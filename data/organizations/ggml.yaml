@@ -1,0 +1,17 @@
+slug: ggml
+name: ggml
+kinds: [open_source]
+tagline: Tensor library behind llama.cpp, for inference on commodity hardware.
+website: https://ggml.ai
+hq_country: BG
+founded_year: 2023
+links:
+  github: https://github.com/ggml-org
+products:
+  - slug: llama-cpp
+    name: llama.cpp
+    type: oss_project
+    tagline: LLM inference in C/C++ on CPUs, Apple silicon and GPUs.
+    url: https://github.com/ggml-org/llama.cpp
+    metadata:
+      license: MIT

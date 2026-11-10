@@ -1,0 +1,38 @@
+slug: mistral-ai
+name: Mistral AI
+kinds: [model_provider]
+tagline: European lab shipping open and commercial models.
+website: https://mistral.ai
+hq_country: FR
+founded_year: 2023
+products:
+  - slug: mistral-large-2
+    name: Mistral Large 2
+    type: model
+    tagline: Flagship Mistral model with weights released for research use.
+    launched_at: 2024-07-24
+    model:
+      family: Mistral Large
+      parameters_b: 123
+      context_window: 128000
+      modalities: [text]
+      license: Mistral Research License
+      open_weights: true
+    offerings:
+      - provider: mistral-ai
+        input: 2
+        output: 6
+        observed_on: 2024-11-01
+  - slug: mixtral-8x7b
+    name: Mixtral 8x7B
+    type: model
+    tagline: Sparse mixture-of-experts model under Apache 2.0.
+    launched_at: 2023-12-11
+    model:
+      family: Mixtral
+      parameters_b: 46.7
+      active_params_b: 12.9
+      context_window: 32768
+      modalities: [text]
+      license: Apache-2.0
+      open_weights: true

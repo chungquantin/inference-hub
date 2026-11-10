@@ -1,12 +1,12 @@
-use chrono::{DateTime, NaiveDate, Utc};
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 use uuid::Uuid;
 
-use crate::Category;
+use crate::{Category, ProductSummary};
 
 /// The roles an organization plays in the market. One organization can hold several.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ToSchema, sqlx::Type)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, ToSchema, sqlx::Type)]
 #[serde(rename_all = "snake_case")]
 #[sqlx(type_name = "org_kind", rename_all = "snake_case")]
 pub enum OrgKind {
@@ -21,7 +21,24 @@ pub enum OrgKind {
     Other,
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, ToSchema, sqlx::Type)]
+impl OrgKind {
+    /// The category an organization of this kind is listed under, if any.
+    pub fn category_slug(self) -> Option<&'static str> {
+        Some(match self {
+            OrgKind::ModelProvider => "model-providers",
+            OrgKind::InferenceProvider => "inference-providers",
+            OrgKind::LlmGateway => "llm-gateways",
+            OrgKind::GpuCloud => "gpu-clouds",
+            OrgKind::Hyperscaler => "hyperscalers",
+            OrgKind::Hardware => "hardware",
+            OrgKind::OpenSource => "open-source",
+            OrgKind::Investor => "investors",
+            OrgKind::Other => return None,
+        })
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, ToSchema, sqlx::Type)]
 #[serde(rename_all = "snake_case")]
 #[sqlx(type_name = "org_status", rename_all = "snake_case")]
 pub enum OrgStatus {
@@ -46,19 +63,6 @@ pub struct Organization {
     pub status: OrgStatus,
 }
 
-/// A product as listed on its organization's page.
-#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
-pub struct ProductSummary {
-    pub id: Uuid,
-    pub slug: String,
-    pub name: String,
-    /// One of: model, inference_api, gateway, gpu_instance, oss_project, hardware, platform, other.
-    pub product_type: String,
-    pub tagline: Option<String>,
-    pub url: Option<String>,
-    pub launched_at: Option<NaiveDate>,
-}
-
 /// The full profile of an organization.
 #[derive(Debug, Clone, Serialize, ToSchema)]
 pub struct OrganizationDetail {
@@ -66,9 +70,12 @@ pub struct OrganizationDetail {
     pub organization: Organization,
     pub description: Option<String>,
     /// Named external links, such as `github`, `x` or `docs`.
-    #[schema(value_type = Object)]
+    #[schema(value_type = std::collections::HashMap<String, String>)]
     pub links: serde_json::Value,
     pub categories: Vec<Category>,
+    /// Products the organization makes.
     pub products: Vec<ProductSummary>,
+    /// Products made by others that the organization sells or serves.
+    pub served_products: Vec<ProductSummary>,
     pub updated_at: DateTime<Utc>,
 }

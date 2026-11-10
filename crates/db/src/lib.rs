@@ -2,6 +2,8 @@
 
 pub mod categories;
 pub mod organizations;
+pub mod products;
+pub mod sitemap;
 
 use std::time::Duration;
 

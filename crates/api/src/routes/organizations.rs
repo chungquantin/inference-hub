@@ -1,7 +1,4 @@
-use axum::{
-    Json,
-    extract::{Path, Query, State},
-};
+use axum::{Json, extract::State};
 use ih_core::{OrgKind, Organization, OrganizationDetail, Page, PageParams};
 use ih_db::organizations::OrganizationFilter;
 use serde::Deserialize;
@@ -11,6 +8,7 @@ use utoipa_axum::{router::OpenApiRouter, routes};
 use crate::{
     AppState,
     error::{ApiError, ApiResult, ErrorBody},
+    extract::{Path, Query},
 };
 
 pub fn router() -> OpenApiRouter<AppState> {
@@ -37,7 +35,10 @@ struct ListOrganizationsQuery {
     tag = "organizations",
     operation_id = "listOrganizations",
     params(ListOrganizationsQuery, PageParams),
-    responses((status = 200, body = Page<Organization>))
+    responses(
+        (status = 200, body = Page<Organization>),
+        (status = 400, body = ErrorBody),
+    )
 )]
 async fn list_organizations(
     State(state): State<AppState>,

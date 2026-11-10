@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["crates/core", "crates/db", "crates/api", "crates/worker"]
+members = ["crates/core", "crates/db", "crates/api", "crates/worker", "crates/seed"]
 
 [workspace.package]
 edition = "2024"
@@ -13,11 +13,13 @@ ih-core = { path = "crates/core" }
 ih-db = { path = "crates/db" }
 
 anyhow = "1"
-axum = "0.8"
+axum = { version = "0.8", features = ["macros"] }
 chrono = { version = "0.4", features = ["serde"] }
 dotenvy = "0.15"
+http-body-util = "0.1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+serde-saphyr = { version = "2", default-features = false, features = ["deserialize"] }
 sqlx = { version = "0.9", default-features = false, features = [
     "runtime-tokio",
     "tls-rustls-ring-webpki",
@@ -30,6 +32,7 @@ sqlx = { version = "0.9", default-features = false, features = [
 ] }
 thiserror = "2"
 tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+tower = { version = "0.5", features = ["util"] }
 tower-http = { version = "0.7", features = ["cors", "trace"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }

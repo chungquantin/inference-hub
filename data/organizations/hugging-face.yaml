@@ -1,0 +1,15 @@
+slug: hugging-face
+name: Hugging Face
+kinds: [open_source, inference_provider]
+tagline: Hub for open models and datasets, with hosted inference.
+website: https://huggingface.co
+hq_country: US
+founded_year: 2016
+links:
+  github: https://github.com/huggingface
+products:
+  - slug: text-generation-inference
+    name: Text Generation Inference
+    type: oss_project
+    tagline: Toolkit for serving large language models.
+    url: https://github.com/huggingface/text-generation-inference

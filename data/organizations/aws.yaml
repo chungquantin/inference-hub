@@ -1,0 +1,13 @@
+slug: aws
+name: Amazon Web Services
+kinds: [hyperscaler, inference_provider, hardware]
+tagline: Cloud provider offering Bedrock, Trainium and Inferentia.
+website: https://aws.amazon.com
+hq_country: US
+founded_year: 2006
+products:
+  - slug: amazon-bedrock
+    name: Amazon Bedrock
+    type: inference_api
+    tagline: Managed API for foundation models from several labs.
+    url: https://aws.amazon.com/bedrock/

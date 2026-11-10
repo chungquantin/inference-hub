@@ -2,6 +2,7 @@
 
 pub mod config;
 pub mod error;
+mod extract;
 mod routes;
 
 use axum::Router;
@@ -29,6 +30,7 @@ pub struct AppState {
         (name = "meta", description = "Service health"),
         (name = "categories", description = "Market taxonomy"),
         (name = "organizations", description = "Companies, projects and investors"),
+        (name = "products", description = "Models, APIs, GPU instances and projects"),
     )
 )]
 struct ApiDoc;

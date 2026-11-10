@@ -1,8 +1,8 @@
 use chrono::{DateTime, Utc};
-use ih_core::{OrgKind, Organization, OrganizationDetail, Page, PageParams, ProductSummary};
+use ih_core::{OrgKind, Organization, OrganizationDetail, Page, PageParams};
 use sqlx::{FromRow, PgPool};
 
-use crate::categories;
+use crate::{categories, products};
 
 /// Filters for listing organizations. All filters combine with AND.
 #[derive(Debug, Clone, Default)]
@@ -108,14 +108,8 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
 
     let org_id = row.organization.id;
     let categories = categories::list_for_organization(pool, org_id).await?;
-    let products: Vec<ProductSummary> = sqlx::query_as(
-        "SELECT id, slug, name, product_type::text AS product_type, tagline, url, launched_at
-         FROM products WHERE organization_id = $1
-         ORDER BY launched_at DESC NULLS LAST, name",
-    )
-    .bind(org_id)
-    .fetch_all(pool)
-    .await?;
+    let products = products::list_made_by(pool, org_id).await?;
+    let served_products = products::list_served_by(pool, org_id).await?;
 
     Ok(Some(OrganizationDetail {
         organization: row.organization,
@@ -123,6 +117,7 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
         links: row.links,
         categories,
         products,
+        served_products,
         updated_at: row.updated_at,
     }))
 }

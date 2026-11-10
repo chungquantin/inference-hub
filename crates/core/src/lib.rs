@@ -6,7 +6,11 @@
 pub mod category;
 pub mod organization;
 pub mod pagination;
+pub mod product;
 
 pub use category::Category;
-pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail, ProductSummary};
+pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail};
 pub use pagination::{Page, PageParams};
+pub use product::{
+    ModelSpec, Offering, OrganizationRef, ProductDetail, ProductSummary, ProductType,
+};

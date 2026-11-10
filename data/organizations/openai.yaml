@@ -1,0 +1,44 @@
+slug: openai
+name: OpenAI
+kinds: [model_provider]
+tagline: Creator of the GPT model family and ChatGPT.
+website: https://openai.com
+hq_country: US
+founded_year: 2015
+links:
+  docs: https://platform.openai.com/docs
+  x: https://x.com/OpenAI
+products:
+  - slug: gpt-4o
+    name: GPT-4o
+    type: model
+    tagline: Multimodal flagship model accepting text, image and audio.
+    url: https://openai.com/index/hello-gpt-4o/
+    launched_at: 2024-05-13
+    model:
+      family: GPT-4
+      context_window: 128000
+      modalities: [text, image, audio]
+      license: Proprietary
+    offerings:
+      - provider: openai
+        input: 2.5
+        output: 10
+        source_url: https://openai.com/api/pricing/
+        observed_on: 2024-11-01
+  - slug: gpt-4o-mini
+    name: GPT-4o mini
+    type: model
+    tagline: Small, low-cost multimodal model.
+    launched_at: 2024-07-18
+    model:
+      family: GPT-4
+      context_window: 128000
+      modalities: [text, image]
+      license: Proprietary
+    offerings:
+      - provider: openai
+        input: 0.15
+        output: 0.6
+        source_url: https://openai.com/api/pricing/
+        observed_on: 2024-11-01

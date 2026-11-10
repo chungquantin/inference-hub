@@ -1,0 +1,48 @@
+slug: anthropic
+name: Anthropic
+kinds: [model_provider]
+tagline: AI safety company building the Claude models.
+website: https://www.anthropic.com
+hq_country: US
+founded_year: 2021
+links:
+  docs: https://docs.anthropic.com
+products:
+  - slug: claude-3-5-sonnet
+    name: Claude 3.5 Sonnet
+    type: model
+    tagline: Mid-size Claude model balancing intelligence and speed.
+    launched_at: 2024-06-20
+    model:
+      family: Claude 3.5
+      context_window: 200000
+      modalities: [text, image]
+      license: Proprietary
+    offerings:
+      - provider: anthropic
+        input: 3
+        output: 15
+        source_url: https://www.anthropic.com/pricing
+        observed_on: 2024-11-01
+      - provider: aws
+        input: 3
+        output: 15
+        region: us-east-1
+        source_url: https://aws.amazon.com/bedrock/pricing/
+        observed_on: 2024-11-01
+  - slug: claude-3-5-haiku
+    name: Claude 3.5 Haiku
+    type: model
+    tagline: Fastest model of the Claude 3.5 family.
+    launched_at: 2024-11-04
+    model:
+      family: Claude 3.5
+      context_window: 200000
+      modalities: [text]
+      license: Proprietary
+    offerings:
+      - provider: anthropic
+        input: 0.8
+        output: 4
+        source_url: https://www.anthropic.com/pricing
+        observed_on: 2024-12-01

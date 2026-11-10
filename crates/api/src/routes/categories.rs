@@ -1,13 +1,11 @@
-use axum::{
-    Json,
-    extract::{Path, State},
-};
+use axum::{Json, extract::State};
 use ih_core::Category;
 use utoipa_axum::{router::OpenApiRouter, routes};
 
 use crate::{
     AppState,
     error::{ApiError, ApiResult, ErrorBody},
+    extract::Path,
 };
 
 pub fn router() -> OpenApiRouter<AppState> {

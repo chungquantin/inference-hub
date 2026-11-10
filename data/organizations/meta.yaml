@@ -1,0 +1,87 @@
+slug: meta
+name: Meta
+kinds: [model_provider]
+tagline: Publisher of the open-weights Llama models.
+website: https://ai.meta.com
+hq_country: US
+founded_year: 2004
+products:
+  - slug: llama-3-1-405b
+    name: Llama 3.1 405B
+    type: model
+    tagline: Largest open-weights model of the Llama 3.1 family.
+    launched_at: 2024-07-23
+    model:
+      family: Llama 3.1
+      parameters_b: 405
+      context_window: 128000
+      modalities: [text]
+      license: Llama 3.1 Community License
+      open_weights: true
+    offerings:
+      - provider: together-ai
+        input: 3.5
+        output: 3.5
+        source_url: https://www.together.ai/pricing
+        observed_on: 2024-11-01
+      - provider: fireworks-ai
+        input: 3
+        output: 3
+        source_url: https://fireworks.ai/pricing
+        observed_on: 2024-11-01
+  - slug: llama-3-1-70b
+    name: Llama 3.1 70B
+    type: model
+    tagline: Mid-size open-weights Llama 3.1 model.
+    launched_at: 2024-07-23
+    model:
+      family: Llama 3.1
+      parameters_b: 70
+      context_window: 128000
+      modalities: [text]
+      license: Llama 3.1 Community License
+      open_weights: true
+    offerings:
+      - provider: together-ai
+        input: 0.88
+        output: 0.88
+        source_url: https://www.together.ai/pricing
+        observed_on: 2024-11-01
+      - provider: fireworks-ai
+        input: 0.9
+        output: 0.9
+        source_url: https://fireworks.ai/pricing
+        observed_on: 2024-11-01
+      - provider: groq
+        input: 0.59
+        output: 0.79
+        source_url: https://groq.com/pricing/
+        observed_on: 2024-11-01
+  - slug: llama-3-1-8b
+    name: Llama 3.1 8B
+    type: model
+    tagline: Small open-weights Llama 3.1 model.
+    launched_at: 2024-07-23
+    model:
+      family: Llama 3.1
+      parameters_b: 8
+      context_window: 128000
+      modalities: [text]
+      license: Llama 3.1 Community License
+      open_weights: true
+    offerings:
+      - provider: together-ai
+        input: 0.18
+        output: 0.18
+        source_url: https://www.together.ai/pricing
+        observed_on: 2024-11-01
+      - provider: fireworks-ai
+        input: 0.2
+        output: 0.2
+        source_url: https://fireworks.ai/pricing
+        observed_on: 2024-11-01
+      - provider: groq
+        input: 0.05
+        output: 0.08
+        source_url: https://groq.com/pricing/
+        observed_on: 2024-11-01

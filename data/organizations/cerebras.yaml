@@ -1,0 +1,7 @@
+slug: cerebras
+name: Cerebras
+kinds: [hardware, inference_provider]
+tagline: Wafer-scale chips and an inference cloud built on them.
+website: https://www.cerebras.ai
+hq_country: US
+founded_year: 2016

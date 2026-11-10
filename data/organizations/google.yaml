@@ -1,0 +1,18 @@
+slug: google
+name: Google
+kinds: [model_provider, hyperscaler, hardware, investor]
+tagline: Gemini models, Google Cloud and TPUs.
+website: https://cloud.google.com
+hq_country: US
+founded_year: 1998
+products:
+  - slug: gemini-1-5-pro
+    name: Gemini 1.5 Pro
+    type: model
+    tagline: Long-context multimodal model with a context window of up to 2M tokens.
+    launched_at: 2024-02-15
+    model:
+      family: Gemini 1.5
+      context_window: 2000000
+      modalities: [text, image, audio, video]
+      license: Proprietary

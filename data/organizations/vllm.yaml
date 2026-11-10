@@ -1,0 +1,16 @@
+slug: vllm
+name: vLLM
+kinds: [open_source]
+tagline: High-throughput LLM inference and serving engine.
+website: https://docs.vllm.ai
+founded_year: 2023
+links:
+  github: https://github.com/vllm-project/vllm
+products:
+  - slug: vllm-engine
+    name: vLLM
+    type: oss_project
+    tagline: Inference engine built around PagedAttention.
+    url: https://github.com/vllm-project/vllm
+    metadata:
+      license: Apache-2.0

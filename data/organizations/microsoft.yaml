@@ -1,0 +1,7 @@
+slug: microsoft
+name: Microsoft
+kinds: [hyperscaler, inference_provider, investor]
+tagline: Azure cloud and Azure AI Foundry.
+website: https://azure.microsoft.com
+hq_country: US
+founded_year: 1975

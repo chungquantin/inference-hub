@@ -1,0 +1,7 @@
+slug: openrouter
+name: OpenRouter
+kinds: [llm_gateway]
+tagline: One API across hundreds of models and providers.
+website: https://openrouter.ai
+hq_country: US
+founded_year: 2023

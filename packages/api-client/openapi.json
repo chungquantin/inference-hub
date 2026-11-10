@@ -169,6 +169,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
           }
         }
       }
@@ -206,6 +215,153 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/products": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "List products, optionally filtered and searched.",
+        "operationId": "listProducts",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Keep products of this type.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ProductType"
+            }
+          },
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "Keep products made by this organization (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "open_weights",
+            "in": "query",
+            "description": "Keep models with (true) or without (false) open weights.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Free-text search over name, tagline and description.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page (1-100, default 24).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Items to skip (default 0).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_ProductSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/{slug}": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Get one product with its model attributes and current offerings.",
+        "operationId": "getProduct",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Product slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sitemap": {
+      "get": {
+        "tags": [
+          "meta"
+        ],
+        "summary": "List the slugs of every category, organization and product with their last update.",
+        "operationId": "getSitemap",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SitemapIndex"
                 }
               }
             }
@@ -266,7 +422,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Machine-readable code, such as `not_found`."
+            "description": "Machine-readable code: `bad_request`, `not_found` or `internal`."
           },
           "message": {
             "type": "string"
@@ -285,6 +441,138 @@
           },
           "status": {
             "type": "string"
+          }
+        }
+      },
+      "ModelSpec": {
+        "type": "object",
+        "description": "Technical attributes of a model.",
+        "required": [
+          "modalities",
+          "open_weights"
+        ],
+        "properties": {
+          "active_params_b": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Parameters active per token, in billions (mixture-of-experts models)."
+          },
+          "context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Context window, in tokens."
+          },
+          "family": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "modalities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Input modalities, such as `text` or `image`."
+          },
+          "open_weights": {
+            "type": "boolean"
+          },
+          "parameters_b": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Total parameters, in billions."
+          }
+        }
+      },
+      "Offering": {
+        "type": "object",
+        "description": "The latest observation of a provider selling a product.",
+        "required": [
+          "id",
+          "provider",
+          "currency",
+          "observed_at"
+        ],
+        "properties": {
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code of the prices."
+          },
+          "gpu_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "gpu_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "USD per million input tokens."
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "USD per million output tokens."
+          },
+          "price_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Price per instance-hour."
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "region": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -386,6 +674,7 @@
               "links",
               "categories",
               "products",
+              "served_products",
               "updated_at"
             ],
             "properties": {
@@ -403,13 +692,27 @@
               },
               "links": {
                 "type": "object",
-                "description": "Named external links, such as `github`, `x` or `docs`."
+                "description": "Named external links, such as `github`, `x` or `docs`.",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "propertyNames": {
+                  "type": "string"
+                }
               },
               "products": {
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/ProductSummary"
-                }
+                },
+                "description": "Products the organization makes."
+              },
+              "served_products": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductSummary"
+                },
+                "description": "Products made by others that the organization sells or serves."
               },
               "updated_at": {
                 "type": "string",
@@ -419,6 +722,22 @@
           }
         ],
         "description": "The full profile of an organization."
+      },
+      "OrganizationRef": {
+        "type": "object",
+        "description": "A short reference to an organization, embedded in product and offering responses.",
+        "required": [
+          "slug",
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
       },
       "Page_Organization": {
         "type": "object",
@@ -511,14 +830,145 @@
           }
         }
       },
+      "Page_ProductSummary": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "A product as shown in listings.",
+              "required": [
+                "id",
+                "slug",
+                "name",
+                "product_type",
+                "organization"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "launched_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "organization": {
+                  "$ref": "#/components/schemas/OrganizationRef",
+                  "description": "The organization that makes the product."
+                },
+                "product_type": {
+                  "$ref": "#/components/schemas/ProductType"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "tagline": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ProductDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ProductSummary"
+          },
+          {
+            "type": "object",
+            "required": [
+              "metadata",
+              "offerings",
+              "updated_at"
+            ],
+            "properties": {
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "metadata": {
+                "type": "object",
+                "description": "Attributes specific to the product type.",
+                "additionalProperties": {},
+                "propertyNames": {
+                  "type": "string"
+                }
+              },
+              "model": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/ModelSpec",
+                    "description": "Present when the product is a model."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "offerings": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Offering"
+                },
+                "description": "Where the product can be bought, one entry per provider and configuration."
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ],
+        "description": "The full page of a product."
+      },
       "ProductSummary": {
         "type": "object",
-        "description": "A product as listed on its organization's page.",
+        "description": "A product as shown in listings.",
         "required": [
           "id",
           "slug",
           "name",
-          "product_type"
+          "product_type",
+          "organization"
         ],
         "properties": {
           "id": {
@@ -535,9 +985,12 @@
           "name": {
             "type": "string"
           },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef",
+            "description": "The organization that makes the product."
+          },
           "product_type": {
-            "type": "string",
-            "description": "One of: model, inference_api, gateway, gpu_instance, oss_project, hardware, platform, other."
+            "$ref": "#/components/schemas/ProductType"
           },
           "slug": {
             "type": "string"
@@ -555,6 +1008,65 @@
             ]
           }
         }
+      },
+      "ProductType": {
+        "type": "string",
+        "description": "What kind of thing a product is.",
+        "enum": [
+          "model",
+          "inference_api",
+          "gateway",
+          "gpu_instance",
+          "oss_project",
+          "hardware",
+          "platform",
+          "other"
+        ]
+      },
+      "SitemapEntry": {
+        "type": "object",
+        "required": [
+          "slug",
+          "updated_at"
+        ],
+        "properties": {
+          "slug": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SitemapIndex": {
+        "type": "object",
+        "description": "Every page-worthy slug, for building the sitemap.",
+        "required": [
+          "categories",
+          "organizations",
+          "products"
+        ],
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SitemapEntry"
+            }
+          },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SitemapEntry"
+            }
+          },
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SitemapEntry"
+            }
+          }
+        }
       }
     }
   },
@@ -570,6 +1082,10 @@
     {
       "name": "organizations",
       "description": "Companies, projects and investors"
+    },
+    {
+      "name": "products",
+      "description": "Models, APIs, GPU instances and projects"
     }
   ]
 }

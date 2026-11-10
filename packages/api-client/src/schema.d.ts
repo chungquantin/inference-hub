@@ -89,6 +89,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List products, optionally filtered and searched. */
+        get: operations["listProducts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/products/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get one product with its model attributes and current offerings. */
+        get: operations["getProduct"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/sitemap": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List the slugs of every category, organization and product with their last update. */
+        get: operations["getSitemap"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -110,13 +161,66 @@ export interface components {
         };
         /** @description Error body returned by every failing endpoint. */
         ErrorBody: {
-            /** @description Machine-readable code, such as `not_found`. */
+            /** @description Machine-readable code: `bad_request`, `not_found` or `internal`. */
             code: string;
             message: string;
         };
         Health: {
             database: string;
             status: string;
+        };
+        /** @description Technical attributes of a model. */
+        ModelSpec: {
+            /**
+             * Format: double
+             * @description Parameters active per token, in billions (mixture-of-experts models).
+             */
+            active_params_b?: number | null;
+            /**
+             * Format: int32
+             * @description Context window, in tokens.
+             */
+            context_window?: number | null;
+            family?: string | null;
+            license?: string | null;
+            /** @description Input modalities, such as `text` or `image`. */
+            modalities: string[];
+            open_weights: boolean;
+            /**
+             * Format: double
+             * @description Total parameters, in billions.
+             */
+            parameters_b?: number | null;
+        };
+        /** @description The latest observation of a provider selling a product. */
+        Offering: {
+            /** @description ISO 4217 currency code of the prices. */
+            currency: string;
+            /** Format: int32 */
+            gpu_count?: number | null;
+            gpu_type?: string | null;
+            /** Format: uuid */
+            id: string;
+            /** Format: date-time */
+            observed_at: string;
+            /**
+             * Format: double
+             * @description USD per million input tokens.
+             */
+            price_input_per_mtok?: number | null;
+            /**
+             * Format: double
+             * @description USD per million output tokens.
+             */
+            price_output_per_mtok?: number | null;
+            /**
+             * Format: double
+             * @description Price per instance-hour.
+             */
+            price_per_hour?: number | null;
+            provider: components["schemas"]["OrganizationRef"];
+            region?: string | null;
+            source_url?: string | null;
         };
         /**
          * @description The roles an organization plays in the market. One organization can hold several.
@@ -146,10 +250,20 @@ export interface components {
             categories: components["schemas"]["Category"][];
             description?: string | null;
             /** @description Named external links, such as `github`, `x` or `docs`. */
-            links: Record<string, never>;
+            links: {
+                [key: string]: string;
+            };
+            /** @description Products the organization makes. */
             products: components["schemas"]["ProductSummary"][];
+            /** @description Products made by others that the organization sells or serves. */
+            served_products: components["schemas"]["ProductSummary"][];
             /** Format: date-time */
             updated_at: string;
+        };
+        /** @description A short reference to an organization, embedded in product and offering responses. */
+        OrganizationRef: {
+            name: string;
+            slug: string;
         };
         /** @description One page of results plus the total count across all pages. */
         Page_Organization: {
@@ -175,18 +289,70 @@ export interface components {
             /** Format: int64 */
             total: number;
         };
-        /** @description A product as listed on its organization's page. */
+        /** @description One page of results plus the total count across all pages. */
+        Page_ProductSummary: {
+            items: {
+                /** Format: uuid */
+                id: string;
+                /** Format: date */
+                launched_at?: string | null;
+                name: string;
+                /** @description The organization that makes the product. */
+                organization: components["schemas"]["OrganizationRef"];
+                product_type: components["schemas"]["ProductType"];
+                slug: string;
+                tagline?: string | null;
+                url?: string | null;
+            }[];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
+        };
+        /** @description The full page of a product. */
+        ProductDetail: components["schemas"]["ProductSummary"] & {
+            description?: string | null;
+            /** @description Attributes specific to the product type. */
+            metadata: {
+                [key: string]: unknown;
+            };
+            model?: components["schemas"]["ModelSpec"] | null;
+            /** @description Where the product can be bought, one entry per provider and configuration. */
+            offerings: components["schemas"]["Offering"][];
+            /** Format: date-time */
+            updated_at: string;
+        };
+        /** @description A product as shown in listings. */
         ProductSummary: {
             /** Format: uuid */
             id: string;
             /** Format: date */
             launched_at?: string | null;
             name: string;
-            /** @description One of: model, inference_api, gateway, gpu_instance, oss_project, hardware, platform, other. */
-            product_type: string;
+            /** @description The organization that makes the product. */
+            organization: components["schemas"]["OrganizationRef"];
+            product_type: components["schemas"]["ProductType"];
             slug: string;
             tagline?: string | null;
             url?: string | null;
+        };
+        /**
+         * @description What kind of thing a product is.
+         * @enum {string}
+         */
+        ProductType: "model" | "inference_api" | "gateway" | "gpu_instance" | "oss_project" | "hardware" | "platform" | "other";
+        SitemapEntry: {
+            slug: string;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        /** @description Every page-worthy slug, for building the sitemap. */
+        SitemapIndex: {
+            categories: components["schemas"]["SitemapEntry"][];
+            organizations: components["schemas"]["SitemapEntry"][];
+            products: components["schemas"]["SitemapEntry"][];
         };
     };
     responses: never;
@@ -303,6 +469,14 @@ export interface operations {
                     "application/json": components["schemas"]["Page_Organization"];
                 };
             };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
         };
     };
     getOrganization: {
@@ -331,6 +505,95 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    listProducts: {
+        parameters: {
+            query?: {
+                /** @description Keep products of this type. */
+                type?: components["schemas"]["ProductType"];
+                /** @description Keep products made by this organization (slug). */
+                organization?: string;
+                /** @description Keep models with (true) or without (false) open weights. */
+                open_weights?: boolean;
+                /** @description Free-text search over name, tagline and description. */
+                q?: string;
+                /** @description Items per page (1-100, default 24). */
+                limit?: number;
+                /** @description Items to skip (default 0). */
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_ProductSummary"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    getProduct: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Product slug */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductDetail"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    getSitemap: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SitemapIndex"];
                 };
             };
         };

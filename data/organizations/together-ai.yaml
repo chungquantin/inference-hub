@@ -1,0 +1,7 @@
+slug: together-ai
+name: Together AI
+kinds: [inference_provider, gpu_cloud]
+tagline: Cloud for running, fine-tuning and training open models.
+website: https://www.together.ai
+hq_country: US
+founded_year: 2022

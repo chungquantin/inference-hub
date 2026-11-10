@@ -1,0 +1,29 @@
+slug: nvidia
+name: NVIDIA
+kinds: [hardware, investor]
+tagline: Maker of the dominant AI accelerators.
+website: https://www.nvidia.com
+hq_country: US
+founded_year: 1993
+products:
+  - slug: nvidia-h100
+    name: NVIDIA H100
+    type: hardware
+    tagline: Hopper-generation data-center GPU with 80 GB of HBM3.
+    url: https://www.nvidia.com/en-us/data-center/h100/
+    launched_at: 2022-03-22
+    metadata:
+      memory_gb: 80
+      architecture: Hopper
+    offerings:
+      - provider: lambda
+        gpu_type: H100 SXM
+        gpu_count: 8
+        per_hour: 23.92
+        observed_on: 2024-11-01
+      - provider: coreweave
+        gpu_type: H100 SXM
+        gpu_count: 8
+        per_hour: 49.24
+        source_url: https://www.coreweave.com/pricing
+        observed_on: 2024-11-01
