@@ -8,7 +8,7 @@ use api::AppState;
 use axum::{
     Router,
     body::Body,
-    http::{Request, StatusCode},
+    http::{Method, Request, StatusCode, header},
 };
 use http_body_util::BodyExt;
 use serde_json::Value;
@@ -16,13 +16,34 @@ use sqlx::PgPool;
 use tower::ServiceExt;
 
 fn app(pool: PgPool) -> Router {
-    api::app(AppState { pool }, &[])
+    api::app(AppState::new(pool), &[])
 }
 
 async fn get(app: &Router, uri: &str) -> (StatusCode, Value) {
+    send(app, Method::GET, uri, None, None).await
+}
+
+async fn send(
+    app: &Router,
+    method: Method,
+    uri: &str,
+    token: Option<&str>,
+    body: Option<Value>,
+) -> (StatusCode, Value) {
+    let mut request = Request::builder().method(method).uri(uri);
+    if let Some(token) = token {
+        request = request.header(header::AUTHORIZATION, format!("Bearer {token}"));
+    }
+    let body = match body {
+        Some(json) => {
+            request = request.header(header::CONTENT_TYPE, "application/json");
+            Body::from(json.to_string())
+        }
+        None => Body::empty(),
+    };
     let response = app
         .clone()
-        .oneshot(Request::get(uri).body(Body::empty()).unwrap())
+        .oneshot(request.body(body).unwrap())
         .await
         .unwrap();
     let status = response.status();
@@ -237,4 +258,263 @@ async fn sitemap_lists_every_slug(pool: PgPool) {
     assert_eq!(body["categories"].as_array().unwrap().len(), 8);
     assert_eq!(body["organizations"].as_array().unwrap().len(), 14);
     assert_eq!(body["products"].as_array().unwrap().len(), 2);
+}
+
+const ADMIN_TOKEN: &str = "0123456789abcdef0123456789abcdef";
+
+fn admin_app(pool: PgPool) -> Router {
+    api::app(
+        AppState {
+            pool,
+            admin_token: Some(ADMIN_TOKEN.to_owned()),
+        },
+        &[],
+    )
+}
+
+/// Three news items: two approved (one about OpenAI), one pending.
+async fn seed_news(pool: &PgPool) -> Vec<uuid::Uuid> {
+    let source: uuid::Uuid = sqlx::query_scalar(
+        "INSERT INTO sources (slug, name, source_type, url) VALUES ('press', 'Press', 'rss', 'https://press.example/rss')
+         RETURNING id",
+    )
+    .fetch_one(pool)
+    .await
+    .unwrap();
+    let mut ids = Vec::new();
+    for (slug, title, status, day) in [
+        ("old", "Older 100% news_item", "approved", 1),
+        ("new", "OpenAI ships a model", "approved", 3),
+        ("queued", "Pending story", "pending", 2),
+    ] {
+        let id: uuid::Uuid = sqlx::query_scalar(
+            "INSERT INTO news_items (source_id, url, title, publisher, published_at, status)
+             VALUES ($1, $2, $3, 'Press', make_timestamptz(2025, 11, $4, 0, 0, 0), $5::news_status)
+             RETURNING id",
+        )
+        .bind(source)
+        .bind(format!("https://press.example/{slug}"))
+        .bind(title)
+        .bind(day)
+        .bind(status)
+        .fetch_one(pool)
+        .await
+        .unwrap();
+        ids.push(id);
+    }
+    sqlx::query(
+        "INSERT INTO news_item_organizations (news_item_id, organization_id, matched_by)
+         SELECT $1, id, 'title' FROM organizations WHERE slug = 'openai'",
+    )
+    .bind(ids[1])
+    .execute(pool)
+    .await
+    .unwrap();
+    ids
+}
+
+fn titles(page: &Value) -> Vec<&str> {
+    page["items"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|i| i["title"].as_str().unwrap())
+        .collect()
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn public_news_shows_only_approved_items_newest_first(pool: PgPool) {
+    seed_news(&pool).await;
+    let app = app(pool);
+
+    let (status, body) = get(&app, "/v1/news").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(
+        titles(&body),
+        ["OpenAI ships a model", "Older 100% news_item"]
+    );
+    assert_eq!(body["items"][0]["organizations"][0]["slug"], "openai");
+    assert_eq!(body["items"][0]["organizations"][0]["matched_by"], "title");
+
+    let (_, body) = get(&app, "/v1/news?organization=openai").await;
+    assert_eq!(titles(&body), ["OpenAI ships a model"]);
+
+    let (_, body) = get(&app, "/v1/news?source=press&limit=1&offset=1").await;
+    assert_eq!(titles(&body), ["Older 100% news_item"]);
+    assert_eq!(body["total"], 2);
+
+    // LIKE wildcards in the search text match literally.
+    let (_, body) = get(&app, "/v1/news?q=100%25").await;
+    assert_eq!(titles(&body), ["Older 100% news_item"]);
+    let (_, body) = get(&app, "/v1/news?q=_").await;
+    assert_eq!(titles(&body), ["Older 100% news_item"]);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn admin_api_is_hidden_without_a_token_and_guarded_with_one(pool: PgPool) {
+    let disabled = app(pool.clone());
+    let (status, _) = send(
+        &disabled,
+        Method::GET,
+        "/v1/admin/news",
+        Some(ADMIN_TOKEN),
+        None,
+    )
+    .await;
+    assert_eq!(status, StatusCode::NOT_FOUND, "no ADMIN_TOKEN configured");
+
+    let app = admin_app(pool);
+    for token in [
+        None,
+        Some("wrong"),
+        Some("0123456789abcdef0123456789abcdeX"),
+    ] {
+        let (status, body) = send(&app, Method::GET, "/v1/admin/news", token, None).await;
+        assert_eq!(status, StatusCode::UNAUTHORIZED, "{token:?}");
+        assert_eq!(body["code"], "unauthorized");
+    }
+    let (status, _) = send(
+        &app,
+        Method::GET,
+        "/v1/admin/sources",
+        Some(ADMIN_TOKEN),
+        None,
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn admin_reviews_the_queue(pool: PgPool) {
+    let ids = seed_news(&pool).await;
+    let app = admin_app(pool);
+    let token = Some(ADMIN_TOKEN);
+
+    let (_, body) = send(&app, Method::GET, "/v1/admin/news", token, None).await;
+    assert_eq!(
+        titles(&body),
+        ["Pending story"],
+        "defaults to the pending queue"
+    );
+
+    let review =
+        |ids: Vec<String>, status: &str| serde_json::json!({ "ids": ids, "status": status });
+    let (status, body) = send(
+        &app,
+        Method::POST,
+        "/v1/admin/news/review",
+        token,
+        Some(review(
+            vec![ids[2].to_string(), uuid::Uuid::nil().to_string()],
+            "approved",
+        )),
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(body["updated"], 1, "unknown ids are ignored");
+
+    let (_, body) = get(&app, "/v1/news").await;
+    assert_eq!(body["total"], 3, "the approved item is now public");
+
+    let (_, body) = send(
+        &app,
+        Method::GET,
+        "/v1/admin/news?status=rejected",
+        token,
+        None,
+    )
+    .await;
+    assert_eq!(body["total"], 0);
+
+    for bad in [
+        review(vec![], "approved"),
+        serde_json::json!({ "ids": [ids[0].to_string()], "status": "published" }),
+        serde_json::json!({ "ids": ["not-a-uuid"], "status": "approved" }),
+    ] {
+        let (status, body) = send(
+            &app,
+            Method::POST,
+            "/v1/admin/news/review",
+            token,
+            Some(bad),
+        )
+        .await;
+        assert_eq!(status, StatusCode::BAD_REQUEST);
+        assert_eq!(body["code"], "bad_request");
+    }
+
+    let (_, sources) = send(&app, Method::GET, "/v1/admin/sources", token, None).await;
+    assert_eq!(sources[0]["slug"], "press");
+    assert_eq!(sources[0]["item_count"], 3);
+    assert_eq!(sources[0]["pending_count"], 0);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn admin_corrects_organization_tags(pool: PgPool) {
+    let ids = seed_news(&pool).await;
+    let app = admin_app(pool);
+    let token = Some(ADMIN_TOKEN);
+    let uri = format!("/v1/admin/news/{}/organizations", ids[1]);
+
+    // Keep OpenAI (its title match stays), add Anthropic as a manual tag.
+    let (status, body) = send(
+        &app,
+        Method::PUT,
+        &uri,
+        token,
+        Some(serde_json::json!({ "organizations": ["openai", "anthropic"] })),
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    let tags: Vec<(String, String)> = body["organizations"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|o| {
+            (
+                o["slug"].as_str().unwrap().into(),
+                o["matched_by"].as_str().unwrap().into(),
+            )
+        })
+        .collect();
+    assert_eq!(
+        tags,
+        [
+            ("openai".into(), "title".into()),
+            ("anthropic".into(), "manual".into())
+        ]
+    );
+
+    // Removing all tags works; unknown slugs and unknown items are errors.
+    let (_, body) = send(
+        &app,
+        Method::PUT,
+        &uri,
+        token,
+        Some(serde_json::json!({ "organizations": [] })),
+    )
+    .await;
+    assert_eq!(body["organizations"].as_array().unwrap().len(), 0);
+
+    let (status, body) = send(
+        &app,
+        Method::PUT,
+        &uri,
+        token,
+        Some(serde_json::json!({ "organizations": ["openai", "nope"] })),
+    )
+    .await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert!(body["message"].as_str().unwrap().contains("nope"));
+
+    let missing = format!("/v1/admin/news/{}/organizations", uuid::Uuid::nil());
+    let (status, _) = send(
+        &app,
+        Method::PUT,
+        &missing,
+        token,
+        Some(serde_json::json!({ "organizations": ["openai"] })),
+    )
+    .await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
 }

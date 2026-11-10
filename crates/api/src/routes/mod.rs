@@ -1,5 +1,7 @@
+pub mod admin;
 pub mod categories;
 pub mod health;
+pub mod news;
 pub mod organizations;
 pub mod products;
 pub mod sitemap;
@@ -13,5 +15,6 @@ pub fn v1_router() -> OpenApiRouter<AppState> {
         .merge(categories::router())
         .merge(organizations::router())
         .merge(products::router())
+        .merge(news::router())
         .merge(sitemap::router())
 }

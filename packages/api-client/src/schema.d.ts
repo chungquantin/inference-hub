@@ -21,6 +21,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List news in any review state. Defaults to the pending queue. */
+        get: operations["adminListNews"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/news/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve, reject or return items to the queue. */
+        post: operations["adminReviewNews"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/news/{id}/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Replace the organizations a news item is linked to. */
+        put: operations["adminSetNewsOrganizations"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List feed sources with their fetch health, failing ones first. */
+        get: operations["adminListSources"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/categories": {
         parameters: {
             query?: never;
@@ -47,6 +115,23 @@ export interface paths {
         };
         /** Get one category by slug. */
         get: operations["getCategory"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List published news, newest first. */
+        get: operations["listNews"];
         put?: never;
         post?: never;
         delete?: never;
@@ -161,7 +246,7 @@ export interface components {
         };
         /** @description Error body returned by every failing endpoint. */
         ErrorBody: {
-            /** @description Machine-readable code: `bad_request`, `not_found` or `internal`. */
+            /** @description Machine-readable code: `bad_request`, `unauthorized`, `not_found` or `internal`. */
             code: string;
             message: string;
         };
@@ -192,6 +277,37 @@ export interface components {
              */
             parameters_b?: number | null;
         };
+        /** @description A news item as shown in feeds. */
+        NewsItem: {
+            author?: string | null;
+            /** Format: uuid */
+            id: string;
+            image_url?: string | null;
+            organizations: components["schemas"]["NewsMention"][];
+            /** Format: date-time */
+            published_at: string;
+            publisher?: string | null;
+            status: components["schemas"]["NewsStatus"];
+            summary?: string | null;
+            title: string;
+            url: string;
+        };
+        /**
+         * @description How a news item was linked to an organization.
+         * @enum {string}
+         */
+        NewsMatch: "source" | "title" | "body" | "manual";
+        /** @description An organization a news item is about. */
+        NewsMention: {
+            matched_by: components["schemas"]["NewsMatch"];
+            name: string;
+            slug: string;
+        };
+        /**
+         * @description Review state of a news item. Only approved items are public.
+         * @enum {string}
+         */
+        NewsStatus: "pending" | "approved" | "rejected";
         /** @description The latest observation of a provider selling a product. */
         Offering: {
             /** @description ISO 4217 currency code of the prices. */
@@ -264,6 +380,29 @@ export interface components {
         OrganizationRef: {
             name: string;
             slug: string;
+        };
+        /** @description One page of results plus the total count across all pages. */
+        Page_NewsItem: {
+            items: {
+                author?: string | null;
+                /** Format: uuid */
+                id: string;
+                image_url?: string | null;
+                organizations: components["schemas"]["NewsMention"][];
+                /** Format: date-time */
+                published_at: string;
+                publisher?: string | null;
+                status: components["schemas"]["NewsStatus"];
+                summary?: string | null;
+                title: string;
+                url: string;
+            }[];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
         };
         /** @description One page of results plus the total count across all pages. */
         Page_Organization: {
@@ -343,6 +482,22 @@ export interface components {
          * @enum {string}
          */
         ProductType: "model" | "inference_api" | "gateway" | "gpu_instance" | "oss_project" | "hardware" | "platform" | "other";
+        ReviewRequest: {
+            /** @description Items to change, at most 200. */
+            ids: string[];
+            status: components["schemas"]["NewsStatus"];
+        };
+        ReviewResult: {
+            /**
+             * Format: int64
+             * @description Items that exist and were set.
+             */
+            updated: number;
+        };
+        SetOrganizationsRequest: {
+            /** @description Slugs of the organizations the item is about. Unknown slugs are rejected. */
+            organizations: string[];
+        };
         SitemapEntry: {
             slug: string;
             /** Format: date-time */
@@ -353,6 +508,38 @@ export interface components {
             categories: components["schemas"]["SitemapEntry"][];
             organizations: components["schemas"]["SitemapEntry"][];
             products: components["schemas"]["SitemapEntry"][];
+        };
+        /** @description A feed source with its fetch health, for the admin view. */
+        SourceStatus: {
+            auto_approve: boolean;
+            /** Format: int32 */
+            consecutive_failures: number;
+            enabled: boolean;
+            /** Format: int32 */
+            fetch_interval_minutes: number;
+            /** Format: uuid */
+            id: string;
+            /**
+             * Format: int64
+             * @description Items stored from this source.
+             */
+            item_count: number;
+            last_error?: string | null;
+            /** Format: date-time */
+            last_run_at?: string | null;
+            /** Format: date-time */
+            last_success_at?: string | null;
+            name: string;
+            organization_name?: string | null;
+            /** @description The organization that owns the feed, if any. */
+            organization_slug?: string | null;
+            /**
+             * Format: int64
+             * @description Of which waiting for review.
+             */
+            pending_count: number;
+            slug: string;
+            url?: string | null;
         };
     };
     responses: never;
@@ -388,6 +575,162 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Health"];
+                };
+            };
+        };
+    };
+    adminListNews: {
+        parameters: {
+            query?: {
+                /** @description Review state to list. Default `pending`. */
+                status?: components["schemas"]["NewsStatus"];
+                /** @description Keep items from this source (slug). */
+                source?: string;
+                /** @description Keep items about this organization (slug). */
+                organization?: string;
+                /** @description Text that the title or summary must contain. */
+                q?: string;
+                /** @description Items per page (1-100, default 24). */
+                limit?: number;
+                /** @description Items to skip (default 0). */
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_NewsItem"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminReviewNews: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReviewRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewResult"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminSetNewsOrganizations: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description News item id */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetOrganizationsRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsItem"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminListSources: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SourceStatus"][];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
                 };
             };
         };
@@ -432,6 +775,44 @@ export interface operations {
                 };
             };
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    listNews: {
+        parameters: {
+            query?: {
+                /** @description Keep items about this organization (slug). */
+                organization?: string;
+                /** @description Keep items from this source (slug). */
+                source?: string;
+                /** @description Text that the title or summary must contain. */
+                q?: string;
+                /** @description Items per page (1-100, default 24). */
+                limit?: number;
+                /** @description Items to skip (default 0). */
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_NewsItem"];
+                };
+            };
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };

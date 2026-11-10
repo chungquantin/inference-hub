@@ -41,6 +41,262 @@
         }
       }
     },
+    "/v1/admin/news": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List news in any review state. Defaults to the pending queue.",
+        "operationId": "adminListNews",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Review state to list. Default `pending`.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/NewsStatus"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "Keep items from this source (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "Keep items about this organization (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text that the title or summary must contain.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page (1-100, default 24).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Items to skip (default 0).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_NewsItem"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/news/review": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Approve, reject or return items to the queue.",
+        "operationId": "adminReviewNews",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/news/{id}/organizations": {
+      "put": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Replace the organizations a news item is linked to.",
+        "operationId": "adminSetNewsOrganizations",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "News item id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrganizationsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/sources": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List feed sources with their fetch health, failing ones first.",
+        "operationId": "adminListSources",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SourceStatus"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
     "/v1/categories": {
       "get": {
         "tags": [
@@ -93,6 +349,84 @@
             }
           },
           "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/news": {
+      "get": {
+        "tags": [
+          "news"
+        ],
+        "summary": "List published news, newest first.",
+        "operationId": "listNews",
+        "parameters": [
+          {
+            "name": "organization",
+            "in": "query",
+            "description": "Keep items about this organization (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "Keep items from this source (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text that the title or summary must contain.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page (1-100, default 24).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Items to skip (default 0).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_NewsItem"
+                }
+              }
+            }
+          },
+          "400": {
             "content": {
               "application/json": {
                 "schema": {
@@ -422,7 +756,7 @@
         "properties": {
           "code": {
             "type": "string",
-            "description": "Machine-readable code: `bad_request`, `not_found` or `internal`."
+            "description": "Machine-readable code: `bad_request`, `unauthorized`, `not_found` or `internal`."
           },
           "message": {
             "type": "string"
@@ -499,6 +833,106 @@
             "description": "Total parameters, in billions."
           }
         }
+      },
+      "NewsItem": {
+        "type": "object",
+        "description": "A news item as shown in feeds.",
+        "required": [
+          "id",
+          "url",
+          "title",
+          "published_at",
+          "status",
+          "organizations"
+        ],
+        "properties": {
+          "author": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "image_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewsMention"
+            }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publisher": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/NewsStatus"
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "NewsMatch": {
+        "type": "string",
+        "description": "How a news item was linked to an organization.",
+        "enum": [
+          "source",
+          "title",
+          "body",
+          "manual"
+        ]
+      },
+      "NewsMention": {
+        "type": "object",
+        "description": "An organization a news item is about.",
+        "required": [
+          "slug",
+          "name",
+          "matched_by"
+        ],
+        "properties": {
+          "matched_by": {
+            "$ref": "#/components/schemas/NewsMatch"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "NewsStatus": {
+        "type": "string",
+        "description": "Review state of a news item. Only approved items are public.",
+        "enum": [
+          "pending",
+          "approved",
+          "rejected"
+        ]
       },
       "Offering": {
         "type": "object",
@@ -736,6 +1170,94 @@
           },
           "slug": {
             "type": "string"
+          }
+        }
+      },
+      "Page_NewsItem": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "A news item as shown in feeds.",
+              "required": [
+                "id",
+                "url",
+                "title",
+                "published_at",
+                "status",
+                "organizations"
+              ],
+              "properties": {
+                "author": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "image_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "organizations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NewsMention"
+                  }
+                },
+                "published_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "publisher": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "status": {
+                  "$ref": "#/components/schemas/NewsStatus"
+                },
+                "summary": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -1023,6 +1545,55 @@
           "other"
         ]
       },
+      "ReviewRequest": {
+        "type": "object",
+        "required": [
+          "ids",
+          "status"
+        ],
+        "properties": {
+          "ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Items to change, at most 200."
+          },
+          "status": {
+            "$ref": "#/components/schemas/NewsStatus"
+          }
+        }
+      },
+      "ReviewResult": {
+        "type": "object",
+        "required": [
+          "updated"
+        ],
+        "properties": {
+          "updated": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Items that exist and were set.",
+            "minimum": 0
+          }
+        }
+      },
+      "SetOrganizationsRequest": {
+        "type": "object",
+        "required": [
+          "organizations"
+        ],
+        "properties": {
+          "organizations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Slugs of the organizations the item is about. Unknown slugs are rejected."
+          }
+        }
+      },
       "SitemapEntry": {
         "type": "object",
         "required": [
@@ -1067,6 +1638,102 @@
             }
           }
         }
+      },
+      "SourceStatus": {
+        "type": "object",
+        "description": "A feed source with its fetch health, for the admin view.",
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "enabled",
+          "auto_approve",
+          "fetch_interval_minutes",
+          "consecutive_failures",
+          "item_count",
+          "pending_count"
+        ],
+        "properties": {
+          "auto_approve": {
+            "type": "boolean"
+          },
+          "consecutive_failures": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "fetch_interval_minutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "item_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Items stored from this source."
+          },
+          "last_error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_run_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "last_success_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organization_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "organization_slug": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The organization that owns the feed, if any."
+          },
+          "pending_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Of which waiting for review."
+          },
+          "slug": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "admin_token": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   },
@@ -1086,6 +1753,14 @@
     {
       "name": "products",
       "description": "Models, APIs, GPU instances and projects"
+    },
+    {
+      "name": "news",
+      "description": "Published news about the market"
+    },
+    {
+      "name": "admin",
+      "description": "Editorial endpoints; need the admin token"
     }
   ]
 }

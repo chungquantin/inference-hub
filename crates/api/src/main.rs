@@ -20,7 +20,14 @@ async fn main() -> anyhow::Result<()> {
         tracing::info!("migrations applied");
     }
 
-    let app = api::app(AppState { pool }, &config.cors_origins);
+    if config.admin_token.is_none() {
+        tracing::info!("ADMIN_TOKEN is not set; the admin API is disabled");
+    }
+    let state = AppState {
+        pool,
+        admin_token: config.admin_token.clone(),
+    };
+    let app = api::app(state, &config.cors_origins);
     let listener = tokio::net::TcpListener::bind(config.addr)
         .await
         .with_context(|| format!("binding {}", config.addr))?;

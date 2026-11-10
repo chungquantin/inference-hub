@@ -9,6 +9,8 @@ pub struct Config {
     pub addr: SocketAddr,
     pub cors_origins: Vec<HeaderValue>,
     pub run_migrations: bool,
+    /// Enables the admin API. Must be at least 32 characters.
+    pub admin_token: Option<String>,
 }
 
 impl Config {
@@ -34,11 +36,23 @@ impl Config {
             "1" | "true" | "yes"
         );
 
+        let admin_token = std::env::var("ADMIN_TOKEN")
+            .ok()
+            .map(|t| t.trim().to_owned())
+            .filter(|t| !t.is_empty());
+        if let Some(token) = &admin_token {
+            anyhow::ensure!(
+                token.len() >= 32,
+                "ADMIN_TOKEN must be at least 32 characters (try `openssl rand -hex 32`)"
+            );
+        }
+
         Ok(Self {
             database_url,
             addr,
             cors_origins,
             run_migrations,
+            admin_token,
         })
     }
 }

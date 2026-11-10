@@ -4,11 +4,13 @@
 //! the OpenAPI document (and the generated TypeScript client) follows them.
 
 pub mod category;
+pub mod news;
 pub mod organization;
 pub mod pagination;
 pub mod product;
 
 pub use category::Category;
+pub use news::{NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus};
 pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail};
 pub use pagination::{Page, PageParams};
 pub use product::{
