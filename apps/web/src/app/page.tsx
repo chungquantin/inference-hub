@@ -27,6 +27,17 @@ export default async function HomePage() {
         <div className="mt-2">
           <SearchForm action="/organizations" placeholder="Search companies and projects" />
         </div>
+        <nav className="flex flex-wrap gap-x-5 gap-y-1 text-sm" aria-label="Comparisons">
+          <Link href="/compare/models" className="underline">
+            Compare model API prices
+          </Link>
+          <Link href="/compare/gpus" className="underline">
+            Compare GPU cloud prices
+          </Link>
+          <Link href="/compare/open-source" className="underline">
+            Open-source projects by stars
+          </Link>
+        </nav>
       </section>
 
       <section className="flex flex-col gap-4">

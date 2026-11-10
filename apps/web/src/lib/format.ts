@@ -38,6 +38,33 @@ export function formatDate(value: string | null | undefined): string {
   return new Date(value).toLocaleDateString("en-US", { dateStyle: "medium", timeZone: "UTC" });
 }
 
+/** 3_500_000_000 → "$3.5B", 1_700_000_000 EUR → "€1.7B". */
+export function formatMoney(value: number | null | undefined, currency = "USD"): string {
+  if (value == null) return "—";
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(value);
+}
+
+/** 96658 → "96.7K". */
+export function formatCount(value: number | null | undefined): string {
+  if (value == null) return "—";
+  return new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(
+    value,
+  );
+}
+
+/** "series_a" → "Series A", "seed" → "Seed". */
+export function formatRound(round: string): string {
+  return round
+    .split("_")
+    .map((word) => (word.length === 1 ? word.toUpperCase() : word[0].toUpperCase() + word.slice(1)))
+    .join(" ");
+}
+
 function trim(n: number): string {
   return Number.isInteger(n) ? String(n) : n.toFixed(1).replace(/\.0$/, "");
 }

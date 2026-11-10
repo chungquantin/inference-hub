@@ -73,6 +73,27 @@ products:
 
 GPU offerings use `gpu_type`, `gpu_count` and `per_hour` instead of `input` and `output`.
 
+Open-source products take `github: owner/name`; the worker syncs their stars, forks,
+license and latest release every 6 hours, and keeps one star count per day for trends.
+
+Funding rounds go in the organization that raised them. Investors are slugs of other
+organization files; anything they cannot express goes in `notes`. Amounts are stored as
+announced, in `currency` (default USD), and are never converted:
+
+```yaml
+funding:
+  - round: series_c               # lower_snake_case: seed, series_a, strategic, debt, ...
+    announced_on: 2025-09-09
+    amount: 1700000000
+    valuation: 11700000000        # post-money
+    currency: EUR
+    lead: [asml]
+    investors: [a16z, nvidia]
+    source_url: https://mistral.ai/news/...
+```
+
+Only add a round with a `source_url` to the announcement.
+
 `pnpm seed:check` validates the files without writing anything. `pnpm seed` imports them.
 The import is idempotent: rows are upserted by slug, and an offering is added only when it
 is a new observation. To record a price change, add a new offering with a newer `observed_on`
@@ -142,5 +163,6 @@ pnpm test           # needs Postgres running: each DB test creates and drops its
    SEO (sitemap, robots, JSON-LD, canonical URLs).
 3. **News pipeline** (done): Postgres job queue, feed ingestion with conditional requests,
    name-based tagging, admin review queue.
-4. **Comparisons:** pricing offerings, model and GPU price tables, GitHub stats, funding.
+4. **Comparisons** (done): model and GPU price tables, price history, GitHub stats,
+   funding rounds and investor portfolios.
 5. **Growth:** semantic search, newsletter, public API, submissions.

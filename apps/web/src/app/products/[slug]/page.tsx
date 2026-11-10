@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ModelSpec } from "@inference-hub/api-client";
+import type { ModelSpec, RepoStats } from "@inference-hub/api-client";
 import { OfferingsTable } from "@/components/offerings-table";
+import { PriceHistoryChart } from "@/components/price-history-chart";
 import { api } from "@/lib/api";
-import { formatDate, formatParams, formatTokens } from "@/lib/format";
+import { formatCount, formatDate, formatParams, formatTokens } from "@/lib/format";
 import { PRODUCT_TYPE_LABELS } from "@/lib/labels";
 import { SITE_URL, jsonLd } from "@/lib/site";
 
@@ -31,7 +32,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage({ params }: Props) {
-  const product = await loadProduct((await params).slug);
+  const { slug } = await params;
+  const [product, history] = await Promise.all([
+    loadProduct(slug),
+    api.GET("/v1/products/{slug}/price-history", { params: { path: { slug } } }),
+  ]);
+  // Rendered on the server per request (and per revalidation), so "today" is the render time.
+  const renderedAt = new Date(history.response.headers.get("date") ?? 0).getTime() || 0;
+  const historyUnit =
+    product.offerings.some((o) => o.price_per_hour != null) ? "Price per hour" : "Output price per million tokens";
   const metadata = Object.entries(product.metadata).filter(
     ([, v]) => typeof v === "string" || typeof v === "number" || typeof v === "boolean",
   );
@@ -97,10 +106,19 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
+      {product.repo && <RepoSection repo={product.repo} />}
+
       <section className="flex flex-col gap-3">
         <h2 className="text-xl font-semibold">Where to get it</h2>
         <OfferingsTable offerings={product.offerings} />
       </section>
+
+      {history.data && history.data.length > 1 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xl font-semibold">Price history</h2>
+          <PriceHistoryChart points={history.data} unit={historyUnit} now={renderedAt} />
+        </section>
+      )}
     </article>
   );
 }
@@ -124,6 +142,51 @@ function ModelFacts({ model }: { model: ModelSpec }) {
       <Fact label="License" value={model.license ?? undefined} />
       {model.family && <Fact label="Family" value={model.family} />}
     </>
+  );
+}
+
+function RepoSection({ repo }: { repo: RepoStats }) {
+  return (
+    <section className="flex flex-col gap-3">
+      <h2 className="text-xl font-semibold">
+        On GitHub{" "}
+        <a
+          href={`https://github.com/${repo.repo}`}
+          rel="noopener"
+          target="_blank"
+          className="ml-1 font-mono text-sm font-normal text-zinc-500 hover:underline"
+        >
+          {repo.repo}
+        </a>
+      </h2>
+      {repo.archived && (
+        <p className="text-sm text-amber-600">This repository is archived and no longer maintained.</p>
+      )}
+      <dl className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
+        <Fact
+          label="Stars"
+          value={
+            <>
+              {formatCount(repo.stars)}
+              {repo.stars_30d != null && (
+                <span className="ml-1 font-normal text-zinc-500">+{formatCount(repo.stars_30d)} in 30 days</span>
+              )}
+            </>
+          }
+        />
+        <Fact label="Forks" value={formatCount(repo.forks)} />
+        <Fact label="License" value={repo.license ?? undefined} />
+        <Fact
+          label="Latest release"
+          value={
+            repo.latest_release
+              ? `${repo.latest_release}${repo.released_at ? ` · ${formatDate(repo.released_at)}` : ""}`
+              : undefined
+          }
+        />
+      </dl>
+      <p className="text-xs text-zinc-500">Synced {formatDate(repo.synced_at)}.</p>
+    </section>
   );
 }
 

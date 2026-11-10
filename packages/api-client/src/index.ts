@@ -19,6 +19,15 @@ export type SitemapIndex = Schemas["SitemapIndex"];
 export type NewsItem = Schemas["NewsItem"];
 export type NewsStatus = Schemas["NewsStatus"];
 export type SourceStatus = Schemas["SourceStatus"];
+export type ModelPrice = Schemas["ModelPrice"];
+export type ModelPriceSort = Schemas["ModelPriceSort"];
+export type GpuPrice = Schemas["GpuPrice"];
+export type GpuComparison = Schemas["GpuComparison"];
+export type PricePoint = Schemas["PricePoint"];
+export type FundingRound = Schemas["FundingRound"];
+export type PortfolioCompany = Schemas["PortfolioCompany"];
+export type RepoStats = Schemas["RepoStats"];
+export type RepoLeader = Schemas["RepoLeader"];
 export type ApiErrorBody = Schemas["ErrorBody"];
 
 /** A typed client for the Inference Hub API, generated from its OpenAPI document. */

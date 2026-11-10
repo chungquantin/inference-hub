@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FundingTable, PortfolioList } from "@/components/funding";
 import { NewsList } from "@/components/news";
 import { ProductList } from "@/components/product-list";
 import { api } from "@/lib/api";
@@ -97,6 +98,21 @@ export default async function OrganizationPage({ params }: Props) {
           <h2 className="text-xl font-semibold">Serves</h2>
           <p className="text-sm text-zinc-500">Products from other makers that {org.name} offers.</p>
           <ProductList products={org.served_products} />
+        </section>
+      )}
+
+      {org.funding.length > 0 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xl font-semibold">Funding</h2>
+          <FundingTable rounds={org.funding} />
+        </section>
+      )}
+
+      {org.portfolio.length > 0 && (
+        <section className="flex flex-col gap-1">
+          <h2 className="text-xl font-semibold">Portfolio</h2>
+          <p className="text-sm text-zinc-500">Companies in the hub that {org.name} invested in.</p>
+          <PortfolioList companies={org.portfolio} />
         </section>
       )}
 

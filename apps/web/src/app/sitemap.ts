@@ -8,7 +8,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data, error } = await api.GET("/v1/sitemap");
   if (error || !data) throw new Error("Could not load sitemap data");
 
-  const staticPages: MetadataRoute.Sitemap = ["", "/categories", "/organizations", "/products", "/news"].map(
+  const staticPages: MetadataRoute.Sitemap = [
+    "",
+    "/categories",
+    "/organizations",
+    "/products",
+    "/news",
+    "/compare",
+    "/compare/models",
+    "/compare/gpus",
+    "/compare/open-source",
+  ].map(
     (path) => ({ url: `${SITE_URL}${path}`, changeFrequency: "daily", priority: path ? 0.8 : 1 }),
   );
   const pages = (prefix: string, entries: typeof data.categories, priority: number) =>
