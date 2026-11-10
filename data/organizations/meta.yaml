@@ -3,6 +3,7 @@ name: Meta
 kinds: [model_provider]
 tagline: Publisher of the open-weights Llama models.
 website: https://ai.meta.com
+logo_url: /logos/meta.png
 hq_country: US
 founded_year: 2004
 tagging:

@@ -3,3 +3,4 @@ name: Liquid Inference
 kinds: [llm_gateway]
 tagline: Auction exchange where providers compete to serve each model request.
 website: https://liquidinference.ai
+logo_url: /logos/liquid-inference.svg

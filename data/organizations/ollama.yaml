@@ -3,6 +3,7 @@ name: Ollama
 kinds: [open_source]
 tagline: Run open models locally with one command.
 website: https://ollama.com
+logo_url: /logos/ollama.png
 hq_country: US
 founded_year: 2023
 links:

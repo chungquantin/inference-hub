@@ -19,7 +19,7 @@ pub struct ProductFilter {
 macro_rules! product_columns {
     () => {
         "p.id, p.slug, p.name, p.product_type, p.tagline, p.url, p.launched_at, \
-         o.slug AS organization_slug, o.name AS organization_name"
+         o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo"
     };
 }
 
@@ -145,7 +145,7 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Produ
 /// cheapest first. Older rows are kept as price history.
 pub async fn latest_offerings(pool: &PgPool, product_id: Uuid) -> sqlx::Result<Vec<Offering>> {
     sqlx::query_as(
-        "SELECT f.id, o.slug AS organization_slug, o.name AS organization_name,
+        "SELECT f.id, o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
                 f.price_input_per_mtok::float8 AS price_input_per_mtok,
                 f.price_output_per_mtok::float8 AS price_output_per_mtok,
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,

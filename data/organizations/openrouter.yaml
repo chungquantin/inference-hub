@@ -3,5 +3,6 @@ name: OpenRouter
 kinds: [llm_gateway]
 tagline: One API across hundreds of models and providers.
 website: https://openrouter.ai
+logo_url: /logos/openrouter.png
 hq_country: US
 founded_year: 2023

@@ -3,6 +3,7 @@ name: ggml
 kinds: [open_source]
 tagline: Tensor library behind llama.cpp, for inference on commodity hardware.
 website: https://ggml.ai
+logo_url: /logos/ggml.jpg
 hq_country: BG
 founded_year: 2023
 links:

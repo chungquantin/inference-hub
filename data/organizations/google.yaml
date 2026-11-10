@@ -3,6 +3,7 @@ name: Google
 kinds: [model_provider, hyperscaler, hardware, investor]
 tagline: Gemini models, Google Cloud and TPUs.
 website: https://cloud.google.com
+logo_url: /logos/google.png
 hq_country: US
 founded_year: 1998
 tagging:

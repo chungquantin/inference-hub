@@ -3,6 +3,7 @@ name: Mistral AI
 kinds: [model_provider]
 tagline: European lab shipping open and commercial models.
 website: https://mistral.ai
+logo_url: /logos/mistral-ai.png
 hq_country: FR
 founded_year: 2023
 tagging:

@@ -3,6 +3,7 @@ name: Hugging Face
 kinds: [open_source, inference_provider]
 tagline: Hub for open models and datasets, with hosted inference.
 website: https://huggingface.co
+logo_url: /logos/hugging-face.svg
 hq_country: US
 founded_year: 2016
 links:

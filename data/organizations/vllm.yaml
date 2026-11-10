@@ -3,6 +3,7 @@ name: vLLM
 kinds: [open_source]
 tagline: High-throughput LLM inference and serving engine.
 website: https://docs.vllm.ai
+logo_url: /logos/vllm.png
 founded_year: 2023
 links:
   github: https://github.com/vllm-project/vllm

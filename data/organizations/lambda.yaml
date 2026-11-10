@@ -3,6 +3,7 @@ name: Lambda
 kinds: [gpu_cloud, hardware]
 tagline: GPU cloud and on-premises AI infrastructure.
 website: https://lambda.ai
+logo_url: /logos/lambda.svg
 hq_country: US
 founded_year: 2012
 tagging:

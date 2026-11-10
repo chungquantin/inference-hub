@@ -25,8 +25,8 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
     sqlx::query_as(
         "SELECT * FROM (
              SELECT p.slug AS product_slug, p.name AS product_name,
-                    mk.slug AS maker_slug, mk.name AS maker_name,
-                    pr.slug AS organization_slug, pr.name AS organization_name,
+                    mk.slug AS maker_slug, mk.name AS maker_name, mk.logo_url AS maker_logo,
+                    pr.slug AS organization_slug, pr.name AS organization_name, pr.logo_url AS organization_logo,
                     m.open_weights, m.context_window, m.parameters_b::float8 AS parameters_b,
                     f.price_input_per_mtok::float8 AS price_input_per_mtok,
                     f.price_output_per_mtok::float8 AS price_output_per_mtok,
@@ -67,7 +67,7 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
 pub async fn gpu_prices(pool: &PgPool, q: &GpuPriceQuery) -> sqlx::Result<Vec<GpuPrice>> {
     sqlx::query_as(
         "SELECT p.slug AS product_slug, p.name AS product_name,
-                pr.slug AS organization_slug, pr.name AS organization_name,
+                pr.slug AS organization_slug, pr.name AS organization_name, pr.logo_url AS organization_logo,
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
                 (f.price_per_hour / f.gpu_count)::float8 AS price_per_gpu_hour,
                 f.region, f.currency::text AS currency, f.source_url,
@@ -107,7 +107,7 @@ pub async fn price_history(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Vec
         return Ok(None);
     };
     let points = sqlx::query_as(
-        "SELECT o.slug AS organization_slug, o.name AS organization_name,
+        "SELECT o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
                 nullif(concat_ws(' · ',
                     CASE WHEN f.gpu_type IS NOT NULL
                          THEN concat_ws('× ', f.gpu_count::text, f.gpu_type) END,
@@ -153,8 +153,8 @@ pub async fn funding_rounds(
     .fetch_all(pool)
     .await?;
     let ids: Vec<Uuid> = rounds.iter().map(|r| r.id).collect();
-    let investors: Vec<(Uuid, String, String, bool)> = sqlx::query_as(
-        "SELECT fi.funding_round_id, o.slug, o.name, fi.is_lead
+    let investors: Vec<(Uuid, String, String, Option<String>, bool)> = sqlx::query_as(
+        "SELECT fi.funding_round_id, o.slug, o.name, o.logo_url, fi.is_lead
          FROM funding_round_investors fi JOIN organizations o ON o.id = fi.investor_id
          WHERE fi.funding_round_id = ANY ($1)
          ORDER BY fi.is_lead DESC, o.name",
@@ -164,11 +164,13 @@ pub async fn funding_rounds(
     .await?;
 
     let mut by_round: BTreeMap<Uuid, Vec<RoundInvestor>> = BTreeMap::new();
-    for (round, slug, name, lead) in investors {
-        by_round
-            .entry(round)
-            .or_default()
-            .push(RoundInvestor { slug, name, lead });
+    for (round, slug, name, logo_url, lead) in investors {
+        by_round.entry(round).or_default().push(RoundInvestor {
+            slug,
+            name,
+            logo_url,
+            lead,
+        });
     }
     Ok(rounds
         .into_iter()
@@ -189,6 +191,7 @@ pub async fn funding_rounds(
 struct PortfolioRow {
     slug: String,
     name: String,
+    logo_url: Option<String>,
     round: String,
     announced_on: NaiveDate,
     amount: Option<i64>,
@@ -199,7 +202,7 @@ struct PortfolioRow {
 /// Companies an investor backed, most recent investment first.
 pub async fn portfolio(pool: &PgPool, investor_id: Uuid) -> sqlx::Result<Vec<PortfolioCompany>> {
     let rows: Vec<PortfolioRow> = sqlx::query_as(
-        "SELECT o.slug, o.name, fr.round, fr.announced_on, fr.amount,
+        "SELECT o.slug, o.name, o.logo_url, fr.round, fr.announced_on, fr.amount,
                 fr.currency::text AS currency, fi.is_lead AS lead
          FROM funding_round_investors fi
          JOIN funding_rounds fr ON fr.id = fi.funding_round_id
@@ -230,6 +233,7 @@ pub async fn portfolio(pool: &PgPool, investor_id: Uuid) -> sqlx::Result<Vec<Por
                 organization: OrganizationRef {
                     slug: row.slug,
                     name: row.name,
+                    logo_url: row.logo_url,
                 },
                 rounds: vec![entry],
             }),
@@ -268,6 +272,7 @@ struct LeaderRow {
     product_type: ProductType,
     organization_slug: String,
     organization_name: String,
+    organization_logo: Option<String>,
     #[sqlx(flatten)]
     stats: RepoStats,
 }
@@ -276,7 +281,7 @@ struct LeaderRow {
 pub async fn repo_leaderboard(pool: &PgPool) -> sqlx::Result<Vec<RepoLeader>> {
     let rows: Vec<LeaderRow> = sqlx::query_as(concat!(
         "SELECT p.slug AS product_slug, p.name AS product_name, p.product_type,
-                o.slug AS organization_slug, o.name AS organization_name, ",
+                o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo, ",
         repo_stats_columns!(),
         " FROM products p
           JOIN repo_stats s ON s.product_id = p.id
@@ -295,6 +300,7 @@ pub async fn repo_leaderboard(pool: &PgPool) -> sqlx::Result<Vec<RepoLeader>> {
             organization: OrganizationRef {
                 slug: r.organization_slug,
                 name: r.organization_name,
+                logo_url: r.organization_logo,
             },
             stats: r.stats,
         })

@@ -3,6 +3,7 @@ name: SGLang
 kinds: [open_source]
 tagline: Fast serving framework for large language and vision models.
 website: https://docs.sglang.ai
+logo_url: /logos/sglang.png
 founded_year: 2024
 links:
   github: https://github.com/sgl-project

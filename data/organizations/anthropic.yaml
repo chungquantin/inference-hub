@@ -3,6 +3,7 @@ name: Anthropic
 kinds: [model_provider]
 tagline: AI safety company building the Claude models.
 website: https://www.anthropic.com
+logo_url: /logos/anthropic.svg
 hq_country: US
 founded_year: 2021
 links:

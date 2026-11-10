@@ -3,6 +3,7 @@ name: Fireworks AI
 kinds: [inference_provider]
 tagline: Fast inference platform for open models.
 website: https://fireworks.ai
+logo_url: /logos/fireworks-ai.svg
 hq_country: US
 founded_year: 2022
 funding:

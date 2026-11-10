@@ -3,6 +3,7 @@ name: OpenAI
 kinds: [model_provider]
 tagline: Creator of the GPT model family and ChatGPT.
 website: https://openai.com
+logo_url: /logos/openai.svg
 hq_country: US
 founded_year: 2015
 links:

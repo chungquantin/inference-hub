@@ -3,5 +3,6 @@ name: Cerebras
 kinds: [hardware, inference_provider]
 tagline: Wafer-scale chips and an inference cloud built on them.
 website: https://www.cerebras.ai
+logo_url: /logos/cerebras.png
 hq_country: US
 founded_year: 2016

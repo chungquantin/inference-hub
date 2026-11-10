@@ -27,6 +27,9 @@ pub struct OrganizationRef {
     pub slug: String,
     #[sqlx(rename = "organization_name")]
     pub name: String,
+    /// Path of the organization's logo, such as `/logos/openai.svg`.
+    #[sqlx(rename = "organization_logo")]
+    pub logo_url: Option<String>,
 }
 
 /// A product as shown in listings.

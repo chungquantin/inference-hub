@@ -430,6 +430,7 @@ export interface components {
         };
         /** @description The organization that makes a product, read from `maker_*` columns. */
         MakerRef: {
+            logo_url?: string | null;
             name: string;
             slug: string;
         };
@@ -516,6 +517,7 @@ export interface components {
         NewsMatch: "source" | "title" | "body" | "manual";
         /** @description An organization a news item is about. */
         NewsMention: {
+            logo_url?: string | null;
             matched_by: components["schemas"]["NewsMatch"];
             name: string;
             slug: string;
@@ -602,6 +604,8 @@ export interface components {
         };
         /** @description A short reference to an organization, embedded in product and offering responses. */
         OrganizationRef: {
+            /** @description Path of the organization's logo, such as `/logos/openai.svg`. */
+            logo_url?: string | null;
             name: string;
             slug: string;
         };
@@ -808,6 +812,7 @@ export interface components {
         };
         RoundInvestor: {
             lead: boolean;
+            logo_url?: string | null;
             name: string;
             slug: string;
         };
@@ -847,6 +852,7 @@ export interface components {
             /** Format: date-time */
             last_success_at?: string | null;
             name: string;
+            organization_logo_url?: string | null;
             organization_name?: string | null;
             /** @description The organization that owns the feed, if any. */
             organization_slug?: string | null;

@@ -1,0 +1,126 @@
+{
+ "a16z": {
+  "file": "/logos/a16z.png",
+  "source": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/06/Favicon-%E2%80%94-270x270px.png"
+ },
+ "anthropic": {
+  "file": "/logos/anthropic.svg",
+  "source": "https://www.anthropic.com/images/icons/safari-pinned-tab.svg"
+ },
+ "asml": {
+  "file": "/logos/asml.png",
+  "source": "https://github.com/asml.png?size=256"
+ },
+ "aws": {
+  "file": "/logos/aws.png",
+  "source": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
+ },
+ "cerebras": {
+  "file": "/logos/cerebras.png",
+  "source": "https://cdn.sanity.io/images/e4qjo92p/production/e7a55ae5ab7e2c4fdfd4e66a51f628d1f2f44207-967x967.png?w=512&h=512&fit=max&auto=format"
+ },
+ "coreweave": {
+  "file": "/logos/coreweave.png",
+  "source": "https://cdn.prod.website-files.com/62ba1fb86485b6d5029975c4/676dd39272d1e888a56c48ad_logo_coreweave_solo_256x256.png"
+ },
+ "deepseek": {
+  "file": "/logos/deepseek.png",
+  "source": "https://github.com/deepseek-ai.png?size=256"
+ },
+ "fireworks-ai": {
+  "file": "/logos/fireworks-ai.svg",
+  "source": "https://fireworks.ai/icon.svg?26fd47f5c5eddcac"
+ },
+ "general-catalyst": {
+  "file": "/logos/general-catalyst.png",
+  "source": "https://cdn.prod.website-files.com/69df4e62ff62d7b5568fc58b/6a0464cb9a8c5dfd0baf068a_GC_Symbol_Black_RGB%201%20(1).png"
+ },
+ "ggml": {
+  "file": "/logos/ggml.jpg",
+  "source": "https://github.com/ggml-org.png?size=256"
+ },
+ "google": {
+  "file": "/logos/google.png",
+  "source": "https://www.gstatic.com/cgc/super_cloud_gradient.png"
+ },
+ "groq": {
+  "file": "/logos/groq.svg",
+  "source": "https://groq.com/favicon.svg"
+ },
+ "hugging-face": {
+  "file": "/logos/hugging-face.svg",
+  "source": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
+ },
+ "hyperbolic": {
+  "file": "/logos/hyperbolic.png",
+  "source": "https://www.hyperbolic.ai/apple-touch-icon-2026.png"
+ },
+ "index-ventures": {
+  "file": "/logos/index-ventures.svg",
+  "source": "https://www.indexventures.com/static/images/safari-pinned-tab.394df958a54e.svg"
+ },
+ "lambda": {
+  "file": "/logos/lambda.svg",
+  "source": "https://lambda.com/hubfs/favicon-48x48-1.svg"
+ },
+ "lightspeed": {
+  "file": "/logos/lightspeed.svg",
+  "source": "https://lsvp.com/wp-content/uploads/2023/04/favico.svg"
+ },
+ "liquid-inference": {
+  "file": "/logos/liquid-inference.svg",
+  "source": "https://liquidinference.ai/favicon.svg"
+ },
+ "menlo-ventures": {
+  "file": "/logos/menlo-ventures.png",
+  "source": "https://menlovc.com/favicon.svg"
+ },
+ "meta": {
+  "file": "/logos/meta.png",
+  "source": "https://github.com/facebookresearch.png?size=256"
+ },
+ "microsoft": {
+  "file": "/logos/microsoft.png",
+  "source": "https://github.com/microsoft.png?size=256"
+ },
+ "mistral-ai": {
+  "file": "/logos/mistral-ai.png",
+  "source": "https://github.com/mistralai.png?size=256"
+ },
+ "nvidia": {
+  "file": "/logos/nvidia.png",
+  "source": "https://github.com/NVIDIA.png?size=256"
+ },
+ "ollama": {
+  "file": "/logos/ollama.png",
+  "source": "https://ollama.com/public/apple-touch-icon.png"
+ },
+ "openai": {
+  "file": "/logos/openai.svg",
+  "source": "https://openai.com/favicon.svg"
+ },
+ "openrouter": {
+  "file": "/logos/openrouter.png",
+  "source": "https://openrouter.ai/apple-touch-icon.png"
+ },
+ "runpod": {
+  "file": "/logos/runpod.png",
+  "source": "https://cdn.prod.website-files.com/69ce570adca53340abab8376/69e08b4ced16e020149fc61d_favicon_www_runpod_io_256x256.png"
+ },
+ "sequoia-capital": {
+  "file": "/logos/sequoia-capital.png",
+  "source": "https://framerusercontent.com/images/BjlCZkZ0WlX5JcURORpeyljjCmM.png"
+ },
+ "sglang": {
+  "file": "/logos/sglang.png",
+  "source": "https://docs.sglang.io/mintlify-assets/_mintlify/favicons/lmsysorg/HxNR9zohmNorO5Pc/_generated/favicon/apple-touch-icon.png"
+ },
+ "together-ai": {
+  "file": "/logos/together-ai.png",
+  "source": "https://cdn.prod.website-files.com/69654e88dce9154b5f1206dd/69a59cff65ed0f267dd2fbe8_touchicon.png"
+ },
+ "vllm": {
+  "file": "/logos/vllm.png",
+  "source": "https://github.com/vllm-project.png?size=256"
+ }
+}

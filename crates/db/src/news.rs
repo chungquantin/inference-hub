@@ -114,8 +114,8 @@ pub async fn get(pool: &PgPool, id: Uuid) -> sqlx::Result<Option<NewsItem>> {
 /// Loads the organizations of each item in one query, keeping the item order.
 async fn with_mentions(pool: &PgPool, rows: Vec<NewsRow>) -> sqlx::Result<Vec<NewsItem>> {
     let ids: Vec<Uuid> = rows.iter().map(|r| r.id).collect();
-    let mentions: Vec<(Uuid, String, String, NewsMatch)> = sqlx::query_as(
-        "SELECT no.news_item_id, o.slug, o.name, no.matched_by
+    let mentions: Vec<(Uuid, String, String, Option<String>, NewsMatch)> = sqlx::query_as(
+        "SELECT no.news_item_id, o.slug, o.name, o.logo_url, no.matched_by
          FROM news_item_organizations no
          JOIN organizations o ON o.id = no.organization_id
          WHERE no.news_item_id = ANY ($1)
@@ -126,10 +126,11 @@ async fn with_mentions(pool: &PgPool, rows: Vec<NewsRow>) -> sqlx::Result<Vec<Ne
     .await?;
 
     let mut by_item: HashMap<Uuid, Vec<NewsMention>> = HashMap::new();
-    for (item, slug, name, matched_by) in mentions {
+    for (item, slug, name, logo_url, matched_by) in mentions {
         by_item.entry(item).or_default().push(NewsMention {
             slug,
             name,
+            logo_url,
             matched_by,
         });
     }
@@ -198,14 +199,14 @@ pub async fn set_organizations(pool: &PgPool, id: Uuid, slugs: &[String]) -> sql
 pub async fn list_sources(pool: &PgPool) -> sqlx::Result<Vec<SourceStatus>> {
     sqlx::query_as(
         "SELECT s.id, s.slug, s.name, s.url, s.enabled, s.auto_approve, s.fetch_interval_minutes,
-                o.slug AS organization_slug, o.name AS organization_name,
+                o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
                 s.last_run_at, s.last_success_at, s.last_error, s.consecutive_failures,
                 count(n.id) AS item_count,
                 count(n.id) FILTER (WHERE n.status = 'pending') AS pending_count
          FROM sources s
          LEFT JOIN organizations o ON o.id = s.organization_id
          LEFT JOIN news_items n ON n.source_id = s.id
-         GROUP BY s.id, o.slug, o.name
+         GROUP BY s.id, o.slug, o.name, o.logo_url
          ORDER BY s.consecutive_failures DESC, s.name",
     )
     .fetch_all(pool)

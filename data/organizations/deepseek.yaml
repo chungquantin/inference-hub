@@ -3,6 +3,7 @@ name: DeepSeek
 kinds: [model_provider]
 tagline: Lab behind the DeepSeek V3 and R1 open-weights models.
 website: https://www.deepseek.com
+logo_url: /logos/deepseek.png
 hq_country: CN
 founded_year: 2023
 tagging:

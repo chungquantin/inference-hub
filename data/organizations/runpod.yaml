@@ -3,3 +3,4 @@ name: RunPod
 kinds: [gpu_cloud]
 tagline: GPU cloud with on-demand pods and serverless GPUs.
 website: https://www.runpod.io
+logo_url: /logos/runpod.png

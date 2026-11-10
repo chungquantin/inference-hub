@@ -198,6 +198,18 @@ pub fn is_slug(s: &str) -> bool {
             .all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-')
 }
 
+/// A path under `/logos/` with an image extension, without traversal.
+pub fn is_logo_path(s: &str) -> bool {
+    s.strip_prefix("/logos/").is_some_and(|name| {
+        !name.is_empty()
+            && !name.contains('/')
+            && !name.contains("..")
+            && [".svg", ".png", ".jpg", ".webp"]
+                .iter()
+                .any(|ext| name.ends_with(ext))
+    })
+}
+
 /// `owner/name` with GitHub's allowed characters.
 pub fn is_github_repo(s: &str) -> bool {
     let valid = |part: &str| {
@@ -306,12 +318,20 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
             .website
             .iter()
             .map(|u| ("website", u))
-            .chain(org.logo_url.iter().map(|u| ("logo_url", u)))
             .chain(org.links.iter().map(|(k, v)| (k.as_str(), v)))
         {
             if !is_http_url(url) {
                 issue(format!("{name} `{url}` must be an http(s) URL"));
             }
+        }
+        // Logos are served by the web app from `apps/web/public/logos/`.
+        if let Some(logo) = &org.logo_url
+            && !is_logo_path(logo)
+        {
+            issue(format!(
+                "logo_url `{logo}` must be a file under /logos/, such as /logos/{}.svg",
+                org.slug
+            ));
         }
         for category in &org.categories {
             if !known_categories.contains(category) {
@@ -699,6 +719,22 @@ feeds:
                 .iter()
                 .any(|m| m.contains("listing `lab/one` is also mapped"))
         );
+    }
+
+    #[test]
+    fn logo_paths_stay_in_the_logos_folder() {
+        for ok in ["/logos/openai.svg", "/logos/a16z.png"] {
+            assert!(is_logo_path(ok), "{ok}");
+        }
+        for bad in [
+            "https://x.com/logo.png",
+            "/logos/../secret.svg",
+            "/logos/a/b.svg",
+            "/logos/x.gif",
+            "/img/x.svg",
+        ] {
+            assert!(!is_logo_path(bad), "{bad}");
+        }
     }
 
     #[test]

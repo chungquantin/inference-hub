@@ -3,6 +3,7 @@ name: Amazon Web Services
 kinds: [hyperscaler, inference_provider, hardware]
 tagline: Cloud provider offering Bedrock, Trainium and Inferentia.
 website: https://aws.amazon.com
+logo_url: /logos/aws.png
 hq_country: US
 founded_year: 2006
 tagging:

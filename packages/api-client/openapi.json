@@ -1291,6 +1291,12 @@
           "name"
         ],
         "properties": {
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "name": {
             "type": "string"
           },
@@ -1527,6 +1533,12 @@
           "matched_by"
         ],
         "properties": {
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "matched_by": {
             "$ref": "#/components/schemas/NewsMatch"
           },
@@ -1795,6 +1807,13 @@
           "name"
         ],
         "properties": {
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Path of the organization's logo, such as `/logos/openai.svg`."
+          },
           "name": {
             "type": "string"
           },
@@ -2532,6 +2551,12 @@
           "lead": {
             "type": "boolean"
           },
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "name": {
             "type": "string"
           },
@@ -2660,6 +2685,12 @@
           },
           "name": {
             "type": "string"
+          },
+          "organization_logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "organization_name": {
             "type": [

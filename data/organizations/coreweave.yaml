@@ -3,6 +3,7 @@ name: CoreWeave
 kinds: [gpu_cloud]
 tagline: Specialized cloud for GPU-accelerated workloads.
 website: https://www.coreweave.com
+logo_url: /logos/coreweave.png
 hq_country: US
 founded_year: 2017
 feeds:

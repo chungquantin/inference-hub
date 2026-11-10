@@ -3,6 +3,7 @@ name: NVIDIA
 kinds: [hardware, investor]
 tagline: Maker of the dominant AI accelerators.
 website: https://www.nvidia.com
+logo_url: /logos/nvidia.png
 hq_country: US
 founded_year: 1993
 tagging:

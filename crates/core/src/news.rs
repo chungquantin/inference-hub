@@ -33,6 +33,7 @@ pub enum NewsMatch {
 pub struct NewsMention {
     pub slug: String,
     pub name: String,
+    pub logo_url: Option<String>,
     pub matched_by: NewsMatch,
 }
 
@@ -64,6 +65,8 @@ pub struct SourceStatus {
     /// The organization that owns the feed, if any.
     pub organization_slug: Option<String>,
     pub organization_name: Option<String>,
+    #[sqlx(rename = "organization_logo")]
+    pub organization_logo_url: Option<String>,
     pub last_run_at: Option<DateTime<Utc>>,
     pub last_success_at: Option<DateTime<Utc>>,
     pub last_error: Option<String>,

@@ -3,6 +3,7 @@ name: Together AI
 kinds: [inference_provider, gpu_cloud]
 tagline: Cloud for running, fine-tuning and training open models.
 website: https://www.together.ai
+logo_url: /logos/together-ai.png
 hq_country: US
 founded_year: 2022
 tagging:

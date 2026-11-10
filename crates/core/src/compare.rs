@@ -36,6 +36,8 @@ pub struct MakerRef {
     pub slug: String,
     #[sqlx(rename = "maker_name")]
     pub name: String,
+    #[sqlx(rename = "maker_logo")]
+    pub logo_url: Option<String>,
 }
 
 /// A row of the GPU price comparison: one configuration at one provider.
@@ -124,6 +126,7 @@ pub struct FundingRound {
 pub struct RoundInvestor {
     pub slug: String,
     pub name: String,
+    pub logo_url: Option<String>,
     pub lead: bool,
 }
 

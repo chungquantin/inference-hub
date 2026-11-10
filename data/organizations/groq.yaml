@@ -3,6 +3,7 @@ name: Groq
 kinds: [inference_provider, hardware]
 tagline: Inference cloud built on its own LPU chips.
 website: https://groq.com
+logo_url: /logos/groq.svg
 hq_country: US
 founded_year: 2016
 tagging:
