@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 use uuid::Uuid;
 
-use crate::{Category, ProductSummary};
+use crate::{Category, FundingRound, PortfolioCompany, ProductSummary};
 
 /// The roles an organization plays in the market. One organization can hold several.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, ToSchema, sqlx::Type)]
@@ -77,5 +77,9 @@ pub struct OrganizationDetail {
     pub products: Vec<ProductSummary>,
     /// Products made by others that the organization sells or serves.
     pub served_products: Vec<ProductSummary>,
+    /// Rounds the organization raised, newest first.
+    pub funding: Vec<FundingRound>,
+    /// Companies the organization invested in, most recent first.
+    pub portfolio: Vec<PortfolioCompany>,
     pub updated_at: DateTime<Utc>,
 }

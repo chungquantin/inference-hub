@@ -38,3 +38,12 @@ products:
       modalities: [text]
       license: Apache-2.0
       open_weights: true
+funding:
+  - round: series_c
+    announced_on: 2025-09-09
+    amount: 1700000000
+    valuation: 11700000000
+    currency: EUR
+    lead: [asml]
+    investors: [a16z, general-catalyst, index-ventures, lightspeed, nvidia]
+    source_url: https://mistral.ai/news/mistral-ai-raises-1-7-b-to-accelerate-technological-progress-with-ai

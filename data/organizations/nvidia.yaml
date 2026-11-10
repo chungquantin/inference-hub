@@ -16,6 +16,12 @@ feeds:
     name: NVIDIA Blog
     url: https://blogs.nvidia.com/feed/
 products:
+  - slug: tensorrt-llm
+    name: TensorRT-LLM
+    type: oss_project
+    github: NVIDIA/TensorRT-LLM
+    tagline: NVIDIA library for optimized LLM inference on its GPUs.
+    url: https://github.com/NVIDIA/TensorRT-LLM
   - slug: nvidia-h100
     name: NVIDIA H100
     type: hardware

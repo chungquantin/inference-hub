@@ -17,5 +17,6 @@ products:
   - slug: text-generation-inference
     name: Text Generation Inference
     type: oss_project
+    github: huggingface/text-generation-inference
     tagline: Toolkit for serving large language models.
     url: https://github.com/huggingface/text-generation-inference

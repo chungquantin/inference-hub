@@ -42,12 +42,15 @@ impl AppState {
         description = "Products, services and news of the inference market."
     ),
     modifiers(&AdminTokenScheme),
+    // Enums used only as query parameters are not collected from the routes.
+    components(schemas(ih_core::ModelPriceSort, ih_core::NewsStatus)),
     tags(
         (name = "meta", description = "Service health"),
         (name = "categories", description = "Market taxonomy"),
         (name = "organizations", description = "Companies, projects and investors"),
         (name = "products", description = "Models, APIs, GPU instances and projects"),
         (name = "news", description = "Published news about the market"),
+        (name = "compare", description = "Prices and stats across providers"),
         (name = "admin", description = "Editorial endpoints; need the admin token"),
     )
 )]

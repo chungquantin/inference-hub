@@ -14,6 +14,7 @@ products:
   - slug: llama-cpp
     name: llama.cpp
     type: oss_project
+    github: ggml-org/llama.cpp
     tagline: LLM inference in C/C++ on CPUs, Apple silicon and GPUs.
     url: https://github.com/ggml-org/llama.cpp
     metadata:

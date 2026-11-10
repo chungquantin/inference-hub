@@ -128,6 +128,7 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Produ
     .fetch_optional(pool)
     .await?;
     let offerings = latest_offerings(pool, product_id).await?;
+    let repo = crate::compare::repo_stats(pool, product_id).await?;
 
     Ok(Some(ProductDetail {
         product: row.product,
@@ -135,6 +136,7 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Produ
         metadata: row.metadata,
         model,
         offerings,
+        repo,
         updated_at: row.updated_at,
     }))
 }
@@ -143,23 +145,15 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Produ
 /// cheapest first. Older rows are kept as price history.
 pub async fn latest_offerings(pool: &PgPool, product_id: Uuid) -> sqlx::Result<Vec<Offering>> {
     sqlx::query_as(
-        "SELECT * FROM (
-             SELECT DISTINCT ON (f.provider_id, coalesce(f.gpu_type, ''),
-                                 coalesce(f.gpu_count, 0), coalesce(f.region, ''))
-                    f.id, o.slug AS organization_slug, o.name AS organization_name,
-                    f.price_input_per_mtok::float8 AS price_input_per_mtok,
-                    f.price_output_per_mtok::float8 AS price_output_per_mtok,
-                    f.gpu_type, f.gpu_count,
-                    f.price_per_hour::float8 AS price_per_hour,
-                    f.region, f.currency::text AS currency, f.source_url, f.observed_at
-             FROM offerings f
-             JOIN organizations o ON o.id = f.provider_id
-             WHERE f.product_id = $1
-             ORDER BY f.provider_id, coalesce(f.gpu_type, ''), coalesce(f.gpu_count, 0),
-                      coalesce(f.region, ''), f.observed_at DESC
-         ) latest
-         ORDER BY coalesce(price_output_per_mtok, price_per_hour) NULLS LAST,
-                  organization_name",
+        "SELECT f.id, o.slug AS organization_slug, o.name AS organization_name,
+                f.price_input_per_mtok::float8 AS price_input_per_mtok,
+                f.price_output_per_mtok::float8 AS price_output_per_mtok,
+                f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
+                f.region, f.currency::text AS currency, f.source_url, f.observed_at
+         FROM latest_offerings f
+         JOIN organizations o ON o.id = f.provider_id
+         WHERE f.product_id = $1
+         ORDER BY coalesce(f.price_output_per_mtok, f.price_per_hour) NULLS LAST, o.name",
     )
     .bind(product_id)
     .fetch_all(pool)

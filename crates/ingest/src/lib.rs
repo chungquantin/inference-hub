@@ -1,7 +1,8 @@
-//! News ingestion: feed parsing, URL canonicalization, organization tagging
-//! and storing entries as news items.
+//! Ingestion: news feeds (parsing, URL canonicalization, organization tagging)
+//! and GitHub repository stats.
 
 pub mod feed;
+pub mod github;
 pub mod ingest;
 pub mod tagger;
 pub mod url;

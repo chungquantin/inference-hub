@@ -151,10 +151,20 @@ async fn insert_source(
     .unwrap()
 }
 
+fn context(github_url: &str) -> worker::Context {
+    worker::Context::new(
+        ih_ingest::http_client().unwrap(),
+        worker::GitHub {
+            api_url: github_url.to_owned(),
+            token: None,
+        },
+    )
+}
+
 async fn run_due(pool: &PgPool) -> usize {
-    let http = ih_ingest::http_client().unwrap();
+    let ctx = context("http://127.0.0.1:9");
     worker::schedule_due_sources(pool).await.unwrap();
-    worker::drain(pool, &http, "test").await.unwrap()
+    worker::drain(pool, &ctx, "test").await.unwrap()
 }
 
 /// Makes every source due again, as if its interval had passed.
@@ -402,4 +412,265 @@ async fn stale_running_jobs_are_requeued(pool: PgPool) {
         1
     );
     assert!(jobs::claim(&pool, "live-worker").await.unwrap().is_some());
+}
+
+/// A fake GitHub API with one repository whose stars the test controls.
+#[derive(Clone)]
+struct FakeGitHub {
+    stars: Arc<AtomicUsize>,
+    /// When set, every request is answered as rate limited.
+    exhausted: Arc<std::sync::atomic::AtomicBool>,
+    conditional_hits: Arc<AtomicUsize>,
+    auth_seen: Arc<std::sync::Mutex<Option<String>>>,
+}
+
+impl FakeGitHub {
+    fn new(stars: usize) -> Self {
+        Self {
+            stars: Arc::new(AtomicUsize::new(stars)),
+            exhausted: Arc::default(),
+            conditional_hits: Arc::default(),
+            auth_seen: Arc::default(),
+        }
+    }
+
+    async fn start(self) -> String {
+        let repo_state = self.clone();
+        let release_state = self.clone();
+        let app = Router::new()
+            .route(
+                "/repos/acme/engine",
+                get(move |headers: HeaderMap| {
+                    let state = repo_state.clone();
+                    async move { state.repo(&headers) }
+                }),
+            )
+            .route(
+                "/repos/acme/engine/releases/latest",
+                get(move || {
+                    let state = release_state.clone();
+                    async move {
+                        if state.exhausted.load(Ordering::SeqCst) {
+                            return rate_limited();
+                        }
+                        axum::Json(serde_json::json!({
+                            "tag_name": "v1.2.0", "published_at": "2025-10-01T00:00:00Z"
+                        }))
+                        .into_response()
+                    }
+                }),
+            )
+            // A repository without releases.
+            .route(
+                "/repos/acme/norel",
+                get(|| async {
+                    axum::Json(serde_json::json!({
+                        "stargazers_count": 5, "forks_count": 0, "open_issues_count": 0,
+                        "archived": true, "pushed_at": null,
+                        "license": { "spdx_id": "NOASSERTION" }
+                    }))
+                }),
+            )
+            .route(
+                "/repos/acme/norel/releases/latest",
+                get(|| async { StatusCode::NOT_FOUND }),
+            );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+        tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+        format!("http://{addr}")
+    }
+
+    fn repo(&self, headers: &HeaderMap) -> axum::response::Response {
+        *self.auth_seen.lock().unwrap() = headers
+            .get(header::AUTHORIZATION)
+            .and_then(|v| v.to_str().ok())
+            .map(str::to_owned);
+        if self.exhausted.load(Ordering::SeqCst) {
+            return rate_limited();
+        }
+        let stars = self.stars.load(Ordering::SeqCst);
+        let etag = format!("\"s{stars}\"");
+        if headers
+            .get(header::IF_NONE_MATCH)
+            .and_then(|v| v.to_str().ok())
+            == Some(&etag)
+        {
+            self.conditional_hits.fetch_add(1, Ordering::SeqCst);
+            return StatusCode::NOT_MODIFIED.into_response();
+        }
+        (
+            [(header::ETAG, etag)],
+            axum::Json(serde_json::json!({
+                "stargazers_count": stars, "forks_count": 7, "open_issues_count": 3,
+                "archived": false, "pushed_at": "2025-11-01T12:00:00Z",
+                "license": { "spdx_id": "Apache-2.0" }
+            })),
+        )
+            .into_response()
+    }
+}
+
+fn rate_limited() -> axum::response::Response {
+    (
+        StatusCode::FORBIDDEN,
+        [
+            ("x-ratelimit-remaining", "0"),
+            ("x-ratelimit-reset", "1893456000"),
+        ],
+        "rate limited",
+    )
+        .into_response()
+}
+
+async fn insert_repo_product(pool: &PgPool, slug: &str, repo: &str) -> Uuid {
+    sqlx::query_scalar(
+        "INSERT INTO products (organization_id, slug, name, product_type, github_repo)
+         SELECT id, $1, $1, 'oss_project', $2 FROM organizations WHERE slug = 'vllm'
+         RETURNING id",
+    )
+    .bind(slug)
+    .bind(repo)
+    .fetch_one(pool)
+    .await
+    .unwrap()
+}
+
+#[derive(Debug, PartialEq, sqlx::FromRow)]
+struct Stats {
+    stars: Option<i32>,
+    forks: Option<i32>,
+    license: Option<String>,
+    archived: bool,
+    latest_release: Option<String>,
+    last_error: Option<String>,
+}
+
+async fn stats(pool: &PgPool, product: Uuid) -> Stats {
+    sqlx::query_as(
+        "SELECT stars, forks, license, archived, latest_release, last_error
+         FROM repo_stats WHERE product_id = $1",
+    )
+    .bind(product)
+    .fetch_one(pool)
+    .await
+    .unwrap()
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn syncs_repo_stats_with_etags_and_history(pool: PgPool) {
+    let github = FakeGitHub::new(100);
+    let url = github.clone().start().await;
+    let mut ctx = context(&url);
+    ctx.github.token = Some("ghp_test".into());
+    let engine = insert_repo_product(&pool, "engine", "acme/engine").await;
+    let norel = insert_repo_product(&pool, "norel", "acme/norel").await;
+
+    assert_eq!(worker::schedule_all(&pool, &ctx).await.unwrap(), 2);
+    assert_eq!(worker::drain(&pool, &ctx, "t").await.unwrap(), 2);
+    assert_eq!(
+        github.auth_seen.lock().unwrap().as_deref(),
+        Some("Bearer ghp_test")
+    );
+    assert_eq!(
+        stats(&pool, engine).await,
+        Stats {
+            stars: Some(100),
+            forks: Some(7),
+            license: Some("Apache-2.0".into()),
+            archived: false,
+            latest_release: Some("v1.2.0".into()),
+            last_error: None,
+        }
+    );
+    let norel_stats = stats(&pool, norel).await;
+    assert_eq!(
+        norel_stats.latest_release, None,
+        "no releases is not an error"
+    );
+    assert_eq!(norel_stats.license, None, "NOASSERTION is not a license");
+    assert!(norel_stats.archived);
+
+    // Fresh stats are not synced again.
+    assert_eq!(worker::schedule_all(&pool, &ctx).await.unwrap(), 0);
+
+    // Stale and unchanged: the ETag gets a 304 and stats stay.
+    sqlx::query("UPDATE repo_stats SET synced_at = now() - interval '1 day'")
+        .execute(&pool)
+        .await
+        .unwrap();
+    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+    assert_eq!(github.conditional_hits.load(Ordering::SeqCst), 1);
+    assert_eq!(stats(&pool, engine).await.stars, Some(100));
+
+    // Stars change: stats update, and today's history row is overwritten, not duplicated.
+    github.stars.store(150, Ordering::SeqCst);
+    sqlx::query("UPDATE repo_stats SET synced_at = now() - interval '1 day'")
+        .execute(&pool)
+        .await
+        .unwrap();
+    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+    assert_eq!(stats(&pool, engine).await.stars, Some(150));
+    let history: Vec<i32> =
+        sqlx::query_scalar("SELECT stars FROM repo_star_history WHERE product_id = $1")
+            .bind(engine)
+            .fetch_all(&pool)
+            .await
+            .unwrap();
+    assert_eq!(history, [150]);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn repo_sync_records_rate_limits_and_missing_repos(pool: PgPool) {
+    let github = FakeGitHub::new(10);
+    let url = github.clone().start().await;
+    let ctx = context(&url);
+    let engine = insert_repo_product(&pool, "engine", "acme/engine").await;
+    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+
+    // Rate limited: old stats are kept, the error says when the limit resets.
+    github
+        .exhausted
+        .store(true, std::sync::atomic::Ordering::SeqCst);
+    sqlx::query("UPDATE repo_stats SET synced_at = now() - interval '1 day', etag = NULL")
+        .execute(&pool)
+        .await
+        .unwrap();
+    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+    let after = stats(&pool, engine).await;
+    assert_eq!(after.stars, Some(10));
+    let error = after.last_error.expect("error recorded");
+    assert!(
+        error.contains("rate limit") && error.contains("2030-01-01"),
+        "{error}"
+    );
+    assert_eq!(
+        worker::schedule_all(&pool, &ctx).await.unwrap(),
+        0,
+        "a failed sync waits for the next interval"
+    );
+
+    // A repository that does not exist fails its job; an empty stats row records why.
+    let gone = insert_repo_product(&pool, "gone", "acme/gone").await;
+    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+    let job_error: String =
+        sqlx::query_scalar("SELECT last_error FROM jobs WHERE payload->>'product_id' = $1::text")
+            .bind(gone)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    assert!(job_error.contains("was not found"), "{job_error}");
+    let gone_stats = stats(&pool, gone).await;
+    assert_eq!(gone_stats.stars, None);
+    assert!(gone_stats.last_error.unwrap().contains("was not found"));
+    assert_eq!(
+        worker::schedule_all(&pool, &ctx).await.unwrap(),
+        0,
+        "a repository that failed its first sync also waits for the next interval"
+    );
 }

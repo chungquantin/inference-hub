@@ -518,3 +518,343 @@ async fn admin_corrects_organization_tags(pool: PgPool) {
     .await;
     assert_eq!(status, StatusCode::NOT_FOUND);
 }
+
+/// Two models at three providers, a GPU at two clouds, and price history.
+const MARKET: [&str; 4] = [
+    r#"
+slug: lab-a
+name: Lab A
+kinds: [model_provider]
+products:
+  - slug: big-model
+    name: Big Model
+    type: model
+    model: { context_window: 200000, open_weights: false }
+    offerings:
+      - { provider: lab-a, input: 3, output: 15, observed_on: 2025-01-01 }
+      - { provider: lab-a, input: 2, output: 10, observed_on: 2025-06-01 }
+      - { provider: cloud-x, input: 3, output: 15, region: us-east-1, observed_on: 2025-06-01 }
+  - slug: open-model
+    name: Open Model
+    type: model
+    model: { context_window: 32000, open_weights: true }
+    offerings:
+      - { provider: cloud-x, input: 0.2, output: 0.2, observed_on: 2025-06-01 }
+      - { provider: cloud-y, input: 0.1, output: 0.4, observed_on: 2025-06-01 }
+funding:
+  - round: series_a
+    announced_on: 2024-01-10
+    amount: 100000000
+    lead: [fund-z]
+  - round: series_b
+    announced_on: 2025-02-20
+    amount: 900000000
+    valuation: 9000000000
+    currency: EUR
+    lead: [fund-y]
+    investors: [fund-z]
+    notes: Includes secondary shares.
+"#,
+    r#"
+slug: chips
+name: Chips
+kinds: [hardware]
+products:
+  - slug: gpu-h1
+    name: GPU H1
+    type: hardware
+    offerings:
+      - { provider: cloud-x, gpu_type: H1, gpu_count: 8, per_hour: 40, observed_on: 2025-06-01 }
+      - { provider: cloud-y, gpu_type: H1, gpu_count: 1, per_hour: 4.5, observed_on: 2025-06-01 }
+      - { provider: cloud-y, gpu_type: H1, gpu_count: 8, per_hour: 30, observed_on: 2025-01-01 }
+      - { provider: cloud-y, gpu_type: H1, gpu_count: 8, per_hour: 28, observed_on: 2025-06-01 }
+"#,
+    "slug: cloud-x\nname: Cloud X\nkinds: [inference_provider, gpu_cloud]\n",
+    "slug: cloud-y\nname: Cloud Y\nkinds: [inference_provider, gpu_cloud]\n",
+];
+
+async fn seed_market(pool: &PgPool) {
+    let mut files: Vec<(String, seed::data::OrgSeed)> = MARKET
+        .iter()
+        .map(|yaml| {
+            let org: seed::data::OrgSeed = serde_saphyr::from_str(yaml).unwrap();
+            (format!("{}.yaml", org.slug), org)
+        })
+        .collect();
+    for slug in ["fund-y", "fund-z"] {
+        let org: seed::data::OrgSeed =
+            serde_saphyr::from_str(&format!("slug: {slug}\nname: {slug}\nkinds: [investor]\n"))
+                .unwrap();
+        files.push((format!("{slug}.yaml"), org));
+    }
+    seed::import(pool, &seed::DataSet::from_organizations(files))
+        .await
+        .expect("market fixtures import");
+}
+
+fn rows(body: &Value) -> Vec<(String, String)> {
+    body.as_array()
+        .unwrap()
+        .iter()
+        .map(|r| {
+            (
+                r["product_slug"].as_str().unwrap().to_owned(),
+                r["provider"]["slug"].as_str().unwrap().to_owned(),
+            )
+        })
+        .collect()
+}
+
+fn pairs(list: &[(&str, &str)]) -> Vec<(String, String)> {
+    list.iter()
+        .map(|(a, b)| (a.to_string(), b.to_string()))
+        .collect()
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn model_comparison_uses_latest_prices_and_sorts(pool: PgPool) {
+    seed_market(&pool).await;
+    let app = app(pool);
+
+    // Blended = (3 × input + output) / 4. Open Model: cloud-y 0.175, cloud-x 0.2.
+    // Big Model: lab-a's newest price (2, 10) → 4, cloud-x (3, 15) → 6.
+    let (status, body) = get(&app, "/v1/compare/models").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(
+        rows(&body),
+        pairs(&[
+            ("open-model", "cloud-y"),
+            ("open-model", "cloud-x"),
+            ("big-model", "lab-a"),
+            ("big-model", "cloud-x"),
+        ])
+    );
+    assert_eq!(body[0]["blended_per_mtok"], 0.175);
+    assert_eq!(
+        body[2]["price_output_per_mtok"], 10.0,
+        "old observation is ignored"
+    );
+    assert_eq!(body[2]["maker"]["slug"], "lab-a");
+
+    let (_, body) = get(&app, "/v1/compare/models?sort=output").await;
+    assert_eq!(rows(&body)[0], ("open-model".into(), "cloud-x".into()));
+
+    let (_, body) = get(&app, "/v1/compare/models?sort=context_window").await;
+    assert_eq!(body[0]["product_slug"], "big-model");
+
+    let (_, body) = get(
+        &app,
+        "/v1/compare/models?open_weights=false&provider=cloud-x",
+    )
+    .await;
+    assert_eq!(rows(&body), pairs(&[("big-model", "cloud-x")]));
+
+    let (_, body) = get(&app, "/v1/compare/models?min_context=100000&maker=lab-a").await;
+    assert_eq!(body.as_array().unwrap().len(), 2);
+
+    let (status, _) = get(&app, "/v1/compare/models?sort=cheapest").await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn gpu_comparison_ranks_by_price_per_gpu_hour(pool: PgPool) {
+    seed_market(&pool).await;
+    let app = app(pool);
+
+    let (status, body) = get(&app, "/v1/compare/gpus").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(body["gpu_types"], serde_json::json!(["H1"]));
+    let prices: Vec<(String, i64, f64)> = body["prices"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|p| {
+            (
+                p["provider"]["slug"].as_str().unwrap().to_owned(),
+                p["gpu_count"].as_i64().unwrap(),
+                p["price_per_gpu_hour"].as_f64().unwrap(),
+            )
+        })
+        .collect();
+    // cloud-y 8×: newest 28/8 = 3.5; cloud-y 1×: 4.5; cloud-x 8×: 40/8 = 5.
+    assert_eq!(
+        prices,
+        [
+            ("cloud-y".to_owned(), 8, 3.5),
+            ("cloud-y".to_owned(), 1, 4.5),
+            ("cloud-x".to_owned(), 8, 5.0),
+        ]
+    );
+
+    let (_, body) = get(&app, "/v1/compare/gpus?gpu=h1&provider=cloud-x").await;
+    assert_eq!(
+        body["prices"].as_array().unwrap().len(),
+        1,
+        "GPU filter ignores case"
+    );
+    let (_, body) = get(&app, "/v1/compare/gpus?gpu=B9").await;
+    assert_eq!(body["prices"].as_array().unwrap().len(), 0);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn price_history_keeps_every_observation(pool: PgPool) {
+    seed_market(&pool).await;
+    let app = app(pool);
+
+    let (status, body) = get(&app, "/v1/products/gpu-h1/price-history").await;
+    assert_eq!(status, StatusCode::OK);
+    let points: Vec<(String, String, f64)> = body
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|p| {
+            (
+                p["observed_at"].as_str().unwrap()[..10].to_owned(),
+                p["configuration"].as_str().unwrap().to_owned(),
+                p["price_per_hour"].as_f64().unwrap(),
+            )
+        })
+        .collect();
+    assert_eq!(points.len(), 4);
+    assert_eq!(points[0], ("2025-01-01".into(), "8× H1".into(), 30.0));
+
+    let (_, body) = get(&app, "/v1/products/big-model/price-history").await;
+    let lab_a: Vec<f64> = body
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|p| p["provider"]["slug"] == "lab-a")
+        .map(|p| p["price_output_per_mtok"].as_f64().unwrap())
+        .collect();
+    assert_eq!(lab_a, [15.0, 10.0], "oldest first");
+    let region = body
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|p| p["provider"]["slug"] == "cloud-x")
+        .unwrap();
+    assert_eq!(region["configuration"], "us-east-1");
+
+    let (status, _) = get(&app, "/v1/products/nope/price-history").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn organizations_show_funding_and_portfolio(pool: PgPool) {
+    seed_market(&pool).await;
+    let app = app(pool);
+
+    let (_, body) = get(&app, "/v1/organizations/lab-a").await;
+    let funding = body["funding"].as_array().unwrap();
+    assert_eq!(funding.len(), 2);
+    assert_eq!(funding[0]["round"], "series_b", "newest first");
+    assert_eq!(funding[0]["currency"], "EUR");
+    assert_eq!(funding[0]["valuation"], 9_000_000_000_i64);
+    assert_eq!(funding[0]["notes"], "Includes secondary shares.");
+    let investors: Vec<(&str, bool)> = funding[0]["investors"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|i| (i["slug"].as_str().unwrap(), i["lead"].as_bool().unwrap()))
+        .collect();
+    assert_eq!(
+        investors,
+        [("fund-y", true), ("fund-z", false)],
+        "leads first"
+    );
+    assert_eq!(body["portfolio"].as_array().unwrap().len(), 0);
+
+    let (_, body) = get(&app, "/v1/organizations/fund-z").await;
+    let portfolio = body["portfolio"].as_array().unwrap();
+    assert_eq!(portfolio.len(), 1, "one company even with two rounds");
+    assert_eq!(portfolio[0]["slug"], "lab-a");
+    let rounds: Vec<(&str, bool)> = portfolio[0]["rounds"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| (r["round"].as_str().unwrap(), r["lead"].as_bool().unwrap()))
+        .collect();
+    assert_eq!(rounds, [("series_b", false), ("series_a", true)]);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn open_source_leaderboard_and_product_repo_stats(pool: PgPool) {
+    let ids: Vec<(uuid::Uuid, &str)> = {
+        let mut ids = Vec::new();
+        for (slug, repo, stars, archived) in [
+            ("engine-a", "a/engine", 500, false),
+            ("engine-b", "b/engine", 900, true),
+            ("engine-c", "c/engine", 100, false),
+        ] {
+            let id: uuid::Uuid = sqlx::query_scalar(
+                "INSERT INTO products (organization_id, slug, name, product_type, github_repo)
+                 SELECT id, $1, $1, 'oss_project', $2 FROM organizations WHERE slug = 'vllm'
+                 RETURNING id",
+            )
+            .bind(slug)
+            .bind(repo)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+            sqlx::query(
+                "INSERT INTO repo_stats (product_id, stars, forks, open_issues, archived)
+                 VALUES ($1, $2, 1, 1, $3)",
+            )
+            .bind(id)
+            .bind(stars)
+            .bind(archived)
+            .execute(&pool)
+            .await
+            .unwrap();
+            ids.push((id, slug));
+        }
+        ids
+    };
+    // engine-a had 420 stars 20 days ago and 300 forty days ago (outside the window).
+    sqlx::query(
+        "INSERT INTO repo_star_history (product_id, day, stars)
+         VALUES ($1, current_date - 40, 300), ($1, current_date - 20, 420), ($1, current_date, 500)",
+    )
+    .bind(ids[0].0)
+    .execute(&pool)
+    .await
+    .unwrap();
+    // A repository whose first sync failed has no stats yet.
+    sqlx::query(
+        "INSERT INTO products (organization_id, slug, name, product_type, github_repo)
+         SELECT id, 'engine-d', 'engine-d', 'oss_project', 'd/engine' FROM organizations WHERE slug = 'vllm'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO repo_stats (product_id, last_error)
+         SELECT id, 'repository d/engine was not found' FROM products WHERE slug = 'engine-d'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+
+    let app = app(pool);
+    let (_, body) = get(&app, "/v1/compare/open-source").await;
+    let order: Vec<&str> = body
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|r| r["product_slug"].as_str().unwrap())
+        .collect();
+    assert_eq!(
+        order,
+        ["engine-a", "engine-c", "engine-b"],
+        "archived last, unsynced left out"
+    );
+    assert_eq!(body[0]["stars_30d"], 80);
+    assert_eq!(body[1]["stars_30d"], Value::Null, "no history, no trend");
+    assert_eq!(body[0]["organization"]["slug"], "vllm");
+
+    let (_, body) = get(&app, "/v1/products/engine-a").await;
+    assert_eq!(body["repo"]["repo"], "a/engine");
+    assert_eq!(body["repo"]["stars"], 500);
+    let (_, body) = get(&app, "/v1/products/engine-d").await;
+    assert_eq!(body["repo"], Value::Null);
+}

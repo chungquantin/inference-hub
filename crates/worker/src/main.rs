@@ -1,7 +1,7 @@
 //! `worker [--once] [--retag]`
 //!
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
-//! `--once` schedules due sources, runs every due job and exits.
+//! `--once` schedules due feed fetches and repository syncs, runs them and exits.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
 
 use anyhow::Context;
@@ -26,6 +26,11 @@ async fn main() -> anyhow::Result<()> {
         .context("connecting to Postgres")?;
     ih_db::migrate(&pool).await.context("running migrations")?;
     let http = ih_ingest::http_client().context("building the HTTP client")?;
+    let github = worker::GitHub::from_env();
+    if github.token.is_none() {
+        tracing::info!("GITHUB_TOKEN is not set; GitHub allows 60 requests per hour");
+    }
+    let ctx = worker::Context::new(http, github);
 
     if flag("--retag") {
         let items = ih_ingest::retag_all(&pool).await?;
@@ -39,8 +44,8 @@ async fn main() -> anyhow::Result<()> {
     };
 
     if flag("--once") {
-        let scheduled = worker::schedule_due_sources(&pool).await?;
-        let ran = worker::drain(&pool, &http, &config.worker_id).await?;
+        let scheduled = worker::schedule_all(&pool, &ctx).await?;
+        let ran = worker::drain(&pool, &ctx, &config.worker_id).await?;
         tracing::info!(scheduled, ran, "done");
         return Ok(());
     }
@@ -55,7 +60,7 @@ async fn main() -> anyhow::Result<()> {
         }
     });
     tracing::info!(concurrency = config.concurrency, "worker started");
-    worker::run(pool, http, config, cancel).await;
+    worker::run(pool, ctx, config, cancel).await;
     Ok(())
 }
 

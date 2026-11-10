@@ -360,6 +360,159 @@
         }
       }
     },
+    "/v1/compare/gpus": {
+      "get": {
+        "tags": [
+          "compare"
+        ],
+        "summary": "Latest hourly prices of GPU instances at every provider.",
+        "operationId": "compareGpus",
+        "parameters": [
+          {
+            "name": "gpu",
+            "in": "query",
+            "description": "Keep offerings of this GPU type, such as `H100 SXM` (case-insensitive).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Keep offerings from this provider (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GpuComparison"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/compare/models": {
+      "get": {
+        "tags": [
+          "compare"
+        ],
+        "summary": "Latest token prices of every model at every provider.",
+        "description": "`blended_per_mtok` weighs input and output 3:1, a common chat workload, so\nmodels can be ranked by one number.",
+        "operationId": "compareModels",
+        "parameters": [
+          {
+            "name": "open_weights",
+            "in": "query",
+            "description": "Keep models with open weights.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "maker",
+            "in": "query",
+            "description": "Keep models made by this organization (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Keep offerings from this provider (slug).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "min_context",
+            "in": "query",
+            "description": "Keep models with at least this context window, in tokens.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Default `blended`, cheapest first.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ModelPriceSort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelPrice"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/compare/open-source": {
+      "get": {
+        "tags": [
+          "compare"
+        ],
+        "summary": "Open-source projects by GitHub stars, archived ones last.",
+        "operationId": "compareOpenSource",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RepoLeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/news": {
       "get": {
         "tags": [
@@ -683,6 +836,49 @@
         }
       }
     },
+    "/v1/products/{slug}/price-history": {
+      "get": {
+        "tags": [
+          "products"
+        ],
+        "summary": "Every recorded price of a product, oldest first.",
+        "operationId": "getPriceHistory",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Product slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PricePoint"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/sitemap": {
       "get": {
         "tags": [
@@ -763,6 +959,146 @@
           }
         }
       },
+      "FundingRound": {
+        "type": "object",
+        "description": "A funding round as shown on the company's page.",
+        "required": [
+          "round",
+          "announced_on",
+          "currency",
+          "investors"
+        ],
+        "properties": {
+          "amount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "description": "Amount raised, in `currency`."
+          },
+          "announced_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "investors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RoundInvestor"
+            }
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "round": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valuation": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "description": "Post-money valuation, in `currency`."
+          }
+        }
+      },
+      "GpuComparison": {
+        "type": "object",
+        "required": [
+          "gpu_types",
+          "prices"
+        ],
+        "properties": {
+          "gpu_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "GPU types with a current offering, for filters."
+          },
+          "prices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GpuPrice"
+            },
+            "description": "Cheapest per GPU-hour first."
+          }
+        }
+      },
+      "GpuPrice": {
+        "type": "object",
+        "description": "A row of the GPU price comparison: one configuration at one provider.",
+        "required": [
+          "product_slug",
+          "product_name",
+          "provider",
+          "gpu_type",
+          "gpu_count",
+          "price_per_hour",
+          "price_per_gpu_hour",
+          "currency",
+          "observed_at"
+        ],
+        "properties": {
+          "currency": {
+            "type": "string"
+          },
+          "gpu_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "gpu_type": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price_per_gpu_hour": {
+            "type": "number",
+            "format": "double",
+            "description": "Price per hour divided by the number of GPUs."
+          },
+          "price_per_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "product_slug": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "region": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
       "Health": {
         "type": "object",
         "required": [
@@ -777,6 +1113,114 @@
             "type": "string"
           }
         }
+      },
+      "MakerRef": {
+        "type": "object",
+        "description": "The organization that makes a product, read from `maker_*` columns.",
+        "required": [
+          "slug",
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "ModelPrice": {
+        "type": "object",
+        "description": "A row of the model price comparison: one model at one provider, latest price.",
+        "required": [
+          "product_slug",
+          "product_name",
+          "maker",
+          "provider",
+          "open_weights",
+          "currency",
+          "observed_at"
+        ],
+        "properties": {
+          "blended_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Price of 3 input tokens per output token, per million tokens: a single\nnumber for sorting chat-style workloads."
+          },
+          "context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "maker": {
+            "$ref": "#/components/schemas/MakerRef",
+            "description": "The lab that makes the model."
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "open_weights": {
+            "type": "boolean"
+          },
+          "parameters_b": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "USD per million input tokens."
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "USD per million output tokens."
+          },
+          "product_name": {
+            "type": "string"
+          },
+          "product_slug": {
+            "type": "string"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ModelPriceSort": {
+        "type": "string",
+        "description": "Sort orders of the model comparison.",
+        "enum": [
+          "blended",
+          "input",
+          "output",
+          "context_window"
+        ]
       },
       "ModelSpec": {
         "type": "object",
@@ -1109,6 +1553,8 @@
               "categories",
               "products",
               "served_products",
+              "funding",
+              "portfolio",
               "updated_at"
             ],
             "properties": {
@@ -1124,6 +1570,13 @@
                   "null"
                 ]
               },
+              "funding": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FundingRound"
+                },
+                "description": "Rounds the organization raised, newest first."
+              },
               "links": {
                 "type": "object",
                 "description": "Named external links, such as `github`, `x` or `docs`.",
@@ -1133,6 +1586,13 @@
                 "propertyNames": {
                   "type": "string"
                 }
+              },
+              "portfolio": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PortfolioCompany"
+                },
+                "description": "Companies the organization invested in, most recent first."
               },
               "products": {
                 "type": "array",
@@ -1428,6 +1888,108 @@
           }
         }
       },
+      "PortfolioCompany": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          {
+            "type": "object",
+            "required": [
+              "rounds"
+            ],
+            "properties": {
+              "rounds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PortfolioRound"
+                }
+              }
+            }
+          }
+        ],
+        "description": "A company an investor backed, with the rounds it joined."
+      },
+      "PortfolioRound": {
+        "type": "object",
+        "required": [
+          "round",
+          "announced_on",
+          "currency",
+          "lead"
+        ],
+        "properties": {
+          "amount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64"
+          },
+          "announced_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "lead": {
+            "type": "boolean"
+          },
+          "round": {
+            "type": "string"
+          }
+        }
+      },
+      "PricePoint": {
+        "type": "object",
+        "description": "One observation of a provider's price for a product, for price history.",
+        "required": [
+          "provider",
+          "currency",
+          "observed_at"
+        ],
+        "properties": {
+          "configuration": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Distinguishes configurations of one provider, such as `8× H100 SXM` or a region."
+          },
+          "currency": {
+            "type": "string"
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          }
+        }
+      },
       "ProductDetail": {
         "allOf": [
           {
@@ -1472,6 +2034,17 @@
                   "$ref": "#/components/schemas/Offering"
                 },
                 "description": "Where the product can be bought, one entry per provider and configuration."
+              },
+              "repo": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/RepoStats",
+                    "description": "GitHub stats, for products with a synced repository."
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "updated_at": {
                 "type": "string",
@@ -1545,6 +2118,115 @@
           "other"
         ]
       },
+      "RepoLeader": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/RepoStats"
+          },
+          {
+            "type": "object",
+            "required": [
+              "product_slug",
+              "product_name",
+              "product_type",
+              "organization"
+            ],
+            "properties": {
+              "organization": {
+                "$ref": "#/components/schemas/OrganizationRef"
+              },
+              "product_name": {
+                "type": "string"
+              },
+              "product_slug": {
+                "type": "string"
+              },
+              "product_type": {
+                "$ref": "#/components/schemas/ProductType"
+              }
+            }
+          }
+        ],
+        "description": "A row of the open-source leaderboard."
+      },
+      "RepoStats": {
+        "type": "object",
+        "description": "Latest GitHub stats of an open-source product.",
+        "required": [
+          "repo",
+          "archived",
+          "synced_at"
+        ],
+        "properties": {
+          "archived": {
+            "type": "boolean"
+          },
+          "forks": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "latest_release": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "SPDX identifier, such as `Apache-2.0`."
+          },
+          "open_issues": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "pushed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "released_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "repo": {
+            "type": "string",
+            "description": "`owner/name`."
+          },
+          "stars": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "stars_30d": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Stars gained over the last 30 days of recorded history, when there is any."
+          },
+          "synced_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
       "ReviewRequest": {
         "type": "object",
         "required": [
@@ -1576,6 +2258,25 @@
             "format": "int64",
             "description": "Items that exist and were set.",
             "minimum": 0
+          }
+        }
+      },
+      "RoundInvestor": {
+        "type": "object",
+        "required": [
+          "slug",
+          "name",
+          "lead"
+        ],
+        "properties": {
+          "lead": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
           }
         }
       },
@@ -1757,6 +2458,10 @@
     {
       "name": "news",
       "description": "Published news about the market"
+    },
+    {
+      "name": "compare",
+      "description": "Prices and stats across providers"
     },
     {
       "name": "admin",

@@ -14,6 +14,7 @@ products:
   - slug: vllm-engine
     name: vLLM
     type: oss_project
+    github: vllm-project/vllm
     tagline: Inference engine built around PagedAttention.
     url: https://github.com/vllm-project/vllm
     metadata:

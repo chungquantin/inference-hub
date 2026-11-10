@@ -63,6 +63,7 @@ async fn main() -> anyhow::Result<()> {
         products = summary.products,
         offerings_added = summary.offerings_added,
         sources = summary.sources,
+        funding_rounds = summary.funding_rounds,
         "import complete"
     );
     Ok(())

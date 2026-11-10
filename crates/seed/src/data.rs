@@ -37,6 +37,34 @@ pub struct OrgSeed {
     pub feeds: Vec<FeedSeed>,
     #[serde(default)]
     pub products: Vec<ProductSeed>,
+    /// Funding rounds the organization raised.
+    #[serde(default)]
+    pub funding: Vec<FundingSeed>,
+}
+
+/// One funding round. Rounds are keyed by (round, announced_on) within an organization.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FundingSeed {
+    /// Such as `seed`, `series_a`, `series_b`, `strategic`, `debt`.
+    pub round: String,
+    pub announced_on: NaiveDate,
+    /// Amount raised, in `currency`, as announced.
+    pub amount: Option<i64>,
+    /// Post-money valuation, in `currency`.
+    pub valuation: Option<i64>,
+    /// ISO 4217 code of the amounts. Default USD.
+    #[serde(default = "default_currency")]
+    pub currency: String,
+    /// Slugs of the investors that led the round.
+    #[serde(default)]
+    pub lead: Vec<String>,
+    /// Slugs of the other investors.
+    #[serde(default)]
+    pub investors: Vec<String>,
+    pub source_url: Option<String>,
+    /// Context the investor lists cannot hold, such as investors not in the directory.
+    pub notes: Option<String>,
 }
 
 /// News tagging rules. The organization's name is always a match term.
@@ -98,6 +126,8 @@ pub struct ProductSeed {
     pub launched_at: Option<NaiveDate>,
     #[serde(default)]
     pub metadata: BTreeMap<String, serde_json::Value>,
+    /// GitHub repository as `owner/name`; the worker syncs its stars and releases.
+    pub github: Option<String>,
     pub model: Option<ModelSeed>,
     #[serde(default)]
     pub offerings: Vec<OfferingSeed>,
@@ -164,6 +194,25 @@ pub fn is_slug(s: &str) -> bool {
             .all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'-')
 }
 
+/// `owner/name` with GitHub's allowed characters.
+pub fn is_github_repo(s: &str) -> bool {
+    let valid = |part: &str| {
+        !part.is_empty()
+            && part != "."
+            && part != ".."
+            && part
+                .bytes()
+                .all(|b| b.is_ascii_alphanumeric() || matches!(b, b'-' | b'_' | b'.'))
+    };
+    matches!(s.split_once('/'), Some((owner, name)) if valid(owner) && valid(name) && !name.contains('/'))
+}
+
+fn is_round_name(s: &str) -> bool {
+    !s.is_empty()
+        && s.bytes()
+            .all(|b| b.is_ascii_lowercase() || b.is_ascii_digit() || b == b'_')
+}
+
 fn is_http_url(s: &str) -> bool {
     s.starts_with("https://") || s.starts_with("http://")
 }
@@ -207,6 +256,7 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
     let org_slugs: HashSet<&str> = files.iter().map(|(_, o)| o.slug.as_str()).collect();
     let mut seen_orgs: HashMap<&str, &str> = HashMap::new();
     let mut seen_products: HashMap<&str, &str> = HashMap::new();
+    let mut seen_repos: HashMap<String, String> = HashMap::new();
 
     for (file, org) in files {
         let mut issue = |message: String| {
@@ -260,6 +310,49 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
                 issue(format!("unknown category `{category}`"));
             }
         }
+        let mut seen_rounds = HashSet::new();
+        for round in &org.funding {
+            let at = format!("funding `{}` on {}", round.round, round.announced_on);
+            if !is_round_name(&round.round) {
+                issue(format!(
+                    "{at}: round must be lower_snake_case, such as `series_a`"
+                ));
+            }
+            if !seen_rounds.insert((round.round.as_str(), round.announced_on)) {
+                issue(format!("{at}: listed twice"));
+            }
+            if !(round.currency.len() == 3
+                && round.currency.bytes().all(|b| b.is_ascii_uppercase()))
+            {
+                issue(format!(
+                    "{at}: currency must be an ISO 4217 code such as USD"
+                ));
+            }
+            for (name, value) in [("amount", round.amount), ("valuation", round.valuation)] {
+                if value.is_some_and(|v| v <= 0) {
+                    issue(format!("{at}: {name} must be positive"));
+                }
+            }
+            let mut investors = HashSet::new();
+            for investor in round.lead.iter().chain(&round.investors) {
+                if !org_slugs.contains(investor.as_str()) {
+                    issue(format!(
+                        "{at}: investor `{investor}` is not a known organization"
+                    ));
+                }
+                if investor == &org.slug {
+                    issue(format!("{at}: an organization cannot invest in itself"));
+                }
+                if !investors.insert(investor.as_str()) {
+                    issue(format!("{at}: investor `{investor}` is listed twice"));
+                }
+            }
+            if let Some(url) = &round.source_url
+                && !is_http_url(url)
+            {
+                issue(format!("{at}: source_url `{url}` must be an http(s) URL"));
+            }
+        }
         for term in org.tagging.aliases.iter().chain(&org.tagging.exclude) {
             if term.trim().len() < 2 {
                 issue(format!("tagging term `{term}` is too short"));
@@ -273,6 +366,19 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
             }
             if let Some(first) = seen_products.insert(&product.slug, file) {
                 issue(format!("{at}: also defined in {first}"));
+            }
+            if let Some(repo) = &product.github
+                && !is_github_repo(repo)
+            {
+                issue(format!("{at}: github `{repo}` must be `owner/name`"));
+            }
+            if let Some(repo) = &product.github
+                && let Some(first) =
+                    seen_repos.insert(repo.to_ascii_lowercase(), product.slug.clone())
+            {
+                issue(format!(
+                    "{at}: github `{repo}` is also used by product `{first}`"
+                ));
             }
             if product.model.is_some() && product.product_type != ProductType::Model {
                 issue(format!(
@@ -498,6 +604,63 @@ feeds:
                 .iter()
                 .any(|m| m.starts_with("sources.yaml: feed `dup`: also defined in lab.yaml"))
         );
+    }
+
+    #[test]
+    fn validates_funding_rounds_and_repos() {
+        let mut lab = parse(LAB);
+        lab.products[0].github = Some("org/repo".into());
+        lab.funding = serde_saphyr::from_str(
+            r#"
+- { round: series_a, announced_on: 2024-01-01, amount: 100, lead: [cloud] }
+- { round: Series B, announced_on: 2024-06-01, amount: 0, currency: eur, investors: [nobody, lab, cloud, cloud] }
+- { round: series_a, announced_on: 2024-01-01 }
+"#,
+        )
+        .unwrap();
+        let mut cloud = parse(CLOUD);
+        cloud.products.push(ProductSeed {
+            github: Some("ORG/repo".into()),
+            ..lab.products[0].clone()
+        });
+        cloud.products[0].slug = "cloud-copy".into();
+        cloud.products[0].offerings.clear();
+        let files = vec![
+            ("lab.yaml".to_owned(), lab),
+            ("cloud.yaml".to_owned(), cloud),
+        ];
+        let messages: Vec<String> = validate(&files, &categories())
+            .into_iter()
+            .map(|i| i.message)
+            .collect();
+        let has = |needle: &str| messages.iter().any(|m| m.contains(needle));
+        assert!(has("round must be lower_snake_case"), "{messages:#?}");
+        assert!(has("amount must be positive"));
+        assert!(has("currency must be an ISO 4217 code"));
+        assert!(has("investor `nobody` is not a known organization"));
+        assert!(has("cannot invest in itself"));
+        assert!(has("investor `cloud` is listed twice"));
+        assert!(has("funding `series_a` on 2024-01-01: listed twice"));
+        assert!(has("github `ORG/repo` is also used by product `lab-1`"));
+        assert!(!has("funding `series_a` on 2024-01-01: investor"));
+    }
+
+    #[test]
+    fn github_repo_rules() {
+        for ok in ["vllm-project/vllm", "ggml-org/llama.cpp", "a/b_c"] {
+            assert!(is_github_repo(ok), "{ok}");
+        }
+        for bad in [
+            "vllm",
+            "a/b/c",
+            "/b",
+            "a/",
+            "a/..",
+            "a b/c",
+            "https://github.com/a/b",
+        ] {
+            assert!(!is_github_repo(bad), "{bad}");
+        }
     }
 
     #[test]

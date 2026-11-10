@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 use utoipa::ToSchema;
 use uuid::Uuid;
 
+use crate::RepoStats;
+
 /// What kind of thing a product is.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize, ToSchema, sqlx::Type)]
 #[serde(rename_all = "snake_case")]
@@ -92,5 +94,7 @@ pub struct ProductDetail {
     pub model: Option<ModelSpec>,
     /// Where the product can be bought, one entry per provider and configuration.
     pub offerings: Vec<Offering>,
+    /// GitHub stats, for products with a synced repository.
+    pub repo: Option<RepoStats>,
     pub updated_at: DateTime<Utc>,
 }

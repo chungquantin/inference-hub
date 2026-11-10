@@ -1,0 +1,16 @@
+slug: ollama
+name: Ollama
+kinds: [open_source]
+tagline: Run open models locally with one command.
+website: https://ollama.com
+hq_country: US
+founded_year: 2023
+links:
+  github: https://github.com/ollama
+products:
+  - slug: ollama-runtime
+    name: Ollama
+    type: oss_project
+    github: ollama/ollama
+    tagline: Local model runner and library built on llama.cpp.
+    url: https://github.com/ollama/ollama

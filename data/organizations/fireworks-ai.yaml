@@ -5,3 +5,12 @@ tagline: Fast inference platform for open models.
 website: https://fireworks.ai
 hq_country: US
 founded_year: 2022
+funding:
+  - round: series_c
+    announced_on: 2025-10-28
+    amount: 250000000
+    valuation: 4000000000
+    lead: [lightspeed, index-ventures]
+    investors: [sequoia-capital]
+    source_url: https://fireworks.ai/blog/series-c
+    notes: Co-led with Evantic. Includes primary and secondary funding.

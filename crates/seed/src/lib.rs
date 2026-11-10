@@ -11,7 +11,7 @@ use std::{collections::HashSet, path::Path};
 
 use anyhow::{Context, bail};
 use chrono::{NaiveTime, TimeZone, Utc};
-use data::{FeedSeed, OrgSeed, SourcesFile, categories_for, validate, validate_feeds};
+use data::{FeedSeed, FundingSeed, OrgSeed, SourcesFile, categories_for, validate, validate_feeds};
 use ih_db::{PgPool, sqlx};
 use sqlx::{Postgres, Transaction};
 
@@ -22,6 +22,7 @@ pub struct Summary {
     pub products: usize,
     pub offerings_added: usize,
     pub sources: usize,
+    pub funding_rounds: usize,
 }
 
 /// Everything in the data directory.
@@ -141,6 +142,13 @@ pub async fn import(pool: &PgPool, data: &DataSet) -> anyhow::Result<Summary> {
         upsert_feed(&mut tx, feed, None, feed.auto_approve.unwrap_or(false)).await?;
         summary.sources += 1;
     }
+    // Funding last: investors may be any organization of the data set.
+    for (_, org) in files {
+        for round in &org.funding {
+            upsert_funding_round(&mut tx, &org.slug, round).await?;
+            summary.funding_rounds += 1;
+        }
+    }
 
     tx.commit().await?;
     Ok(summary)
@@ -208,13 +216,15 @@ async fn upsert_product(
     let metadata = serde_json::to_value(&product.metadata).unwrap_or_default();
     let product_id: ih_db::sqlx::types::Uuid = sqlx::query_scalar(
         "INSERT INTO products
-             (organization_id, slug, name, product_type, tagline, description, url, launched_at, metadata)
-         SELECT o.id, $2, $3, $4, $5, $6, $7, $8, $9 FROM organizations o WHERE o.slug = $1
+             (organization_id, slug, name, product_type, tagline, description, url, launched_at,
+              metadata, github_repo)
+         SELECT o.id, $2, $3, $4, $5, $6, $7, $8, $9, $10 FROM organizations o WHERE o.slug = $1
          ON CONFLICT (slug) DO UPDATE SET
              organization_id = EXCLUDED.organization_id, name = EXCLUDED.name,
              product_type = EXCLUDED.product_type, tagline = EXCLUDED.tagline,
              description = EXCLUDED.description, url = EXCLUDED.url,
-             launched_at = EXCLUDED.launched_at, metadata = EXCLUDED.metadata
+             launched_at = EXCLUDED.launched_at, metadata = EXCLUDED.metadata,
+             github_repo = EXCLUDED.github_repo
          RETURNING id",
     )
     .bind(org_slug)
@@ -226,6 +236,7 @@ async fn upsert_product(
     .bind(&product.url)
     .bind(product.launched_at)
     .bind(metadata)
+    .bind(&product.github)
     .fetch_one(&mut **tx)
     .await?;
 
@@ -329,6 +340,50 @@ async fn upsert_feed(
     .bind(auto_approve)
     .bind(feed.interval_minutes)
     .bind(feed.enabled)
+    .execute(&mut **tx)
+    .await?;
+    Ok(())
+}
+
+async fn upsert_funding_round(
+    tx: &mut Transaction<'_, Postgres>,
+    org_slug: &str,
+    round: &FundingSeed,
+) -> sqlx::Result<()> {
+    let id: ih_db::sqlx::types::Uuid = sqlx::query_scalar(
+        "INSERT INTO funding_rounds
+             (organization_id, round, announced_on, amount, valuation, currency, source_url, notes)
+         SELECT id, $2, $3, $4, $5, $6, $7, $8 FROM organizations WHERE slug = $1
+         ON CONFLICT (organization_id, round, announced_on) DO UPDATE SET
+             amount = EXCLUDED.amount, valuation = EXCLUDED.valuation,
+             currency = EXCLUDED.currency, source_url = EXCLUDED.source_url,
+             notes = EXCLUDED.notes
+         RETURNING id",
+    )
+    .bind(org_slug)
+    .bind(&round.round)
+    .bind(round.announced_on)
+    .bind(round.amount)
+    .bind(round.valuation)
+    .bind(&round.currency)
+    .bind(&round.source_url)
+    .bind(&round.notes)
+    .fetch_one(&mut **tx)
+    .await?;
+
+    // The YAML is the source of truth for who invested.
+    sqlx::query("DELETE FROM funding_round_investors WHERE funding_round_id = $1")
+        .bind(id)
+        .execute(&mut **tx)
+        .await?;
+    sqlx::query(
+        "INSERT INTO funding_round_investors (funding_round_id, investor_id, is_lead)
+         SELECT $1, o.id, o.slug = ANY ($2) FROM organizations o
+         WHERE o.slug = ANY ($2) OR o.slug = ANY ($3)",
+    )
+    .bind(id)
+    .bind(&round.lead)
+    .bind(&round.investors)
     .execute(&mut **tx)
     .await?;
     Ok(())

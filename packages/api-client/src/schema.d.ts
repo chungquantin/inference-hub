@@ -123,6 +123,61 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/compare/gpus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Latest hourly prices of GPU instances at every provider. */
+        get: operations["compareGpus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/compare/models": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Latest token prices of every model at every provider.
+         * @description `blended_per_mtok` weighs input and output 3:1, a common chat workload, so
+         *     models can be ranked by one number.
+         */
+        get: operations["compareModels"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/compare/open-source": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Open-source projects by GitHub stars, archived ones last. */
+        get: operations["compareOpenSource"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/news": {
         parameters: {
             query?: never;
@@ -208,6 +263,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/products/{slug}/price-history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every recorded price of a product, oldest first. */
+        get: operations["getPriceHistory"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/sitemap": {
         parameters: {
             query?: never;
@@ -250,10 +322,100 @@ export interface components {
             code: string;
             message: string;
         };
+        /** @description A funding round as shown on the company's page. */
+        FundingRound: {
+            /**
+             * Format: int64
+             * @description Amount raised, in `currency`.
+             */
+            amount?: number | null;
+            /** Format: date */
+            announced_on: string;
+            currency: string;
+            investors: components["schemas"]["RoundInvestor"][];
+            notes?: string | null;
+            round: string;
+            source_url?: string | null;
+            /**
+             * Format: int64
+             * @description Post-money valuation, in `currency`.
+             */
+            valuation?: number | null;
+        };
+        GpuComparison: {
+            /** @description GPU types with a current offering, for filters. */
+            gpu_types: string[];
+            /** @description Cheapest per GPU-hour first. */
+            prices: components["schemas"]["GpuPrice"][];
+        };
+        /** @description A row of the GPU price comparison: one configuration at one provider. */
+        GpuPrice: {
+            currency: string;
+            /** Format: int32 */
+            gpu_count: number;
+            gpu_type: string;
+            /** Format: date-time */
+            observed_at: string;
+            /**
+             * Format: double
+             * @description Price per hour divided by the number of GPUs.
+             */
+            price_per_gpu_hour: number;
+            /** Format: double */
+            price_per_hour: number;
+            product_name: string;
+            product_slug: string;
+            provider: components["schemas"]["OrganizationRef"];
+            region?: string | null;
+            source_url?: string | null;
+        };
         Health: {
             database: string;
             status: string;
         };
+        /** @description The organization that makes a product, read from `maker_*` columns. */
+        MakerRef: {
+            name: string;
+            slug: string;
+        };
+        /** @description A row of the model price comparison: one model at one provider, latest price. */
+        ModelPrice: {
+            /**
+             * Format: double
+             * @description Price of 3 input tokens per output token, per million tokens: a single
+             *     number for sorting chat-style workloads.
+             */
+            blended_per_mtok?: number | null;
+            /** Format: int32 */
+            context_window?: number | null;
+            currency: string;
+            /** @description The lab that makes the model. */
+            maker: components["schemas"]["MakerRef"];
+            /** Format: date-time */
+            observed_at: string;
+            open_weights: boolean;
+            /** Format: double */
+            parameters_b?: number | null;
+            /**
+             * Format: double
+             * @description USD per million input tokens.
+             */
+            price_input_per_mtok?: number | null;
+            /**
+             * Format: double
+             * @description USD per million output tokens.
+             */
+            price_output_per_mtok?: number | null;
+            product_name: string;
+            product_slug: string;
+            provider: components["schemas"]["OrganizationRef"];
+            source_url?: string | null;
+        };
+        /**
+         * @description Sort orders of the model comparison.
+         * @enum {string}
+         */
+        ModelPriceSort: "blended" | "input" | "output" | "context_window";
         /** @description Technical attributes of a model. */
         ModelSpec: {
             /**
@@ -365,10 +527,14 @@ export interface components {
         OrganizationDetail: components["schemas"]["Organization"] & {
             categories: components["schemas"]["Category"][];
             description?: string | null;
+            /** @description Rounds the organization raised, newest first. */
+            funding: components["schemas"]["FundingRound"][];
             /** @description Named external links, such as `github`, `x` or `docs`. */
             links: {
                 [key: string]: string;
             };
+            /** @description Companies the organization invested in, most recent first. */
+            portfolio: components["schemas"]["PortfolioCompany"][];
             /** @description Products the organization makes. */
             products: components["schemas"]["ProductSummary"][];
             /** @description Products made by others that the organization sells or serves. */
@@ -450,6 +616,34 @@ export interface components {
             /** Format: int64 */
             total: number;
         };
+        /** @description A company an investor backed, with the rounds it joined. */
+        PortfolioCompany: components["schemas"]["OrganizationRef"] & {
+            rounds: components["schemas"]["PortfolioRound"][];
+        };
+        PortfolioRound: {
+            /** Format: int64 */
+            amount?: number | null;
+            /** Format: date */
+            announced_on: string;
+            currency: string;
+            lead: boolean;
+            round: string;
+        };
+        /** @description One observation of a provider's price for a product, for price history. */
+        PricePoint: {
+            /** @description Distinguishes configurations of one provider, such as `8× H100 SXM` or a region. */
+            configuration?: string | null;
+            currency: string;
+            /** Format: date-time */
+            observed_at: string;
+            /** Format: double */
+            price_input_per_mtok?: number | null;
+            /** Format: double */
+            price_output_per_mtok?: number | null;
+            /** Format: double */
+            price_per_hour?: number | null;
+            provider: components["schemas"]["OrganizationRef"];
+        };
         /** @description The full page of a product. */
         ProductDetail: components["schemas"]["ProductSummary"] & {
             description?: string | null;
@@ -460,6 +654,7 @@ export interface components {
             model?: components["schemas"]["ModelSpec"] | null;
             /** @description Where the product can be bought, one entry per provider and configuration. */
             offerings: components["schemas"]["Offering"][];
+            repo?: components["schemas"]["RepoStats"] | null;
             /** Format: date-time */
             updated_at: string;
         };
@@ -482,6 +677,39 @@ export interface components {
          * @enum {string}
          */
         ProductType: "model" | "inference_api" | "gateway" | "gpu_instance" | "oss_project" | "hardware" | "platform" | "other";
+        /** @description A row of the open-source leaderboard. */
+        RepoLeader: components["schemas"]["RepoStats"] & {
+            organization: components["schemas"]["OrganizationRef"];
+            product_name: string;
+            product_slug: string;
+            product_type: components["schemas"]["ProductType"];
+        };
+        /** @description Latest GitHub stats of an open-source product. */
+        RepoStats: {
+            archived: boolean;
+            /** Format: int32 */
+            forks?: number | null;
+            latest_release?: string | null;
+            /** @description SPDX identifier, such as `Apache-2.0`. */
+            license?: string | null;
+            /** Format: int32 */
+            open_issues?: number | null;
+            /** Format: date-time */
+            pushed_at?: string | null;
+            /** Format: date-time */
+            released_at?: string | null;
+            /** @description `owner/name`. */
+            repo: string;
+            /** Format: int32 */
+            stars?: number | null;
+            /**
+             * Format: int32
+             * @description Stars gained over the last 30 days of recorded history, when there is any.
+             */
+            stars_30d?: number | null;
+            /** Format: date-time */
+            synced_at: string;
+        };
         ReviewRequest: {
             /** @description Items to change, at most 200. */
             ids: string[];
@@ -493,6 +721,11 @@ export interface components {
              * @description Items that exist and were set.
              */
             updated: number;
+        };
+        RoundInvestor: {
+            lead: boolean;
+            name: string;
+            slug: string;
         };
         SetOrganizationsRequest: {
             /** @description Slugs of the organizations the item is about. Unknown slugs are rejected. */
@@ -784,6 +1017,95 @@ export interface operations {
             };
         };
     };
+    compareGpus: {
+        parameters: {
+            query?: {
+                /** @description Keep offerings of this GPU type, such as `H100 SXM` (case-insensitive). */
+                gpu?: string;
+                /** @description Keep offerings from this provider (slug). */
+                provider?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GpuComparison"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    compareModels: {
+        parameters: {
+            query?: {
+                /** @description Keep models with open weights. */
+                open_weights?: boolean;
+                /** @description Keep models made by this organization (slug). */
+                maker?: string;
+                /** @description Keep offerings from this provider (slug). */
+                provider?: string;
+                /** @description Keep models with at least this context window, in tokens. */
+                min_context?: number;
+                /** @description Default `blended`, cheapest first. */
+                sort?: components["schemas"]["ModelPriceSort"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelPrice"][];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    compareOpenSource: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RepoLeader"][];
+                };
+            };
+        };
+    };
     listNews: {
         parameters: {
             query?: {
@@ -948,6 +1270,36 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ProductDetail"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    getPriceHistory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Product slug */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PricePoint"][];
                 };
             };
             404: {

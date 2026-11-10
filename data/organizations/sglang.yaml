@@ -1,0 +1,15 @@
+slug: sglang
+name: SGLang
+kinds: [open_source]
+tagline: Fast serving framework for large language and vision models.
+website: https://docs.sglang.ai
+founded_year: 2024
+links:
+  github: https://github.com/sgl-project
+products:
+  - slug: sglang-engine
+    name: SGLang
+    type: oss_project
+    github: sgl-project/sglang
+    tagline: Serving engine with RadixAttention prefix caching.
+    url: https://github.com/sgl-project/sglang

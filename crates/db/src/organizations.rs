@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use ih_core::{OrgKind, Organization, OrganizationDetail, Page, PageParams};
 use sqlx::{FromRow, PgPool};
 
-use crate::{categories, products};
+use crate::{categories, compare, products};
 
 /// Filters for listing organizations. All filters combine with AND.
 #[derive(Debug, Clone, Default)]
@@ -110,6 +110,8 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
     let categories = categories::list_for_organization(pool, org_id).await?;
     let products = products::list_made_by(pool, org_id).await?;
     let served_products = products::list_served_by(pool, org_id).await?;
+    let funding = compare::funding_rounds(pool, org_id).await?;
+    let portfolio = compare::portfolio(pool, org_id).await?;
 
     Ok(Some(OrganizationDetail {
         organization: row.organization,
@@ -118,6 +120,8 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
         categories,
         products,
         served_products,
+        funding,
+        portfolio,
         updated_at: row.updated_at,
     }))
 }

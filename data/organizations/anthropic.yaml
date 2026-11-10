@@ -48,3 +48,11 @@ products:
         output: 4
         source_url: https://www.anthropic.com/pricing
         observed_on: 2024-12-01
+funding:
+  - round: series_e
+    announced_on: 2025-03-03
+    amount: 3500000000
+    valuation: 61500000000
+    lead: [lightspeed]
+    investors: [general-catalyst, menlo-ventures]
+    source_url: https://www.anthropic.com/news/anthropic-raises-series-e-at-usd61-5b-post-money-valuation
