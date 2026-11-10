@@ -7,6 +7,9 @@ hq_country: BG
 founded_year: 2023
 links:
   github: https://github.com/ggml-org
+tagging:
+  aliases: [llama.cpp]
+  match_case: true
 products:
   - slug: llama-cpp
     name: llama.cpp

@@ -1,8 +1,9 @@
 //! Imports the curated YAML data in `data/` into Postgres.
 //!
-//! The import is idempotent: organizations, products and models are upserted by
-//! slug, and an offering is added only when the same price observation is not
-//! already stored. Nothing is deleted, so removing a file does not remove rows.
+//! The import is idempotent: organizations, products, models and feed sources
+//! are upserted by slug, and an offering is added only when the same price
+//! observation is not already stored. Nothing is deleted, so removing a file
+//! does not remove rows. Fetch state of sources (validators, failures) is kept.
 
 pub mod data;
 
@@ -10,7 +11,7 @@ use std::{collections::HashSet, path::Path};
 
 use anyhow::{Context, bail};
 use chrono::{NaiveTime, TimeZone, Utc};
-use data::{OrgSeed, categories_for, validate};
+use data::{FeedSeed, OrgSeed, SourcesFile, categories_for, validate, validate_feeds};
 use ih_db::{PgPool, sqlx};
 use sqlx::{Postgres, Transaction};
 
@@ -20,10 +21,52 @@ pub struct Summary {
     pub organizations: usize,
     pub products: usize,
     pub offerings_added: usize,
+    pub sources: usize,
 }
 
-/// Reads every `*.yaml` file of `dir/organizations`, sorted by name.
-pub fn load(dir: &Path) -> anyhow::Result<Vec<(String, OrgSeed)>> {
+/// Everything in the data directory.
+#[derive(Debug, Clone, Default)]
+pub struct DataSet {
+    /// `organizations/<slug>.yaml` files, as (file name, content), sorted by name.
+    pub organizations: Vec<(String, OrgSeed)>,
+    /// `sources.yaml`, if present.
+    pub sources: SourcesFile,
+}
+
+impl DataSet {
+    pub fn from_organizations(organizations: Vec<(String, OrgSeed)>) -> Self {
+        Self {
+            organizations,
+            sources: SourcesFile::default(),
+        }
+    }
+
+    /// Every problem in the data set.
+    pub fn validate(&self, known_categories: &HashSet<String>) -> Vec<data::Issue> {
+        let mut issues = validate(&self.organizations, known_categories);
+        issues.extend(validate_feeds(&self.organizations, &self.sources));
+        issues
+    }
+}
+
+/// Reads the data directory: `organizations/*.yaml` and the optional `sources.yaml`.
+pub fn load(dir: &Path) -> anyhow::Result<DataSet> {
+    let sources_path = dir.join("sources.yaml");
+    let sources = if sources_path.exists() {
+        let text = std::fs::read_to_string(&sources_path)
+            .with_context(|| format!("reading {}", sources_path.display()))?;
+        serde_saphyr::from_str(&text)
+            .with_context(|| format!("parsing {}", sources_path.display()))?
+    } else {
+        SourcesFile::default()
+    };
+    Ok(DataSet {
+        organizations: load_organizations(dir)?,
+        sources,
+    })
+}
+
+fn load_organizations(dir: &Path) -> anyhow::Result<Vec<(String, OrgSeed)>> {
     let org_dir = dir.join("organizations");
     let mut paths: Vec<_> = std::fs::read_dir(&org_dir)
         .with_context(|| format!("reading {}", org_dir.display()))?
@@ -56,9 +99,10 @@ pub async fn known_categories(pool: &PgPool) -> sqlx::Result<HashSet<String>> {
     Ok(slugs.into_iter().collect())
 }
 
-/// Validates the files against each other and the database, then writes them in one transaction.
-pub async fn import(pool: &PgPool, files: &[(String, OrgSeed)]) -> anyhow::Result<Summary> {
-    let issues = validate(files, &known_categories(pool).await?);
+/// Validates the data against itself and the database, then writes it in one transaction.
+pub async fn import(pool: &PgPool, data: &DataSet) -> anyhow::Result<Summary> {
+    let files = &data.organizations;
+    let issues = data.validate(&known_categories(pool).await?);
     if !issues.is_empty() {
         let list: Vec<String> = issues.iter().map(|i| format!("  - {i}")).collect();
         bail!(
@@ -81,6 +125,21 @@ pub async fn import(pool: &PgPool, files: &[(String, OrgSeed)]) -> anyhow::Resul
             summary.offerings_added += upsert_product(&mut tx, &org.slug, product).await?;
             summary.products += 1;
         }
+        for feed in &org.feeds {
+            // An organization's own feed is trusted by default.
+            upsert_feed(
+                &mut tx,
+                feed,
+                Some(&org.slug),
+                feed.auto_approve.unwrap_or(true),
+            )
+            .await?;
+            summary.sources += 1;
+        }
+    }
+    for feed in &data.sources.feeds {
+        upsert_feed(&mut tx, feed, None, feed.auto_approve.unwrap_or(false)).await?;
+        summary.sources += 1;
     }
 
     tx.commit().await?;
@@ -95,14 +154,16 @@ async fn upsert_organization(
     let id: ih_db::sqlx::types::Uuid = sqlx::query_scalar(
         "INSERT INTO organizations
              (slug, name, kinds, tagline, description, website, logo_url,
-              hq_country, founded_year, status, links)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, coalesce($10, 'active'::org_status), $11)
+              hq_country, founded_year, status, links, aliases, exclude_phrases, match_case)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, coalesce($10, 'active'::org_status), $11,
+                 $12, $13, $14)
          ON CONFLICT (slug) DO UPDATE SET
              name = EXCLUDED.name, kinds = EXCLUDED.kinds, tagline = EXCLUDED.tagline,
              description = EXCLUDED.description, website = EXCLUDED.website,
              logo_url = EXCLUDED.logo_url, hq_country = EXCLUDED.hq_country,
              founded_year = EXCLUDED.founded_year, status = EXCLUDED.status,
-             links = EXCLUDED.links
+             links = EXCLUDED.links, aliases = EXCLUDED.aliases,
+             exclude_phrases = EXCLUDED.exclude_phrases, match_case = EXCLUDED.match_case
          RETURNING id",
     )
     .bind(&org.slug)
@@ -116,6 +177,9 @@ async fn upsert_organization(
     .bind(org.founded_year)
     .bind(org.status)
     .bind(links)
+    .bind(&org.tagging.aliases)
+    .bind(&org.tagging.exclude)
+    .bind(org.tagging.match_case)
     .fetch_one(&mut **tx)
     .await?;
 
@@ -234,4 +298,38 @@ async fn upsert_product(
         added += result.rows_affected() as usize;
     }
     Ok(added)
+}
+
+async fn upsert_feed(
+    tx: &mut Transaction<'_, Postgres>,
+    feed: &FeedSeed,
+    org_slug: Option<&str>,
+    auto_approve: bool,
+) -> sqlx::Result<()> {
+    sqlx::query(
+        "INSERT INTO sources
+             (slug, name, source_type, url, organization_id, auto_approve,
+              fetch_interval_minutes, enabled)
+         VALUES ($1, $2, 'rss', $3, (SELECT id FROM organizations WHERE slug = $4), $5, $6, $7)
+         ON CONFLICT (slug) DO UPDATE SET
+             name = EXCLUDED.name, url = EXCLUDED.url,
+             organization_id = EXCLUDED.organization_id,
+             auto_approve = EXCLUDED.auto_approve,
+             fetch_interval_minutes = EXCLUDED.fetch_interval_minutes,
+             enabled = EXCLUDED.enabled,
+             -- A new URL starts fresh: old validators belong to the old URL.
+             etag = CASE WHEN sources.url IS DISTINCT FROM EXCLUDED.url THEN NULL ELSE sources.etag END,
+             last_modified = CASE WHEN sources.url IS DISTINCT FROM EXCLUDED.url
+                                  THEN NULL ELSE sources.last_modified END",
+    )
+    .bind(&feed.slug)
+    .bind(&feed.name)
+    .bind(&feed.url)
+    .bind(org_slug)
+    .bind(auto_approve)
+    .bind(feed.interval_minutes)
+    .bind(feed.enabled)
+    .execute(&mut **tx)
+    .await?;
+    Ok(())
 }

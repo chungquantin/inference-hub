@@ -8,6 +8,12 @@ founded_year: 2015
 links:
   docs: https://platform.openai.com/docs
   x: https://x.com/OpenAI
+tagging:
+  aliases: [ChatGPT]
+feeds:
+  - slug: openai-news
+    name: OpenAI News
+    url: https://openai.com/news/rss.xml
 products:
   - slug: gpt-4o
     name: GPT-4o

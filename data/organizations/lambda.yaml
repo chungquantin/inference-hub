@@ -5,3 +5,11 @@ tagline: GPU cloud and on-premises AI infrastructure.
 website: https://lambda.ai
 hq_country: US
 founded_year: 2012
+tagging:
+  aliases: [Lambda Labs, Lambda Cloud]
+  exclude: [AWS Lambda, Lambda function, Lambda functions, lambda calculus]
+  match_case: true
+feeds:
+  - slug: lambda-blog
+    name: Lambda Blog
+    url: https://lambda.ai/blog/rss.xml

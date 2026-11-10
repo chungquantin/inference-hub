@@ -5,6 +5,12 @@ tagline: Cloud provider offering Bedrock, Trainium and Inferentia.
 website: https://aws.amazon.com
 hq_country: US
 founded_year: 2006
+tagging:
+  aliases: [AWS, Amazon Bedrock, Bedrock, Trainium, Inferentia]
+feeds:
+  - slug: aws-ml-blog
+    name: AWS Machine Learning Blog
+    url: https://aws.amazon.com/blogs/machine-learning/feed/
 products:
   - slug: amazon-bedrock
     name: Amazon Bedrock

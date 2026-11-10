@@ -7,6 +7,8 @@ hq_country: US
 founded_year: 2021
 links:
   docs: https://docs.anthropic.com
+tagging:
+  aliases: [Claude]
 products:
   - slug: claude-3-5-sonnet
     name: Claude 3.5 Sonnet

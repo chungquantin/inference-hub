@@ -5,6 +5,16 @@ tagline: Maker of the dominant AI accelerators.
 website: https://www.nvidia.com
 hq_country: US
 founded_year: 1993
+tagging:
+  aliases: [CUDA, TensorRT, TensorRT-LLM, NIM]
+  match_case: true
+feeds:
+  - slug: nvidia-developer-blog
+    name: NVIDIA Technical Blog
+    url: https://developer.nvidia.com/blog/feed
+  - slug: nvidia-blog
+    name: NVIDIA Blog
+    url: https://blogs.nvidia.com/feed/
 products:
   - slug: nvidia-h100
     name: NVIDIA H100

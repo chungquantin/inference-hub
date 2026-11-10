@@ -29,8 +29,60 @@ pub struct OrgSeed {
     /// Categories on top of the ones implied by `kinds`.
     #[serde(default)]
     pub categories: Vec<String>,
+    /// How the news tagger recognizes the organization.
+    #[serde(default)]
+    pub tagging: TaggingSeed,
+    /// The organization's own feeds, such as its blog. Their items are tagged with it.
+    #[serde(default)]
+    pub feeds: Vec<FeedSeed>,
     #[serde(default)]
     pub products: Vec<ProductSeed>,
+}
+
+/// News tagging rules. The organization's name is always a match term.
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct TaggingSeed {
+    /// Other names to match, such as "AWS".
+    #[serde(default)]
+    pub aliases: Vec<String>,
+    /// Phrases that contain a name but mean something else, such as "AWS Lambda".
+    #[serde(default)]
+    pub exclude: Vec<String>,
+    /// Match case-sensitively, for names that are also common words.
+    #[serde(default)]
+    pub match_case: bool,
+}
+
+/// A feed to ingest news from.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FeedSeed {
+    pub slug: String,
+    pub name: String,
+    pub url: String,
+    /// Publish items without review. Defaults to true for an organization's own feeds.
+    pub auto_approve: Option<bool>,
+    #[serde(default = "default_interval")]
+    pub interval_minutes: i32,
+    #[serde(default = "default_true")]
+    pub enabled: bool,
+}
+
+fn default_interval() -> i32 {
+    60
+}
+
+fn default_true() -> bool {
+    true
+}
+
+/// `data/sources.yaml`: feeds not owned by one organization, such as trade press.
+#[derive(Debug, Clone, Default, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SourcesFile {
+    #[serde(default)]
+    pub feeds: Vec<FeedSeed>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -116,6 +168,38 @@ fn is_http_url(s: &str) -> bool {
     s.starts_with("https://") || s.starts_with("http://")
 }
 
+/// Checks every feed: slugs are unique across the data set, URLs are http(s)
+/// and intervals are at least 5 minutes.
+pub fn validate_feeds(files: &[(String, OrgSeed)], sources: &SourcesFile) -> Vec<Issue> {
+    let mut issues = Vec::new();
+    let mut seen: HashMap<&str, &str> = HashMap::new();
+    let all = files
+        .iter()
+        .flat_map(|(file, org)| org.feeds.iter().map(move |f| (file.as_str(), f)))
+        .chain(sources.feeds.iter().map(|f| ("sources.yaml", f)));
+    for (file, feed) in all {
+        let mut issue = |message: String| {
+            issues.push(Issue {
+                file: file.to_owned(),
+                message: format!("feed `{}`: {message}", feed.slug),
+            })
+        };
+        if !is_slug(&feed.slug) {
+            issue("not a valid slug".to_owned());
+        }
+        if let Some(first) = seen.insert(&feed.slug, file) {
+            issue(format!("also defined in {first}"));
+        }
+        if !is_http_url(&feed.url) {
+            issue(format!("url `{}` must be an http(s) URL", feed.url));
+        }
+        if feed.interval_minutes < 5 {
+            issue("interval_minutes must be at least 5".to_owned());
+        }
+    }
+    issues
+}
+
 /// Checks the whole data set: each file on its own and the references between files.
 /// `files` pairs a file name (`<slug>.yaml`) with its parsed content.
 pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>) -> Vec<Issue> {
@@ -174,6 +258,11 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
         for category in &org.categories {
             if !known_categories.contains(category) {
                 issue(format!("unknown category `{category}`"));
+            }
+        }
+        for term in org.tagging.aliases.iter().chain(&org.tagging.exclude) {
+            if term.trim().len() < 2 {
+                issue(format!("tagging term `{term}` is too short"));
             }
         }
 
@@ -357,6 +446,57 @@ kinds: [inference_provider, gpu_cloud]
         assert_eq!(
             categories_for(&cloud),
             ["gpu-clouds", "inference-providers", "model-providers"]
+        );
+    }
+
+    #[test]
+    fn parses_tagging_and_feeds_with_defaults() {
+        let org = parse(
+            r#"
+slug: lab
+name: Lab
+kinds: [model_provider]
+tagging: { aliases: [Lab AI], exclude: [lab coat], match_case: true }
+feeds:
+  - { slug: lab-blog, name: Lab Blog, url: "https://lab.example/feed.xml" }
+"#,
+        );
+        assert_eq!(org.tagging.aliases, ["Lab AI"]);
+        assert!(org.tagging.match_case);
+        let feed = &org.feeds[0];
+        assert_eq!(feed.interval_minutes, 60);
+        assert!(feed.enabled);
+        assert_eq!(feed.auto_approve, None);
+    }
+
+    #[test]
+    fn feeds_must_be_unique_and_valid() {
+        let mut lab = parse(LAB);
+        lab.feeds.push(FeedSeed {
+            slug: "dup".into(),
+            name: "A".into(),
+            url: "feed.xml".into(),
+            auto_approve: None,
+            interval_minutes: 1,
+            enabled: true,
+        });
+        let sources = SourcesFile {
+            feeds: vec![lab.feeds[0].clone()],
+        };
+        let messages: Vec<String> = validate_feeds(&[("lab.yaml".into(), lab)], &sources)
+            .into_iter()
+            .map(|i| i.to_string())
+            .collect();
+        assert!(
+            messages
+                .iter()
+                .any(|m| m.contains("must be an http(s) URL"))
+        );
+        assert!(messages.iter().any(|m| m.contains("at least 5")));
+        assert!(
+            messages
+                .iter()
+                .any(|m| m.starts_with("sources.yaml: feed `dup`: also defined in lab.yaml"))
         );
     }
 

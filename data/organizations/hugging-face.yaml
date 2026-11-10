@@ -7,6 +7,12 @@ hq_country: US
 founded_year: 2016
 links:
   github: https://github.com/huggingface
+tagging:
+  aliases: [HuggingFace, Text Generation Inference]
+feeds:
+  - slug: hugging-face-blog
+    name: Hugging Face Blog
+    url: https://huggingface.co/blog/feed.xml
 products:
   - slug: text-generation-inference
     name: Text Generation Inference

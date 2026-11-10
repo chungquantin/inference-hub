@@ -30,8 +30,13 @@ async fn main() -> anyhow::Result<()> {
         }
     }
 
-    let files = seed::load(&dir)?;
-    tracing::info!(files = files.len(), dir = %dir.display(), "loaded seed files");
+    let data = seed::load(&dir)?;
+    tracing::info!(
+        organizations = data.organizations.len(),
+        shared_feeds = data.sources.feeds.len(),
+        dir = %dir.display(),
+        "loaded seed files"
+    );
 
     let database_url = std::env::var("DATABASE_URL").context("DATABASE_URL must be set")?;
     let pool = ih_db::connect(&database_url)
@@ -41,7 +46,7 @@ async fn main() -> anyhow::Result<()> {
 
     if check_only {
         let known = seed::known_categories(&pool).await?;
-        let issues = seed::data::validate(&files, &known);
+        let issues = data.validate(&known);
         if issues.is_empty() {
             tracing::info!("data is valid");
             return Ok(());
@@ -52,11 +57,12 @@ async fn main() -> anyhow::Result<()> {
         anyhow::bail!("{} problem(s) found", issues.len());
     }
 
-    let summary = seed::import(&pool, &files).await?;
+    let summary = seed::import(&pool, &data).await?;
     tracing::info!(
         organizations = summary.organizations,
         products = summary.products,
         offerings_added = summary.offerings_added,
+        sources = summary.sources,
         "import complete"
     );
     Ok(())

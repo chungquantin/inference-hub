@@ -1,0 +1,8 @@
+# Feeds not owned by a single organization. Items go to the review queue
+# unless auto_approve is true. An organization's own blog belongs in its
+# organizations/<slug>.yaml under `feeds:` instead.
+feeds:
+  - slug: simon-willison
+    name: Simon Willison's Weblog
+    url: https://simonwillison.net/atom/everything/
+    interval_minutes: 120

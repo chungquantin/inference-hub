@@ -1,6 +1,6 @@
 //! Import tests against a real Postgres (see crates/api/tests/api.rs for setup).
 
-use seed::{Summary, data::OrgSeed};
+use seed::{DataSet, Summary, data::OrgSeed};
 use sqlx::PgPool;
 
 fn file(yaml: &str) -> (String, OrgSeed) {
@@ -8,11 +8,18 @@ fn file(yaml: &str) -> (String, OrgSeed) {
     (format!("{}.yaml", org.slug), org)
 }
 
+fn data(files: Vec<(String, OrgSeed)>) -> DataSet {
+    DataSet::from_organizations(files)
+}
+
 const ORG_V1: &str = r#"
 slug: acme
 name: Acme
 kinds: [model_provider]
 categories: [investors]
+tagging: { aliases: [Acme AI], exclude: [acme corp], match_case: true }
+feeds:
+  - { slug: acme-blog, name: Acme Blog, url: "https://acme.example/feed.xml" }
 products:
   - slug: acme-1
     name: Acme 1
@@ -26,6 +33,8 @@ const ORG_V2: &str = r#"
 slug: acme
 name: Acme Labs
 kinds: [gpu_cloud]
+feeds:
+  - { slug: acme-blog, name: Acme Blog, url: "https://acme.example/new-feed.xml", auto_approve: false }
 products:
   - slug: acme-1
     name: Acme 1
@@ -37,14 +46,15 @@ products:
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
 async fn import_is_idempotent(pool: PgPool) {
-    let files = vec![file(ORG_V1)];
+    let files = data(vec![file(ORG_V1)]);
     let first = seed::import(&pool, &files).await.unwrap();
     assert_eq!(
         first,
         Summary {
             organizations: 1,
             products: 1,
-            offerings_added: 1
+            offerings_added: 1,
+            sources: 1,
         }
     );
     let second = seed::import(&pool, &files).await.unwrap();
@@ -59,8 +69,12 @@ async fn import_is_idempotent(pool: PgPool) {
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
 async fn reimport_updates_fields_categories_and_model(pool: PgPool) {
-    seed::import(&pool, &[file(ORG_V1)]).await.unwrap();
-    let summary = seed::import(&pool, &[file(ORG_V2)]).await.unwrap();
+    seed::import(&pool, &data(vec![file(ORG_V1)]))
+        .await
+        .unwrap();
+    let summary = seed::import(&pool, &data(vec![file(ORG_V2)]))
+        .await
+        .unwrap();
     assert_eq!(
         summary.offerings_added, 1,
         "only the new observation is added"
@@ -99,7 +113,10 @@ async fn invalid_data_is_rejected_without_writing(pool: PgPool) {
     bad.1.products[0].offerings[0].provider = "nobody".to_owned();
     bad.1.categories.push("not-a-category".to_owned());
 
-    let err = seed::import(&pool, &[bad]).await.unwrap_err().to_string();
+    let err = seed::import(&pool, &data(vec![bad]))
+        .await
+        .unwrap_err()
+        .to_string();
     assert!(err.contains("2 problem(s)"), "{err}");
     assert!(err.contains("unknown category `not-a-category`"), "{err}");
 
@@ -113,12 +130,13 @@ async fn invalid_data_is_rejected_without_writing(pool: PgPool) {
 #[test]
 fn bundled_data_parses() {
     let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../data");
-    let files = seed::load(&dir).expect("data/ parses");
+    let set = seed::load(&dir).expect("data/ parses");
     assert!(
-        files.len() >= 20,
+        set.organizations.len() >= 20,
         "expected the curated data set, got {}",
-        files.len()
+        set.organizations.len()
     );
+    assert!(!set.sources.feeds.is_empty(), "expected data/sources.yaml");
     let categories = [
         "model-providers",
         "inference-providers",
@@ -131,6 +149,6 @@ fn bundled_data_parses() {
     ]
     .map(str::to_owned)
     .into();
-    let issues = seed::data::validate(&files, &categories);
+    let issues = set.validate(&categories);
     assert!(issues.is_empty(), "{issues:#?}");
 }

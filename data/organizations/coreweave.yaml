@@ -5,3 +5,7 @@ tagline: Specialized cloud for GPU-accelerated workloads.
 website: https://www.coreweave.com
 hq_country: US
 founded_year: 2017
+feeds:
+  - slug: coreweave-blog
+    name: CoreWeave Blog
+    url: https://www.coreweave.com/blog/rss.xml

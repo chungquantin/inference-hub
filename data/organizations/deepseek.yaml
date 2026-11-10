@@ -5,6 +5,8 @@ tagline: Lab behind the DeepSeek V3 and R1 open-weights models.
 website: https://www.deepseek.com
 hq_country: CN
 founded_year: 2023
+tagging:
+  aliases: [DeepSeek-V3, DeepSeek-R1]
 products:
   - slug: deepseek-v3
     name: DeepSeek-V3

@@ -5,3 +5,6 @@ tagline: Inference cloud built on its own LPU chips.
 website: https://groq.com
 hq_country: US
 founded_year: 2016
+tagging:
+  aliases: [GroqCloud]
+  match_case: true

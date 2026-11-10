@@ -5,6 +5,10 @@ tagline: Publisher of the open-weights Llama models.
 website: https://ai.meta.com
 hq_country: US
 founded_year: 2004
+tagging:
+  aliases: [Meta AI, Llama]
+  exclude: [Meta description, Meta tags, Meta-learning, Meta learning]
+  match_case: true
 products:
   - slug: llama-3-1-405b
     name: Llama 3.1 405B

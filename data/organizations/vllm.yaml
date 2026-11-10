@@ -6,6 +6,10 @@ website: https://docs.vllm.ai
 founded_year: 2023
 links:
   github: https://github.com/vllm-project/vllm
+feeds:
+  - slug: vllm-blog
+    name: vLLM Blog
+    url: https://vllm.ai/blog/rss.xml
 products:
   - slug: vllm-engine
     name: vLLM

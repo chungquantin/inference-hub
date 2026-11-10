@@ -5,6 +5,8 @@ tagline: European lab shipping open and commercial models.
 website: https://mistral.ai
 hq_country: FR
 founded_year: 2023
+tagging:
+  aliases: [Mistral, Mixtral]
 products:
   - slug: mistral-large-2
     name: Mistral Large 2

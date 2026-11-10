@@ -5,3 +5,9 @@ tagline: Cloud for running, fine-tuning and training open models.
 website: https://www.together.ai
 hq_country: US
 founded_year: 2022
+tagging:
+  aliases: [Together.ai]
+feeds:
+  - slug: together-ai-blog
+    name: Together AI Blog
+    url: https://www.together.ai/blog/rss.xml

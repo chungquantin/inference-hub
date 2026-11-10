@@ -96,7 +96,9 @@ async fn seed_fixtures(pool: &PgPool) {
             serde_saphyr::from_str(LAB).unwrap(),
         ),
     ];
-    seed::import(pool, &files).await.expect("fixtures import");
+    seed::import(pool, &seed::DataSet::from_organizations(files))
+        .await
+        .expect("fixtures import");
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]

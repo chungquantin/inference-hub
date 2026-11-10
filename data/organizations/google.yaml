@@ -5,6 +5,15 @@ tagline: Gemini models, Google Cloud and TPUs.
 website: https://cloud.google.com
 hq_country: US
 founded_year: 1998
+tagging:
+  aliases: [Google DeepMind, DeepMind, Gemini, Google Cloud, TPU]
+feeds:
+  - slug: google-ai-blog
+    name: Google AI Blog
+    url: https://blog.google/technology/ai/rss/
+  - slug: google-deepmind-blog
+    name: Google DeepMind Blog
+    url: https://deepmind.google/blog/rss.xml
 products:
   - slug: gemini-1-5-pro
     name: Gemini 1.5 Pro
