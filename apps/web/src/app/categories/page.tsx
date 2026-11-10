@@ -3,7 +3,10 @@ import { CategoryGrid } from "@/components/category-grid";
 import { api } from "@/lib/api";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
-export const metadata: Metadata = { title: "Categories" };
+export const metadata: Metadata = {
+  title: "Categories",
+  alternates: { canonical: "/categories" },
+};
 
 export default async function CategoriesPage() {
   const { data, error } = await api.GET("/v1/categories");

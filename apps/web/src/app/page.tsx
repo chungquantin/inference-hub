@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { CategoryGrid } from "@/components/category-grid";
+import { SearchForm } from "@/components/listing";
 import { OrganizationGrid } from "@/components/organization-card";
+import { ProductList } from "@/components/product-list";
 import { api } from "@/lib/api";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
 export default async function HomePage() {
-  const [categories, orgs] = await Promise.all([
+  const [categories, orgs, models] = await Promise.all([
     api.GET("/v1/categories"),
     api.GET("/v1/organizations", { params: { query: { limit: 6 } } }),
+    api.GET("/v1/products", { params: { query: { type: "model", limit: 6 } } }),
   ]);
 
   return (
@@ -19,20 +22,9 @@ export default async function HomePage() {
           Model providers, LLM gateways, open-source engines, GPU clouds, hyperscalers and the
           investors behind them, in one place.
         </p>
-        <form action="/organizations" className="mt-2 flex max-w-xl gap-2">
-          <input
-            type="search"
-            name="q"
-            placeholder="Search companies and projects"
-            className="flex-1 rounded-md border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700"
-          />
-          <button
-            type="submit"
-            className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white dark:bg-zinc-100 dark:text-zinc-900"
-          >
-            Search
-          </button>
-        </form>
+        <div className="mt-2">
+          <SearchForm action="/organizations" placeholder="Search companies and projects" />
+        </div>
       </section>
 
       <section className="flex flex-col gap-4">
@@ -45,18 +37,33 @@ export default async function HomePage() {
       </section>
 
       <section className="flex flex-col gap-4">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold">In the directory</h2>
-          <Link href="/organizations" className="text-sm text-zinc-600 hover:underline dark:text-zinc-400">
-            View all{orgs.data ? ` ${orgs.data.total}` : ""} →
-          </Link>
-        </div>
+        <SectionHeader title="Latest models" href="/products?type=model" total={models.data?.total} />
+        {models.data ? (
+          <ProductList products={models.data.items} />
+        ) : (
+          <p className="text-sm text-red-600">Could not load models.</p>
+        )}
+      </section>
+
+      <section className="flex flex-col gap-4">
+        <SectionHeader title="In the directory" href="/organizations" total={orgs.data?.total} />
         {orgs.data ? (
           <OrganizationGrid orgs={orgs.data.items} />
         ) : (
           <p className="text-sm text-red-600">Could not load organizations.</p>
         )}
       </section>
+    </div>
+  );
+}
+
+function SectionHeader({ title, href, total }: { title: string; href: string; total?: number }) {
+  return (
+    <div className="flex items-baseline justify-between">
+      <h2 className="text-xl font-semibold">{title}</h2>
+      <Link href={href} className="text-sm text-zinc-600 hover:underline dark:text-zinc-400">
+        View all{total != null ? ` ${total}` : ""} →
+      </Link>
     </div>
   );
 }

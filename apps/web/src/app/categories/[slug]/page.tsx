@@ -18,7 +18,11 @@ async function loadCategory(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = await loadCategory((await params).slug);
-  return { title: category.name, description: category.description ?? undefined };
+  return {
+    title: category.name,
+    description: category.description ?? undefined,
+    alternates: { canonical: `/categories/${category.slug}` },
+  };
 }
 
 export default async function CategoryPage({ params }: Props) {

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductList } from "@/components/product-list";
 import { api } from "@/lib/api";
 import { ORG_KIND_LABELS } from "@/lib/labels";
+import { SITE_URL, jsonLd } from "@/lib/site";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
@@ -19,15 +21,30 @@ async function loadOrganization(slug: string) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const org = await loadOrganization((await params).slug);
-  return { title: org.name, description: org.tagline ?? undefined };
+  return {
+    title: org.name,
+    description: org.tagline ?? undefined,
+    alternates: { canonical: `/organizations/${org.slug}` },
+  };
 }
 
 export default async function OrganizationPage({ params }: Props) {
   const org = await loadOrganization((await params).slug);
-  const links = Object.entries(org.links as Record<string, string>);
+  const links = Object.entries(org.links);
 
   return (
     <article className="flex flex-col gap-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd({
+          "@type": "Organization",
+          name: org.name,
+          description: org.tagline ?? undefined,
+          url: `${SITE_URL}/organizations/${org.slug}`,
+          sameAs: [org.website, ...links.map(([, href]) => href)].filter(Boolean),
+          foundingDate: org.founded_year ? String(org.founded_year) : undefined,
+        })}
+      />
       <header className="flex flex-col gap-3">
         <h1 className="text-3xl font-semibold tracking-tight">{org.name}</h1>
         {org.tagline && <p className="text-lg text-zinc-600 dark:text-zinc-400">{org.tagline}</p>}
@@ -67,24 +84,16 @@ export default async function OrganizationPage({ params }: Props) {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xl font-semibold">Products</h2>
-        {org.products.length === 0 ? (
-          <p className="text-sm text-zinc-500">No products listed yet.</p>
-        ) : (
-          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-            {org.products.map((product) => (
-              <li key={product.id} className="flex items-baseline justify-between gap-4 py-3">
-                <div>
-                  <p className="font-medium">{product.name}</p>
-                  {product.tagline && (
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400">{product.tagline}</p>
-                  )}
-                </div>
-                <span className="font-mono text-xs text-zinc-500">{product.product_type}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ProductList products={org.products} showMaker={false} />
       </section>
+
+      {org.served_products.length > 0 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-xl font-semibold">Serves</h2>
+          <p className="text-sm text-zinc-500">Products from other makers that {org.name} offers.</p>
+          <ProductList products={org.served_products} />
+        </section>
+      )}
 
       <footer className="flex flex-wrap gap-4 text-sm text-zinc-600 dark:text-zinc-400">
         {org.categories.map((category) => (

@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Inference Hub",
-    template: "%s · Inference Hub",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
+  openGraph: { siteName: SITE_NAME, type: "website" },
   description:
     "The map of the inference market: model providers, LLM gateways, open-source projects, GPU clouds, hyperscalers and investors.",
 };
@@ -30,6 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
               <Link href="/organizations" className="hover:text-zinc-900 dark:hover:text-zinc-100">
                 Directory
+              </Link>
+              <Link href="/products" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+                Products
               </Link>
             </div>
           </nav>
