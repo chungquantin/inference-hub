@@ -3,7 +3,10 @@
 
 use std::time::Duration;
 
+use std::sync::Arc;
+
 use ih_db::jobs::{self, Job, NewJob};
+pub use ih_ingest::adapters::{Endpoints, MarketAdapter, market_adapters};
 pub use ih_ingest::{github::GitHub, ingest::Client};
 use serde::{Deserialize, Serialize};
 use sqlx::PgPool;
@@ -12,6 +15,7 @@ use uuid::Uuid;
 
 pub const FETCH_SOURCE: &str = "fetch_source";
 pub const SYNC_REPO: &str = "sync_repo";
+pub const RUN_ADAPTER: &str = "run_adapter";
 
 /// How long a job may run before another worker may take it over.
 pub const LEASE: Duration = Duration::from_secs(10 * 60);
@@ -26,6 +30,11 @@ pub struct SyncRepoPayload {
     pub product_id: Uuid,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RunAdapterPayload {
+    pub adapter: String,
+}
+
 /// What jobs need besides the database.
 #[derive(Clone)]
 pub struct Context {
@@ -33,15 +42,30 @@ pub struct Context {
     pub github: GitHub,
     /// How long repository stats stay fresh.
     pub repo_sync_every: Duration,
+    /// Market adapters, shared by every runner.
+    pub adapters: Arc<Vec<MarketAdapter>>,
+    /// How often each market adapter runs.
+    pub adapter_every: Duration,
 }
 
 impl Context {
     pub fn new(http: Client, github: GitHub) -> Self {
+        Self::with_endpoints(http, github, &Endpoints::default())
+    }
+
+    /// Points the market adapters at other base URLs (tests use local servers).
+    pub fn with_endpoints(http: Client, github: GitHub, endpoints: &Endpoints) -> Self {
         Self {
             http,
             github,
             repo_sync_every: Duration::from_secs(6 * 3600),
+            adapters: Arc::new(market_adapters(endpoints)),
+            adapter_every: Duration::from_secs(6 * 3600),
         }
+    }
+
+    fn adapter(&self, id: &str) -> Option<&MarketAdapter> {
+        self.adapters.iter().find(|a| a.info().id() == id)
     }
 }
 
@@ -135,14 +159,64 @@ pub async fn schedule_due_repos(pool: &PgPool, every: Duration) -> sqlx::Result<
     Ok(enqueued)
 }
 
+/// Enqueues a run of every market adapter that has not run within its interval.
+/// A failing adapter backs off like a feed: the interval doubles per failure, up to a day.
+pub async fn schedule_due_adapters(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
+    let mut enqueued = 0;
+    for adapter in ctx.adapters.iter() {
+        let id = adapter.info().id();
+        let due: bool = sqlx::query_scalar(
+            "SELECT coalesce((
+                 SELECT last_run_at + make_interval(secs => least(
+                            $2 * power(2, least(consecutive_failures, 10)), 86400)) <= now()
+                 FROM adapter_state WHERE adapter = $1), true)",
+        )
+        .bind(id)
+        .bind(ctx.adapter_every.as_secs_f64())
+        .fetch_one(pool)
+        .await?;
+        if !due {
+            continue;
+        }
+        let key = format!("{RUN_ADAPTER}:{id}");
+        let job = jobs::enqueue(
+            pool,
+            NewJob {
+                kind: RUN_ADAPTER,
+                payload: serde_json::to_value(RunAdapterPayload {
+                    adapter: id.to_owned(),
+                })
+                .unwrap_or_default(),
+                dedupe_key: Some(&key),
+                max_attempts: Some(1),
+                ..NewJob::default()
+            },
+        )
+        .await?;
+        enqueued += usize::from(job.is_some());
+    }
+    Ok(enqueued)
+}
+
 /// Schedules every kind of due work. Returns how many jobs were enqueued.
 pub async fn schedule_all(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
-    Ok(schedule_due_sources(pool).await? + schedule_due_repos(pool, ctx.repo_sync_every).await?)
+    Ok(schedule_due_sources(pool).await?
+        + schedule_due_repos(pool, ctx.repo_sync_every).await?
+        + schedule_due_adapters(pool, ctx).await?)
 }
 
 /// Runs one job. Errors are recorded on the job by the caller.
 pub async fn run_job(pool: &PgPool, ctx: &Context, job: &Job) -> anyhow::Result<()> {
     match job.kind.as_str() {
+        RUN_ADAPTER => {
+            let payload: RunAdapterPayload = serde_json::from_value(job.payload.clone())?;
+            let adapter = ctx
+                .adapter(&payload.adapter)
+                .ok_or_else(|| anyhow::anyhow!("unknown adapter `{}`", payload.adapter))?;
+            let report = ih_ingest::market::run_adapter(pool, &ctx.http, adapter).await?;
+            tracing::info!(job = job.id, adapter = %payload.adapter, ?report, "ran market adapter");
+            Ok(())
+        }
         SYNC_REPO => {
             let payload: SyncRepoPayload = serde_json::from_value(job.payload.clone())?;
             let outcome =

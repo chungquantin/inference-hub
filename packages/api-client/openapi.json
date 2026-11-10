@@ -41,6 +41,126 @@
         }
       }
     },
+    "/v1/admin/adapters": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List market adapters with their health, failing ones first.",
+        "operationId": "adminListAdapters",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AdapterStatus"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/listings/unmapped": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "List live listings that no product is mapped to: candidates to add to the directory.",
+        "operationId": "adminListUnmapped",
+        "parameters": [
+          {
+            "name": "adapter",
+            "in": "query",
+            "description": "Keep listings of this adapter, such as `openrouter`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "`model` or `gpu`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page (1-100, default 24).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Items to skip (default 0).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_UnmappedListing"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
     "/v1/admin/news": {
       "get": {
         "tags": [
@@ -902,6 +1022,55 @@
   },
   "components": {
     "schemas": {
+      "AdapterStatus": {
+        "type": "object",
+        "description": "Health of one market adapter, for the admin view.",
+        "required": [
+          "adapter",
+          "consecutive_failures",
+          "listings_seen",
+          "mapped"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "consecutive_failures": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "last_error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_run_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "last_success_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "listings_seen": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Listings the last successful run saw."
+          },
+          "mapped": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Of which mapped to a product of the directory."
+          }
+        }
+      },
       "Category": {
         "type": "object",
         "description": "A node of the market taxonomy, such as \"GPU Clouds\".",
@@ -1411,7 +1580,8 @@
           },
           "observed_at": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "description": "When this price was last checked: first seen, or last confirmed by an adapter."
           },
           "price_input_per_mtok": {
             "type": [
@@ -1870,6 +2040,96 @@
                     "string",
                     "null"
                   ]
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Page_UnmappedListing": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "A listing an adapter saw that no product is mapped to yet.",
+              "required": [
+                "adapter",
+                "external_id",
+                "name",
+                "kind",
+                "first_seen_at"
+              ],
+              "properties": {
+                "adapter": {
+                  "type": "string"
+                },
+                "external_id": {
+                  "type": "string",
+                  "description": "The id to put under the product's `listings:` in the data."
+                },
+                "first_seen_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "gpu_type": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "maker": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "price_input_per_mtok": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "format": "double"
+                },
+                "price_output_per_mtok": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "format": "double"
+                },
+                "price_per_hour": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "format": "double"
                 }
               }
             }
@@ -2427,6 +2687,69 @@
               "string",
               "null"
             ]
+          }
+        }
+      },
+      "UnmappedListing": {
+        "type": "object",
+        "description": "A listing an adapter saw that no product is mapped to yet.",
+        "required": [
+          "adapter",
+          "external_id",
+          "name",
+          "kind",
+          "first_seen_at"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "string",
+            "description": "The id to put under the product's `listings:` in the data."
+          },
+          "first_seen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "gpu_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "kind": {
+            "type": "string"
+          },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
           }
         }
       }

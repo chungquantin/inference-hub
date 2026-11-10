@@ -21,6 +21,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/adapters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List market adapters with their health, failing ones first. */
+        get: operations["adminListAdapters"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/listings/unmapped": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List live listings that no product is mapped to: candidates to add to the directory. */
+        get: operations["adminListUnmapped"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/news": {
         parameters: {
             query?: never;
@@ -301,6 +335,27 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** @description Health of one market adapter, for the admin view. */
+        AdapterStatus: {
+            adapter: string;
+            /** Format: int32 */
+            consecutive_failures: number;
+            last_error?: string | null;
+            /** Format: date-time */
+            last_run_at?: string | null;
+            /** Format: date-time */
+            last_success_at?: string | null;
+            /**
+             * Format: int32
+             * @description Listings the last successful run saw.
+             */
+            listings_seen: number;
+            /**
+             * Format: int64
+             * @description Of which mapped to a product of the directory.
+             */
+            mapped: number;
+        };
         /** @description A node of the market taxonomy, such as "GPU Clouds". */
         Category: {
             description?: string | null;
@@ -479,7 +534,10 @@ export interface components {
             gpu_type?: string | null;
             /** Format: uuid */
             id: string;
-            /** Format: date-time */
+            /**
+             * Format: date-time
+             * @description When this price was last checked: first seen, or last confirmed by an adapter.
+             */
             observed_at: string;
             /**
              * Format: double
@@ -608,6 +666,32 @@ export interface components {
                 slug: string;
                 tagline?: string | null;
                 url?: string | null;
+            }[];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
+        };
+        /** @description One page of results plus the total count across all pages. */
+        Page_UnmappedListing: {
+            items: {
+                adapter: string;
+                /** @description The id to put under the product's `listings:` in the data. */
+                external_id: string;
+                /** Format: date-time */
+                first_seen_at: string;
+                gpu_type?: string | null;
+                kind: string;
+                maker?: string | null;
+                name: string;
+                /** Format: double */
+                price_input_per_mtok?: number | null;
+                /** Format: double */
+                price_output_per_mtok?: number | null;
+                /** Format: double */
+                price_per_hour?: number | null;
             }[];
             /** Format: int64 */
             limit: number;
@@ -774,6 +858,24 @@ export interface components {
             slug: string;
             url?: string | null;
         };
+        /** @description A listing an adapter saw that no product is mapped to yet. */
+        UnmappedListing: {
+            adapter: string;
+            /** @description The id to put under the product's `listings:` in the data. */
+            external_id: string;
+            /** Format: date-time */
+            first_seen_at: string;
+            gpu_type?: string | null;
+            kind: string;
+            maker?: string | null;
+            name: string;
+            /** Format: double */
+            price_input_per_mtok?: number | null;
+            /** Format: double */
+            price_output_per_mtok?: number | null;
+            /** Format: double */
+            price_per_hour?: number | null;
+        };
     };
     responses: never;
     parameters: never;
@@ -808,6 +910,77 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Health"];
+                };
+            };
+        };
+    };
+    adminListAdapters: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdapterStatus"][];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminListUnmapped: {
+        parameters: {
+            query?: {
+                /** @description Keep listings of this adapter, such as `openrouter`. */
+                adapter?: string;
+                /** @description `model` or `gpu`. */
+                kind?: string;
+                /** @description Items per page (1-100, default 24). */
+                limit?: number;
+                /** @description Items to skip (default 0). */
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_UnmappedListing"];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
                 };
             };
         };

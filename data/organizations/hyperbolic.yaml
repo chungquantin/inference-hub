@@ -1,0 +1,5 @@
+slug: hyperbolic
+name: Hyperbolic
+kinds: [gpu_cloud, inference_provider]
+tagline: GPU cloud and inference API for open models.
+website: https://www.hyperbolic.ai

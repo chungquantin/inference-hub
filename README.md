@@ -16,7 +16,7 @@ apps/web  (Next.js, server-rendered)  ──HTTP──▶  crates/api  (Rust, Ax
 | `crates/db` | Pool, embedded migrations, queries (sqlx). |
 | `crates/api` | HTTP API. Interactive docs are at `/docs`, and the spec is at `/openapi.json`. |
 | `crates/worker` | Scheduler and job runners on a Postgres queue. Fetches feeds on their interval. |
-| `crates/ingest` | Feed parsing, URL canonicalization and organization tagging. |
+| `crates/ingest` | Provider adapters, feed parsing, URL canonicalization, organization tagging, GitHub sync. |
 | `crates/seed` | Validates and imports the curated YAML in `data/`. |
 | `data/organizations/` | Curated data: one YAML file per organization, with its products, prices, feeds and tagging rules. |
 | `data/sources.yaml` | Feeds not owned by one organization, such as newsletters and trade press. |
@@ -130,6 +130,42 @@ true). Items from `data/sources.yaml` wait for review. After changing tagging ru
 
 When a feed will not parse, save it and run
 `cargo run -p ih-ingest --example parse_file -- feed.xml https://its.url/` to see why.
+
+## Market adapters
+
+Prices also come from the providers themselves, through adapters in
+`crates/ingest/src/adapters/`. There are three kinds of adapter, each a trait:
+
+| Trait | Returns | Adapters |
+|---|---|---|
+| `GatewayAdapter` | model API prices (`ModelListing`) | `OpenRouterAdapter` (public model list), `LiquidInferenceAdapter` (best live offer in the exchange's order book) |
+| `NeoCloudAdapter` | GPU instance prices (`GpuListing`) | `RunPodAdapter` (GraphQL, Secure Cloud price), `HyperbolicAdapter` (rental options), `CoreWeaveAdapter` (reads the pricing page) |
+| `NewsAdapter` | articles (`FeedEntry`) | `RssNewsAdapter` (RSS, Atom, JSON Feed) |
+
+The worker runs every market adapter every 6 hours. Each run stores everything it saw in
+`market_listings`. Listings that a product maps to become offerings at the adapter's
+organization:
+
+```yaml
+products:
+  - slug: nvidia-h100
+    listings:                    # the provider's own id for the product
+      runpod: [NVIDIA H100 80GB HBM3]
+      hyperbolic: [h100 sxm5]
+      coreweave: [NVIDIA HGX H100]
+```
+
+A changed price adds an offering row, so price history stays complete; an unchanged price
+moves the row's `confirmed_at`, which the site shows as the date checked. A listing that
+disappears ends its offering, which takes it out of comparisons; curated offerings are
+never ended by an adapter. A run that returns less than half the listings of the last one,
+or a page whose layout changed, fails and changes nothing. `/admin/market` shows each
+adapter's health and the listings no product maps to yet.
+
+GPU names are normalized (`NVIDIA H100 80GB HBM3`, `h100 sxm5` and `NVIDIA HGX H100` are all
+`H100 SXM`), so the GPU comparison lines them up. To add a provider, implement one of the
+traits, give it an id and the slug of its organization, and register it in
+`market_adapters()`.
 
 ## Admin
 

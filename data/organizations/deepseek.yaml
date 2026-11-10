@@ -11,6 +11,8 @@ products:
   - slug: deepseek-v3
     name: DeepSeek-V3
     type: model
+    listings:
+      liquid: [deepseek-v3]
     tagline: Mixture-of-experts model with 671B total and 37B active parameters.
     launched_at: 2024-12-26
     model:
@@ -30,6 +32,8 @@ products:
   - slug: deepseek-r1
     name: DeepSeek-R1
     type: model
+    listings:
+      liquid: [deepseek-r1]
     tagline: Reasoning model trained with reinforcement learning, released under MIT.
     launched_at: 2025-01-20
     model:

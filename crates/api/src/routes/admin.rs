@@ -2,7 +2,9 @@
 //! Every route requires `Authorization: Bearer <ADMIN_TOKEN>`.
 
 use axum::{extract::State, http::StatusCode};
-use ih_core::{NewsItem, NewsStatus, Page, PageParams, SourceStatus};
+use ih_core::{
+    AdapterStatus, NewsItem, NewsStatus, Page, PageParams, SourceStatus, UnmappedListing,
+};
 use ih_db::news::NewsFilter;
 use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
@@ -24,6 +26,8 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(review_news))
         .routes(routes!(set_news_organizations))
         .routes(routes!(list_sources))
+        .routes(routes!(list_adapters))
+        .routes(routes!(list_unmapped))
 }
 
 #[derive(Debug, Deserialize, IntoParams)]
@@ -177,4 +181,64 @@ async fn set_news_organizations(
 )]
 async fn list_sources(State(state): State<AppState>) -> ApiResult<axum::Json<Vec<SourceStatus>>> {
     Ok(axum::Json(ih_db::news::list_sources(&state.pool).await?))
+}
+
+/// List market adapters with their health, failing ones first.
+#[utoipa::path(
+    get,
+    path = "/admin/adapters",
+    tag = "admin",
+    operation_id = "adminListAdapters",
+    security(("admin_token" = [])),
+    responses(
+        (status = 200, body = Vec<AdapterStatus>),
+        (status = 401, body = ErrorBody),
+    )
+)]
+async fn list_adapters(State(state): State<AppState>) -> ApiResult<axum::Json<Vec<AdapterStatus>>> {
+    Ok(axum::Json(ih_db::news::list_adapters(&state.pool).await?))
+}
+
+#[derive(Debug, Deserialize, IntoParams)]
+#[into_params(parameter_in = Query)]
+struct UnmappedQuery {
+    /// Keep listings of this adapter, such as `openrouter`.
+    adapter: Option<String>,
+    /// `model` or `gpu`.
+    kind: Option<String>,
+}
+
+/// List live listings that no product is mapped to: candidates to add to the directory.
+#[utoipa::path(
+    get,
+    path = "/admin/listings/unmapped",
+    tag = "admin",
+    operation_id = "adminListUnmapped",
+    params(UnmappedQuery, PageParams),
+    security(("admin_token" = [])),
+    responses(
+        (status = 200, body = Page<UnmappedListing>),
+        (status = 400, body = ErrorBody),
+        (status = 401, body = ErrorBody),
+    )
+)]
+async fn list_unmapped(
+    State(state): State<AppState>,
+    Query(query): Query<UnmappedQuery>,
+    Query(page): Query<PageParams>,
+) -> ApiResult<axum::Json<Page<UnmappedListing>>> {
+    if let Some(kind) = query.kind.as_deref()
+        && !matches!(kind, "model" | "gpu")
+    {
+        return Err(ApiError::BadRequest("kind must be `model` or `gpu`".into()));
+    }
+    Ok(axum::Json(
+        ih_db::news::list_unmapped(
+            &state.pool,
+            query.adapter.as_deref(),
+            query.kind.as_deref(),
+            page,
+        )
+        .await?,
+    ))
 }

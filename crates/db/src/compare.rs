@@ -33,7 +33,8 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
                     -- numeric math, rounded, so 0.175 does not become 0.17500000000000002
                     round((f.price_input_per_mtok * $5::numeric + f.price_output_per_mtok)
                           / ($5::numeric + 1), 6)::float8 AS blended_per_mtok,
-                    f.currency::text AS currency, f.source_url, f.observed_at
+                    f.currency::text AS currency, f.source_url,
+                    coalesce(f.confirmed_at, f.observed_at) AS observed_at
              FROM latest_offerings f
              JOIN products p ON p.id = f.product_id AND p.product_type = 'model'
              JOIN models m ON m.product_id = p.id
@@ -69,7 +70,8 @@ pub async fn gpu_prices(pool: &PgPool, q: &GpuPriceQuery) -> sqlx::Result<Vec<Gp
                 pr.slug AS organization_slug, pr.name AS organization_name,
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
                 (f.price_per_hour / f.gpu_count)::float8 AS price_per_gpu_hour,
-                f.region, f.currency::text AS currency, f.source_url, f.observed_at
+                f.region, f.currency::text AS currency, f.source_url,
+                    coalesce(f.confirmed_at, f.observed_at) AS observed_at
          FROM latest_offerings f
          JOIN products p ON p.id = f.product_id
          JOIN organizations pr ON pr.id = f.provider_id

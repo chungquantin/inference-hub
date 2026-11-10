@@ -15,7 +15,9 @@ pub use compare::{
     FundingRound, GpuPrice, GpuPriceQuery, MakerRef, ModelPrice, ModelPriceQuery, ModelPriceSort,
     PortfolioCompany, PortfolioRound, PricePoint, RepoLeader, RepoStats, RoundInvestor,
 };
-pub use news::{NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus};
+pub use news::{
+    AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus, UnmappedListing,
+};
 pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail};
 pub use pagination::{Page, PageParams};
 pub use product::{

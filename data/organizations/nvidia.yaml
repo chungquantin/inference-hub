@@ -22,9 +22,35 @@ products:
     github: NVIDIA/TensorRT-LLM
     tagline: NVIDIA library for optimized LLM inference on its GPUs.
     url: https://github.com/NVIDIA/TensorRT-LLM
+  - slug: nvidia-h200
+    name: NVIDIA H200
+    type: hardware
+    listings:
+      runpod: [NVIDIA H200]
+      hyperbolic: [h200 sxm5]
+      coreweave: [NVIDIA HGX H200]
+    tagline: Hopper-generation data-center GPU with 141 GB of HBM3e.
+    url: https://www.nvidia.com/en-us/data-center/h200/
+    metadata:
+      memory_gb: 141
+      architecture: Hopper
+  - slug: nvidia-b200
+    name: NVIDIA B200
+    type: hardware
+    listings:
+      runpod: [NVIDIA B200]
+      coreweave: [NVIDIA HGX B200]
+    tagline: Blackwell-generation data-center GPU.
+    url: https://www.nvidia.com/en-us/data-center/dgx-b200/
+    metadata:
+      architecture: Blackwell
   - slug: nvidia-h100
     name: NVIDIA H100
     type: hardware
+    listings:
+      runpod: [NVIDIA H100 80GB HBM3]
+      hyperbolic: [h100 sxm5]
+      coreweave: [NVIDIA HGX H100]
     tagline: Hopper-generation data-center GPU with 80 GB of HBM3.
     url: https://www.nvidia.com/en-us/data-center/h100/
     launched_at: 2022-03-22

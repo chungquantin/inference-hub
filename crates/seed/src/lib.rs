@@ -240,6 +240,26 @@ async fn upsert_product(
     .fetch_one(&mut **tx)
     .await?;
 
+    // The YAML is the source of truth for which listings map to this product.
+    sqlx::query("DELETE FROM product_listing_ids WHERE product_id = $1")
+        .bind(product_id)
+        .execute(&mut **tx)
+        .await?;
+    for (adapter, ids) in &product.listings {
+        for id in ids {
+            sqlx::query(
+                "INSERT INTO product_listing_ids (product_id, adapter, external_id)
+                 VALUES ($1, $2, $3)
+                 ON CONFLICT (adapter, external_id) DO UPDATE SET product_id = EXCLUDED.product_id",
+            )
+            .bind(product_id)
+            .bind(adapter)
+            .bind(id)
+            .execute(&mut **tx)
+            .await?;
+        }
+    }
+
     match &product.model {
         Some(model) => {
             sqlx::query(

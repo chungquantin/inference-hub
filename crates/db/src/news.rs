@@ -1,7 +1,10 @@
 use std::collections::HashMap;
 
 use chrono::{DateTime, Utc};
-use ih_core::{NewsItem, NewsMatch, NewsMention, NewsStatus, Page, PageParams, SourceStatus};
+use ih_core::{
+    AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, Page, PageParams, SourceStatus,
+    UnmappedListing,
+};
 use sqlx::{FromRow, PgPool};
 use uuid::Uuid;
 
@@ -207,6 +210,68 @@ pub async fn list_sources(pool: &PgPool) -> sqlx::Result<Vec<SourceStatus>> {
     )
     .fetch_all(pool)
     .await
+}
+
+/// Every market adapter that has run, failing ones first.
+pub async fn list_adapters(pool: &PgPool) -> sqlx::Result<Vec<AdapterStatus>> {
+    sqlx::query_as(
+        "SELECT a.adapter, a.last_run_at, a.last_success_at, a.last_error,
+                a.consecutive_failures, a.listings_seen,
+                (SELECT count(*) FROM market_listings l
+                 JOIN product_listing_ids pl ON pl.adapter = l.adapter AND pl.external_id = l.external_id
+                 WHERE l.adapter = a.adapter AND l.delisted_at IS NULL) AS mapped
+         FROM adapter_state a
+         ORDER BY a.consecutive_failures DESC, a.adapter",
+    )
+    .fetch_all(pool)
+    .await
+}
+
+/// Live listings no product is mapped to, newest first, optionally by adapter or kind.
+pub async fn list_unmapped(
+    pool: &PgPool,
+    adapter: Option<&str>,
+    kind: Option<&str>,
+    page: PageParams,
+) -> sqlx::Result<Page<UnmappedListing>> {
+    let items: Vec<UnmappedListing> = sqlx::query_as(
+        "SELECT l.adapter, l.external_id, l.name, l.kind, l.maker,
+                l.price_input_per_mtok::float8 AS price_input_per_mtok,
+                l.price_output_per_mtok::float8 AS price_output_per_mtok,
+                l.gpu_type, l.price_per_hour::float8 AS price_per_hour, l.first_seen_at
+         FROM market_listings l
+         WHERE l.delisted_at IS NULL
+           AND NOT EXISTS (SELECT 1 FROM product_listing_ids pl
+                           WHERE pl.adapter = l.adapter AND pl.external_id = l.external_id)
+           AND ($1::text IS NULL OR l.adapter = $1)
+           AND ($2::text IS NULL OR l.kind = $2)
+         ORDER BY l.first_seen_at DESC, l.adapter, l.name
+         LIMIT $3 OFFSET $4",
+    )
+    .bind(adapter)
+    .bind(kind)
+    .bind(page.limit())
+    .bind(page.offset())
+    .fetch_all(pool)
+    .await?;
+    let total: i64 = sqlx::query_scalar(
+        "SELECT count(*) FROM market_listings l
+         WHERE l.delisted_at IS NULL
+           AND NOT EXISTS (SELECT 1 FROM product_listing_ids pl
+                           WHERE pl.adapter = l.adapter AND pl.external_id = l.external_id)
+           AND ($1::text IS NULL OR l.adapter = $1)
+           AND ($2::text IS NULL OR l.kind = $2)",
+    )
+    .bind(adapter)
+    .bind(kind)
+    .fetch_one(pool)
+    .await?;
+    Ok(Page {
+        items,
+        total,
+        limit: page.limit(),
+        offset: page.offset(),
+    })
 }
 
 /// Escapes `%`, `_` and `\` so user text matches literally in ILIKE.

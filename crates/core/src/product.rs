@@ -78,6 +78,7 @@ pub struct Offering {
     /// ISO 4217 currency code of the prices.
     pub currency: String,
     pub source_url: Option<String>,
+    /// When this price was last checked: first seen, or last confirmed by an adapter.
     pub observed_at: DateTime<Utc>,
 }
 

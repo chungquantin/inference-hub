@@ -128,6 +128,10 @@ pub struct ProductSeed {
     pub metadata: BTreeMap<String, serde_json::Value>,
     /// GitHub repository as `owner/name`; the worker syncs its stars and releases.
     pub github: Option<String>,
+    /// The ids market adapters use for this product, by adapter: their prices
+    /// become offerings of this product. Such as `openrouter: [openai/gpt-oss-120b]`.
+    #[serde(default)]
+    pub listings: BTreeMap<String, Vec<String>>,
     pub model: Option<ModelSeed>,
     #[serde(default)]
     pub offerings: Vec<OfferingSeed>,
@@ -249,6 +253,9 @@ pub fn validate_feeds(files: &[(String, OrgSeed)], sources: &SourcesFile) -> Vec
     issues
 }
 
+/// Ids of the market adapters that listings may refer to.
+pub const ADAPTERS: [&str; 5] = ["openrouter", "liquid", "runpod", "hyperbolic", "coreweave"];
+
 /// Checks the whole data set: each file on its own and the references between files.
 /// `files` pairs a file name (`<slug>.yaml`) with its parsed content.
 pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>) -> Vec<Issue> {
@@ -257,6 +264,7 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
     let mut seen_orgs: HashMap<&str, &str> = HashMap::new();
     let mut seen_products: HashMap<&str, &str> = HashMap::new();
     let mut seen_repos: HashMap<String, String> = HashMap::new();
+    let mut seen_listings: HashMap<(String, String), String> = HashMap::new();
 
     for (file, org) in files {
         let mut issue = |message: String| {
@@ -379,6 +387,22 @@ pub fn validate(files: &[(String, OrgSeed)], known_categories: &HashSet<String>)
                 issue(format!(
                     "{at}: github `{repo}` is also used by product `{first}`"
                 ));
+            }
+            for (adapter, ids) in &product.listings {
+                if !ADAPTERS.contains(&adapter.as_str()) {
+                    issue(format!("{at}: unknown adapter `{adapter}` in listings"));
+                }
+                for id in ids {
+                    if id.trim().is_empty() {
+                        issue(format!("{at}: empty {adapter} listing id"));
+                    } else if let Some(first) =
+                        seen_listings.insert((adapter.clone(), id.clone()), product.slug.clone())
+                    {
+                        issue(format!(
+                            "{at}: {adapter} listing `{id}` is also mapped to product `{first}`"
+                        ));
+                    }
+                }
             }
             if product.model.is_some() && product.product_type != ProductType::Model {
                 issue(format!(
@@ -643,6 +667,38 @@ feeds:
         assert!(has("funding `series_a` on 2024-01-01: listed twice"));
         assert!(has("github `ORG/repo` is also used by product `lab-1`"));
         assert!(!has("funding `series_a` on 2024-01-01: investor"));
+    }
+
+    #[test]
+    fn listing_ids_must_name_a_known_adapter_and_map_once() {
+        let mut lab = parse(LAB);
+        lab.products[0].listings = [
+            (
+                "openrouter".to_owned(),
+                vec!["lab/one".to_owned(), "lab/one".to_owned()],
+            ),
+            ("bogus".to_owned(), vec!["x".to_owned()]),
+        ]
+        .into();
+        let files = vec![
+            ("lab.yaml".to_owned(), lab),
+            ("cloud.yaml".to_owned(), parse(CLOUD)),
+        ];
+        let messages: Vec<String> = validate(&files, &categories())
+            .into_iter()
+            .map(|i| i.message)
+            .collect();
+        assert!(
+            messages
+                .iter()
+                .any(|m| m.contains("unknown adapter `bogus`")),
+            "{messages:#?}"
+        );
+        assert!(
+            messages
+                .iter()
+                .any(|m| m.contains("listing `lab/one` is also mapped"))
+        );
     }
 
     #[test]

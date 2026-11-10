@@ -149,7 +149,8 @@ pub async fn latest_offerings(pool: &PgPool, product_id: Uuid) -> sqlx::Result<V
                 f.price_input_per_mtok::float8 AS price_input_per_mtok,
                 f.price_output_per_mtok::float8 AS price_output_per_mtok,
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
-                f.region, f.currency::text AS currency, f.source_url, f.observed_at
+                f.region, f.currency::text AS currency, f.source_url,
+                coalesce(f.confirmed_at, f.observed_at) AS observed_at
          FROM latest_offerings f
          JOIN organizations o ON o.id = f.provider_id
          WHERE f.product_id = $1

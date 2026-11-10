@@ -15,9 +15,24 @@ feeds:
     name: OpenAI News
     url: https://openai.com/news/rss.xml
 products:
+  - slug: gpt-oss-120b
+    name: gpt-oss-120b
+    type: model
+    listings:
+      openrouter: [openai/gpt-oss-120b]
+      liquid: [gpt-oss-120b]
+    tagline: OpenAI's open-weight mixture-of-experts model.
+    url: https://huggingface.co/openai/gpt-oss-120b
+    model:
+      family: gpt-oss
+      license: Apache-2.0
+      open_weights: true
   - slug: gpt-4o
     name: GPT-4o
     type: model
+    listings:
+      openrouter: [openai/gpt-4o]
+      liquid: [gpt-4o]
     tagline: Multimodal flagship model accepting text, image and audio.
     url: https://openai.com/index/hello-gpt-4o/
     launched_at: 2024-05-13
@@ -35,6 +50,9 @@ products:
   - slug: gpt-4o-mini
     name: GPT-4o mini
     type: model
+    listings:
+      openrouter: [openai/gpt-4o-mini]
+      liquid: [gpt-4o-mini]
     tagline: Small, low-cost multimodal model.
     launched_at: 2024-07-18
     model:

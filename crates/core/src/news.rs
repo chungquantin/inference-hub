@@ -73,3 +73,33 @@ pub struct SourceStatus {
     /// Of which waiting for review.
     pub pending_count: i64,
 }
+
+/// Health of one market adapter, for the admin view.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct AdapterStatus {
+    pub adapter: String,
+    pub last_run_at: Option<DateTime<Utc>>,
+    pub last_success_at: Option<DateTime<Utc>>,
+    pub last_error: Option<String>,
+    pub consecutive_failures: i32,
+    /// Listings the last successful run saw.
+    pub listings_seen: i32,
+    /// Of which mapped to a product of the directory.
+    pub mapped: i64,
+}
+
+/// A listing an adapter saw that no product is mapped to yet.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct UnmappedListing {
+    pub adapter: String,
+    /// The id to put under the product's `listings:` in the data.
+    pub external_id: String,
+    pub name: String,
+    pub kind: String,
+    pub maker: Option<String>,
+    pub price_input_per_mtok: Option<f64>,
+    pub price_output_per_mtok: Option<f64>,
+    pub gpu_type: Option<String>,
+    pub price_per_hour: Option<f64>,
+    pub first_seen_at: DateTime<Utc>,
+}

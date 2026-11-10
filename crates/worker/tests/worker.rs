@@ -151,12 +151,22 @@ async fn insert_source(
     .unwrap()
 }
 
+/// A context whose market adapters would only reach a closed local port; these
+/// tests schedule feeds and repositories directly, never adapters.
 fn context(github_url: &str) -> worker::Context {
-    worker::Context::new(
+    let closed = "http://127.0.0.1:9".to_owned();
+    worker::Context::with_endpoints(
         ih_ingest::http_client().unwrap(),
         worker::GitHub {
             api_url: github_url.to_owned(),
             token: None,
+        },
+        &worker::Endpoints {
+            openrouter: closed.clone(),
+            liquid: closed.clone(),
+            runpod: closed.clone(),
+            hyperbolic: closed.clone(),
+            coreweave: closed,
         },
     )
 }
@@ -566,7 +576,12 @@ async fn syncs_repo_stats_with_etags_and_history(pool: PgPool) {
     let engine = insert_repo_product(&pool, "engine", "acme/engine").await;
     let norel = insert_repo_product(&pool, "norel", "acme/norel").await;
 
-    assert_eq!(worker::schedule_all(&pool, &ctx).await.unwrap(), 2);
+    assert_eq!(
+        worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+            .await
+            .unwrap(),
+        2
+    );
     assert_eq!(worker::drain(&pool, &ctx, "t").await.unwrap(), 2);
     assert_eq!(
         github.auth_seen.lock().unwrap().as_deref(),
@@ -592,14 +607,21 @@ async fn syncs_repo_stats_with_etags_and_history(pool: PgPool) {
     assert!(norel_stats.archived);
 
     // Fresh stats are not synced again.
-    assert_eq!(worker::schedule_all(&pool, &ctx).await.unwrap(), 0);
+    assert_eq!(
+        worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+            .await
+            .unwrap(),
+        0
+    );
 
     // Stale and unchanged: the ETag gets a 304 and stats stay.
     sqlx::query("UPDATE repo_stats SET synced_at = now() - interval '1 day'")
         .execute(&pool)
         .await
         .unwrap();
-    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+        .await
+        .unwrap();
     worker::drain(&pool, &ctx, "t").await.unwrap();
     assert_eq!(github.conditional_hits.load(Ordering::SeqCst), 1);
     assert_eq!(stats(&pool, engine).await.stars, Some(100));
@@ -610,7 +632,9 @@ async fn syncs_repo_stats_with_etags_and_history(pool: PgPool) {
         .execute(&pool)
         .await
         .unwrap();
-    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+        .await
+        .unwrap();
     worker::drain(&pool, &ctx, "t").await.unwrap();
     assert_eq!(stats(&pool, engine).await.stars, Some(150));
     let history: Vec<i32> =
@@ -628,7 +652,9 @@ async fn repo_sync_records_rate_limits_and_missing_repos(pool: PgPool) {
     let url = github.clone().start().await;
     let ctx = context(&url);
     let engine = insert_repo_product(&pool, "engine", "acme/engine").await;
-    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+        .await
+        .unwrap();
     worker::drain(&pool, &ctx, "t").await.unwrap();
 
     // Rate limited: old stats are kept, the error says when the limit resets.
@@ -639,7 +665,9 @@ async fn repo_sync_records_rate_limits_and_missing_repos(pool: PgPool) {
         .execute(&pool)
         .await
         .unwrap();
-    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+        .await
+        .unwrap();
     worker::drain(&pool, &ctx, "t").await.unwrap();
     let after = stats(&pool, engine).await;
     assert_eq!(after.stars, Some(10));
@@ -649,14 +677,18 @@ async fn repo_sync_records_rate_limits_and_missing_repos(pool: PgPool) {
         "{error}"
     );
     assert_eq!(
-        worker::schedule_all(&pool, &ctx).await.unwrap(),
+        worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+            .await
+            .unwrap(),
         0,
         "a failed sync waits for the next interval"
     );
 
     // A repository that does not exist fails its job; an empty stats row records why.
     let gone = insert_repo_product(&pool, "gone", "acme/gone").await;
-    worker::schedule_all(&pool, &ctx).await.unwrap();
+    worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+        .await
+        .unwrap();
     worker::drain(&pool, &ctx, "t").await.unwrap();
     let job_error: String =
         sqlx::query_scalar("SELECT last_error FROM jobs WHERE payload->>'product_id' = $1::text")
@@ -669,7 +701,9 @@ async fn repo_sync_records_rate_limits_and_missing_repos(pool: PgPool) {
     assert_eq!(gone_stats.stars, None);
     assert!(gone_stats.last_error.unwrap().contains("was not found"));
     assert_eq!(
-        worker::schedule_all(&pool, &ctx).await.unwrap(),
+        worker::schedule_due_repos(&pool, ctx.repo_sync_every)
+            .await
+            .unwrap(),
         0,
         "a repository that failed its first sync also waits for the next interval"
     );

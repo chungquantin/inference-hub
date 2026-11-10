@@ -28,6 +28,8 @@ products:
   - slug: mixtral-8x7b
     name: Mixtral 8x7B
     type: model
+    listings:
+      liquid: [mixtral-8x7b-instruct-v0.1]
     tagline: Sparse mixture-of-experts model under Apache 2.0.
     launched_at: 2023-12-11
     model:

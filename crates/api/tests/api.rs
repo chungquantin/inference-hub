@@ -858,3 +858,72 @@ async fn open_source_leaderboard_and_product_repo_stats(pool: PgPool) {
     let (_, body) = get(&app, "/v1/products/engine-d").await;
     assert_eq!(body["repo"], Value::Null);
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn admin_sees_adapter_health_and_unmapped_listings(pool: PgPool) {
+    seed_market(&pool).await;
+    for sql in [
+        "INSERT INTO adapter_state (adapter, last_run_at, last_success_at, listings_seen)
+         VALUES ('openrouter', now(), now(), 3)",
+        "INSERT INTO adapter_state (adapter, last_run_at, last_error, consecutive_failures)
+         VALUES ('coreweave', now(), 'page layout changed', 2)",
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name,
+                                      price_input_per_mtok, price_output_per_mtok)
+         VALUES ('openrouter', 'a/mapped', 'a/mapped', 'model', 'Mapped', 1, 2),
+                ('openrouter', 'b/new', 'b/new', 'model', 'New model', 0.5, 1.5)",
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name,
+                                      gpu_type, gpu_count, price_per_hour, delisted_at)
+         VALUES ('runpod', 'gone|1|', 'gone', 'gpu', 'Gone GPU', 'L4', 1, 0.5, now())",
+        "INSERT INTO product_listing_ids (product_id, adapter, external_id)
+         SELECT id, 'openrouter', 'a/mapped' FROM products WHERE slug = 'big-model'",
+    ] {
+        sqlx::query(sql).execute(&pool).await.unwrap();
+    }
+    let app = admin_app(pool);
+    let token = Some(ADMIN_TOKEN);
+
+    let (status, body) = send(&app, Method::GET, "/v1/admin/adapters", token, None).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(body[0]["adapter"], "coreweave", "failing first");
+    assert_eq!(body[0]["last_error"], "page layout changed");
+    assert_eq!(body[1]["adapter"], "openrouter");
+    assert_eq!(body[1]["mapped"], 1);
+
+    let (_, body) = send(
+        &app,
+        Method::GET,
+        "/v1/admin/listings/unmapped",
+        token,
+        None,
+    )
+    .await;
+    let ids: Vec<&str> = body["items"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|l| l["external_id"].as_str().unwrap())
+        .collect();
+    assert_eq!(ids, ["b/new"], "mapped and delisted listings are left out");
+    assert_eq!(body["items"][0]["price_output_per_mtok"], 1.5);
+
+    let (_, body) = send(
+        &app,
+        Method::GET,
+        "/v1/admin/listings/unmapped?kind=gpu",
+        token,
+        None,
+    )
+    .await;
+    assert_eq!(body["total"], 0);
+    let (status, _) = send(
+        &app,
+        Method::GET,
+        "/v1/admin/listings/unmapped?kind=tpu",
+        token,
+        None,
+    )
+    .await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    let (status, _) = send(&app, Method::GET, "/v1/admin/adapters", None, None).await;
+    assert_eq!(status, StatusCode::UNAUTHORIZED);
+}
