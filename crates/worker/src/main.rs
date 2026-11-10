@@ -1,8 +1,13 @@
-//! Ingestion worker. Phase 2 adds the job queue and the RSS, GitHub and pricing
-//! sources; for now it only connects and reports how many sources are enabled.
+//! `worker [--once] [--retag]`
+//!
+//! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
+//! `--once` schedules due sources, runs every due job and exits.
+//! `--retag` re-runs the organization tagger on all stored news and exits.
 
 use anyhow::Context;
+use tokio_util::sync::CancellationToken;
 use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
+use worker::Config;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -12,18 +17,70 @@ async fn main() -> anyhow::Result<()> {
         .with(tracing_subscriber::fmt::layer())
         .init();
 
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    let flag = |name: &str| args.iter().any(|a| a == name);
+
     let database_url = std::env::var("DATABASE_URL").context("DATABASE_URL must be set")?;
     let pool = ih_db::connect(&database_url)
         .await
         .context("connecting to Postgres")?;
+    ih_db::migrate(&pool).await.context("running migrations")?;
+    let http = ih_ingest::http_client().context("building the HTTP client")?;
 
-    let enabled: i64 = ih_db::sqlx::query_scalar("SELECT count(*) FROM sources WHERE enabled")
-        .fetch_one(&pool)
-        .await
-        .context("reading sources (have migrations run?)")?;
-    tracing::info!(
-        enabled_sources = enabled,
-        "worker ready; no jobs are implemented yet"
-    );
+    if flag("--retag") {
+        let items = ih_ingest::retag_all(&pool).await?;
+        tracing::info!(items, "retagged news");
+        return Ok(());
+    }
+
+    let config = Config {
+        concurrency: env_parse("WORKER_CONCURRENCY", 4),
+        ..Config::default()
+    };
+
+    if flag("--once") {
+        let scheduled = worker::schedule_due_sources(&pool).await?;
+        let ran = worker::drain(&pool, &http, &config.worker_id).await?;
+        tracing::info!(scheduled, ran, "done");
+        return Ok(());
+    }
+
+    let cancel = CancellationToken::new();
+    tokio::spawn({
+        let cancel = cancel.clone();
+        async move {
+            shutdown_signal().await;
+            tracing::info!("shutting down after running jobs finish");
+            cancel.cancel();
+        }
+    });
+    tracing::info!(concurrency = config.concurrency, "worker started");
+    worker::run(pool, http, config, cancel).await;
     Ok(())
+}
+
+fn env_parse<T: std::str::FromStr>(key: &str, default: T) -> T {
+    std::env::var(key)
+        .ok()
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(default)
+}
+
+async fn shutdown_signal() {
+    let ctrl_c = async {
+        tokio::signal::ctrl_c().await.ok();
+    };
+    #[cfg(unix)]
+    let terminate = async {
+        if let Ok(mut s) = tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())
+        {
+            s.recv().await;
+        }
+    };
+    #[cfg(not(unix))]
+    let terminate = std::future::pending::<()>();
+    tokio::select! {
+        () = ctrl_c => {},
+        () = terminate => {},
+    }
 }

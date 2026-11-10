@@ -1,6 +1,7 @@
 //! Postgres access: connection pool, migrations and queries.
 
 pub mod categories;
+pub mod jobs;
 pub mod organizations;
 pub mod products;
 pub mod sitemap;
