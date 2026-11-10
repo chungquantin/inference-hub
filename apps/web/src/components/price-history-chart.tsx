@@ -4,7 +4,8 @@ import { formatDate, formatPrice } from "@/lib/format";
 const WIDTH = 640;
 const HEIGHT = 220;
 const PAD = { top: 12, right: 16, bottom: 28, left: 64 };
-const COLORS = ["#2563eb", "#dc2626", "#16a34a", "#d97706", "#7c3aed", "#0891b2", "#db2777", "#4b5563"];
+/** The design system's data series, so the chart follows the theme. */
+const COLORS = Array.from({ length: 8 }, (_, i) => `var(--series-${i + 1})`);
 
 type Series = { label: string; currency: string; points: { t: number; v: number }[] };
 
@@ -68,7 +69,7 @@ export function PriceHistoryChart({
   };
 
   return (
-    <figure className="flex flex-col gap-2">
+    <figure className="flex flex-col gap-3 rounded-[10px] bg-surface p-4 shadow-elev-1">
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full max-w-2xl"
@@ -82,17 +83,17 @@ export function PriceHistoryChart({
               x2={WIDTH - PAD.right}
               y1={y(v)}
               y2={y(v)}
-              className="stroke-zinc-200 dark:stroke-zinc-800"
+              className="stroke-line"
             />
-            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" className="fill-zinc-500 text-[11px]">
+            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" className="fill-ink-3 text-[11px]">
               {formatPrice(v, currency)}
             </text>
           </g>
         ))}
-        <text x={PAD.left} y={HEIGHT - 8} className="fill-zinc-500 text-[11px]">
+        <text x={PAD.left} y={HEIGHT - 8} className="fill-ink-3 text-[11px]">
           {formatDate(new Date(t0).toISOString())}
         </text>
-        <text x={WIDTH - PAD.right} y={HEIGHT - 8} textAnchor="end" className="fill-zinc-500 text-[11px]">
+        <text x={WIDTH - PAD.right} y={HEIGHT - 8} textAnchor="end" className="fill-ink-3 text-[11px]">
           Today
         </text>
         {series.map((s, i) => (
@@ -105,8 +106,8 @@ export function PriceHistoryChart({
           />
         ))}
       </svg>
-      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-600 dark:text-zinc-400">
-        <span className="text-zinc-500">{unit}:</span>
+      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-2">
+        <span className="text-ink-3">{unit}:</span>
         {series.map((s, i) => (
           <span key={s.label} className="flex items-center gap-1.5">
             <span className="inline-block size-2.5 rounded-sm" style={{ background: COLORS[i % COLORS.length] }} />

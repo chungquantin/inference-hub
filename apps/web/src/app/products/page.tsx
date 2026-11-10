@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ProductType } from "@inference-hub/api-client";
 import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
 import { ProductList } from "@/components/product-list";
+import { PageHeader } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { PRODUCT_TYPE_LABELS, isProductType } from "@/lib/labels";
 
@@ -43,7 +44,7 @@ export default async function ProductsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight">Products</h1>
+        <PageHeader title="Products" lead="Models, inference APIs, GPU instances, hardware and open-source projects." />
         <SearchForm
           defaultValue={q}
           placeholder="Search models, APIs and projects"
@@ -75,7 +76,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         )}
       </header>
 
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-ink-3">
         {data.total} {data.total === 1 ? "result" : "results"}
       </p>
       <ProductList products={data.items} empty="No products found." />

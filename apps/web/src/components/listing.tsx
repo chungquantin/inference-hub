@@ -1,28 +1,9 @@
 import Link from "next/link";
+import { Chip } from "@/components/ui/primitives";
 
-/** A pill link used for filters. */
-export function FilterChip({
-  href,
-  active,
-  children,
-}: {
-  href: string;
-  active: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <Link
-      href={href}
-      aria-current={active ? "page" : undefined}
-      className={
-        active
-          ? "rounded-full bg-zinc-900 px-3 py-1 text-white dark:bg-zinc-100 dark:text-zinc-900"
-          : "rounded-full border border-zinc-300 px-3 py-1 text-zinc-700 hover:border-zinc-500 dark:border-zinc-700 dark:text-zinc-300"
-      }
-    >
-      {children}
-    </Link>
-  );
+/** A filter pill. Kept under this name for the listing pages. */
+export function FilterChip(props: { href: string; active: boolean; children: React.ReactNode }) {
+  return <Chip {...props} />;
 }
 
 /** Previous / next links for a paged listing. */
@@ -36,21 +17,22 @@ export function Pagination({
   hrefFor: (page: number) => string;
 }) {
   if (lastPage <= 1) return null;
+  const link = "rounded-[6px] px-3 py-1.5 text-ink-2 hover:bg-hover hover:text-ink";
   return (
     <nav className="flex items-center justify-between text-sm" aria-label="Pagination">
       {page > 1 ? (
-        <Link href={hrefFor(page - 1)} className="hover:underline">
-          ← Previous
+        <Link href={hrefFor(page - 1)} className={link}>
+          Previous
         </Link>
       ) : (
         <span />
       )}
-      <span className="text-zinc-500">
+      <span className="text-ink-3">
         Page {page} of {lastPage}
       </span>
       {page < lastPage ? (
-        <Link href={hrefFor(page + 1)} className="hover:underline">
-          Next →
+        <Link href={hrefFor(page + 1)} className={link}>
+          Next
         </Link>
       ) : (
         <span />
@@ -72,21 +54,27 @@ export function SearchForm({
   hidden?: Record<string, string | undefined>;
 }) {
   return (
-    <form action={action} className="flex max-w-xl gap-2" role="search">
-      <input
-        type="search"
-        name="q"
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        aria-label={placeholder}
-        className="flex-1 rounded-md border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700"
-      />
+    <form action={action} className="flex w-full max-w-xl gap-2" role="search">
+      <label className="flex h-10 flex-1 items-center gap-2 rounded-[6px] bg-surface px-3 shadow-elev-1 focus-within:outline-2 focus-within:outline-accent">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0 text-ink-3">
+          <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
+          <path d="m10.5 10.5 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+        <input
+          type="search"
+          name="q"
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          aria-label={placeholder}
+          className="h-full flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
+        />
+      </label>
       {Object.entries(hidden).map(
         ([name, value]) => value && <input key={name} type="hidden" name={name} value={value} />,
       )}
       <button
         type="submit"
-        className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white dark:bg-zinc-100 dark:text-zinc-900"
+        className="h-10 rounded-[6px] bg-ink px-4 text-sm font-medium text-canvas hover:opacity-90"
       >
         Search
       </button>

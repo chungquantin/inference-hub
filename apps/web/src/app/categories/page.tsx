@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CategoryGrid } from "@/components/category-grid";
+import { PageHeader } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
@@ -14,7 +15,7 @@ export default async function CategoriesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-3xl font-semibold tracking-tight">Categories</h1>
+      <PageHeader title="Categories" />
       <CategoryGrid categories={data} />
     </div>
   );

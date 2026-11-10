@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { OrganizationGrid } from "@/components/organization-card";
+import { PageHeader } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
@@ -35,12 +36,7 @@ export default async function CategoryPage({ params }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-3xl font-semibold tracking-tight">{category.name}</h1>
-        {category.description && (
-          <p className="text-zinc-600 dark:text-zinc-400">{category.description}</p>
-        )}
-      </header>
+      <PageHeader title={category.name} lead={category.description ?? undefined} />
       <OrganizationGrid orgs={orgs.data.items} />
     </div>
   );

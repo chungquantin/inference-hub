@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DataTable } from "@/components/data-table";
+import { Logo } from "@/components/ui/logo";
+import { Badge, PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { formatCount, formatDate } from "@/lib/format";
 
@@ -18,15 +20,14 @@ export default async function CompareOpenSourcePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">Open-source projects</h1>
-        <p className="max-w-3xl text-zinc-600 dark:text-zinc-400">
-          Inference engines and runtimes by GitHub stars. Stars over 30 days appear once the hub
-          has 30 days of history. Archived projects are listed last.
-        </p>
-      </header>
+      <PageHeader
+        title="Open-source projects"
+        lead="Inference engines and runtimes by GitHub stars. Stars over 30 days appear once the hub has 30 days of history. Archived projects are listed last."
+      />
       {data.length === 0 ? (
-        <p className="text-sm text-zinc-500">No repository stats yet. The worker syncs them every few hours.</p>
+        <p className="text-sm text-ink-3">
+          No repository stats yet. The worker syncs them every few hours.
+        </p>
       ) : (
         <DataTable
           headers={["Project", "Stars", "30 days", "Forks", "License", "Latest release", "Last push"]}
@@ -34,33 +35,49 @@ export default async function CompareOpenSourcePage() {
           rows={data.map((row) => ({
             key: row.product_slug,
             cells: [
-              <div key="p">
-                <Link href={`/products/${row.product_slug}`} className="font-medium hover:underline">
-                  {row.product_name}
-                </Link>
-                <a
-                  href={`https://github.com/${row.repo}`}
-                  rel="noopener"
-                  target="_blank"
-                  className="ml-2 font-mono text-xs text-zinc-500 hover:underline"
-                >
-                  {row.repo}
-                </a>
-                {row.archived && <span className="ml-2 text-xs text-amber-600">archived</span>}
+              <div key="p" className="flex items-center gap-2.5">
+                <Logo name={row.organization.name} src={row.organization.logo_url} size="md" />
+                <div className="min-w-0">
+                  <Link
+                    href={`/products/${row.product_slug}`}
+                    className="font-medium text-ink hover:text-accent"
+                  >
+                    {row.product_name}
+                  </Link>
+                  <div className="flex items-center gap-1.5 text-xs">
+                    <a
+                      href={`https://github.com/${row.repo}`}
+                      rel="noopener"
+                      target="_blank"
+                      className="font-mono text-ink-3 hover:text-ink"
+                    >
+                      {row.repo}
+                    </a>
+                    {row.archived && <Badge tone="amber">archived</Badge>}
+                  </div>
+                </div>
               </div>,
-              formatCount(row.stars),
-              row.stars_30d != null ? `+${formatCount(row.stars_30d)}` : "—",
-              formatCount(row.forks),
-              row.license ?? "—",
+              <Price key="s" strong>
+                {formatCount(row.stars)}
+              </Price>,
+              <Price key="t">{row.stars_30d != null ? `+${formatCount(row.stars_30d)}` : "—"}</Price>,
+              <Price key="f">{formatCount(row.forks)}</Price>,
+              <span key="l" className="text-ink-2">
+                {row.license ?? "—"}
+              </span>,
               row.latest_release ? (
-                <span key="r">
-                  <span className="font-mono text-xs">{row.latest_release}</span>
-                  {row.released_at && <span className="ml-1 text-zinc-500">{formatDate(row.released_at)}</span>}
+                <span key="r" className="text-ink-2">
+                  <span className="font-mono text-xs text-ink">{row.latest_release}</span>
+                  {row.released_at && <span className="ml-1.5">{formatDate(row.released_at)}</span>}
                 </span>
               ) : (
-                "—"
+                <span key="r" className="text-ink-3">
+                  —
+                </span>
               ),
-              formatDate(row.pushed_at),
+              <span key="d" className="text-ink-2">
+                {formatDate(row.pushed_at)}
+              </span>,
             ],
           }))}
         />

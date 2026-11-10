@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { NewsStatus } from "@inference-hub/api-client";
 import { FilterChip, Pagination, listingHref, parsePage } from "@/components/listing";
 import { NewsCard } from "@/components/news";
+import { buttonClass } from "@/components/ui/primitives";
 import { adminApi, requireAdmin } from "@/lib/admin";
 import { formatDate } from "@/lib/format";
 import { logout, review, setOrganizations } from "./actions";
@@ -46,11 +47,11 @@ export default async function AdminPage({ searchParams }: Props) {
       <header className="flex items-baseline justify-between">
         <h1 className="text-2xl font-semibold">Review queue</h1>
         <div className="flex items-baseline gap-4 text-sm">
-          <Link href="/admin/market" className="text-zinc-500 hover:underline">
+          <Link href="/admin/market" className="text-ink-2 hover:text-ink">
             Market adapters
           </Link>
           <form action={logout}>
-            <button type="submit" className="text-zinc-500 hover:underline">
+            <button type="submit" className="text-ink-2 hover:text-ink">
               Sign out
             </button>
           </form>
@@ -70,20 +71,20 @@ export default async function AdminPage({ searchParams }: Props) {
             </FilterChip>
           )}
         </nav>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-ink-3">
           {news.data.total} {status} {news.data.total === 1 ? "item" : "items"}
         </p>
 
         {news.data.items.length > 0 && (
           <form action={review} id="review" className="flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-zinc-500">Checked items:</span>
+            <span className="text-ink-3">Checked items:</span>
             {otherStatuses.map((s) => (
               <button
                 key={s}
                 type="submit"
                 name="status"
                 value={s}
-                className="rounded-md border border-zinc-300 px-3 py-1 hover:border-zinc-500 dark:border-zinc-700"
+                className={buttonClass("secondary")}
               >
                 {s === "approved" ? "Approve" : s === "rejected" ? "Reject" : "Back to queue"}
               </button>
@@ -91,7 +92,7 @@ export default async function AdminPage({ searchParams }: Props) {
           </form>
         )}
 
-        <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+        <div className="divide-y divide-line overflow-hidden rounded-[10px] bg-surface shadow-elev-1">
           {news.data.items.map((item) => (
             <div key={item.id} className="flex gap-3">
               <input
@@ -111,9 +112,9 @@ export default async function AdminPage({ searchParams }: Props) {
                       defaultValue={item.organizations.map((o) => o.slug).join(", ")}
                       aria-label="Organization slugs, comma separated"
                       placeholder="organization slugs, comma separated"
-                      className="w-full max-w-md rounded border border-zinc-300 bg-transparent px-2 py-1 font-mono dark:border-zinc-700"
+                      className="h-8 w-full max-w-md rounded-[6px] bg-inset px-2 font-mono text-ink"
                     />
-                    <button type="submit" className="text-zinc-500 hover:underline">
+                    <button type="submit" className="text-ink-2 hover:text-ink">
                       Save tags
                     </button>
                   </form>
@@ -134,7 +135,7 @@ export default async function AdminPage({ searchParams }: Props) {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-200 text-left text-zinc-500 dark:border-zinc-800">
+              <tr className="border-b border-line text-left text-ink-3">
                 {["Source", "Owner", "Items", "Pending", "Last success", "Status"].map((h) => (
                   <th key={h} scope="col" className="py-2 pr-4 font-normal">
                     {h}
@@ -142,14 +143,14 @@ export default async function AdminPage({ searchParams }: Props) {
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-900">
+            <tbody className="divide-y divide-line">
               {sources.data.map((s) => (
                 <tr key={s.id}>
                   <td className="py-2 pr-4">
                     <Link href={href({ source: s.slug, status: "pending" })} className="hover:underline">
                       {s.name}
                     </Link>
-                    {!s.enabled && <span className="ml-2 text-xs text-zinc-500">disabled</span>}
+                    {!s.enabled && <span className="ml-2 text-xs text-ink-3">disabled</span>}
                   </td>
                   <td className="py-2 pr-4">{s.organization_name ?? "—"}</td>
                   <td className="py-2 pr-4 tabular-nums">{s.item_count}</td>
@@ -157,7 +158,7 @@ export default async function AdminPage({ searchParams }: Props) {
                   <td className="py-2 pr-4">{s.last_success_at ? formatDate(s.last_success_at) : "never"}</td>
                   <td className="py-2 pr-4">
                     {s.consecutive_failures > 0 ? (
-                      <span className="text-red-600" title={s.last_error ?? undefined}>
+                      <span className="text-red" title={s.last_error ?? undefined}>
                         failing ×{s.consecutive_failures}
                       </span>
                     ) : s.last_run_at ? (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { OrgKind } from "@inference-hub/api-client";
 import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
 import { OrganizationGrid } from "@/components/organization-card";
+import { PageHeader } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { ORG_KIND_LABELS, isOrgKind } from "@/lib/labels";
 
@@ -41,7 +42,7 @@ export default async function OrganizationsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold tracking-tight">Directory</h1>
+        <PageHeader title="Directory" lead="Companies, open-source projects and investors of the inference market." />
         <SearchForm
           defaultValue={q}
           placeholder="Search companies and projects"
@@ -59,7 +60,7 @@ export default async function OrganizationsPage({ searchParams }: Props) {
         </nav>
       </header>
 
-      <p className="text-sm text-zinc-500">
+      <p className="text-sm text-ink-3">
         {data.total} {data.total === 1 ? "result" : "results"}
       </p>
       <OrganizationGrid orgs={data.items} />

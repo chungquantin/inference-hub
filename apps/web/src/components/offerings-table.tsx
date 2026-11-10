@@ -1,6 +1,7 @@
 import type { Offering } from "@inference-hub/api-client";
 import { DataTable } from "@/components/data-table";
 import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { Price } from "@/components/ui/primitives";
 import { formatPrice } from "@/lib/format";
 
 /**
@@ -9,7 +10,7 @@ import { formatPrice } from "@/lib/format";
  */
 export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
   if (offerings.length === 0) {
-    return <p className="text-sm text-zinc-500">No pricing recorded yet.</p>;
+    return <p className="text-sm text-ink-3">No provider sells this yet, as far as the hub knows.</p>;
   }
   const tokenPriced = offerings.filter((o) => o.price_per_hour == null);
   const timePriced = offerings.filter((o) => o.price_per_hour != null);
@@ -24,9 +25,11 @@ export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
           rows={tokenPriced.map((o) => ({
             key: o.id,
             cells: [
-              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} />,
-              formatPrice(o.price_input_per_mtok, o.currency),
-              formatPrice(o.price_output_per_mtok, o.currency),
+              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
+              <Price key="i">{formatPrice(o.price_input_per_mtok, o.currency)}</Price>,
+              <Price key="o" strong>
+                {formatPrice(o.price_output_per_mtok, o.currency)}
+              </Price>,
               o.region ?? "—",
               <CheckedOn key="c" date={o.observed_at} source={o.source_url} />,
             ],
@@ -41,13 +44,15 @@ export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
           rows={timePriced.map((o) => ({
             key: o.id,
             cells: [
-              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} />,
+              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
               [o.gpu_count && `${o.gpu_count}×`, o.gpu_type].filter(Boolean).join(" ") || "—",
-              formatPrice(o.price_per_hour, o.currency),
-              formatPrice(
-                o.price_per_hour != null && o.gpu_count ? o.price_per_hour / o.gpu_count : null,
-                o.currency,
-              ),
+              <Price key="h">{formatPrice(o.price_per_hour, o.currency)}</Price>,
+              <Price key="g" strong>
+                {formatPrice(
+                  o.price_per_hour != null && o.gpu_count ? o.price_per_hour / o.gpu_count : null,
+                  o.currency,
+                )}
+              </Price>,
               o.region ?? "—",
               <CheckedOn key="c" date={o.observed_at} source={o.source_url} />,
             ],

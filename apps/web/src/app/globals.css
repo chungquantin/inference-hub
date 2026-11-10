@@ -1,14 +1,165 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+/*
+ * Design tokens. Semantic names (canvas, surface, ink, line, accent) so every
+ * component reads the same in light and dark. Dark follows the OS, and a
+ * `data-theme` attribute on <html> overrides it.
+ */
+:root {
+  --canvas: #f6f6f5;
+  --surface: #ffffff;
+  --inset: #f1f1ef;
+  --hover: #ebebe9;
+  --ink: #18181a;
+  --ink-2: #4f4f52;
+  --ink-3: #6d6d70;
+  --line: #e4e4e1;
+  --line-strong: #d6d6d2;
+  --accent: #0f7b6c;
+  --accent-ink: #0b6457;
+  --accent-tint: #0f7b6c14;
+  --on-accent: #ffffff;
+  --red: #c43c3c;
+  --red-tint: #c43c3c17;
+  --amber: #98600c;
+  --amber-tint: #98600c1f;
+  --logo-plate: #ffffff;
+  --elev-1: 0 2px 3px -1px #0000001a, 0 1px 0 0 #191c2105, 0 0 0 1px #191c2114;
+  --elev-2: 0 0 0 1px #0000000f, 0 1px 1px -0.5px #0000000f, 0 3px 3px -1.5px #0000000f,
+    0 6px 6px -3px #0000000f, 0 12px 12px -6px #0000000f;
+  --shadow-logo: 0 0 0 1px var(--line), 0 1px 2px 0 #00000014;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #8a63d2;
+  --series-5: #c9a227;
+  --series-6: #8f98a8;
+  --series-7: #d6528f;
+  --series-8: #1f9fb5;
+  color-scheme: light;
 }
 
-:root {
-  color-scheme: light dark;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --canvas: #121212;
+    --surface: #1b1b1b;
+    --inset: #0f0f0f;
+    --hover: #262626;
+    --ink: #ececec;
+    --ink-2: #b0b0b0;
+    --ink-3: #9a9a9a;
+    --line: #ffffff14;
+    --line-strong: #ffffff24;
+    --accent: #3fc1a9;
+    --accent-ink: #6ad3bf;
+    --accent-tint: #3fc1a929;
+    --on-accent: #06201b;
+    --red: #e57373;
+    --red-tint: #e5737329;
+    --amber: #d79a45;
+    --amber-tint: #d79a4529;
+    --elev-1: 0 2px 3px -1px #00000080, 0 0 0 1px #ffffff14;
+    --elev-2: 0 0 0 1px #ffffff1a, 0 8px 12px -4px #0000008c, 0 24px 32px -12px #00000099;
+    --shadow-logo: 0 0 0 1px #ffffff1f, 0 1px 2px 0 #00000066;
+    --series-1: #5aa0f0;
+    --series-2: #f0894f;
+    --series-3: #34c48c;
+    --series-4: #a58ae6;
+    --series-5: #d9b94a;
+    --series-6: #7d8696;
+    --series-7: #ee7fb1;
+    --series-8: #4cc7da;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --canvas: #121212;
+  --surface: #1b1b1b;
+  --inset: #0f0f0f;
+  --hover: #262626;
+  --ink: #ececec;
+  --ink-2: #b0b0b0;
+  --ink-3: #9a9a9a;
+  --line: #ffffff14;
+  --line-strong: #ffffff24;
+  --accent: #3fc1a9;
+  --accent-ink: #6ad3bf;
+  --accent-tint: #3fc1a929;
+  --on-accent: #06201b;
+  --red: #e57373;
+  --red-tint: #e5737329;
+  --amber: #d79a45;
+  --amber-tint: #d79a4529;
+  --elev-1: 0 2px 3px -1px #00000080, 0 0 0 1px #ffffff14;
+  --elev-2: 0 0 0 1px #ffffff1a, 0 8px 12px -4px #0000008c, 0 24px 32px -12px #00000099;
+  --shadow-logo: 0 0 0 1px #ffffff1f, 0 1px 2px 0 #00000066;
+  --series-1: #5aa0f0;
+  --series-2: #f0894f;
+  --series-3: #34c48c;
+  --series-4: #a58ae6;
+  --series-5: #d9b94a;
+  --series-6: #7d8696;
+  --series-7: #ee7fb1;
+  --series-8: #4cc7da;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-inset: var(--inset);
+  --color-hover: var(--hover);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+  --color-on-accent: var(--on-accent);
+  --color-red: var(--red);
+  --color-red-tint: var(--red-tint);
+  --color-amber: var(--amber);
+  --color-amber-tint: var(--amber-tint);
+  --color-logo-plate: var(--logo-plate);
+
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-logo: var(--shadow-logo);
+
+  --radius-control: 6px;
+  --radius-surface: 10px;
 }
 
 body {
-  @apply bg-white text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100;
+  background: var(--canvas);
+  color: var(--ink);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visible keyboard focus everywhere, in the accent color. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent-tint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }

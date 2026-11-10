@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { FilterChip, listingHref } from "@/components/listing";
 import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { Badge, PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { formatPrice } from "@/lib/format";
 
@@ -24,23 +25,30 @@ export default async function CompareGpusPage({ searchParams }: Props) {
   const current = { gpu: params.gpu, provider: params.provider };
   const href = (overrides: Record<string, string | undefined>) =>
     listingHref("/compare/gpus", current, overrides);
+  const rowKey = (i: number) => {
+    const row = data.prices[i];
+    return `${row.provider.slug}:${row.gpu_type}:${row.gpu_count}:${row.region ?? ""}`;
+  };
+  // The cheapest row is only meaningful when one GPU type is selected.
+  const highlight = params.gpu && data.prices.length > 1 ? rowKey(0) : undefined;
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">GPU cloud prices</h1>
-        <p className="max-w-3xl text-zinc-600 dark:text-zinc-400">
-          On-demand prices of GPU instances, cheapest per GPU-hour first. Reserved and spot prices
-          are usually lower.
-        </p>
-      </header>
+      <PageHeader
+        title="GPU cloud prices"
+        lead="On-demand prices of GPU instances, cheapest per GPU-hour first. Reserved and spot prices are usually lower."
+      />
 
       <nav className="flex flex-wrap items-center gap-2 text-sm" aria-label="Filter by GPU">
         <FilterChip href={href({ gpu: undefined })} active={!params.gpu}>
           All GPUs
         </FilterChip>
         {data.gpu_types.map((gpu) => (
-          <FilterChip key={gpu} href={href({ gpu })} active={params.gpu?.toLowerCase() === gpu.toLowerCase()}>
+          <FilterChip
+            key={gpu}
+            href={href({ gpu })}
+            active={params.gpu?.toLowerCase() === gpu.toLowerCase()}
+          >
             {gpu}
           </FilterChip>
         ))}
@@ -52,33 +60,44 @@ export default async function CompareGpusPage({ searchParams }: Props) {
       </nav>
 
       {data.prices.length === 0 ? (
-        <p className="text-sm text-zinc-500">No prices match these filters.</p>
+        <p className="text-sm text-ink-3">No prices match these filters. Remove a filter to see more.</p>
       ) : (
         <DataTable
           caption={`${data.prices.length} prices`}
           headers={["GPU", "Provider", "GPUs", "Per GPU-hour", "Per hour", "Region", "Checked"]}
           numeric={[2, 3, 4]}
-          rows={data.prices.map((row) => ({
-            key: `${row.provider.slug}:${row.gpu_type}:${row.gpu_count}:${row.region ?? ""}`,
+          highlight={highlight}
+          rows={data.prices.map((row, i) => ({
+            key: rowKey(i),
             cells: [
-              <Link key="g" href={`/products/${row.product_slug}`} className="font-medium hover:underline">
-                {row.gpu_type}
-              </Link>,
-              <ProviderLink key="p" slug={row.provider.slug} name={row.provider.name} />,
-              row.gpu_count,
-              <span key="g1" className="font-medium">
-                {formatPrice(row.price_per_gpu_hour, row.currency)}
+              <span key="g" className="flex items-center gap-2">
+                <Link
+                  href={`/products/${row.product_slug}`}
+                  className="font-medium text-ink hover:text-accent"
+                >
+                  {row.gpu_type}
+                </Link>
+                {i === 0 && highlight && <Badge tone="accent">lowest</Badge>}
               </span>,
-              formatPrice(row.price_per_hour, row.currency),
-              row.region ?? "—",
+              <ProviderLink
+                key="p"
+                slug={row.provider.slug}
+                name={row.provider.name}
+                logoUrl={row.provider.logo_url}
+              />,
+              <Price key="n">{row.gpu_count}</Price>,
+              <Price key="g1" strong>
+                {formatPrice(row.price_per_gpu_hour, row.currency)}
+              </Price>,
+              <Price key="h">{formatPrice(row.price_per_hour, row.currency)}</Price>,
+              <span key="r" className="text-ink-2">
+                {row.region ?? "—"}
+              </span>,
               <CheckedOn key="c" date={row.observed_at} source={row.source_url} />,
             ],
           }))}
         />
       )}
-      <p className="text-xs text-zinc-500">
-        Prices are curated by hand and can be out of date: check the provider before you buy.
-      </p>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
     <div className="flex flex-col gap-10">
       <header className="flex items-baseline justify-between">
         <h1 className="text-2xl font-semibold">Market adapters</h1>
-        <Link href="/admin" className="text-sm text-zinc-500 hover:underline">
+        <Link href="/admin" className="text-sm text-ink-2 hover:text-ink">
           ← Review queue
         </Link>
       </header>
@@ -62,7 +62,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
               a.mapped,
               a.last_success_at ? formatDate(a.last_success_at) : "never",
               a.consecutive_failures > 0 ? (
-                <span key="s" className="text-red-600" title={a.last_error ?? undefined}>
+                <span key="s" className="text-red" title={a.last_error ?? undefined}>
                   failing ×{a.consecutive_failures}: {a.last_error}
                 </span>
               ) : (
@@ -75,7 +75,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-xl font-semibold">Unmapped listings</h2>
-        <p className="max-w-3xl text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="max-w-[65ch] text-sm text-ink-2">
           Models and GPUs the adapters see that no product is mapped to. To track one, add its id
           under the product&apos;s <code className="font-mono">listings:</code> in the data, such as{" "}
           <code className="font-mono">listings: {"{ openrouter: [openai/gpt-oss-120b] }"}</code>,
@@ -96,7 +96,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
             </FilterChip>
           )}
         </nav>
-        <p className="text-sm text-zinc-500">{unmapped.data.total} unmapped</p>
+        <p className="text-sm text-ink-3">{unmapped.data.total} unmapped</p>
         <DataTable
           headers={["Adapter", "Id", "Name", "Price", "First seen"]}
           rows={unmapped.data.items.map((l) => ({
@@ -108,7 +108,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
               </code>,
               <span key="n">
                 {l.name}
-                {l.maker && <span className="ml-1 text-xs text-zinc-500">{l.maker}</span>}
+                {l.maker && <span className="ml-1 text-xs text-ink-3">{l.maker}</span>}
               </span>,
               l.kind === "gpu"
                 ? `${formatPrice(l.price_per_hour)}/h${l.gpu_type ? ` · ${l.gpu_type}` : ""}`

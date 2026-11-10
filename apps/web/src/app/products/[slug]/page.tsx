@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ModelSpec, RepoStats } from "@inference-hub/api-client";
 import { OfferingsTable } from "@/components/offerings-table";
+import { FactStrip, ProfileHeader } from "@/components/profile";
+import { Badge, SectionHeader, buttonClass } from "@/components/ui/primitives";
 import { PriceHistoryChart } from "@/components/price-history-chart";
 import { api } from "@/lib/api";
 import { formatCount, formatDate, formatParams, formatTokens } from "@/lib/format";
@@ -46,7 +48,7 @@ export default async function ProductPage({ params }: Props) {
   );
 
   return (
-    <article className="flex flex-col gap-10">
+    <article className="flex flex-col gap-8">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={jsonLd({
@@ -58,144 +60,138 @@ export default async function ProductPage({ params }: Props) {
         })}
       />
 
-      <header className="flex flex-col gap-3">
-        <nav className="text-sm text-zinc-500" aria-label="Breadcrumb">
-          <Link href="/products" className="hover:underline">
-            Products
-          </Link>
-          {" / "}
-          <Link href={`/products?type=${product.product_type}`} className="hover:underline">
-            {PRODUCT_TYPE_LABELS[product.product_type]}
-          </Link>
-        </nav>
-        <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          by{" "}
-          <Link
-            href={`/organizations/${product.organization.slug}`}
-            className="font-medium text-zinc-900 underline dark:text-zinc-100"
-          >
-            {product.organization.name}
-          </Link>
-          {product.tagline && <> · {product.tagline}</>}
-        </p>
-      </header>
+      <nav className="-mb-4 text-sm text-ink-3" aria-label="Breadcrumb">
+        <Link href="/products" className="hover:text-ink">
+          Products
+        </Link>
+        <span className="px-1.5">/</span>
+        <Link href={`/products?type=${product.product_type}`} className="hover:text-ink">
+          {PRODUCT_TYPE_LABELS[product.product_type]}
+        </Link>
+      </nav>
 
-      <dl className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
-        <Fact label="Type" value={PRODUCT_TYPE_LABELS[product.product_type]} />
-        <Fact label="Released" value={product.launched_at ? formatDate(product.launched_at) : undefined} />
-        {product.model && <ModelFacts model={product.model} />}
-        {metadata.map(([key, value]) => (
-          <Fact key={key} label={humanize(key)} value={String(value)} />
-        ))}
-        {product.url && (
-          <Fact
-            label="Link"
-            value={
-              <a href={product.url} rel="noopener" target="_blank" className="underline">
-                {new URL(product.url).hostname}
-              </a>
-            }
-          />
-        )}
-      </dl>
+      <ProfileHeader
+        name={product.name}
+        logoName={product.organization.name}
+        logoUrl={product.organization.logo_url}
+        subtitle={
+          <>
+            by{" "}
+            <Link
+              href={`/organizations/${product.organization.slug}`}
+              className="font-medium text-ink hover:text-accent"
+            >
+              {product.organization.name}
+            </Link>
+            {product.tagline && <span className="text-ink-2">. {product.tagline}</span>}
+          </>
+        }
+        badges={
+          <>
+            <Badge>{PRODUCT_TYPE_LABELS[product.product_type]}</Badge>
+            {product.model?.open_weights && <Badge tone="accent">Open weights</Badge>}
+            {product.repo?.archived && <Badge tone="amber">Archived</Badge>}
+          </>
+        }
+        actions={
+          product.url ? (
+            <a href={product.url} rel="noopener" target="_blank" className={buttonClass("secondary")}>
+              Visit {new URL(product.url).hostname}
+            </a>
+          ) : undefined
+        }
+      />
+
+      <FactStrip
+        facts={[
+          { label: "Released", value: product.launched_at ? formatDate(product.launched_at) : undefined },
+          ...(product.model ? modelFacts(product.model) : []),
+          ...metadata.map(([key, value]) => ({ label: humanize(key), value: String(value) })),
+        ]}
+      />
 
       {product.description && (
-        <section className="max-w-3xl leading-relaxed text-zinc-700 dark:text-zinc-300">
-          {product.description}
-        </section>
+        <section className="max-w-[65ch] text-[15px] leading-relaxed text-ink-2">{product.description}</section>
       )}
 
-      {product.repo && <RepoSection repo={product.repo} />}
-
       <section className="flex flex-col gap-3">
-        <h2 className="text-xl font-semibold">Where to get it</h2>
+        <SectionHeader title="Where to get it" />
         <OfferingsTable offerings={product.offerings} />
       </section>
 
       {history.data && history.data.length > 1 && (
         <section className="flex flex-col gap-3">
-          <h2 className="text-xl font-semibold">Price history</h2>
+          <SectionHeader title="Price history" />
           <PriceHistoryChart points={history.data} unit={historyUnit} now={renderedAt} />
         </section>
       )}
+
+      {product.repo && <RepoSection repo={product.repo} />}
     </article>
   );
 }
 
-function ModelFacts({ model }: { model: ModelSpec }) {
+function modelFacts(model: ModelSpec): { label: string; value: React.ReactNode }[] {
   const params =
     model.active_params_b != null
       ? `${formatParams(model.parameters_b)} (${formatParams(model.active_params_b)} active)`
       : model.parameters_b != null
         ? formatParams(model.parameters_b)
         : undefined;
-  return (
-    <>
-      <Fact label="Parameters" value={params} />
-      <Fact
-        label="Context window"
-        value={model.context_window ? `${formatTokens(model.context_window)} tokens` : undefined}
-      />
-      <Fact label="Input" value={model.modalities.length ? model.modalities.join(", ") : undefined} />
-      <Fact label="Weights" value={model.open_weights ? "Open" : "Closed"} />
-      <Fact label="License" value={model.license ?? undefined} />
-      {model.family && <Fact label="Family" value={model.family} />}
-    </>
-  );
+  return [
+    { label: "Parameters", value: params },
+    {
+      label: "Context window",
+      value: model.context_window ? `${formatTokens(model.context_window)} tokens` : undefined,
+    },
+    { label: "Input", value: model.modalities.length ? model.modalities.join(", ") : undefined },
+    { label: "License", value: model.license ?? undefined },
+  ];
 }
 
 function RepoSection({ repo }: { repo: RepoStats }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="text-xl font-semibold">
-        On GitHub{" "}
+      <div className="flex items-baseline justify-between gap-4">
+        <h2 className="font-display text-lg font-semibold tracking-[-0.01em] text-ink">On GitHub</h2>
         <a
           href={`https://github.com/${repo.repo}`}
           rel="noopener"
           target="_blank"
-          className="ml-1 font-mono text-sm font-normal text-zinc-500 hover:underline"
+          className="font-mono text-sm text-ink-2 hover:text-accent"
         >
           {repo.repo}
         </a>
-      </h2>
-      {repo.archived && (
-        <p className="text-sm text-amber-600">This repository is archived and no longer maintained.</p>
-      )}
-      <dl className="grid grid-cols-2 gap-4 text-sm sm:grid-cols-4">
-        <Fact
-          label="Stars"
-          value={
-            <>
-              {formatCount(repo.stars)}
-              {repo.stars_30d != null && (
-                <span className="ml-1 font-normal text-zinc-500">+{formatCount(repo.stars_30d)} in 30 days</span>
-              )}
-            </>
-          }
-        />
-        <Fact label="Forks" value={formatCount(repo.forks)} />
-        <Fact label="License" value={repo.license ?? undefined} />
-        <Fact
-          label="Latest release"
-          value={
-            repo.latest_release
-              ? `${repo.latest_release}${repo.released_at ? ` · ${formatDate(repo.released_at)}` : ""}`
-              : undefined
-          }
-        />
-      </dl>
-      <p className="text-xs text-zinc-500">Synced {formatDate(repo.synced_at)}.</p>
+      </div>
+      <FactStrip
+        facts={[
+          {
+            label: "Stars",
+            value: (
+              <>
+                {formatCount(repo.stars)}
+                {repo.stars_30d != null && (
+                  <span className="ml-1.5 text-sm font-normal text-accent-ink">
+                    +{formatCount(repo.stars_30d)} in 30 days
+                  </span>
+                )}
+              </>
+            ),
+          },
+          { label: "Forks", value: formatCount(repo.forks) },
+          { label: "License", value: repo.license ?? undefined },
+          {
+            label: "Latest release",
+            value: repo.latest_release
+              ? `${repo.latest_release}${repo.released_at ? `, ${formatDate(repo.released_at)}` : ""}`
+              : undefined,
+          },
+        ]}
+      />
+      <p className="text-xs text-ink-3">
+        {repo.archived && "Archived and no longer maintained. "}Synced {formatDate(repo.synced_at)}.
+      </p>
     </section>
-  );
-}
-
-function Fact({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div>
-      <dt className="text-zinc-500">{label}</dt>
-      <dd className="mt-0.5 font-medium">{value ?? "—"}</dd>
-    </div>
   );
 }
 

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import type { ProductSummary } from "@inference-hub/api-client";
+import { Logo } from "@/components/ui/logo";
 import { formatDate } from "@/lib/format";
 import { PRODUCT_TYPE_LABELS } from "@/lib/labels";
 
-/** A compact list of products, linking each to its page. */
+/** A list of products, each with its maker's logo, linking to its page. */
 export function ProductList({
   products,
   showMaker = true,
@@ -14,33 +15,30 @@ export function ProductList({
   empty?: string;
 }) {
   if (products.length === 0) {
-    return <p className="text-sm text-zinc-500">{empty}</p>;
+    return <p className="text-sm text-ink-3">{empty}</p>;
   }
   return (
-    <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
+    <ul className="overflow-hidden rounded-[10px] bg-surface shadow-elev-1">
       {products.map((product) => (
-        <li key={product.id}>
+        <li key={product.id} className="border-b border-line last:border-0">
           <Link
             href={`/products/${product.slug}`}
-            className="group flex items-baseline justify-between gap-4 py-3"
+            className="group flex items-center gap-3 px-4 py-3 hover:bg-hover/50"
           >
-            <div className="min-w-0">
-              <p className="font-medium group-hover:underline">
+            {showMaker && (
+              <Logo name={product.organization.name} src={product.organization.logo_url} size="md" />
+            )}
+            <div className="min-w-0 flex-1">
+              <p className="truncate font-medium text-ink group-hover:text-accent">
                 {product.name}
                 {showMaker && (
-                  <span className="ml-2 text-sm font-normal text-zinc-500">
-                    {product.organization.name}
-                  </span>
+                  <span className="ml-2 text-sm font-normal text-ink-3">{product.organization.name}</span>
                 )}
               </p>
-              {product.tagline && (
-                <p className="truncate text-sm text-zinc-600 dark:text-zinc-400">
-                  {product.tagline}
-                </p>
-              )}
+              {product.tagline && <p className="truncate text-sm text-ink-2">{product.tagline}</p>}
             </div>
-            <div className="flex shrink-0 flex-col items-end gap-0.5 text-xs text-zinc-500">
-              <span className="font-mono">{PRODUCT_TYPE_LABELS[product.product_type]}</span>
+            <div className="hidden shrink-0 flex-col items-end gap-0.5 text-xs text-ink-3 sm:flex">
+              <span>{PRODUCT_TYPE_LABELS[product.product_type]}</span>
               {product.launched_at && <span>{formatDate(product.launched_at)}</span>}
             </div>
           </Link>
