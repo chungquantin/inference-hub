@@ -45,11 +45,16 @@ export default async function AdminPage({ searchParams }: Props) {
     <div className="flex flex-col gap-10">
       <header className="flex items-baseline justify-between">
         <h1 className="text-2xl font-semibold">Review queue</h1>
-        <form action={logout}>
-          <button type="submit" className="text-sm text-zinc-500 hover:underline">
-            Sign out
-          </button>
-        </form>
+        <div className="flex items-baseline gap-4 text-sm">
+          <Link href="/admin/market" className="text-zinc-500 hover:underline">
+            Market adapters
+          </Link>
+          <form action={logout}>
+            <button type="submit" className="text-zinc-500 hover:underline">
+              Sign out
+            </button>
+          </form>
+        </div>
       </header>
 
       <section className="flex flex-col gap-4">

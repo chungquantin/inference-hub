@@ -28,6 +28,8 @@ export type FundingRound = Schemas["FundingRound"];
 export type PortfolioCompany = Schemas["PortfolioCompany"];
 export type RepoStats = Schemas["RepoStats"];
 export type RepoLeader = Schemas["RepoLeader"];
+export type AdapterStatus = Schemas["AdapterStatus"];
+export type UnmappedListing = Schemas["UnmappedListing"];
 export type ApiErrorBody = Schemas["ErrorBody"];
 
 /** A typed client for the Inference Hub API, generated from its OpenAPI document. */
