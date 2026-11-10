@@ -15,9 +15,11 @@ apps/web  (Next.js, server-rendered)  ──HTTP──▶  crates/api  (Rust, Ax
 | `crates/core` | Domain types. They are the API contract and derive the OpenAPI schemas. |
 | `crates/db` | Pool, embedded migrations, queries (sqlx). |
 | `crates/api` | HTTP API. Interactive docs are at `/docs`, and the spec is at `/openapi.json`. |
-| `crates/worker` | Ingestion jobs (RSS, GitHub, pricing). It's a stub for now. |
+| `crates/worker` | Scheduler and job runners on a Postgres queue. Fetches feeds on their interval. |
+| `crates/ingest` | Feed parsing, URL canonicalization and organization tagging. |
 | `crates/seed` | Validates and imports the curated YAML in `data/`. |
-| `data/organizations/` | Curated data: one YAML file per organization, with its products and prices. |
+| `data/organizations/` | Curated data: one YAML file per organization, with its products, prices, feeds and tagging rules. |
+| `data/sources.yaml` | Feeds not owned by one organization, such as newsletters and trade press. |
 | `migrations/` | SQL migrations. The API applies them on startup when `RUN_MIGRATIONS=true`. |
 | `packages/api-client` | TypeScript client generated from the OpenAPI document. |
 | `apps/web` | Next.js site. |
@@ -37,6 +39,7 @@ pnpm db:up          # Postgres 17 + pgvector on localhost:5434
 pnpm seed           # runs the migrations and imports data/
 pnpm dev:api        # http://127.0.0.1:4000, docs at /docs
 pnpm dev:web        # http://localhost:3000 (in a second terminal)
+pnpm worker:once    # fetches every due feed once; `pnpm dev:worker` keeps running
 ```
 
 ## Adding data
@@ -79,6 +82,41 @@ references and bad slugs are rejected before anything is written.
 To use a different Postgres port, set `POSTGRES_PORT` for Docker Compose and update
 `DATABASE_URL` to match.
 
+## News
+
+The worker fetches each enabled feed every `interval_minutes` (default 60), sending the
+stored `ETag` and `Last-Modified` so unchanged feeds cost one 304. A feed that fails backs
+off: its interval doubles per consecutive failure, up to 24 hours. Items are deduplicated
+by canonical URL (lower-case host without `www.`, no fragment, no tracking parameters).
+
+Each item is tagged with the organizations it mentions by name. The rules live in the
+organization file:
+
+```yaml
+feeds:                           # the organization's own blog; its items are tagged with it
+  - slug: lambda-blog
+    name: Lambda Blog
+    url: https://lambda.ai/blog/rss.xml
+tagging:
+  aliases: [Lambda Labs]         # other names to match, as whole words
+  exclude: [AWS Lambda]          # phrases that contain a name but mean something else
+  match_case: true               # for names that are also common words
+```
+
+Items from an organization's own feed are published at once (`auto_approve` defaults to
+true). Items from `data/sources.yaml` wait for review. After changing tagging rules, run
+`pnpm seed` and then `pnpm worker:retag` to apply them to stored items.
+
+When a feed will not parse, save it and run
+`cargo run -p ih-ingest --example parse_file -- feed.xml https://its.url/` to see why.
+
+## Admin
+
+Set `ADMIN_TOKEN` (32+ characters, `openssl rand -hex 32`) for both the API and the web
+server. That enables the admin API under `/v1/admin` (bearer token) and the review pages
+at `/admin`, where editors approve or reject queued items, correct their organizations,
+and see which feeds are failing. Without `ADMIN_TOKEN` both answer 404.
+
 ## Changing the API
 
 The Rust types are the source of truth. After changing a route or a type in `crates/core`, run:
@@ -102,6 +140,7 @@ pnpm test           # needs Postgres running: each DB test creates and drops its
 1. **Foundation** (done): workspace, schema, read API, directory pages.
 2. **Directory MVP** (done): YAML seed importer, product and model pages with pricing,
    SEO (sitemap, robots, JSON-LD, canonical URLs).
-3. **News pipeline:** worker job queue, RSS ingestion, LLM tagging, admin review queue.
+3. **News pipeline** (done): Postgres job queue, feed ingestion with conditional requests,
+   name-based tagging, admin review queue.
 4. **Comparisons:** pricing offerings, model and GPU price tables, GitHub stats, funding.
 5. **Growth:** semantic search, newsletter, public API, submissions.

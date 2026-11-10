@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { NewsList } from "@/components/news";
 import { ProductList } from "@/components/product-list";
 import { api } from "@/lib/api";
 import { ORG_KIND_LABELS } from "@/lib/labels";
@@ -29,7 +30,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function OrganizationPage({ params }: Props) {
-  const org = await loadOrganization((await params).slug);
+  const { slug } = await params;
+  const [org, news] = await Promise.all([
+    loadOrganization(slug),
+    api.GET("/v1/news", { params: { query: { organization: slug, limit: 8 } } }),
+  ]);
   const links = Object.entries(org.links);
 
   return (
@@ -92,6 +97,13 @@ export default async function OrganizationPage({ params }: Props) {
           <h2 className="text-xl font-semibold">Serves</h2>
           <p className="text-sm text-zinc-500">Products from other makers that {org.name} offers.</p>
           <ProductList products={org.served_products} />
+        </section>
+      )}
+
+      {news.data && news.data.items.length > 0 && (
+        <section className="flex flex-col gap-1">
+          <h2 className="text-xl font-semibold">News</h2>
+          <NewsList items={news.data.items} />
         </section>
       )}
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CategoryGrid } from "@/components/category-grid";
 import { SearchForm } from "@/components/listing";
+import { NewsList } from "@/components/news";
 import { OrganizationGrid } from "@/components/organization-card";
 import { ProductList } from "@/components/product-list";
 import { api } from "@/lib/api";
@@ -8,10 +9,11 @@ import { api } from "@/lib/api";
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
 export default async function HomePage() {
-  const [categories, orgs, models] = await Promise.all([
+  const [categories, orgs, models, news] = await Promise.all([
     api.GET("/v1/categories"),
     api.GET("/v1/organizations", { params: { query: { limit: 6 } } }),
     api.GET("/v1/products", { params: { query: { type: "model", limit: 6 } } }),
+    api.GET("/v1/news", { params: { query: { limit: 5 } } }),
   ]);
 
   return (
@@ -35,6 +37,13 @@ export default async function HomePage() {
           <p className="text-sm text-red-600">Could not load categories.</p>
         )}
       </section>
+
+      {news.data && news.data.items.length > 0 && (
+        <section className="flex flex-col gap-1">
+          <SectionHeader title="Latest news" href="/news" total={news.data.total} />
+          <NewsList items={news.data.items} />
+        </section>
+      )}
 
       <section className="flex flex-col gap-4">
         <SectionHeader title="Latest models" href="/products?type=model" total={models.data?.total} />

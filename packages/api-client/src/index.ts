@@ -16,6 +16,9 @@ export type Offering = Schemas["Offering"];
 export type OrganizationPage = Schemas["Page_Organization"];
 export type ProductPage = Schemas["Page_ProductSummary"];
 export type SitemapIndex = Schemas["SitemapIndex"];
+export type NewsItem = Schemas["NewsItem"];
+export type NewsStatus = Schemas["NewsStatus"];
+export type SourceStatus = Schemas["SourceStatus"];
 export type ApiErrorBody = Schemas["ErrorBody"];
 
 /** A typed client for the Inference Hub API, generated from its OpenAPI document. */

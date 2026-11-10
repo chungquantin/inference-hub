@@ -37,6 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/products" className="hover:text-zinc-900 dark:hover:text-zinc-100">
                 Products
               </Link>
+              <Link href="/news" className="hover:text-zinc-900 dark:hover:text-zinc-100">
+                News
+              </Link>
             </div>
           </nav>
         </header>
