@@ -4,8 +4,8 @@ import { formatDate, formatPrice } from "@/lib/format";
 const WIDTH = 640;
 const HEIGHT = 220;
 const PAD = { top: 12, right: 16, bottom: 28, left: 64 };
-/** The design system's data series, so the chart follows the theme. */
-const COLORS = Array.from({ length: 8 }, (_, i) => `var(--series-${i + 1})`);
+/** Series colors: the brand ramp first, then distinct hues for more providers. */
+const COLORS = ["#0b6e5f", "#b42318", "#2a5bd7", "#8a5300", "#57ab96", "#7a3fb0", "#0a0a0a", "#c2410c"];
 
 type Series = { label: string; currency: string; points: { t: number; v: number }[] };
 
@@ -69,7 +69,7 @@ export function PriceHistoryChart({
   };
 
   return (
-    <figure className="flex flex-col gap-3 rounded-[10px] bg-surface p-4 shadow-elev-1">
+    <figure className="flex flex-col gap-3 border border-line bg-wash p-4">
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full max-w-2xl"
@@ -85,15 +85,15 @@ export function PriceHistoryChart({
               y2={y(v)}
               className="stroke-line"
             />
-            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" className="fill-ink-3 text-[11px]">
+            <text x={PAD.left - 6} y={y(v) + 4} textAnchor="end" className="fill-ink-3 font-mono text-[11px]">
               {formatPrice(v, currency)}
             </text>
           </g>
         ))}
-        <text x={PAD.left} y={HEIGHT - 8} className="fill-ink-3 text-[11px]">
+        <text x={PAD.left} y={HEIGHT - 8} className="fill-ink-3 font-mono text-[11px]">
           {formatDate(new Date(t0).toISOString())}
         </text>
-        <text x={WIDTH - PAD.right} y={HEIGHT - 8} textAnchor="end" className="fill-ink-3 text-[11px]">
+        <text x={WIDTH - PAD.right} y={HEIGHT - 8} textAnchor="end" className="fill-ink-3 font-mono text-[11px]">
           Today
         </text>
         {series.map((s, i) => (
@@ -103,14 +103,15 @@ export function PriceHistoryChart({
             fill="none"
             stroke={COLORS[i % COLORS.length]}
             strokeWidth={2}
+            shapeRendering="crispEdges"
           />
         ))}
       </svg>
-      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink-2">
+      <figcaption className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[12px] text-ink-2">
         <span className="text-ink-3">{unit}:</span>
         {series.map((s, i) => (
           <span key={s.label} className="flex items-center gap-1.5">
-            <span className="inline-block size-2.5 rounded-sm" style={{ background: COLORS[i % COLORS.length] }} />
+            <span className="inline-block size-2" style={{ background: COLORS[i % COLORS.length] }} />
             {s.label}
           </span>
         ))}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Chip } from "@/components/ui/primitives";
 
-/** A filter pill. Kept under this name for the listing pages. */
+/** A square filter toggle. Kept under this name for the listing pages. */
 export function FilterChip(props: { href: string; active: boolean; children: React.ReactNode }) {
   return <Chip {...props} />;
 }
@@ -17,22 +17,22 @@ export function Pagination({
   hrefFor: (page: number) => string;
 }) {
   if (lastPage <= 1) return null;
-  const link = "rounded-[6px] px-3 py-1.5 text-ink-2 hover:bg-hover hover:text-ink";
+  const link = "inline-flex h-8 items-center bg-field px-3 font-mono text-[13px] text-ink hover:bg-s-2";
   return (
-    <nav className="flex items-center justify-between text-sm" aria-label="Pagination">
+    <nav className="flex items-center justify-between" aria-label="Pagination">
       {page > 1 ? (
         <Link href={hrefFor(page - 1)} className={link}>
-          Previous
+          ← Previous
         </Link>
       ) : (
         <span />
       )}
-      <span className="text-ink-3">
-        Page {page} of {lastPage}
+      <span className="font-mono text-[13px] text-ink-3 tabular">
+        {page} / {lastPage}
       </span>
       {page < lastPage ? (
         <Link href={hrefFor(page + 1)} className={link}>
-          Next
+          Next →
         </Link>
       ) : (
         <span />
@@ -54,28 +54,24 @@ export function SearchForm({
   hidden?: Record<string, string | undefined>;
 }) {
   return (
-    <form action={action} className="flex w-full max-w-xl gap-2" role="search">
-      <label className="flex h-10 flex-1 items-center gap-2 rounded-[6px] bg-surface px-3 shadow-elev-1 focus-within:outline-2 focus-within:outline-accent">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden className="shrink-0 text-ink-3">
-          <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.5" />
-          <path d="m10.5 10.5 3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
+    <form action={action} className="flex w-full max-w-xl" role="search">
+      <label className="flex h-12 flex-1 items-center gap-3 border border-ink bg-wash px-4 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-s-7">
+        <span aria-hidden className="font-mono text-[15px] text-s-7">
+          &gt;
+        </span>
         <input
           type="search"
           name="q"
           defaultValue={defaultValue}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="h-full flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-ink-3"
+          className="h-full flex-1 bg-transparent font-mono text-[14px] text-ink outline-none placeholder:text-ink-3"
         />
       </label>
       {Object.entries(hidden).map(
         ([name, value]) => value && <input key={name} type="hidden" name={name} value={value} />,
       )}
-      <button
-        type="submit"
-        className="h-10 rounded-[6px] bg-ink px-4 text-sm font-medium text-canvas hover:opacity-90"
-      >
+      <button type="submit" className="h-12 bg-ink px-5 text-[15px] text-wash hover:bg-s-8">
         Search
       </button>
     </form>

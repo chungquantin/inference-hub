@@ -5,6 +5,7 @@ import { DataTable } from "@/components/data-table";
 import { FilterChip, listingHref } from "@/components/listing";
 import { CheckedOn, ProviderLink } from "@/components/price-cells";
 import { Logo } from "@/components/ui/logo";
+import { PixelBar } from "@/components/ui/pixel";
 import { Badge, PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { formatPrice, formatTokens } from "@/lib/format";
@@ -60,17 +61,19 @@ export default async function CompareModelsPage({ searchParams }: Props) {
   const href = (overrides: Record<string, string | undefined>) =>
     listingHref("/compare/models", current, overrides);
   const rowKey = (i: number) => `${data[i].product_slug}:${data[i].provider.slug}:${i}`;
+  const max = Math.max(...data.map((m) => m.blended_per_mtok ?? 0), 0);
 
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
+        label="Compare / Model APIs"
         title="Model API prices"
         lead="The latest price of each model at each provider, in USD per million tokens. The blended price weighs input and output 3 to 1, a typical chat workload."
       />
 
       <div className="flex flex-col gap-3 text-sm">
         <nav className="flex flex-wrap items-center gap-2" aria-label="Sort">
-          <span className="w-16 text-ink-3">Sort by</span>
+          <span className="w-16 font-mono text-[12px] text-ink-3">Sort</span>
           {SORTS.map((s) => (
             <FilterChip
               key={s.value}
@@ -82,7 +85,7 @@ export default async function CompareModelsPage({ searchParams }: Props) {
           ))}
         </nav>
         <nav className="flex flex-wrap items-center gap-2" aria-label="Filter">
-          <span className="w-16 text-ink-3">Show</span>
+          <span className="w-16 font-mono text-[12px] text-ink-3">Show</span>
           <FilterChip href={href({ open: open ? undefined : "1" })} active={Boolean(open)}>
             Open weights
           </FilterChip>
@@ -104,11 +107,11 @@ export default async function CompareModelsPage({ searchParams }: Props) {
       </div>
 
       {data.length === 0 ? (
-        <p className="text-sm text-ink-3">No prices match these filters. Remove a filter to see more.</p>
+        <p className="font-mono text-[13px] text-ink-3">No prices match these filters. Remove a filter to see more.</p>
       ) : (
         <DataTable
           caption={`${data.length} prices`}
-          headers={["Model", "Provider", "Context", "Input", "Output", "Blended", "Checked"]}
+          headers={["Model", "Provider", "Context", "Input", "Output", "Blended", "", "Checked"]}
           numeric={[2, 3, 4, 5]}
           highlight={sort === "blended" ? rowKey(0) : undefined}
           rows={data.map((row, i) => ({
@@ -119,14 +122,14 @@ export default async function CompareModelsPage({ searchParams }: Props) {
                 <div className="min-w-0">
                   <Link
                     href={`/products/${row.product_slug}`}
-                    className="font-medium text-ink hover:text-accent"
+                    className="font-sans text-[14px] text-ink hover:text-s-7 hover:underline"
                   >
                     {row.product_name}
                   </Link>
-                  <div className="flex items-center gap-1.5 text-xs text-ink-3">
+                  <div className="flex items-center gap-1.5 text-[12px] text-ink-3">
                     {row.maker.name}
-                    {row.open_weights && <Badge tone="accent">open</Badge>}
-                    {i === 0 && sort === "blended" && <Badge tone="accent">lowest</Badge>}
+                    {row.open_weights && <Badge tone="brand">open</Badge>}
+                    {i === 0 && sort === "blended" && <Badge tone="solid">lowest</Badge>}
                   </div>
                 </div>
               </div>,
@@ -142,6 +145,15 @@ export default async function CompareModelsPage({ searchParams }: Props) {
               <Price key="b" strong>
                 {formatPrice(row.blended_per_mtok, row.currency)}
               </Price>,
+              <span key="bar" className="hidden w-[126px] md:block">
+                <PixelBar
+                  value={row.blended_per_mtok ?? 0}
+                  max={max}
+                  cells={17}
+                  tone={i === 0 && sort === "blended" ? "lead" : "muted"}
+                  label={`${formatPrice(row.blended_per_mtok, row.currency)} blended per million tokens`}
+                />
+              </span>,
               <CheckedOn key="c2" date={row.observed_at} source={row.source_url} />,
             ],
           }))}

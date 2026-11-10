@@ -15,7 +15,7 @@ export default async function CategoriesPage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader title="Categories" />
+      <PageHeader label="Categories" title="The market, by role" lead="One organization can appear in several categories: a hyperscaler often trains models and invests too." />
       <CategoryGrid categories={data} />
     </div>
   );

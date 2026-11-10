@@ -62,7 +62,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
               a.mapped,
               a.last_success_at ? formatDate(a.last_success_at) : "never",
               a.consecutive_failures > 0 ? (
-                <span key="s" className="text-red" title={a.last_error ?? undefined}>
+                <span key="s" className="text-up" title={a.last_error ?? undefined}>
                   failing ×{a.consecutive_failures}: {a.last_error}
                 </span>
               ) : (
@@ -96,7 +96,7 @@ export default async function AdminMarketPage({ searchParams }: Props) {
             </FilterChip>
           )}
         </nav>
-        <p className="text-sm text-ink-3">{unmapped.data.total} unmapped</p>
+        <p className="font-mono text-[13px] text-ink-3">{unmapped.data.total} unmapped</p>
         <DataTable
           headers={["Adapter", "Id", "Name", "Price", "First seen"]}
           rows={unmapped.data.items.map((l) => ({

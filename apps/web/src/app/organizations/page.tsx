@@ -42,7 +42,7 @@ export default async function OrganizationsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-4">
-        <PageHeader title="Directory" lead="Companies, open-source projects and investors of the inference market." />
+        <PageHeader label="Directory" title="Who is who in inference" lead="Model labs, inference providers, gateways, GPU clouds, hardware makers, open-source projects and the investors behind them." />
         <SearchForm
           defaultValue={q}
           placeholder="Search companies and projects"
@@ -60,7 +60,7 @@ export default async function OrganizationsPage({ searchParams }: Props) {
         </nav>
       </header>
 
-      <p className="text-sm text-ink-3">
+      <p className="font-mono text-[13px] text-ink-3">
         {data.total} {data.total === 1 ? "result" : "results"}
       </p>
       <OrganizationGrid orgs={data.items} />

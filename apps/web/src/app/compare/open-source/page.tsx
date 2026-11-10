@@ -21,11 +21,12 @@ export default async function CompareOpenSourcePage() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
+        label="Compare / Open source"
         title="Open-source projects"
         lead="Inference engines and runtimes by GitHub stars. Stars over 30 days appear once the hub has 30 days of history. Archived projects are listed last."
       />
       {data.length === 0 ? (
-        <p className="text-sm text-ink-3">
+        <p className="font-mono text-[13px] text-ink-3">
           No repository stats yet. The worker syncs them every few hours.
         </p>
       ) : (
@@ -40,11 +41,11 @@ export default async function CompareOpenSourcePage() {
                 <div className="min-w-0">
                   <Link
                     href={`/products/${row.product_slug}`}
-                    className="font-medium text-ink hover:text-accent"
+                    className="font-sans text-[14px] text-ink hover:text-s-7 hover:underline"
                   >
                     {row.product_name}
                   </Link>
-                  <div className="flex items-center gap-1.5 text-xs">
+                  <div className="flex items-center gap-1.5 text-[12px]">
                     <a
                       href={`https://github.com/${row.repo}`}
                       rel="noopener"
@@ -53,7 +54,7 @@ export default async function CompareOpenSourcePage() {
                     >
                       {row.repo}
                     </a>
-                    {row.archived && <Badge tone="amber">archived</Badge>}
+                    {row.archived && <Badge tone="warn">archived</Badge>}
                   </div>
                 </div>
               </div>,

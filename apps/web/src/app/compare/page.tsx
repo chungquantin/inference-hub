@@ -29,18 +29,24 @@ const PAGES = [
 export default function ComparePage() {
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader title="Compare" lead="Side-by-side views of the market, refreshed from providers every few hours." />
-      <div className="grid gap-3 sm:grid-cols-3">
-        {PAGES.map((page) => (
+      <PageHeader
+        label="Compare"
+        title="Compare the market"
+        lead="Side-by-side views of the market, refreshed from providers every few hours."
+      />
+      <div className="grid grid-cols-1 pt-px pl-px sm:grid-cols-3">
+        {PAGES.map((page, i) => (
           <Link
             key={page.href}
             href={page.href}
-            className="group flex flex-col gap-1.5 rounded-[10px] bg-surface p-5 shadow-elev-1 transition-shadow hover:shadow-elev-2"
+            className="group -mt-px -ml-px flex flex-col gap-3 border border-line p-6 hover:z-10 hover:border-s-7"
           >
-            <h2 className="font-display font-semibold tracking-[-0.01em] text-ink group-hover:text-accent">
+            <span className="font-mono text-[13px] text-s-7 tabular">0{i + 1}</span>
+            <h2 className="font-display text-[24px] leading-8 tracking-[-0.02em] text-ink group-hover:text-s-7">
               {page.title}
             </h2>
-            <p className="text-sm text-ink-2">{page.body}</p>
+            <p className="text-[14px] leading-6 text-ink-2">{page.body}</p>
+            <span className="mt-auto pt-2 font-mono text-[13px] text-s-7 underline">Open</span>
           </Link>
         ))}
       </div>

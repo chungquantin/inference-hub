@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { FundingTable, PortfolioList } from "@/components/funding";
 import { NewsList } from "@/components/news";
 import { ProductList } from "@/components/product-list";
+import { OrgPrices } from "@/components/org-prices";
 import { FactStrip, ProfileHeader } from "@/components/profile";
 import { Badge, SectionHeader, buttonClass } from "@/components/ui/primitives";
 import type { FundingRound } from "@inference-hub/api-client";
@@ -36,10 +37,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function OrganizationPage({ params }: Props) {
   const { slug } = await params;
-  const [org, news] = await Promise.all([
+  const [org, news, modelPrices, gpuPrices] = await Promise.all([
     loadOrganization(slug),
     api.GET("/v1/news", { params: { query: { organization: slug, limit: 8 } } }),
+    api.GET("/v1/compare/models", { params: { query: { provider: slug } } }),
+    api.GET("/v1/compare/gpus", { params: { query: { provider: slug } } }),
   ]);
+  const sells = {
+    models: modelPrices.data ?? [],
+    gpus: gpuPrices.data?.prices ?? [],
+  };
   const links = Object.entries(org.links);
 
   return (
@@ -86,6 +93,18 @@ export default async function OrganizationPage({ params }: Props) {
         <section className="max-w-[65ch] text-[15px] leading-relaxed text-ink-2">{org.description}</section>
       )}
 
+      {(sells.models.length > 0 || sells.gpus.length > 0) && (
+        <section className="flex flex-col gap-4">
+          <SectionHeader
+            title={`Prices at ${org.name}`}
+            count={sells.models.length + sells.gpus.length}
+            href={sells.gpus.length > 0 ? `/compare/gpus?provider=${org.slug}` : `/compare/models?provider=${org.slug}`}
+            linkLabel="Compare with other providers"
+          />
+          <OrgPrices models={sells.models} gpus={sells.gpus} />
+        </section>
+      )}
+
       {org.products.length > 0 && (
         <section className="flex flex-col gap-3">
           <SectionHeader title="Products" />
@@ -127,12 +146,12 @@ export default async function OrganizationPage({ params }: Props) {
 
       <footer className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line pt-4 text-sm text-ink-2">
         {org.categories.map((category) => (
-          <Link key={category.id} href={`/categories/${category.slug}`} className="hover:text-accent">
+          <Link key={category.id} href={`/categories/${category.slug}`} className="hover:text-s-7">
             {category.name}
           </Link>
         ))}
         {links.map(([name, href]) => (
-          <a key={name} href={href} rel="noopener" target="_blank" className="capitalize hover:text-accent">
+          <a key={name} href={href} rel="noopener" target="_blank" className="capitalize hover:text-s-7">
             {name}
           </a>
         ))}

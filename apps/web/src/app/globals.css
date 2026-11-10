@@ -1,158 +1,119 @@
 @import "tailwindcss";
 
 /*
- * Design tokens. Semantic names (canvas, surface, ink, line, accent) so every
- * component reads the same in light and dark. Dark follows the OS, and a
- * `data-theme` attribute on <html> overrides it.
+ * Inference Hub design system: white, square, framed.
+ *
+ * - Radius is 0 everywhere. Surfaces are separated by 1px hairline frames,
+ *   never by drop shadows.
+ * - One brand ramp ("signal", teal) supplies every tint, hover and fill.
+ * - Numbers, labels and tables are set in IBM Plex Mono; headings in Funnel
+ *   Display; text in Inter. A pixel font is reserved for the price bars.
  */
 :root {
-  --canvas: #f6f6f5;
-  --surface: #ffffff;
-  --inset: #f1f1ef;
-  --hover: #ebebe9;
-  --ink: #18181a;
-  --ink-2: #4f4f52;
-  --ink-3: #6d6d70;
-  --line: #e4e4e1;
-  --line-strong: #d6d6d2;
-  --accent: #0f7b6c;
-  --accent-ink: #0b6457;
-  --accent-tint: #0f7b6c14;
-  --on-accent: #ffffff;
-  --red: #c43c3c;
-  --red-tint: #c43c3c17;
-  --amber: #98600c;
-  --amber-tint: #98600c1f;
-  --logo-plate: #ffffff;
-  --elev-1: 0 2px 3px -1px #0000001a, 0 1px 0 0 #191c2105, 0 0 0 1px #191c2114;
-  --elev-2: 0 0 0 1px #0000000f, 0 1px 1px -0.5px #0000000f, 0 3px 3px -1.5px #0000000f,
-    0 6px 6px -3px #0000000f, 0 12px 12px -6px #0000000f;
-  --shadow-logo: 0 0 0 1px var(--line), 0 1px 2px 0 #00000014;
-  --series-1: #2a78d6;
-  --series-2: #eb6834;
-  --series-3: #1baf7a;
-  --series-4: #8a63d2;
-  --series-5: #c9a227;
-  --series-6: #8f98a8;
-  --series-7: #d6528f;
-  --series-8: #1f9fb5;
+  --wash: #ffffff;
+  --paper: #fafafa;
+  --field: #f5f5f5;
+  --line: #e5e5e5;
+  --line-strong: #d4d4d4;
+  --ink: #0a0a0a;
+  --ink-2: #525252;
+  --ink-3: #6b6b6b;
+
+  /* Signal ramp, light to dark. s-7 is the key brand color. */
+  --s-1: #f0f7f5;
+  --s-2: #dcefea;
+  --s-3: #b9dfd5;
+  --s-4: #8cc9b9;
+  --s-5: #57ab96;
+  --s-6: #2a8a75;
+  --s-7: #0b6e5f;
+  --s-8: #08584c;
+  --s-9: #064239;
+  --s-10: #042b25;
+
+  --up: #b42318;
+  --up-tint: #fbe9e7;
+  --down: #156b47;
+  --down-tint: #e8f3ed;
+  --warn: #8a5300;
+  --warn-tint: #fbf1de;
+
+  /* The pixel grid: one cell is 8px. */
+  --px: 8px;
+
   color-scheme: light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --canvas: #121212;
-    --surface: #1b1b1b;
-    --inset: #0f0f0f;
-    --hover: #262626;
-    --ink: #ececec;
-    --ink-2: #b0b0b0;
-    --ink-3: #9a9a9a;
-    --line: #ffffff14;
-    --line-strong: #ffffff24;
-    --accent: #3fc1a9;
-    --accent-ink: #6ad3bf;
-    --accent-tint: #3fc1a929;
-    --on-accent: #06201b;
-    --red: #e57373;
-    --red-tint: #e5737329;
-    --amber: #d79a45;
-    --amber-tint: #d79a4529;
-    --elev-1: 0 2px 3px -1px #00000080, 0 0 0 1px #ffffff14;
-    --elev-2: 0 0 0 1px #ffffff1a, 0 8px 12px -4px #0000008c, 0 24px 32px -12px #00000099;
-    --shadow-logo: 0 0 0 1px #ffffff1f, 0 1px 2px 0 #00000066;
-    --series-1: #5aa0f0;
-    --series-2: #f0894f;
-    --series-3: #34c48c;
-    --series-4: #a58ae6;
-    --series-5: #d9b94a;
-    --series-6: #7d8696;
-    --series-7: #ee7fb1;
-    --series-8: #4cc7da;
-    color-scheme: dark;
-  }
-}
-
-:root[data-theme="dark"] {
-  --canvas: #121212;
-  --surface: #1b1b1b;
-  --inset: #0f0f0f;
-  --hover: #262626;
-  --ink: #ececec;
-  --ink-2: #b0b0b0;
-  --ink-3: #9a9a9a;
-  --line: #ffffff14;
-  --line-strong: #ffffff24;
-  --accent: #3fc1a9;
-  --accent-ink: #6ad3bf;
-  --accent-tint: #3fc1a929;
-  --on-accent: #06201b;
-  --red: #e57373;
-  --red-tint: #e5737329;
-  --amber: #d79a45;
-  --amber-tint: #d79a4529;
-  --elev-1: 0 2px 3px -1px #00000080, 0 0 0 1px #ffffff14;
-  --elev-2: 0 0 0 1px #ffffff1a, 0 8px 12px -4px #0000008c, 0 24px 32px -12px #00000099;
-  --shadow-logo: 0 0 0 1px #ffffff1f, 0 1px 2px 0 #00000066;
-  --series-1: #5aa0f0;
-  --series-2: #f0894f;
-  --series-3: #34c48c;
-  --series-4: #a58ae6;
-  --series-5: #d9b94a;
-  --series-6: #7d8696;
-  --series-7: #ee7fb1;
-  --series-8: #4cc7da;
-  color-scheme: dark;
 }
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
+  --font-display: var(--font-funnel), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
+  --font-pixel: var(--font-silkscreen), var(--font-plex-mono), monospace;
 
-  --color-canvas: var(--canvas);
-  --color-surface: var(--surface);
-  --color-inset: var(--inset);
-  --color-hover: var(--hover);
+  --color-wash: var(--wash);
+  --color-paper: var(--paper);
+  --color-field: var(--field);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
-  --color-line: var(--line);
-  --color-line-strong: var(--line-strong);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-tint: var(--accent-tint);
-  --color-on-accent: var(--on-accent);
-  --color-red: var(--red);
-  --color-red-tint: var(--red-tint);
-  --color-amber: var(--amber);
-  --color-amber-tint: var(--amber-tint);
-  --color-logo-plate: var(--logo-plate);
+  --color-s-1: var(--s-1);
+  --color-s-2: var(--s-2);
+  --color-s-3: var(--s-3);
+  --color-s-4: var(--s-4);
+  --color-s-5: var(--s-5);
+  --color-s-6: var(--s-6);
+  --color-s-7: var(--s-7);
+  --color-s-8: var(--s-8);
+  --color-s-9: var(--s-9);
+  --color-s-10: var(--s-10);
+  --color-up: var(--up);
+  --color-up-tint: var(--up-tint);
+  --color-down: var(--down);
+  --color-down-tint: var(--down-tint);
+  --color-warn: var(--warn);
+  --color-warn-tint: var(--warn-tint);
 
-  --shadow-elev-1: var(--elev-1);
-  --shadow-elev-2: var(--elev-2);
-  --shadow-logo: var(--shadow-logo);
+  /* No rounding anywhere unless a component asks for a pill on purpose. */
+  --radius-none: 0;
+}
 
-  --radius-control: 6px;
-  --radius-surface: 10px;
+html {
+  background: var(--wash);
 }
 
 body {
-  background: var(--canvas);
+  background: var(--wash);
   color: var(--ink);
-  font-feature-settings: "cv11", "ss01";
+  font-size: 15px;
+  line-height: 24px;
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
 }
 
-/* Visible keyboard focus everywhere, in the accent color. */
+a {
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--s-7);
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
 ::selection {
-  background: var(--accent-tint);
+  background: var(--s-2);
+}
+
+/* Numbers line up in every column. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pixel art and bitmap text stay crisp. */
+.pixelated {
+  image-rendering: pixelated;
 }
 
 @media (prefers-reduced-motion: reduce) {

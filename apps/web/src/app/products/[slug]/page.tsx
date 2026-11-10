@@ -79,7 +79,7 @@ export default async function ProductPage({ params }: Props) {
             by{" "}
             <Link
               href={`/organizations/${product.organization.slug}`}
-              className="font-medium text-ink hover:text-accent"
+              className="font-medium text-ink hover:text-s-7"
             >
               {product.organization.name}
             </Link>
@@ -89,8 +89,8 @@ export default async function ProductPage({ params }: Props) {
         badges={
           <>
             <Badge>{PRODUCT_TYPE_LABELS[product.product_type]}</Badge>
-            {product.model?.open_weights && <Badge tone="accent">Open weights</Badge>}
-            {product.repo?.archived && <Badge tone="amber">Archived</Badge>}
+            {product.model?.open_weights && <Badge tone="brand">Open weights</Badge>}
+            {product.repo?.archived && <Badge tone="warn">Archived</Badge>}
           </>
         }
         actions={
@@ -158,7 +158,7 @@ function RepoSection({ repo }: { repo: RepoStats }) {
           href={`https://github.com/${repo.repo}`}
           rel="noopener"
           target="_blank"
-          className="font-mono text-sm text-ink-2 hover:text-accent"
+          className="font-mono text-sm text-ink-2 hover:text-s-7"
         >
           {repo.repo}
         </a>
@@ -171,7 +171,7 @@ function RepoSection({ repo }: { repo: RepoStats }) {
               <>
                 {formatCount(repo.stars)}
                 {repo.stars_30d != null && (
-                  <span className="ml-1.5 text-sm font-normal text-accent-ink">
+                  <span className="ml-1.5 text-sm font-normal text-s-7">
                     +{formatCount(repo.stars_30d)} in 30 days
                   </span>
                 )}

@@ -71,7 +71,7 @@ export default async function AdminPage({ searchParams }: Props) {
             </FilterChip>
           )}
         </nav>
-        <p className="text-sm text-ink-3">
+        <p className="font-mono text-[13px] text-ink-3">
           {news.data.total} {status} {news.data.total === 1 ? "item" : "items"}
         </p>
 
@@ -92,7 +92,7 @@ export default async function AdminPage({ searchParams }: Props) {
           </form>
         )}
 
-        <div className="divide-y divide-line overflow-hidden rounded-[10px] bg-surface shadow-elev-1">
+        <div className="divide-y divide-line border border-line bg-wash">
           {news.data.items.map((item) => (
             <div key={item.id} className="flex gap-3">
               <input
@@ -112,7 +112,7 @@ export default async function AdminPage({ searchParams }: Props) {
                       defaultValue={item.organizations.map((o) => o.slug).join(", ")}
                       aria-label="Organization slugs, comma separated"
                       placeholder="organization slugs, comma separated"
-                      className="h-8 w-full max-w-md rounded-[6px] bg-inset px-2 font-mono text-ink"
+                      className="h-8 w-full max-w-md border border-line bg-wash px-2 font-mono text-[13px] text-ink"
                     />
                     <button type="submit" className="text-ink-2 hover:text-ink">
                       Save tags
@@ -158,7 +158,7 @@ export default async function AdminPage({ searchParams }: Props) {
                   <td className="py-2 pr-4">{s.last_success_at ? formatDate(s.last_success_at) : "never"}</td>
                   <td className="py-2 pr-4">
                     {s.consecutive_failures > 0 ? (
-                      <span className="text-red" title={s.last_error ?? undefined}>
+                      <span className="text-up" title={s.last_error ?? undefined}>
                         failing ×{s.consecutive_failures}
                       </span>
                     ) : s.last_run_at ? (

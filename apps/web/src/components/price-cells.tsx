@@ -13,7 +13,10 @@ export function ProviderLink({
   logoUrl?: string | null;
 }) {
   return (
-    <Link href={`/organizations/${slug}`} className="inline-flex items-center gap-2 font-medium text-ink hover:text-accent">
+    <Link
+      href={`/organizations/${slug}`}
+      className="inline-flex items-center gap-2 font-sans text-[14px] text-ink hover:text-s-7 hover:underline"
+    >
       <Logo name={name} src={logoUrl} size="sm" />
       {name}
     </Link>
@@ -24,7 +27,7 @@ export function ProviderLink({
 export function CheckedOn({ date, source }: { date: string; source?: string | null }) {
   const label = formatDate(date);
   return source ? (
-    <a href={source} rel="noopener" target="_blank" className="text-ink-3 underline decoration-line-strong underline-offset-2 hover:text-ink">
+    <a href={source} rel="noopener" target="_blank" className="text-ink-3 underline hover:text-s-7">
       {label}
     </a>
   ) : (

@@ -44,7 +44,7 @@ export default async function ProductsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <header className="flex flex-col gap-4">
-        <PageHeader title="Products" lead="Models, inference APIs, GPU instances, hardware and open-source projects." />
+        <PageHeader label="Products" title="Models, GPUs and engines" lead="Every model, inference API, GPU, hardware product and open-source project the hub tracks." />
         <SearchForm
           defaultValue={q}
           placeholder="Search models, APIs and projects"
@@ -76,7 +76,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         )}
       </header>
 
-      <p className="text-sm text-ink-3">
+      <p className="font-mono text-[13px] text-ink-3">
         {data.total} {data.total === 1 ? "result" : "results"}
       </p>
       <ProductList products={data.items} empty="No products found." />

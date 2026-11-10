@@ -17,10 +17,10 @@ export function LoginForm() {
         type="password"
         autoComplete="current-password"
         required
-        className="h-10 rounded-[6px] bg-surface px-3 text-sm text-ink shadow-elev-1"
+        className="h-10 border border-ink bg-wash px-3 font-mono text-[14px] text-ink"
       />
       {state?.error && (
-        <p role="alert" className="text-sm text-red">
+        <p role="alert" className="font-mono text-[13px] text-up">
           {state.error}
         </p>
       )}

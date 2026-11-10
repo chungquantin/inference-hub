@@ -10,7 +10,7 @@ import { formatPrice } from "@/lib/format";
  */
 export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
   if (offerings.length === 0) {
-    return <p className="text-sm text-ink-3">No provider sells this yet, as far as the hub knows.</p>;
+    return <p className="font-mono text-[13px] text-ink-3">No provider sells this yet, as far as the hub knows.</p>;
   }
   const tokenPriced = offerings.filter((o) => o.price_per_hour == null);
   const timePriced = offerings.filter((o) => o.price_per_hour != null);

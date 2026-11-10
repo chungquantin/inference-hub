@@ -33,7 +33,8 @@ export default async function NewsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        title="News"
+        label="News"
+        title="What the market shipped"
         lead="From company blogs, research labs and the press, tagged with the companies they are about."
       />
       <SearchForm defaultValue={q} placeholder="Search news" hidden={{ organization }} />

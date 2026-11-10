@@ -2,32 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NAV_LINKS } from "@/lib/nav";
 
-const LINKS = [
-  { href: "/compare", label: "Compare" },
-  { href: "/organizations", label: "Directory" },
-  { href: "/products", label: "Products" },
-  { href: "/news", label: "News" },
-  { href: "/categories", label: "Categories" },
-];
 
-/** Primary navigation; marks the section of the current page. */
+/** Primary navigation in mono; the current section is underlined in the brand color. */
 export function MainNav() {
   const pathname = usePathname();
   return (
-    <nav aria-label="Main" className="flex items-center gap-1 overflow-x-auto text-sm">
-      {LINKS.map(({ href, label }) => {
+    <nav aria-label="Main" className="flex h-full items-stretch overflow-x-auto">
+      {NAV_LINKS.map(({ href, label }) => {
         const active = pathname === href || pathname.startsWith(`${href}/`);
         return (
           <Link
             key={href}
             href={href}
             aria-current={active ? "page" : undefined}
-            className={
-              active
-                ? "rounded-[6px] bg-inset px-3 py-1.5 font-medium text-ink"
-                : "rounded-[6px] px-3 py-1.5 text-ink-2 hover:bg-hover hover:text-ink"
-            }
+            className={`flex items-center border-b-2 px-3 font-mono text-[13px] whitespace-nowrap ${
+              active ? "border-s-7 text-ink" : "border-transparent text-ink-2 hover:text-ink"
+            }`}
           >
             {label}
           </Link>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { FilterChip, listingHref } from "@/components/listing";
 import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { PixelBar } from "@/components/ui/pixel";
 import { Badge, PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { formatPrice } from "@/lib/format";
@@ -31,10 +32,12 @@ export default async function CompareGpusPage({ searchParams }: Props) {
   };
   // The cheapest row is only meaningful when one GPU type is selected.
   const highlight = params.gpu && data.prices.length > 1 ? rowKey(0) : undefined;
+  const max = Math.max(...data.prices.map((p) => p.price_per_gpu_hour), 0);
 
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
+        label="Compare / GPUs"
         title="GPU cloud prices"
         lead="On-demand prices of GPU instances, cheapest per GPU-hour first. Reserved and spot prices are usually lower."
       />
@@ -60,24 +63,24 @@ export default async function CompareGpusPage({ searchParams }: Props) {
       </nav>
 
       {data.prices.length === 0 ? (
-        <p className="text-sm text-ink-3">No prices match these filters. Remove a filter to see more.</p>
+        <p className="font-mono text-[13px] text-ink-3">No prices match these filters. Remove a filter to see more.</p>
       ) : (
         <DataTable
           caption={`${data.prices.length} prices`}
-          headers={["GPU", "Provider", "GPUs", "Per GPU-hour", "Per hour", "Region", "Checked"]}
-          numeric={[2, 3, 4]}
+          headers={["GPU", "Provider", "GPUs", "Per GPU-hour", "", "Per hour", "Region", "Checked"]}
+          numeric={[2, 3, 5]}
           highlight={highlight}
           rows={data.prices.map((row, i) => ({
             key: rowKey(i),
             cells: [
-              <span key="g" className="flex items-center gap-2">
+              <span key="g" className="flex items-center gap-2 whitespace-nowrap">
                 <Link
                   href={`/products/${row.product_slug}`}
-                  className="font-medium text-ink hover:text-accent"
+                  className="text-ink underline decoration-line-strong hover:text-s-7"
                 >
                   {row.gpu_type}
                 </Link>
-                {i === 0 && highlight && <Badge tone="accent">lowest</Badge>}
+                {i === 0 && highlight && <Badge tone="solid">lowest</Badge>}
               </span>,
               <ProviderLink
                 key="p"
@@ -89,8 +92,17 @@ export default async function CompareGpusPage({ searchParams }: Props) {
               <Price key="g1" strong>
                 {formatPrice(row.price_per_gpu_hour, row.currency)}
               </Price>,
+              <span key="bar" className="hidden w-[150px] md:block">
+                <PixelBar
+                  value={row.price_per_gpu_hour}
+                  max={max}
+                  cells={20}
+                  tone={i === 0 ? "lead" : "muted"}
+                  label={`${formatPrice(row.price_per_gpu_hour, row.currency)} per GPU-hour`}
+                />
+              </span>,
               <Price key="h">{formatPrice(row.price_per_hour, row.currency)}</Price>,
-              <span key="r" className="text-ink-2">
+              <span key="r" className="text-ink-3">
                 {row.region ?? "—"}
               </span>,
               <CheckedOn key="c" date={row.observed_at} source={row.source_url} />,
