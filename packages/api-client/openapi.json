@@ -1,0 +1,575 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Inference Hub API",
+    "description": "Products, services and news of the inference market.",
+    "license": {
+      "name": "UNLICENSED",
+      "identifier": "UNLICENSED"
+    },
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "meta"
+        ],
+        "summary": "Liveness and database connectivity.",
+        "operationId": "health",
+        "responses": {
+          "200": {
+            "description": "Service and database are up",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Database is unreachable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/categories": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "List all categories of the market taxonomy.",
+        "operationId": "listCategories",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/categories/{slug}": {
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Get one category by slug.",
+        "operationId": "getCategory",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Category slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations": {
+      "get": {
+        "tags": [
+          "organizations"
+        ],
+        "summary": "List organizations, optionally filtered and searched.",
+        "operationId": "listOrganizations",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "Keep organizations that play this role.",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/OrgKind"
+            }
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Keep organizations listed in this category.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Free-text search over name, tagline and description.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Items per page (1-100, default 24).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Items to skip (default 0).",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_Organization"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/organizations/{slug}": {
+      "get": {
+        "tags": [
+          "organizations"
+        ],
+        "summary": "Get the full profile of one organization.",
+        "operationId": "getOrganization",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Organization slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrganizationDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "description": "A node of the market taxonomy, such as \"GPU Clouds\".",
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "organization_count"
+        ],
+        "properties": {
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organization_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of organizations listed in this category."
+          },
+          "parent_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uuid"
+          },
+          "slug": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorBody": {
+        "type": "object",
+        "description": "Error body returned by every failing endpoint.",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Machine-readable code, such as `not_found`."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Health": {
+        "type": "object",
+        "required": [
+          "status",
+          "database"
+        ],
+        "properties": {
+          "database": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "OrgKind": {
+        "type": "string",
+        "description": "The roles an organization plays in the market. One organization can hold several.",
+        "enum": [
+          "model_provider",
+          "inference_provider",
+          "llm_gateway",
+          "gpu_cloud",
+          "hyperscaler",
+          "hardware",
+          "open_source",
+          "investor",
+          "other"
+        ]
+      },
+      "OrgStatus": {
+        "type": "string",
+        "enum": [
+          "active",
+          "acquired",
+          "defunct"
+        ]
+      },
+      "Organization": {
+        "type": "object",
+        "description": "An organization as shown in listings.",
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "kinds",
+          "status"
+        ],
+        "properties": {
+          "founded_year": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "hq_country": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "ISO 3166-1 alpha-2 country code."
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgKind"
+            }
+          },
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrgStatus"
+          },
+          "tagline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "OrganizationDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Organization"
+          },
+          {
+            "type": "object",
+            "required": [
+              "links",
+              "categories",
+              "products",
+              "updated_at"
+            ],
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Category"
+                }
+              },
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "links": {
+                "type": "object",
+                "description": "Named external links, such as `github`, `x` or `docs`."
+              },
+              "products": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductSummary"
+                }
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ],
+        "description": "The full profile of an organization."
+      },
+      "Page_Organization": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "An organization as shown in listings.",
+              "required": [
+                "id",
+                "slug",
+                "name",
+                "kinds",
+                "status"
+              ],
+              "properties": {
+                "founded_year": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                },
+                "hq_country": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 3166-1 alpha-2 country code."
+                },
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "kinds": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrgKind"
+                  }
+                },
+                "logo_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "status": {
+                  "$ref": "#/components/schemas/OrgStatus"
+                },
+                "tagline": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "website": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ProductSummary": {
+        "type": "object",
+        "description": "A product as listed on its organization's page.",
+        "required": [
+          "id",
+          "slug",
+          "name",
+          "product_type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "launched_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "name": {
+            "type": "string"
+          },
+          "product_type": {
+            "type": "string",
+            "description": "One of: model, inference_api, gateway, gpu_instance, oss_project, hardware, platform, other."
+          },
+          "slug": {
+            "type": "string"
+          },
+          "tagline": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "meta",
+      "description": "Service health"
+    },
+    {
+      "name": "categories",
+      "description": "Market taxonomy"
+    },
+    {
+      "name": "organizations",
+      "description": "Companies, projects and investors"
+    }
+  ]
+}
