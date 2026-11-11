@@ -13,8 +13,10 @@ use reqwest::Client;
 use serde_json::Value;
 
 use super::{
-    Adapter, AdapterError, BoxFuture, DAILY, Endpoints, GatewayAdapter, HOURLY, ModelListing,
-    get_text, json_price, maker_of, round6,
+    Adapter, AdapterError, BoxFuture, DAILY, Endpoints, GatewayAdapter, HOURLY, MediaKind,
+    MediaPrice, ModelListing, json_price, maker_of,
+    paging::{Items, Paging, fetch_all},
+    round_sig, round6,
 };
 
 /// One model as a provider lists it, before validation.
@@ -28,6 +30,8 @@ pub struct Entry {
     pub input: f64,
     pub output: f64,
     pub extra: Value,
+    /// Set for models priced per unit rather than by chat tokens.
+    pub media: Option<MediaPrice>,
 }
 
 /// How to read one provider's model list.
@@ -38,6 +42,9 @@ pub struct CatalogSpec {
     /// Origin of the API, such as `https://api.deepinfra.com`.
     pub origin: &'static str,
     pub path: &'static str,
+    /// Where the items are and how the list pages.
+    pub items: Items,
+    pub paging: Paging,
     pub interval: Duration,
     /// Page a reader can check the price on. `{id}` is replaced by the model id.
     pub source_url: &'static str,
@@ -80,24 +87,37 @@ impl GatewayAdapter for CatalogAdapter {
         client: &'a Client,
     ) -> BoxFuture<'a, Result<Vec<ModelListing>, AdapterError>> {
         Box::pin(async move {
-            let body = get_text(client, self.spec.id, &self.url).await?;
-            parse(self.spec, &body)
+            let (items, _) = fetch_all(
+                client,
+                self.spec.id,
+                &self.url,
+                self.spec.items,
+                &self.spec.paging,
+            )
+            .await?;
+            parse_items(self.spec, &items)
         })
     }
 }
 
-/// Parses a provider's model list with its spec.
+/// Parses a provider's model list (one response) with its spec.
 pub fn parse(spec: &CatalogSpec, body: &str) -> Result<Vec<ModelListing>, AdapterError> {
     let fail = |msg: String| AdapterError::Format(spec.id, msg);
     let root: Value = serde_json::from_str(body).map_err(|e| fail(e.to_string()))?;
-    let items = match &root {
-        Value::Array(items) => items,
-        Value::Object(o) => o
-            .get("data")
-            .and_then(Value::as_array)
-            .ok_or_else(|| fail("no `data` array".into()))?,
-        _ => return Err(fail("not a JSON list".into())),
-    };
+    let items = match spec.items {
+        Items::Root => root.as_array(),
+        Items::At(path) => path
+            .iter()
+            .try_fold(&root, |v, k| v.get(*k))
+            .and_then(Value::as_array),
+    }
+    .ok_or_else(|| fail("no item list".into()))?;
+    parse_items(spec, items)
+}
+
+/// Turns the items of every page into listings.
+pub fn parse_items(spec: &CatalogSpec, items: &[Value]) -> Result<Vec<ModelListing>, AdapterError> {
+    let fail = |msg: String| AdapterError::Format(spec.id, msg);
     let mut seen = std::collections::HashSet::new();
     let mut out = Vec::with_capacity(items.len());
     for item in items {
@@ -105,6 +125,23 @@ pub fn parse(spec: &CatalogSpec, body: &str) -> Result<Vec<ModelListing>, Adapte
             continue;
         };
         if e.id.trim().is_empty() || !seen.insert(e.id.clone()) {
+            continue;
+        }
+        if let Some(m) = e.media {
+            if !(m.price.is_finite() && m.price > 0.0) {
+                continue;
+            }
+            out.push(ModelListing::media(
+                e.id.clone(),
+                e.name
+                    .filter(|n| !n.trim().is_empty())
+                    .unwrap_or_else(|| e.id.clone()),
+                e.maker.or_else(|| maker_of(&e.id)),
+                m.kind,
+                round_sig(m.price),
+                Some(spec.source_url.replace("{id}", &e.id)),
+                e.extra,
+            ));
             continue;
         }
         if !(e.input.is_finite() && e.output.is_finite() && e.input >= 0.0 && e.output >= 0.0) {
@@ -124,14 +161,25 @@ pub fn parse(spec: &CatalogSpec, body: &str) -> Result<Vec<ModelListing>, Adapte
             input_per_mtok: round6(e.input),
             output_per_mtok: round6(e.output),
             variant: None,
+            media: None,
             extra: e.extra,
             external_id: e.id,
         });
     }
     if out.is_empty() {
-        return Err(fail("the list has no priced text models".into()));
+        return Err(fail("the list has no priced models".into()));
     }
     Ok(out)
+}
+
+/// A media entry: id, optional name, kind and USD per unit.
+fn media_entry(id: String, name: Option<String>, kind: MediaKind, price: f64) -> Entry {
+    Entry {
+        id,
+        name,
+        media: Some(MediaPrice { kind, price }),
+        ..Entry::default()
+    }
 }
 
 // --- Reading helpers --------------------------------------------------------
@@ -199,16 +247,40 @@ fn openai_style(v: &Value, scale: f64) -> Result<Option<Entry>, String> {
 // --- Providers --------------------------------------------------------------
 
 fn deepinfra(v: &Value) -> Result<Option<Entry>, String> {
-    if str_at(v, &["type"]).as_deref() != Some("text-generation")
-        || str_at(v, &["pricing", "type"]).as_deref() != Some("tokens")
-        || at(v, &["deprecated"]).as_bool() == Some(true)
-        || at(v, &["private"]).as_bool() == Some(true)
+    if at(v, &["deprecated"]).as_bool() == Some(true) || at(v, &["private"]).as_bool() == Some(true)
     {
         return Ok(None);
     }
     let Some(id) = str_at(v, &["model_name"]) else {
         return Err("model without model_name".into());
     };
+    let kind = str_at(v, &["type"]).unwrap_or_default();
+    let pricing = str_at(v, &["pricing", "type"]).unwrap_or_default();
+    // Prices in US cents per unit; only units that map to one of ours.
+    let cents = |field: &str| price_at(v, &["pricing", field], 0.01);
+    let media = match (kind.as_str(), pricing.as_str()) {
+        ("embeddings", "input_tokens") => {
+            cents("cents_per_input_token")?.map(|p| (MediaKind::Embedding, p * 1e6))
+        }
+        ("text-to-image", "image_units") => {
+            cents("cents_per_image_unit")?.map(|p| (MediaKind::Image, p))
+        }
+        ("text-to-video", "output_length") => {
+            cents("cents_per_output_sec")?.map(|p| (MediaKind::Video, p))
+        }
+        ("text-to-speech", "input_character_length") => {
+            cents("cents_per_input_chars")?.map(|p| (MediaKind::Speech, p))
+        }
+        ("automatic-speech-recognition", "input_length") => {
+            cents("cents_per_input_sec")?.map(|p| (MediaKind::Transcription, p))
+        }
+        ("text-generation", "tokens") => None,
+        // Priced per GPU second, per frame or per image token: not comparable.
+        _ => return Ok(None),
+    };
+    if let Some((kind, price)) = media {
+        return Ok(Some(media_entry(id, None, kind, price)));
+    }
     // US cents per token: × 1e6 tokens ÷ 100 cents.
     let Some((input, output)) = prices(
         v,
@@ -299,12 +371,40 @@ fn featherless(v: &Value) -> Result<Option<Entry>, String> {
 }
 
 fn vercel(v: &Value) -> Result<Option<Entry>, String> {
-    if str_at(v, &["type"]).as_deref() != Some("language") {
-        return Ok(None);
-    }
     let Some(id) = str_at(v, &["id"]) else {
         return Err("model without an id".into());
     };
+    let name = str_at(v, &["name"]);
+    let unit = |field: &str, kind: MediaKind, scale: f64| -> Result<Option<Entry>, String> {
+        Ok(price_at(v, &["pricing", field], scale)?
+            .map(|p| media_entry(id.clone(), name.clone(), kind, p)))
+    };
+    match str_at(v, &["type"]).as_deref() {
+        Some("language") => {}
+        Some("embedding") => return unit("input", MediaKind::Embedding, PER_TOKEN),
+        // The default size's price; per-size prices stay upstream.
+        Some("image") => return unit("image", MediaKind::Image, 1.0),
+        Some("speech") => return unit("speech_input_character_cost", MediaKind::Speech, 1.0),
+        Some("transcription") => {
+            return unit(
+                "transcription_duration_cost_per_second",
+                MediaKind::Transcription,
+                1.0,
+            );
+        }
+        Some("video") => {
+            // Several resolutions; list the lowest per-second price.
+            let tiers = at(v, &["pricing", "video_duration_pricing"]).as_array();
+            let min = tiers
+                .into_iter()
+                .flatten()
+                .filter_map(|t| json_price("vercel", &t["cost_per_second"]).ok().flatten())
+                .filter(|p| *p > 0.0)
+                .fold(None, |m: Option<f64>, p| Some(m.map_or(p, |m| m.min(p))));
+            return Ok(min.map(|p| media_entry(id, name, MediaKind::Video, p)));
+        }
+        _ => return Ok(None),
+    }
     let Some((input, output)) =
         prices(v, &["pricing", "input"], &["pricing", "output"], PER_TOKEN)?
     else {
@@ -322,12 +422,28 @@ fn vercel(v: &Value) -> Result<Option<Entry>, String> {
 }
 
 fn venice(v: &Value) -> Result<Option<Entry>, String> {
-    if str_at(v, &["type"]).as_deref() != Some("text") {
-        return Ok(None);
-    }
     let Some(id) = str_at(v, &["id"]) else {
         return Err("model without an id".into());
     };
+    let name = str_at(v, &["model_spec", "name"]);
+    let p = |path: &[&str], scale: f64| {
+        price_at(v, &[&["model_spec", "pricing"][..], path].concat(), scale)
+    };
+    let media = match str_at(v, &["type"]).as_deref() {
+        Some("text") => None,
+        Some("embedding") => p(&["input", "usd"], PER_MTOK)?.map(|x| (MediaKind::Embedding, x)),
+        Some("image") => p(&["generation", "usd"], 1.0)?.map(|x| (MediaKind::Image, x)),
+        // Text to speech is priced per million characters.
+        Some("tts") => p(&["input", "usd"], 1e-6)?.map(|x| (MediaKind::Speech, x)),
+        Some("asr") => p(&["per_audio_second", "usd"], 1.0)?.map(|x| (MediaKind::Transcription, x)),
+        _ => return Ok(None),
+    };
+    if let Some((kind, price)) = media {
+        return Ok(Some(media_entry(id, name, kind, price)));
+    }
+    if str_at(v, &["type"]).as_deref() != Some("text") {
+        return Ok(None);
+    }
     let Some((input, output)) = prices(
         v,
         &["model_spec", "pricing", "input", "usd"],
@@ -366,8 +482,13 @@ fn requesty(v: &Value) -> Result<Option<Entry>, String> {
     }))
 }
 
-/// Every catalog provider, small to large is not an order here: the worker
-/// runs them on their own intervals.
+/// Every catalog provider; the worker runs each on its own interval.
+///
+/// `paging` records what the endpoint does. Each was checked against the
+/// live API: they all answer with the whole list, and ignore `limit` and
+/// `offset`. When one starts paging, change its `paging` (and add a test);
+/// the store refuses a run that suddenly returns half the list, so a silent
+/// switch to paging shows up as a failing adapter rather than lost data.
 pub static CATALOGS: &[CatalogSpec] = &[
     CatalogSpec {
         id: "deepinfra",
@@ -375,6 +496,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "deepinfra",
         origin: "https://api.deepinfra.com",
         path: "/models/list",
+        items: Items::Root,
+        paging: Paging::None,
         interval: HOURLY,
         source_url: "https://deepinfra.com/{id}",
         entry: deepinfra,
@@ -385,6 +508,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "novita-ai",
         origin: "https://api.novita.ai",
         path: "/v3/openai/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: HOURLY,
         source_url: "https://novita.ai/models/llm/{id}",
         entry: novita,
@@ -395,6 +520,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "chutes",
         origin: "https://llm.chutes.ai",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: HOURLY,
         source_url: "https://chutes.ai/app",
         entry: chutes,
@@ -405,6 +532,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "sambanova",
         origin: "https://api.sambanova.ai",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://cloud.sambanova.ai/plans/pricing",
         entry: per_token,
@@ -415,6 +544,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "atlas-cloud",
         origin: "https://api.atlascloud.ai",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://www.atlascloud.ai/models",
         entry: atlascloud,
@@ -425,6 +556,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "inference-net",
         origin: "https://api.inference.net",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://inference.net/models",
         entry: per_token,
@@ -435,6 +568,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "featherless",
         origin: "https://api.featherless.ai",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://featherless.ai/models/{id}",
         entry: featherless,
@@ -444,7 +579,9 @@ pub static CATALOGS: &[CatalogSpec] = &[
         name: "Venice",
         organization: "venice",
         origin: "https://api.venice.ai",
-        path: "/api/v1/models",
+        path: "/api/v1/models?type=all",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://venice.ai/pricing",
         entry: venice,
@@ -455,6 +592,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "vercel",
         origin: "https://ai-gateway.vercel.sh",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://vercel.com/ai-gateway/models",
         entry: vercel,
@@ -465,6 +604,8 @@ pub static CATALOGS: &[CatalogSpec] = &[
         organization: "requesty",
         origin: "https://router.requesty.ai",
         path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
         interval: DAILY,
         source_url: "https://www.requesty.ai/solution/llm-routing/models",
         entry: requesty,
@@ -549,15 +690,95 @@ mod tests {
     }
 
     #[test]
-    fn vercel_keeps_language_models_only() {
-        let l = one(
-            "vercel",
-            r#"{"data":[{"id":"alibaba/qwen-3-14b","owned_by":"alibaba","type":"language","context_window":40960,
-                         "pricing":{"input":"0.00000012","output":"0.00000024"}},
-                        {"id":"bfl/flux","type":"image","pricing":{"image":"0.04"}}]}"#,
+    fn vercel_lists_chat_and_media_models_in_their_units() {
+        let l = parse(
+            spec("vercel"),
+            r#"{"data":[
+              {"id":"alibaba/qwen-3-14b","owned_by":"alibaba","type":"language","context_window":40960,
+               "pricing":{"input":"0.00000012","output":"0.00000024"}},
+              {"id":"bfl/flux","type":"image","pricing":{"image":"0.04"}},
+              {"id":"bfl/no-price","type":"image","pricing":{}},
+              {"id":"alibaba/qwen3-embedding","type":"embedding","pricing":{"input":"0.00000001"}},
+              {"id":"eleven/flash","type":"speech","pricing":{"input":"0.00004","speech_input_character_cost":"0.00004"}},
+              {"id":"eleven/scribe","type":"transcription","pricing":{"input":"0","transcription_duration_cost_per_second":"0.000061112"}},
+              {"id":"wan/t2v","type":"video","pricing":{"video_duration_pricing":[
+                  {"resolution":"720p","cost_per_second":"0.1"},{"resolution":"480p","cost_per_second":"0.05"}]}},
+              {"id":"cohere/rerank","type":"reranking","pricing":{}}
+            ]}"#,
+        )
+        .unwrap();
+        let get = |id: &str| l.iter().find(|x| x.external_id == id).unwrap();
+        assert_eq!(l.len(), 6, "{l:?}");
+        assert_eq!(
+            (
+                get("alibaba/qwen-3-14b").input_per_mtok,
+                get("alibaba/qwen-3-14b").output_per_mtok
+            ),
+            (0.12, 0.24)
         );
-        assert_eq!((l.input_per_mtok, l.output_per_mtok), (0.12, 0.24));
-        assert_eq!(l.maker.as_deref(), Some("alibaba"));
+        let m = |id: &str| get(id).media.unwrap();
+        assert_eq!(
+            (m("bfl/flux").kind, m("bfl/flux").price),
+            (MediaKind::Image, 0.04)
+        );
+        assert_eq!(
+            m("alibaba/qwen3-embedding").price,
+            0.01,
+            "per million input tokens"
+        );
+        assert_eq!(m("eleven/flash").kind, MediaKind::Speech);
+        assert_eq!(m("eleven/scribe").price, 0.000061112);
+        assert_eq!(m("wan/t2v").price, 0.05, "the lowest resolution's price");
+    }
+
+    #[test]
+    fn deepinfra_and_venice_media_prices_are_converted_to_usd_per_unit() {
+        let l = parse(
+            spec("deepinfra"),
+            r#"[{"model_name":"Bria/fibo","type":"text-to-image","pricing":{"type":"image_units","cents_per_image_unit":4.0}},
+                {"model_name":"BAAI/bge-m3","type":"embeddings","pricing":{"type":"input_tokens","cents_per_input_token":0.000001}},
+                {"model_name":"ltx","type":"text-to-video","pricing":{"type":"output_length","cents_per_output_sec":3.6}},
+                {"model_name":"nemo-asr","type":"automatic-speech-recognition","pricing":{"type":"input_length","cents_per_input_sec":0.00166667}},
+                {"model_name":"sd15","type":"text-to-image","pricing":{"type":"time","cents_per_sec":0.05}}]"#,
+        )
+        .unwrap();
+        let m = |id: &str| {
+            l.iter()
+                .find(|x| x.external_id == id)
+                .unwrap()
+                .media
+                .unwrap()
+        };
+        assert_eq!(l.len(), 4, "GPU-time pricing is skipped");
+        assert_eq!(m("Bria/fibo").price, 0.04);
+        assert_eq!(m("BAAI/bge-m3").price, 0.01);
+        assert_eq!(m("ltx").price, 0.036);
+        assert_eq!(m("nemo-asr").price, 0.0000166667);
+
+        let l = parse(
+            spec("venice"),
+            r#"{"data":[
+              {"id":"tts-kokoro","type":"tts","model_spec":{"pricing":{"input":{"usd":3.5}}}},
+              {"id":"venice-sd35","type":"image","model_spec":{"pricing":{"generation":{"usd":0.01}}}},
+              {"id":"parakeet","type":"asr","model_spec":{"pricing":{"per_audio_second":{"usd":0.0001}}}},
+              {"id":"video-x","type":"video","model_spec":{"pricing":null}}
+            ]}"#,
+        )
+        .unwrap();
+        let m = |id: &str| {
+            l.iter()
+                .find(|x| x.external_id == id)
+                .unwrap()
+                .media
+                .unwrap()
+        };
+        assert_eq!(l.len(), 3);
+        assert_eq!(
+            m("tts-kokoro").price,
+            0.0000035,
+            "per million characters to per character"
+        );
+        assert_eq!(m("venice-sd35").kind, MediaKind::Image);
     }
 
     #[test]

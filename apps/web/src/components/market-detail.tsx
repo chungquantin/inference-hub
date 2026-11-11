@@ -3,24 +3,28 @@ import { CheckedOn, ProviderLink } from "@/components/price-cells";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price } from "@/components/ui/primitives";
 import type { components } from "@inference-hub/api-client";
+import { formatUnitPrice } from "@/components/market";
 import { formatPrice, formatTokens } from "@/lib/format";
 
 type Listing = components["schemas"]["MarketListing"];
 
 /** Every provider's price for one GPU type or model, cheapest first. */
-export function MarketListings({ listings, kind }: { listings: Listing[]; kind: "gpu" | "model" }) {
-  const unit = (l: Listing) => (kind === "gpu" ? l.price_per_gpu_hour : l.blended_per_mtok) ?? 0;
+export function MarketListings({ listings, kind }: { listings: Listing[]; kind: "gpu" | "model" | "media" }) {
+  const unit = (l: Listing) =>
+    (kind === "gpu" ? l.price_per_gpu_hour : kind === "media" ? l.price_per_unit : l.blended_per_mtok) ?? 0;
   const max = Math.max(...listings.map(unit), 0);
   const key = (l: Listing, i: number) => `${l.adapter}:${l.external_id}:${l.variant ?? ""}:${l.gpu_count ?? ""}:${i}`;
   const headers =
     kind === "gpu"
       ? ["Provider", "Configuration", "GPUs", "Per GPU-hour", "", "Per hour", "Checked"]
-      : ["Provider", "Listed as", "Input", "Output", "Blend", "", "Context", "Checked"];
+      : kind === "media"
+        ? ["Provider", "Listed as", "Price", "", "Checked"]
+        : ["Provider", "Listed as", "Input", "Output", "Blend", "", "Context", "Checked"];
   return (
     <DataTable
       caption={`${listings.length} prices, cheapest first`}
       headers={headers}
-      numeric={kind === "gpu" ? [2, 3, 5] : [2, 3, 4, 6]}
+      numeric={kind === "gpu" ? [2, 3, 5] : kind === "media" ? [2] : [2, 3, 4, 6]}
       highlight={listings.length > 1 ? key(listings[0], 0) : undefined}
       rows={listings.map((l, i) => {
         const provider = (
@@ -44,7 +48,17 @@ export function MarketListings({ listings, kind }: { listings: Listing[]; kind: 
         return {
           key: key(l, i),
           cells:
-            kind === "gpu"
+            kind === "media"
+              ? [
+                  provider,
+                  via,
+                  <Price key="u" strong>
+                    {formatUnitPrice(l.price_per_unit, l.unit)}
+                  </Price>,
+                  bar,
+                  checked,
+                ]
+              : kind === "gpu"
               ? [
                   provider,
                   via,

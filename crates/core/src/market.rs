@@ -23,6 +23,10 @@ pub struct MarketOverview {
     /// Live GPU configurations with an hourly price.
     pub gpu_listings: i64,
     pub gpu_types: i64,
+    /// Live listings of models priced per unit (embedding, image, video,
+    /// speech, transcription), and the distinct models among them.
+    pub media_listings: i64,
+    pub media_models: i64,
     /// When the freshest listing was last seen.
     pub updated_at: Option<DateTime<Utc>>,
     /// The most widely sold GPUs, for the headline index.
@@ -109,6 +113,9 @@ pub struct MarketListing {
     pub gpu_count: Option<i16>,
     pub price_per_hour: Option<f64>,
     pub price_per_gpu_hour: Option<f64>,
+    /// Non-chat models: what the price is per, and the price.
+    pub unit: Option<String>,
+    pub price_per_unit: Option<f64>,
     pub source_url: Option<String>,
     pub last_seen_at: DateTime<Utc>,
 }
@@ -128,6 +135,8 @@ pub struct MarketProvider {
     #[sqlx(flatten)]
     pub organization: OrganizationRef,
     pub models: i64,
+    /// Embedding, image, video, speech and transcription models.
+    pub media_models: i64,
     pub gpu_configurations: i64,
     /// GPU types or models sold by two or more providers where this one is cheapest.
     pub cheapest_count: i64,
@@ -176,4 +185,36 @@ pub struct FailedJob {
     pub attempts: i32,
     pub last_error: Option<String>,
     pub failed_at: DateTime<Utc>,
+}
+
+/// One non-chat model across providers: its unit price.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct MediaIndexRow {
+    pub model_key: String,
+    pub name: String,
+    pub maker: Option<String>,
+    /// `embedding`, `image`, `video`, `speech` or `transcription`.
+    pub kind: String,
+    /// What the price is per: `mtok_input`, `image`, `video_second`,
+    /// `character` or `audio_second`.
+    pub unit: String,
+    pub providers: i64,
+    pub min_price: f64,
+    pub median_price: f64,
+    #[sqlx(flatten)]
+    pub cheapest: OrganizationRef,
+}
+
+#[derive(Debug, Clone, Default, Deserialize, IntoParams)]
+#[into_params(parameter_in = Query)]
+pub struct MediaIndexQuery {
+    /// `embedding`, `image`, `video`, `speech` or `transcription`. Default all.
+    pub kind: Option<String>,
+    /// Text the model id or name must contain (case-insensitive).
+    pub q: Option<String>,
+    /// Keep rows sold by at least this many providers. Default 1.
+    pub min_providers: Option<i64>,
+    /// Default 100, at most 500.
+    pub limit: Option<i64>,
+    pub offset: Option<i64>,
 }

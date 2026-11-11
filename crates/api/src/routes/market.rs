@@ -3,7 +3,7 @@
 use axum::{Json, extract::State};
 use ih_core::{
     GpuIndexRow, MarketDetail, MarketIndexQuery, MarketOverview, MarketProvider, MarketSource,
-    ModelIndexRow, Page,
+    MediaIndexQuery, MediaIndexRow, ModelIndexRow, Page,
 };
 use utoipa_axum::{router::OpenApiRouter, routes};
 
@@ -20,6 +20,7 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(gpu_detail))
         .routes(routes!(model_index))
         .routes(routes!(model_detail))
+        .routes(routes!(media_index))
         .routes(routes!(providers))
         .routes(routes!(sources))
 }
@@ -93,4 +94,27 @@ async fn providers(State(state): State<AppState>) -> ApiResult<Json<Vec<MarketPr
     responses((status = 200, body = Vec<MarketSource>)))]
 async fn sources(State(state): State<AppState>) -> ApiResult<Json<Vec<MarketSource>>> {
     Ok(Json(ih_db::market::sources(&state.pool).await?))
+}
+
+/// Embedding, image, video, speech and transcription models across
+/// providers, priced in their own unit.
+#[utoipa::path(get, path = "/market/media", tag = "market", operation_id = "marketMedia",
+    params(MediaIndexQuery),
+    responses((status = 200, body = Page<MediaIndexRow>), (status = 400, body = ErrorBody)))]
+async fn media_index(
+    State(state): State<AppState>,
+    Query(q): Query<MediaIndexQuery>,
+) -> ApiResult<Json<Page<MediaIndexRow>>> {
+    if let Some(kind) = q.kind.as_deref()
+        && !kind.is_empty()
+        && !matches!(
+            kind,
+            "embedding" | "image" | "video" | "speech" | "transcription"
+        )
+    {
+        return Err(ApiError::BadRequest(
+            "kind must be embedding, image, video, speech or transcription".into(),
+        ));
+    }
+    Ok(Json(ih_db::market::media_index(&state.pool, &q).await?))
 }

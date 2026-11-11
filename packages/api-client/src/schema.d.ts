@@ -314,6 +314,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/media": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Embedding, image, video, speech and transcription models across
+         *     providers, priced in their own unit.
+         */
+        get: operations["marketMedia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/models": {
         parameters: {
             query?: never;
@@ -670,8 +690,12 @@ export interface components {
             price_per_gpu_hour?: number | null;
             /** Format: double */
             price_per_hour?: number | null;
+            /** Format: double */
+            price_per_unit?: number | null;
             provider: components["schemas"]["OrganizationRef"];
             source_url?: string | null;
+            /** @description Non-chat models: what the price is per, and the price. */
+            unit?: string | null;
             /** @description Reseller detail: the hosting provider behind a router, or a region or plan. */
             variant?: string | null;
         };
@@ -693,6 +717,14 @@ export interface components {
             gpu_providers: number;
             /** Format: int64 */
             gpu_types: number;
+            /**
+             * Format: int64
+             * @description Live listings of models priced per unit (embedding, image, video,
+             *     speech, transcription), and the distinct models among them.
+             */
+            media_listings: number;
+            /** Format: int64 */
+            media_models: number;
             /** @description The most widely served models. */
             model_index: components["schemas"]["ModelIndexRow"][];
             /**
@@ -730,6 +762,11 @@ export interface components {
             gpu_configurations: number;
             /** Format: date-time */
             last_seen_at?: string | null;
+            /**
+             * Format: int64
+             * @description Embedding, image, video, speech and transcription models.
+             */
+            media_models: number;
             /** Format: int64 */
             models: number;
             organization: components["schemas"]["OrganizationRef"];
@@ -745,6 +782,26 @@ export interface components {
             /** Format: int64 */
             listings: number;
             organization: components["schemas"]["OrganizationRef"];
+        };
+        /** @description One non-chat model across providers: its unit price. */
+        MediaIndexRow: {
+            cheapest: components["schemas"]["OrganizationRef"];
+            /** @description `embedding`, `image`, `video`, `speech` or `transcription`. */
+            kind: string;
+            maker?: string | null;
+            /** Format: double */
+            median_price: number;
+            /** Format: double */
+            min_price: number;
+            model_key: string;
+            name: string;
+            /** Format: int64 */
+            providers: number;
+            /**
+             * @description What the price is per: `mtok_input`, `image`, `video_second`,
+             *     `character` or `audio_second`.
+             */
+            unit: string;
         };
         /** @description One model across every provider: price per million tokens. */
         ModelIndexRow: {
@@ -960,6 +1017,34 @@ export interface components {
             logo_url?: string | null;
             name: string;
             slug: string;
+        };
+        /** @description One page of results plus the total count across all pages. */
+        Page_MediaIndexRow: {
+            items: {
+                cheapest: components["schemas"]["OrganizationRef"];
+                /** @description `embedding`, `image`, `video`, `speech` or `transcription`. */
+                kind: string;
+                maker?: string | null;
+                /** Format: double */
+                median_price: number;
+                /** Format: double */
+                min_price: number;
+                model_key: string;
+                name: string;
+                /** Format: int64 */
+                providers: number;
+                /**
+                 * @description What the price is per: `mtok_input`, `image`, `video_second`,
+                 *     `character` or `audio_second`.
+                 */
+                unit: string;
+            }[];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
         };
         /** @description One page of results plus the total count across all pages. */
         Page_ModelIndexRow: {
@@ -1873,6 +1958,43 @@ export interface operations {
                 };
             };
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketMedia: {
+        parameters: {
+            query?: {
+                /** @description `embedding`, `image`, `video`, `speech` or `transcription`. Default all. */
+                kind?: string;
+                /** @description Text the model id or name must contain (case-insensitive). */
+                q?: string;
+                /** @description Keep rows sold by at least this many providers. Default 1. */
+                min_providers?: number;
+                /** @description Default 100, at most 500. */
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Page_MediaIndexRow"];
+                };
+            };
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };

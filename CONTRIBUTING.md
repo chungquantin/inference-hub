@@ -50,6 +50,15 @@ Rules every adapter follows:
 - **Fail rather than store junk.** Return `AdapterError::Format` when the
   shape is unexpected or the result is empty. The store also refuses runs that
   shrink by half, and holds implausible prices for review.
+- **Read the whole catalog.** Find out how the endpoint paginates (try
+  `?limit=`, `?offset=`, `?page=`, and look for `next`, `cursor` or a total in
+  the body) and fetch through `paging::fetch_all` with the matching `Paging`.
+  Ask for every kind of model the endpoint can list (OpenRouter needs
+  `output_modalities=all`, Venice `type=all`).
+- **Price non-chat models in their unit** with `ModelListing::media`: per image,
+  per video second, per character, per audio second, or per million input
+  tokens for embeddings. Skip prices that only convert with assumptions (per
+  GPU second, per image token).
 - **Pick an interval.** `HOURLY` for marketplaces and order books, `DAILY` for
   price lists. Mark order books and host marketplaces `volatile`.
 - **Write unit tests** for the parser from a trimmed real response, including

@@ -897,6 +897,84 @@
         }
       }
     },
+    "/v1/market/media": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Embedding, image, video, speech and transcription models across\nproviders, priced in their own unit.",
+        "operationId": "marketMedia",
+        "parameters": [
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "`embedding`, `image`, `video`, `speech` or `transcription`. Default all.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text the model id or name must contain (case-insensitive).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "min_providers",
+            "in": "query",
+            "description": "Keep rows sold by at least this many providers. Default 1.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Default 100, at most 500.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Page_MediaIndexRow"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market/models": {
       "get": {
         "tags": [
@@ -1913,6 +1991,13 @@
             ],
             "format": "double"
           },
+          "price_per_unit": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
           "provider": {
             "$ref": "#/components/schemas/OrganizationRef"
           },
@@ -1921,6 +2006,13 @@
               "string",
               "null"
             ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Non-chat models: what the price is per, and the price."
           },
           "variant": {
             "type": [
@@ -1943,6 +2035,8 @@
           "multi_provider_models",
           "gpu_listings",
           "gpu_types",
+          "media_listings",
+          "media_models",
           "gpu_index",
           "model_index",
           "sources"
@@ -1970,6 +2064,15 @@
             "format": "int64"
           },
           "gpu_types": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "media_listings": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Live listings of models priced per unit (embedding, image, video,\nspeech, transcription), and the distinct models among them."
+          },
+          "media_models": {
             "type": "integer",
             "format": "int64"
           },
@@ -2021,6 +2124,7 @@
         "required": [
           "organization",
           "models",
+          "media_models",
           "gpu_configurations",
           "cheapest_count"
         ],
@@ -2040,6 +2144,11 @@
               "null"
             ],
             "format": "date-time"
+          },
+          "media_models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Embedding, image, video, speech and transcription models."
           },
           "models": {
             "type": "integer",
@@ -2086,6 +2195,57 @@
           },
           "organization": {
             "$ref": "#/components/schemas/OrganizationRef"
+          }
+        }
+      },
+      "MediaIndexRow": {
+        "type": "object",
+        "description": "One non-chat model across providers: its unit price.",
+        "required": [
+          "model_key",
+          "name",
+          "kind",
+          "unit",
+          "providers",
+          "min_price",
+          "median_price",
+          "cheapest"
+        ],
+        "properties": {
+          "cheapest": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "kind": {
+            "type": "string",
+            "description": "`embedding`, `image`, `video`, `speech` or `transcription`."
+          },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "median_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "model_key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "unit": {
+            "type": "string",
+            "description": "What the price is per: `mtok_input`, `image`, `video_second`,\n`character` or `audio_second`."
           }
         }
       },
@@ -2713,6 +2873,84 @@
           },
           "slug": {
             "type": "string"
+          }
+        }
+      },
+      "Page_MediaIndexRow": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "One non-chat model across providers: its unit price.",
+              "required": [
+                "model_key",
+                "name",
+                "kind",
+                "unit",
+                "providers",
+                "min_price",
+                "median_price",
+                "cheapest"
+              ],
+              "properties": {
+                "cheapest": {
+                  "$ref": "#/components/schemas/OrganizationRef"
+                },
+                "kind": {
+                  "type": "string",
+                  "description": "`embedding`, `image`, `video`, `speech` or `transcription`."
+                },
+                "maker": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "median_price": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "min_price": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "model_key": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "providers": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "What the price is per: `mtok_input`, `image`, `video_second`,\n`character` or `audio_second`."
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },

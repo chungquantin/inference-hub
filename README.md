@@ -140,7 +140,15 @@ When a feed will not parse, save it and run
 
 Prices come from the providers themselves, through adapters in
 `crates/ingest/src/adapters/`. Each returns listings in common units: USD per million
-tokens for models, USD per hour (with a GPU count) for GPU configurations.
+tokens for chat models, USD per hour (with a GPU count) for GPU configurations, and for
+other models their own unit: per million input tokens (embeddings), per image, per video
+second, per character (text to speech) and per audio second (transcription). These are
+compared at `/market/media`.
+
+Every adapter reads its whole catalog. List endpoints go through `adapters/paging.rs`,
+which follows offset/limit, page numbers, next links and cursors, stops at a repeated
+page or a loop, and caps a walk at 200 pages. Each catalog spec records how its endpoint
+pages; most answer with the full list at once, OpenRouter, Linode and Vultr page.
 
 | Kind | Adapters |
 |---|---|

@@ -46,6 +46,17 @@ fn check_price(
             ));
         }
     }
+    if let (Some(price), Some(max)) = (row.per_unit, row.max_per_unit)
+        && (!price.is_finite() || price < 0.0 || price > max)
+    {
+        return Some((
+            "out_of_band",
+            format!(
+                "${price} per {} is outside $0–${max}",
+                row.unit.unwrap_or("unit")
+            ),
+        ));
+    }
     if row.input.is_some_and(|p| p > MAX_INPUT_PER_MTOK)
         || row.output.is_some_and(|p| p > MAX_OUTPUT_PER_MTOK)
     {
@@ -68,6 +79,7 @@ fn check_price(
         _ => false,
     };
     for (label, new, old) in [
+        ("per unit", row.per_unit, previous.per_unit),
         ("per hour", row.per_hour, previous.per_hour),
         ("input", row.input, previous.input),
         ("output", row.output, previous.output),
@@ -92,6 +104,7 @@ struct PreviousPrice {
     input: Option<f64>,
     output: Option<f64>,
     per_hour: Option<f64>,
+    per_unit: Option<f64>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -154,6 +167,11 @@ struct Row {
     gpu_type: Option<String>,
     gpu_count: Option<i16>,
     per_hour: Option<f64>,
+    /// Non-chat models: the unit and its price.
+    unit: Option<&'static str>,
+    per_unit: Option<f64>,
+    /// Upper bound of `per_unit` for the plausibility check.
+    max_per_unit: Option<f64>,
     region: Option<String>,
     source_url: Option<String>,
     extra: serde_json::Value,
@@ -167,15 +185,18 @@ impl From<ModelListing> for Row {
                 None => l.external_id.clone(),
             },
             external_id: l.external_id,
-            kind: "model",
+            kind: l.media.map_or("model", |m| m.kind.as_str()),
             name: l.name,
             maker: l.maker,
             context_window: l.context_window,
-            input: Some(l.input_per_mtok),
-            output: Some(l.output_per_mtok),
+            input: l.media.is_none().then_some(l.input_per_mtok),
+            output: l.media.is_none().then_some(l.output_per_mtok),
             gpu_type: None,
             gpu_count: None,
             per_hour: None,
+            unit: l.media.map(|m| m.kind.unit()),
+            per_unit: l.media.map(|m| m.price),
+            max_per_unit: l.media.map(|m| m.kind.max_price()),
             region: l.variant,
             source_url: l.source_url,
             extra: l.extra,
@@ -202,6 +223,9 @@ impl From<GpuListing> for Row {
             gpu_type: Some(l.gpu_type),
             gpu_count: Some(l.gpu_count),
             per_hour: Some(l.price_per_hour),
+            unit: None,
+            per_unit: None,
+            max_per_unit: None,
             region: l.region,
             source_url: l.source_url,
             extra: l.extra,
@@ -340,7 +364,8 @@ async fn store(
     let previous: std::collections::HashMap<String, PreviousPrice> =
         sqlx::query_as::<_, PreviousPrice>(
             "SELECT listing_key, price_input_per_mtok::float8 AS input,
-                price_output_per_mtok::float8 AS output, price_per_hour::float8 AS per_hour
+                price_output_per_mtok::float8 AS output, price_per_hour::float8 AS per_hour,
+                price_per_unit::float8 AS per_unit
          FROM market_listings WHERE adapter = $1 AND delisted_at IS NULL",
         )
         .bind(adapter)
@@ -378,6 +403,10 @@ async fn store(
         }
         upsert_listing(&mut tx, adapter, row, now).await?;
         stored.push(row.listing_key.clone());
+        // Offerings hold token or hourly prices; media prices live in listings only.
+        if row.unit.is_some() {
+            continue;
+        }
 
         let product: Option<Uuid> = sqlx::query_scalar(
             "SELECT product_id FROM product_listing_ids WHERE adapter = $1 AND external_id = $2",
@@ -460,15 +489,17 @@ async fn hold(
              (adapter, listing_key, external_id, kind, name, reason,
               price_input_per_mtok, price_output_per_mtok, price_per_hour,
               previous_input_per_mtok, previous_output_per_mtok, previous_per_hour,
-              gpu_count, detail, held_at, last_seen_at)
+              gpu_count, detail, held_at, last_seen_at, unit, price_per_unit, previous_per_unit)
          VALUES ($1, $2, $3, $4, $5, $6, $7::float8::numeric, $8::float8::numeric,
                  $9::float8::numeric, $10::float8::numeric, $11::float8::numeric,
-                 $12::float8::numeric, $13, $14, $15, $15)
+                 $12::float8::numeric, $13, $14, $15, $15, $16, $17::float8::numeric,
+                 $18::float8::numeric)
          ON CONFLICT (adapter, listing_key) DO UPDATE SET
              name = EXCLUDED.name, reason = EXCLUDED.reason,
              price_input_per_mtok = EXCLUDED.price_input_per_mtok,
              price_output_per_mtok = EXCLUDED.price_output_per_mtok,
              price_per_hour = EXCLUDED.price_per_hour, gpu_count = EXCLUDED.gpu_count,
+             unit = EXCLUDED.unit, price_per_unit = EXCLUDED.price_per_unit,
              detail = EXCLUDED.detail, last_seen_at = EXCLUDED.last_seen_at,
              -- A different price than the one the editor rejected reopens the review.
              resolution = CASE
@@ -476,11 +507,13 @@ async fn hold(
                   AND price_holds.price_input_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_input_per_mtok
                   AND price_holds.price_output_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_output_per_mtok
                   AND price_holds.price_per_hour IS NOT DISTINCT FROM EXCLUDED.price_per_hour
+                  AND price_holds.price_per_unit IS NOT DISTINCT FROM EXCLUDED.price_per_unit
                  THEN 'rejected' END,
              resolved_at = CASE WHEN price_holds.resolution = 'rejected'
                   AND price_holds.price_input_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_input_per_mtok
                   AND price_holds.price_output_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_output_per_mtok
                   AND price_holds.price_per_hour IS NOT DISTINCT FROM EXCLUDED.price_per_hour
+                  AND price_holds.price_per_unit IS NOT DISTINCT FROM EXCLUDED.price_per_unit
                  THEN price_holds.resolved_at END",
     )
     .bind(adapter)
@@ -498,6 +531,9 @@ async fn hold(
     .bind(row.gpu_count)
     .bind(detail)
     .bind(now)
+    .bind(row.unit)
+    .bind(row.per_unit)
+    .bind(previous.and_then(|p| p.per_unit))
     .execute(&mut **tx)
     .await?;
     // Keep the listing live at its old price, so it is not delisted or stale.
@@ -523,9 +559,12 @@ async fn upsert_listing(
         "INSERT INTO market_listings
              (adapter, listing_key, external_id, kind, name, maker, context_window,
               price_input_per_mtok, price_output_per_mtok, gpu_type, gpu_count, price_per_hour,
-              region, source_url, extra, first_seen_at, last_seen_at, delisted_at)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $16, NULL)
+              region, source_url, extra, first_seen_at, last_seen_at, delisted_at,
+              unit, price_per_unit)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $16, NULL,
+                 $17, $18::float8::numeric)
          ON CONFLICT (adapter, listing_key) DO UPDATE SET
+             kind = EXCLUDED.kind, unit = EXCLUDED.unit, price_per_unit = EXCLUDED.price_per_unit,
              external_id = EXCLUDED.external_id, name = EXCLUDED.name, maker = EXCLUDED.maker,
              context_window = EXCLUDED.context_window,
              price_input_per_mtok = EXCLUDED.price_input_per_mtok,
@@ -551,6 +590,8 @@ async fn upsert_listing(
     .bind(&row.source_url)
     .bind(&row.extra)
     .bind(now)
+    .bind(row.unit)
+    .bind(row.per_unit)
     .execute(&mut **tx)
     .await?;
     Ok(())
@@ -655,6 +696,7 @@ mod tests {
             input_per_mtok: input,
             output_per_mtok: output,
             variant: None,
+            media: None,
             source_url: None,
             extra: serde_json::Value::Null,
         })
@@ -666,6 +708,7 @@ mod tests {
             input,
             output,
             per_hour,
+            per_unit: None,
         }
     }
 

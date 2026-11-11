@@ -3,7 +3,9 @@
 use serde::Deserialize;
 
 use super::{
-    BoxFuture, DAILY, GpuListing, NeoCloudAdapter, adapter_info, get_text, gpu, round6,
+    BoxFuture, DAILY, GpuListing, NeoCloudAdapter, adapter_info, gpu,
+    paging::{Items, Paging, fetch_all},
+    round6,
     simple::{json, non_empty},
 };
 use crate::adapters::AdapterError;
@@ -46,18 +48,20 @@ impl NeoCloudAdapter for VultrAdapter {
         client: &'a reqwest::Client,
     ) -> BoxFuture<'a, Result<Vec<GpuListing>, AdapterError>> {
         Box::pin(async move {
-            let cloud = get_text(
-                client,
-                ID,
-                &format!("{}/v2/plans?type=vcg&per_page=500", self.origin),
-            )
-            .await?;
-            let metal = get_text(
-                client,
-                ID,
-                &format!("{}/v2/plans-metal?per_page=500", self.origin),
-            )
-            .await?;
+            // Plans page with an opaque `cursor` in `meta.links.next`.
+            let fetch = |path: &'static str, key: &'static [&'static str]| {
+                let url = format!("{}{path}", self.origin);
+                async move {
+                    let paging = Paging::Cursor {
+                        param: "cursor",
+                        cursor_field: &["meta", "links", "next"],
+                    };
+                    let (items, _) = fetch_all(client, ID, &url, Items::At(key), &paging).await?;
+                    Ok::<_, AdapterError>(serde_json::json!({ "plans": items }).to_string())
+                }
+            };
+            let cloud = fetch("/v2/plans?type=vcg&per_page=100", &["plans"]).await?;
+            let metal = fetch("/v2/plans-metal?per_page=100", &["plans_metal"]).await?;
             let mut out = parse_plans(&cloud, "cloud GPU")?;
             out.extend(parse_plans(&metal, "bare metal")?);
             non_empty(ID, out)

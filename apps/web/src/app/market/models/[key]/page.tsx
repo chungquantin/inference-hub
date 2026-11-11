@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MarketListings } from "@/components/market-detail";
 import { PageHeader, Stat } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
+import { formatUnitPrice } from "@/components/market";
 import { formatPrice } from "@/lib/format";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
@@ -29,9 +30,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MarketModelPage({ params }: Props) {
   const data = await load((await params).key);
-  const priced = data.listings.filter((l) => (l.blended_per_mtok ?? 0) > 0);
+  const media = data.listings.filter((l) => l.unit);
+  const chat = data.listings.filter((l) => !l.unit);
+  if (chat.length === 0) {
+    const prices = media.map((l) => l.price_per_unit ?? 0).sort((a, b) => a - b);
+    const unit = media[0]?.unit;
+    return (
+      <div className="flex flex-col gap-6">
+        <PageHeader
+          label={`Market / Models / ${data.key}`}
+          title={data.name}
+          lead="Each provider's listing of this model, priced in its own unit, cheapest first."
+        />
+        <section className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-3">
+          <Stat value={formatUnitPrice(prices[0], unit)} label="lowest" />
+          <Stat value={formatUnitPrice(prices[Math.floor(prices.length / 2)], unit)} label="median" />
+          <Stat value={new Set(media.map((l) => l.variant ?? l.provider.slug)).size} label="sellers" />
+        </section>
+        <MarketListings listings={media} kind="media" />
+      </div>
+    );
+  }
+  const priced = chat.filter((l) => (l.blended_per_mtok ?? 0) > 0);
   const blends = priced.map((l) => l.blended_per_mtok ?? 0).sort((a, b) => a - b);
-  const sellers = new Set(data.listings.map((l) => l.variant ?? l.provider.slug)).size;
+  const sellers = new Set(chat.map((l) => l.variant ?? l.provider.slug)).size;
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
@@ -43,9 +65,10 @@ export default async function MarketModelPage({ params }: Props) {
         <Stat value={formatPrice(blends[0])} label="lowest blend / 1M" />
         <Stat value={formatPrice(blends[Math.floor(blends.length / 2)])} label="median blend / 1M" />
         <Stat value={sellers} label="sellers" />
-        <Stat value={data.listings.length} label="listings" />
+        <Stat value={chat.length} label="listings" />
       </section>
-      <MarketListings listings={data.listings} kind="model" />
+      <MarketListings listings={chat} kind="model" />
+      {media.length > 0 && <MarketListings listings={media} kind="media" />}
     </div>
   );
 }

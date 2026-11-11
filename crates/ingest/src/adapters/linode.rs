@@ -3,21 +3,47 @@
 use serde::Deserialize;
 
 use super::{
-    DAILY, GpuListing, gpu, round6,
-    simple::{json, non_empty, simple_gpu_adapter},
+    BoxFuture, DAILY, GpuListing, NeoCloudAdapter, adapter_info, gpu,
+    paging::{Items, Paging, fetch_all},
+    round6,
+    simple::{json, non_empty},
 };
 use crate::adapters::AdapterError;
 
 const ID: &str = "linode";
 
-simple_gpu_adapter!(
-    LinodeAdapter,
-    ID,
-    "Akamai Cloud (Linode)",
-    "akamai",
-    DAILY,
-    "/v4/linode/types"
-);
+pub struct LinodeAdapter {
+    url: String,
+}
+
+impl LinodeAdapter {
+    pub fn new(origin: &str) -> Self {
+        Self {
+            url: format!("{}/v4/linode/types", origin.trim_end_matches('/')),
+        }
+    }
+}
+
+adapter_info!(LinodeAdapter, ID, "Akamai Cloud (Linode)", "akamai", DAILY);
+
+impl NeoCloudAdapter for LinodeAdapter {
+    fn fetch_gpus<'a>(
+        &'a self,
+        client: &'a reqwest::Client,
+    ) -> BoxFuture<'a, Result<Vec<GpuListing>, AdapterError>> {
+        Box::pin(async move {
+            // The types API pages (`page`, `pages`); walk every page.
+            let paging = Paging::Page {
+                param: "page",
+                first: 1,
+                pages_field: Some(&["pages"]),
+            };
+            let (items, _) =
+                fetch_all(client, ID, &self.url, Items::At(&["data"]), &paging).await?;
+            parse(&serde_json::json!({ "data": items }).to_string())
+        })
+    }
+}
 
 #[derive(Deserialize)]
 struct Types {

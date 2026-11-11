@@ -65,3 +65,32 @@ export function ago(iso: string | null | undefined, now: string | null | undefin
   if (h < 36) return `${h} h ago`;
   return `${Math.round(h / 24)} d ago`;
 }
+
+/** Labels of the units non-chat models are priced in. */
+export const UNIT_LABELS: Record<string, string> = {
+  mtok_input: "per 1M input tokens",
+  image: "per image",
+  video_second: "per video second",
+  character: "per character",
+  audio_second: "per audio second",
+};
+
+/** The kinds of non-chat models, in display order. */
+export const MEDIA_KINDS = [
+  { kind: "image", label: "Image" },
+  { kind: "video", label: "Video" },
+  { kind: "speech", label: "Speech" },
+  { kind: "transcription", label: "Transcription" },
+  { kind: "embedding", label: "Embeddings" },
+] as const;
+
+/**
+ * A unit price. Speech is priced per character, where cents are fractions
+ * too small to read, so it shows per 1,000 characters.
+ */
+export function formatUnitPrice(price: number | null | undefined, unit: string | null | undefined): string {
+  if (price == null) return "—";
+  if (unit === "character") return `${formatPrice(price * 1000)} / 1K chars`;
+  if (unit === "audio_second") return `${formatPrice(price * 60)} / min`;
+  return `${formatPrice(price)} ${UNIT_LABELS[unit ?? ""]?.replace("per ", "/ ") ?? ""}`.trim();
+}

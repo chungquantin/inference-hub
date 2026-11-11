@@ -1,11 +1,20 @@
 //! OpenRouter: a gateway that resells many labs' models. Its public model list
 //! carries per-token prices.
+//!
+//! The default list holds chat models only; `output_modalities=all` adds
+//! embeddings, image, audio and video models. Chat and multimodal-output chat
+//! models are listed by their token prices, embeddings per million input
+//! tokens. Image, speech, transcription and video models are priced in tokens
+//! or per request upstream, which does not convert to a per-image or
+//! per-second price without assumptions, so they are skipped.
 
 use reqwest::Client;
 use serde::Deserialize;
 
 use super::{
-    Adapter, AdapterError, BoxFuture, GatewayAdapter, ModelListing, get_text, parse_price, round6,
+    Adapter, AdapterError, BoxFuture, GatewayAdapter, MediaKind, ModelListing,
+    paging::{Items, Paging, fetch_all},
+    parse_price, round6,
 };
 
 const ID: &str = "openrouter";
@@ -45,6 +54,14 @@ struct Model {
     name: String,
     context_length: Option<i64>,
     pricing: Pricing,
+    #[serde(default)]
+    architecture: Architecture,
+}
+
+#[derive(Deserialize, Default)]
+struct Architecture {
+    #[serde(default)]
+    output_modalities: Vec<String>,
 }
 
 /// USD per token, as decimal strings. `-1` marks variable pricing (routers).
@@ -60,9 +77,17 @@ impl GatewayAdapter for OpenRouterAdapter {
         client: &'a Client,
     ) -> BoxFuture<'a, Result<Vec<ModelListing>, AdapterError>> {
         Box::pin(async move {
-            let url = format!("{}/api/v1/models", self.base_url);
-            let body = get_text(client, ID, &url).await?;
-            parse(&body)
+            let url = format!("{}/api/v1/models?output_modalities=all", self.base_url);
+            // Answers with every model at once today; it pages when asked to,
+            // so read it page by page and never miss the tail.
+            let paging = Paging::Offset {
+                offset: "offset",
+                limit: "limit",
+                size: 200,
+                total_field: Some(&["total_count"]),
+            };
+            let (items, _) = fetch_all(client, ID, &url, Items::At(&["data"]), &paging).await?;
+            parse(&serde_json::json!({ "data": items }).to_string())
         })
     }
 }
@@ -76,10 +101,31 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
         if model.pricing.prompt.starts_with('-') || model.pricing.completion.starts_with('-') {
             continue;
         }
+        let outputs = &model.architecture.output_modalities;
+        let has = |m: &str| outputs.iter().any(|o| o == m);
         let input = parse_price(ID, &model.pricing.prompt)? * 1e6;
         let output = parse_price(ID, &model.pricing.completion)? * 1e6;
         // The maker is the part of the id before the slash: `meta-llama/llama-3.3-70b`.
         let maker = model.id.split_once('/').map(|(m, _)| m.to_owned());
+        if has("embeddings") {
+            if input > 0.0 {
+                listings.push(ModelListing::media(
+                    model.id.clone(),
+                    model.name,
+                    maker,
+                    MediaKind::Embedding,
+                    round6(input),
+                    Some(format!("https://openrouter.ai/{}", model.id)),
+                    serde_json::Value::Null,
+                ));
+            }
+            continue;
+        }
+        // Chat models, including ones that also return images or audio. A
+        // list without modalities (older API) is all chat.
+        if !(outputs.is_empty() || has("text")) {
+            continue;
+        }
         listings.push(ModelListing {
             source_url: Some(format!("https://openrouter.ai/{}", model.id)),
             external_id: model.id,
@@ -89,6 +135,7 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
             input_per_mtok: round6(input),
             output_per_mtok: round6(output),
             variant: None,
+            media: None,
             extra: serde_json::Value::Null,
         });
     }

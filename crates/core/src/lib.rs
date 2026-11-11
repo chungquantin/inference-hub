@@ -18,7 +18,8 @@ pub use compare::{
 };
 pub use market::{
     FailedJob, GpuIndexRow, HoldResolution, MarketDetail, MarketIndexQuery, MarketListing,
-    MarketOverview, MarketProvider, MarketSource, ModelIndexRow, PriceHold,
+    MarketOverview, MarketProvider, MarketSource, MediaIndexQuery, MediaIndexRow, ModelIndexRow,
+    PriceHold,
 };
 pub use news::{
     AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus,

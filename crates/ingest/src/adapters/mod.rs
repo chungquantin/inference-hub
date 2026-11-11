@@ -26,6 +26,7 @@ pub mod linode;
 pub mod liquid;
 pub mod openrouter;
 pub mod oracle;
+pub mod paging;
 pub mod rss;
 pub mod runpod;
 pub mod shadeform;
@@ -93,6 +94,94 @@ pub struct ModelListing {
     pub variant: Option<String>,
     pub source_url: Option<String>,
     pub extra: serde_json::Value,
+    /// For models not priced by chat tokens: what they make and the unit
+    /// price. `input_per_mtok` and `output_per_mtok` are then not stored.
+    pub media: Option<MediaPrice>,
+}
+
+/// What a non-chat model produces, which decides its unit.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub enum MediaKind {
+    /// Priced per million input tokens.
+    Embedding,
+    /// Priced per image.
+    Image,
+    /// Priced per second of video.
+    Video,
+    /// Text to speech, priced per input character.
+    Speech,
+    /// Speech to text, priced per second of audio.
+    Transcription,
+}
+
+impl MediaKind {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            MediaKind::Embedding => "embedding",
+            MediaKind::Image => "image",
+            MediaKind::Video => "video",
+            MediaKind::Speech => "speech",
+            MediaKind::Transcription => "transcription",
+        }
+    }
+
+    /// The unit `price_per_unit` is per.
+    pub fn unit(self) -> &'static str {
+        match self {
+            MediaKind::Embedding => "mtok_input",
+            MediaKind::Image => "image",
+            MediaKind::Video => "video_second",
+            MediaKind::Speech => "character",
+            MediaKind::Transcription => "audio_second",
+        }
+    }
+
+    /// Plausible upper bound of one unit, in USD. Catches unit mistakes
+    /// (cents read as dollars, per-minute read as per-second), not high prices.
+    pub fn max_price(self) -> f64 {
+        match self {
+            MediaKind::Embedding => 200.0,
+            MediaKind::Image => 5.0,
+            MediaKind::Video => 20.0,
+            MediaKind::Speech => 0.01,
+            MediaKind::Transcription => 0.1,
+        }
+    }
+}
+
+/// The price of a non-chat model in its own unit.
+#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
+pub struct MediaPrice {
+    pub kind: MediaKind,
+    /// USD per unit (see [`MediaKind::unit`]).
+    pub price: f64,
+}
+
+impl ModelListing {
+    /// A listing priced per unit rather than by chat tokens.
+    pub fn media(
+        external_id: String,
+        name: String,
+        maker: Option<String>,
+        kind: MediaKind,
+        price: f64,
+        source_url: Option<String>,
+        extra: serde_json::Value,
+    ) -> Self {
+        Self {
+            external_id,
+            name,
+            maker,
+            context_window: None,
+            input_per_mtok: 0.0,
+            output_per_mtok: 0.0,
+            variant: None,
+            source_url,
+            extra,
+            media: Some(MediaPrice { kind, price }),
+        }
+    }
 }
 
 /// A GPU configuration rented by the hour.
@@ -339,9 +428,26 @@ pub(crate) async fn get_text(
     adapter: &'static str,
     url: &str,
 ) -> Result<String, AdapterError> {
-    pace(url).await;
-    let response = client.get(url).send().await?;
-    Ok(check(adapter, url, response).await?.text().await?)
+    // One retry for transport errors (a dropped connection mid-body, a reset):
+    // they are common on large catalogs and say nothing about the provider.
+    // HTTP errors are not retried here; the scheduler backs off on them.
+    let mut attempt = 0;
+    loop {
+        attempt += 1;
+        pace(url).await;
+        let result = async {
+            let response = client.get(url).send().await?;
+            Ok::<_, AdapterError>(check(adapter, url, response).await?.text().await?)
+        }
+        .await;
+        match result {
+            Err(AdapterError::Http(err)) if attempt < 2 && !err.is_status() => {
+                tracing::warn!(adapter, url, error = %err, "transport error; retrying once");
+                tokio::time::sleep(Duration::from_secs(2)).await;
+            }
+            other => return other,
+        }
+    }
 }
 
 /// A price from JSON that may be a number or a decimal string.
@@ -430,6 +536,18 @@ pub(crate) fn parse_price(adapter: &'static str, s: &str) -> Result<f64, Adapter
         ));
     }
     Ok(value)
+}
+
+/// Rounds a small unit price (per character, per audio second) to 10
+/// significant digits: keeps real precision, drops float noise from unit
+/// conversions such as cents × 0.01.
+pub(crate) fn round_sig(x: f64) -> f64 {
+    if x == 0.0 || !x.is_finite() {
+        return x;
+    }
+    let digits = 10 - (x.abs().log10().floor() as i32) - 1;
+    let factor = 10f64.powi(digits);
+    (x * factor).round() / factor
 }
 
 /// Rounds a price to 6 decimals, so per-token × 1M conversions do not leave

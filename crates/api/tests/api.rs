@@ -1077,3 +1077,52 @@ async fn admin_allow_list_hides_the_admin_api_from_other_networks(pool: PgPool) 
     let (status, _) = get(&app("198.51.100.0/24"), "/v1/market/sources").await;
     assert_eq!(status, StatusCode::OK, "public routes are not limited");
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn media_index_compares_unit_prices_across_providers(pool: PgPool) {
+    seed_market_index(&pool).await;
+    sqlx::query(
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name, unit, price_per_unit)
+         VALUES
+           ('a', 'i1', 'bfl/flux-2-pro', 'image', 'FLUX.2 [pro]', 'image', 0.05),
+           ('b', 'i1', 'flux-2-pro', 'image', 'FLUX.2 [pro]', 'image', 0.03),
+           ('g', 'v1', 'wan-video', 'video', 'Wan', 'video_second', 0.29),
+           ('g', 's1', 'tts-kokoro', 'speech', 'Kokoro', 'character', 0.0000035)",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    let app = app(pool);
+
+    let (status, page) = get(&app, "/v1/market/media").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(page["total"], 3);
+    let flux = &page["items"][0];
+    assert_eq!(flux["model_key"], "flux-2-pro");
+    assert_eq!(
+        (flux["providers"].as_i64(), flux["min_price"].as_f64()),
+        (Some(2), Some(0.03))
+    );
+    assert_eq!(flux["unit"], "image");
+    assert_eq!(flux["cheapest"]["slug"], "beta");
+
+    let (_, video) = get(&app, "/v1/market/media?kind=video").await;
+    assert_eq!(video["total"], 1);
+    assert_eq!(
+        get(&app, "/v1/market/media?kind=chat").await.0,
+        StatusCode::BAD_REQUEST
+    );
+
+    let (_, detail) = get(&app, "/v1/market/models/flux-2-pro").await;
+    assert_eq!(detail["listings"][0]["price_per_unit"], 0.03);
+    assert_eq!(detail["listings"][0]["unit"], "image");
+
+    let (_, overview) = get(&app, "/v1/market").await;
+    assert_eq!(
+        (
+            overview["media_listings"].as_i64(),
+            overview["media_models"].as_i64()
+        ),
+        (Some(4), Some(3))
+    );
+}

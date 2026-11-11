@@ -35,7 +35,7 @@ export default async function MarketPage() {
         </span>
       </PageHeader>
 
-      <section aria-label="Market totals" className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-4">
+      <section aria-label="Market totals" className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-5">
         <Stat value={data.providers} label="providers tracked" href="/market/providers" />
         <Stat
           value={formatCount(data.multi_provider_models)}
@@ -43,6 +43,11 @@ export default async function MarketPage() {
           href="/market/models"
         />
         <Stat value={data.gpu_types} label={`GPU types · ${data.gpu_listings} configs`} href="/market/gpus" />
+        <Stat
+          value={formatCount(data.media_models)}
+          label={`image, video, speech, embedding · ${formatCount(data.media_listings)} prices`}
+          href="/market/media"
+        />
         <Stat value={`${healthy}/${data.sources.length}`} label="sources healthy" href="#sources" />
       </section>
 

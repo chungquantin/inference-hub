@@ -118,6 +118,7 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
                     "throughput_tps": p.throughput,
                 }),
                 variant: Some(p.provider),
+                media: None,
             });
         }
     }
