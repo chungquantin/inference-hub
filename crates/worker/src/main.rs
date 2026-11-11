@@ -3,6 +3,9 @@
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
 //! `--once` schedules due feed fetches and repository syncs, runs them and exits.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
+//!
+//! The long-running mode also serves `/healthz`, `/readyz` and `/metrics` on
+//! `WORKER_METRICS_PORT` (default 9090), for the platform's health checks.
 
 use anyhow::Context;
 use tokio_util::sync::CancellationToken;
@@ -12,16 +15,13 @@ use worker::Config;
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
-    tracing_subscriber::registry()
-        .with(EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))
-        .with(tracing_subscriber::fmt::layer())
-        .init();
+    init_tracing();
 
     let args: Vec<String> = std::env::args().skip(1).collect();
     let flag = |name: &str| args.iter().any(|a| a == name);
 
     let database_url = std::env::var("DATABASE_URL").context("DATABASE_URL must be set")?;
-    let pool = ih_db::connect(&database_url)
+    let pool = ih_db::connect_with_retry(&database_url, std::time::Duration::from_secs(120))
         .await
         .context("connecting to Postgres")?;
     ih_db::migrate(&pool).await.context("running migrations")?;
@@ -59,9 +59,33 @@ async fn main() -> anyhow::Result<()> {
             cancel.cancel();
         }
     });
+    let port: u16 = env_parse("WORKER_METRICS_PORT", 9090);
+    let health = tokio::spawn(worker::health::serve(
+        std::net::SocketAddr::from(([0, 0, 0, 0], port)),
+        pool.clone(),
+        ctx.metrics.clone(),
+        cancel.clone(),
+    ));
     tracing::info!(concurrency = config.concurrency, "worker started");
     worker::run(pool, ctx, config, cancel).await;
+    if let Ok(Err(err)) = health.await {
+        tracing::warn!(error = %err, "health server stopped with an error");
+    }
     Ok(())
+}
+
+/// Pretty logs by default; one JSON object per line when `LOG_FORMAT=json`,
+/// for log collectors.
+fn init_tracing() {
+    let filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into());
+    let registry = tracing_subscriber::registry().with(filter);
+    if std::env::var("LOG_FORMAT").is_ok_and(|v| v.eq_ignore_ascii_case("json")) {
+        registry
+            .with(tracing_subscriber::fmt::layer().json())
+            .init();
+    } else {
+        registry.with(tracing_subscriber::fmt::layer()).init();
+    }
 }
 
 fn env_parse<T: std::str::FromStr>(key: &str, default: T) -> T {

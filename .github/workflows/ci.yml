@@ -57,3 +57,23 @@ jobs:
           git diff --exit-code packages/api-client/src/schema.d.ts
       - run: pnpm -r typecheck
       - run: pnpm --filter web lint
+
+  docker:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build the deployment image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: false
+          load: true
+          tags: inference-hub:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: The entrypoint rejects an unknown service
+        run: |
+          set +e
+          docker run --rm -e IH_SERVICE=nope inference-hub:ci
+          test $? -eq 64

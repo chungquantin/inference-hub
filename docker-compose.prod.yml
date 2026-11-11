@@ -1,0 +1,79 @@
+# The production topology, runnable locally: the same image and services that
+# run on Railway. The web app is not here; it is deployed to Vercel.
+#
+#   docker compose -f docker-compose.prod.yml up -d --build
+#   docker compose -f docker-compose.prod.yml --profile seed run --rm seed
+#
+# Secrets come from an `.env.prod` file next to this one (see .env.example).
+# DATABASE_URL is derived from the POSTGRES_* variables on purpose: compose
+# would otherwise pick up the development `.env`, which points at localhost.
+
+x-backend: &backend
+  build: .
+  image: inference-hub:latest
+  restart: unless-stopped
+  env_file:
+    - path: .env.prod
+      required: false
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-inference_hub}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-inference_hub}
+      POSTGRES_DB: ${POSTGRES_DB:-inference_hub}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-inference_hub} -d ${POSTGRES_DB:-inference_hub}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    <<: *backend
+    environment:
+      IH_SERVICE: api
+      DATABASE_URL: postgres://${POSTGRES_USER:-inference_hub}:${POSTGRES_PASSWORD:-inference_hub}@postgres:5432/${POSTGRES_DB:-inference_hub}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    ports:
+      - "${API_PUBLIC_PORT:-4000}:4000"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/4000 && printf 'GET /health HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q '200 OK' <&3"]
+      interval: 10s
+      timeout: 3s
+      retries: 6
+
+  worker:
+    <<: *backend
+    environment:
+      IH_SERVICE: worker
+      DATABASE_URL: postgres://${POSTGRES_USER:-inference_hub}:${POSTGRES_PASSWORD:-inference_hub}@postgres:5432/${POSTGRES_DB:-inference_hub}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY:-4}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      LIQUID_BASE_URL: ${LIQUID_BASE_URL:-}
+      LIQUID_API_KEY: ${LIQUID_API_KEY:-}
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/9090 && printf 'GET /healthz HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q '200 OK' <&3"]
+      interval: 15s
+      timeout: 3s
+      retries: 4
+
+  # One-shot import of data/: run it after the first deploy and after data changes.
+  seed:
+    <<: *backend
+    restart: "no"
+    profiles: [seed]
+    environment:
+      IH_SERVICE: seed
+      DATABASE_URL: postgres://${POSTGRES_USER:-inference_hub}:${POSTGRES_PASSWORD:-inference_hub}@postgres:5432/${POSTGRES_DB:-inference_hub}
+
+volumes:
+  pgdata:

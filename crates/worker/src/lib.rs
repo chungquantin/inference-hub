@@ -1,9 +1,10 @@
 //! The ingestion worker: a scheduler that enqueues due work and a pool of
 //! runners that execute jobs from the Postgres queue.
 
-use std::time::Duration;
+pub mod health;
 
 use std::sync::Arc;
+use std::time::Duration;
 
 use ih_db::jobs::{self, Job, NewJob};
 pub use ih_ingest::adapters::{Endpoints, MarketAdapter, market_adapters};
@@ -46,6 +47,8 @@ pub struct Context {
     pub adapters: Arc<Vec<MarketAdapter>>,
     /// How often each market adapter runs.
     pub adapter_every: Duration,
+    /// Counters served on `/metrics`.
+    pub metrics: Arc<health::Metrics>,
 }
 
 impl Context {
@@ -61,6 +64,7 @@ impl Context {
             repo_sync_every: Duration::from_secs(6 * 3600),
             adapters: Arc::new(market_adapters(endpoints)),
             adapter_every: Duration::from_secs(6 * 3600),
+            metrics: Arc::default(),
         }
     }
 
@@ -255,8 +259,12 @@ pub async fn drain(pool: &PgPool, ctx: &Context, worker_id: &str) -> sqlx::Resul
 
 async fn execute(pool: &PgPool, ctx: &Context, job: &Job) -> sqlx::Result<()> {
     match run_job(pool, ctx, job).await {
-        Ok(()) => jobs::complete(pool, job.id).await,
+        Ok(()) => {
+            ctx.metrics.job_finished(&job.kind, true);
+            jobs::complete(pool, job.id).await
+        }
         Err(err) => {
+            ctx.metrics.job_finished(&job.kind, false);
             tracing::warn!(job = job.id, kind = %job.kind, attempt = job.attempts, error = %err, "job failed");
             jobs::fail(pool, job, &format!("{err:#}")).await
         }
@@ -334,5 +342,6 @@ async fn maintenance(pool: &PgPool, ctx: &Context) -> sqlx::Result<()> {
         tracing::info!(scheduled, "scheduled jobs");
     }
     jobs::prune_done(pool, Duration::from_secs(7 * 24 * 3600)).await?;
+    ctx.metrics.schedule_ok();
     Ok(())
 }

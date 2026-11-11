@@ -40,7 +40,7 @@ tokio-util = { version = "0.7", features = ["rt"] }
 tower = { version = "0.5", features = ["util"] }
 tower-http = { version = "0.7", features = ["cors", "trace"] }
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
 url = "2"
 utoipa = { version = "6", features = ["axum_extras", "chrono", "uuid"] }
 utoipa-axum = "0.3"
@@ -52,3 +52,9 @@ unsafe_code = "forbid"
 
 [workspace.lints.clippy]
 all = { level = "warn", priority = -1 }
+
+# Release builds ship in the Docker image: smaller binaries, no debug info.
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 4

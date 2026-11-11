@@ -1,0 +1,10 @@
+# Only the Rust workspace, the migrations and the curated data go in the image.
+**
+!Cargo.toml
+!Cargo.lock
+!rust-toolchain.toml
+!crates/
+!migrations/
+!data/
+!docker/
+crates/**/target

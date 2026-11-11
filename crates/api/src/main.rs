@@ -5,13 +5,18 @@ use tracing_subscriber::{EnvFilter, layer::SubscriberExt, util::SubscriberInitEx
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
-    tracing_subscriber::registry()
-        .with(EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))
-        .with(tracing_subscriber::fmt::layer())
-        .init();
+    let filter = EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into());
+    let registry = tracing_subscriber::registry().with(filter);
+    if std::env::var("LOG_FORMAT").is_ok_and(|v| v.eq_ignore_ascii_case("json")) {
+        registry
+            .with(tracing_subscriber::fmt::layer().json())
+            .init();
+    } else {
+        registry.with(tracing_subscriber::fmt::layer()).init();
+    }
 
     let config = Config::from_env()?;
-    let pool = ih_db::connect(&config.database_url)
+    let pool = ih_db::connect_with_retry(&config.database_url, std::time::Duration::from_secs(120))
         .await
         .context("connecting to Postgres")?;
 

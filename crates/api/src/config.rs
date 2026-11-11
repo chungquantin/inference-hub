@@ -17,7 +17,8 @@ impl Config {
     pub fn from_env() -> anyhow::Result<Self> {
         let database_url = std::env::var("DATABASE_URL").context("DATABASE_URL must be set")?;
         let host = env_or("API_HOST", "127.0.0.1");
-        let port = env_or("API_PORT", "4000");
+        // Platforms such as Railway assign the port in `PORT`.
+        let port = std::env::var("PORT").unwrap_or_else(|_| env_or("API_PORT", "4000"));
         let addr = format!("{host}:{port}")
             .parse()
             .with_context(|| format!("invalid API_HOST/API_PORT: {host}:{port}"))?;

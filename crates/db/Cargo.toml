@@ -11,6 +11,8 @@ serde_json.workspace = true
 sqlx.workspace = true
 uuid.workspace = true
 chrono.workspace = true
+tokio.workspace = true
+tracing.workspace = true
 
 [lints]
 workspace = true

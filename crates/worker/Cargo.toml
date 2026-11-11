@@ -6,6 +6,7 @@ license.workspace = true
 publish.workspace = true
 
 [dependencies]
+axum.workspace = true
 ih-db.workspace = true
 ih-ingest.workspace = true
 anyhow.workspace = true
@@ -20,6 +21,8 @@ tracing-subscriber.workspace = true
 uuid.workspace = true
 
 [dev-dependencies]
+http-body-util.workspace = true
+tower.workspace = true
 axum.workspace = true
 seed = { path = "../seed" }
 serde-saphyr.workspace = true
