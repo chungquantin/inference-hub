@@ -267,6 +267,7 @@ fn admin_app(pool: PgPool) -> Router {
         AppState {
             pool,
             admin_token: Some(ADMIN_TOKEN.to_owned()),
+            admin_allowed: None,
         },
         &[],
     )
@@ -1025,4 +1026,39 @@ async fn market_indexes_match_models_across_providers(pool: PgPool) {
     assert_eq!(overview["gpu_types"], 2);
     assert_eq!(overview["distinct_models"], 2);
     assert_eq!(overview["sources"].as_array().unwrap().len(), 3);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn admin_allow_list_hides_the_admin_api_from_other_networks(pool: PgPool) {
+    let app = |allowed: &str| {
+        api::app(
+            AppState {
+                pool: pool.clone(),
+                admin_token: Some(ADMIN_TOKEN.to_owned()),
+                admin_allowed: Some(
+                    api::auth::AllowList::parse(allowed, Some("x-real-ip".into())).unwrap(),
+                ),
+            },
+            &[],
+        )
+    };
+    let call = |app: Router, client: &'static str| async move {
+        let request = Request::get("/v1/admin/sources")
+            .header(header::AUTHORIZATION, format!("Bearer {ADMIN_TOKEN}"))
+            .header("x-real-ip", client)
+            .body(Body::empty())
+            .unwrap();
+        app.oneshot(request).await.unwrap().status()
+    };
+    assert_eq!(
+        call(app("198.51.100.0/24"), "198.51.100.7").await,
+        StatusCode::OK
+    );
+    assert_eq!(
+        call(app("198.51.100.0/24"), "203.0.113.9").await,
+        StatusCode::NOT_FOUND,
+        "a valid token from elsewhere sees no admin API"
+    );
+    let (status, _) = get(&app("198.51.100.0/24"), "/v1/market/sources").await;
+    assert_eq!(status, StatusCode::OK, "public routes are not limited");
 }

@@ -11,6 +11,8 @@ pub struct Config {
     pub run_migrations: bool,
     /// Enables the admin API. Must be at least 32 characters.
     pub admin_token: Option<String>,
+    /// When set, admin requests must also come from one of these networks.
+    pub admin_allowed: Option<crate::auth::AllowList>,
 }
 
 impl Config {
@@ -48,12 +50,21 @@ impl Config {
             );
         }
 
+        let admin_allowed = match std::env::var("ADMIN_ALLOWED_IPS") {
+            Ok(list) if !list.trim().is_empty() => Some(
+                crate::auth::AllowList::parse(&list, std::env::var("CLIENT_IP_HEADER").ok())
+                    .context("ADMIN_ALLOWED_IPS")?,
+            ),
+            _ => None,
+        };
+
         Ok(Self {
             database_url,
             addr,
             cors_origins,
             run_migrations,
             admin_token,
+            admin_allowed,
         })
     }
 }

@@ -1,6 +1,6 @@
 //! HTTP API for Inference Hub.
 
-mod auth;
+pub mod auth;
 pub mod config;
 pub mod error;
 mod extract;
@@ -24,6 +24,8 @@ pub struct AppState {
     pub pool: PgPool,
     /// Bearer token of the admin API. `None` disables the admin API.
     pub admin_token: Option<String>,
+    /// Networks admin requests must come from, on top of the token.
+    pub admin_allowed: Option<auth::AllowList>,
 }
 
 impl AppState {
@@ -31,6 +33,7 @@ impl AppState {
         Self {
             pool,
             admin_token: None,
+            admin_allowed: None,
         }
     }
 }

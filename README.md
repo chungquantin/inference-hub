@@ -1,7 +1,12 @@
 # Inference Hub
 
-A directory and news site for the inference market: model providers, LLM gateways,
-open-source projects, GPU clouds, hyperscalers, hardware makers and investors.
+A directory, price tracker and news site for the inference market: model providers,
+LLM gateways, open-source projects, GPU clouds, hyperscalers, hardware makers and
+investors.
+
+The worker collects live prices from 27 providers, from small GPU marketplaces to
+hyperscalers, and the site shows them as market-wide indexes: every model and GPU,
+the cheapest offer, the median and the spread (`/market`).
 
 ## Architecture
 
@@ -133,18 +138,19 @@ When a feed will not parse, save it and run
 
 ## Market adapters
 
-Prices also come from the providers themselves, through adapters in
-`crates/ingest/src/adapters/`. There are three kinds of adapter, each a trait:
+Prices come from the providers themselves, through adapters in
+`crates/ingest/src/adapters/`. Each returns listings in common units: USD per million
+tokens for models, USD per hour (with a GPU count) for GPU configurations.
 
-| Trait | Returns | Adapters |
-|---|---|---|
-| `GatewayAdapter` | model API prices (`ModelListing`) | `OpenRouterAdapter` (public model list), `LiquidInferenceAdapter` (best live offer in the exchange's order book) |
-| `NeoCloudAdapter` | GPU instance prices (`GpuListing`) | `RunPodAdapter` (GraphQL, Secure Cloud price), `HyperbolicAdapter` (rental options), `CoreWeaveAdapter` (reads the pricing page) |
-| `NewsAdapter` | articles (`FeedEntry`) | `RssNewsAdapter` (RSS, Atom, JSON Feed) |
+| Kind | Adapters |
+|---|---|
+| Model APIs and routers | OpenRouter, Liquid Inference (order book), Hugging Face Inference Providers (one price per hosting provider), DeepInfra, Novita, Chutes, SambaNova, Atlas Cloud, Inference.net, Featherless, Venice, Vercel AI Gateway, Requesty |
+| GPU clouds and marketplaces | RunPod, Hyperbolic, CoreWeave, Lambda, Vultr, Akamai (Linode), Verda (DataCrunch), Cudo, Vast.ai and Akash (medians of host offers), io.net, Shadeform (18 resold clouds), Oracle Cloud, Microsoft Azure |
 
-The worker runs every market adapter every 6 hours. Each run stores everything it saw in
-`market_listings`. Listings that a product maps to become offerings at the adapter's
-organization:
+Each adapter runs on its own interval: hourly for marketplaces and order books, daily
+for price lists. Every run stores everything it saw in `market_listings`, which feeds
+the market pages. Listings that a product maps to also become offerings of that
+product, with full price history:
 
 ```yaml
 products:
@@ -155,24 +161,56 @@ products:
       coreweave: [NVIDIA HGX H100]
 ```
 
-A changed price adds an offering row, so price history stays complete; an unchanged price
-moves the row's `confirmed_at`, which the site shows as the date checked. A listing that
-disappears ends its offering, which takes it out of comparisons; curated offerings are
-never ended by an adapter. A run that returns less than half the listings of the last one,
-or a page whose layout changed, fails and changes nothing. `/admin/market` shows each
-adapter's health and the listings no product maps to yet.
+A changed price adds an offering row; an unchanged price moves the row's
+`confirmed_at`. A listing that disappears ends its offering. Guards keep bad data out:
 
-GPU names are normalized (`NVIDIA H100 80GB HBM3`, `h100 sxm5` and `NVIDIA HGX H100` are all
-`H100 SXM`), so the GPU comparison lines them up. To add a provider, implement one of the
-traits, give it an id and the slug of its organization, and register it in
-`market_adapters()`.
+- a run that returns less than half the listings of the last one, or a page whose
+  layout changed, fails and changes nothing;
+- a price outside plausible bounds, or more than 5× from the stored one, is held for
+  review at `/admin/market` while the old price stays live (order books and host
+  marketplaces only get the bounds check);
+- jobs that run out of attempts are kept in `jobs_failed`.
+
+GPU names are normalized (`NVIDIA H100 80GB HBM3`, `h100 sxm5`, `H100_80G` are all
+`H100 SXM`), and models are matched across providers by a normalized id
+(`deepseek-ai/DeepSeek-V3.2` and `deepseek/deepseek-v3.2:free` are `deepseek-v3.2`).
+
+`cargo run -p ih-ingest --example live_parse [adapter ...]` fetches adapters live and
+prints what they would store, without a database. To add a provider, see
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
+## News triage with an LLM
+
+With `LIQUID_BASE_URL` and `LIQUID_API_KEY` set, the worker sends pending news to an
+OpenAI-compatible exchange (Liquid Inference, `liquid.auto`) for a topic, a relevance
+grade, a suggested verdict with confidence, a one-sentence summary, and the
+organizations the item is about, chosen from a closed list of directory slugs. Items
+are published automatically only on a confident approve for core news from an
+organization's own feed; everything else waits for an editor, who sees the
+suggestion. Spend is capped per call, per pass and per day (`MAX_ENRICH_USD_PER_DAY`).
+`pnpm worker:enrich` triages the backlog once.
 
 ## Admin
 
 Set `ADMIN_TOKEN` (32+ characters, `openssl rand -hex 32`) for both the API and the web
 server. That enables the admin API under `/v1/admin` (bearer token) and the review pages
 at `/admin`, where editors approve or reject queued items, correct their organizations,
-and see which feeds are failing. Without `ADMIN_TOKEN` both answer 404.
+review held prices, and see which feeds and adapters are failing. Without `ADMIN_TOKEN`
+both answer 404. `ADMIN_ALLOWED_IPS` (addresses or CIDR networks) additionally limits the
+admin API to those clients; behind a proxy, set `CLIENT_IP_HEADER` to the header it sets,
+such as `X-Real-IP` on Railway.
+
+## Deploy
+
+The backend runs on Railway from the repository's `Dockerfile` (one image for the API,
+the worker and the seed), with Postgres and pgvector on a volume; the web app runs on
+Vercel. The Railway project is described in `.railway/railway.ts`. See
+[DEPLOY.md](DEPLOY.md) for the first deploy, secrets and operations, and
+`docker-compose.prod.yml` to run the same stack locally.
+
+The worker serves `/healthz`, `/readyz` and Prometheus `/metrics` on
+`WORKER_METRICS_PORT` (default 9090), and every service logs JSON with
+`LOG_FORMAT=json`.
 
 ## Changing the API
 
@@ -188,7 +226,7 @@ Commit both generated files. CI fails if they are stale.
 
 ```sh
 pnpm lint           # cargo fmt --check, clippy -D warnings, eslint
-pnpm typecheck
+pnpm typecheck      # web, API client and .railway/railway.ts
 pnpm test           # needs Postgres running: each DB test creates and drops its own database
 ```
 
@@ -201,4 +239,7 @@ pnpm test           # needs Postgres running: each DB test creates and drops its
    name-based tagging, admin review queue.
 4. **Comparisons** (done): model and GPU price tables, price history, GitHub stats,
    funding rounds and investor portfolios.
-5. **Growth:** semantic search, newsletter, public API, submissions.
+5. **Market coverage** (done): 27 price adapters, market-wide indexes, price guards,
+   LLM news triage, container deploy.
+6. **Growth:** price history charts per market item, semantic search, newsletter,
+   public API, submissions.

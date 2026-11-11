@@ -55,7 +55,7 @@ jobs:
         run: |
           pnpm --filter @inference-hub/api-client generate
           git diff --exit-code packages/api-client/src/schema.d.ts
-      - run: pnpm -r typecheck
+      - run: pnpm typecheck
       - run: pnpm --filter web lint
 
   docker:

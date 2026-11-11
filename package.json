@@ -18,7 +18,12 @@
     "gen:api": "cargo run -q -p api --bin openapi > packages/api-client/openapi.json && pnpm --filter @inference-hub/api-client generate",
     "build:web": "pnpm --filter web build",
     "lint": "cargo fmt --all --check && cargo clippy --workspace --all-targets -- -D warnings && pnpm -r lint",
-    "typecheck": "pnpm -r typecheck",
-    "test": "cargo test --workspace"
+    "typecheck": "pnpm -r typecheck && tsc -p .railway",
+    "test": "cargo test --workspace",
+    "worker:enrich": "cargo run -q -p worker -- --enrich-backlog"
+  },
+  "devDependencies": {
+    "railway": "3.16.0",
+    "typescript": "5.9.3"
   }
 }

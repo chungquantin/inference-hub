@@ -28,9 +28,13 @@ async fn main() -> anyhow::Result<()> {
     if config.admin_token.is_none() {
         tracing::info!("ADMIN_TOKEN is not set; the admin API is disabled");
     }
+    if config.admin_allowed.is_some() {
+        tracing::info!("admin requests are limited to ADMIN_ALLOWED_IPS");
+    }
     let state = AppState {
         pool,
         admin_token: config.admin_token.clone(),
+        admin_allowed: config.admin_allowed.clone(),
     };
     let app = api::app(state, &config.cors_origins);
     let listener = tokio::net::TcpListener::bind(config.addr)
@@ -38,9 +42,12 @@ async fn main() -> anyhow::Result<()> {
         .with_context(|| format!("binding {}", config.addr))?;
     tracing::info!("listening on http://{} (docs at /docs)", config.addr);
 
-    axum::serve(listener, app)
-        .with_graceful_shutdown(shutdown_signal())
-        .await?;
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<std::net::SocketAddr>(),
+    )
+    .with_graceful_shutdown(shutdown_signal())
+    .await?;
     Ok(())
 }
 
