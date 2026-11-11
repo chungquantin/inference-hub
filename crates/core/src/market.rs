@@ -227,3 +227,64 @@ pub struct MediaIndexQuery {
     /// Keep models this organization sells, by slug.
     pub provider: Option<String>,
 }
+
+/// One thing a provider sells: its price next to the market's.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct ProviderOffering {
+    /// `model`, `gpu`, `embedding`, `image`, `video`, `speech` or `transcription`.
+    pub kind: String,
+    /// The market key: a model key, or a GPU type.
+    pub item_key: String,
+    pub name: String,
+    pub maker: Option<String>,
+    /// The curated product page, when editors mapped this item.
+    pub product_slug: Option<String>,
+    /// `adapter` (collected from the provider) and/or `curated` (the data files).
+    pub sources: Vec<String>,
+    /// Listings of this item at the provider: variants, regions, sizes.
+    pub variants: i32,
+    /// The provider's lowest price: blended USD per 1M tokens for chat models,
+    /// USD per GPU-hour for GPUs, USD per `unit` for the rest.
+    pub price: Option<f64>,
+    pub input_per_mtok: Option<f64>,
+    pub output_per_mtok: Option<f64>,
+    pub unit: Option<String>,
+    /// Providers selling it, and the market's lowest and median price.
+    pub market_providers: Option<i32>,
+    pub market_min: Option<f64>,
+    pub market_median: Option<f64>,
+    /// 1 = cheapest in the market.
+    pub rank: Option<i32>,
+    pub context_window: Option<i32>,
+    pub source_url: Option<String>,
+    pub last_seen_at: Option<DateTime<Utc>>,
+}
+
+/// How many items a provider sells of each kind, for tabs.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct KindCount {
+    pub kind: String,
+    pub count: i64,
+}
+
+#[derive(Debug, Clone, Default, Deserialize, IntoParams)]
+#[into_params(parameter_in = Query)]
+pub struct ProviderOfferingsQuery {
+    /// One kind; default all kinds.
+    pub kind: Option<String>,
+    /// Text the name or key must contain (case-insensitive).
+    pub q: Option<String>,
+    /// Default 50, at most 500.
+    pub limit: Option<i64>,
+    pub offset: Option<i64>,
+}
+
+/// A provider's offerings, one page, with counts per kind.
+#[derive(Debug, Clone, Serialize, ToSchema)]
+pub struct ProviderOfferings {
+    pub kinds: Vec<KindCount>,
+    pub items: Vec<ProviderOffering>,
+    pub total: i64,
+    pub limit: i64,
+    pub offset: i64,
+}

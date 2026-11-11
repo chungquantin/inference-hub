@@ -378,3 +378,61 @@ pub async fn provider(pool: &PgPool, slug: &str) -> sqlx::Result<Option<MarketPr
     .fetch_optional(pool)
     .await
 }
+
+/// A provider's offerings of one kind (or all), the most widely sold first,
+/// with counts per kind. `None` when the provider sells nothing tracked.
+pub async fn provider_offerings(
+    pool: &PgPool,
+    slug: &str,
+    q: &ih_core::ProviderOfferingsQuery,
+) -> sqlx::Result<Option<ih_core::ProviderOfferings>> {
+    let org: Option<uuid::Uuid> =
+        sqlx::query_scalar("SELECT id FROM organizations WHERE slug = $1")
+            .bind(slug)
+            .fetch_optional(pool)
+            .await?;
+    let Some(org) = org else { return Ok(None) };
+    let kinds: Vec<ih_core::KindCount> = sqlx::query_as(
+        "SELECT kind, count(*) AS count FROM market_provider_offerings
+         WHERE organization_id = $1
+         GROUP BY kind
+         ORDER BY array_position(
+             ARRAY['model', 'gpu', 'image', 'video', 'speech', 'transcription', 'embedding'], kind)",
+    )
+    .bind(org)
+    .fetch_all(pool)
+    .await?;
+    if kinds.is_empty() {
+        return Ok(None);
+    }
+    let limit = q.limit.unwrap_or(50).clamp(1, 500);
+    let offset = offset(q.offset);
+    let rows: Vec<Counted<ih_core::ProviderOffering>> = sqlx::query_as(
+        "SELECT count(*) OVER () AS total, f.kind, f.item_key, f.name, f.maker,
+                p.slug AS product_slug, f.sources, f.variants, f.price, f.input_per_mtok,
+                f.output_per_mtok, f.unit, f.market_providers, f.market_min, f.market_median,
+                f.rank, f.context_window, f.source_url, f.last_seen_at
+         FROM market_provider_offerings f
+         LEFT JOIN products p ON p.id = f.product_id
+         WHERE f.organization_id = $1
+           AND ($2::text IS NULL OR f.kind = $2)
+           AND ($3::text IS NULL OR f.name ILIKE $3 OR f.item_key ILIKE $3)
+         ORDER BY f.market_providers DESC NULLS LAST, f.price NULLS LAST, f.item_key
+         LIMIT $4 OFFSET $5",
+    )
+    .bind(org)
+    .bind(blank(&q.kind))
+    .bind(like(&q.q))
+    .bind(limit)
+    .bind(offset)
+    .fetch_all(pool)
+    .await?;
+    let page = page(rows, limit, offset);
+    Ok(Some(ih_core::ProviderOfferings {
+        kinds,
+        items: page.items,
+        total: page.total,
+        limit,
+        offset,
+    }))
+}

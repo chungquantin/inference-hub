@@ -23,6 +23,7 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(media_index))
         .routes(routes!(providers))
         .routes(routes!(provider))
+        .routes(routes!(provider_offerings))
         .routes(routes!(sources))
 }
 
@@ -132,4 +133,21 @@ async fn provider(
         .await?
         .map(Json)
         .ok_or(ApiError::NotFound("market provider"))
+}
+
+/// Everything one provider sells, collected from its catalog and from the
+/// curated data, with the market's price next to its own.
+#[utoipa::path(get, path = "/market/providers/{slug}/offerings", tag = "market",
+    operation_id = "marketProviderOfferings",
+    params(("slug" = String, Path, description = "Organization slug"), ih_core::ProviderOfferingsQuery),
+    responses((status = 200, body = ih_core::ProviderOfferings), (status = 404, body = ErrorBody)))]
+async fn provider_offerings(
+    State(state): State<AppState>,
+    Path(slug): Path<String>,
+    Query(q): Query<ih_core::ProviderOfferingsQuery>,
+) -> ApiResult<Json<ih_core::ProviderOfferings>> {
+    ih_db::market::provider_offerings(&state.pool, &slug, &q)
+        .await?
+        .map(Json)
+        .ok_or(ApiError::NotFound("provider offerings"))
 }

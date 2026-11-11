@@ -1175,6 +1175,83 @@
         }
       }
     },
+    "/v1/market/providers/{slug}/offerings": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Everything one provider sells, collected from its catalog and from the\ncurated data, with the market's price next to its own.",
+        "operationId": "marketProviderOfferings",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Organization slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "description": "One kind; default all kinds.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text the name or key must contain (case-insensitive).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Default 50, at most 500.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderOfferings"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market/sources": {
       "get": {
         "tags": [
@@ -1938,6 +2015,23 @@
           "accepted",
           "rejected"
         ]
+      },
+      "KindCount": {
+        "type": "object",
+        "description": "How many items a provider sells of each kind, for tabs.",
+        "required": [
+          "kind",
+          "count"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kind": {
+            "type": "string"
+          }
+        }
       },
       "MakerRef": {
         "type": "object",
@@ -3800,6 +3894,170 @@
           "platform",
           "other"
         ]
+      },
+      "ProviderOffering": {
+        "type": "object",
+        "description": "One thing a provider sells: its price next to the market's.",
+        "required": [
+          "kind",
+          "item_key",
+          "name",
+          "sources",
+          "variants"
+        ],
+        "properties": {
+          "context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "item_key": {
+            "type": "string",
+            "description": "The market key: a model key, or a GPU type."
+          },
+          "kind": {
+            "type": "string",
+            "description": "`model`, `gpu`, `embedding`, `image`, `video`, `speech` or `transcription`."
+          },
+          "last_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market_median": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "market_min": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "market_providers": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "Providers selling it, and the market's lowest and median price."
+          },
+          "name": {
+            "type": "string"
+          },
+          "output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "The provider's lowest price: blended USD per 1M tokens for chat models,\nUSD per GPU-hour for GPUs, USD per `unit` for the rest."
+          },
+          "product_slug": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The curated product page, when editors mapped this item."
+          },
+          "rank": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "1 = cheapest in the market."
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "`adapter` (collected from the provider) and/or `curated` (the data files)."
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variants": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Listings of this item at the provider: variants, regions, sizes."
+          }
+        }
+      },
+      "ProviderOfferings": {
+        "type": "object",
+        "description": "A provider's offerings, one page, with counts per kind.",
+        "required": [
+          "kinds",
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProviderOffering"
+            }
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KindCount"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
       },
       "RepoLeader": {
         "allOf": [

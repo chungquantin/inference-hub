@@ -1207,3 +1207,80 @@ async fn a_providers_catalog_matches_its_filtered_lists(pool: PgPool) {
         StatusCode::NOT_FOUND
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn a_providers_offerings_merge_live_and_curated_in_one_list(pool: PgPool) {
+    // Curated: cloud-x sells big-model, open-model and 8× H1; cloud-y sells
+    // open-model and H1. Live: cloud-x's adapter also lists a model of its own.
+    seed_market(&pool).await;
+    sqlx::query(
+        "INSERT INTO adapter_state (adapter, organization_id, last_success_at)
+         SELECT 'x', id, now() FROM organizations WHERE slug = 'cloud-x'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name,
+             price_input_per_mtok, price_output_per_mtok)
+         VALUES ('x', 'live-only', 'acme/live-only', 'model', 'Live Only', 1, 1)",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    ih_db::market_refresh::refresh(&pool).await.unwrap();
+    let app = app(pool);
+
+    let (status, all) = get(&app, "/v1/market/providers/cloud-x/offerings").await;
+    assert_eq!(status, StatusCode::OK);
+    let kinds: Vec<(String, i64)> = all["kinds"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|k| {
+            (
+                k["kind"].as_str().unwrap().to_owned(),
+                k["count"].as_i64().unwrap(),
+            )
+        })
+        .collect();
+    assert_eq!(kinds, [("model".into(), 3), ("gpu".into(), 1)], "{all}");
+    assert_eq!(all["total"], 4, "the tabs and the list count the same rows");
+
+    let item = |key: &str| {
+        all["items"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|i| i["item_key"] == key)
+            .unwrap_or_else(|| panic!("{key} in {all}"))
+            .clone()
+    };
+    let open = item("open-model");
+    assert_eq!(open["sources"], serde_json::json!(["curated"]));
+    assert_eq!(open["product_slug"], "open-model");
+    // 0.2/0.2 blends to 0.2; cloud-y's 0.1/0.4 blends to 0.175: second of two.
+    assert_eq!(
+        (open["rank"].as_i64(), open["market_providers"].as_i64()),
+        (Some(2), Some(2))
+    );
+    let live = item("live-only");
+    assert_eq!(live["sources"], serde_json::json!(["adapter"]));
+    assert_eq!(live["product_slug"], serde_json::Value::Null);
+    let gpu = item("H1");
+    assert_eq!(gpu["price"], 5.0, "40 per hour for 8 GPUs");
+    assert_eq!(gpu["rank"], 2, "cloud-y's 3.5 per GPU-hour is lower");
+
+    let (_, gpus) = get(&app, "/v1/market/providers/cloud-x/offerings?kind=gpu").await;
+    assert_eq!(gpus["total"], 1);
+    let (_, found) = get(&app, "/v1/market/providers/cloud-x/offerings?q=live").await;
+    assert_eq!(found["total"], 1);
+
+    let (_, provider) = get(&app, "/v1/market/providers/cloud-x").await;
+    assert_eq!(provider["models"], 3, "the summary counts the same rows");
+    assert_eq!(
+        get(&app, "/v1/market/providers/chips/offerings").await.0,
+        StatusCode::NOT_FOUND,
+        "chips makes the GPU but sells it nowhere: no section"
+    );
+}

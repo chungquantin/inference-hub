@@ -2,21 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FundingTable, PortfolioList } from "@/components/funding";
-import { MarketCatalog } from "@/components/market-catalog";
 import { NewsList } from "@/components/news";
 import { ProductList } from "@/components/product-list";
-import { OrgPrices } from "@/components/org-prices";
+import { parsePage } from "@/components/listing";
+import { ProviderOfferingsSection } from "@/components/provider-offerings";
 import { FactStrip, ProfileHeader } from "@/components/profile";
 import { Badge, SectionHeader, buttonClass } from "@/components/ui/primitives";
 import type { FundingRound } from "@inference-hub/api-client";
 import { api } from "@/lib/api";
-import { formatDate, formatMoney } from "@/lib/format";
+import { formatCount, formatDate, formatMoney } from "@/lib/format";
 import { ORG_KIND_LABELS } from "@/lib/labels";
 import { SITE_URL, jsonLd } from "@/lib/site";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ kind?: string; q?: string; page?: string }>;
+};
+
+const OFFERINGS_PAGE = 50;
 
 async function loadOrganization(slug: string) {
   const { data, response } = await api.GET("/v1/organizations/{slug}", {
@@ -36,22 +41,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function OrganizationPage({ params }: Props) {
+export default async function OrganizationPage({ params, searchParams }: Props) {
   const { slug } = await params;
-  const [org, news, modelPrices, gpuPrices, market, marketModels, marketGpus] = await Promise.all([
+  const query = await searchParams;
+  const page = parsePage(query.page);
+  const [org, news, market, offerings] = await Promise.all([
     loadOrganization(slug),
     api.GET("/v1/news", { params: { query: { organization: slug, limit: 8 } } }),
-    api.GET("/v1/compare/models", { params: { query: { provider: slug } } }),
-    api.GET("/v1/compare/gpus", { params: { query: { provider: slug } } }),
-    // The provider's full catalog, from the worker's market summaries.
     api.GET("/v1/market/providers/{slug}", { params: { path: { slug } } }),
-    api.GET("/v1/market/models", { params: { query: { provider: slug, limit: 15 } } }),
-    api.GET("/v1/market/gpus", { params: { query: { provider: slug, limit: 30 } } }),
+    // Everything it sells, from its live catalog and the curated data, merged.
+    api.GET("/v1/market/providers/{slug}/offerings", {
+      params: {
+        path: { slug },
+        query: {
+          kind: query.kind || undefined,
+          q: query.q || undefined,
+          limit: OFFERINGS_PAGE,
+          offset: (page - 1) * OFFERINGS_PAGE,
+        },
+      },
+    }),
   ]);
-  const sells = {
-    models: modelPrices.data ?? [],
-    gpus: gpuPrices.data?.prices ?? [],
-  };
   const links = Object.entries(org.links);
 
   return (
@@ -89,7 +99,12 @@ export default async function OrganizationPage({ params }: Props) {
           { label: "Headquarters", value: org.hq_country ?? undefined },
           { label: "Status", value: org.status === "active" ? undefined : org.status },
           { label: "Products", value: org.products.length || undefined },
-          { label: "Serves", value: org.served_products.length || undefined },
+          {
+            label: "Sells",
+            value: offerings.data
+              ? formatCount(offerings.data.kinds.reduce((n, k) => n + k.count, 0))
+              : undefined,
+          },
           { label: "Raised", value: raised(org.funding) },
         ]}
       />
@@ -98,38 +113,23 @@ export default async function OrganizationPage({ params }: Props) {
         <section className="max-w-[65ch] text-[15px] leading-relaxed text-ink-2">{org.description}</section>
       )}
 
-      {market.data && (
-        <MarketCatalog
+      {offerings.data && (
+        <ProviderOfferingsSection
           name={org.name}
+          slug={org.slug}
           provider={market.data}
-          models={{ items: marketModels.data?.items ?? [], total: marketModels.data?.total ?? 0 }}
-          gpus={marketGpus.data ?? []}
+          offerings={offerings.data}
+          kind={query.kind || undefined}
+          q={query.q || undefined}
+          page={page}
+          pageSize={OFFERINGS_PAGE}
         />
-      )}
-
-      {(sells.models.length > 0 || sells.gpus.length > 0) && (
-        <section className="flex flex-col gap-4">
-          <SectionHeader
-            title={`Tracked prices at ${org.name}`}
-            count={sells.models.length + sells.gpus.length}
-            href={sells.gpus.length > 0 ? `/compare/gpus?provider=${org.slug}` : `/compare/models?provider=${org.slug}`}
-            linkLabel="Compare with other providers"
-          />
-          <OrgPrices models={sells.models} gpus={sells.gpus} />
-        </section>
       )}
 
       {org.products.length > 0 && (
         <section className="flex flex-col gap-3">
           <SectionHeader title="Products" />
           <ProductList products={org.products} showMaker={false} />
-        </section>
-      )}
-
-      {org.served_products.length > 0 && (
-        <section className="flex flex-col gap-3">
-          <SectionHeader title={`Sold by ${org.name}`} />
-          <ProductList products={org.served_products} />
         </section>
       )}
 

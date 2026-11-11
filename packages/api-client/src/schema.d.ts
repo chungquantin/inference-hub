@@ -402,6 +402,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/providers/{slug}/offerings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Everything one provider sells, collected from its catalog and from the
+         *     curated data, with the market's price next to its own.
+         */
+        get: operations["marketProviderOfferings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/sources": {
         parameters: {
             query?: never;
@@ -673,6 +693,12 @@ export interface components {
          * @enum {string}
          */
         HoldResolution: "accepted" | "rejected";
+        /** @description How many items a provider sells of each kind, for tabs. */
+        KindCount: {
+            /** Format: int64 */
+            count: number;
+            kind: string;
+        };
         /** @description The organization that makes a product, read from `maker_*` columns. */
         MakerRef: {
             logo_url?: string | null;
@@ -1291,6 +1317,65 @@ export interface components {
          * @enum {string}
          */
         ProductType: "model" | "inference_api" | "gateway" | "gpu_instance" | "oss_project" | "hardware" | "platform" | "other";
+        /** @description One thing a provider sells: its price next to the market's. */
+        ProviderOffering: {
+            /** Format: int32 */
+            context_window?: number | null;
+            /** Format: double */
+            input_per_mtok?: number | null;
+            /** @description The market key: a model key, or a GPU type. */
+            item_key: string;
+            /** @description `model`, `gpu`, `embedding`, `image`, `video`, `speech` or `transcription`. */
+            kind: string;
+            /** Format: date-time */
+            last_seen_at?: string | null;
+            maker?: string | null;
+            /** Format: double */
+            market_median?: number | null;
+            /** Format: double */
+            market_min?: number | null;
+            /**
+             * Format: int32
+             * @description Providers selling it, and the market's lowest and median price.
+             */
+            market_providers?: number | null;
+            name: string;
+            /** Format: double */
+            output_per_mtok?: number | null;
+            /**
+             * Format: double
+             * @description The provider's lowest price: blended USD per 1M tokens for chat models,
+             *     USD per GPU-hour for GPUs, USD per `unit` for the rest.
+             */
+            price?: number | null;
+            /** @description The curated product page, when editors mapped this item. */
+            product_slug?: string | null;
+            /**
+             * Format: int32
+             * @description 1 = cheapest in the market.
+             */
+            rank?: number | null;
+            source_url?: string | null;
+            /** @description `adapter` (collected from the provider) and/or `curated` (the data files). */
+            sources: string[];
+            unit?: string | null;
+            /**
+             * Format: int32
+             * @description Listings of this item at the provider: variants, regions, sizes.
+             */
+            variants: number;
+        };
+        /** @description A provider's offerings, one page, with counts per kind. */
+        ProviderOfferings: {
+            items: components["schemas"]["ProviderOffering"][];
+            kinds: components["schemas"]["KindCount"][];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
+        };
         /** @description A row of the open-source leaderboard. */
         RepoLeader: components["schemas"]["RepoStats"] & {
             organization: components["schemas"]["OrganizationRef"];
@@ -2145,6 +2230,44 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarketProvider"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketProviderOfferings: {
+        parameters: {
+            query?: {
+                /** @description One kind; default all kinds. */
+                kind?: string;
+                /** @description Text the name or key must contain (case-insensitive). */
+                q?: string;
+                /** @description Default 50, at most 500. */
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                /** @description Organization slug */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProviderOfferings"];
                 };
             };
             404: {
