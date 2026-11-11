@@ -23,16 +23,43 @@ async fn main() -> anyhow::Result<()> {
     }
 
     let mut check_only = false;
+    let mut archive: Option<&str> = None;
     let mut dir = PathBuf::from("data");
     for arg in std::env::args().skip(1) {
         match arg.as_str() {
             "--check" => check_only = true,
+            "--export-archive" => archive = Some("export"),
+            "--import-archive" => archive = Some("import"),
             "-h" | "--help" => {
-                println!("usage: seed [--check] [DATA_DIR]");
+                println!(
+                    "usage: seed [--check | --export-archive | --import-archive] [DATA_DIR]\n\
+                     \n  --export-archive  write fetched data to DATA_DIR/archive/*.jsonl\
+                     \n  --import-archive  load DATA_DIR/archive/*.jsonl, then rebuild market summaries"
+                );
                 return Ok(());
             }
             other => dir = PathBuf::from(other),
         }
+    }
+
+    if let Some(mode) = archive {
+        let database_url = std::env::var("DATABASE_URL").context("DATABASE_URL must be set")?;
+        let pool =
+            ih_db::connect_with_retry(&database_url, std::time::Duration::from_secs(120)).await?;
+        ih_db::migrate(&pool).await.context("running migrations")?;
+        let archive_dir = dir.join("archive");
+        let counts = if mode == "export" {
+            seed::archive::export(&pool, &archive_dir).await?
+        } else {
+            let counts = seed::archive::import(&pool, &archive_dir).await?;
+            let report = ih_db::market_refresh::refresh(&pool).await?;
+            tracing::info!(?report, "market summaries rebuilt");
+            counts
+        };
+        for c in &counts {
+            tracing::info!(table = c.table, rows = c.rows, "{mode}ed");
+        }
+        return Ok(());
     }
 
     let data = seed::load(&dir)?;

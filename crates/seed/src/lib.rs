@@ -5,6 +5,7 @@
 //! observation is not already stored. Nothing is deleted, so removing a file
 //! does not remove rows. Fetch state of sources (validators, failures) is kept.
 
+pub mod archive;
 pub mod data;
 
 use std::{collections::HashSet, path::Path};

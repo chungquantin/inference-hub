@@ -12,6 +12,8 @@
     "dev:web": "pnpm --filter web dev",
     "seed": "cargo run -q -p seed",
     "seed:check": "cargo run -q -p seed -- --check",
+    "archive:export": "cargo run -q -p seed -- --export-archive",
+    "archive:import": "cargo run -q -p seed -- --import-archive",
     "dev:worker": "cargo run -p worker",
     "worker:once": "cargo run -q -p worker -- --once",
     "worker:retag": "cargo run -q -p worker -- --retag",
