@@ -767,7 +767,15 @@ export interface components {
              * @description Embedding, image, video, speech and transcription models.
              */
             media_models: number;
-            /** Format: int64 */
+            /**
+             * Format: int64
+             * @description Chat model listings as the provider lists them, variants included.
+             */
+            model_listings: number;
+            /**
+             * Format: int64
+             * @description Distinct chat models (variants such as `:free` or `@region` count once).
+             */
             models: number;
             organization: components["schemas"]["OrganizationRef"];
         };
@@ -1912,6 +1920,11 @@ export interface operations {
                 limit?: number;
                 /** @description Rows to skip, for paging. Default 0. */
                 offset?: number;
+                /**
+                 * @description Keep models (or GPUs) this organization sells, by slug. Prices and
+                 *     provider counts still cover the whole market.
+                 */
+                provider?: string;
             };
             header?: never;
             path?: never;
@@ -2015,6 +2028,11 @@ export interface operations {
                 limit?: number;
                 /** @description Rows to skip, for paging. Default 0. */
                 offset?: number;
+                /**
+                 * @description Keep models (or GPUs) this organization sells, by slug. Prices and
+                 *     provider counts still cover the whole market.
+                 */
+                provider?: string;
             };
             header?: never;
             path?: never;

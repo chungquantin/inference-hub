@@ -94,6 +94,9 @@ pub struct MarketIndexQuery {
     pub limit: Option<i64>,
     /// Rows to skip, for paging. Default 0.
     pub offset: Option<i64>,
+    /// Keep models (or GPUs) this organization sells, by slug. Prices and
+    /// provider counts still cover the whole market.
+    pub provider: Option<String>,
 }
 
 /// One provider's live price for a model or GPU, as the adapter saw it.
@@ -134,7 +137,10 @@ pub struct MarketDetail {
 pub struct MarketProvider {
     #[sqlx(flatten)]
     pub organization: OrganizationRef,
+    /// Distinct chat models (variants such as `:free` or `@region` count once).
     pub models: i64,
+    /// Chat model listings as the provider lists them, variants included.
+    pub model_listings: i64,
     /// Embedding, image, video, speech and transcription models.
     pub media_models: i64,
     pub gpu_configurations: i64,

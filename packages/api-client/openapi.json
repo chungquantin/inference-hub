@@ -830,6 +830,15 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Keep models (or GPUs) this organization sells, by slug. Prices and\nprovider counts still cover the whole market.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1020,6 +1029,15 @@
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Keep models (or GPUs) this organization sells, by slug. Prices and\nprovider counts still cover the whole market.",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -2124,6 +2142,7 @@
         "required": [
           "organization",
           "models",
+          "model_listings",
           "media_models",
           "gpu_configurations",
           "cheapest_count"
@@ -2150,9 +2169,15 @@
             "format": "int64",
             "description": "Embedding, image, video, speech and transcription models."
           },
+          "model_listings": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Chat model listings as the provider lists them, variants included."
+          },
           "models": {
             "type": "integer",
-            "format": "int64"
+            "format": "int64",
+            "description": "Distinct chat models (variants such as `:free` or `@region` count once)."
           },
           "organization": {
             "$ref": "#/components/schemas/OrganizationRef"

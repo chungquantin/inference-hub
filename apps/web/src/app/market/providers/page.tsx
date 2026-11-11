@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { ProviderLink } from "@/components/price-cells";
 import { PixelBar } from "@/components/ui/pixel";
@@ -23,18 +24,30 @@ export default async function MarketProvidersPage() {
       <PageHeader
         label="Market / Providers"
         title="Providers"
-        lead="Catalog size, and how many contested models or GPU types each provider sells cheapest. Only items two or more providers sell count as contested."
+        lead="Catalog size, and how many contested models or GPU types each provider sells cheapest. Chat models are distinct models; listings count every variant the provider lists (regions, :free, batch). Only items two or more providers sell count as contested."
       />
       <DataTable
         caption={`${data.length} providers`}
-        headers={["#", "Provider", "Models", "GPU configs", "Cheapest on", ""]}
-        numeric={[0, 2, 3, 4]}
+        headers={["#", "Provider", "Chat models", "Listings", "Media models", "GPU configs", "Cheapest on", ""]}
+        numeric={[0, 2, 3, 4, 5, 6]}
         rows={data.map((p, i) => ({
           key: p.organization.slug,
           cells: [
             <Price key="r">{i + 1}</Price>,
             <ProviderLink key="p" slug={p.organization.slug} name={p.organization.name} logoUrl={p.organization.logo_url} />,
-            <Price key="m">{p.models ? formatCount(p.models) : "—"}</Price>,
+            p.models ? (
+              <Link
+                key="m"
+                href={`/market/models?provider=${p.organization.slug}`}
+                className="font-mono text-ink underline decoration-line-strong tabular hover:text-s-7"
+              >
+                {formatCount(p.models)}
+              </Link>
+            ) : (
+              <Price key="m">—</Price>
+            ),
+            <Price key="l">{p.model_listings ? formatCount(p.model_listings) : "—"}</Price>,
+            <Price key="md">{p.media_models ? formatCount(p.media_models) : "—"}</Price>,
             <Price key="g">{p.gpu_configurations || "—"}</Price>,
             <Price key="w" strong>
               {p.cheapest_count}

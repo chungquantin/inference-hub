@@ -13,20 +13,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/market/models" },
 };
 
-type Props = { searchParams: Promise<{ q?: string; min?: string; page?: string }> };
+type Props = { searchParams: Promise<{ q?: string; min?: string; page?: string; provider?: string }> };
 
 const MINS = ["1", "2", "5"] as const;
 const PAGE_SIZE = 100;
 
 export default async function MarketModelsPage({ searchParams }: Props) {
   const params = await searchParams;
-  // Without a search, show contested models first: thousands are sold by one provider only.
-  const min = MINS.includes(params.min as (typeof MINS)[number]) ? Number(params.min) : params.q ? 1 : 2;
+  // Every model by default; the most widely sold come first.
+  const min = MINS.includes(params.min as (typeof MINS)[number]) ? Number(params.min) : 1;
   const pageNumber = parsePage(params.page);
   const { data: page, error } = await api.GET("/v1/market/models", {
     params: {
       query: {
         q: params.q || undefined,
+        provider: params.provider || undefined,
         min_providers: min,
         limit: PAGE_SIZE,
         offset: (pageNumber - 1) * PAGE_SIZE,
@@ -35,7 +36,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
   });
   if (error || !page) throw new Error("Could not load the model index");
   const data = page.items;
-  const current = { q: params.q, min: params.min };
+  const current = { q: params.q, min: params.min, provider: params.provider };
   // Filters reset to the first page.
   const href = (o: Record<string, string | undefined>) =>
     listingHref("/market/models", current, { page: undefined, ...o });
@@ -46,21 +47,28 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       <PageHeader
         label="Market / Models"
         title="Model price index"
-        lead="The same model across providers, routers and gateways, matched by its id. Blend is 3 input tokens per output token; free promotional listings are left out."
+        lead="Every chat model we see, matched across providers by its id: maker and routing prefixes, regions and quantization suffixes are ignored, so anthropic/claude-sonnet-4.5 and bedrock/claude-sonnet-4-5@us-east-1 are one model. Blend is 3 input tokens per output token; free promotional listings are left out of prices."
       />
-      <SearchForm action="/market/models" defaultValue={params.q} placeholder="Search models, such as deepseek or llama" hidden={{ min: params.min }} />
+      <SearchForm action="/market/models" defaultValue={params.q} placeholder="Search models, such as deepseek or llama" hidden={{ min: params.min, provider: params.provider }} />
       <nav className="flex flex-wrap gap-2 text-sm" aria-label="Minimum providers">
         {MINS.map((m) => (
           <FilterChip key={m} href={href({ min: m })} active={min === Number(m)}>
-            {m === "1" ? "All, incl. single-provider" : `${m}+ providers`}
+            {m === "1" ? "All models" : `Sold by ${m}+ providers`}
           </FilterChip>
         ))}
+        {params.provider && (
+          <FilterChip href={href({ provider: undefined })} active>
+            Sold by {params.provider} ✕
+          </FilterChip>
+        )}
       </nav>
       {data.length === 0 ? (
         <p className="font-mono text-[13px] text-ink-3">No model matches. Try a shorter search or fewer providers.</p>
       ) : (
         <DataTable
-          caption={`${formatCount(page.total)} models sold by ${min === 1 ? "one or more providers" : `${min}+ providers`}${
+          caption={`${formatCount(page.total)} models${params.provider ? ` sold by ${params.provider}` : ""}${
+            min > 1 ? ` on ${min}+ providers` : ""
+          }${
             page.total > PAGE_SIZE ? ` · ${first}–${first + data.length - 1}` : ""
           }`}
           headers={["Model", "Maker", "Providers", "Lowest in", "Lowest out", "Lowest blend", "Median blend", "Context", "Cheapest at"]}

@@ -128,6 +128,8 @@ pub async fn model_index(
                 c.logo_url AS organization_logo
          FROM stats s JOIN cheapest c USING (model_key)
          WHERE s.providers >= $2
+           AND ($6::text IS NULL OR EXISTS (
+                 SELECT 1 FROM live p WHERE p.model_key = s.model_key AND p.slug = $6))
          ORDER BY s.providers DESC, s.min_blended, s.model_key
          LIMIT $3 OFFSET $5",
     )
@@ -136,6 +138,7 @@ pub async fn model_index(
     .bind(limit(q))
     .bind(BLEND_INPUT_WEIGHT)
     .bind(q.offset.unwrap_or(0).max(0))
+    .bind(q.provider.as_deref().filter(|p| !p.is_empty()))
     .fetch_all(pool)
     .await?;
     // The window count; a page past the end has no rows to carry it.
@@ -260,6 +263,7 @@ pub async fn providers(pool: &PgPool) -> sqlx::Result<Vec<MarketProvider>> {
              SELECT l.slug AS organization_slug, l.name AS organization_name,
                     l.logo_url AS organization_logo,
                     count(DISTINCT l.item) FILTER (WHERE l.kind = 'model') AS models,
+                    count(*) FILTER (WHERE l.kind = 'model') AS model_listings,
                     count(DISTINCT l.item) FILTER (WHERE l.kind NOT IN ('model', 'gpu')) AS media_models,
                     count(*) FILTER (WHERE l.kind = 'gpu') AS gpu_configurations,
                     (SELECT count(*) FROM winners w WHERE w.id = l.id) AS cheapest_count,

@@ -1126,3 +1126,53 @@ async fn media_index_compares_unit_prices_across_providers(pool: PgPool) {
         (Some(4), Some(3))
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn one_model_is_matched_across_spellings_routes_and_regions(pool: PgPool) {
+    let keys: Vec<(String, String)> =
+        sqlx::query_as("SELECT x, market_model_key(x) FROM unnest($1::text[]) x")
+            .bind(vec![
+                "anthropic/claude-sonnet-4.5",
+                "claude-sonnet-4-5",
+                "bedrock/claude-sonnet-4-5@us-east-1",
+                "claude-sonnet-4-5-eu-west-1",
+                "google/gemini-2.5-pro-batch",
+                "deepseek-v4-flash-0731:thinking",
+                "deepseek/deepseek-v3.2:free",
+                "claude-haiku-4-5-20251001",
+                "openai/whisper-large-v3-turbo",
+                "Qwen/Qwen3-235B-A22B-Instruct-2507",
+            ])
+            .fetch_all(&pool)
+            .await
+            .unwrap();
+    let keys: Vec<&str> = keys.iter().map(|(_, k)| k.as_str()).collect();
+    assert_eq!(
+        keys,
+        [
+            "claude-sonnet-4.5",
+            "claude-sonnet-4.5",
+            "claude-sonnet-4.5",
+            "claude-sonnet-4.5",
+            "gemini-2.5-pro",
+            "deepseek-v4-flash-0731-thinking",
+            "deepseek-v3.2",
+            // Dated snapshots and sizes keep their digits.
+            "claude-haiku-4.5-20251001",
+            "whisper-large-v3-turbo",
+            "qwen3-235b-a22b-instruct-2507",
+        ]
+    );
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn model_index_filters_by_provider_but_prices_the_whole_market(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+    let (_, page) = get(&app, "/v1/market/models?provider=alpha").await;
+    assert_eq!(page["total"], 1, "{page}");
+    let m = &page["items"][0];
+    assert_eq!(m["model_key"], "deepseek-v3.2");
+    assert_eq!(m["providers"], 2, "the other provider still counts");
+    assert_eq!(m["cheapest"]["slug"], "beta");
+}
