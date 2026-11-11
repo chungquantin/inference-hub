@@ -123,6 +123,7 @@ pub async fn media_index(pool: &PgPool, q: &MediaIndexQuery) -> sqlx::Result<Pag
          WHERE m.kind <> 'model' AND m.providers >= $3
            AND ($1::text IS NULL OR m.kind = $1)
            AND ($2::text IS NULL OR m.model_key ILIKE $2 OR m.name ILIKE $2)
+           AND ($6::text IS NULL OR m.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $6)])
          ORDER BY m.providers DESC, m.kind, m.min_price, m.model_key
          LIMIT $4 OFFSET $5"
     )))
@@ -131,6 +132,7 @@ pub async fn media_index(pool: &PgPool, q: &MediaIndexQuery) -> sqlx::Result<Pag
     .bind(q.min_providers.unwrap_or(1))
     .bind(limit)
     .bind(offset)
+    .bind(blank(&q.provider))
     .fetch_all(pool)
     .await?;
     Ok(page(rows, limit, offset))
@@ -357,5 +359,22 @@ pub async fn failed_jobs(pool: &PgPool, limit: i64) -> sqlx::Result<Vec<ih_core:
     )
     .bind(limit.clamp(1, 500))
     .fetch_all(pool)
+    .await
+}
+
+/// One provider's catalog size, `None` when no adapter reports for it.
+pub async fn provider(pool: &PgPool, slug: &str) -> sqlx::Result<Option<MarketProvider>> {
+    sqlx::query_as(
+        "SELECT o.slug AS organization_slug, o.name AS organization_name,
+                o.logo_url AS organization_logo,
+                p.models::int8 AS models, p.model_listings::int8 AS model_listings,
+                p.media_models::int8 AS media_models,
+                p.gpu_configurations::int8 AS gpu_configurations,
+                p.cheapest_count::int8 AS cheapest_count, p.last_seen_at
+         FROM market_providers p JOIN organizations o ON o.id = p.organization_id
+         WHERE o.slug = $1",
+    )
+    .bind(slug)
+    .fetch_optional(pool)
     .await
 }

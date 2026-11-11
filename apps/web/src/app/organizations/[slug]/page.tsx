@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { FundingTable, PortfolioList } from "@/components/funding";
+import { MarketCatalog } from "@/components/market-catalog";
 import { NewsList } from "@/components/news";
 import { ProductList } from "@/components/product-list";
 import { OrgPrices } from "@/components/org-prices";
@@ -37,11 +38,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function OrganizationPage({ params }: Props) {
   const { slug } = await params;
-  const [org, news, modelPrices, gpuPrices] = await Promise.all([
+  const [org, news, modelPrices, gpuPrices, market, marketModels, marketGpus] = await Promise.all([
     loadOrganization(slug),
     api.GET("/v1/news", { params: { query: { organization: slug, limit: 8 } } }),
     api.GET("/v1/compare/models", { params: { query: { provider: slug } } }),
     api.GET("/v1/compare/gpus", { params: { query: { provider: slug } } }),
+    // The provider's full catalog, from the worker's market summaries.
+    api.GET("/v1/market/providers/{slug}", { params: { path: { slug } } }),
+    api.GET("/v1/market/models", { params: { query: { provider: slug, limit: 15 } } }),
+    api.GET("/v1/market/gpus", { params: { query: { provider: slug, limit: 30 } } }),
   ]);
   const sells = {
     models: modelPrices.data ?? [],
@@ -93,10 +98,19 @@ export default async function OrganizationPage({ params }: Props) {
         <section className="max-w-[65ch] text-[15px] leading-relaxed text-ink-2">{org.description}</section>
       )}
 
+      {market.data && (
+        <MarketCatalog
+          name={org.name}
+          provider={market.data}
+          models={{ items: marketModels.data?.items ?? [], total: marketModels.data?.total ?? 0 }}
+          gpus={marketGpus.data ?? []}
+        />
+      )}
+
       {(sells.models.length > 0 || sells.gpus.length > 0) && (
         <section className="flex flex-col gap-4">
           <SectionHeader
-            title={`Prices at ${org.name}`}
+            title={`Tracked prices at ${org.name}`}
             count={sells.models.length + sells.gpus.length}
             href={sells.gpus.length > 0 ? `/compare/gpus?provider=${org.slug}` : `/compare/models?provider=${org.slug}`}
             linkLabel="Compare with other providers"

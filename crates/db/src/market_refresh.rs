@@ -81,7 +81,8 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                     ('bedrock', 'vertex', 'azure', 'aws', 'gcp', 'google-vertex', 'coding')),
                 count(DISTINCT seller) FILTER (WHERE blended > 0),
                 count(*),
-                array_agg(DISTINCT org),
+                -- Organizations selling it at a price (a free tier alone is not selling).
+                array_agg(DISTINCT org) FILTER (WHERE blended > 0),
                 (array_agg(org ORDER BY blended, org_name) FILTER (WHERE blended > 0))[1],
                 round(min(input) FILTER (WHERE blended > 0)::numeric, 6)::float8,
                 round(min(output) FILTER (WHERE blended > 0)::numeric, 6)::float8,
@@ -158,7 +159,9 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
              (organization_id, models, model_listings, media_models, gpu_configurations,
               cheapest_count, last_seen_at)
          SELECT org,
-                count(DISTINCT item) FILTER (WHERE kind = 'model'),
+                -- Priced models, as the model index lists them; free-only
+                -- listings still count as listings.
+                count(DISTINCT item) FILTER (WHERE kind = 'model' AND blended > 0),
                 count(*) FILTER (WHERE kind = 'model'),
                 count(DISTINCT kind || ':' || item) FILTER (WHERE kind NOT IN ('model', 'gpu')),
                 count(*) FILTER (WHERE kind = 'gpu'),

@@ -385,6 +385,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/providers/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One provider's catalog in the market: model, media and GPU counts. */
+        get: operations["marketProvider"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/sources": {
         parameters: {
             query?: never;
@@ -774,7 +791,8 @@ export interface components {
             model_listings: number;
             /**
              * Format: int64
-             * @description Distinct chat models (variants such as `:free` or `@region` count once).
+             * @description Distinct chat models with a price (variants such as `:free` or
+             *     `@region` count once; models only offered free are left out).
              */
             models: number;
             organization: components["schemas"]["OrganizationRef"];
@@ -1992,6 +2010,8 @@ export interface operations {
                 /** @description Default 100, at most 500. */
                 limit?: number;
                 offset?: number;
+                /** @description Keep models this organization sells, by slug. */
+                provider?: string;
             };
             header?: never;
             path?: never;
@@ -2103,6 +2123,36 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarketProvider"][];
+                };
+            };
+        };
+    };
+    marketProvider: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Organization slug */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketProvider"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
                 };
             };
         };

@@ -22,6 +22,7 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(model_detail))
         .routes(routes!(media_index))
         .routes(routes!(providers))
+        .routes(routes!(provider))
         .routes(routes!(sources))
 }
 
@@ -117,4 +118,18 @@ async fn media_index(
         ));
     }
     Ok(Json(ih_db::market::media_index(&state.pool, &q).await?))
+}
+
+/// One provider's catalog in the market: model, media and GPU counts.
+#[utoipa::path(get, path = "/market/providers/{slug}", tag = "market", operation_id = "marketProvider",
+    params(("slug" = String, Path, description = "Organization slug")),
+    responses((status = 200, body = MarketProvider), (status = 404, body = ErrorBody)))]
+async fn provider(
+    State(state): State<AppState>,
+    Path(slug): Path<String>,
+) -> ApiResult<Json<MarketProvider>> {
+    ih_db::market::provider(&state.pool, &slug)
+        .await?
+        .map(Json)
+        .ok_or(ApiError::NotFound("market provider"))
 }

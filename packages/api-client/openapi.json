@@ -960,6 +960,15 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "provider",
+            "in": "query",
+            "description": "Keep models this organization sells, by slug.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1119,6 +1128,46 @@
                   "items": {
                     "$ref": "#/components/schemas/MarketProvider"
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/providers/{slug}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "One provider's catalog in the market: model, media and GPU counts.",
+        "operationId": "marketProvider",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "description": "Organization slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketProvider"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
                 }
               }
             }
@@ -2177,7 +2226,7 @@
           "models": {
             "type": "integer",
             "format": "int64",
-            "description": "Distinct chat models (variants such as `:free` or `@region` count once)."
+            "description": "Distinct chat models with a price (variants such as `:free` or\n`@region` count once; models only offered free are left out)."
           },
           "organization": {
             "$ref": "#/components/schemas/OrganizationRef"

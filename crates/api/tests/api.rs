@@ -1179,3 +1179,31 @@ async fn model_index_filters_by_provider_but_prices_the_whole_market(pool: PgPoo
     assert_eq!(m["providers"], 2, "the other provider still counts");
     assert_eq!(m["cheapest"]["slug"], "beta");
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn a_providers_catalog_matches_its_filtered_lists(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+    let (status, beta) = get(&app, "/v1/market/providers/beta").await;
+    assert_eq!(status, StatusCode::OK);
+    // Beta lists DeepSeek twice (paid and :free) and one H100: one priced model.
+    assert_eq!(
+        (
+            beta["models"].as_i64(),
+            beta["model_listings"].as_i64(),
+            beta["gpu_configurations"].as_i64()
+        ),
+        (Some(1), Some(2), Some(1))
+    );
+    let (_, models) = get(&app, "/v1/market/models?provider=beta").await;
+    assert_eq!(
+        models["total"], beta["models"],
+        "the count and the list agree"
+    );
+    let (_, gpus) = get(&app, "/v1/market/gpus?provider=gamma").await;
+    assert_eq!(gpus.as_array().unwrap().len(), 2);
+    assert_eq!(
+        get(&app, "/v1/market/providers/nobody").await.0,
+        StatusCode::NOT_FOUND
+    );
+}

@@ -137,7 +137,8 @@ pub struct MarketDetail {
 pub struct MarketProvider {
     #[sqlx(flatten)]
     pub organization: OrganizationRef,
-    /// Distinct chat models (variants such as `:free` or `@region` count once).
+    /// Distinct chat models with a price (variants such as `:free` or
+    /// `@region` count once; models only offered free are left out).
     pub models: i64,
     /// Chat model listings as the provider lists them, variants included.
     pub model_listings: i64,
@@ -223,4 +224,6 @@ pub struct MediaIndexQuery {
     /// Default 100, at most 500.
     pub limit: Option<i64>,
     pub offset: Option<i64>,
+    /// Keep models this organization sells, by slug.
+    pub provider: Option<String>,
 }
