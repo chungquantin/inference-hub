@@ -45,6 +45,9 @@ impl Adapter for LiquidInferenceAdapter {
     fn organization_slug(&self) -> &'static str {
         "liquid-inference"
     }
+    fn volatile(&self) -> bool {
+        true
+    }
 }
 
 #[derive(Deserialize)]

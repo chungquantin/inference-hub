@@ -38,6 +38,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/holds": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Prices that failed a sanity check and wait for a decision. */
+        get: operations["adminListHolds"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/holds/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept a held price (stored on the adapter's next run) or reject it. */
+        post: operations["adminResolveHold"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/jobs/failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Jobs that failed every attempt, newest first. */
+        get: operations["adminListFailedJobs"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/listings/unmapped": {
         parameters: {
             query?: never;
@@ -496,6 +547,20 @@ export interface components {
             code: string;
             message: string;
         };
+        /** @description A job that failed every attempt. */
+        FailedJob: {
+            /** Format: int32 */
+            attempts: number;
+            /** Format: date-time */
+            failed_at: string;
+            /** Format: int64 */
+            id: number;
+            /** Format: int64 */
+            job_id: number;
+            kind: string;
+            last_error?: string | null;
+            payload: unknown;
+        };
         /** @description A funding round as shown on the company's page. */
         FundingRound: {
             /**
@@ -566,6 +631,11 @@ export interface components {
             database: string;
             status: string;
         };
+        /**
+         * @description An editor's decision on a held price.
+         * @enum {string}
+         */
+        HoldResolution: "accepted" | "rejected";
         /** @description The organization that makes a product, read from `maker_*` columns. */
         MakerRef: {
             logo_url?: string | null;
@@ -978,6 +1048,36 @@ export interface components {
             lead: boolean;
             round: string;
         };
+        /** @description A price an adapter reported that failed a sanity check, waiting for an editor. */
+        PriceHold: {
+            adapter: string;
+            detail?: string | null;
+            external_id: string;
+            /** Format: int32 */
+            gpu_count?: number | null;
+            /** Format: date-time */
+            held_at: string;
+            /** Format: int64 */
+            id: number;
+            kind: string;
+            /** Format: date-time */
+            last_seen_at: string;
+            name: string;
+            /** Format: double */
+            previous_input_per_mtok?: number | null;
+            /** Format: double */
+            previous_output_per_mtok?: number | null;
+            /** Format: double */
+            previous_per_hour?: number | null;
+            /** Format: double */
+            price_input_per_mtok?: number | null;
+            /** Format: double */
+            price_output_per_mtok?: number | null;
+            /** Format: double */
+            price_per_hour?: number | null;
+            /** @description `out_of_band` or `jump`. */
+            reason: string;
+        };
         /** @description One observation of a provider's price for a product, for price history. */
         PricePoint: {
             /** @description Distinguishes configurations of one provider, such as `8× H100 SXM` or a region. */
@@ -1058,6 +1158,9 @@ export interface components {
             stars_30d?: number | null;
             /** Format: date-time */
             synced_at: string;
+        };
+        ResolveHoldRequest: {
+            resolution: components["schemas"]["HoldResolution"];
         };
         ReviewRequest: {
             /** @description Items to change, at most 200. */
@@ -1196,6 +1299,100 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdapterStatus"][];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminListHolds: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceHold"][];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminResolveHold: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Hold id */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ResolveHoldRequest"];
+            };
+        };
+        responses: {
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    adminListFailedJobs: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FailedJob"][];
                 };
             };
             401: {

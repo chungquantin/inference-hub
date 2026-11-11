@@ -20,6 +20,80 @@ use crate::adapters::{AdapterError, GpuListing, MarketAdapter, ModelListing};
 /// A run must return at least this share of the listings the last good run saw.
 const MIN_SHARE_OF_PREVIOUS: f64 = 0.5;
 
+/// Plausible ranges. Generous on purpose: they catch unit mistakes (cents
+/// read as dollars, per-token read as per-million), not unusual prices.
+const GPU_HOUR_RANGE: (f64, f64) = (0.01, 100.0);
+const MAX_INPUT_PER_MTOK: f64 = 500.0;
+const MAX_OUTPUT_PER_MTOK: f64 = 2_000.0;
+/// A price more than this factor away from the stored one is held.
+const MAX_JUMP: f64 = 5.0;
+
+/// Why a price is held, or `None` when it may be stored.
+fn check_price(
+    row: &Row,
+    previous: Option<&PreviousPrice>,
+    volatile: bool,
+) -> Option<(&'static str, String)> {
+    if let (Some(per_hour), Some(count)) = (row.per_hour, row.gpu_count) {
+        let per_gpu = per_hour / f64::from(count.max(1));
+        if !(GPU_HOUR_RANGE.0..=GPU_HOUR_RANGE.1).contains(&per_gpu) {
+            return Some((
+                "out_of_band",
+                format!(
+                    "${per_gpu:.4} per GPU-hour is outside ${}–${}",
+                    GPU_HOUR_RANGE.0, GPU_HOUR_RANGE.1
+                ),
+            ));
+        }
+    }
+    if row.input.is_some_and(|p| p > MAX_INPUT_PER_MTOK)
+        || row.output.is_some_and(|p| p > MAX_OUTPUT_PER_MTOK)
+    {
+        return Some((
+            "out_of_band",
+            format!(
+                "${} in / ${} out per million tokens is above ${MAX_INPUT_PER_MTOK} / ${MAX_OUTPUT_PER_MTOK}",
+                row.input.unwrap_or_default(),
+                row.output.unwrap_or_default()
+            ),
+        ));
+    }
+    if volatile {
+        return None;
+    }
+    let previous = previous?;
+    let jumped = |new: Option<f64>, old: Option<f64>| match (new, old) {
+        // Zero is a free tier: going to or from free is a real change, not a parse error.
+        (Some(n), Some(o)) if n > 0.0 && o > 0.0 => n / o > MAX_JUMP || o / n > MAX_JUMP,
+        _ => false,
+    };
+    for (label, new, old) in [
+        ("per hour", row.per_hour, previous.per_hour),
+        ("input", row.input, previous.input),
+        ("output", row.output, previous.output),
+    ] {
+        if jumped(new, old) {
+            return Some((
+                "jump",
+                format!(
+                    "{label} moved from {} to {}, more than {MAX_JUMP}×",
+                    old.unwrap_or_default(),
+                    new.unwrap_or_default()
+                ),
+            ));
+        }
+    }
+    None
+}
+
+#[derive(sqlx::FromRow)]
+struct PreviousPrice {
+    listing_key: String,
+    input: Option<f64>,
+    output: Option<f64>,
+    per_hour: Option<f64>,
+}
+
 #[derive(Debug, thiserror::Error)]
 pub enum MarketError {
     #[error(transparent)]
@@ -46,6 +120,8 @@ pub struct RunReport {
     pub offerings_confirmed: usize,
     /// Listings gone since the last run.
     pub delisted: usize,
+    /// Listings whose new price failed a sanity check and waits for review.
+    pub held: usize,
 }
 
 #[derive(sqlx::FromRow)]
@@ -221,13 +297,22 @@ async fn fetch_and_store(
             .map(Row::from)
             .collect(),
     };
-    store(pool, info.id(), info.organization_slug(), rows, Utc::now()).await
+    store(
+        pool,
+        info.id(),
+        info.organization_slug(),
+        info.volatile(),
+        rows,
+        Utc::now(),
+    )
+    .await
 }
 
 async fn store(
     pool: &PgPool,
     adapter: &'static str,
     organization_slug: &'static str,
+    volatile: bool,
     rows: Vec<Row>,
     now: DateTime<Utc>,
 ) -> Result<RunReport, MarketError> {
@@ -251,16 +336,48 @@ async fn store(
         });
     }
 
+    // The stored price of every live listing, and the editor's decisions on held ones.
+    let previous: std::collections::HashMap<String, PreviousPrice> =
+        sqlx::query_as::<_, PreviousPrice>(
+            "SELECT listing_key, price_input_per_mtok::float8 AS input,
+                price_output_per_mtok::float8 AS output, price_per_hour::float8 AS per_hour
+         FROM market_listings WHERE adapter = $1 AND delisted_at IS NULL",
+        )
+        .bind(adapter)
+        .fetch_all(pool)
+        .await?
+        .into_iter()
+        .map(|p| (p.listing_key.clone(), p))
+        .collect();
+    let accepted: std::collections::HashSet<String> = sqlx::query_scalar(
+        "SELECT listing_key FROM price_holds WHERE adapter = $1 AND resolution = 'accepted'",
+    )
+    .bind(adapter)
+    .fetch_all(pool)
+    .await?
+    .into_iter()
+    .collect();
+
     let mut tx = pool.begin().await?;
     let mut report = RunReport {
         listings: rows.len(),
         ..RunReport::default()
     };
     let mut keys = Vec::with_capacity(rows.len());
+    let mut stored = Vec::with_capacity(rows.len());
 
     for row in &rows {
         keys.push(row.listing_key.clone());
+        let prev = previous.get(&row.listing_key);
+        if !accepted.contains(&row.listing_key)
+            && let Some((reason, detail)) = check_price(row, prev, volatile)
+        {
+            hold(&mut tx, adapter, row, prev, reason, &detail, now).await?;
+            report.held += 1;
+            continue;
+        }
         upsert_listing(&mut tx, adapter, row, now).await?;
+        stored.push(row.listing_key.clone());
 
         let product: Option<Uuid> = sqlx::query_scalar(
             "SELECT product_id FROM product_listing_ids WHERE adapter = $1 AND external_id = $2",
@@ -277,6 +394,18 @@ async fn store(
             report.offerings_confirmed += 1;
         }
     }
+
+    // Open or accepted holds whose listing was stored this run are settled: the
+    // price came back within bounds, or the editor accepted it.
+    sqlx::query(
+        "DELETE FROM price_holds
+         WHERE adapter = $1 AND listing_key = ANY ($2)
+           AND (resolution IS NULL OR resolution = 'accepted')",
+    )
+    .bind(adapter)
+    .bind(&stored)
+    .execute(&mut *tx)
+    .await?;
 
     // Everything active that this run did not see is gone.
     let gone: Vec<GoneListing> = sqlx::query_as(
@@ -312,6 +441,76 @@ async fn store(
 
     tx.commit().await?;
     Ok(report)
+}
+
+/// Records or refreshes a held price. A listing whose price the editor
+/// rejected stays held without reopening the review.
+async fn hold(
+    tx: &mut Transaction<'_, Postgres>,
+    adapter: &str,
+    row: &Row,
+    previous: Option<&PreviousPrice>,
+    reason: &str,
+    detail: &str,
+    now: DateTime<Utc>,
+) -> sqlx::Result<()> {
+    tracing::warn!(adapter, listing = %row.listing_key, reason, detail, "holding a price for review");
+    sqlx::query(
+        "INSERT INTO price_holds
+             (adapter, listing_key, external_id, kind, name, reason,
+              price_input_per_mtok, price_output_per_mtok, price_per_hour,
+              previous_input_per_mtok, previous_output_per_mtok, previous_per_hour,
+              gpu_count, detail, held_at, last_seen_at)
+         VALUES ($1, $2, $3, $4, $5, $6, $7::float8::numeric, $8::float8::numeric,
+                 $9::float8::numeric, $10::float8::numeric, $11::float8::numeric,
+                 $12::float8::numeric, $13, $14, $15, $15)
+         ON CONFLICT (adapter, listing_key) DO UPDATE SET
+             name = EXCLUDED.name, reason = EXCLUDED.reason,
+             price_input_per_mtok = EXCLUDED.price_input_per_mtok,
+             price_output_per_mtok = EXCLUDED.price_output_per_mtok,
+             price_per_hour = EXCLUDED.price_per_hour, gpu_count = EXCLUDED.gpu_count,
+             detail = EXCLUDED.detail, last_seen_at = EXCLUDED.last_seen_at,
+             -- A different price than the one the editor rejected reopens the review.
+             resolution = CASE
+                 WHEN price_holds.resolution = 'rejected'
+                  AND price_holds.price_input_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_input_per_mtok
+                  AND price_holds.price_output_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_output_per_mtok
+                  AND price_holds.price_per_hour IS NOT DISTINCT FROM EXCLUDED.price_per_hour
+                 THEN 'rejected' END,
+             resolved_at = CASE WHEN price_holds.resolution = 'rejected'
+                  AND price_holds.price_input_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_input_per_mtok
+                  AND price_holds.price_output_per_mtok IS NOT DISTINCT FROM EXCLUDED.price_output_per_mtok
+                  AND price_holds.price_per_hour IS NOT DISTINCT FROM EXCLUDED.price_per_hour
+                 THEN price_holds.resolved_at END",
+    )
+    .bind(adapter)
+    .bind(&row.listing_key)
+    .bind(&row.external_id)
+    .bind(row.kind)
+    .bind(&row.name)
+    .bind(reason)
+    .bind(row.input)
+    .bind(row.output)
+    .bind(row.per_hour)
+    .bind(previous.and_then(|p| p.input))
+    .bind(previous.and_then(|p| p.output))
+    .bind(previous.and_then(|p| p.per_hour))
+    .bind(row.gpu_count)
+    .bind(detail)
+    .bind(now)
+    .execute(&mut **tx)
+    .await?;
+    // Keep the listing live at its old price, so it is not delisted or stale.
+    sqlx::query(
+        "UPDATE market_listings SET last_seen_at = $3
+         WHERE adapter = $1 AND listing_key = $2",
+    )
+    .bind(adapter)
+    .bind(&row.listing_key)
+    .bind(now)
+    .execute(&mut **tx)
+    .await?;
+    Ok(())
 }
 
 async fn upsert_listing(
@@ -428,4 +627,105 @@ async fn record_offering(
     .execute(&mut **tx)
     .await?;
     Ok(true)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn gpu_row(per_hour: f64, count: i16) -> Row {
+        Row::from(GpuListing {
+            external_id: "H100".into(),
+            name: "H100".into(),
+            gpu_type: "H100 SXM".into(),
+            gpu_count: count,
+            price_per_hour: per_hour,
+            region: None,
+            source_url: None,
+            extra: serde_json::Value::Null,
+        })
+    }
+
+    fn model_row(input: f64, output: f64) -> Row {
+        Row::from(ModelListing {
+            external_id: "m".into(),
+            name: "m".into(),
+            maker: None,
+            context_window: None,
+            input_per_mtok: input,
+            output_per_mtok: output,
+            variant: None,
+            source_url: None,
+            extra: serde_json::Value::Null,
+        })
+    }
+
+    fn prev(input: Option<f64>, output: Option<f64>, per_hour: Option<f64>) -> PreviousPrice {
+        PreviousPrice {
+            listing_key: "k".into(),
+            input,
+            output,
+            per_hour,
+        }
+    }
+
+    #[test]
+    fn plausible_range_is_per_gpu() {
+        assert!(
+            check_price(&gpu_row(24.0, 8), None, false).is_none(),
+            "$3/GPU-hour"
+        );
+        assert!(
+            check_price(&gpu_row(400.0, 8), None, false).is_none(),
+            "$50/GPU-hour is high but plausible"
+        );
+        let (reason, _) = check_price(&gpu_row(2990.0, 1), None, false).unwrap();
+        assert_eq!(reason, "out_of_band", "cents read as dollars");
+        assert!(check_price(&gpu_row(0.001, 1), None, false).is_some());
+        assert!(
+            check_price(&model_row(2_500_000.0, 1.0), None, false).is_some(),
+            "per token × 1e12"
+        );
+        assert!(
+            check_price(&gpu_row(2990.0, 1), None, true).is_some(),
+            "volatile sources keep the range check"
+        );
+    }
+
+    #[test]
+    fn large_jumps_are_held_except_to_or_from_free_and_on_volatile_sources() {
+        let p = prev(Some(1.0), Some(2.0), None);
+        assert!(check_price(&model_row(1.2, 2.4), Some(&p), false).is_none());
+        assert_eq!(
+            check_price(&model_row(10.0, 2.0), Some(&p), false)
+                .unwrap()
+                .0,
+            "jump"
+        );
+        assert_eq!(
+            check_price(&model_row(1.0, 0.3), Some(&p), false)
+                .unwrap()
+                .0,
+            "jump",
+            "down too"
+        );
+        assert!(
+            check_price(&model_row(0.0, 0.0), Some(&p), false).is_none(),
+            "now free"
+        );
+        let free = prev(Some(0.0), Some(0.0), None);
+        assert!(
+            check_price(&model_row(5.0, 10.0), Some(&free), false).is_none(),
+            "no longer free"
+        );
+        assert!(
+            check_price(&model_row(10.0, 2.0), Some(&p), true).is_none(),
+            "order books move"
+        );
+        let gpu = prev(None, None, Some(3.99));
+        assert_eq!(
+            check_price(&gpu_row(39.9, 1), Some(&gpu), false).unwrap().0,
+            "jump"
+        );
+    }
 }

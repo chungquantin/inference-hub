@@ -129,3 +129,47 @@ pub struct MarketProvider {
     pub cheapest_count: i64,
     pub last_seen_at: Option<DateTime<Utc>>,
 }
+
+/// A price an adapter reported that failed a sanity check, waiting for an editor.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct PriceHold {
+    pub id: i64,
+    pub adapter: String,
+    pub external_id: String,
+    pub kind: String,
+    pub name: String,
+    /// `out_of_band` or `jump`.
+    pub reason: String,
+    pub detail: Option<String>,
+    pub price_input_per_mtok: Option<f64>,
+    pub price_output_per_mtok: Option<f64>,
+    pub price_per_hour: Option<f64>,
+    pub previous_input_per_mtok: Option<f64>,
+    pub previous_output_per_mtok: Option<f64>,
+    pub previous_per_hour: Option<f64>,
+    pub gpu_count: Option<i16>,
+    pub held_at: DateTime<Utc>,
+    pub last_seen_at: DateTime<Utc>,
+}
+
+/// An editor's decision on a held price.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Deserialize, Serialize, ToSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum HoldResolution {
+    /// Store the price on the adapter's next run.
+    Accepted,
+    /// Keep the old price; the same held price stays silent.
+    Rejected,
+}
+
+/// A job that failed every attempt.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct FailedJob {
+    pub id: i64,
+    pub job_id: i64,
+    pub kind: String,
+    pub payload: serde_json::Value,
+    pub attempts: i32,
+    pub last_error: Option<String>,
+    pub failed_at: DateTime<Utc>,
+}

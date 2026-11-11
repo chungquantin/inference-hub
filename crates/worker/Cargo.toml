@@ -21,6 +21,7 @@ tracing-subscriber.workspace = true
 uuid.workspace = true
 
 [dev-dependencies]
+ih-core.workspace = true
 http-body-util.workspace = true
 tower.workspace = true
 axum.workspace = true

@@ -495,3 +495,96 @@ async fn delisting_only_ends_the_adapters_own_offerings(pool: PgPool) {
         "curated rows are the editor's to end, not the adapter's"
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn implausible_prices_are_held_until_an_editor_accepts_them(pool: PgPool) {
+    seed(&pool).await;
+    let market = FakeMarket::new();
+    let ctx = context(&market.start().await);
+    run_adapters(&pool, &ctx).await;
+    let h100 = || async {
+        offerings(&pool, "nvidia-h100")
+            .await
+            .into_iter()
+            .filter(|o| o.provider == "runpod")
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(h100().await, [gpu("runpod", 1, None, 3.99, false)]);
+
+    // A tenfold jump (a unit mistake upstream) is held; the old price stays live.
+    *market.runpod.lock().unwrap() = runpod_body(39.9);
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    assert_eq!(
+        h100().await,
+        [gpu("runpod", 1, None, 3.99, false)],
+        "not published"
+    );
+    let holds: Vec<(i64, String, Option<f64>, Option<f64>)> = sqlx::query_as(
+        "SELECT id, reason, price_per_hour::float8, previous_per_hour::float8
+         FROM price_holds WHERE resolution IS NULL",
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+    assert_eq!(holds.len(), 1, "{holds:?}");
+    assert_eq!(
+        (holds[0].1.as_str(), holds[0].2, holds[0].3),
+        ("jump", Some(39.9), Some(3.99))
+    );
+    let live: i64 = sqlx::query_scalar(
+        "SELECT count(*) FROM market_listings WHERE adapter = 'runpod' AND delisted_at IS NULL",
+    )
+    .fetch_one(&pool)
+    .await
+    .unwrap();
+    assert_eq!(live, 4, "the held listing is not delisted");
+
+    // Rejected: the same price stays held, silently.
+    ih_db::market::resolve_hold(&pool, holds[0].0, ih_core::HoldResolution::Rejected)
+        .await
+        .unwrap();
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    assert!(ih_db::market::open_holds(&pool).await.unwrap().is_empty());
+    assert_eq!(h100().await, [gpu("runpod", 1, None, 3.99, false)]);
+
+    // A different implausible price reopens the review; accepting it publishes it.
+    *market.runpod.lock().unwrap() = runpod_body(41.0);
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    let open = ih_db::market::open_holds(&pool).await.unwrap();
+    assert_eq!(open.len(), 1);
+    ih_db::market::resolve_hold(&pool, open[0].id, ih_core::HoldResolution::Accepted)
+        .await
+        .unwrap();
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    let prices: Vec<Option<f64>> = h100().await.iter().map(|o| o.per_hour).collect();
+    assert_eq!(prices, [Some(3.99), Some(41.0)]);
+    let left: i64 = sqlx::query_scalar("SELECT count(*) FROM price_holds")
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+    assert_eq!(left, 0, "the accepted hold is settled once stored");
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn jobs_out_of_attempts_go_to_the_dead_letter_table(pool: PgPool) {
+    seed(&pool).await;
+    let market = FakeMarket::new();
+    *market.coreweave.lock().unwrap() = "<html>changed</html>".into();
+    let ctx = context(&market.start().await);
+    run_adapters(&pool, &ctx).await;
+    let failed = ih_db::market::failed_jobs(&pool, 10).await.unwrap();
+    assert_eq!(failed.len(), 1, "{failed:?}");
+    assert_eq!(failed[0].kind, "run_adapter");
+    assert_eq!(failed[0].payload["adapter"], "coreweave");
+    assert!(
+        failed[0]
+            .last_error
+            .as_deref()
+            .unwrap()
+            .contains("layout changed")
+    );
+}

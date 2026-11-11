@@ -22,7 +22,8 @@ simple_gpu_adapter!(
     "Vast.ai",
     "vast-ai",
     HOURLY,
-    "/api/v0/bundles/?q=%7B%22rentable%22%3A%7B%22eq%22%3Atrue%7D%2C%22type%22%3A%22on-demand%22%2C%22limit%22%3A3000%7D"
+    "/api/v0/bundles/?q=%7B%22rentable%22%3A%7B%22eq%22%3Atrue%7D%2C%22type%22%3A%22on-demand%22%2C%22limit%22%3A3000%7D",
+    volatile
 );
 
 #[derive(Deserialize)]

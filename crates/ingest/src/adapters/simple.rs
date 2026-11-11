@@ -6,6 +6,14 @@
 /// the body to `parse`.
 macro_rules! simple_gpu_adapter {
     ($ty:ident, $id:expr, $name:expr, $org:expr, $interval:expr, $path:expr) => {
+        $crate::adapters::simple::simple_gpu_adapter!(@body $ty, $id, $path);
+        $crate::adapters::adapter_info!($ty, $id, $name, $org, $interval);
+    };
+    ($ty:ident, $id:expr, $name:expr, $org:expr, $interval:expr, $path:expr, volatile) => {
+        $crate::adapters::simple::simple_gpu_adapter!(@body $ty, $id, $path);
+        $crate::adapters::adapter_info!($ty, $id, $name, $org, $interval, volatile);
+    };
+    (@body $ty:ident, $id:expr, $path:expr) => {
         pub struct $ty {
             url: String,
         }
@@ -17,8 +25,6 @@ macro_rules! simple_gpu_adapter {
                 }
             }
         }
-
-        $crate::adapters::adapter_info!($ty, $id, $name, $org, $interval);
 
         impl $crate::adapters::NeoCloudAdapter for $ty {
             fn fetch_gpus<'a>(

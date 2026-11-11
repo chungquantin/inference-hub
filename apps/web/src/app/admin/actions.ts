@@ -60,3 +60,18 @@ export async function setOrganizations(formData: FormData): Promise<void> {
   if (error) throw new Error(error.message);
   revalidatePath("/admin");
 }
+
+/** Accepts or rejects a held price. */
+export async function resolveHold(formData: FormData): Promise<void> {
+  await requireAdmin();
+  const id = Number(formData.get("id"));
+  const resolution = String(formData.get("resolution"));
+  if (!Number.isSafeInteger(id) || id <= 0) throw new Error("Invalid id");
+  if (resolution !== "accepted" && resolution !== "rejected") throw new Error("Invalid resolution");
+  const { error } = await adminApi().POST("/v1/admin/holds/{id}", {
+    params: { path: { id } },
+    body: { resolution },
+  });
+  if (error) throw new Error(error.message);
+  revalidatePath("/admin/market");
+}

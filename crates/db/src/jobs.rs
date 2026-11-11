@@ -94,6 +94,20 @@ pub async fn fail(pool: &PgPool, job: &Job, error: &str) -> sqlx::Result<()> {
     .bind(error)
     .execute(pool)
     .await?;
+    if !retry {
+        // Out of attempts: keep a copy that outlives queue pruning.
+        sqlx::query(
+            "INSERT INTO jobs_failed (job_id, kind, payload, attempts, last_error)
+             VALUES ($1, $2, $3, $4, left($5, 2000))",
+        )
+        .bind(job.id)
+        .bind(&job.kind)
+        .bind(&job.payload)
+        .bind(job.attempts)
+        .bind(error)
+        .execute(pool)
+        .await?;
+    }
     Ok(())
 }
 

@@ -318,3 +318,54 @@ pub async fn sources(pool: &PgPool) -> sqlx::Result<Vec<MarketSource>> {
     .fetch_all(pool)
     .await
 }
+
+/// Held prices waiting for a decision, newest first.
+pub async fn open_holds(pool: &PgPool) -> sqlx::Result<Vec<ih_core::PriceHold>> {
+    sqlx::query_as(
+        "SELECT id, adapter, external_id, kind, name, reason, detail,
+                price_input_per_mtok::float8 AS price_input_per_mtok,
+                price_output_per_mtok::float8 AS price_output_per_mtok,
+                price_per_hour::float8 AS price_per_hour,
+                previous_input_per_mtok::float8 AS previous_input_per_mtok,
+                previous_output_per_mtok::float8 AS previous_output_per_mtok,
+                previous_per_hour::float8 AS previous_per_hour,
+                gpu_count, held_at, last_seen_at
+         FROM price_holds WHERE resolution IS NULL
+         ORDER BY held_at DESC, id
+         LIMIT 500",
+    )
+    .fetch_all(pool)
+    .await
+}
+
+/// Records an editor's decision. Returns whether an open hold was resolved.
+pub async fn resolve_hold(
+    pool: &PgPool,
+    id: i64,
+    resolution: ih_core::HoldResolution,
+) -> sqlx::Result<bool> {
+    let value = match resolution {
+        ih_core::HoldResolution::Accepted => "accepted",
+        ih_core::HoldResolution::Rejected => "rejected",
+    };
+    let result = sqlx::query(
+        "UPDATE price_holds SET resolution = $2, resolved_at = now()
+         WHERE id = $1 AND resolution IS NULL",
+    )
+    .bind(id)
+    .bind(value)
+    .execute(pool)
+    .await?;
+    Ok(result.rows_affected() == 1)
+}
+
+/// Jobs that failed every attempt, newest first.
+pub async fn failed_jobs(pool: &PgPool, limit: i64) -> sqlx::Result<Vec<ih_core::FailedJob>> {
+    sqlx::query_as(
+        "SELECT id, job_id, kind, payload, attempts, last_error, failed_at
+         FROM jobs_failed ORDER BY failed_at DESC, id DESC LIMIT $1",
+    )
+    .bind(limit.clamp(1, 500))
+    .fetch_all(pool)
+    .await
+}

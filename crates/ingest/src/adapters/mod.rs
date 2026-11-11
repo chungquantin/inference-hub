@@ -64,6 +64,12 @@ pub trait Adapter: Send + Sync {
     fn interval(&self) -> Duration {
         Duration::from_secs(6 * 3600)
     }
+    /// Whether prices come from a live order book or host offers, which can
+    /// move several-fold between runs. The store then skips its jump check
+    /// and keeps only the plausible-range check.
+    fn volatile(&self) -> bool {
+        false
+    }
 }
 
 /// Run cadences, so adapters agree on what "hourly" means.
@@ -386,6 +392,25 @@ macro_rules! adapter_info {
             }
             fn interval(&self) -> std::time::Duration {
                 $interval
+            }
+        }
+    };
+    ($ty:ty, $id:expr, $name:expr, $org:expr, $interval:expr, volatile) => {
+        impl $crate::adapters::Adapter for $ty {
+            fn id(&self) -> &'static str {
+                $id
+            }
+            fn name(&self) -> &'static str {
+                $name
+            }
+            fn organization_slug(&self) -> &'static str {
+                $org
+            }
+            fn interval(&self) -> std::time::Duration {
+                $interval
+            }
+            fn volatile(&self) -> bool {
+                true
             }
         }
     };

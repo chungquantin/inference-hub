@@ -78,6 +78,137 @@
         ]
       }
     },
+    "/v1/admin/holds": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Prices that failed a sanity check and wait for a decision.",
+        "operationId": "adminListHolds",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PriceHold"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/holds/{id}": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Accept a held price (stored on the adapter's next run) or reject it.",
+        "operationId": "adminResolveHold",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Hold id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveHoldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {},
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
+    "/v1/admin/jobs/failed": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Jobs that failed every attempt, newest first.",
+        "operationId": "adminListFailedJobs",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FailedJob"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "admin_token": []
+          }
+        ]
+      }
+    },
     "/v1/admin/listings/unmapped": {
       "get": {
         "tags": [
@@ -1400,6 +1531,46 @@
           }
         }
       },
+      "FailedJob": {
+        "type": "object",
+        "description": "A job that failed every attempt.",
+        "required": [
+          "id",
+          "job_id",
+          "kind",
+          "payload",
+          "attempts",
+          "failed_at"
+        ],
+        "properties": {
+          "attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "job_id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "last_error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "payload": {}
+        }
+      },
       "FundingRound": {
         "type": "object",
         "description": "A funding round as shown on the company's page.",
@@ -1597,6 +1768,14 @@
             "type": "string"
           }
         }
+      },
+      "HoldResolution": {
+        "type": "string",
+        "description": "An editor's decision on a held price.",
+        "enum": [
+          "accepted",
+          "rejected"
+        ]
       },
       "MakerRef": {
         "type": "object",
@@ -2863,6 +3042,105 @@
           }
         }
       },
+      "PriceHold": {
+        "type": "object",
+        "description": "A price an adapter reported that failed a sanity check, waiting for an editor.",
+        "required": [
+          "id",
+          "adapter",
+          "external_id",
+          "kind",
+          "name",
+          "reason",
+          "held_at",
+          "last_seen_at"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "detail": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "external_id": {
+            "type": "string"
+          },
+          "gpu_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "held_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "previous_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "previous_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "previous_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "reason": {
+            "type": "string",
+            "description": "`out_of_band` or `jump`."
+          }
+        }
+      },
       "PricePoint": {
         "type": "object",
         "description": "One observation of a provider's price for a product, for price history.",
@@ -3146,6 +3424,17 @@
           "synced_at": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "ResolveHoldRequest": {
+        "type": "object",
+        "required": [
+          "resolution"
+        ],
+        "properties": {
+          "resolution": {
+            "$ref": "#/components/schemas/HoldResolution"
           }
         }
       },

@@ -17,8 +17,8 @@ pub use compare::{
     PortfolioCompany, PortfolioRound, PricePoint, RepoLeader, RepoStats, RoundInvestor,
 };
 pub use market::{
-    GpuIndexRow, MarketDetail, MarketIndexQuery, MarketListing, MarketOverview, MarketProvider,
-    MarketSource, ModelIndexRow,
+    FailedJob, GpuIndexRow, HoldResolution, MarketDetail, MarketIndexQuery, MarketListing,
+    MarketOverview, MarketProvider, MarketSource, ModelIndexRow, PriceHold,
 };
 pub use news::{
     AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus, UnmappedListing,

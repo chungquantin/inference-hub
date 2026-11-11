@@ -3,7 +3,8 @@
 
 use axum::{extract::State, http::StatusCode};
 use ih_core::{
-    AdapterStatus, NewsItem, NewsStatus, Page, PageParams, SourceStatus, UnmappedListing,
+    AdapterStatus, FailedJob, HoldResolution, NewsItem, NewsStatus, Page, PageParams, PriceHold,
+    SourceStatus, UnmappedListing,
 };
 use ih_db::news::NewsFilter;
 use serde::{Deserialize, Serialize};
@@ -28,6 +29,9 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(list_sources))
         .routes(routes!(list_adapters))
         .routes(routes!(list_unmapped))
+        .routes(routes!(list_holds))
+        .routes(routes!(resolve_hold))
+        .routes(routes!(list_failed_jobs))
 }
 
 #[derive(Debug, Deserialize, IntoParams)]
@@ -240,5 +244,66 @@ async fn list_unmapped(
             page,
         )
         .await?,
+    ))
+}
+
+/// Prices that failed a sanity check and wait for a decision.
+#[utoipa::path(
+    get,
+    path = "/admin/holds",
+    tag = "admin",
+    operation_id = "adminListHolds",
+    security(("admin_token" = [])),
+    responses((status = 200, body = Vec<PriceHold>), (status = 401, body = ErrorBody))
+)]
+async fn list_holds(State(state): State<AppState>) -> ApiResult<axum::Json<Vec<PriceHold>>> {
+    Ok(axum::Json(ih_db::market::open_holds(&state.pool).await?))
+}
+
+#[derive(Debug, Deserialize, ToSchema)]
+pub struct ResolveHoldRequest {
+    pub resolution: HoldResolution,
+}
+
+/// Accept a held price (stored on the adapter's next run) or reject it.
+#[utoipa::path(
+    post,
+    path = "/admin/holds/{id}",
+    tag = "admin",
+    operation_id = "adminResolveHold",
+    params(("id" = i64, Path, description = "Hold id")),
+    request_body = ResolveHoldRequest,
+    security(("admin_token" = [])),
+    responses(
+        (status = 204),
+        (status = 401, body = ErrorBody),
+        (status = 404, body = ErrorBody),
+    )
+)]
+async fn resolve_hold(
+    State(state): State<AppState>,
+    Path(id): Path<i64>,
+    Json(request): Json<ResolveHoldRequest>,
+) -> ApiResult<StatusCode> {
+    if ih_db::market::resolve_hold(&state.pool, id, request.resolution).await? {
+        tracing::info!(id, resolution = ?request.resolution, "price hold resolved");
+        Ok(StatusCode::NO_CONTENT)
+    } else {
+        Err(ApiError::NotFound("open hold"))
+    }
+}
+
+/// Jobs that failed every attempt, newest first.
+#[utoipa::path(
+    get,
+    path = "/admin/jobs/failed",
+    tag = "admin",
+    operation_id = "adminListFailedJobs",
+    security(("admin_token" = [])),
+    responses((status = 200, body = Vec<FailedJob>), (status = 401, body = ErrorBody))
+)]
+async fn list_failed_jobs(State(state): State<AppState>) -> ApiResult<axum::Json<Vec<FailedJob>>> {
+    Ok(axum::Json(
+        ih_db::market::failed_jobs(&state.pool, 100).await?,
     ))
 }

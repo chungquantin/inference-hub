@@ -17,7 +17,8 @@ simple_gpu_adapter!(
     "Akash Network",
     "akash-network",
     HOURLY,
-    "/v1/gpu-prices"
+    "/v1/gpu-prices",
+    volatile
 );
 
 #[derive(Deserialize)]
