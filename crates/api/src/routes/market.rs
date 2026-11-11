@@ -3,7 +3,7 @@
 use axum::{Json, extract::State};
 use ih_core::{
     GpuIndexRow, MarketDetail, MarketIndexQuery, MarketOverview, MarketProvider, MarketSource,
-    ModelIndexRow,
+    ModelIndexRow, Page,
 };
 use utoipa_axum::{router::OpenApiRouter, routes};
 
@@ -59,11 +59,11 @@ async fn gpu_detail(
 /// Models across every provider: cheapest and median price per million tokens.
 #[utoipa::path(get, path = "/market/models", tag = "market", operation_id = "marketModels",
     params(MarketIndexQuery),
-    responses((status = 200, body = Vec<ModelIndexRow>), (status = 400, body = ErrorBody)))]
+    responses((status = 200, body = Page<ModelIndexRow>), (status = 400, body = ErrorBody)))]
 async fn model_index(
     State(state): State<AppState>,
     Query(q): Query<MarketIndexQuery>,
-) -> ApiResult<Json<Vec<ModelIndexRow>>> {
+) -> ApiResult<Json<Page<ModelIndexRow>>> {
     Ok(Json(ih_db::market::model_index(&state.pool, &q).await?))
 }
 

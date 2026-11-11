@@ -18,6 +18,8 @@ pub struct MarketOverview {
     pub model_listings: i64,
     /// Distinct models across providers, by normalized id.
     pub distinct_models: i64,
+    /// Of which sold by two or more providers: the comparable market.
+    pub multi_provider_models: i64,
     /// Live GPU configurations with an hourly price.
     pub gpu_listings: i64,
     pub gpu_types: i64,
@@ -86,6 +88,8 @@ pub struct MarketIndexQuery {
     pub min_providers: Option<i64>,
     /// Most rows to return. Default 100, at most 500.
     pub limit: Option<i64>,
+    /// Rows to skip, for paging. Default 0.
+    pub offset: Option<i64>,
 }
 
 /// One provider's live price for a model or GPU, as the adapter saw it.

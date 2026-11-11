@@ -3,3 +3,4 @@ name: DeepInfra
 kinds: [inference_provider]
 tagline: Serverless inference API for open models, billed per token.
 website: https://deepinfra.com
+logo_url: /logos/deepinfra.png

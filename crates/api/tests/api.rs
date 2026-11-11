@@ -981,9 +981,9 @@ async fn market_indexes_match_models_across_providers(pool: PgPool) {
     );
     assert_eq!(gpus[0]["cheapest"]["slug"], "beta");
 
-    let (_, models) = get(&app, "/v1/market/models?min_providers=2").await;
-    assert_eq!(models.as_array().unwrap().len(), 1, "{models}");
-    let m = &models[0];
+    let (_, page) = get(&app, "/v1/market/models?min_providers=2").await;
+    assert_eq!(page["total"], 1, "{page}");
+    let m = &page["items"][0];
     assert_eq!(
         m["model_key"], "deepseek-v3.2",
         "maker prefixes and :free variants are one model"
@@ -1025,6 +1025,21 @@ async fn market_indexes_match_models_across_providers(pool: PgPool) {
     assert_eq!(overview["providers"], 3);
     assert_eq!(overview["gpu_types"], 2);
     assert_eq!(overview["distinct_models"], 2);
+    assert_eq!(
+        overview["multi_provider_models"], 1,
+        "only DeepSeek is sold twice"
+    );
+
+    let (_, all) = get(&app, "/v1/market/models?limit=1").await;
+    assert_eq!(
+        (
+            all["total"].as_i64(),
+            all["items"].as_array().unwrap().len()
+        ),
+        (Some(2), 1)
+    );
+    let (_, second) = get(&app, "/v1/market/models?limit=1&offset=1").await;
+    assert_eq!(second["items"][0]["model_key"], "only-here");
     assert_eq!(overview["sources"].as_array().unwrap().len(), 3);
 }
 

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { DataTable } from "@/components/data-table";
-import { FilterChip, SearchForm, listingHref } from "@/components/listing";
+import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
 import { RowLink, modelHref } from "@/components/market";
 import { ProviderLink } from "@/components/price-cells";
 import { PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
-import { formatPrice, formatTokens } from "@/lib/format";
+import { formatCount, formatPrice, formatTokens } from "@/lib/format";
 
 export const metadata: Metadata = {
   title: "Model price index",
@@ -13,20 +13,33 @@ export const metadata: Metadata = {
   alternates: { canonical: "/market/models" },
 };
 
-type Props = { searchParams: Promise<{ q?: string; min?: string }> };
+type Props = { searchParams: Promise<{ q?: string; min?: string; page?: string }> };
 
 const MINS = ["1", "2", "5"] as const;
+const PAGE_SIZE = 100;
 
 export default async function MarketModelsPage({ searchParams }: Props) {
   const params = await searchParams;
   // Without a search, show contested models first: thousands are sold by one provider only.
   const min = MINS.includes(params.min as (typeof MINS)[number]) ? Number(params.min) : params.q ? 1 : 2;
-  const { data, error } = await api.GET("/v1/market/models", {
-    params: { query: { q: params.q || undefined, min_providers: min, limit: 300 } },
+  const pageNumber = parsePage(params.page);
+  const { data: page, error } = await api.GET("/v1/market/models", {
+    params: {
+      query: {
+        q: params.q || undefined,
+        min_providers: min,
+        limit: PAGE_SIZE,
+        offset: (pageNumber - 1) * PAGE_SIZE,
+      },
+    },
   });
-  if (error || !data) throw new Error("Could not load the model index");
+  if (error || !page) throw new Error("Could not load the model index");
+  const data = page.items;
+  const current = { q: params.q, min: params.min };
+  // Filters reset to the first page.
   const href = (o: Record<string, string | undefined>) =>
-    listingHref("/market/models", { q: params.q, min: params.min }, o);
+    listingHref("/market/models", current, { page: undefined, ...o });
+  const first = (pageNumber - 1) * PAGE_SIZE + 1;
 
   return (
     <div className="flex flex-col gap-6">
@@ -39,7 +52,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       <nav className="flex flex-wrap gap-2 text-sm" aria-label="Minimum providers">
         {MINS.map((m) => (
           <FilterChip key={m} href={href({ min: m })} active={min === Number(m)}>
-            {m === "1" ? "All" : `${m}+ providers`}
+            {m === "1" ? "All, incl. single-provider" : `${m}+ providers`}
           </FilterChip>
         ))}
       </nav>
@@ -47,7 +60,9 @@ export default async function MarketModelsPage({ searchParams }: Props) {
         <p className="font-mono text-[13px] text-ink-3">No model matches. Try a shorter search or fewer providers.</p>
       ) : (
         <DataTable
-          caption={`${data.length} models${data.length === 300 ? " (first 300)" : ""}`}
+          caption={`${formatCount(page.total)} models sold by ${min === 1 ? "one or more providers" : `${min}+ providers`}${
+            page.total > PAGE_SIZE ? ` · ${first}–${first + data.length - 1}` : ""
+          }`}
           headers={["Model", "Maker", "Providers", "Lowest in", "Lowest out", "Lowest blend", "Median blend", "Context", "Cheapest at"]}
           numeric={[2, 3, 4, 5, 6, 7]}
           rows={data.map((row) => ({
@@ -72,6 +87,11 @@ export default async function MarketModelsPage({ searchParams }: Props) {
           }))}
         />
       )}
+      <Pagination
+        page={pageNumber}
+        lastPage={Math.max(1, Math.ceil(page.total / PAGE_SIZE))}
+        hrefFor={(p) => listingHref("/market/models", current, { page: String(p) })}
+      />
     </div>
   );
 }

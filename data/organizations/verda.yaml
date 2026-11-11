@@ -3,6 +3,7 @@ name: Verda
 kinds: [gpu_cloud]
 tagline: GPU cloud, formerly DataCrunch.
 website: https://verda.com
+logo_url: /logos/verda.png
 tagging:
   aliases: [DataCrunch]
   match_case: true

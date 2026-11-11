@@ -3,6 +3,7 @@ name: Cudo Compute
 kinds: [gpu_cloud]
 tagline: GPU cloud with per-component pricing across data centers.
 website: https://www.cudocompute.com
+logo_url: /logos/cudo-compute.png
 tagging:
   aliases: [Cudo]
   match_case: true

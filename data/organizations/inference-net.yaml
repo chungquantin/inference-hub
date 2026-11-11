@@ -3,3 +3,4 @@ name: Inference.net
 kinds: [inference_provider]
 tagline: Inference API for open and frontier models.
 website: https://inference.net
+logo_url: /logos/inference-net.png

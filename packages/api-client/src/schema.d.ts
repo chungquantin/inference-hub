@@ -704,6 +704,11 @@ export interface components {
             model_providers: number;
             /**
              * Format: int64
+             * @description Of which sold by two or more providers: the comparable market.
+             */
+            multi_provider_models: number;
+            /**
+             * Format: int64
              * @description Organizations with at least one live listing.
              */
             providers: number;
@@ -955,6 +960,38 @@ export interface components {
             logo_url?: string | null;
             name: string;
             slug: string;
+        };
+        /** @description One page of results plus the total count across all pages. */
+        Page_ModelIndexRow: {
+            items: {
+                cheapest: components["schemas"]["OrganizationRef"];
+                maker?: string | null;
+                /** Format: int32 */
+                max_context_window?: number | null;
+                /** Format: double */
+                median_blended_per_mtok: number;
+                /**
+                 * Format: double
+                 * @description Cheapest 3:1 blend of input and output.
+                 */
+                min_blended_per_mtok: number;
+                /** Format: double */
+                min_input_per_mtok: number;
+                /** Format: double */
+                min_output_per_mtok: number;
+                /** @description Normalized id shared by providers, such as `deepseek-v3.2`. */
+                model_key: string;
+                /** @description A display name: the most common name providers give it. */
+                name: string;
+                /** Format: int64 */
+                providers: number;
+            }[];
+            /** Format: int64 */
+            limit: number;
+            /** Format: int64 */
+            offset: number;
+            /** Format: int64 */
+            total: number;
         };
         /** @description One page of results plus the total count across all pages. */
         Page_NewsItem: {
@@ -1788,6 +1825,8 @@ export interface operations {
                 min_providers?: number;
                 /** @description Most rows to return. Default 100, at most 500. */
                 limit?: number;
+                /** @description Rows to skip, for paging. Default 0. */
+                offset?: number;
             };
             header?: never;
             path?: never;
@@ -1852,6 +1891,8 @@ export interface operations {
                 min_providers?: number;
                 /** @description Most rows to return. Default 100, at most 500. */
                 limit?: number;
+                /** @description Rows to skip, for paging. Default 0. */
+                offset?: number;
             };
             header?: never;
             path?: never;
@@ -1864,7 +1905,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ModelIndexRow"][];
+                    "application/json": components["schemas"]["Page_ModelIndexRow"];
                 };
             };
             400: {

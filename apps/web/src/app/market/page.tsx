@@ -37,7 +37,11 @@ export default async function MarketPage() {
 
       <section aria-label="Market totals" className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-4">
         <Stat value={data.providers} label="providers tracked" href="/market/providers" />
-        <Stat value={formatCount(data.distinct_models)} label={`models · ${formatCount(data.model_listings)} prices`} href="/market/models" />
+        <Stat
+          value={formatCount(data.multi_provider_models)}
+          label={`models on 2+ providers · ${formatCount(data.distinct_models)} listed`}
+          href="/market/models"
+        />
         <Stat value={data.gpu_types} label={`GPU types · ${data.gpu_listings} configs`} href="/market/gpus" />
         <Stat value={`${healthy}/${data.sources.length}`} label="sources healthy" href="#sources" />
       </section>
@@ -109,7 +113,7 @@ export default async function MarketPage() {
           }))}
         />
         <Link href="/market/models" className="block border-t border-line px-3 py-2 font-mono text-[13px] text-s-7 underline">
-          All {formatCount(data.distinct_models)} models
+          All {formatCount(data.multi_provider_models)} models on 2+ providers ({formatCount(data.distinct_models)} listed in total)
         </Link>
       </WindowFrame>
 

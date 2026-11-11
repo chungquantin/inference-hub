@@ -3,6 +3,7 @@ name: Akamai
 kinds: [gpu_cloud]
 tagline: Akamai Cloud (formerly Linode), with GPU instances.
 website: https://www.akamai.com/products/cloud-gpu
+logo_url: /logos/akamai.png
 tagging:
   aliases: [Linode, Akamai Cloud]
   match_case: true

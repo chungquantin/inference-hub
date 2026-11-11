@@ -75,8 +75,17 @@ pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<
 }
 
 /// Models across providers, the most widely served first.
-pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<ModelIndexRow>> {
-    sqlx::query_as(
+pub async fn model_index(
+    pool: &PgPool,
+    q: &MarketIndexQuery,
+) -> sqlx::Result<ih_core::Page<ModelIndexRow>> {
+    #[derive(sqlx::FromRow)]
+    struct Counted {
+        #[sqlx(flatten)]
+        row: ModelIndexRow,
+        total: i64,
+    }
+    let rows: Vec<Counted> = sqlx::query_as(
         "WITH live AS (
              SELECT market_model_key(l.external_id) AS model_key, l.name, l.maker,
                     l.context_window,
@@ -109,7 +118,7 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Ve
              SELECT DISTINCT ON (model_key) model_key, slug, org_name, logo_url
              FROM live ORDER BY model_key, blended, org_name
          )
-         SELECT s.model_key, s.name, s.maker, s.providers,
+         SELECT count(*) OVER () AS total, s.model_key, s.name, s.maker, s.providers,
                 round(s.min_input::numeric, 6)::float8 AS min_input_per_mtok,
                 round(s.min_output::numeric, 6)::float8 AS min_output_per_mtok,
                 round(s.min_blended::numeric, 6)::float8 AS min_blended_per_mtok,
@@ -120,14 +129,23 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Ve
          FROM stats s JOIN cheapest c USING (model_key)
          WHERE s.providers >= $2
          ORDER BY s.providers DESC, s.min_blended, s.model_key
-         LIMIT $3",
+         LIMIT $3 OFFSET $5",
     )
     .bind(like(&q.q))
     .bind(q.min_providers.unwrap_or(1))
     .bind(limit(q))
     .bind(BLEND_INPUT_WEIGHT)
+    .bind(q.offset.unwrap_or(0).max(0))
     .fetch_all(pool)
-    .await
+    .await?;
+    // The window count; a page past the end has no rows to carry it.
+    let total = rows.first().map_or(0, |r| r.total);
+    Ok(ih_core::Page {
+        items: rows.into_iter().map(|r| r.row).collect(),
+        total,
+        limit: limit(q),
+        offset: q.offset.unwrap_or(0).max(0),
+    })
 }
 
 const LISTING_COLUMNS: &str = "l.adapter, o.slug AS organization_slug, o.name AS organization_name,
@@ -259,6 +277,7 @@ struct Totals {
     providers: i64,
     model_listings: i64,
     distinct_models: i64,
+    multi_provider_models: i64,
     gpu_listings: i64,
     gpu_types: i64,
     updated_at: Option<chrono::DateTime<chrono::Utc>>,
@@ -275,7 +294,14 @@ pub async fn overview(pool: &PgPool) -> sqlx::Result<MarketOverview> {
                     AS distinct_models,
                 count(*) FILTER (WHERE l.kind = 'gpu') AS gpu_listings,
                 count(DISTINCT l.gpu_type) FILTER (WHERE l.kind = 'gpu') AS gpu_types,
-                max(l.last_seen_at) AS updated_at
+                max(l.last_seen_at) AS updated_at,
+                (SELECT count(*) FROM (
+                     SELECT 1 FROM market_listings m
+                     JOIN adapter_state ma ON ma.adapter = m.adapter
+                     WHERE m.kind = 'model' AND m.delisted_at IS NULL
+                     GROUP BY market_model_key(m.external_id)
+                     HAVING count(DISTINCT coalesce(m.region, ma.organization_id::text)) >= 2
+                 ) multi) AS multi_provider_models
          FROM market_listings l
          JOIN adapter_state a ON a.adapter = l.adapter
          WHERE l.delisted_at IS NULL",
@@ -293,11 +319,12 @@ pub async fn overview(pool: &PgPool) -> sqlx::Result<MarketOverview> {
         gpu_providers: t.gpu_providers,
         model_listings: t.model_listings,
         distinct_models: t.distinct_models,
+        multi_provider_models: t.multi_provider_models,
         gpu_listings: t.gpu_listings,
         gpu_types: t.gpu_types,
         updated_at: t.updated_at,
         gpu_index: gpu_index(pool, &top).await?,
-        model_index: model_index(pool, &top).await?,
+        model_index: model_index(pool, &top).await?.items,
         sources: sources(pool).await?,
     })
 }

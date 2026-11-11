@@ -3,5 +3,6 @@ name: Featherless
 kinds: [inference_provider]
 tagline: Inference for thousands of open-weights models from Hugging Face.
 website: https://featherless.ai
+logo_url: /logos/featherless.png
 tagging:
   aliases: [Featherless AI]

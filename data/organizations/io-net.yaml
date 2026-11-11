@@ -3,6 +3,7 @@ name: io.net
 kinds: [gpu_cloud]
 tagline: Decentralized GPU network.
 website: https://io.net
+logo_url: /logos/io-net.png
 tagging:
   aliases: [io.net]
   match_case: true

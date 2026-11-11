@@ -3,6 +3,7 @@ name: Akash Network
 kinds: [gpu_cloud]
 tagline: Decentralized marketplace for cloud compute and GPUs.
 website: https://akash.network
+logo_url: /logos/akash-network.png
 tagging:
   aliases: [Akash]
   match_case: true

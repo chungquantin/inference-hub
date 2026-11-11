@@ -3,5 +3,6 @@ name: Vast.ai
 kinds: [gpu_cloud]
 tagline: Marketplace for renting GPUs from independent hosts.
 website: https://vast.ai
+logo_url: /logos/vast-ai.png
 tagging:
   aliases: [Vast AI]

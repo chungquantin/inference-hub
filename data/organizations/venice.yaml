@@ -3,6 +3,7 @@ name: Venice
 kinds: [inference_provider]
 tagline: Private, uncensored inference API and chat app.
 website: https://venice.ai
+logo_url: /logos/venice.png
 tagging:
   aliases: [Venice AI, Venice.ai]
   match_case: true

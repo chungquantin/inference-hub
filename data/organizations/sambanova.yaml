@@ -3,5 +3,6 @@ name: SambaNova
 kinds: [inference_provider, hardware]
 tagline: Inference cloud on its own RDU chips.
 website: https://sambanova.ai
+logo_url: /logos/sambanova.png
 tagging:
   aliases: [SambaNova Systems, SambaNova Cloud]

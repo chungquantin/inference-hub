@@ -820,6 +820,16 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Rows to skip, for paging. Default 0.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
         "responses": {
@@ -923,6 +933,16 @@
               "type": "integer",
               "format": "int64"
             }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Rows to skip, for paging. Default 0.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
           }
         ],
         "responses": {
@@ -930,10 +950,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ModelIndexRow"
-                  }
+                  "$ref": "#/components/schemas/Page_ModelIndexRow"
                 }
               }
             }
@@ -1923,6 +1940,7 @@
           "gpu_providers",
           "model_listings",
           "distinct_models",
+          "multi_provider_models",
           "gpu_listings",
           "gpu_types",
           "gpu_index",
@@ -1970,6 +1988,11 @@
           "model_providers": {
             "type": "integer",
             "format": "int64"
+          },
+          "multi_provider_models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Of which sold by two or more providers: the comparable market."
           },
           "providers": {
             "type": "integer",
@@ -2690,6 +2713,94 @@
           },
           "slug": {
             "type": "string"
+          }
+        }
+      },
+      "Page_ModelIndexRow": {
+        "type": "object",
+        "description": "One page of results plus the total count across all pages.",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "One model across every provider: price per million tokens.",
+              "required": [
+                "model_key",
+                "name",
+                "providers",
+                "min_input_per_mtok",
+                "min_output_per_mtok",
+                "min_blended_per_mtok",
+                "median_blended_per_mtok",
+                "cheapest"
+              ],
+              "properties": {
+                "cheapest": {
+                  "$ref": "#/components/schemas/OrganizationRef"
+                },
+                "maker": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "max_context_window": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "format": "int32"
+                },
+                "median_blended_per_mtok": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "min_blended_per_mtok": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Cheapest 3:1 blend of input and output."
+                },
+                "min_input_per_mtok": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "min_output_per_mtok": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "model_key": {
+                  "type": "string",
+                  "description": "Normalized id shared by providers, such as `deepseek-v3.2`."
+                },
+                "name": {
+                  "type": "string",
+                  "description": "A display name: the most common name providers give it."
+                },
+                "providers": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "offset": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },

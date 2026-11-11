@@ -3,3 +3,4 @@ name: Atlas Cloud
 kinds: [inference_provider]
 tagline: Inference API for open and proprietary models.
 website: https://www.atlascloud.ai
+logo_url: /logos/atlas-cloud.png

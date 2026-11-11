@@ -3,6 +3,7 @@ name: Oracle
 kinds: [hyperscaler]
 tagline: Oracle Cloud Infrastructure, with GPU bare metal and superclusters.
 website: https://www.oracle.com/cloud/
+logo_url: /logos/oracle.png
 tagging:
   aliases: [Oracle Cloud, OCI, Oracle Cloud Infrastructure]
   match_case: true
