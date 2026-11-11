@@ -10,6 +10,7 @@ axum.workspace = true
 ih-db.workspace = true
 ih-ingest.workspace = true
 anyhow.workspace = true
+chrono.workspace = true
 dotenvy.workspace = true
 serde.workspace = true
 serde_json.workspace = true

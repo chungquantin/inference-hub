@@ -588,3 +588,60 @@ async fn jobs_out_of_attempts_go_to_the_dead_letter_table(pool: PgPool) {
             .contains("layout changed")
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn adapter_runs_rebuild_the_market_summaries_once(pool: PgPool) {
+    seed(&pool).await;
+    let market = FakeMarket::new();
+    let ctx = context(&market.start().await);
+
+    // No summaries yet: the scheduler asks for a rebuild at once.
+    assert_eq!(worker::schedule_market_refresh(&pool).await.unwrap(), 1);
+    sqlx::query("DELETE FROM jobs")
+        .execute(&pool)
+        .await
+        .unwrap();
+
+    // Five adapter runs queue one debounced rebuild, not five.
+    run_adapters(&pool, &ctx).await;
+    let queued: Vec<(String, bool)> = sqlx::query_as(
+        "SELECT kind, run_at > now() FROM jobs WHERE kind = 'refresh_market' AND status = 'queued'",
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+    assert_eq!(
+        queued,
+        [("refresh_market".to_owned(), true)],
+        "one, after the debounce"
+    );
+
+    // When it runs, the summaries match the listings.
+    sqlx::query("UPDATE jobs SET run_at = now() WHERE kind = 'refresh_market'")
+        .execute(&pool)
+        .await
+        .unwrap();
+    worker::drain(&pool, &ctx, "t").await.unwrap();
+    let (models, gpus): (i32, i32) =
+        sqlx::query_as("SELECT distinct_models, gpu_types FROM market_stats")
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    assert_eq!(
+        models, 2,
+        "gpt-oss-120b (sold by both gateways) and unmapped/model"
+    );
+    assert!(gpus >= 4, "{gpus}");
+    let oss: (i32, String) = sqlx::query_as(
+        "SELECT m.providers, o.slug FROM market_models m
+         JOIN organizations o ON o.id = m.cheapest_organization_id
+         WHERE m.kind = 'model' AND m.model_key = 'gpt-oss-120b'",
+    )
+    .fetch_one(&pool)
+    .await
+    .unwrap();
+    assert_eq!(oss, (2, "liquid-inference".to_owned()));
+
+    // Fresh summaries need no scheduled rebuild.
+    assert_eq!(worker::schedule_market_refresh(&pool).await.unwrap(), 0);
+}

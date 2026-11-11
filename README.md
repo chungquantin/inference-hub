@@ -156,8 +156,21 @@ pages; most answer with the full list at once, OpenRouter, Linode and Vultr page
 | GPU clouds and marketplaces | RunPod, Hyperbolic, CoreWeave, Lambda, Vultr, Akamai (Linode), Verda (DataCrunch), Cudo, Vast.ai and Akash (medians of host offers), io.net, Shadeform (18 resold clouds), Oracle Cloud, Microsoft Azure |
 
 Each adapter runs on its own interval: hourly for marketplaces and order books, daily
-for price lists. Every run stores everything it saw in `market_listings`, which feeds
-the market pages. Listings that a product maps to also become offerings of that
+for price lists. Every run stores everything it saw in `market_listings`.
+
+The site never calls providers and never aggregates on request. The data flows one way:
+
+```
+providers ──(worker: run_adapter, every page)──▶ market_listings
+market_listings ──(worker: refresh_market)──▶ market_models · market_gpus · market_providers · market_stats
+summary tables ──(API: indexed, paginated reads)──▶ web
+```
+
+After an adapter run the worker queues one `refresh_market` job 20 seconds out, so the
+adapters of one scheduler pass share it; summaries older than an hour are rebuilt
+regardless. A rebuild takes under a second for ~26,000 listings and swaps all tables
+in one transaction. Index pages read the summaries and page with `limit`/`offset`
+along `market_models_rank_idx`; detail pages read the listings of one model or GPU. Listings that a product maps to also become offerings of that
 product, with full price history:
 
 ```yaml

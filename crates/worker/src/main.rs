@@ -74,7 +74,9 @@ async fn main() -> anyhow::Result<()> {
     if flag("--once") {
         let scheduled = worker::schedule_all(&pool, &ctx).await?;
         let ran = worker::drain(&pool, &ctx, &config.worker_id).await?;
-        tracing::info!(scheduled, ran, "done");
+        // Adapter runs schedule a debounced refresh; a one-shot run does it now.
+        let refresh = ih_db::market_refresh::refresh(&pool).await?;
+        tracing::info!(scheduled, ran, ?refresh, "done");
         return Ok(());
     }
 

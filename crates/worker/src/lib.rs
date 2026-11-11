@@ -18,6 +18,14 @@ pub const FETCH_SOURCE: &str = "fetch_source";
 pub const SYNC_REPO: &str = "sync_repo";
 pub const RUN_ADAPTER: &str = "run_adapter";
 pub const ENRICH_NEWS: &str = "enrich_news";
+pub const REFRESH_MARKET: &str = "refresh_market";
+
+/// How long after an adapter run the market summaries are rebuilt, so the
+/// adapters of one scheduler pass share one refresh.
+pub const REFRESH_DEBOUNCE: Duration = Duration::from_secs(20);
+/// Summaries older than this are rebuilt even without new listings, so a
+/// missed refresh never leaves the site stale for long.
+pub const REFRESH_MAX_AGE: Duration = Duration::from_secs(3600);
 
 fn market_adapters_from(adapters: Arc<Vec<MarketAdapter>>) -> Vec<MarketAdapter> {
     Arc::try_unwrap(adapters).unwrap_or_else(|_| panic!("adapters are shared"))
@@ -232,7 +240,44 @@ pub async fn schedule_all(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
     Ok(schedule_due_sources(pool).await?
         + schedule_due_repos(pool, ctx.repo_sync_every).await?
         + schedule_due_adapters(pool, ctx).await?
-        + schedule_enrichment(pool, ctx).await?)
+        + schedule_enrichment(pool, ctx).await?
+        + schedule_market_refresh(pool).await?)
+}
+
+/// Enqueues a rebuild of the market summaries to run after `delay`. A queued
+/// rebuild absorbs later requests (dedupe key), so a pass of many adapters
+/// rebuilds once.
+pub async fn enqueue_market_refresh(pool: &PgPool, delay: Duration) -> sqlx::Result<bool> {
+    let job = jobs::enqueue(
+        pool,
+        NewJob {
+            kind: REFRESH_MARKET,
+            payload: serde_json::json!({}),
+            dedupe_key: Some(REFRESH_MARKET),
+            run_at: Some(chrono::Utc::now() + delay),
+            max_attempts: Some(3),
+        },
+    )
+    .await?;
+    Ok(job.is_some())
+}
+
+/// Enqueues a rebuild when the summaries are missing or older than
+/// [`REFRESH_MAX_AGE`].
+pub async fn schedule_market_refresh(pool: &PgPool) -> sqlx::Result<usize> {
+    let stale: bool = sqlx::query_scalar(
+        "SELECT coalesce((SELECT refreshed_at < now() - make_interval(secs => $1)
+                          FROM market_stats), true)",
+    )
+    .bind(REFRESH_MAX_AGE.as_secs_f64())
+    .fetch_one(pool)
+    .await?;
+    if !stale {
+        return Ok(0);
+    }
+    Ok(usize::from(
+        enqueue_market_refresh(pool, Duration::ZERO).await?,
+    ))
 }
 
 /// Enqueues one enrichment pass when enrichment is on and pending items wait
@@ -282,6 +327,14 @@ pub async fn run_job(pool: &PgPool, ctx: &Context, job: &Job) -> anyhow::Result<
                 .ok_or_else(|| anyhow::anyhow!("unknown adapter `{}`", payload.adapter))?;
             let report = ih_ingest::market::run_adapter(pool, &ctx.http, adapter).await?;
             tracing::info!(job = job.id, adapter = %payload.adapter, ?report, "ran market adapter");
+            // Rebuild the summaries shortly; adapters finishing meanwhile share it.
+            enqueue_market_refresh(pool, REFRESH_DEBOUNCE).await?;
+            Ok(())
+        }
+        REFRESH_MARKET => {
+            let report = ih_db::market_refresh::refresh(pool).await?;
+            ctx.metrics.market_refreshed(report.millis);
+            tracing::info!(job = job.id, ?report, "refreshed market summaries");
             Ok(())
         }
         SYNC_REPO => {

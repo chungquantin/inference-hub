@@ -22,6 +22,8 @@ pub struct Metrics {
     jobs_failed: Mutex<BTreeMap<String, u64>>,
     /// Seconds since the Unix epoch of the last scheduler pass that reached the database.
     last_schedule_ok: AtomicU64,
+    /// Duration of the last market summary rebuild.
+    last_refresh_ms: AtomicU64,
 }
 
 impl Metrics {
@@ -30,6 +32,10 @@ impl Metrics {
         if let Ok(mut map) = map.lock() {
             *map.entry(kind.to_owned()).or_default() += 1;
         }
+    }
+
+    pub fn market_refreshed(&self, millis: u64) {
+        self.last_refresh_ms.store(millis, Ordering::Relaxed);
     }
 
     pub fn schedule_ok(&self) {
@@ -128,6 +134,30 @@ async fn metrics_text(State(state): State<AppState>) -> impl IntoResponse {
         "ih_worker_last_schedule_timestamp_seconds {}",
         m.last_schedule_ok.load(Ordering::Relaxed)
     );
+
+    let _ = writeln!(
+        out,
+        "# HELP ih_market_refresh_duration_ms Duration of the last market summary rebuild here."
+    );
+    let _ = writeln!(out, "# TYPE ih_market_refresh_duration_ms gauge");
+    let _ = writeln!(
+        out,
+        "ih_market_refresh_duration_ms {}",
+        m.last_refresh_ms.load(Ordering::Relaxed)
+    );
+    if let Ok(Some(at)) = sqlx::query_scalar::<_, f64>(
+        "SELECT extract(epoch FROM refreshed_at)::float8 FROM market_stats",
+    )
+    .fetch_optional(&state.pool)
+    .await
+    {
+        let _ = writeln!(
+            out,
+            "# HELP ih_market_refreshed_timestamp_seconds When the market summaries were last rebuilt."
+        );
+        let _ = writeln!(out, "# TYPE ih_market_refreshed_timestamp_seconds gauge");
+        let _ = writeln!(out, "ih_market_refreshed_timestamp_seconds {at}");
+    }
 
     let _ = writeln!(
         out,

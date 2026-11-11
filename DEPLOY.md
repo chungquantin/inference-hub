@@ -116,7 +116,9 @@ Then add the Vercel origin to the API's `CORS_ORIGINS`.
   queue depth by status, the last success time and failure streak of every
   market adapter, and feed failure streaks. Alert on
   `ih_adapter_consecutive_failures > 3` and on
-  `ih_worker_last_schedule_timestamp_seconds` falling behind.
+  `ih_worker_last_schedule_timestamp_seconds` falling behind, and on
+  `ih_market_refreshed_timestamp_seconds` older than two hours (the market
+  pages would be showing stale summaries).
 - **Held prices.** A price outside plausible bounds, or more than 5× from the
   stored one, is held instead of published. Review them at
   `/admin/market#held`.

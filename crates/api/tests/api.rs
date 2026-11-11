@@ -963,6 +963,8 @@ async fn seed_market_index(pool: &PgPool) {
     .execute(pool)
     .await
     .unwrap();
+    // The worker rebuilds the summaries after adapter runs; do it here.
+    ih_db::market_refresh::refresh(pool).await.unwrap();
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
@@ -1092,6 +1094,7 @@ async fn media_index_compares_unit_prices_across_providers(pool: PgPool) {
     .execute(&pool)
     .await
     .unwrap();
+    ih_db::market_refresh::refresh(&pool).await.unwrap();
     let app = app(pool);
 
     let (status, page) = get(&app, "/v1/market/media").await;

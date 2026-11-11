@@ -1,20 +1,28 @@
-//! Market-wide queries over `market_listings`: every live price any adapter
-//! saw, mapped to a product or not.
+//! Market-wide reads.
 //!
-//! Prices are compared per unit: GPUs per GPU-hour, models on the 3:1 blend of
-//! input and output used by the model comparison. Free listings (price 0) are
-//! promotions, not market prices, and are left out of minimums and medians.
+//! Index, overview and provider queries read the summaries the worker
+//! precomputes (see [`crate::market_refresh`]): they page along indexes and do
+//! not aggregate at request time. Detail queries (every price of one model or
+//! GPU) read the live listings directly, through indexes.
+//!
+//! Prices are compared per unit: GPUs per GPU-hour, chat models on the 3:1
+//! blend of input and output used by the model comparison, other models in
+//! their own unit. Free listings (price 0) are left out of minimums and medians.
 
 use ih_core::{
     GpuIndexRow, MarketDetail, MarketIndexQuery, MarketListing, MarketOverview, MarketProvider,
-    MarketSource, ModelIndexRow,
+    MarketSource, MediaIndexQuery, MediaIndexRow, ModelIndexRow, Page,
 };
 use sqlx::PgPool;
 
 use crate::compare::BLEND_INPUT_WEIGHT;
 
-fn limit(q: &MarketIndexQuery) -> i64 {
-    q.limit.unwrap_or(100).clamp(1, 500)
+fn limit(q: Option<i64>) -> i64 {
+    q.unwrap_or(100).clamp(1, 500)
+}
+
+fn offset(q: Option<i64>) -> i64 {
+    q.unwrap_or(0).max(0)
 }
 
 /// Escapes `%`, `_` and `\` so user text matches literally in ILIKE.
@@ -32,123 +40,100 @@ fn like(q: &Option<String>) -> Option<String> {
         })
 }
 
+fn blank(s: &Option<String>) -> Option<&str> {
+    s.as_deref().map(str::trim).filter(|s| !s.is_empty())
+}
+
+/// The organization columns every index row carries, for `cheapest`.
+const CHEAPEST: &str = "o.slug AS organization_slug, o.name AS organization_name,
+    o.logo_url AS organization_logo";
+
 /// GPU types across clouds, the most widely sold first.
 pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<GpuIndexRow>> {
-    sqlx::query_as(
-        "WITH live AS (
-             SELECT l.gpu_type, o.slug, o.name, o.logo_url,
-                    (l.price_per_hour / l.gpu_count)::float8 AS per_gpu
-             FROM market_listings l
-             JOIN adapter_state a ON a.adapter = l.adapter
-             JOIN organizations o ON o.id = a.organization_id
-             WHERE l.kind = 'gpu' AND l.delisted_at IS NULL AND l.gpu_count > 0
-               AND l.price_per_hour > 0
-               AND ($1::text IS NULL OR l.gpu_type ILIKE $1)
-         ),
-         stats AS (
-             SELECT gpu_type, count(DISTINCT slug) AS providers, count(*) AS listings,
-                    min(per_gpu) AS min_per_gpu_hour,
-                    percentile_cont(0.5) WITHIN GROUP (ORDER BY per_gpu) AS median_per_gpu_hour,
-                    max(per_gpu) AS max_per_gpu_hour
-             FROM live GROUP BY gpu_type
-         ),
-         cheapest AS (
-             SELECT DISTINCT ON (gpu_type) gpu_type, slug, name, logo_url
-             FROM live ORDER BY gpu_type, per_gpu, name
-         )
-         SELECT s.gpu_type, s.providers, s.listings,
-                round(s.min_per_gpu_hour::numeric, 4)::float8 AS min_per_gpu_hour,
-                round(s.median_per_gpu_hour::numeric, 4)::float8 AS median_per_gpu_hour,
-                round(s.max_per_gpu_hour::numeric, 4)::float8 AS max_per_gpu_hour,
-                c.slug AS organization_slug, c.name AS organization_name,
-                c.logo_url AS organization_logo
-         FROM stats s JOIN cheapest c USING (gpu_type)
-         WHERE s.providers >= $2
-         ORDER BY s.providers DESC, s.listings DESC, s.gpu_type
-         LIMIT $3",
-    )
+    sqlx::query_as(sqlx::AssertSqlSafe(format!(
+        "SELECT g.gpu_type, g.providers::int8 AS providers, g.listings::int8 AS listings,
+                g.min_per_gpu_hour, g.median_per_gpu_hour, g.max_per_gpu_hour, {CHEAPEST}
+         FROM market_gpus g
+         JOIN organizations o ON o.id = g.cheapest_organization_id
+         WHERE g.providers >= $2
+           AND ($1::text IS NULL OR g.gpu_type ILIKE $1)
+           AND ($5::text IS NULL OR g.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $5)])
+         ORDER BY g.providers DESC, g.listings DESC, g.gpu_type
+         LIMIT $3 OFFSET $4"
+    )))
     .bind(like(&q.q))
     .bind(q.min_providers.unwrap_or(1))
-    .bind(limit(q))
+    .bind(limit(q.limit))
+    .bind(offset(q.offset))
+    .bind(blank(&q.provider))
     .fetch_all(pool)
     .await
 }
 
-/// Models across providers, the most widely served first.
-pub async fn model_index(
-    pool: &PgPool,
-    q: &MarketIndexQuery,
-) -> sqlx::Result<ih_core::Page<ModelIndexRow>> {
-    #[derive(sqlx::FromRow)]
-    struct Counted {
-        #[sqlx(flatten)]
-        row: ModelIndexRow,
-        total: i64,
+#[derive(sqlx::FromRow)]
+struct Counted<T> {
+    #[sqlx(flatten)]
+    row: T,
+    total: i64,
+}
+
+fn page<T>(rows: Vec<Counted<T>>, limit: i64, offset: i64) -> Page<T> {
+    Page {
+        total: rows.first().map_or(0, |r| r.total),
+        items: rows.into_iter().map(|r| r.row).collect(),
+        limit,
+        offset,
     }
-    let rows: Vec<Counted> = sqlx::query_as(
-        "WITH live AS (
-             SELECT market_model_key(l.external_id) AS model_key, l.name, l.maker,
-                    l.context_window,
-                    l.price_input_per_mtok::float8 AS input,
-                    l.price_output_per_mtok::float8 AS output,
-                    ((l.price_input_per_mtok * $4::numeric + l.price_output_per_mtok)
-                        / ($4::numeric + 1))::float8 AS blended,
-                    -- A router's listing names the provider behind it.
-                    coalesce(l.region, o.slug) AS seller,
-                    o.slug, o.name AS org_name, o.logo_url
-             FROM market_listings l
-             JOIN adapter_state a ON a.adapter = l.adapter
-             JOIN organizations o ON o.id = a.organization_id
-             WHERE l.kind = 'model' AND l.delisted_at IS NULL
-               AND l.price_input_per_mtok + l.price_output_per_mtok > 0
-               AND ($1::text IS NULL OR l.external_id ILIKE $1 OR l.name ILIKE $1)
-         ),
-         stats AS (
-             SELECT model_key,
-                    mode() WITHIN GROUP (ORDER BY name) AS name,
-                    mode() WITHIN GROUP (ORDER BY maker) AS maker,
-                    count(DISTINCT seller) AS providers,
-                    min(input) AS min_input, min(output) AS min_output,
-                    min(blended) AS min_blended,
-                    percentile_cont(0.5) WITHIN GROUP (ORDER BY blended) AS median_blended,
-                    max(context_window) AS max_context_window
-             FROM live GROUP BY model_key
-         ),
-         cheapest AS (
-             SELECT DISTINCT ON (model_key) model_key, slug, org_name, logo_url
-             FROM live ORDER BY model_key, blended, org_name
-         )
-         SELECT count(*) OVER () AS total, s.model_key, s.name, s.maker, s.providers,
-                round(s.min_input::numeric, 6)::float8 AS min_input_per_mtok,
-                round(s.min_output::numeric, 6)::float8 AS min_output_per_mtok,
-                round(s.min_blended::numeric, 6)::float8 AS min_blended_per_mtok,
-                round(s.median_blended::numeric, 6)::float8 AS median_blended_per_mtok,
-                s.max_context_window,
-                c.slug AS organization_slug, c.org_name AS organization_name,
-                c.logo_url AS organization_logo
-         FROM stats s JOIN cheapest c USING (model_key)
-         WHERE s.providers >= $2
-           AND ($6::text IS NULL OR EXISTS (
-                 SELECT 1 FROM live p WHERE p.model_key = s.model_key AND p.slug = $6))
-         ORDER BY s.providers DESC, s.min_blended, s.model_key
-         LIMIT $3 OFFSET $5",
-    )
+}
+
+/// Chat models across providers, the most widely sold first.
+pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Page<ModelIndexRow>> {
+    let (limit, offset) = (limit(q.limit), offset(q.offset));
+    let rows: Vec<Counted<ModelIndexRow>> = sqlx::query_as(sqlx::AssertSqlSafe(format!(
+        "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker,
+                m.providers::int8 AS providers,
+                m.min_input_per_mtok, m.min_output_per_mtok, m.min_blended_per_mtok,
+                m.median_blended_per_mtok, m.max_context_window, {CHEAPEST}
+         FROM market_models m
+         JOIN organizations o ON o.id = m.cheapest_organization_id
+         WHERE m.kind = 'model' AND m.providers >= $2
+           AND ($1::text IS NULL OR m.model_key ILIKE $1 OR m.name ILIKE $1)
+           AND ($5::text IS NULL OR m.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $5)])
+         ORDER BY m.providers DESC, m.min_blended_per_mtok, m.model_key
+         LIMIT $3 OFFSET $4"
+    )))
     .bind(like(&q.q))
     .bind(q.min_providers.unwrap_or(1))
-    .bind(limit(q))
-    .bind(BLEND_INPUT_WEIGHT)
-    .bind(q.offset.unwrap_or(0).max(0))
-    .bind(q.provider.as_deref().filter(|p| !p.is_empty()))
+    .bind(limit)
+    .bind(offset)
+    .bind(blank(&q.provider))
     .fetch_all(pool)
     .await?;
-    // The window count; a page past the end has no rows to carry it.
-    let total = rows.first().map_or(0, |r| r.total);
-    Ok(ih_core::Page {
-        items: rows.into_iter().map(|r| r.row).collect(),
-        total,
-        limit: limit(q),
-        offset: q.offset.unwrap_or(0).max(0),
-    })
+    Ok(page(rows, limit, offset))
+}
+
+/// Models priced per unit, the most widely sold first.
+pub async fn media_index(pool: &PgPool, q: &MediaIndexQuery) -> sqlx::Result<Page<MediaIndexRow>> {
+    let (limit, offset) = (limit(q.limit), offset(q.offset));
+    let rows: Vec<Counted<MediaIndexRow>> = sqlx::query_as(sqlx::AssertSqlSafe(format!(
+        "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker, m.kind, m.unit,
+                m.providers::int8 AS providers, m.min_price, m.median_price, {CHEAPEST}
+         FROM market_models m
+         JOIN organizations o ON o.id = m.cheapest_organization_id
+         WHERE m.kind <> 'model' AND m.providers >= $3
+           AND ($1::text IS NULL OR m.kind = $1)
+           AND ($2::text IS NULL OR m.model_key ILIKE $2 OR m.name ILIKE $2)
+         ORDER BY m.providers DESC, m.kind, m.min_price, m.model_key
+         LIMIT $4 OFFSET $5"
+    )))
+    .bind(blank(&q.kind))
+    .bind(like(&q.q))
+    .bind(q.min_providers.unwrap_or(1))
+    .bind(limit)
+    .bind(offset)
+    .fetch_all(pool)
+    .await?;
+    Ok(page(rows, limit, offset))
 }
 
 const LISTING_COLUMNS: &str = "l.adapter, o.slug AS organization_slug, o.name AS organization_name,
@@ -233,110 +218,74 @@ fn detail(key: &str, listings: Vec<MarketListing>) -> Option<MarketDetail> {
 /// Providers by how much of the market they cover.
 pub async fn providers(pool: &PgPool) -> sqlx::Result<Vec<MarketProvider>> {
     sqlx::query_as(
-        "WITH live AS (
-             SELECT o.id, o.slug, o.name, o.logo_url, l.kind, l.external_id, l.gpu_type,
-                    l.last_seen_at,
-                    CASE WHEN l.kind = 'gpu' THEN l.price_per_hour / nullif(l.gpu_count, 0)
-                         WHEN l.kind = 'model'
-                         THEN (l.price_input_per_mtok * $1::numeric + l.price_output_per_mtok)
-                              / ($1::numeric + 1)
-                         ELSE l.price_per_unit END AS unit_price,
-                    CASE WHEN l.kind = 'gpu' THEN l.gpu_type
-                         ELSE market_model_key(l.external_id) END AS item
-             FROM market_listings l
-             JOIN adapter_state a ON a.adapter = l.adapter
-             JOIN organizations o ON o.id = a.organization_id
-             WHERE l.delisted_at IS NULL
-         ),
-         -- Only items at least two organizations sell: being the sole seller is not winning.
-         contested AS (
-             SELECT kind, item FROM live WHERE unit_price > 0
-             GROUP BY kind, item HAVING count(DISTINCT id) >= 2
-         ),
-         winners AS (
-             SELECT DISTINCT ON (kind, item) kind, item, id
-             FROM live JOIN contested USING (kind, item)
-             WHERE unit_price > 0
-             ORDER BY kind, item, unit_price, name
-         )
-         SELECT * FROM (
-             SELECT l.slug AS organization_slug, l.name AS organization_name,
-                    l.logo_url AS organization_logo,
-                    count(DISTINCT l.item) FILTER (WHERE l.kind = 'model') AS models,
-                    count(*) FILTER (WHERE l.kind = 'model') AS model_listings,
-                    count(DISTINCT l.item) FILTER (WHERE l.kind NOT IN ('model', 'gpu')) AS media_models,
-                    count(*) FILTER (WHERE l.kind = 'gpu') AS gpu_configurations,
-                    (SELECT count(*) FROM winners w WHERE w.id = l.id) AS cheapest_count,
-                    max(l.last_seen_at) AS last_seen_at
-             FROM live l
-             GROUP BY l.id, l.slug, l.name, l.logo_url
-         ) p
-         ORDER BY models + media_models + gpu_configurations DESC, organization_name",
+        "SELECT o.slug AS organization_slug, o.name AS organization_name,
+                o.logo_url AS organization_logo,
+                p.models::int8 AS models, p.model_listings::int8 AS model_listings,
+                p.media_models::int8 AS media_models,
+                p.gpu_configurations::int8 AS gpu_configurations,
+                p.cheapest_count::int8 AS cheapest_count, p.last_seen_at
+         FROM market_providers p JOIN organizations o ON o.id = p.organization_id
+         ORDER BY p.models + p.media_models + p.gpu_configurations DESC, o.name",
     )
-    .bind(BLEND_INPUT_WEIGHT)
     .fetch_all(pool)
     .await
 }
 
 #[derive(sqlx::FromRow)]
 struct Totals {
-    model_providers: i64,
-    gpu_providers: i64,
-    providers: i64,
-    model_listings: i64,
-    distinct_models: i64,
-    multi_provider_models: i64,
-    gpu_listings: i64,
-    gpu_types: i64,
-    media_listings: i64,
-    media_models: i64,
+    providers: i32,
+    model_providers: i32,
+    gpu_providers: i32,
+    model_listings: i32,
+    distinct_models: i32,
+    multi_provider_models: i32,
+    gpu_listings: i32,
+    gpu_types: i32,
+    media_listings: i32,
+    media_models: i32,
     updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// Headline numbers, the top of both indexes, and the health of every source.
 pub async fn overview(pool: &PgPool) -> sqlx::Result<MarketOverview> {
-    let t: Totals = sqlx::query_as(
-        "SELECT count(DISTINCT a.organization_id) FILTER (WHERE l.kind = 'model') AS model_providers,
-                count(DISTINCT a.organization_id) FILTER (WHERE l.kind = 'gpu') AS gpu_providers,
-                count(DISTINCT a.organization_id) AS providers,
-                count(*) FILTER (WHERE l.kind = 'model') AS model_listings,
-                count(DISTINCT market_model_key(l.external_id)) FILTER (WHERE l.kind = 'model')
-                    AS distinct_models,
-                count(*) FILTER (WHERE l.kind = 'gpu') AS gpu_listings,
-                count(DISTINCT l.gpu_type) FILTER (WHERE l.kind = 'gpu') AS gpu_types,
-                count(*) FILTER (WHERE l.kind NOT IN ('model', 'gpu')) AS media_listings,
-                count(DISTINCT l.kind || ':' || market_model_key(l.external_id))
-                    FILTER (WHERE l.kind NOT IN ('model', 'gpu')) AS media_models,
-                max(l.last_seen_at) AS updated_at,
-                (SELECT count(*) FROM (
-                     SELECT 1 FROM market_listings m
-                     JOIN adapter_state ma ON ma.adapter = m.adapter
-                     WHERE m.kind = 'model' AND m.delisted_at IS NULL
-                     GROUP BY market_model_key(m.external_id)
-                     HAVING count(DISTINCT coalesce(m.region, ma.organization_id::text)) >= 2
-                 ) multi) AS multi_provider_models
-         FROM market_listings l
-         JOIN adapter_state a ON a.adapter = l.adapter
-         WHERE l.delisted_at IS NULL",
+    let t: Option<Totals> = sqlx::query_as(
+        "SELECT providers, model_providers, gpu_providers, model_listings, distinct_models,
+                multi_provider_models, gpu_listings, gpu_types, media_listings, media_models,
+                updated_at
+         FROM market_stats",
     )
-    .fetch_one(pool)
+    .fetch_optional(pool)
     .await?;
+    // Before the first refresh everything is zero.
+    let t = t.unwrap_or(Totals {
+        providers: 0,
+        model_providers: 0,
+        gpu_providers: 0,
+        model_listings: 0,
+        distinct_models: 0,
+        multi_provider_models: 0,
+        gpu_listings: 0,
+        gpu_types: 0,
+        media_listings: 0,
+        media_models: 0,
+        updated_at: None,
+    });
     let top = MarketIndexQuery {
         min_providers: Some(2),
         limit: Some(12),
         ..MarketIndexQuery::default()
     };
     Ok(MarketOverview {
-        providers: t.providers,
-        model_providers: t.model_providers,
-        gpu_providers: t.gpu_providers,
-        model_listings: t.model_listings,
-        distinct_models: t.distinct_models,
-        multi_provider_models: t.multi_provider_models,
-        gpu_listings: t.gpu_listings,
-        gpu_types: t.gpu_types,
-        media_listings: t.media_listings,
-        media_models: t.media_models,
+        providers: t.providers.into(),
+        model_providers: t.model_providers.into(),
+        gpu_providers: t.gpu_providers.into(),
+        model_listings: t.model_listings.into(),
+        distinct_models: t.distinct_models.into(),
+        multi_provider_models: t.multi_provider_models.into(),
+        gpu_listings: t.gpu_listings.into(),
+        gpu_types: t.gpu_types.into(),
+        media_listings: t.media_listings.into(),
+        media_models: t.media_models.into(),
         updated_at: t.updated_at,
         gpu_index: gpu_index(pool, &top).await?,
         model_index: model_index(pool, &top).await?.items,
@@ -350,8 +299,7 @@ pub async fn sources(pool: &PgPool) -> sqlx::Result<Vec<MarketSource>> {
         "SELECT a.adapter, o.slug AS organization_slug, o.name AS organization_name,
                 o.logo_url AS organization_logo,
                 (SELECT min(kind) FROM market_listings l WHERE l.adapter = a.adapter) AS kind,
-                (SELECT count(*) FROM market_listings l
-                 WHERE l.adapter = a.adapter AND l.delisted_at IS NULL) AS listings,
+                a.listings_seen::int8 AS listings,
                 a.last_success_at,
                 a.consecutive_failures = 0 AND a.last_success_at IS NOT NULL AS healthy
          FROM adapter_state a JOIN organizations o ON o.id = a.organization_id
@@ -410,68 +358,4 @@ pub async fn failed_jobs(pool: &PgPool, limit: i64) -> sqlx::Result<Vec<ih_core:
     .bind(limit.clamp(1, 500))
     .fetch_all(pool)
     .await
-}
-
-/// Non-chat models across providers, by unit price, the most widely sold first.
-pub async fn media_index(
-    pool: &PgPool,
-    q: &ih_core::MediaIndexQuery,
-) -> sqlx::Result<ih_core::Page<ih_core::MediaIndexRow>> {
-    #[derive(sqlx::FromRow)]
-    struct Counted {
-        #[sqlx(flatten)]
-        row: ih_core::MediaIndexRow,
-        total: i64,
-    }
-    let limit = q.limit.unwrap_or(100).clamp(1, 500);
-    let offset = q.offset.unwrap_or(0).max(0);
-    let rows: Vec<Counted> = sqlx::query_as(
-        "WITH live AS (
-             SELECT l.kind, l.unit, market_model_key(l.external_id) AS model_key, l.name, l.maker,
-                    l.price_per_unit::float8 AS price,
-                    coalesce(l.region, o.slug) AS seller,
-                    o.slug, o.name AS org_name, o.logo_url
-             FROM market_listings l
-             JOIN adapter_state a ON a.adapter = l.adapter
-             JOIN organizations o ON o.id = a.organization_id
-             WHERE l.kind NOT IN ('model', 'gpu') AND l.delisted_at IS NULL
-               AND l.price_per_unit > 0
-               AND ($1::text IS NULL OR l.kind = $1)
-               AND ($2::text IS NULL OR l.external_id ILIKE $2 OR l.name ILIKE $2)
-         ),
-         stats AS (
-             SELECT kind, unit, model_key,
-                    mode() WITHIN GROUP (ORDER BY name) AS name,
-                    mode() WITHIN GROUP (ORDER BY maker) AS maker,
-                    count(DISTINCT seller) AS providers,
-                    min(price) AS min_price,
-                    percentile_cont(0.5) WITHIN GROUP (ORDER BY price) AS median_price
-             FROM live GROUP BY kind, unit, model_key
-         ),
-         cheapest AS (
-             SELECT DISTINCT ON (kind, model_key) kind, model_key, slug, org_name, logo_url
-             FROM live ORDER BY kind, model_key, price, org_name
-         )
-         SELECT count(*) OVER () AS total, s.model_key, s.name, s.maker, s.kind, s.unit,
-                s.providers, s.min_price, s.median_price,
-                c.slug AS organization_slug, c.org_name AS organization_name,
-                c.logo_url AS organization_logo
-         FROM stats s JOIN cheapest c USING (kind, model_key)
-         WHERE s.providers >= $3
-         ORDER BY s.providers DESC, s.kind, s.min_price, s.model_key
-         LIMIT $4 OFFSET $5",
-    )
-    .bind(q.kind.as_deref().filter(|k| !k.is_empty()))
-    .bind(like(&q.q))
-    .bind(q.min_providers.unwrap_or(1))
-    .bind(limit)
-    .bind(offset)
-    .fetch_all(pool)
-    .await?;
-    Ok(ih_core::Page {
-        total: rows.first().map_or(0, |r| r.total),
-        items: rows.into_iter().map(|r| r.row).collect(),
-        limit,
-        offset,
-    })
 }
