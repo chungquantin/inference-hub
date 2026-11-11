@@ -1,0 +1,8 @@
+slug: verda
+name: Verda
+kinds: [gpu_cloud]
+tagline: GPU cloud, formerly DataCrunch.
+website: https://verda.com
+tagging:
+  aliases: [DataCrunch]
+  match_case: true

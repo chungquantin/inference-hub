@@ -266,7 +266,37 @@ pub fn validate_feeds(files: &[(String, OrgSeed)], sources: &SourcesFile) -> Vec
 }
 
 /// Ids of the market adapters that listings may refer to.
-pub const ADAPTERS: [&str; 5] = ["openrouter", "liquid", "runpod", "hyperbolic", "coreweave"];
+pub const ADAPTERS: &[&str] = &[
+    // Model APIs
+    "openrouter",
+    "liquid",
+    "huggingface",
+    "deepinfra",
+    "novita",
+    "chutes",
+    "sambanova",
+    "atlascloud",
+    "inferencenet",
+    "featherless",
+    "venice",
+    "vercel",
+    "requesty",
+    // GPU clouds
+    "runpod",
+    "hyperbolic",
+    "coreweave",
+    "vastai",
+    "vultr",
+    "linode",
+    "verda",
+    "akash",
+    "ionet",
+    "cudo",
+    "shadeform",
+    "oracle",
+    "lambda",
+    "azure",
+];
 
 /// Checks the whole data set: each file on its own and the references between files.
 /// `files` pairs a file name (`<slug>.yaml`) with its parsed content.

@@ -1,0 +1,7 @@
+slug: featherless
+name: Featherless
+kinds: [inference_provider]
+tagline: Inference for thousands of open-weights models from Hugging Face.
+website: https://featherless.ai
+tagging:
+  aliases: [Featherless AI]

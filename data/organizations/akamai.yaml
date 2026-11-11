@@ -1,0 +1,8 @@
+slug: akamai
+name: Akamai
+kinds: [gpu_cloud]
+tagline: Akamai Cloud (formerly Linode), with GPU instances.
+website: https://www.akamai.com/products/cloud-gpu
+tagging:
+  aliases: [Linode, Akamai Cloud]
+  match_case: true

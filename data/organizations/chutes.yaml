@@ -1,0 +1,5 @@
+slug: chutes
+name: Chutes
+kinds: [inference_provider]
+tagline: Serverless inference on the Bittensor network, with confidential-compute models.
+website: https://chutes.ai

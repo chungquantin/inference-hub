@@ -116,13 +116,7 @@ impl FakeMarket {
         let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
         let base = format!("http://{}", listener.local_addr().unwrap());
         tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
-        Endpoints {
-            openrouter: base.clone(),
-            liquid: base.clone(),
-            runpod: base.clone(),
-            hyperbolic: base.clone(),
-            coreweave: base,
-        }
+        Endpoints::all(base)
     }
 }
 
@@ -179,7 +173,11 @@ fn context(endpoints: &Endpoints) -> worker::Context {
         },
         endpoints,
     )
+    .only_adapters(&TESTED)
 }
+
+/// The adapters this suite fakes; their parsers have unit tests of their own.
+const TESTED: [&str; 5] = ["openrouter", "liquid", "runpod", "hyperbolic", "coreweave"];
 
 /// Runs every due adapter job through the real worker.
 async fn run_adapters(pool: &PgPool, ctx: &worker::Context) -> usize {

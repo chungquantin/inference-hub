@@ -1,0 +1,5 @@
+slug: shadeform
+name: Shadeform
+kinds: [gpu_cloud]
+tagline: One marketplace and API for GPU instances across many clouds.
+website: https://www.shadeform.ai

@@ -1,0 +1,8 @@
+slug: vercel
+name: Vercel
+kinds: [llm_gateway]
+tagline: Frontend cloud with the AI Gateway, one API across model providers.
+website: https://vercel.com/ai-gateway
+tagging:
+  aliases: [Vercel AI Gateway, AI Gateway]
+  match_case: true

@@ -1,0 +1,7 @@
+slug: vast-ai
+name: Vast.ai
+kinds: [gpu_cloud]
+tagline: Marketplace for renting GPUs from independent hosts.
+website: https://vast.ai
+tagging:
+  aliases: [Vast AI]

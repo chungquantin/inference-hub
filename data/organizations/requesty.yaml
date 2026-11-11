@@ -1,0 +1,5 @@
+slug: requesty
+name: Requesty
+kinds: [llm_gateway]
+tagline: LLM router with one API across providers.
+website: https://www.requesty.ai

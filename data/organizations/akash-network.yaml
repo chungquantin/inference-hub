@@ -1,0 +1,8 @@
+slug: akash-network
+name: Akash Network
+kinds: [gpu_cloud]
+tagline: Decentralized marketplace for cloud compute and GPUs.
+website: https://akash.network
+tagging:
+  aliases: [Akash]
+  match_case: true

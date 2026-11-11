@@ -18,6 +18,10 @@ pub const FETCH_SOURCE: &str = "fetch_source";
 pub const SYNC_REPO: &str = "sync_repo";
 pub const RUN_ADAPTER: &str = "run_adapter";
 
+fn market_adapters_from(adapters: Arc<Vec<MarketAdapter>>) -> Vec<MarketAdapter> {
+    Arc::try_unwrap(adapters).unwrap_or_else(|_| panic!("adapters are shared"))
+}
+
 /// How long a job may run before another worker may take it over.
 pub const LEASE: Duration = Duration::from_secs(10 * 60);
 
@@ -45,8 +49,8 @@ pub struct Context {
     pub repo_sync_every: Duration,
     /// Market adapters, shared by every runner.
     pub adapters: Arc<Vec<MarketAdapter>>,
-    /// How often each market adapter runs.
-    pub adapter_every: Duration,
+    /// Runs every market adapter at this interval instead of its own (tests).
+    pub adapter_every: Option<Duration>,
     /// Counters served on `/metrics`.
     pub metrics: Arc<health::Metrics>,
 }
@@ -63,9 +67,21 @@ impl Context {
             github,
             repo_sync_every: Duration::from_secs(6 * 3600),
             adapters: Arc::new(market_adapters(endpoints)),
-            adapter_every: Duration::from_secs(6 * 3600),
+            adapter_every: None,
             metrics: Arc::default(),
         }
+    }
+
+    /// Keeps only the adapters with these ids (tests that fake some providers).
+    pub fn only_adapters(mut self, ids: &[&str]) -> Self {
+        let adapters = market_adapters_from(std::mem::take(&mut self.adapters));
+        self.adapters = Arc::new(
+            adapters
+                .into_iter()
+                .filter(|a| ids.contains(&a.info().id()))
+                .collect(),
+        );
+        self
     }
 
     fn adapter(&self, id: &str) -> Option<&MarketAdapter> {
@@ -176,7 +192,11 @@ pub async fn schedule_due_adapters(pool: &PgPool, ctx: &Context) -> sqlx::Result
                  FROM adapter_state WHERE adapter = $1), true)",
         )
         .bind(id)
-        .bind(ctx.adapter_every.as_secs_f64())
+        .bind(
+            ctx.adapter_every
+                .unwrap_or_else(|| adapter.info().interval())
+                .as_secs_f64(),
+        )
         .fetch_one(pool)
         .await?;
         if !due {

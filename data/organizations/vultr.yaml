@@ -1,0 +1,5 @@
+slug: vultr
+name: Vultr
+kinds: [gpu_cloud]
+tagline: Cloud provider with cloud GPU and bare-metal GPU servers.
+website: https://www.vultr.com

@@ -1,0 +1,8 @@
+slug: cudo-compute
+name: Cudo Compute
+kinds: [gpu_cloud]
+tagline: GPU cloud with per-component pricing across data centers.
+website: https://www.cudocompute.com
+tagging:
+  aliases: [Cudo]
+  match_case: true

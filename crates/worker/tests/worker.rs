@@ -161,13 +161,7 @@ fn context(github_url: &str) -> worker::Context {
             api_url: github_url.to_owned(),
             token: None,
         },
-        &worker::Endpoints {
-            openrouter: closed.clone(),
-            liquid: closed.clone(),
-            runpod: closed.clone(),
-            hyperbolic: closed.clone(),
-            coreweave: closed,
-        },
+        &worker::Endpoints::all(closed),
     )
 }
 

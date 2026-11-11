@@ -1,0 +1,8 @@
+slug: venice
+name: Venice
+kinds: [inference_provider]
+tagline: Private, uncensored inference API and chat app.
+website: https://venice.ai
+tagging:
+  aliases: [Venice AI, Venice.ai]
+  match_case: true

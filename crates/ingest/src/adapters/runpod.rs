@@ -66,15 +66,10 @@ impl NeoCloudAdapter for RunPodAdapter {
         client: &'a Client,
     ) -> BoxFuture<'a, Result<Vec<GpuListing>, AdapterError>> {
         Box::pin(async move {
-            let response = client
-                .post(format!("{}/graphql", self.base_url))
-                .json(&serde_json::json!({ "query": QUERY }))
-                .send()
-                .await?;
-            if !response.status().is_success() {
-                return Err(AdapterError::Status(ID, response.status()));
-            }
-            parse(&response.text().await?)
+            let url = format!("{}/graphql", self.base_url);
+            let body =
+                super::post_json(client, ID, &url, &serde_json::json!({ "query": QUERY })).await?;
+            parse(&body)
         })
     }
 }

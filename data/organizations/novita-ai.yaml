@@ -1,0 +1,7 @@
+slug: novita-ai
+name: Novita AI
+kinds: [inference_provider, gpu_cloud]
+tagline: Model APIs and GPU instances for open models.
+website: https://novita.ai
+tagging:
+  aliases: [Novita]
