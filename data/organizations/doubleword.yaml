@@ -1,0 +1,10 @@
+slug: doubleword
+name: "Doubleword"
+kinds: [other]
+tagline: "Self-hosted inference, formerly TitanML."
+description: "Dedicated, high-throughput inference for agents and token-hungry teams. Open-weight models on our own stack, OpenAI-compatible, up to 90% lower cost."
+website: "https://www.doubleword.ai"
+logo_url: /logos/doubleword.png
+categories: [serving-orchestration]
+tagging:
+  match_case: true

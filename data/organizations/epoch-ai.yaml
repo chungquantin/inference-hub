@@ -1,0 +1,10 @@
+slug: epoch-ai
+name: "Epoch AI"
+kinds: [llmops]
+tagline: "AI benchmarking and data hub."
+description: "Epoch AI is a research institute investigating key trends and questions that will shape the trajectory and governance of Artificial Intelligence."
+website: "https://epoch.ai"
+logo_url: /logos/epoch-ai.svg
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

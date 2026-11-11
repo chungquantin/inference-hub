@@ -1,0 +1,10 @@
+slug: lm-studio
+name: "LM Studio"
+kinds: [open_source]
+tagline: "Desktop app and local server for running models."
+description: "Bionic is LM Studio's agent for work and code. Create documents, slides, PDFs, and software with local or frontier open models."
+website: "https://lmstudio.ai"
+logo_url: /logos/lm-studio.png
+categories: [local-runtimes]
+tagging:
+  match_case: true

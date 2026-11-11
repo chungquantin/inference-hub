@@ -1,0 +1,10 @@
+slug: render-network
+name: "Render Network"
+kinds: [decentralized]
+tagline: "Distributed GPU rendering/AI."
+description: "Try the leading decentralized GPU computing platform today at: https://rendernetwork.com/"
+website: "https://rendernetwork.com"
+logo_url: /logos/render-network.png
+tagging:
+  match_case: true
+  match_name: false

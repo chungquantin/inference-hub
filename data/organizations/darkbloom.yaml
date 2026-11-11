@@ -1,0 +1,7 @@
+slug: darkbloom
+name: "Darkbloom"
+kinds: [decentralized]
+tagline: "Decentralized private inference network powered by Apple Silicon Macs."
+website: "https://www.darkbloom.ai"
+tagging:
+  match_case: true

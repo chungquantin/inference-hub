@@ -1,0 +1,10 @@
+slug: black-forest-labs
+name: "Black Forest Labs"
+kinds: [model_provider]
+tagline: "FLUX API."
+description: "Black Forest Labs is building visual intelligence: models that understand, reason, and act in the world. Use FLUX models via our API."
+website: "https://bfl.ai"
+logo_url: /logos/black-forest-labs.png
+tagging:
+  aliases: ["BFL"]
+  match_case: true

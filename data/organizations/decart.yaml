@@ -1,0 +1,9 @@
+slug: decart
+name: "Decart"
+kinds: [model_provider]
+tagline: "Realtime video models."
+description: "Decart is a frontier AI lab building real-time world models - environments that respond instantly and run at millisecond latency with unprecedented efficiency."
+website: "https://decart.ai"
+logo_url: /logos/decart.png
+tagging:
+  match_case: true

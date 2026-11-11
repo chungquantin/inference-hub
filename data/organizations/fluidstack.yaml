@@ -1,0 +1,9 @@
+slug: fluidstack
+name: "Fluidstack"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "We build compute faster than anyone on the planet. Gigawatt data centers, built in America, delivered in months. We're hiring the people who build them."
+website: "https://fluidstack.io"
+logo_url: /logos/fluidstack.png
+tagging:
+  match_case: true

@@ -70,3 +70,45 @@ products:
         per_hour: 49.24
         source_url: https://www.coreweave.com/pricing
         observed_on: 2024-11-01
+  - slug: nvidia-dynamo
+    name: "NVIDIA Dynamo"
+    type: oss_project
+    github: ai-dynamo/dynamo
+    tagline: "Datacenter-scale distributed serving layer above vLLM/SGLang/TRT-LLM."
+    url: "https://github.com/ai-dynamo/dynamo"
+  - slug: triton-inference-server
+    name: "Triton Inference Server"
+    type: oss_project
+    github: triton-inference-server/server
+    tagline: "NVIDIA multi-framework inference server."
+    url: "https://github.com/triton-inference-server/server"
+    metadata:
+      license: "BSD-3-Clause"
+  - slug: nvidia-tensorrt-model-optimizer
+    name: "NVIDIA TensorRT Model Optimizer"
+    type: oss_project
+    github: NVIDIA/Model-Optimizer
+    tagline: "Quantization and sparsity for TRT."
+    url: "https://github.com/NVIDIA/TensorRT-Model-Optimizer"
+    metadata:
+      license: "Apache-2.0"
+  - slug: nixl
+    name: "NIXL"
+    type: oss_project
+    github: ai-dynamo/nixl
+    tagline: "Inference data-transfer library for Dynamo."
+    url: "https://github.com/ai-dynamo/nixl"
+  - slug: nemo-guardrails
+    name: "NeMo Guardrails"
+    type: oss_project
+    github: NVIDIA-NeMo/Guardrails
+    tagline: "Programmable guardrails."
+    url: "https://github.com/NVIDIA/NeMo-Guardrails"
+  - slug: aiperf
+    name: "AIPerf"
+    type: oss_project
+    github: ai-dynamo/aiperf
+    tagline: "NVIDIA load generator."
+    url: "https://github.com/ai-dynamo/aiperf"
+    metadata:
+      license: "Apache-2.0"

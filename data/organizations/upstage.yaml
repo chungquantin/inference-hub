@@ -1,0 +1,9 @@
+slug: upstage
+name: "Upstage"
+kinds: [model_provider]
+tagline: "Solar models API."
+description: "Upstage builds powerful large language models and document processing engines to transform workflows and empower leading businesses like yours."
+website: "https://upstage.ai"
+logo_url: /logos/upstage.png
+tagging:
+  match_case: true

@@ -1,0 +1,10 @@
+slug: swisscom
+name: "Swisscom"
+kinds: [gpu_cloud]
+tagline: "Swiss sovereign AI."
+description: "Entdecke beste Tarife & Abos für Internet, TV, Mobile & Sicherheit. Erlebe das beste Netz der Schweiz. Angebote vergleichen, Online-Vorteile nutzen & wechseln."
+website: "https://swisscom.ch"
+logo_url: /logos/swisscom.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

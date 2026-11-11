@@ -1,0 +1,10 @@
+slug: mlperf-inference
+name: "MLPerf Inference"
+kinds: [llmops]
+tagline: "MLCommons hardware inference benchmark."
+description: "The MLPerf Inference: Datacenter benchmark suite measures how fast systems can process inputs and produce results using a trained model."
+website: "https://mlcommons.org/benchmarks/inference-datacenter/"
+logo_url: /logos/mlperf-inference.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

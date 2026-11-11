@@ -1,0 +1,8 @@
+slug: tenstorrent
+name: "Tenstorrent"
+kinds: [inference_provider, hardware]
+tagline: "Inference on own silicon."
+website: "https://tenstorrent.com"
+logo_url: /logos/tenstorrent.png
+tagging:
+  match_case: true

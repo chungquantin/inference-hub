@@ -1,0 +1,26 @@
+slug: kvcache-ai
+name: "kvcache.ai"
+kinds: [open_source]
+logo_url: /logos/kvcache-ai.png
+links:
+  github: "https://github.com/kvcache-ai"
+categories: [inference-engines, model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: mooncake
+    name: "Mooncake"
+    type: oss_project
+    github: kvcache-ai/Mooncake
+    tagline: "KVCache-centric disaggregated serving platform (Kimi)."
+    url: "https://github.com/kvcache-ai/Mooncake"
+    metadata:
+      license: "Apache-2.0"
+  - slug: ktransformers
+    name: "KTransformers"
+    type: oss_project
+    github: kvcache-ai/ktransformers
+    tagline: "CPU/GPU hybrid inference for large MoE models."
+    url: "https://github.com/kvcache-ai/ktransformers"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,22 @@
+slug: ragas
+name: "Ragas"
+kinds: [llmops]
+tagline: "RAG evaluation."
+description: "Evaluation framework for your AI Application"
+website: "https://docs.ragas.io"
+logo_url: /logos/ragas.png
+links:
+  github: "https://github.com/vibrantlabsai"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ragas-engine
+    name: "Ragas"
+    type: oss_project
+    github: vibrantlabsai/ragas
+    tagline: "RAG evaluation."
+    url: "https://github.com/explodinggradients/ragas"
+    metadata:
+      license: "Apache-2.0"

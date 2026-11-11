@@ -1,0 +1,9 @@
+slug: prime-intellect
+name: "Prime Intellect"
+kinds: [decentralized]
+tagline: "Compute + inference."
+description: "Train, deploy, and continuously improve your own models on an integrated compute, training, inference, and sandbox stack."
+website: "https://primeintellect.ai"
+logo_url: /logos/prime-intellect.jpg
+tagging:
+  match_case: true

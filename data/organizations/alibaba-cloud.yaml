@@ -1,0 +1,9 @@
+slug: alibaba-cloud
+name: "Alibaba Cloud"
+kinds: [hyperscaler, inference_provider]
+tagline: "Qwen API."
+description: "Alibaba Cloud offers an integrated suite of reliable and secure cloud computing tools and products, enabling you to build cloud infrastructure and data centers across multiple regions to empower your global business. Try it for free."
+website: "https://alibabacloud.com"
+tagging:
+  aliases: ["Model Studio", "Alibaba Cloud Model Studio"]
+  match_case: true

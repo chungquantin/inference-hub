@@ -1,0 +1,10 @@
+slug: ritual
+name: "Ritual"
+kinds: [decentralized]
+tagline: "On-chain AI coprocessor."
+description: "Infrastructure for AI agents to run themselves, for developers everywhere."
+website: "https://ritual.net"
+logo_url: /logos/ritual.webp
+tagging:
+  match_case: true
+  match_name: false

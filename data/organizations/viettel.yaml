@@ -1,0 +1,8 @@
+slug: viettel
+name: "Viettel"
+kinds: [gpu_cloud]
+tagline: "Vietnam AI cloud."
+website: "https://viettel.com.vn"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

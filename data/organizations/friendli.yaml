@@ -1,0 +1,8 @@
+slug: friendli
+name: "Friendli"
+kinds: [inference_provider]
+tagline: "Inference engine/endpoints."
+website: "https://friendli.ai"
+logo_url: /logos/friendli.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: huawei-cloud
+name: "Huawei Cloud"
+kinds: [hyperscaler, inference_provider]
+tagline: "Huawei AI platform."
+website: "https://huaweicloud.com"
+logo_url: /logos/huawei-cloud.png
+tagging:
+  aliases: ["ModelArts"]
+  match_case: true

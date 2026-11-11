@@ -1,0 +1,11 @@
+slug: aruba
+name: "Aruba"
+kinds: [gpu_cloud]
+tagline: "Italian cloud GPUs."
+description: "Scalable, secure and reliable cloud solutions for every need. Competitive pricing and dedicated support. Aruba Cloud the best cloud service provider."
+website: "https://arubacloud.com"
+logo_url: /logos/aruba.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true
+  match_name: false

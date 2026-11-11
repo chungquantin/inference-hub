@@ -1,0 +1,19 @@
+slug: seldon-core
+name: "Seldon Core"
+kinds: [open_source]
+tagline: "Kubernetes ML deployment."
+description: "An MLOps framework to package, deploy, monitor and manage thousands of production machine learning models"
+website: "https://github.com/SeldonIO/seldon-core"
+logo_url: /logos/seldon-core.png
+links:
+  github: "https://github.com/SeldonIO"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: seldon-core-engine
+    name: "Seldon Core"
+    type: oss_project
+    github: SeldonIO/seldon-core
+    tagline: "Kubernetes ML deployment."
+    url: "https://github.com/SeldonIO/seldon-core"

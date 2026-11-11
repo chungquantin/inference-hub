@@ -1,0 +1,20 @@
+slug: higress
+name: "Higress"
+kinds: [llm_gateway]
+tagline: "Alibaba AI-native API gateway."
+description: "🤖 AI Gateway | AI Native API Gateway"
+website: "https://higress.ai"
+logo_url: /logos/higress.png
+links:
+  github: "https://github.com/higress-group"
+tagging:
+  match_case: true
+products:
+  - slug: higress-engine
+    name: "Higress"
+    type: oss_project
+    github: higress-group/higress
+    tagline: "Alibaba AI-native API gateway."
+    url: "https://github.com/alibaba/higress"
+    metadata:
+      license: "Apache-2.0"

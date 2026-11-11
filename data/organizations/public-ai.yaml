@@ -1,0 +1,10 @@
+slug: public-ai
+name: "Public AI"
+kinds: [inference_provider]
+tagline: "Public-good inference."
+description: "A nonprofit, open-source service to make public and sovereign AI models more accessible."
+website: "https://publicai.co"
+logo_url: /logos/public-ai.png
+tagging:
+  match_case: true
+  match_name: false

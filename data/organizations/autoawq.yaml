@@ -1,0 +1,21 @@
+slug: autoawq
+name: "AutoAWQ"
+kinds: [open_source]
+tagline: "AWQ quantization."
+description: "AutoAWQ implements the AWQ algorithm for 4-bit quantization with a 2x speedup during inference. Documentation:"
+website: "https://casper-hansen.github.io/AutoAWQ/"
+logo_url: /logos/autoawq.png
+links:
+  github: "https://github.com/casper-hansen"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: autoawq-engine
+    name: "AutoAWQ"
+    type: oss_project
+    github: casper-hansen/AutoAWQ
+    tagline: "AWQ quantization."
+    url: "https://github.com/casper-hansen/AutoAWQ"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,10 @@
+slug: tensordock
+name: "TensorDock"
+kinds: [gpu_cloud]
+tagline: "GPU marketplace."
+description: "Save over 80% on GPUs. Train your machine learning models, render your animations, or cloud game through our infrastructure. Secure and reliable. Enterprise-grade hardware. Easy with TensorFlow and PyTorch. Start with only $5."
+website: "https://tensordock.com"
+logo_url: /logos/tensordock.png
+categories: [gpu-marketplaces]
+tagging:
+  match_case: true

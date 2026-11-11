@@ -1,0 +1,21 @@
+slug: llm-d
+name: "llm-d"
+kinds: [open_source]
+tagline: "Kubernetes-native distributed inference stack on vLLM."
+description: "Kubernetes-native, high-performance distributed LLM inference"
+website: "https://www.llm-d.ai"
+logo_url: /logos/llm-d.png
+links:
+  github: "https://github.com/llm-d"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: llm-d-engine
+    name: "llm-d"
+    type: oss_project
+    github: llm-d/llm-d
+    tagline: "Kubernetes-native distributed inference stack on vLLM."
+    url: "https://github.com/llm-d/llm-d"
+    metadata:
+      license: "Apache-2.0"

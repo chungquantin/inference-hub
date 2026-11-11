@@ -1,0 +1,10 @@
+slug: scaleway
+name: "Scaleway"
+kinds: [gpu_cloud]
+tagline: "Generative APIs."
+description: "Build on a secure, transparent, and fast-moving cloud & AI platform built for what’s next."
+website: "https://scaleway.com"
+logo_url: /logos/scaleway.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

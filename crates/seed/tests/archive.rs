@@ -119,6 +119,38 @@ async fn rows_of_unknown_organizations_are_skipped(pool: PgPool) {
     std::fs::remove_dir_all(&dir).unwrap();
 }
 
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn token_shaped_rows_stay_out_of_the_archive(pool: PgPool) {
+    curated(&pool).await;
+    // Built at run time so no token-shaped string sits in the repository.
+    let tokenish = format!("u/{}_{}", "hf", "a".repeat(36));
+    sqlx::query(
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name)
+         VALUES ('acme', 'ok', 'acme/ok', 'model', 'Fine Model'),
+                ('acme', 'tok', $1, 'model', $1),
+                ('acme', 'short', 'acme/hf_notatoken', 'model', 'hf_notatoken')",
+    )
+    .bind(&tokenish)
+    .execute(&pool)
+    .await
+    .unwrap();
+    let dir = std::env::temp_dir().join(format!("ih-archive-{}", uuid_like()));
+    let counts = archive::export(&pool, &dir).await.unwrap();
+    let rows = counts
+        .iter()
+        .find(|c| c.table == "market_listings")
+        .unwrap()
+        .rows;
+    assert_eq!(
+        rows, 2,
+        "the token-shaped row is dropped, a short hf_ name is kept"
+    );
+    let text = std::fs::read_to_string(dir.join("market_listings.jsonl")).unwrap();
+    assert!(!text.contains(&tokenish));
+    assert!(text.contains("hf_notatoken"));
+    std::fs::remove_dir_all(&dir).unwrap();
+}
+
 fn uuid_like() -> String {
     format!(
         "{}-{:?}",

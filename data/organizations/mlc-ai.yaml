@@ -1,0 +1,26 @@
+slug: mlc-ai
+name: "MLC AI"
+kinds: [open_source]
+logo_url: /logos/mlc-ai.jpg
+links:
+  github: "https://github.com/mlc-ai"
+categories: [inference-engines, model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: mlc-llm
+    name: "MLC LLM"
+    type: oss_project
+    github: mlc-ai/mlc-llm
+    tagline: "Compiler-based universal LLM deployment (TVM)."
+    url: "https://github.com/mlc-ai/mlc-llm"
+    metadata:
+      license: "Apache-2.0"
+  - slug: xgrammar
+    name: "XGrammar"
+    type: oss_project
+    github: mlc-ai/xgrammar
+    tagline: "Fast grammar-constrained decoding."
+    url: "https://github.com/mlc-ai/xgrammar"
+    metadata:
+      license: "Apache-2.0"

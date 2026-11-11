@@ -1,0 +1,11 @@
+slug: predibase
+name: "Predibase"
+kinds: [inference_provider]
+tagline: "LoRA serving."
+website: "https://predibase.com"
+logo_url: /logos/predibase.png
+status: acquired
+links:
+  github: "https://github.com/predibase"
+tagging:
+  match_case: true

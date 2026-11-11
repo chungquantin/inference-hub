@@ -1,0 +1,10 @@
+slug: cloudrift
+name: "CloudRift"
+kinds: [llmops]
+tagline: "Open reproducible provider price/throughput benchmark."
+description: "Sovereign AI platform for enterprise GPU infrastructure. Run LLM inference on-premise or in your security perimeter with full data sovereignty."
+website: "https://www.cloudrift.ai"
+logo_url: /logos/cloudrift.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

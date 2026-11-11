@@ -1,0 +1,10 @@
+slug: claro-brasil
+name: "Claro Brasil"
+kinds: [gpu_cloud]
+tagline: "Brazil sovereign AI cloud."
+description: "A Claro oferece combos de Internet fixa com fibra, Internet Móvel, TV por Assinatura, Planos de celular com o 4G e 5G, Apps e muito mais. Confira!"
+website: "https://claro.com.br"
+logo_url: /logos/claro-brasil.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

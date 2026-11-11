@@ -1,0 +1,21 @@
+slug: lm-evaluation-harness
+name: "lm-evaluation-harness"
+kinds: [llmops]
+tagline: "Standard benchmark harness."
+description: "EleutherAI is a non-profit AI research lab advancing open science through models, datasets, tools, and research."
+website: "https://www.eleuther.ai"
+logo_url: /logos/lm-evaluation-harness.png
+links:
+  github: "https://github.com/EleutherAI"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+products:
+  - slug: lm-evaluation-harness-engine
+    name: "lm-evaluation-harness"
+    type: oss_project
+    github: EleutherAI/lm-evaluation-harness
+    tagline: "Standard benchmark harness."
+    url: "https://github.com/EleutherAI/lm-evaluation-harness"
+    metadata:
+      license: "MIT"

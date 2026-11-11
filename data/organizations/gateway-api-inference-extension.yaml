@@ -1,0 +1,20 @@
+slug: gateway-api-inference-extension
+name: "Gateway API Inference Extension"
+kinds: [llm_gateway]
+tagline: "K8s model-aware routing extension."
+description: "Gateway API Inference Extension"
+website: "https://gateway-api-inference-extension.sigs.k8s.io/"
+logo_url: /logos/gateway-api-inference-extension.png
+links:
+  github: "https://github.com/kubernetes-sigs"
+tagging:
+  match_case: true
+products:
+  - slug: gateway-api-inference-extension-engine
+    name: "Gateway API Inference Extension"
+    type: oss_project
+    github: kubernetes-sigs/gateway-api-inference-extension
+    tagline: "K8s model-aware routing extension."
+    url: "https://github.com/kubernetes-sigs/gateway-api-inference-extension"
+    metadata:
+      license: "Apache-2.0"

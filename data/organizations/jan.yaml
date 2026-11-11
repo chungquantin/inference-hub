@@ -1,0 +1,25 @@
+slug: jan
+name: "Jan"
+kinds: [open_source]
+logo_url: /logos/jan.png
+links:
+  github: "https://github.com/janhq"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: jan
+    name: "Jan"
+    type: oss_project
+    github: janhq/jan
+    tagline: "Offline desktop ChatGPT alternative."
+    url: "https://github.com/janhq/jan"
+  - slug: cortex
+    name: "Cortex"
+    type: oss_project
+    github: janhq/cortex.cpp
+    tagline: "Local AI engine behind Jan."
+    url: "https://github.com/menloresearch/cortex.cpp"
+    metadata:
+      license: "Apache-2.0"

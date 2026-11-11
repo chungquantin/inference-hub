@@ -1,0 +1,10 @@
+slug: kubeflow
+name: "Kubeflow"
+kinds: [open_source]
+tagline: "Kubernetes ML platform."
+description: "Kubeflow makes deployment of ML Workflows on Kubernetes straightforward and automated"
+website: "https://www.kubeflow.org"
+logo_url: /logos/kubeflow.png
+categories: [serving-orchestration]
+tagging:
+  match_case: true

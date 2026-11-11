@@ -1,0 +1,21 @@
+slug: unsloth
+name: "Unsloth"
+kinds: [open_source]
+tagline: "Fast fine-tuning and quantization."
+description: "Unsloth is an open-source framework for running and training LLMs."
+website: "https://unsloth.ai/docs"
+logo_url: /logos/unsloth.png
+links:
+  github: "https://github.com/unslothai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: unsloth-engine
+    name: "Unsloth"
+    type: oss_project
+    github: unslothai/unsloth
+    tagline: "Fast fine-tuning and quantization."
+    url: "https://github.com/unslothai/unsloth"
+    metadata:
+      license: "Apache-2.0"

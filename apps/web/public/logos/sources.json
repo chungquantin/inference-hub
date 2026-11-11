@@ -3,6 +3,14 @@
   "file": "/logos/a16z.png",
   "source": "https://d1lamhf6l6yk6d.cloudfront.net/uploads/2025/06/Favicon-%E2%80%94-270x270px.png"
  },
+ "aethir": {
+  "file": "/logos/aethir.png",
+  "source": "https://aethir.com/apple-icon.png?67cbab355344cee4"
+ },
+ "aionlabs": {
+  "file": "/logos/aionlabs.png",
+  "source": "https://www.aionlabs.ai/static/images/favicons/apple-touch-icon.65c7e987d0e6.png"
+ },
  "akamai": {
   "file": "/logos/akamai.png",
   "source": "https://github.com/linode.png?size=256"
@@ -11,37 +19,181 @@
   "file": "/logos/akash-network.png",
   "source": "https://github.com/akash-network.png?size=256"
  },
+ "ambient": {
+  "file": "/logos/ambient.png",
+  "source": "https://ambient.xyz/apple-touch-icon.png"
+ },
  "anthropic": {
   "file": "/logos/anthropic.svg",
   "source": "https://www.anthropic.com/images/icons/safari-pinned-tab.svg"
+ },
+ "anyscale": {
+  "file": "/logos/anyscale.png",
+  "source": "https://www.anyscale.com/static/favicon-new.ico"
+ },
+ "apache-apisix": {
+  "file": "/logos/apache-apisix.png",
+  "source": "https://static.apiseven.com/202202/favicon.png"
+ },
+ "aphrodite-engine": {
+  "file": "/logos/aphrodite-engine.jpg",
+  "source": "https://github.com/dphnAI.png?size=256"
+ },
+ "arize-ai": {
+  "file": "/logos/arize-ai.jpg",
+  "source": "https://github.com/Arize-ai.png?size=256"
+ },
+ "artificial-analysis": {
+  "file": "/logos/artificial-analysis.png",
+  "source": "https://artificialanalysis.ai/favicon.ico"
+ },
+ "aruba": {
+  "file": "/logos/aruba.png",
+  "source": "https://www.arubacloud.com/.resources/aruba/webresources/business/images/favicons/apple-icon-180x180.png"
  },
  "asml": {
   "file": "/logos/asml.png",
   "source": "https://github.com/asml.png?size=256"
  },
+ "assemblyai": {
+  "file": "/logos/assemblyai.png",
+  "source": "https://www.assemblyai.com/favicon.ico"
+ },
  "atlas-cloud": {
   "file": "/logos/atlas-cloud.png",
   "source": "https://github.com/atlascloud-ai.png?size=256"
+ },
+ "autoawq": {
+  "file": "/logos/autoawq.png",
+  "source": "https://casper-hansen.github.io/AutoAWQ/assets/images/favicon.png"
  },
  "aws": {
   "file": "/logos/aws.png",
   "source": "https://a0.awsstatic.com/libra-css/images/site/touch-icon-ipad-144-smile.png"
  },
+ "baidu-ai-cloud": {
+  "file": "/logos/baidu-ai-cloud.png",
+  "source": "https://bce.bdstatic.com/img/newfavicon.ico"
+ },
+ "banana-dev": {
+  "file": "/logos/banana-dev.png",
+  "source": "https://www.banana.dev/favicon.ico"
+ },
+ "baseten": {
+  "file": "/logos/baseten.png",
+  "source": "https://www.datocms-assets.com/104802/1792619555-favicon.png"
+ },
+ "beam": {
+  "file": "/logos/beam.png",
+  "source": "https://www.beam.cloud/apple-touch-icon.png"
+ },
+ "bentoml": {
+  "file": "/logos/bentoml.jpg",
+  "source": "https://github.com/bentoml.png?size=256"
+ },
+ "bifrost": {
+  "file": "/logos/bifrost.png",
+  "source": "https://github.com/maximhq.png?size=256"
+ },
+ "bitsandbytes": {
+  "file": "/logos/bitsandbytes.png",
+  "source": "https://github.com/bitsandbytes-foundation.png?size=256"
+ },
+ "black-forest-labs": {
+  "file": "/logos/black-forest-labs.png",
+  "source": "https://bfl.ai/apple-icon.png?f3e2842f59013de0"
+ },
+ "braintrust": {
+  "file": "/logos/braintrust.png",
+  "source": "https://www.braintrust.dev/icon180.png?v=2"
+ },
+ "burn": {
+  "file": "/logos/burn.png",
+  "source": "https://github.com/tracel-ai.png?size=256"
+ },
  "cerebras": {
   "file": "/logos/cerebras.png",
   "source": "https://cdn.sanity.io/images/e4qjo92p/production/e7a55ae5ab7e2c4fdfd4e66a51f628d1f2f44207-967x967.png?w=512&h=512&fit=max&auto=format"
+ },
+ "cerebrium": {
+  "file": "/logos/cerebrium.png",
+  "source": "https://www.datocms-assets.com/180613/1770487378-iiynr41hlhnjq7vtreipiv8k6eo.png?auto=format&h=192&w=192"
  },
  "chutes": {
   "file": "/logos/chutes.png",
   "source": "https://chutes.ai/apple-icon.png?apple-icon.0gj39pa49futm.png"
  },
+ "cirrascale": {
+  "file": "/logos/cirrascale.png",
+  "source": "https://cdn.prod.website-files.com/662806b7f6407f7722104527/66f1c3c2a7379d717c566ae8_CCS-Peacock-256x256.png"
+ },
+ "civo": {
+  "file": "/logos/civo.png",
+  "source": "https://www.civo.com:443/assets-rebrand/favicons/apple-touch-icon.png"
+ },
+ "claro-brasil": {
+  "file": "/logos/claro-brasil.png",
+  "source": "https://www.claro.com.br/android-icon-512x512.png"
+ },
+ "cloudflare": {
+  "file": "/logos/cloudflare.png",
+  "source": "https://developers.cloudflare.com/favicon.png"
+ },
+ "cloudrift": {
+  "file": "/logos/cloudrift.png",
+  "source": "https://www.cloudrift.ai/favicon.ico"
+ },
+ "cohere": {
+  "file": "/logos/cohere.png",
+  "source": "https://cohere.com/apple-touch-icon.png"
+ },
+ "computeprices-com": {
+  "file": "/logos/computeprices-com.png",
+  "source": "https://computeprices.com/favicon.ico"
+ },
+ "core42": {
+  "file": "/logos/core42.png",
+  "source": "https://www.core42.ai/hubfs/Core42_Logo_Icon_RGB_Slate_Black_and_Impact_Green_Duo-Tone.png"
+ },
  "coreweave": {
   "file": "/logos/coreweave.png",
   "source": "https://cdn.prod.website-files.com/62ba1fb86485b6d5029975c4/676dd39272d1e888a56c48ad_logo_coreweave_solo_256x256.png"
  },
+ "crusoe": {
+  "file": "/logos/crusoe.png",
+  "source": "https://cdn.prod.website-files.com/6855c1aa175582ee23e0aa19/68934b7ef165ad996914d921_Webclip.png"
+ },
  "cudo-compute": {
   "file": "/logos/cudo-compute.png",
   "source": "https://www.cudocompute.com/wp-content/uploads/2026/04/CUDO-Favicon.png"
+ },
+ "cumulus-labs": {
+  "file": "/logos/cumulus-labs.png",
+  "source": "https://cumuluslabs.io/apple-icon.png?apple-icon.32e8a7f0.png"
+ },
+ "databricks": {
+  "file": "/logos/databricks.png",
+  "source": "https://www.databricks.com/en-website-assets/icons/icon-512x512.png?v=c9b9916c3b27dc51866c46b79a6e9b88"
+ },
+ "datadog": {
+  "file": "/logos/datadog.png",
+  "source": "https://web-assets.dd-static.net/42588/1709904028-favicon.ico?auto=format&h=192&w=192"
+ },
+ "decart": {
+  "file": "/logos/decart.png",
+  "source": "https://decart.ai/images/webclip.png"
+ },
+ "deci": {
+  "file": "/logos/deci.png",
+  "source": "https://www.nvidia.com/favicon.ico"
+ },
+ "deepeval": {
+  "file": "/logos/deepeval.png",
+  "source": "https://github.com/confident-ai.png?size=256"
+ },
+ "deepgram": {
+  "file": "/logos/deepgram.png",
+  "source": "https://deepgram.com/apple-icon.png?apple-icon.03qoq60n2nud1.png?dpl=dpl_57FhYfdufyArW26kqDWQ2wJveoBG"
  },
  "deepinfra": {
   "file": "/logos/deepinfra.png",
@@ -51,6 +203,66 @@
   "file": "/logos/deepseek.png",
   "source": "https://github.com/deepseek-ai.png?size=256"
  },
+ "deepspeed-mii": {
+  "file": "/logos/deepspeed-mii.png",
+  "source": "https://github.com/deepspeedai.png?size=256"
+ },
+ "denvr-dataworks": {
+  "file": "/logos/denvr-dataworks.png",
+  "source": "https://static.wixstatic.com/media/d6d289_4dc6e057b84c4f3bab2814a657b7ab3c%7Emv2.png/v1/fill/w_180%2Ch_180%2Clg_1%2Cusm_0.66_1.00_0.01/d6d289_4dc6e057b84c4f3bab2814a657b7ab3c%7Emv2.png"
+ },
+ "digitalocean": {
+  "file": "/logos/digitalocean.svg",
+  "source": "https://www.digitalocean.com/_do-www-marketing/01f28db2/_next/static/media/favicon.91372345.svg"
+ },
+ "docker-model-runner": {
+  "file": "/logos/docker-model-runner.png",
+  "source": "https://docs.docker.com/favicon.ico"
+ },
+ "doubleword": {
+  "file": "/logos/doubleword.png",
+  "source": "https://doubleword.ai/favicon.png"
+ },
+ "dstack": {
+  "file": "/logos/dstack.png",
+  "source": "https://github.com/dstackai.png?size=256"
+ },
+ "eagle": {
+  "file": "/logos/eagle.png",
+  "source": "https://github.com/SafeAILab.png?size=256"
+ },
+ "eden-ai": {
+  "file": "/logos/eden-ai.png",
+  "source": "https://cdn.prod.website-files.com/61e7d259b7746e2d1df0b68d/6a63231f550a424753eaf4b3_eden%20ai%20logo%20light.png"
+ },
+ "elevenlabs": {
+  "file": "/logos/elevenlabs.png",
+  "source": "https://elevenlabs.io/apple-icon.png?6592732ab34b1d42"
+ },
+ "envoy-ai-gateway": {
+  "file": "/logos/envoy-ai-gateway.svg",
+  "source": "https://theagentrouter.ai/img/brand/favicon.svg"
+ },
+ "epoch-ai": {
+  "file": "/logos/epoch-ai.svg",
+  "source": "https://epoch.ai/favicon.svg"
+ },
+ "exllama": {
+  "file": "/logos/exllama.jpg",
+  "source": "https://github.com/turboderp-org.png?size=256"
+ },
+ "exo": {
+  "file": "/logos/exo.jpg",
+  "source": "https://github.com/exo-explore.png?size=256"
+ },
+ "exoscale": {
+  "file": "/logos/exoscale.png",
+  "source": "https://www.exoscale.com/static/apple-touch-icon-180x180.png"
+ },
+ "fal": {
+  "file": "/logos/fal.png",
+  "source": "https://cdn.prod.website-files.com/6a72ef21c470312422dea9b3/6adae13a030770b54ecc8783_fal-icon-favicon.png"
+ },
  "featherless": {
   "file": "/logos/featherless.png",
   "source": "https://cdn.prod.website-files.com/6979c6c70c21b50639123793/699d5e193679f912ae1777e1_Frame%202147256585.png"
@@ -59,29 +271,125 @@
   "file": "/logos/fireworks-ai.svg",
   "source": "https://fireworks.ai/icon.svg?26fd47f5c5eddcac"
  },
+ "firmus": {
+  "file": "/logos/firmus.svg",
+  "source": "https://firmus.co/favicon-light.svg"
+ },
+ "flashattention": {
+  "file": "/logos/flashattention.png",
+  "source": "https://github.com/Dao-AILab.png?size=256"
+ },
+ "flashinfer": {
+  "file": "/logos/flashinfer.png",
+  "source": "https://github.com/flashinfer-ai.png?size=256"
+ },
+ "flexflow-serve": {
+  "file": "/logos/flexflow-serve.png",
+  "source": "https://github.com/flexflow.png?size=256"
+ },
+ "fluidstack": {
+  "file": "/logos/fluidstack.png",
+  "source": "https://fluidstack.io/apple-icon.png?apple-icon.0_.103wpqkpxr.png?dpl=dpl_9k1ZYJSgX9eyL6oHu9zWeR4Kpj6U"
+ },
+ "friendli": {
+  "file": "/logos/friendli.png",
+  "source": "https://friendli.ai/favicon/apple-touch-icon.png"
+ },
+ "galileo": {
+  "file": "/logos/galileo.png",
+  "source": "https://framerusercontent.com/images/ZPCCTUdAWfqDBdZ3d8YL4vq4X1s.png"
+ },
+ "gateway-api-inference-extension": {
+  "file": "/logos/gateway-api-inference-extension.png",
+  "source": "https://github.com/kubernetes-sigs.png?size=256"
+ },
  "general-catalyst": {
   "file": "/logos/general-catalyst.png",
   "source": "https://cdn.prod.website-files.com/69df4e62ff62d7b5568fc58b/6a0464cb9a8c5dfd0baf068a_GC_Symbol_Black_RGB%201%20(1).png"
+ },
+ "genesis-cloud": {
+  "file": "/logos/genesis-cloud.png",
+  "source": "https://github.com/GenesisCloud.png?size=256"
+ },
+ "gensyn": {
+  "file": "/logos/gensyn.png",
+  "source": "https://www.gensyn.ai/favicon.ico"
  },
  "ggml": {
   "file": "/logos/ggml.jpg",
   "source": "https://github.com/ggml-org.png?size=256"
  },
+ "gmi-cloud": {
+  "file": "/logos/gmi-cloud.png",
+  "source": "https://www.gmicloud.ai/favicon.ico?favicon.16990nwjshn44.ico"
+ },
+ "gmo-internet-group": {
+  "file": "/logos/gmo-internet-group.png",
+  "source": "https://group.gmo/favicon_144x144.png"
+ },
+ "gonka": {
+  "file": "/logos/gonka.png",
+  "source": "https://gonka.ai/images/01-favicon.png"
+ },
  "google": {
   "file": "/logos/google.png",
   "source": "https://www.gstatic.com/cgc/super_cloud_gradient.png"
+ },
+ "gpt4all": {
+  "file": "/logos/gpt4all.png",
+  "source": "https://www.nomic.ai/images/webclip.png"
+ },
+ "gptqmodel": {
+  "file": "/logos/gptqmodel.png",
+  "source": "https://github.com/ModelCloud.png?size=256"
  },
  "groq": {
   "file": "/logos/groq.svg",
   "source": "https://groq.com/favicon.svg"
  },
+ "guardrails-ai": {
+  "file": "/logos/guardrails-ai.png",
+  "source": "https://github.com/guardrails-ai.png?size=256"
+ },
+ "helicone": {
+  "file": "/logos/helicone.png",
+  "source": "https://www.helicone.ai/favicon.ico"
+ },
+ "hetzner": {
+  "file": "/logos/hetzner.png",
+  "source": "https://www.hetzner.com/_resources/themes/hetzner/images/favicons/apple-icon-180x180.png"
+ },
+ "higress": {
+  "file": "/logos/higress.png",
+  "source": "https://github.com/higress-group.png?size=256"
+ },
+ "hive-digital": {
+  "file": "/logos/hive-digital.webp",
+  "source": "https://www.hivedigitaltechnologies.com/static/hivesite/images/apple-touch-icon.webp"
+ },
+ "huawei-cloud": {
+  "file": "/logos/huawei-cloud.png",
+  "source": "https://www.huaweicloud.com/favicon.ico"
+ },
  "hugging-face": {
   "file": "/logos/hugging-face.svg",
   "source": "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
  },
+ "hut-8": {
+  "file": "/logos/hut-8.png",
+  "source": "https://www.hut8.com/apple-touch-icon.png"
+ },
  "hyperbolic": {
   "file": "/logos/hyperbolic.png",
   "source": "https://www.hyperbolic.ai/apple-touch-icon-2026.png"
+ },
+ "hyperstack": {
+  "file": "/logos/hyperstack.webp",
+  "source": "https://www.hyperstack.cloud/hubfs/hyperstack_2025/hyperstack_Fav_Icon.webp"
+ },
+ "ibm": {
+  "file": "/logos/ibm.png",
+  "source": "https://www.ibm.com/content/dam/adobe-cms/default-images/apple-touch-icon-180x180.png"
  },
  "index-ventures": {
   "file": "/logos/index-ventures.svg",
@@ -91,21 +399,189 @@
   "file": "/logos/inference-net.png",
   "source": "https://inference.net/apple-touch-icon.png"
  },
+ "inferencemax": {
+  "file": "/logos/inferencemax.webp",
+  "source": "https://inferencex.semianalysis.com/apple-touch-icon.webp"
+ },
+ "infomaniak": {
+  "file": "/logos/infomaniak.png",
+  "source": "https://www.infomaniak.com/favicon.ico"
+ },
+ "inspect-ai": {
+  "file": "/logos/inspect-ai.jpg",
+  "source": "https://github.com/UKGovernmentBEIS.png?size=256"
+ },
  "io-net": {
   "file": "/logos/io-net.png",
   "source": "https://io.net/apple-icon-precomposed.png"
+ },
+ "ionos": {
+  "file": "/logos/ionos.png",
+  "source": "https://www.ionos.com/apple-touch-icon-180x180.png"
+ },
+ "ionstream": {
+  "file": "/logos/ionstream.png",
+  "source": "https://ionstream.ai/apple-touch-icon.png"
+ },
+ "iren": {
+  "file": "/logos/iren.svg",
+  "source": "https://iren.com/icons/logo.svg"
+ },
+ "jan": {
+  "file": "/logos/jan.png",
+  "source": "https://github.com/janhq.png?size=256"
+ },
+ "koboldcpp": {
+  "file": "/logos/koboldcpp.png",
+  "source": "https://koboldcpp.net/apple-touch-icon.png"
+ },
+ "kong": {
+  "file": "/logos/kong.png",
+  "source": "https://konghq.com/favicon-180.png"
+ },
+ "koyeb": {
+  "file": "/logos/koyeb.png",
+  "source": "https://www.koyeb.com/favicon/apple-touch-icon.png"
+ },
+ "kserve": {
+  "file": "/logos/kserve.png",
+  "source": "https://github.com/kserve.png?size=256"
+ },
+ "kt": {
+  "file": "/logos/kt.png",
+  "source": "https://www.kt.com/favicon.ico"
+ },
+ "kubeai": {
+  "file": "/logos/kubeai.png",
+  "source": "https://github.com/kubeai-project.png?size=256"
+ },
+ "kubeflow": {
+  "file": "/logos/kubeflow.png",
+  "source": "https://www.kubeflow.org/favicon.ico?v=2"
+ },
+ "kvcache-ai": {
+  "file": "/logos/kvcache-ai.png",
+  "source": "https://github.com/kvcache-ai.png?size=256"
+ },
+ "lakera": {
+  "file": "/logos/lakera.png",
+  "source": "https://cdn.prod.website-files.com/65080baa3f9a607985451de3/6526f98447db0b4b7b22493e_Lakera-Symbol-Black-256.png"
  },
  "lambda": {
   "file": "/logos/lambda.svg",
   "source": "https://lambda.com/hubfs/favicon-48x48-1.svg"
  },
+ "laminar": {
+  "file": "/logos/laminar.png",
+  "source": "https://github.com/lmnr-ai.png?size=256"
+ },
+ "langchain": {
+  "file": "/logos/langchain.png",
+  "source": "https://cdn.prod.website-files.com/65b8cd72835ceeacd4449a53/69a17e4f0c916c644f4de1cd_webclip%20lg.png"
+ },
+ "langfuse": {
+  "file": "/logos/langfuse.png",
+  "source": "https://langfuse.com/apple-touch-icon.png"
+ },
+ "latitude-sh": {
+  "file": "/logos/latitude-sh.png",
+  "source": "https://www.latitude.sh/apple-touch-icon.png"
+ },
+ "leaseweb": {
+  "file": "/logos/leaseweb.png",
+  "source": "https://www.leaseweb.com/favicon.ico"
+ },
+ "lemonade": {
+  "file": "/logos/lemonade.png",
+  "source": "https://github.com/lemonade-sdk.png?size=256"
+ },
+ "lepton-ai": {
+  "file": "/logos/lepton-ai.png",
+  "source": "https://www.nvidia.com/favicon.ico"
+ },
+ "lightning-ai": {
+  "file": "/logos/lightning-ai.png",
+  "source": "https://lightning.ai/favicon/favicon.ico"
+ },
  "lightspeed": {
   "file": "/logos/lightspeed.svg",
   "source": "https://lsvp.com/wp-content/uploads/2023/04/favico.svg"
  },
+ "lintasarta": {
+  "file": "/logos/lintasarta.png",
+  "source": "https://www.lintasarta.net/storage/2024/06/favicon.png"
+ },
+ "liquid-ai": {
+  "file": "/logos/liquid-ai.png",
+  "source": "https://www.liquid.ai/apple-icon.png?apple-icon.3242q9u7hvs55.png"
+ },
  "liquid-inference": {
   "file": "/logos/liquid-inference.svg",
   "source": "https://liquidinference.ai/favicon.svg"
+ },
+ "litellm": {
+  "file": "/logos/litellm.png",
+  "source": "https://github.com/BerriAI.png?size=256"
+ },
+ "llama-swap": {
+  "file": "/logos/llama-swap.png",
+  "source": "https://llama-swap.ai/static/img/apple-touch-icon.png?v=dc49e92a016d"
+ },
+ "llamafile": {
+  "file": "/logos/llamafile.png",
+  "source": "https://github.com/mozilla-ai.png?size=256"
+ },
+ "llguidance": {
+  "file": "/logos/llguidance.png",
+  "source": "https://github.com/guidance-ai.png?size=256"
+ },
+ "llm-d": {
+  "file": "/logos/llm-d.png",
+  "source": "https://github.com/llm-d.png?size=256"
+ },
+ "llm-gateway": {
+  "file": "/logos/llm-gateway.png",
+  "source": "https://llmgateway.io/favicon/apple-touch-icon.png?v=1"
+ },
+ "llm-guard": {
+  "file": "/logos/llm-guard.png",
+  "source": "https://github.com/protectai.png?size=256"
+ },
+ "lm-evaluation-harness": {
+  "file": "/logos/lm-evaluation-harness.png",
+  "source": "https://github.com/EleutherAI.png?size=256"
+ },
+ "lm-studio": {
+  "file": "/logos/lm-studio.png",
+  "source": "https://lmstudio.ai/assets/marketing/logo-192x192.png"
+ },
+ "lmarena": {
+  "file": "/logos/lmarena.png",
+  "source": "https://arena.ai/favicon.ico"
+ },
+ "lmcache": {
+  "file": "/logos/lmcache.jpg",
+  "source": "https://github.com/LMCache.png?size=256"
+ },
+ "lmdeploy": {
+  "file": "/logos/lmdeploy.png",
+  "source": "https://github.com/InternLM.png?size=256"
+ },
+ "lunary": {
+  "file": "/logos/lunary.png",
+  "source": "https://github.com/lunary-ai.png?size=256"
+ },
+ "mancer": {
+  "file": "/logos/mancer.svg",
+  "source": "https://mancer.tech/resources/Phantom%20Webclip.svg"
+ },
+ "martian": {
+  "file": "/logos/martian.png",
+  "source": "https://cdn.prod.website-files.com/67f3937090e003651f8bb994/67f410282a00aa4473b5381f_Mars_Favicon_180.png"
+ },
+ "medusa": {
+  "file": "/logos/medusa.png",
+  "source": "https://github.com/FasterDecoding.png?size=256"
  },
  "menlo-ventures": {
   "file": "/logos/menlo-ventures.png",
@@ -119,17 +595,85 @@
   "file": "/logos/microsoft.png",
   "source": "https://github.com/microsoft.png?size=256"
  },
+ "minimax": {
+  "file": "/logos/minimax.jpg",
+  "source": "https://github.com/MiniMax-AI.png?size=256"
+ },
  "mistral-ai": {
   "file": "/logos/mistral-ai.png",
   "source": "https://github.com/mistralai.png?size=256"
+ },
+ "mlc-ai": {
+  "file": "/logos/mlc-ai.jpg",
+  "source": "https://github.com/mlc-ai.png?size=256"
+ },
+ "mlflow": {
+  "file": "/logos/mlflow.png",
+  "source": "https://github.com/mlflow.png?size=256"
+ },
+ "mlperf-inference": {
+  "file": "/logos/mlperf-inference.png",
+  "source": "https://mlcommons.org/wp-content/themes/mlcommons/build/img/favicon/apple-touch-icon.png"
+ },
+ "mlx": {
+  "file": "/logos/mlx.png",
+  "source": "https://github.com/ml-explore.png?size=256"
+ },
+ "modal": {
+  "file": "/logos/modal.svg",
+  "source": "https://modal.com/assets/favicon.svg"
+ },
+ "modular": {
+  "file": "/logos/modular.png",
+  "source": "https://github.com/modular.png?size=256"
+ },
+ "moonshot-ai": {
+  "file": "/logos/moonshot-ai.jpg",
+  "source": "https://github.com/MoonshotAI.png?size=256"
+ },
+ "morph": {
+  "file": "/logos/morph.jpg",
+  "source": "https://www.morphllm.com/search.jpg"
+ },
+ "ncompass": {
+  "file": "/logos/ncompass.png",
+  "source": "https://ncompass.tech/favicon.ico"
+ },
+ "near-ai": {
+  "file": "/logos/near-ai.svg",
+  "source": "https://near.ai/favicon.svg"
+ },
+ "nebius": {
+  "file": "/logos/nebius.png",
+  "source": "https://nebius.com/favicon/apple-touch-icon.png"
+ },
+ "northern-data": {
+  "file": "/logos/northern-data.svg",
+  "source": "https://northerndata.de/favicon.ico"
+ },
+ "nosana": {
+  "file": "/logos/nosana.png",
+  "source": "https://nosana.com/apple-touch-icon.png"
+ },
+ "nous-research": {
+  "file": "/logos/nous-research.png",
+  "source": "https://web-assets.nousresearch.com/portal/72bfb01dc2e303fe7081a2bbc087d30f0371f5bb/logo-favicon.png"
  },
  "novita-ai": {
   "file": "/logos/novita-ai.jpg",
   "source": "https://github.com/novitalabs.png?size=256"
  },
+ "nscale": {
+  "file": "/logos/nscale.png",
+  "source": "https://cdn.prod.website-files.com/69e759200831878be71184d8/6a7acbc1616a2b6fef2aa7ab_66851aef2492ff79aa3bd859_favicon-32.png"
+ },
  "nvidia": {
   "file": "/logos/nvidia.png",
   "source": "https://github.com/NVIDIA.png?size=256"
+ },
+ "octoai": {
+  "file": "/logos/octoai.png",
+  "source": "https://www.nvidia.com/favicon.ico"
  },
  "ollama": {
   "file": "/logos/ollama.png",
@@ -139,29 +683,185 @@
   "file": "/logos/openai.svg",
   "source": "https://openai.com/favicon.svg"
  },
+ "openlit": {
+  "file": "/logos/openlit.png",
+  "source": "https://github.com/openlit.png?size=256"
+ },
+ "openpipe": {
+  "file": "/logos/openpipe.png",
+  "source": "https://github.com/OpenPipe.png?size=256"
+ },
  "openrouter": {
   "file": "/logos/openrouter.png",
   "source": "https://openrouter.ai/apple-touch-icon.png"
+ },
+ "openvino-genai": {
+  "file": "/logos/openvino-genai.png",
+  "source": "https://github.com/openvinotoolkit.png?size=256"
+ },
+ "opik": {
+  "file": "/logos/opik.png",
+  "source": "https://github.com/comet-ml.png?size=256"
  },
  "oracle": {
   "file": "/logos/oracle.png",
   "source": "https://github.com/oracle.png?size=256"
  },
+ "outlines": {
+  "file": "/logos/outlines.png",
+  "source": "https://github.com/dottxt-ai.png?size=256"
+ },
+ "outscale": {
+  "file": "/logos/outscale.png",
+  "source": "https://en.outscale.com/wp-content/uploads/2021/03/cropped-SIGLE_LOGO-OSC_256x256-180x180.png?x75423"
+ },
+ "ovhcloud": {
+  "file": "/logos/ovhcloud.png",
+  "source": "https://www.ovhcloud.com/apple-touch-icon.png"
+ },
+ "paperspace": {
+  "file": "/logos/paperspace.webp",
+  "source": "https://cdn.prod.website-files.com/5db99670374d1d829291af4f/66e9b9e0cd2da80a84ae9ba7_DO_Bug_Black_Circle_256_256.webp"
+ },
+ "parasail": {
+  "file": "/logos/parasail.png",
+  "source": "https://www.parasail.io/apple-touch-icon.png"
+ },
+ "perplexity": {
+  "file": "/logos/perplexity.png",
+  "source": "https://www.perplexity.ai/apple-touch-icon.png"
+ },
+ "petals": {
+  "file": "/logos/petals.png",
+  "source": "https://github.com/bigscience-workshop.png?size=256"
+ },
+ "portkey": {
+  "file": "/logos/portkey.png",
+  "source": "https://framerusercontent.com/images/pkFK3AGXHirogqiN67JGtlnMVM.png"
+ },
+ "predibase": {
+  "file": "/logos/predibase.png",
+  "source": "https://github.com/predibase.png?size=256"
+ },
+ "prime-intellect": {
+  "file": "/logos/prime-intellect.jpg",
+  "source": "https://cdn.prod.website-files.com/66239f0441b09824acb92c75/671b6f6054736f752438334f_Positive.jpg"
+ },
+ "proact-it": {
+  "file": "/logos/proact-it.webp",
+  "source": "https://www.proact.eu/wp-content/uploads/2022/04/favicon-red-150x150.webp"
+ },
+ "promptfoo": {
+  "file": "/logos/promptfoo.png",
+  "source": "https://github.com/promptfoo.png?size=256"
+ },
+ "promptlayer": {
+  "file": "/logos/promptlayer.png",
+  "source": "https://www.promptlayer.com/icon.png?80871ce988069a1d"
+ },
+ "pruna-ai": {
+  "file": "/logos/pruna-ai.png",
+  "source": "https://github.com/PrunaAI.png?size=256"
+ },
+ "public-ai": {
+  "file": "/logos/public-ai.png",
+  "source": "https://publicai.co/logo-mark.png"
+ },
+ "qumulusai": {
+  "file": "/logos/qumulusai.webp",
+  "source": "https://images.squarespace-cdn.com/content/v1/67bdecf37c020657950f6723/81648134-44a3-4490-b71f-d1c8487fc805/favicon.ico"
+ },
+ "rackspace": {
+  "file": "/logos/rackspace.png",
+  "source": "https://www.rackspace.com/wp-content/uploads/2026/11/cropped-Icon_512_WhtRed-180x180.png"
+ },
+ "ragas": {
+  "file": "/logos/ragas.png",
+  "source": "https://github.com/vibrantlabsai.png?size=256"
+ },
+ "ramalama": {
+  "file": "/logos/ramalama.png",
+  "source": "https://github.com/containers.png?size=256"
+ },
+ "reka-ai": {
+  "file": "/logos/reka-ai.jpg",
+  "source": "https://reka.ai/_framer/framerusercontent.com/images/XekAjHcWv2prUE9pJiSj61CD54.jpg"
+ },
+ "relace": {
+  "file": "/logos/relace.svg",
+  "source": "https://framerusercontent.com/images/FFActUeE4daoS9F9mpqmKv4y3ZI.svg"
+ },
+ "render-network": {
+  "file": "/logos/render-network.png",
+  "source": "https://rendernetwork.com/apple-touch-icon.png"
+ },
+ "replicate": {
+  "file": "/logos/replicate.png",
+  "source": "https://static.replicateassets.com/fe/ad7fe3a706abfe81d42a93a7659b4395ee36d386/favicon-CKiqAkf2.png"
+ },
  "requesty": {
   "file": "/logos/requesty.png",
   "source": "https://www.requesty.ai/apple-icon.png?apple-icon.029vcb1qzjzj9.png"
+ },
+ "respan": {
+  "file": "/logos/respan.png",
+  "source": "https://www.respan.ai/icon-192.png"
+ },
+ "ritual": {
+  "file": "/logos/ritual.webp",
+  "source": "https://ritual.net/meta/favicon.webp"
+ },
+ "routellm": {
+  "file": "/logos/routellm.png",
+  "source": "https://github.com/lm-sys.png?size=256"
  },
  "runpod": {
   "file": "/logos/runpod.png",
   "source": "https://cdn.prod.website-files.com/69ce570adca53340abab8376/69e08b4ced16e020149fc61d_favicon_www_runpod_io_256x256.png"
  },
+ "runway": {
+  "file": "/logos/runway.png",
+  "source": "https://runway.com/icon.png?icon.35ps9bmugbe1e.png"
+ },
+ "sakana": {
+  "file": "/logos/sakana.png",
+  "source": "https://sakana.ai/favicon.ico"
+ },
+ "sakura-internet": {
+  "file": "/logos/sakura-internet.png",
+  "source": "https://www.sakura.ad.jp/resource/favicon/sakura_logo.png"
+ },
+ "salad": {
+  "file": "/logos/salad.png",
+  "source": "https://github.com/SaladTechnologies.png?size=256"
+ },
  "sambanova": {
   "file": "/logos/sambanova.png",
   "source": "https://sambanova.ai/hubfs/sambanova-favicon.png"
  },
+ "samsung-sds": {
+  "file": "/logos/samsung-sds.png",
+  "source": "https://image.samsungsds.com/resource/en/images/app_ico.gif?queryString=20261105033634"
+ },
+ "sarvam-ai": {
+  "file": "/logos/sarvam-ai.svg",
+  "source": "https://www.sarvam.ai/favicon.svg"
+ },
+ "scaleway": {
+  "file": "/logos/scaleway.png",
+  "source": "https://www.scaleway.com/favicon/website/favicon.ico"
+ },
+ "seldon-core": {
+  "file": "/logos/seldon-core.png",
+  "source": "https://github.com/SeldonIO.png?size=256"
+ },
  "sequoia-capital": {
   "file": "/logos/sequoia-capital.png",
   "source": "https://framerusercontent.com/images/BjlCZkZ0WlX5JcURORpeyljjCmM.png"
+ },
+ "sf-compute": {
+  "file": "/logos/sf-compute.svg",
+  "source": "https://sfcompute.com/icon.svg?icon.3rt2y1zs5estt.svg"
  },
  "sglang": {
   "file": "/logos/sglang.png",
@@ -171,9 +871,101 @@
   "file": "/logos/shadeform.png",
   "source": "https://shadeform.com/web-app-manifest-512x512.png"
  },
+ "sharon-ai": {
+  "file": "/logos/sharon-ai.png",
+  "source": "https://sharonai.com/media/2024/09/cropped-fav-test-180x180.png"
+ },
+ "siliconflow": {
+  "file": "/logos/siliconflow.png",
+  "source": "https://framerusercontent.com/images/bFE5gkPwrI76ftGXfAEDMfKyC9Q.png"
+ },
+ "singtel": {
+  "file": "/logos/singtel.svg",
+  "source": "https://cdn1.singteldigital.com/content/dam/singtel/personal/products-services/mobile/phones/singtel-favicon.svg"
+ },
+ "sk-telecom": {
+  "file": "/logos/sk-telecom.png",
+  "source": "https://www.sktelecom.com/favicon.ico"
+ },
+ "skypilot": {
+  "file": "/logos/skypilot.png",
+  "source": "https://github.com/skypilot-org.png?size=256"
+ },
+ "snowflake": {
+  "file": "/logos/snowflake.png",
+  "source": "https://www.snowflake.com/etc.clientlibs/snowflake-site/clientlibs/clientlib-react/resources/apple-touch-icon.png?v=3"
+ },
+ "soluna": {
+  "file": "/logos/soluna.svg",
+  "source": "https://www.solunacomputing.com/wp-content/uploads/2021/06/icon.svg"
+ },
+ "stepfun": {
+  "file": "/logos/stepfun.svg",
+  "source": "https://www.stepfun.com/step_favicon.svg"
+ },
+ "swisscom": {
+  "file": "/logos/swisscom.png",
+  "source": "https://sdx.scsstatic.ch/v4.1.4/images/swisscom-logo-lifeform-180x180.png"
+ },
+ "targon": {
+  "file": "/logos/targon.png",
+  "source": "https://targon.com/images/apple-icon.png"
+ },
+ "tensordock": {
+  "file": "/logos/tensordock.png",
+  "source": "https://www.tensordock.com/assets/favicon/apple-touch-icon.png"
+ },
+ "tensorwave": {
+  "file": "/logos/tensorwave.png",
+  "source": "https://tensorwave.com/favicon/apple-touch-icon.png"
+ },
+ "tensorzero": {
+  "file": "/logos/tensorzero.png",
+  "source": "https://github.com/tensorzero.png?size=256"
+ },
+ "tenstorrent": {
+  "file": "/logos/tenstorrent.png",
+  "source": "https://tenstorrent.com/apple-icon.png?apple-icon.37vex_3awjtbc.png"
+ },
+ "thinking-machines": {
+  "file": "/logos/thinking-machines.png",
+  "source": "https://thinkingmachines.ai/images/apple-touch-icon.png"
+ },
+ "thunder-compute": {
+  "file": "/logos/thunder-compute.png",
+  "source": "https://www.thundercompute.com/apple-icon.png"
+ },
  "together-ai": {
   "file": "/logos/together-ai.png",
   "source": "https://cdn.prod.website-files.com/69654e88dce9154b5f1206dd/69a59cff65ed0f267dd2fbe8_touchicon.png"
+ },
+ "torchao": {
+  "file": "/logos/torchao.jpg",
+  "source": "https://github.com/pytorch.png?size=256"
+ },
+ "traceloop": {
+  "file": "/logos/traceloop.jpg",
+  "source": "https://github.com/traceloop.png?size=256"
+ },
+ "truefoundry": {
+  "file": "/logos/truefoundry.png",
+  "source": "https://cdn.prod.website-files.com/6291b38507a5238373237679/62c52662b8171f9546cfa886_Untitled%20design%20(4).png"
+ },
+ "tyk": {
+  "file": "/logos/tyk.svg",
+  "source": "https://tyk.io/assets/e642be8a0c-Tyk-site-favicon.svg"
+ },
+ "unify": {
+  "file": "/logos/unify.png",
+  "source": "https://unify.ai/apple-icon.png?apple-icon.2yns35tb0jhfp.png"
+ },
+ "unsloth": {
+  "file": "/logos/unsloth.png",
+  "source": "https://github.com/unslothai.png?size=256"
+ },
+ "upstage": {
+  "file": "/logos/upstage.png",
+  "source": "https://cdn.prod.website-files.com/6743d5190bb2b52f38e99e37/6761994342af9b1ae6a14b36_upstage%20symbol_social%20profiel(256px).png"
  },
  "vast-ai": {
   "file": "/logos/vast-ai.png",
@@ -195,8 +987,48 @@
   "file": "/logos/vllm.png",
   "source": "https://github.com/vllm-project.png?size=256"
  },
+ "volcengine": {
+  "file": "/logos/volcengine.png",
+  "source": "https://portal.volccdn.com/obj/volcfe/misc/favicon.png"
+ },
+ "voltage-park": {
+  "file": "/logos/voltage-park.png",
+  "source": "https://cdn.prod.website-files.com/66bf3d007a95625ff7d81868/66e1b088b8c59e3908d4ead7_Frame%202087325122%20(1).png"
+ },
  "vultr": {
   "file": "/logos/vultr.png",
   "source": "https://github.com/vultr.png?size=256"
+ },
+ "wafer": {
+  "file": "/logos/wafer.png",
+  "source": "https://www.wafer.ai/favicon.png"
+ },
+ "wavespeedai": {
+  "file": "/logos/wavespeedai.png",
+  "source": "https://static.wavespeed.ai/api-dashboard/public/main-fdfec42e735f9ff58e82d3cda9df66c6685bdf47/web-app-manifest-192x192.png"
+ },
+ "weights-and-biases": {
+  "file": "/logos/weights-and-biases.png",
+  "source": "https://github.com/wandb.png?size=256"
+ },
+ "whitefiber": {
+  "file": "/logos/whitefiber.png",
+  "source": "https://cdn.prod.website-files.com/673bd4e39d0fb4773ffa1054/6785db7db9b651aee4dc9afd_favicon%20(1).png"
+ },
+ "xai": {
+  "file": "/logos/xai.png",
+  "source": "https://x.ai/favicon.ico"
+ },
+ "xinference": {
+  "file": "/logos/xinference.png",
+  "source": "https://github.com/xorbitsai.png?size=256"
+ },
+ "yotta": {
+  "file": "/logos/yotta.png",
+  "source": "https://yotta.com/wp-content/uploads/2025/11/cropped-yotta-fov-180x180.png"
+ },
+ "z-ai": {
+  "file": "/logos/z-ai.svg",
+  "source": "https://z-cdn.chatglm.cn/z-ai/static/logo.svg"
  }
 }

@@ -1,0 +1,26 @@
+slug: bentoml
+name: "BentoML"
+kinds: [open_source]
+logo_url: /logos/bentoml.jpg
+links:
+  github: "https://github.com/bentoml"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: bentoml
+    name: "BentoML"
+    type: oss_project
+    github: bentoml/BentoML
+    tagline: "Model serving framework."
+    url: "https://github.com/bentoml/BentoML"
+    metadata:
+      license: "Apache-2.0"
+  - slug: openllm
+    name: "OpenLLM"
+    type: oss_project
+    github: bentoml/OpenLLM
+    tagline: "Run open LLMs as OpenAI-compatible APIs (BentoML)."
+    url: "https://github.com/bentoml/OpenLLM"
+    metadata:
+      license: "Apache-2.0"

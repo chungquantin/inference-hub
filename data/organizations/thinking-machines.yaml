@@ -1,0 +1,9 @@
+slug: thinking-machines
+name: "Thinking Machines"
+kinds: [model_provider]
+tagline: "Lab with Tinker API."
+description: "Connectionism: Research Blog by Thinking Machines Lab"
+website: "https://thinkingmachines.ai"
+logo_url: /logos/thinking-machines.png
+tagging:
+  match_case: true

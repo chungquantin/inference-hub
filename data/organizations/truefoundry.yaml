@@ -1,0 +1,10 @@
+slug: truefoundry
+name: "TrueFoundry"
+kinds: [other]
+tagline: "Kubernetes LLM deployment and gateway platform."
+description: "Deploy, secure, and scale LLMs and AI agents with TrueFoundry's enterprise AI Gateway and MCP Gateway. Rate limiting, observability, and compliance built in."
+website: "https://www.truefoundry.com"
+logo_url: /logos/truefoundry.png
+categories: [serving-orchestration]
+tagging:
+  match_case: true

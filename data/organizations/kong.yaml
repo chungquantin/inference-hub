@@ -1,0 +1,10 @@
+slug: kong
+name: "Kong"
+kinds: [llm_gateway]
+tagline: "AI plugins on Kong API gateway."
+description: "Deliver AI connectivity with centralized security, routing, observability, and cost control for LLMs and MCP resources. Explore Kong AI Gateway!"
+website: "https://konghq.com/products/kong-ai-gateway"
+logo_url: /logos/kong.png
+tagging:
+  aliases: ["Kong AI Gateway"]
+  match_case: true

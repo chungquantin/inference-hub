@@ -1,0 +1,21 @@
+slug: infinity
+name: "Infinity"
+kinds: [open_source]
+tagline: "Embedding and rerank serving."
+description: "Infinity is a high-throughput, low-latency serving engine for text-embeddings, reranking models, clip, clap and colpali"
+website: "https://michaelfeil.github.io/infinity/"
+links:
+  github: "https://github.com/michaelfeil"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: infinity-engine
+    name: "Infinity"
+    type: oss_project
+    github: michaelfeil/infinity
+    tagline: "Embedding and rerank serving."
+    url: "https://github.com/michaelfeil/infinity"
+    metadata:
+      license: "MIT"

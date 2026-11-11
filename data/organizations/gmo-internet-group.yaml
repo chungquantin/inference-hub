@@ -1,0 +1,9 @@
+slug: gmo-internet-group
+name: "GMO Internet Group"
+kinds: [gpu_cloud]
+tagline: "Japanese GPU."
+website: "https://gmo.jp"
+logo_url: /logos/gmo-internet-group.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

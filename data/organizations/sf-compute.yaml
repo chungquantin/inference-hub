@@ -1,0 +1,10 @@
+slug: sf-compute
+name: "SF Compute"
+kinds: [gpu_cloud]
+tagline: "GPU spot market."
+description: "The San Francisco Compute Company. Buy and resell large-scale, vetted GPU clusters from the terminal."
+website: "https://sfcompute.com"
+logo_url: /logos/sf-compute.svg
+categories: [gpu-marketplaces]
+tagging:
+  match_case: true

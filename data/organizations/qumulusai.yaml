@@ -1,0 +1,9 @@
+slug: qumulusai
+name: "QumulusAI"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "QumulusAI delivers integrated AI infrastructure with high-performance computing and energy-efficient data centers, eliminating bottlenecks for enterprises."
+website: "https://qumulusai.com"
+logo_url: /logos/qumulusai.webp
+tagging:
+  match_case: true

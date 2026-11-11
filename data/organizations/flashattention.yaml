@@ -1,0 +1,21 @@
+slug: flashattention
+name: "FlashAttention"
+kinds: [open_source]
+tagline: "Fast exact attention kernels."
+description: "Fast and memory-efficient exact attention"
+website: "https://github.com/Dao-AILab/flash-attention"
+logo_url: /logos/flashattention.png
+links:
+  github: "https://github.com/Dao-AILab"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: flashattention-engine
+    name: "FlashAttention"
+    type: oss_project
+    github: Dao-AILab/flash-attention
+    tagline: "Fast exact attention kernels."
+    url: "https://github.com/Dao-AILab/flash-attention"
+    metadata:
+      license: "BSD-3-Clause"

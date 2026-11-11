@@ -1,0 +1,9 @@
+slug: thunder-compute
+name: "Thunder Compute"
+kinds: [gpu_cloud]
+tagline: "Cheap cloud GPUs."
+description: "CPU and GPU sandboxes for AI agents and persistent GPU instances for developers. A100 and H100 GPUs with per-second and per-minute billing."
+website: "https://thundercompute.com"
+logo_url: /logos/thunder-compute.png
+tagging:
+  match_case: true

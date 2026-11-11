@@ -1,0 +1,9 @@
+slug: ncompass
+name: "nCompass"
+kinds: [inference_provider]
+tagline: "LLM API without rate limits."
+description: "nCompass agents find and fix CPU-GPU performance bottlenecks in your deployments. LLM serving stacks have large open-source communities tuning them. Generative recommender and other custom stacks don't, so our agents do."
+website: "https://ncompass.tech"
+logo_url: /logos/ncompass.png
+tagging:
+  match_case: true

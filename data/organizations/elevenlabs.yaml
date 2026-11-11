@@ -1,0 +1,9 @@
+slug: elevenlabs
+name: "ElevenLabs"
+kinds: [model_provider]
+tagline: "Voice API."
+description: "Create lifelike speech with our AI voice generator and voice agents platform. Access 17,500+ voices in 90+ languages with secure APIs and SDKs."
+website: "https://elevenlabs.io"
+logo_url: /logos/elevenlabs.png
+tagging:
+  match_case: true

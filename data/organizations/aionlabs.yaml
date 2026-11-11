@@ -1,0 +1,8 @@
+slug: aionlabs
+name: "AionLabs"
+kinds: [inference_provider]
+tagline: "Model API."
+website: "https://aionlabs.ai"
+logo_url: /logos/aionlabs.png
+tagging:
+  match_case: true

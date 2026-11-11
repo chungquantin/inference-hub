@@ -1,0 +1,8 @@
+slug: liquid-web
+name: "Liquid Web"
+kinds: [gpu_cloud]
+tagline: "GPU hosting."
+description: "Liquid Web delivers hosting solutions built for uptime, performance, and security. Host websites and workloads with dedicated servers, managed hosting, and compliant infrastructure now."
+website: "https://liquidweb.com"
+tagging:
+  match_case: true

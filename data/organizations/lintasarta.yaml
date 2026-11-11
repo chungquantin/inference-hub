@@ -1,0 +1,9 @@
+slug: lintasarta
+name: "Lintasarta"
+kinds: [gpu_cloud]
+tagline: "Indonesia GPU cloud."
+website: "https://lintasarta.net"
+logo_url: /logos/lintasarta.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

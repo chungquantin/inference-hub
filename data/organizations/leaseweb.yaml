@@ -1,0 +1,9 @@
+slug: leaseweb
+name: "Leaseweb"
+kinds: [gpu_cloud]
+tagline: "Dedicated GPU servers."
+website: "https://leaseweb.com"
+logo_url: /logos/leaseweb.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

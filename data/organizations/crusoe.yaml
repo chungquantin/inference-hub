@@ -1,0 +1,9 @@
+slug: crusoe
+name: "Crusoe"
+kinds: [gpu_cloud]
+tagline: "Neocloud + managed inference."
+description: "Crusoe provides next-gen AI infrastructure and cloud compute using an energy-first approach. Deploy AI workloads at scale with reliable performance and 24/7 support."
+website: "https://crusoe.ai"
+logo_url: /logos/crusoe.png
+tagging:
+  match_case: true

@@ -1,0 +1,10 @@
+slug: martian
+name: "Martian"
+kinds: [llm_gateway]
+tagline: "Model router."
+description: "Measurement. Explanation. Application. That's how we're tackling AI interpretability: the greatest scientific problem of our age."
+website: "https://withmartian.com"
+logo_url: /logos/martian.png
+tagging:
+  match_case: true
+  match_name: false

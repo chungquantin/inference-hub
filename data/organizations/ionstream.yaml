@@ -1,0 +1,10 @@
+slug: ionstream
+name: "Ionstream"
+kinds: [inference_provider]
+tagline: "GPU inference."
+description: "Bare-metal GPU cloud for AI. The raw performance of dedicated hardware, the flexibility of the cloud, and the sovereignty your data demands."
+website: "https://ionstream.ai"
+logo_url: /logos/ionstream.png
+tagging:
+  match_case: true
+  match_name: false

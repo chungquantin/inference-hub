@@ -1,0 +1,10 @@
+slug: inferencemax
+name: "InferenceMAX"
+kinds: [llmops]
+tagline: "Continuous open GPU inference benchmark."
+description: "Compare AgentX long-context, multi-turn coding inference with fixed-sequence benchmarks across chips and frameworks, from public NVIDIA and AMD runs."
+website: "https://inferencemax.semianalysis.com"
+logo_url: /logos/inferencemax.webp
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

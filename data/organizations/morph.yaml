@@ -1,0 +1,10 @@
+slug: morph
+name: "Morph"
+kinds: [inference_provider]
+tagline: "Code-edit models."
+description: "GLM-5.3 with 1M context on inference tuned for coding agents. Plus the agent toolkit: search (WarpGrep), edits (Fast Apply), context (Compact). One OpenAI-compatible API."
+website: "https://morphllm.com"
+logo_url: /logos/morph.jpg
+tagging:
+  match_case: true
+  match_name: false

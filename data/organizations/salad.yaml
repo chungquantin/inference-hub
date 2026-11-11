@@ -1,0 +1,13 @@
+slug: salad
+name: "Salad"
+kinds: [gpu_cloud]
+tagline: "Distributed consumer GPUs."
+description: "SaladCloud orchestrates AI workloads across 16,000+ daily active GPUs in 190+ countries. Save up to 90% vs hyperscalers, or run our stack on your own infrastructure."
+website: "https://salad.com"
+logo_url: /logos/salad.png
+links:
+  github: "https://github.com/SaladTechnologies"
+categories: [gpu-marketplaces]
+tagging:
+  match_case: true
+  match_name: false

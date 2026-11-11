@@ -1,0 +1,9 @@
+slug: orange-business
+name: "Orange Business"
+kinds: [gpu_cloud]
+tagline: "French sovereign AI."
+description: "Turn data into a true business asset with end-to-end intelligent solutions, hybrid and public cloud services and technologies from Orange Business Services"
+website: "https://orange-business.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

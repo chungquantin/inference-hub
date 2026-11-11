@@ -1,0 +1,21 @@
+slug: exo
+name: "Exo"
+kinds: [open_source]
+tagline: "Run models across a cluster of consumer devices."
+website: "https://github.com/exo-explore/exo"
+logo_url: /logos/exo.jpg
+links:
+  github: "https://github.com/exo-explore"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: exo-engine
+    name: "Exo"
+    type: oss_project
+    github: exo-explore/exo
+    tagline: "Run models across a cluster of consumer devices."
+    url: "https://github.com/exo-explore/exo"
+    metadata:
+      license: "Apache-2.0"

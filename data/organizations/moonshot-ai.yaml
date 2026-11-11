@@ -1,0 +1,12 @@
+slug: moonshot-ai
+name: "Moonshot AI"
+kinds: [hyperscaler, inference_provider]
+tagline: "Kimi API."
+description: "Welcome to Moonshot AI. Our mission is to seek the optimal conversion from energy to intelligence."
+website: "https://moonshot.ai"
+logo_url: /logos/moonshot-ai.jpg
+links:
+  github: "https://github.com/MoonshotAI"
+tagging:
+  aliases: ["Kimi"]
+  match_case: true

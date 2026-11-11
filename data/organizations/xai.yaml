@@ -1,0 +1,9 @@
+slug: xai
+name: "xAI"
+kinds: [model_provider]
+tagline: "Grok API."
+website: "https://x.ai"
+logo_url: /logos/xai.png
+tagging:
+  aliases: ["Grok", "x.ai"]
+  match_case: true

@@ -1,0 +1,20 @@
+slug: routellm
+name: "RouteLLM"
+kinds: [llm_gateway]
+tagline: "LMSYS framework for cost-quality routing."
+description: "A framework for serving and evaluating LLM routers - save LLM costs without compromising quality"
+website: "https://github.com/lm-sys/RouteLLM"
+logo_url: /logos/routellm.png
+links:
+  github: "https://github.com/lm-sys"
+tagging:
+  match_case: true
+products:
+  - slug: routellm-engine
+    name: "RouteLLM"
+    type: oss_project
+    github: lm-sys/RouteLLM
+    tagline: "LMSYS framework for cost-quality routing."
+    url: "https://github.com/lm-sys/RouteLLM"
+    metadata:
+      license: "Apache-2.0"

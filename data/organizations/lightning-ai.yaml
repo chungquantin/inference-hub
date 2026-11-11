@@ -1,0 +1,10 @@
+slug: lightning-ai
+name: "Lightning AI"
+kinds: [gpu_cloud]
+tagline: "GPU studios + inference."
+description: "Build, train and deploy your own specialized models. On-demand GPUs, clusters, AI coding agents and enterprise-grade infrastructure."
+website: "https://lightning.ai"
+logo_url: /logos/lightning-ai.png
+tagging:
+  aliases: ["PyTorch Lightning"]
+  match_case: true

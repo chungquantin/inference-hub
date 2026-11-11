@@ -1,0 +1,22 @@
+slug: medusa
+name: "Medusa"
+kinds: [open_source]
+tagline: "Multi-head speculative decoding."
+description: "Tianle Cai*, Yuhong Li*, Zhengyang Geng, Hongwu Peng, Jason D. Lee, Deming Chen, Tri Dao (* Equal contribution)"
+website: "https://sites.google.com/view/medusa-llm"
+logo_url: /logos/medusa.png
+links:
+  github: "https://github.com/FasterDecoding"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: medusa-engine
+    name: "Medusa"
+    type: oss_project
+    github: FasterDecoding/Medusa
+    tagline: "Multi-head speculative decoding."
+    url: "https://github.com/FasterDecoding/Medusa"
+    metadata:
+      license: "Apache-2.0"

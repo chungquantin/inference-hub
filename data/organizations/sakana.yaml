@@ -1,0 +1,9 @@
+slug: sakana
+name: "Sakana"
+kinds: [model_provider]
+tagline: "Japanese lab."
+description: "We are creating a new kind of foundation model based on nature-inspired intelligence."
+website: "https://sakana.ai"
+logo_url: /logos/sakana.png
+tagging:
+  match_case: true

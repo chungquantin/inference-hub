@@ -1,0 +1,10 @@
+slug: ionos
+name: "IONOS"
+kinds: [gpu_cloud]
+tagline: "EU cloud with AI Model Hub."
+description: "IONOS, your digital partner for cloud solutions and web hosting, supporting your needs from websites, domains, servers, and more."
+website: "https://ionos.com"
+logo_url: /logos/ionos.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

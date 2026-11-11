@@ -1,0 +1,9 @@
+slug: cohere
+name: "Cohere"
+kinds: [model_provider]
+tagline: "Model maker and API."
+description: "Cohere builds powerful models and AI solutions enabling enterprises to automate processes, empower employees, and turn fragmented data into actionable insights."
+website: "https://cohere.com"
+logo_url: /logos/cohere.png
+tagging:
+  match_case: true

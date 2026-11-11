@@ -1,0 +1,10 @@
+slug: kt
+name: "KT"
+kinds: [gpu_cloud]
+tagline: "Korean telco models."
+website: "https://kt.com"
+logo_url: /logos/kt.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true
+  match_name: false

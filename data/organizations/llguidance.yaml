@@ -1,0 +1,20 @@
+slug: llguidance
+name: "llguidance"
+kinds: [open_source]
+tagline: "Constrained decoding engine."
+website: "https://github.com/guidance-ai/llguidance"
+logo_url: /logos/llguidance.png
+links:
+  github: "https://github.com/guidance-ai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: llguidance-engine
+    name: "llguidance"
+    type: oss_project
+    github: guidance-ai/llguidance
+    tagline: "Constrained decoding engine."
+    url: "https://github.com/guidance-ai/llguidance"
+    metadata:
+      license: "MIT"

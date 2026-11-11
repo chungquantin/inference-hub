@@ -1,0 +1,11 @@
+slug: langchain
+name: "LangChain"
+kinds: [llmops]
+tagline: "LangChain tracing and eval platform."
+description: "Complete AI agent and LLM observability platform with tracing and real-time monitoring. Debug agents, find failures fast, and track costs and latency."
+website: "https://www.langchain.com/langsmith"
+logo_url: /logos/langchain.png
+categories: [observability]
+tagging:
+  aliases: ["LangSmith"]
+  match_case: true

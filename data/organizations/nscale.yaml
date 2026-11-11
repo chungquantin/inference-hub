@@ -1,0 +1,9 @@
+slug: nscale
+name: "Nscale"
+kinds: [gpu_cloud]
+tagline: "UK neocloud + inference."
+description: "Nscale full-stack AI cloud platform and services are designed for scale, resilience, and speed."
+website: "https://nscale.com"
+logo_url: /logos/nscale.png
+tagging:
+  match_case: true

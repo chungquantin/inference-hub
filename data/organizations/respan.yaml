@@ -1,0 +1,11 @@
+slug: respan
+name: "Respan"
+kinds: [llm_gateway, llmops]
+tagline: "OpenRouter provider."
+description: "Respan is an open-source AI gateway with built-in observability and evals."
+website: "https://respan.ai"
+logo_url: /logos/respan.png
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false

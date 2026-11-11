@@ -1,0 +1,9 @@
+slug: paperspace
+name: "Paperspace"
+kinds: [gpu_cloud]
+tagline: "GPU cloud (DigitalOcean)."
+description: "Accelerate AI training, power complex simulations, and render faster with NVIDIA H100 GPUs on Paperspace. Easy setup, cost-effective cloud compute."
+website: "https://paperspace.com"
+logo_url: /logos/paperspace.webp
+tagging:
+  match_case: true

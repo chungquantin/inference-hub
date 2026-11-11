@@ -1,0 +1,12 @@
+slug: minimax
+name: "MiniMax"
+kinds: [hyperscaler, inference_provider]
+tagline: "Model API."
+description: "Building AGI with our mission Intelligence with Everyone. Global leader in multi-modal models and AI-native products with over 300 million users."
+website: "https://minimax.io"
+logo_url: /logos/minimax.jpg
+links:
+  github: "https://github.com/MiniMax-AI"
+tagging:
+  aliases: ["MiniMax AI"]
+  match_case: true

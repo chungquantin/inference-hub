@@ -1,0 +1,21 @@
+slug: llm-guard
+name: "LLM Guard"
+kinds: [llmops]
+tagline: "Input/output scanners."
+description: "LLM Guard is a comprehensive tool designed to fortify the security of Large Language Models (LLMs)."
+website: "https://protectai.github.io/llm-guard/"
+logo_url: /logos/llm-guard.png
+links:
+  github: "https://github.com/protectai"
+categories: [guardrails]
+tagging:
+  match_case: true
+products:
+  - slug: llm-guard-engine
+    name: "LLM Guard"
+    type: oss_project
+    github: protectai/llm-guard
+    tagline: "Input/output scanners."
+    url: "https://github.com/protectai/llm-guard"
+    metadata:
+      license: "MIT"

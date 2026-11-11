@@ -1,0 +1,9 @@
+slug: volcengine
+name: "Volcengine"
+kinds: [hyperscaler, inference_provider]
+tagline: "ByteDance model API."
+website: "https://volcengine.com"
+logo_url: /logos/volcengine.png
+tagging:
+  aliases: ["Volcano Engine"]
+  match_case: true

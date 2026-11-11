@@ -1,0 +1,8 @@
+slug: rackspace
+name: "Rackspace"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+website: "https://rackspace.com"
+logo_url: /logos/rackspace.png
+tagging:
+  match_case: true

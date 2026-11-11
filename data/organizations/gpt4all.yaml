@@ -1,0 +1,21 @@
+slug: gpt4all
+name: "GPT4All"
+kinds: [open_source]
+tagline: "Local chat app and runtime from Nomic."
+description: "Run open-source AI models locally on your device. GPT4All delivers private, high-performance AI with no cloud required—your data stays on your machine."
+website: "https://nomic.ai/gpt4all"
+logo_url: /logos/gpt4all.png
+links:
+  github: "https://github.com/nomic-ai"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+products:
+  - slug: gpt4all-engine
+    name: "GPT4All"
+    type: oss_project
+    github: nomic-ai/gpt4all
+    tagline: "Local chat app and runtime from Nomic."
+    url: "https://github.com/nomic-ai/gpt4all"
+    metadata:
+      license: "MIT"

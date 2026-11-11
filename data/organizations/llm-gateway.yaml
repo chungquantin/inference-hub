@@ -1,0 +1,9 @@
+slug: llm-gateway
+name: "LLM Gateway"
+kinds: [llm_gateway]
+tagline: "Open-source gateway with hosted option."
+description: "Open-source LLM API gateway: route requests to 250+ models from 40+ providers, including OpenAI, Anthropic and Google, through one OpenAI-compatible API."
+website: "https://llmgateway.io"
+logo_url: /logos/llm-gateway.png
+tagging:
+  match_case: true

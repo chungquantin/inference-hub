@@ -1,0 +1,10 @@
+slug: braintrust
+name: "Braintrust"
+kinds: [llmops]
+tagline: "Evals and logging platform."
+description: "Ship quality agents at scale. Braintrust is the AI observability platform for tracing production, running evals, and catching regressions before they reach users."
+website: "https://www.braintrust.dev"
+logo_url: /logos/braintrust.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

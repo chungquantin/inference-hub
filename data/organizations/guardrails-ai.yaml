@@ -1,0 +1,21 @@
+slug: guardrails-ai
+name: "Guardrails AI"
+kinds: [llmops]
+tagline: "Output validation framework."
+description: "Adding guardrails to large language models."
+website: "https://github.com/guardrails-ai/guardrails"
+logo_url: /logos/guardrails-ai.png
+links:
+  github: "https://github.com/guardrails-ai"
+categories: [guardrails]
+tagging:
+  match_case: true
+products:
+  - slug: guardrails-ai-engine
+    name: "Guardrails AI"
+    type: oss_project
+    github: guardrails-ai/guardrails
+    tagline: "Output validation framework."
+    url: "https://github.com/guardrails-ai/guardrails"
+    metadata:
+      license: "Apache-2.0"

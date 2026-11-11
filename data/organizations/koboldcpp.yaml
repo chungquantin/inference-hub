@@ -1,0 +1,21 @@
+slug: koboldcpp
+name: "KoboldCpp"
+kinds: [open_source]
+tagline: "llama.cpp fork single-file runner."
+description: "KoboldCpp is free and open-source software for running GGUF AI models on Windows, Linux and macOS. One file, no install. Official downloads, guides and docs."
+website: "https://koboldcpp.net"
+logo_url: /logos/koboldcpp.png
+links:
+  github: "https://github.com/LostRuins"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+products:
+  - slug: koboldcpp-engine
+    name: "KoboldCpp"
+    type: oss_project
+    github: LostRuins/koboldcpp
+    tagline: "llama.cpp fork single-file runner."
+    url: "https://github.com/LostRuins/koboldcpp"
+    metadata:
+      license: "AGPL-3.0"

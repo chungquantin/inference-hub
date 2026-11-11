@@ -1,0 +1,10 @@
+slug: perplexity
+name: "Perplexity"
+kinds: [model_provider]
+tagline: "Sonar API."
+description: "Perplexity is a free AI-powered answer engine that provides accurate, trusted, and real-time answers to any question."
+website: "https://perplexity.ai"
+logo_url: /logos/perplexity.png
+tagging:
+  aliases: ["Perplexity AI"]
+  match_case: true

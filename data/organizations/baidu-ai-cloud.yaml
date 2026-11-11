@@ -1,0 +1,9 @@
+slug: baidu-ai-cloud
+name: "Baidu AI Cloud"
+kinds: [hyperscaler, inference_provider]
+tagline: "ERNIE platform."
+website: "https://cloud.baidu.com"
+logo_url: /logos/baidu-ai-cloud.png
+tagging:
+  aliases: ["Qianfan", "Baidu Qianfan"]
+  match_case: true

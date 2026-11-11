@@ -1,0 +1,21 @@
+slug: kubeai
+name: "KubeAI"
+kinds: [open_source]
+tagline: "Kubernetes operator for LLM serving with autoscaling."
+description: "AI Inference Operator for Kubernetes. The easiest way to serve ML models in production. Supports VLMs, LLMs, embeddings, and speech-to-text."
+website: "https://www.kubeai.org"
+logo_url: /logos/kubeai.png
+links:
+  github: "https://github.com/kubeai-project"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: kubeai-engine
+    name: "KubeAI"
+    type: oss_project
+    github: kubeai-project/kubeai
+    tagline: "Kubernetes operator for LLM serving with autoscaling."
+    url: "https://github.com/kubeai-project/kubeai"
+    metadata:
+      license: "Apache-2.0"

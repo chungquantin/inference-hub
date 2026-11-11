@@ -1,0 +1,21 @@
+slug: aphrodite-engine
+name: "Aphrodite Engine"
+kinds: [open_source]
+tagline: "vLLM-derived engine from PygmalionAI."
+description: "High-throughput inference for Hugging Face models"
+website: "https://sonar.dphn.ai"
+logo_url: /logos/aphrodite-engine.jpg
+links:
+  github: "https://github.com/dphnAI"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: aphrodite-engine-engine
+    name: "Aphrodite Engine"
+    type: oss_project
+    github: dphnAI/sonar
+    tagline: "vLLM-derived engine from PygmalionAI."
+    url: "https://github.com/aphrodite-engine/aphrodite-engine"
+    metadata:
+      license: "AGPL-3.0"

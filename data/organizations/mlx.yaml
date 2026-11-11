@@ -1,0 +1,22 @@
+slug: mlx
+name: "MLX"
+kinds: [open_source]
+tagline: "Apple-silicon array framework and LLM runner."
+description: "MLX: An array framework for Apple silicon"
+website: "https://github.com/ml-explore/mlx"
+logo_url: /logos/mlx.png
+links:
+  github: "https://github.com/ml-explore"
+categories: [inference-engines]
+tagging:
+  aliases: ["mlx-lm"]
+  match_case: true
+products:
+  - slug: mlx-mlx-lm
+    name: "MLX / mlx-lm"
+    type: oss_project
+    github: ml-explore/mlx
+    tagline: "Apple-silicon array framework and LLM runner."
+    url: "https://github.com/ml-explore/mlx"
+    metadata:
+      license: "MIT"

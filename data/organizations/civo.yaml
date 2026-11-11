@@ -1,0 +1,10 @@
+slug: civo
+name: "Civo"
+kinds: [gpu_cloud]
+tagline: "Cloud with GPUs."
+description: "Civo is the Sovereign Cloud and AI platform that frees you to build without limits. Discover our cloud solutions for public, private, and AI workloads."
+website: "https://civo.com"
+logo_url: /logos/civo.png
+tagging:
+  match_case: true
+  match_name: false

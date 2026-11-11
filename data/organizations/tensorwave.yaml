@@ -1,0 +1,9 @@
+slug: tensorwave
+name: "TensorWave"
+kinds: [gpu_cloud]
+tagline: "AMD GPU cloud."
+description: "Power AI workloads with AMD Instinct™ GPUs. Scale models faster with high-performance, dedicated cloud compute."
+website: "https://tensorwave.com"
+logo_url: /logos/tensorwave.png
+tagging:
+  match_case: true

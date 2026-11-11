@@ -1,0 +1,9 @@
+slug: runway
+name: "Runway"
+kinds: [model_provider]
+tagline: "Video API."
+description: "Runway is building foundational Real-World Intelligence that is changing how the world’s top brands, companies, agencies and studios are able to tell their stories."
+website: "https://runwayml.com"
+logo_url: /logos/runway.png
+tagging:
+  match_case: true

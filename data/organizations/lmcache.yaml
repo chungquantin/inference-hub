@@ -1,0 +1,21 @@
+slug: lmcache
+name: "LMCache"
+kinds: [open_source]
+tagline: "KV cache layer for engines."
+description: "LMCache: Supercharge Your LLM with the Fastest KV Cache Layer"
+website: "https://lmcache.ai/"
+logo_url: /logos/lmcache.jpg
+links:
+  github: "https://github.com/LMCache"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: lmcache-engine
+    name: "LMCache"
+    type: oss_project
+    github: LMCache/LMCache
+    tagline: "KV cache layer for engines."
+    url: "https://github.com/LMCache/LMCache"
+    metadata:
+      license: "Apache-2.0"

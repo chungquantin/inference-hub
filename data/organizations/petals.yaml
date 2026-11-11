@@ -1,0 +1,22 @@
+slug: petals
+name: "Petals"
+kinds: [open_source]
+tagline: "BitTorrent-style distributed inference."
+description: "🌸 Run LLMs at home, BitTorrent-style. Fine-tuning and inference up to 10x faster than offloading"
+website: "https://petals.dev"
+logo_url: /logos/petals.png
+links:
+  github: "https://github.com/bigscience-workshop"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: petals-engine
+    name: "Petals"
+    type: oss_project
+    github: bigscience-workshop/petals
+    tagline: "BitTorrent-style distributed inference."
+    url: "https://github.com/bigscience-workshop/petals"
+    metadata:
+      license: "MIT"

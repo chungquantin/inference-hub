@@ -1,0 +1,136 @@
+vLLM	https://github.com/vllm-project/vllm	High-throughput LLM serving engine with PagedAttention	Engine
+SGLang	https://github.com/sgl-project/sglang	Fast serving framework with RadixAttention and structured output	Engine
+TensorRT-LLM	https://github.com/NVIDIA/TensorRT-LLM	NVIDIA library for optimized LLM inference on NVIDIA GPUs	Engine
+llama.cpp	https://github.com/ggml-org/llama.cpp	C/C++ LLM inference, GGUF format, CPU/GPU	Engine
+Ollama	https://ollama.com	Local model runner and registry built around llama.cpp	Local runtime
+LM Studio	https://lmstudio.ai	Desktop app and local server for running models	Local runtime
+MLX / mlx-lm	https://github.com/ml-explore/mlx	Apple-silicon array framework and LLM runner	Engine
+TGI	https://github.com/huggingface/text-generation-inference	Hugging Face Text Generation Inference server	Engine
+LMDeploy	https://github.com/InternLM/lmdeploy	Compression and serving toolkit (TurboMind)	Engine
+Modular MAX	https://www.modular.com/max	Mojo-based inference engine and framework, multi-silicon	Engine
+NVIDIA Dynamo	https://github.com/ai-dynamo/dynamo	Datacenter-scale distributed serving layer above vLLM/SGLang/TRT-LLM	Orchestration
+llm-d	https://github.com/llm-d/llm-d	Kubernetes-native distributed inference stack on vLLM	Orchestration
+Mooncake	https://github.com/kvcache-ai/Mooncake	KVCache-centric disaggregated serving platform (Kimi)	KV cache
+KTransformers	https://github.com/kvcache-ai/ktransformers	CPU/GPU hybrid inference for large MoE models	Engine
+ExLlamaV2 / V3	https://github.com/turboderp-org/exllamav3	Fast quantized inference library for consumer GPUs	Engine
+Aphrodite Engine	https://github.com/aphrodite-engine/aphrodite-engine	vLLM-derived engine from PygmalionAI	Engine
+Nexa SDK	https://github.com/NexaAI/nexa-sdk	On-device multimodal inference across NPU/GPU/CPU	Local runtime
+KServe	https://kserve.github.io	Kubernetes model serving CRDs; LLM path uses llm-d	Serving
+Ray Serve	https://docs.ray.io/en/latest/serve/	Scalable model serving on Ray	Serving
+BentoML	https://github.com/bentoml/BentoML	Model serving framework; joined Modular Feb 2026	Serving
+Triton Inference Server	https://github.com/triton-inference-server/server	NVIDIA multi-framework inference server	Serving
+KubeAI	https://github.com/kubeai-project/kubeai	Kubernetes operator for LLM serving with autoscaling	Orchestration
+Kubeflow	https://www.kubeflow.org	Kubernetes ML platform	Orchestration
+SkyPilot	https://github.com/skypilot-org/skypilot	Run AI workloads across clouds and clusters	Orchestration
+dstack	https://github.com/dstackai/dstack	Open-source GPU orchestration for AI	Orchestration
+TrueFoundry	https://www.truefoundry.com	Kubernetes LLM deployment and gateway platform	Platform
+OpenLLM	https://github.com/bentoml/OpenLLM	Run open LLMs as OpenAI-compatible APIs (BentoML)	Serving
+Xinference	https://github.com/xorbitsai/inference	Unified serving for LLM, embedding and multimodal models	Serving
+LocalAI	https://github.com/mudler/LocalAI	Self-hosted OpenAI-compatible local API	Local runtime
+Jan	https://github.com/janhq/jan	Offline desktop ChatGPT alternative	Local runtime
+GPT4All	https://github.com/nomic-ai/gpt4all	Local chat app and runtime from Nomic	Local runtime
+llamafile	https://github.com/Mozilla-Ocho/llamafile	Single-file executable LLMs (Mozilla)	Local runtime
+AIBrix	https://github.com/vllm-project/aibrix	Kubernetes control plane for vLLM: autoscaling, LoRA, routing	Orchestration
+vLLM production-stack	https://github.com/vllm-project/production-stack	Reference K8s deployment for vLLM	Orchestration
+vLLM Semantic Router	https://github.com/vllm-project/semantic-router	Intent-based model routing for vLLM	Router
+Text Embeddings Inference	https://github.com/huggingface/text-embeddings-inference	HF embedding/reranker server	Engine
+Infinity	https://github.com/michaelfeil/infinity	Embedding and rerank serving	Engine
+MLC LLM	https://github.com/mlc-ai/mlc-llm	Compiler-based universal LLM deployment (TVM)	Engine
+ONNX Runtime GenAI	https://github.com/microsoft/onnxruntime-genai	Generative AI loop for ONNX Runtime	Engine
+OpenVINO GenAI	https://github.com/openvinotoolkit/openvino.genai	Intel runtime for GenAI	Engine
+DeepSpeed-MII	https://github.com/microsoft/DeepSpeed-MII	Low-latency inference built on DeepSpeed	Engine
+FlexFlow Serve	https://github.com/flexflow/FlexFlow	Speculative-inference serving system	Engine
+MAX / Mojo kernels (Modular platform)	https://github.com/modular/modular	Open repository of MAX and Mojo	Engine
+Candle	https://github.com/huggingface/candle	Rust ML framework with LLM examples	Engine
+mistral.rs	https://github.com/EricLBuehler/mistral.rs	Rust LLM inference engine	Engine
+Burn	https://github.com/tracel-ai/burn	Rust deep learning framework	Engine
+whisper.cpp	https://github.com/ggml-org/whisper.cpp	Speech recognition in C/C++	Engine
+stable-diffusion.cpp	https://github.com/leejet/stable-diffusion.cpp	Diffusion inference in C/C++	Engine
+Cortex	https://github.com/menloresearch/cortex.cpp	Local AI engine behind Jan	Local runtime
+Text Generation WebUI	https://github.com/oobabooga/text-generation-webui	Gradio UI for local models	Local runtime
+KoboldCpp	https://github.com/LostRuins/koboldcpp	llama.cpp fork single-file runner	Local runtime
+Lemonade	https://github.com/lemonade-sdk/lemonade	AMD-backed local LLM server for NPU/GPU	Local runtime
+RamaLama	https://github.com/containers/ramalama	Container-native local model runner	Local runtime
+Docker Model Runner	https://docs.docker.com/ai/model-runner/	Docker's built-in model runner	Local runtime
+Exo	https://github.com/exo-explore/exo	Run models across a cluster of consumer devices	Local/distributed
+Petals	https://github.com/bigscience-workshop/petals	BitTorrent-style distributed inference	Distributed
+prima.cpp	https://github.com/Lizonghang/prima.cpp	Distributed llama.cpp on home clusters	Distributed
+OpenRouter	https://openrouter.ai	Unified API and marketplace over 600+ models	Gateway/market
+LiteLLM	https://github.com/BerriAI/litellm	OpenAI-format proxy and SDK across 100+ providers	Gateway
+Portkey	https://portkey.ai	AI gateway and control plane; Palo Alto Networks deal 2026	Gateway
+Helicone	https://www.helicone.ai	Observability and proxy; acquired by Mintlify Mar 2026	Gateway/obs
+Kong AI Gateway	https://konghq.com/products/kong-ai-gateway	AI plugins on Kong API gateway	Gateway
+Martian	https://withmartian.com	Model router	Router
+Not Diamond	https://www.notdiamond.ai	Prompt-level model router	Router
+Unify	https://unify.ai	Router and benchmark over endpoints	Router
+RouteLLM	https://github.com/lm-sys/RouteLLM	LMSYS framework for cost-quality routing	Router
+Requesty	https://www.requesty.ai	LLM gateway and router	Gateway
+TensorZero	https://github.com/tensorzero/tensorzero	Gateway plus observability; repo archived Jun 12 2026	Gateway
+Bifrost (Maxim)	https://github.com/maximhq/bifrost	Go LLM gateway, Apache 2.0	Gateway
+Higress	https://github.com/alibaba/higress	Alibaba AI-native API gateway	Gateway
+Tyk AI Studio	https://tyk.io	API gateway vendor with AI gateway features	Gateway
+Envoy AI Gateway	https://aigateway.envoyproxy.io	Envoy-based AI gateway	Gateway
+Gateway API Inference Extension	https://github.com/kubernetes-sigs/gateway-api-inference-extension	K8s model-aware routing extension	Gateway
+Apache APISIX ai-proxy	https://apisix.apache.org	API gateway with AI proxy plugins	Gateway
+Azure API Management AI gateway	https://learn.microsoft.com/azure/api-management/	Azure managed AI gateway features	Gateway
+LLM Gateway (llmgateway.io)	https://llmgateway.io	Open-source gateway with hosted option	Gateway
+Eden AI	https://www.edenai.co	Unified API over many AI vendors	Gateway
+LMCache	https://github.com/LMCache/LMCache	KV cache layer for engines	KV cache
+FlashInfer	https://github.com/flashinfer-ai/flashinfer	Attention kernel library for serving	Kernels
+FlashAttention	https://github.com/Dao-AILab/flash-attention	Fast exact attention kernels	Kernels
+Unsloth	https://github.com/unslothai/unsloth	Fast fine-tuning and quantization	Optimization
+Red Hat AI / LLM Compressor	https://github.com/vllm-project/llm-compressor	Quantization toolkit; Neural Magic joined Red Hat	Optimization
+Pruna AI	https://github.com/PrunaAI/pruna	Model compression and optimization	Optimization
+Deci (NVIDIA)	https://deci.ai	Model optimization; acquired by NVIDIA	Optimization
+TitanML / Doubleword	https://www.doubleword.ai	Self-hosted inference, formerly TitanML	Platform
+AutoAWQ	https://github.com/casper-hansen/AutoAWQ	AWQ quantization	Optimization
+GPTQModel	https://github.com/ModelCloud/GPTQModel	GPTQ quantization toolkit	Optimization
+bitsandbytes	https://github.com/bitsandbytes-foundation/bitsandbytes	8/4-bit quantization	Optimization
+TorchAO	https://github.com/pytorch/ao	PyTorch quantization and sparsity	Optimization
+Medusa	https://github.com/FasterDecoding/Medusa	Multi-head speculative decoding	Optimization
+EAGLE	https://github.com/SafeAILab/EAGLE	Speculative decoding via feature drafting	Optimization
+SpecForge	https://github.com/sgl-project/SpecForge	Train speculative decoding drafters	Optimization
+NVIDIA TensorRT Model Optimizer	https://github.com/NVIDIA/TensorRT-Model-Optimizer	Quantization and sparsity for TRT	Optimization
+NVIDIA NVLink / NIXL	https://github.com/ai-dynamo/nixl	Inference data-transfer library for Dynamo	KV transport
+Outlines	https://github.com/dottxt-ai/outlines	Structured generation	Structured output
+XGrammar	https://github.com/mlc-ai/xgrammar	Fast grammar-constrained decoding	Structured output
+llguidance	https://github.com/guidance-ai/llguidance	Constrained decoding engine	Structured output
+Langfuse	https://langfuse.com	LLM tracing and evals; ClickHouse acquired Jan 2026	Observability
+LangSmith	https://www.langchain.com/langsmith	LangChain tracing and eval platform	Observability
+Arize AX / Phoenix	https://github.com/Arize-ai/phoenix	Observability and eval	Observability
+Braintrust	https://www.braintrust.dev	Evals and logging platform	Eval
+W&B Weave	https://wandb.ai/site/weave	Tracing and eval from Weights & Biases	Observability
+Datadog LLM Observability	https://www.datadoghq.com/product/llm-observability/	LLM monitoring inside Datadog	Observability
+Comet Opik	https://github.com/comet-ml/opik	Tracing and eval	Observability
+Laminar	https://github.com/lmnr-ai/lmnr	Agent tracing and eval	Observability
+OpenLIT	https://github.com/openlit/openlit	OpenTelemetry-native LLM observability	Observability
+OpenLLMetry (Traceloop)	https://github.com/traceloop/openllmetry	OTel instrumentation for LLMs	Observability
+Lunary	https://github.com/lunary-ai/lunary	LLM observability and prompts	Observability
+PromptLayer	https://www.promptlayer.com	Prompt management and logging	Observability
+Galileo	https://www.galileo.ai	Eval and observability	Eval
+Promptfoo	https://github.com/promptfoo/promptfoo	LLM eval and red-teaming CLI	Eval
+DeepEval	https://github.com/confident-ai/deepeval	LLM eval framework	Eval
+Ragas	https://github.com/explodinggradients/ragas	RAG evaluation	Eval
+lm-evaluation-harness	https://github.com/EleutherAI/lm-evaluation-harness	Standard benchmark harness	Eval
+OpenAI Evals	https://github.com/openai/evals	Eval framework and registry	Eval
+Inspect AI	https://github.com/UKGovernmentBEIS/inspect_ai	UK AISI eval framework	Eval
+NeMo Guardrails	https://github.com/NVIDIA/NeMo-Guardrails	Programmable guardrails	Guardrails
+Guardrails AI	https://github.com/guardrails-ai/guardrails	Output validation framework	Guardrails
+LLM Guard	https://github.com/protectai/llm-guard	Input/output scanners	Guardrails
+Llama Guard / Prompt Guard	https://github.com/meta-llama/PurpleLlama	Meta safety classifiers	Guardrails
+Lakera Guard	https://www.lakera.ai	Prompt-injection protection; acquired by Check Point	Guardrails
+Artificial Analysis	https://artificialanalysis.ai	Independent model and provider speed/price benchmarks	Benchmark
+MLPerf Inference	https://mlcommons.org/benchmarks/inference-datacenter/	MLCommons hardware inference benchmark	Benchmark
+InferenceMAX (SemiAnalysis)	https://inferencemax.semianalysis.com	Continuous open GPU inference benchmark	Benchmark
+GuideLLM	https://github.com/vllm-project/guidellm	Load and SLO benchmarking for LLM servers	Benchmark
+LLMPerf	https://github.com/ray-project/llmperf	Ray LLM API benchmark	Benchmark
+genai-perf / AIPerf	https://github.com/ai-dynamo/aiperf	NVIDIA load generator	Benchmark
+LMArena	https://lmarena.ai	Crowd preference leaderboard	Benchmark
+Epoch AI	https://epoch.ai	AI benchmarking and data hub	Benchmark
+computeprices.com	https://computeprices.com	Per-token rates across 39 providers	Price comparison
+CloudRift benchmark	https://www.cloudrift.ai	Open reproducible provider price/throughput benchmark	Price comparison
+Cog	https://github.com/replicate/cog	Container packaging for ML models	Serving
+Seldon Core	https://github.com/SeldonIO/seldon-core	Kubernetes ML deployment	Serving
+MLflow AI Gateway	https://mlflow.org	Gateway and tracing inside MLflow	Gateway/obs
+vLLM Ascend	https://github.com/vllm-project/vllm-ascend	vLLM backend for Huawei Ascend	Engine
+llama-swap	https://github.com/mostlygeek/llama-swap	Model-swapping proxy for local servers	Gateway

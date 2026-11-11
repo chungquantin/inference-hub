@@ -1,0 +1,20 @@
+slug: text-generation-webui
+name: "Text Generation WebUI"
+kinds: [open_source]
+tagline: "Gradio UI for local models."
+description: "Open-source desktop app for local LLMs. Text, vision, tool-calling, OpenAI/Anthropic-compatible API. 100% private."
+website: "https://github.com/oobabooga/text-generation-webui"
+links:
+  github: "https://github.com/oobabooga"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+products:
+  - slug: text-generation-webui-engine
+    name: "Text Generation WebUI"
+    type: oss_project
+    github: oobabooga/textgen
+    tagline: "Gradio UI for local models."
+    url: "https://github.com/oobabooga/text-generation-webui"
+    metadata:
+      license: "AGPL-3.0"

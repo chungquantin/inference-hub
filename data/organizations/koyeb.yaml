@@ -1,0 +1,11 @@
+slug: koyeb
+name: "Koyeb"
+kinds: [inference_provider]
+tagline: "Serverless platform with GPUs."
+description: "Deploy intensive applications across GPUs, CPUs, and Accelerators in minutes - scale in 50+ locations."
+website: "https://koyeb.com"
+logo_url: /logos/koyeb.png
+categories: [serverless-gpu]
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,10 @@
+slug: samsung-sds
+name: "Samsung SDS"
+kinds: [gpu_cloud]
+tagline: "Korean GPU cloud."
+description: "Cloud Service Provider Leading Digital Transformation for Clients"
+website: "https://samsungsds.com"
+logo_url: /logos/samsung-sds.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

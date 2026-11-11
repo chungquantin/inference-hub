@@ -1,0 +1,10 @@
+slug: artificial-analysis
+name: "Artificial Analysis"
+kinds: [llmops]
+tagline: "Independent model and provider speed/price benchmarks."
+description: "Comparison and analysis of AI models and API hosting providers. Independent benchmarks across key performance metrics including quality, price, time per task & latency."
+website: "https://artificialanalysis.ai"
+logo_url: /logos/artificial-analysis.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

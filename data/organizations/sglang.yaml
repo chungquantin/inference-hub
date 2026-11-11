@@ -14,3 +14,11 @@ products:
     github: sgl-project/sglang
     tagline: Serving engine with RadixAttention prefix caching.
     url: https://github.com/sgl-project/sglang
+  - slug: specforge
+    name: "SpecForge"
+    type: oss_project
+    github: sgl-project/SpecForge
+    tagline: "Train speculative decoding drafters."
+    url: "https://github.com/sgl-project/SpecForge"
+    metadata:
+      license: "MIT"

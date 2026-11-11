@@ -1,0 +1,22 @@
+slug: inspect-ai
+name: "Inspect AI"
+kinds: [llmops]
+tagline: "UK AISI eval framework."
+description: "Open-source framework for large language model evaluations"
+website: "https://inspect.aisi.org.uk/"
+logo_url: /logos/inspect-ai.jpg
+links:
+  github: "https://github.com/UKGovernmentBEIS"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: inspect-ai-engine
+    name: "Inspect AI"
+    type: oss_project
+    github: UKGovernmentBEIS/inspect_ai
+    tagline: "UK AISI eval framework."
+    url: "https://github.com/UKGovernmentBEIS/inspect_ai"
+    metadata:
+      license: "MIT"

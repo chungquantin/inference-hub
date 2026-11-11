@@ -1,0 +1,19 @@
+slug: mistral-rs
+name: "mistral.rs"
+kinds: [open_source]
+tagline: "Rust LLM inference engine."
+website: "https://github.com/EricLBuehler/mistral.rs"
+links:
+  github: "https://github.com/EricLBuehler"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: mistral-rs-engine
+    name: "mistral.rs"
+    type: oss_project
+    github: EricLBuehler/mistral.rs
+    tagline: "Rust LLM inference engine."
+    url: "https://github.com/EricLBuehler/mistral.rs"
+    metadata:
+      license: "MIT"

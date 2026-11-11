@@ -1,0 +1,7 @@
+slug: tencent-cloud
+name: "Tencent Cloud"
+kinds: [hyperscaler, inference_provider]
+tagline: "Hunyuan API."
+website: "https://cloud.tencent.com"
+tagging:
+  match_case: true

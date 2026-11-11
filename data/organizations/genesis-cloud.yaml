@@ -1,0 +1,10 @@
+slug: genesis-cloud
+name: "Genesis Cloud"
+kinds: [gpu_cloud]
+tagline: "EU GPU cloud."
+website: "https://genesiscloud.com"
+logo_url: /logos/genesis-cloud.png
+links:
+  github: "https://github.com/GenesisCloud"
+tagging:
+  match_case: true

@@ -1,0 +1,10 @@
+slug: nebius
+name: "Nebius"
+kinds: [gpu_cloud, inference_provider]
+tagline: "Nebius model API."
+description: "Build and scale faster on the purpose-built AI cloud, engineered from silicon to API."
+website: "https://nebius.com"
+logo_url: /logos/nebius.png
+tagging:
+  aliases: ["Nebius AI", "Token Factory"]
+  match_case: true

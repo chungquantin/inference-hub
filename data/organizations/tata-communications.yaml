@@ -1,0 +1,10 @@
+slug: tata-communications
+name: "Tata Communications"
+kinds: [gpu_cloud]
+tagline: "Indian sovereign AI."
+description: "Tata Communications builds the Digital Fabric of global enterprises - uniting Network, Cloud, IoT, Cybersecurity and Interactions so everything works together and possibilities become limitless."
+website: "https://tatacommunications.com"
+categories: [sovereign-clouds]
+tagging:
+  aliases: ["TCS SuperCompute"]
+  match_case: true

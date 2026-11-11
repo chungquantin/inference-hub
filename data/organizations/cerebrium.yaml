@@ -1,0 +1,10 @@
+slug: cerebrium
+name: "Cerebrium"
+kinds: [inference_provider]
+tagline: "Serverless GPU infra."
+description: "Deploy voice agents, video models, and LLMs on serverless GPUs with sub-second cold starts. Pay-per-second pricing. No Kubernetes."
+website: "https://cerebrium.ai"
+logo_url: /logos/cerebrium.png
+categories: [serverless-gpu]
+tagging:
+  match_case: true

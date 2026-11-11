@@ -1,0 +1,10 @@
+slug: proact-it
+name: "Proact IT"
+kinds: [gpu_cloud]
+tagline: "Swedish GPU cloud."
+description: "We deliver expert consulting, services, and 24/7 support in data management, backup, cybersecurity, networking, modern workspace, and more."
+website: "https://proact.eu"
+logo_url: /logos/proact-it.webp
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

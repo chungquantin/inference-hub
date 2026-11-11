@@ -1,0 +1,10 @@
+slug: core42
+name: "Core42"
+kinds: [gpu_cloud]
+tagline: "UAE sovereign AI cloud."
+website: "https://core42.ai"
+logo_url: /logos/core42.png
+categories: [sovereign-clouds]
+tagging:
+  aliases: ["G42"]
+  match_case: true

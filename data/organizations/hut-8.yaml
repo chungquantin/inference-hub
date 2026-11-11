@@ -1,0 +1,8 @@
+slug: hut-8
+name: "Hut 8"
+kinds: [gpu_cloud]
+tagline: "Miner pivoting to AI."
+website: "https://hut8.com"
+logo_url: /logos/hut-8.png
+tagging:
+  match_case: true

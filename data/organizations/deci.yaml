@@ -1,0 +1,11 @@
+slug: deci
+name: "Deci"
+kinds: [open_source]
+tagline: "Model optimization."
+description: "NVIDIA invents the GPU and drives advances in AI, HPC, gaming, creative design, autonomous vehicles, and robotics."
+website: "https://deci.ai"
+logo_url: /logos/deci.png
+status: acquired
+categories: [model-optimization]
+tagging:
+  match_case: true

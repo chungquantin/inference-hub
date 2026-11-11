@@ -1,0 +1,10 @@
+slug: firmus
+name: "Firmus"
+kinds: [gpu_cloud]
+tagline: "Australian AI cloud."
+description: "We design and operate Firmus Cloud and AI Factories — sovereign, modular systems that optimise cost and power at every layer of the stack."
+website: "https://firmus.co"
+logo_url: /logos/firmus.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

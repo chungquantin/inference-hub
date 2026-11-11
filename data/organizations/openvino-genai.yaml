@@ -1,0 +1,21 @@
+slug: openvino-genai
+name: "OpenVINO GenAI"
+kinds: [open_source]
+tagline: "Intel runtime for GenAI."
+description: "Run Generative AI models with simple C++/Python API and using OpenVINO Runtime"
+website: "https://openvinotoolkit.github.io/openvino.genai/"
+logo_url: /logos/openvino-genai.png
+links:
+  github: "https://github.com/openvinotoolkit"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: openvino-genai-engine
+    name: "OpenVINO GenAI"
+    type: oss_project
+    github: openvinotoolkit/openvino.genai
+    tagline: "Intel runtime for GenAI."
+    url: "https://github.com/openvinotoolkit/openvino.genai"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,9 @@
+slug: near-ai
+name: "NEAR AI"
+kinds: [decentralized]
+tagline: "Private inference."
+description: "NEAR AI Cloud is a private AI inference platform built on confidential computing. Our TEE-hosted open-weight models return a hardware-signed proof with every response, at the same per-token price as ordinary inference."
+website: "https://near.ai"
+logo_url: /logos/near-ai.svg
+tagging:
+  match_case: true

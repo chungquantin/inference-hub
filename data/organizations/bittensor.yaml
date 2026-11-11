@@ -1,0 +1,8 @@
+slug: bittensor
+name: "Bittensor"
+kinds: [decentralized]
+tagline: "Subnet incentive network."
+description: "Bittensor is an open network where subnets produce digital commodities — compute, inference, storage, prediction — and contributors earn TAO. Build with the Bittensor Python SDK and btcli."
+website: "https://bittensor.com"
+tagging:
+  match_case: true

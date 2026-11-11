@@ -1,0 +1,9 @@
+slug: targon
+name: "Targon"
+kinds: [decentralized]
+tagline: "Bittensor inference subnet."
+description: "On-demand GPU virtual machines and bare metal for training and inference, with confidential computing when you need it."
+website: "https://targon.com"
+logo_url: /logos/targon.png
+tagging:
+  match_case: true

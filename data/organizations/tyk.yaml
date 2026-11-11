@@ -1,0 +1,10 @@
+slug: tyk
+name: "Tyk"
+kinds: [llm_gateway]
+tagline: "API gateway vendor with AI gateway features."
+description: "Our API Management platform is fast, scalable, modern. Including an open source API Gateway, Analytics, Dev Portal and Dashboard"
+website: "https://tyk.io"
+logo_url: /logos/tyk.svg
+tagging:
+  aliases: ["Tyk AI Studio"]
+  match_case: true

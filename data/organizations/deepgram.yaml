@@ -1,0 +1,9 @@
+slug: deepgram
+name: "Deepgram"
+kinds: [model_provider]
+tagline: "Speech API."
+description: "Power enterprise voice solutions with Deepgram’s Speech-to-Text, Text-to-Speech, and Voice Agent APIs. Real-time, accurate, and built for scale."
+website: "https://deepgram.com"
+logo_url: /logos/deepgram.png
+tagging:
+  match_case: true

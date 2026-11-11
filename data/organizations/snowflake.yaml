@@ -1,0 +1,10 @@
+slug: snowflake
+name: "Snowflake"
+kinds: [inference_provider]
+tagline: "In-warehouse LLM functions."
+description: "Snowflake powers AI, data engineering, applications, and analytics on a trusted, scalable AI Data Cloud—eliminating silos and accelerating innovation."
+website: "https://snowflake.com"
+logo_url: /logos/snowflake.png
+tagging:
+  aliases: ["Snowflake Cortex"]
+  match_case: true

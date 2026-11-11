@@ -1,0 +1,10 @@
+slug: computeprices-com
+name: "computeprices.com"
+kinds: [llmops]
+tagline: "Per-token rates across 39 providers."
+description: "Cloud GPU prices and LLM inference API rates across all major providers. Find the best deals for H100, A100, GPT-5, Claude, and more."
+website: "https://computeprices.com"
+logo_url: /logos/computeprices-com.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

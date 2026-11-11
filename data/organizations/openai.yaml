@@ -67,3 +67,9 @@ products:
         output: 0.6
         source_url: https://openai.com/api/pricing/
         observed_on: 2024-11-01
+  - slug: openai-evals
+    name: "OpenAI Evals"
+    type: oss_project
+    github: openai/evals
+    tagline: "Eval framework and registry."
+    url: "https://github.com/openai/evals"

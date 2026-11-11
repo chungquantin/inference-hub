@@ -1,0 +1,9 @@
+slug: gmi-cloud
+name: "GMI Cloud"
+kinds: [gpu_cloud]
+tagline: "GPU cloud/inference."
+description: "Run production AI workloads on GMI Cloud. Deploy serverless inference, dedicated GPU clusters, and bare metal AI infrastructure on one scalable platform."
+website: "https://gmicloud.ai"
+logo_url: /logos/gmi-cloud.png
+tagging:
+  match_case: true

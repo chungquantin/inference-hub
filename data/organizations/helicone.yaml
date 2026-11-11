@@ -1,0 +1,10 @@
+slug: helicone
+name: "Helicone"
+kinds: [llm_gateway, llmops]
+tagline: "Observability and proxy."
+description: "Routing and monitoring for reliable AI apps - the LLMOps platform behind the fastest-growing AI companies."
+website: "https://www.helicone.ai"
+logo_url: /logos/helicone.png
+categories: [observability]
+tagging:
+  match_case: true

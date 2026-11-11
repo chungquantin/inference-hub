@@ -1,0 +1,10 @@
+slug: sify
+name: "Sify"
+kinds: [gpu_cloud]
+tagline: "Indian GPU cloud."
+description: "Technology you use - trending concepts in Data Centers, Cloud, AI that impact everyday lives; know more, learn what's in it for you"
+website: "https://sify.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true
+  match_name: false

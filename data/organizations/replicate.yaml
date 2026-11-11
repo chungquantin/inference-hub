@@ -1,0 +1,20 @@
+slug: replicate
+name: "Replicate"
+kinds: [inference_provider]
+tagline: "Model hosting API, image/video/LLM."
+description: "Run open-source machine learning models with a cloud API"
+website: "https://replicate.com"
+logo_url: /logos/replicate.png
+tagging:
+  aliases: ["Replicate.com"]
+  match_case: true
+  match_name: false
+products:
+  - slug: cog
+    name: "Cog"
+    type: oss_project
+    github: replicate/cog
+    tagline: "Container packaging for ML models."
+    url: "https://github.com/replicate/cog"
+    metadata:
+      license: "Apache-2.0"

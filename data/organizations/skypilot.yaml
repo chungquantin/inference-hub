@@ -1,0 +1,21 @@
+slug: skypilot
+name: "SkyPilot"
+kinds: [open_source]
+tagline: "Run AI workloads across clouds and clusters."
+description: "Your AI infrastructure, frontier velocity. The AI Compute Platform that turns your fragmented AI compute into frontier intelligence."
+website: "https://skypilot.ai/"
+logo_url: /logos/skypilot.png
+links:
+  github: "https://github.com/skypilot-org"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: skypilot-engine
+    name: "SkyPilot"
+    type: oss_project
+    github: skypilot-org/skypilot
+    tagline: "Run AI workloads across clouds and clusters."
+    url: "https://github.com/skypilot-org/skypilot"
+    metadata:
+      license: "Apache-2.0"

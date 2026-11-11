@@ -1,0 +1,11 @@
+slug: langfuse
+name: "Langfuse"
+kinds: [llmops]
+tagline: "LLM tracing and evals."
+description: "Trace, evaluate, and improve AI agents with one open platform. Use production data to understand behavior, collaborate on fixes, and ship better quality at lower cost and latency."
+website: "https://langfuse.com"
+logo_url: /logos/langfuse.png
+status: acquired
+categories: [observability]
+tagging:
+  match_case: true

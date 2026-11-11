@@ -1,0 +1,9 @@
+slug: gensyn
+name: "Gensyn"
+kinds: [decentralized]
+tagline: "Decentralized training protocol."
+description: "Gensyn builds AI that forecasts – and keeps improving – by verifiably closing the loop between prediction and reality."
+website: "https://gensyn.ai"
+logo_url: /logos/gensyn.png
+tagging:
+  match_case: true

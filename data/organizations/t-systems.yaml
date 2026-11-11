@@ -1,0 +1,8 @@
+slug: t-systems
+name: "T-Systems"
+kinds: [gpu_cloud]
+tagline: "German sovereign AI cloud."
+website: "https://t-systems.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

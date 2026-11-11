@@ -1,0 +1,11 @@
+slug: yotta
+name: "Yotta"
+kinds: [gpu_cloud]
+tagline: "Indian GPU cloud."
+description: "Yotta delivers secure, scalable, India-hosted cloud, hyperscale data center, AI-compute, and cybersecurity solutions powering compliant digital transformation for enterprises."
+website: "https://yotta.com"
+logo_url: /logos/yotta.png
+categories: [sovereign-clouds]
+tagging:
+  aliases: ["Shakti Cloud"]
+  match_case: true

@@ -1,0 +1,21 @@
+slug: deepspeed-mii
+name: "DeepSpeed-MII"
+kinds: [open_source]
+tagline: "Low-latency inference built on DeepSpeed."
+description: "MII makes low-latency and high-throughput inference possible, powered by DeepSpeed."
+website: "https://github.com/microsoft/DeepSpeed-MII"
+logo_url: /logos/deepspeed-mii.png
+links:
+  github: "https://github.com/deepspeedai"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: deepspeed-mii-engine
+    name: "DeepSpeed-MII"
+    type: oss_project
+    github: deepspeedai/DeepSpeed-MII
+    tagline: "Low-latency inference built on DeepSpeed."
+    url: "https://github.com/microsoft/DeepSpeed-MII"
+    metadata:
+      license: "Apache-2.0"

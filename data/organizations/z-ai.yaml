@@ -1,0 +1,10 @@
+slug: z-ai
+name: "Z.ai"
+kinds: [model_provider]
+tagline: "GLM API."
+description: "Meet Z.ai, the AI assistant powered by GLM-5.3-Flash. Build websites, write code, handle long-horizon tasks, and get instant answers. Fast, smart, and reliable."
+website: "https://z.ai"
+logo_url: /logos/z-ai.svg
+tagging:
+  aliases: ["Zhipu", "Zhipu AI", "GLM"]
+  match_case: true

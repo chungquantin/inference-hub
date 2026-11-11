@@ -1,0 +1,10 @@
+slug: cloudflare
+name: "Cloudflare"
+kinds: [hyperscaler, inference_provider]
+tagline: "Edge GPU inference."
+description: "Run machine learning models, powered by serverless GPUs, on Cloudflare"
+website: "https://developers.cloudflare.com/workers-ai"
+logo_url: /logos/cloudflare.png
+tagging:
+  aliases: ["Workers AI"]
+  match_case: true

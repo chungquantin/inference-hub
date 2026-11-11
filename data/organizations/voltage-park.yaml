@@ -1,0 +1,9 @@
+slug: voltage-park
+name: "Voltage Park"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "We provide on-demand and reserve NVIDIA H100, B200, and GB300 GPU Cloud Infrastructure for secure and scalable computing power across 7 Tier 3+ data centers."
+website: "https://voltagepark.com"
+logo_url: /logos/voltage-park.png
+tagging:
+  match_case: true

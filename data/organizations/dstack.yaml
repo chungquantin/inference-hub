@@ -1,0 +1,21 @@
+slug: dstack
+name: "dstack"
+kinds: [open_source]
+tagline: "Open-source GPU orchestration for AI."
+description: "Introduction to dstack and how it works"
+website: "https://dstack.ai/docs"
+logo_url: /logos/dstack.png
+links:
+  github: "https://github.com/dstackai"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+products:
+  - slug: dstack-engine
+    name: "dstack"
+    type: oss_project
+    github: dstackai/dstack
+    tagline: "Open-source GPU orchestration for AI."
+    url: "https://github.com/dstackai/dstack"
+    metadata:
+      license: "MPL-2.0"

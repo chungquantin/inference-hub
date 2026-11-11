@@ -1,0 +1,9 @@
+slug: parasail
+name: "Parasail"
+kinds: [inference_provider]
+tagline: "Model API and on-demand GPUs."
+description: "Parasail is the inference cloud for AI-native startups. Run any open model with production reliability, flexible scaling, and per-token pricing."
+website: "https://parasail.io"
+logo_url: /logos/parasail.png
+tagging:
+  match_case: true

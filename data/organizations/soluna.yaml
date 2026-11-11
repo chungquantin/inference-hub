@@ -1,0 +1,9 @@
+slug: soluna
+name: "Soluna"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+website: "https://solunacomputing.com"
+logo_url: /logos/soluna.svg
+tagging:
+  match_case: true
+  match_name: false

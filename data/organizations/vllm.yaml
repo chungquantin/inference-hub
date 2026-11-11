@@ -20,3 +20,51 @@ products:
     url: https://github.com/vllm-project/vllm
     metadata:
       license: Apache-2.0
+  - slug: aibrix
+    name: "AIBrix"
+    type: oss_project
+    github: vllm-project/aibrix
+    tagline: "Kubernetes control plane for vLLM: autoscaling, LoRA, routing."
+    url: "https://github.com/vllm-project/aibrix"
+    metadata:
+      license: "Apache-2.0"
+  - slug: vllm-production-stack
+    name: "vLLM production-stack"
+    type: oss_project
+    github: vllm-project/production-stack
+    tagline: "Reference K8s deployment for vLLM."
+    url: "https://github.com/vllm-project/production-stack"
+    metadata:
+      license: "Apache-2.0"
+  - slug: vllm-semantic-router
+    name: "vLLM Semantic Router"
+    type: oss_project
+    github: vllm-project/semantic-router
+    tagline: "Intent-based model routing for vLLM."
+    url: "https://github.com/vllm-project/semantic-router"
+    metadata:
+      license: "Apache-2.0"
+  - slug: llm-compressor
+    name: "LLM Compressor"
+    type: oss_project
+    github: vllm-project/llm-compressor
+    tagline: "Quantization toolkit."
+    url: "https://github.com/vllm-project/llm-compressor"
+    metadata:
+      license: "Apache-2.0"
+  - slug: guidellm
+    name: "GuideLLM"
+    type: oss_project
+    github: vllm-project/guidellm
+    tagline: "Load and SLO benchmarking for LLM servers."
+    url: "https://github.com/vllm-project/guidellm"
+    metadata:
+      license: "Apache-2.0"
+  - slug: vllm-ascend
+    name: "vLLM Ascend"
+    type: oss_project
+    github: vllm-project/vllm-ascend
+    tagline: "vLLM backend for Huawei Ascend."
+    url: "https://github.com/vllm-project/vllm-ascend"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,9 @@
+slug: singtel
+name: "Singtel"
+kinds: [gpu_cloud]
+tagline: "Singapore GPUaaS."
+website: "https://singtel.com"
+logo_url: /logos/singtel.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

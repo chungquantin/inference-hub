@@ -1,0 +1,9 @@
+slug: lmarena
+name: "LMArena"
+kinds: [llmops]
+tagline: "Crowd preference leaderboard."
+website: "https://lmarena.ai"
+logo_url: /logos/lmarena.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

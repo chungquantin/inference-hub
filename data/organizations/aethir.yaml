@@ -1,0 +1,10 @@
+slug: aethir
+name: "Aethir"
+kinds: [decentralized]
+tagline: "Enterprise decentralized GPU cloud."
+description: "Powerful GPU compute solutions on-demand"
+website: "https://aethir.com"
+logo_url: /logos/aethir.png
+tagging:
+  match_case: true
+  match_name: false

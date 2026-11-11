@@ -1,0 +1,21 @@
+slug: pruna-ai
+name: "Pruna AI"
+kinds: [open_source]
+tagline: "Model compression and optimization."
+description: "Pruna is a model optimization framework built for developers, enabling you to deliver faster, more efficient models with minimal overhead."
+website: "https://docs.pruna.ai"
+logo_url: /logos/pruna-ai.png
+links:
+  github: "https://github.com/PrunaAI"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: pruna-ai-engine
+    name: "Pruna AI"
+    type: oss_project
+    github: PrunaAI/pruna
+    tagline: "Model compression and optimization."
+    url: "https://github.com/PrunaAI/pruna"
+    metadata:
+      license: "Apache-2.0"

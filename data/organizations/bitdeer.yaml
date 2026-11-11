@@ -1,0 +1,8 @@
+slug: bitdeer
+name: "Bitdeer"
+kinds: [gpu_cloud]
+tagline: "Singapore miner AI cloud."
+description: "Bitdeer (NASDAQ: BTDR) is a world-leading technology company providing enterprise high-performance computing (HPC), AI cloud infrastructure, SEALMINER equipment, and sustainable Bitcoin mining solutions."
+website: "https://bitdeer.com"
+tagging:
+  match_case: true

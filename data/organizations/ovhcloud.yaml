@@ -1,0 +1,11 @@
+slug: ovhcloud
+name: "OVHcloud"
+kinds: [gpu_cloud]
+tagline: "EU AI inference."
+description: "OVHcloud offers more than 80 open and reversible services with the best price-performance ratio, including domain names, VPS, dedicated servers, IaaS and PaaS cloud."
+website: "https://ovhcloud.com"
+logo_url: /logos/ovhcloud.png
+categories: [sovereign-clouds]
+tagging:
+  aliases: ["OVH"]
+  match_case: true

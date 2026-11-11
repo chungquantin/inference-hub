@@ -1,0 +1,12 @@
+slug: openpipe
+name: "OpenPipe"
+kinds: [inference_provider]
+tagline: "Fine-tune/host."
+description: "The OpenPipe platform has migrated to Weights & Biases and CoreWeave. Browse migration details and the OpenPipe technical archive."
+website: "https://openpipe.ai"
+logo_url: /logos/openpipe.png
+status: acquired
+links:
+  github: "https://github.com/OpenPipe"
+tagging:
+  match_case: true

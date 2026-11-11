@@ -1,0 +1,9 @@
+slug: hive-digital
+name: "HIVE Digital"
+kinds: [gpu_cloud]
+tagline: "Miner pivoting to AI."
+description: "Global leaders in sustainable data center infrastructure."
+website: "https://hivedigitaltechnologies.com"
+logo_url: /logos/hive-digital.webp
+tagging:
+  match_case: true

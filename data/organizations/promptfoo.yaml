@@ -1,0 +1,21 @@
+slug: promptfoo
+name: "Promptfoo"
+kinds: [llmops]
+tagline: "LLM eval and red-teaming CLI."
+description: "The AI Security Platform that catches vulnerabilities in development. Trusted by 156 of the Fortune 500 and 300,000+ developers worldwide."
+website: "https://promptfoo.dev"
+logo_url: /logos/promptfoo.png
+links:
+  github: "https://github.com/promptfoo"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+products:
+  - slug: promptfoo-engine
+    name: "Promptfoo"
+    type: oss_project
+    github: promptfoo/promptfoo
+    tagline: "LLM eval and red-teaming CLI."
+    url: "https://github.com/promptfoo/promptfoo"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,20 @@
+slug: bifrost
+name: "Bifrost"
+kinds: [llm_gateway]
+tagline: "Go LLM gateway, Apache 2.0."
+description: "The fastest open-source AI gateway for LLMs, MCP and agents: 50x faster than LiteLLM, with routing, governance, guardrails and observability built in."
+website: "https://www.getmaxim.ai/bifrost"
+logo_url: /logos/bifrost.png
+links:
+  github: "https://github.com/maximhq"
+tagging:
+  match_case: true
+products:
+  - slug: bifrost-maxim
+    name: "Bifrost (Maxim)"
+    type: oss_project
+    github: maximhq/bifrost
+    tagline: "Go LLM gateway, Apache 2.0."
+    url: "https://github.com/maximhq/bifrost"
+    metadata:
+      license: "Apache-2.0"

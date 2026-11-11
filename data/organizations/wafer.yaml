@@ -1,0 +1,10 @@
+slug: wafer
+name: "Wafer"
+kinds: [inference_provider]
+tagline: "Agent-optimized inference cloud."
+description: "Wafer serves open models on a stack tuned to your real traffic, layer by layer: model, decoding, engine, kernels and hardware."
+website: "https://wafer.ai"
+logo_url: /logos/wafer.png
+tagging:
+  match_case: true
+  match_name: false

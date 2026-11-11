@@ -1,0 +1,11 @@
+slug: kserve
+name: "KServe"
+kinds: [open_source]
+tagline: "Kubernetes model serving CRDs; LLM path uses llm-d."
+website: "https://kserve.github.io"
+logo_url: /logos/kserve.png
+links:
+  github: "https://github.com/kserve"
+categories: [serving-orchestration]
+tagging:
+  match_case: true

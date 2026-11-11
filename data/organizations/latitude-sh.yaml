@@ -1,0 +1,10 @@
+slug: latitude-sh
+name: "Latitude.sh"
+kinds: [gpu_cloud]
+tagline: "Bare-metal GPU."
+description: "Deploy globally, scale easily, and build on the cloud that enables AI-native companies to thrive."
+website: "https://latitude.sh"
+logo_url: /logos/latitude-sh.png
+tagging:
+  match_case: true
+  match_name: false

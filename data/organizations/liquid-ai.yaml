@@ -1,0 +1,10 @@
+slug: liquid-ai
+name: "Liquid AI"
+kinds: [model_provider]
+tagline: "LFM API."
+description: "Liquid AI builds efficient Liquid Foundation Models (LFMs) for on-device, edge, and cloud AI with low latency, privacy, and hardware-aware deployment."
+website: "https://liquid.ai"
+logo_url: /logos/liquid-ai.png
+tagging:
+  aliases: ["Liquid Foundation Models"]
+  match_case: true

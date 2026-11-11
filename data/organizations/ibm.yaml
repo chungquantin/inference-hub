@@ -1,0 +1,10 @@
+slug: ibm
+name: "IBM"
+kinds: [hyperscaler, inference_provider]
+tagline: "IBM model platform."
+description: "IBM watsonx is a portfolio of AI products for building AI applications, managing trusted data and governing AI to accelerate AI adoption across the enterprise."
+website: "https://ibm.com/watsonx"
+logo_url: /logos/ibm.png
+tagging:
+  aliases: ["watsonx"]
+  match_case: true

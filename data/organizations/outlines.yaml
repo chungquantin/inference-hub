@@ -1,0 +1,21 @@
+slug: outlines
+name: "Outlines"
+kinds: [open_source]
+tagline: "Structured generation."
+website: "https://dottxt-ai.github.io/outlines/"
+logo_url: /logos/outlines.png
+links:
+  github: "https://github.com/dottxt-ai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: outlines-engine
+    name: "Outlines"
+    type: oss_project
+    github: dottxt-ai/outlines
+    tagline: "Structured generation."
+    url: "https://github.com/dottxt-ai/outlines"
+    metadata:
+      license: "Apache-2.0"

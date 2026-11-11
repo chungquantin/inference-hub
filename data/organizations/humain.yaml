@@ -1,0 +1,8 @@
+slug: humain
+name: "Humain"
+kinds: [gpu_cloud]
+tagline: "Saudi AI company."
+website: "https://humain.ai"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

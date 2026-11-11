@@ -1,0 +1,21 @@
+slug: opik
+name: "Opik"
+kinds: [llmops]
+tagline: "Tracing and eval."
+description: "Opik is an open-source platform that helps you understand what your LLM application is doing, measure how well it"
+website: "https://www.comet.com/docs/opik/"
+logo_url: /logos/opik.png
+links:
+  github: "https://github.com/comet-ml"
+categories: [observability]
+tagging:
+  match_case: true
+products:
+  - slug: comet-opik
+    name: "Comet Opik"
+    type: oss_project
+    github: comet-ml/opik
+    tagline: "Tracing and eval."
+    url: "https://github.com/comet-ml/opik"
+    metadata:
+      license: "Apache-2.0"

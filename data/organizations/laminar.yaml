@@ -1,0 +1,22 @@
+slug: laminar
+name: "Laminar"
+kinds: [llmops]
+tagline: "Agent tracing and eval."
+description: "Open-source platform to trace, evaluate, and debug AI agents. Laminar surfaces agent failures, and helps you fix them."
+website: "https://laminar.sh"
+logo_url: /logos/laminar.png
+links:
+  github: "https://github.com/lmnr-ai"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: laminar-engine
+    name: "Laminar"
+    type: oss_project
+    github: lmnr-ai/lmnr
+    tagline: "Agent tracing and eval."
+    url: "https://github.com/lmnr-ai/lmnr"
+    metadata:
+      license: "Apache-2.0"

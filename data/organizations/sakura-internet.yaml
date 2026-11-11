@@ -1,0 +1,9 @@
+slug: sakura-internet
+name: "SAKURA Internet"
+kinds: [gpu_cloud]
+tagline: "Japanese GPU cloud."
+website: "https://sakura.ad.jp"
+logo_url: /logos/sakura-internet.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

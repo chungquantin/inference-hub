@@ -1,0 +1,19 @@
+slug: gptqmodel
+name: "GPTQModel"
+kinds: [open_source]
+tagline: "GPTQ quantization toolkit."
+description: "GPT-QModel, QvQ ultra low bit quants. Contributor to stuff you are probably using like sglang, vllm, transformers, rocm. ucla alum"
+website: "https://x.com/Qubitium"
+logo_url: /logos/gptqmodel.png
+links:
+  github: "https://github.com/ModelCloud"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: gptqmodel-engine
+    name: "GPTQModel"
+    type: oss_project
+    github: ModelCloud/GPTQModel
+    tagline: "GPTQ quantization toolkit."
+    url: "https://github.com/ModelCloud/GPTQModel"

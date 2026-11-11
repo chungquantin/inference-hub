@@ -1,0 +1,9 @@
+slug: stepfun
+name: "StepFun"
+kinds: [hyperscaler, inference_provider]
+tagline: "Step models API."
+website: "https://stepfun.com"
+logo_url: /logos/stepfun.svg
+tagging:
+  aliases: ["Step Fun"]
+  match_case: true

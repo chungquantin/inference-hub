@@ -1,0 +1,170 @@
+Modal	modal.com	Serverless GPU/CPU compute, Python-native	serverless GPU
+Baseten	baseten.co	Production inference platform, dedicated + model APIs	serverless GPU/model API
+RunPod	runpod.io	GPU pods + serverless endpoints	serverless GPU
+Replicate	replicate.com	Model hosting API, image/video/LLM (HF provider)	model API
+fal	fal.ai	Generative media inference (HF provider)	model API
+Beam	beam.cloud	Serverless GPU Python runtime	serverless GPU
+Cerebrium	cerebrium.ai	Serverless GPU infra	serverless GPU
+Koyeb	koyeb.com	Serverless platform with GPUs	serverless GPU
+Lambda	lambda.ai	GPU cloud + Inference API	neocloud
+Vast.ai	vast.ai	GPU rental marketplace	GPU marketplace
+Together AI	together.ai	Model API + GPU clusters (HF, OpenRouter)	model API
+Fireworks AI	fireworks.ai	Fast model API (HF, OpenRouter)	model API
+DeepInfra	deepinfra.com	Cheap model API (HF, OpenRouter)	model API
+Novita AI	novita.ai	Model API + GPU cloud (HF, OpenRouter)	model API
+Hyperbolic	hyperbolic.xyz	Open-access AI cloud, GPU marketplace	model API/decentralized
+Parasail	parasail.io	Model API and on-demand GPUs (OpenRouter)	model API
+Nebius Token Factory	nebius.com	Nebius model API (OpenRouter)	neocloud/model API
+Lepton AI	lepton.ai	AI cloud; acquired by NVIDIA	serverless GPU
+Featherless AI	featherless.ai	Serverless HF-model API (HF, OpenRouter)	model API
+Chutes	chutes.ai	Serverless AI on Bittensor (OpenRouter)	decentralized
+SiliconFlow	siliconflow.com	Chinese model API (OpenRouter)	model API
+Atlas Cloud	atlascloud.ai	Model API (OpenRouter)	model API
+Inference.net	inference.net	Model API (OpenRouter)	model API
+Prime Intellect	primeintellect.ai	Compute + inference (OpenRouter)	model API/decentralized
+Groq	groq.com	LPU inference (HF, OpenRouter)	model API/custom silicon
+Cerebras	cerebras.ai	Wafer-scale inference (HF, OpenRouter)	model API/custom silicon
+SambaNova	sambanova.ai	RDU inference cloud (OpenRouter)	model API/custom silicon
+Friendli	friendli.ai	Inference engine/endpoints (OpenRouter)	model API
+Cohere	cohere.com	Model maker and API (HF, OpenRouter)	model maker
+Mistral	mistral.ai	La Plateforme API	model maker
+Perplexity	perplexity.ai	Sonar API (OpenRouter)	model maker/search
+Amazon Bedrock	aws.amazon.com/bedrock	AWS managed models	hyperscaler
+Google Vertex AI	cloud.google.com/vertex-ai	Google managed models	hyperscaler
+Google AI Studio	aistudio.google.com	Gemini developer API	hyperscaler
+Azure AI Foundry	ai.azure.com	Azure models	hyperscaler
+Oracle OCI Generative AI	oracle.com/artificial-intelligence	OCI hosted models	hyperscaler
+Alibaba Cloud Model Studio	alibabacloud.com	Qwen API (OpenRouter "Alibaba Cloud Int.")	hyperscaler/China
+Volcengine Ark	volcengine.com	ByteDance model API	hyperscaler/China
+Baidu Qianfan	cloud.baidu.com	ERNIE platform (OpenRouter)	hyperscaler/China
+Tencent Cloud	cloud.tencent.com	Hunyuan API (OpenRouter)	hyperscaler/China
+Huawei Cloud ModelArts	huaweicloud.com	Huawei AI platform	hyperscaler/China
+Cloudflare Workers AI	developers.cloudflare.com/workers-ai	Edge GPU inference (OpenRouter)	hyperscaler/edge
+Vercel AI Gateway	vercel.com/ai-gateway	Routed gateway	gateway
+Databricks Mosaic AI	databricks.com	Foundation Model APIs	data platform
+Snowflake Cortex	snowflake.com	In-warehouse LLM functions	data platform
+IBM watsonx.ai	ibm.com/watsonx	IBM model platform	hyperscaler
+DigitalOcean Gradient	digitalocean.com	GenAI serverless inference (OpenRouter)	cloud
+CoreWeave	coreweave.com	GPU neocloud (OpenRouter lists it)	neocloud
+Crusoe	crusoe.ai	Neocloud + managed inference (OpenRouter)	neocloud
+Voltage Park	voltagepark.com	GPU cloud	neocloud
+TensorWave	tensorwave.com	AMD GPU cloud	neocloud
+Vultr	vultr.com	Cloud + GPU + inference	neocloud
+Paperspace	paperspace.com	GPU cloud (DigitalOcean)	neocloud
+Hetzner	hetzner.com	GPU servers	EU cloud
+OVHcloud AI Endpoints	ovhcloud.com	EU AI inference (HF provider)	EU cloud
+Scaleway	scaleway.com	Generative APIs (HF provider)	EU cloud
+Nscale	nscale.com	UK neocloud + inference (HF)	neocloud
+Fluidstack	fluidstack.io	GPU cloud	neocloud
+GMI Cloud	gmicloud.ai	GPU cloud/inference (OpenRouter)	neocloud
+Verda (DataCrunch)	verda.com	Finnish GPU cloud	neocloud
+NexGen Cloud / Hyperstack	hyperstack.cloud	GPU cloud	neocloud
+Northern Data / Taiga	northerndata.de	GPU cloud	neocloud
+IONOS	ionos.com	EU cloud with AI Model Hub	EU cloud
+Outscale	outscale.com	Sovereign cloud	EU cloud
+Aruba	arubacloud.com	Italian cloud GPUs	EU cloud
+Infomaniak	infomaniak.com	Swiss AI Tools	EU cloud
+T-Systems Industrial AI Cloud	t-systems.com	German sovereign AI cloud	EU sovereign
+Swisscom AI Factory	swisscom.ch	Swiss sovereign AI	EU sovereign
+Orange Business	orange-business.com	French sovereign AI	EU sovereign
+Proact IT	proact.eu	Swedish GPU cloud	EU cloud
+Public AI	publicai.co	Public-good inference (HF provider)	nonprofit
+WaveSpeedAI	wavespeed.ai	Image/video inference (HF)	model API
+Z.ai	z.ai	GLM API (HF, OpenRouter)	model maker
+HF Inference	huggingface.co/inference	HF own serverless	model API
+Akash Network	akash.network	Decentralized compute; AkashML (OpenRouter)	decentralized
+io.net	io.net	Decentralized GPU clusters (OpenRouter)	decentralized
+Render Network	rendernetwork.com	Distributed GPU rendering/AI	decentralized
+Gensyn	gensyn.ai	Decentralized training protocol	decentralized
+Bittensor	bittensor.com	Subnet incentive network	decentralized
+Targon (SN4)	targon.com	Bittensor inference subnet	decentralized
+Nosana	nosana.com	Solana GPU inference marketplace	decentralized
+Aethir	aethir.com	Enterprise decentralized GPU cloud	decentralized
+Ritual	ritual.net	On-chain AI coprocessor	decentralized
+NEAR AI	near.ai	Private inference (OpenRouter)	decentralized
+Ambient	ambient.xyz	Proof-of-logits inference chain (OpenRouter)	decentralized
+Darkbloom	?	Listed on OpenRouter; unknown	?
+Gonka	gonka.ai	Decentralized inference network	decentralized
+Cumulus Labs	cumuluslabs.io	Grace/Blackwell inference API	model API
+nCompass	ncompass.tech	LLM API without rate limits	model API
+Wafer	wafer.ai	Agent-optimized inference cloud (OpenRouter)	model API
+Tenstorrent	tenstorrent.com	Inference on own silicon (OpenRouter)	custom silicon
+Venice	venice.ai	Private uncensored API (OpenRouter)	model API
+Mancer	mancer.tech	Uncensored hosting (OpenRouter)	model API
+AionLabs	aionlabs.ai	Model API (OpenRouter)	model API
+Morph	morphllm.com	Code-edit models (OpenRouter)	model API
+Relace	relace.ai	Code models (OpenRouter)	model API
+Upstage	upstage.ai	Solar models API (OpenRouter)	model maker/Korea
+KT	kt.com	Korean telco models (OpenRouter)	regional Korea
+Sakana	sakana.ai	Japanese lab (OpenRouter)	model maker/Japan
+Ionstream	ionstream.ai	GPU inference (OpenRouter)	model API
+Respan	respan.ai	OpenRouter provider	gateway/observability
+Thinking Machines	thinkingmachines.ai	Lab with Tinker API (OpenRouter)	model maker
+Decart	decart.ai	Realtime video models (OpenRouter)	model maker
+MiniMax	minimax.io	Model API	model maker/China
+Moonshot AI	moonshot.ai	Kimi API	model maker/China
+DeepSeek	deepseek.com	DeepSeek API	model maker/China
+StepFun	stepfun.com	Step models API	model maker/China
+SpaceXAI / xAI	x.ai	Grok API (OpenRouter lists "SpaceXAI")	model maker
+NVIDIA NIM	build.nvidia.com	Hosted NIM endpoints (OpenRouter)	model API
+Meta Llama API	llama.developer.meta.com	First-party Llama API	model maker
+OpenAI	openai.com	API	model maker
+Anthropic / Claude Platform on AWS	anthropic.com	API; OpenRouter lists AWS-hosted variant	model maker
+E2E Networks	e2enetworks.com	Indian GPU cloud	regional India
+Yotta (Shakti Cloud)	yotta.com	Indian GPU cloud	regional India
+Sify	sify.com	Indian GPU cloud	regional India
+Tata Communications / TCS SuperCompute	tatacommunications.com	Indian sovereign AI	regional India
+Sarvam AI	sarvam.ai	Indian LLM API	regional India
+SAKURA Internet	sakura.ad.jp	Japanese GPU cloud	regional Japan
+GMO GPU Cloud	gmo.jp	Japanese GPU	regional Japan
+Samsung SDS Cloud Platform	samsungsds.com	Korean GPU cloud	regional Korea
+SK Telecom GPUaaS	sktelecom.com	Korean GPU cloud	regional Korea
+Core42 / G42	core42.ai	UAE sovereign AI cloud	regional Middle East
+Ooredoo	ooredoo.com	Qatar AI cloud	regional Middle East
+Humain	humain.ai	Saudi AI company	regional Middle East
+Claro Brasil	claro.com.br	Brazil sovereign AI cloud	regional LatAm
+Firmus / SMC	firmus.co	Australian AI cloud	regional APAC
+IREN	iren.com	Australian AI cloud	neocloud
+Sharon AI	sharonai.com	Australian GPU cloud	neocloud
+Singtel RE:AI	singtel.com	Singapore GPUaaS	regional APAC
+Viettel	viettel.com.vn	Vietnam AI cloud	regional APAC
+Lintasarta GPU Merdeka	lintasarta.net	Indonesia GPU cloud	regional APAC
+Kingsoft Cloud	ksyun.com	China GPU cloud	China
+TELUS	telus.com	Canada sovereign AI	regional Canada
+Bit Digital / WhiteFiber	whitefiber.com	AI cloud from miner	neocloud
+Hut 8	hut8.com	Miner pivoting to AI	neocloud
+HIVE Digital	hivedigitaltechnologies.com	Miner pivoting to AI	neocloud
+Bitdeer	bitdeer.com	Singapore miner AI cloud	neocloud
+Rackspace	rackspace.com	GPU cloud	cloud
+Liquid Web	liquidweb.com	GPU hosting	cloud
+QumulusAI	qumulusai.com	GPU cloud	neocloud
+Soluna	solunacomputing.com	GPU cloud	neocloud
+SF Compute	sfcompute.com	GPU spot market	GPU marketplace
+Shadeform	shadeform.ai	GPU marketplace aggregator	GPU marketplace
+TensorDock	tensordock.com	GPU marketplace	GPU marketplace
+Salad	salad.com	Distributed consumer GPUs	GPU marketplace
+Thunder Compute	thundercompute.com	Cheap cloud GPUs	GPU cloud
+Latitude.sh	latitude.sh	Bare-metal GPU	neocloud
+Cirrascale	cirrascale.com	AI cloud, inference platform	neocloud
+Denvr Dataworks	denvrdata.com	GPU cloud	neocloud
+Genesis Cloud	genesiscloud.com	EU GPU cloud	neocloud
+Civo	civo.com	Cloud with GPUs	cloud
+Linode / Akamai Cloud	akamai.com	GPU cloud	cloud
+Leaseweb	leaseweb.com	Dedicated GPU servers	EU cloud
+Exoscale	exoscale.com	Swiss GPU cloud	EU cloud
+Anyscale	anyscale.com	Ray platform, Endpoints	serverless GPU
+OctoAI	octo.ai	Acquired by NVIDIA 2024	model API (defunct)
+Lamini	lamini.ai	Fine-tune/inference	model API
+Predibase	predibase.com	LoRA serving; acquired by Rubrik 2025	model API
+Banana.dev	banana.dev	Serverless GPU; shut down 2024	serverless GPU
+Mystic AI	mystic.ai	Serverless GPU	serverless GPU
+Mosaic / Lightning AI	lightning.ai	GPU studios + inference	GPU cloud
+OpenPipe	openpipe.ai	Fine-tune/host; acquired by CoreWeave	model API
+Unsloth/Nous Portal	portal.nousresearch.com	Nous Research API	model maker
+Liquid AI	liquid.ai	LFM API (OpenRouter)	model maker
+Reka AI	reka.ai	Models API (OpenRouter)	model maker
+Black Forest Labs	bfl.ai	FLUX API (OpenRouter)	model maker
+Runway	runwayml.com	Video API (OpenRouter)	model maker
+ElevenLabs	elevenlabs.io	Voice API (OpenRouter)	model maker
+Deepgram	deepgram.com	Speech API (OpenRouter)	model maker
+AssemblyAI	assemblyai.com	Speech API (OpenRouter)	model maker

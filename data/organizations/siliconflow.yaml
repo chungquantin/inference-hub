@@ -1,0 +1,9 @@
+slug: siliconflow
+name: "SiliconFlow"
+kinds: [inference_provider]
+tagline: "Chinese model API."
+description: "Lightning-fast AI platform for developers. Deploy, fine-tune, and run 200+ optimized LLMs and multimodal models with simple APIs - SiliconFlow."
+website: "https://siliconflow.com"
+logo_url: /logos/siliconflow.png
+tagging:
+  match_case: true

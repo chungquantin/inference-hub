@@ -1,0 +1,11 @@
+slug: lepton-ai
+name: "Lepton AI"
+kinds: [inference_provider]
+tagline: "AI cloud."
+description: "NVIDIA DGX Cloud Lepton connects developers to a global network of GPU compute, across multiple cloud providers, through a single platform."
+website: "https://lepton.ai"
+logo_url: /logos/lepton-ai.png
+status: acquired
+categories: [serverless-gpu]
+tagging:
+  match_case: true

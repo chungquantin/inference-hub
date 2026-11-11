@@ -1,0 +1,20 @@
+slug: stable-diffusion-cpp
+name: "stable-diffusion.cpp"
+kinds: [open_source]
+tagline: "Diffusion inference in C/C++."
+description: "Diffusion model(SD,Flux,Wan,Qwen Image,Z-Image,Minimax H3,...) inference in pure C/C++"
+website: "https://github.com/leejet/stable-diffusion.cpp"
+links:
+  github: "https://github.com/leejet"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: stable-diffusion-cpp-engine
+    name: "stable-diffusion.cpp"
+    type: oss_project
+    github: leejet/stable-diffusion.cpp
+    tagline: "Diffusion inference in C/C++."
+    url: "https://github.com/leejet/stable-diffusion.cpp"
+    metadata:
+      license: "MIT"

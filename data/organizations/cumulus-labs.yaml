@@ -1,0 +1,10 @@
+slug: cumulus-labs
+name: "Cumulus Labs"
+kinds: [inference_provider]
+tagline: "Grace/Blackwell inference API."
+description: "GPU orchestration, model inference, and an agent platform. Adopt Paladin, Ion, or Talos independently, or connect the full Cumulus stack."
+website: "https://cumuluslabs.io"
+logo_url: /logos/cumulus-labs.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: sk-telecom
+name: "SK Telecom"
+kinds: [gpu_cloud]
+tagline: "Korean GPU cloud."
+website: "https://sktelecom.com"
+logo_url: /logos/sk-telecom.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

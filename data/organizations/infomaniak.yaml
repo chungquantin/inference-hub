@@ -1,0 +1,10 @@
+slug: infomaniak
+name: "Infomaniak"
+kinds: [gpu_cloud]
+tagline: "Swiss AI Tools."
+description: "Maîtrisez la gouvernance de vos données avec un cloud indépendant. Des solutions hébergées au cœur de l’Europe, conçues pour protéger votre confidentialité."
+website: "https://infomaniak.com"
+logo_url: /logos/infomaniak.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

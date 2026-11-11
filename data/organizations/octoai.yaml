@@ -1,0 +1,9 @@
+slug: octoai
+name: "OctoAI"
+kinds: [inference_provider]
+description: "NVIDIA invents the GPU and drives advances in AI, HPC, gaming, creative design, autonomous vehicles, and robotics."
+website: "https://octo.ai"
+logo_url: /logos/octoai.png
+status: acquired
+tagging:
+  match_case: true

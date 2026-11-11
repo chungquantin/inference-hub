@@ -1,0 +1,12 @@
+slug: lunary
+name: "Lunary"
+kinds: [llmops]
+tagline: "LLM observability and prompts."
+website: "https://github.com/lunary-ai/lunary"
+logo_url: /logos/lunary.png
+links:
+  github: "https://github.com/lunary-ai"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false

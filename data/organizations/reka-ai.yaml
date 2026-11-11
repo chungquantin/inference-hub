@@ -1,0 +1,9 @@
+slug: reka-ai
+name: "Reka AI"
+kinds: [model_provider]
+tagline: "Models API."
+description: "Reka AI builds natively multimodal models (Spark, Edge, Flash, Core) for video, image, audio, and text. Used by enterprises in security, media, and defense."
+website: "https://reka.ai"
+logo_url: /logos/reka-ai.jpg
+tagging:
+  match_case: true

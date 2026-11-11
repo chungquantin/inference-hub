@@ -1,0 +1,25 @@
+slug: anyscale
+name: "Anyscale"
+kinds: [inference_provider]
+tagline: "Ray platform, Endpoints."
+description: "Powered by Ray, Anyscale helps AI builders run data-intensive workloads to build and deploy Foundation Models and AI at scale on any cloud."
+website: "https://anyscale.com"
+logo_url: /logos/anyscale.png
+categories: [serverless-gpu]
+tagging:
+  aliases: ["Ray Serve"]
+  match_case: true
+products:
+  - slug: ray-serve
+    name: "Ray Serve"
+    type: oss_project
+    tagline: "Scalable model serving on Ray."
+    url: "https://docs.ray.io/en/latest/serve/"
+  - slug: llmperf
+    name: "LLMPerf"
+    type: oss_project
+    github: ray-project/llmperf
+    tagline: "Ray LLM API benchmark."
+    url: "https://github.com/ray-project/llmperf"
+    metadata:
+      license: "Apache-2.0"

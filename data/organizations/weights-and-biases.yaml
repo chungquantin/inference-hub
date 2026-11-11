@@ -1,0 +1,12 @@
+slug: weights-and-biases
+name: "Weights & Biases"
+kinds: [llmops]
+tagline: "Tracing and eval from Weights & Biases."
+website: "https://wandb.ai/site/weave"
+logo_url: /logos/weights-and-biases.png
+links:
+  github: "https://github.com/wandb"
+categories: [observability]
+tagging:
+  aliases: ["W&B", "Weave"]
+  match_case: true

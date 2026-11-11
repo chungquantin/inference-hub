@@ -1,0 +1,10 @@
+slug: galileo
+name: "Galileo"
+kinds: [llmops]
+tagline: "Eval and observability."
+website: "https://www.galileo.ai"
+logo_url: /logos/galileo.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false

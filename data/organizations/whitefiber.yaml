@@ -1,0 +1,10 @@
+slug: whitefiber
+name: "WhiteFiber"
+kinds: [gpu_cloud]
+tagline: "AI cloud from miner."
+description: "High-performance Infrastructure solutions for AI/ML."
+website: "https://whitefiber.com"
+logo_url: /logos/whitefiber.png
+tagging:
+  aliases: ["Bit Digital"]
+  match_case: true

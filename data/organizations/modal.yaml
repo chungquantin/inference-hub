@@ -1,0 +1,12 @@
+slug: modal
+name: "Modal"
+kinds: [inference_provider]
+tagline: "Serverless GPU/CPU compute, Python-native."
+description: "Cloud infrastructure for teams that develop, train, and serve AI applications at scale."
+website: "https://modal.com"
+logo_url: /logos/modal.svg
+categories: [serverless-gpu]
+tagging:
+  aliases: ["Modal Labs"]
+  match_case: true
+  match_name: false

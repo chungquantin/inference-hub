@@ -1,0 +1,20 @@
+slug: llama-swap
+name: "llama-swap"
+kinds: [llm_gateway]
+tagline: "Model-swapping proxy for local servers."
+description: "llama-swap runs many local AI models behind one OpenAI and Anthropic compatible API, starting and stopping inference servers on demand."
+website: "https://llama-swap.ai"
+logo_url: /logos/llama-swap.png
+links:
+  github: "https://github.com/mostlygeek"
+tagging:
+  match_case: true
+products:
+  - slug: llama-swap-engine
+    name: "llama-swap"
+    type: oss_project
+    github: mostlygeek/llama-swap
+    tagline: "Model-swapping proxy for local servers."
+    url: "https://github.com/mostlygeek/llama-swap"
+    metadata:
+      license: "MIT"

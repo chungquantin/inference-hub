@@ -1,0 +1,9 @@
+slug: e2e-networks
+name: "E2E Networks"
+kinds: [gpu_cloud]
+tagline: "Indian GPU cloud."
+description: "India's leading cloud infrastructure provider, offering high-performance GPU computing, enterprise cloud solutions, and managed services for AI and ML workloads."
+website: "https://e2enetworks.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

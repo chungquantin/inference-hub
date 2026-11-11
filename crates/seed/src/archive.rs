@@ -20,6 +20,12 @@ use ih_db::{
     sqlx::{self, AssertSqlSafe},
 };
 
+/// Rows that contain something shaped like an access token are left out of the
+/// archive. Providers list user-named models, and a name can be a pasted token
+/// (a Hugging Face repository called `hf_...` was one), which must not be
+/// republished in a repository. Postgres regular expression.
+const TOKEN_SHAPED: &str = r"hf_[A-Za-z0-9]{30,}|gh[pousr]_[A-Za-z0-9]{30,}|sk-[A-Za-z0-9_-]{32,}|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}";
+
 /// A table of fetched data and how its references map to natural keys.
 struct Table {
     name: &'static str,
@@ -173,7 +179,7 @@ impl Table {
         format!(
             "SELECT line::text FROM (
                  SELECT (to_jsonb(t){minus}){extra} AS line FROM {} t{joins}
-             ) x ORDER BY {}",
+             ) x WHERE line::text !~ '{TOKEN_SHAPED}' ORDER BY {}",
             self.name,
             self.order
                 .split(", ")

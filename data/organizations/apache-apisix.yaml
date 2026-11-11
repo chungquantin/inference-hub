@@ -1,0 +1,10 @@
+slug: apache-apisix
+name: "Apache APISIX"
+kinds: [llm_gateway]
+tagline: "API gateway with AI proxy plugins."
+description: "Apache APISIX is a dynamic, high-performance, open-source API gateway and AI gateway. Features include load balancing, authentication, rate limiting, AI proxying, LLM load balancing, and 100+ plugins."
+website: "https://apisix.apache.org"
+logo_url: /logos/apache-apisix.png
+tagging:
+  aliases: ["APISIX"]
+  match_case: true

@@ -1,0 +1,10 @@
+slug: portkey
+name: "Portkey"
+kinds: [llm_gateway]
+tagline: "AI gateway and control plane; Palo Alto Networks deal 2026."
+description: "Democratize and productionize Gen AI across your entire org with Portkey"
+website: "https://portkey.ai"
+logo_url: /logos/portkey.png
+status: acquired
+tagging:
+  match_case: true

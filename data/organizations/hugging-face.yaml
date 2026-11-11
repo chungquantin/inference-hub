@@ -21,3 +21,19 @@ products:
     github: huggingface/text-generation-inference
     tagline: Toolkit for serving large language models.
     url: https://github.com/huggingface/text-generation-inference
+  - slug: text-embeddings-inference
+    name: "Text Embeddings Inference"
+    type: oss_project
+    github: huggingface/text-embeddings-inference
+    tagline: "HF embedding/reranker server."
+    url: "https://github.com/huggingface/text-embeddings-inference"
+    metadata:
+      license: "Apache-2.0"
+  - slug: candle
+    name: "Candle"
+    type: oss_project
+    github: huggingface/candle
+    tagline: "Rust ML framework with LLM examples."
+    url: "https://github.com/huggingface/candle"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,19 @@
+slug: arize-ai
+name: "Arize AI"
+kinds: [llmops]
+tagline: "Observability and eval."
+website: "https://arize.com/docs/phoenix"
+logo_url: /logos/arize-ai.jpg
+links:
+  github: "https://github.com/Arize-ai"
+categories: [observability]
+tagging:
+  aliases: ["Arize Phoenix"]
+  match_case: true
+products:
+  - slug: arize-ax-phoenix
+    name: "Arize AX / Phoenix"
+    type: oss_project
+    github: Arize-ai/phoenix
+    tagline: "Observability and eval."
+    url: "https://github.com/Arize-ai/phoenix"

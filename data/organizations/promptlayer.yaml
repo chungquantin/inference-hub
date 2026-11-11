@@ -1,0 +1,10 @@
+slug: promptlayer
+name: "PromptLayer"
+kinds: [llmops]
+tagline: "Prompt management and logging."
+description: "PromptLayer is the prompt management platform for AI teams. Version prompts, run LLM evals, and monitor agents in production with tracing, logs, and regression sets."
+website: "https://www.promptlayer.com"
+logo_url: /logos/promptlayer.png
+categories: [observability]
+tagging:
+  match_case: true

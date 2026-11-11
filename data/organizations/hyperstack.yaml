@@ -1,0 +1,10 @@
+slug: hyperstack
+name: "Hyperstack"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "Run AI/ML workloads in minutes with Hyperstack’s on-demand cloud GPU solutions. Get optimal performance, transparent pricing and developer-friendly tools."
+website: "https://hyperstack.cloud"
+logo_url: /logos/hyperstack.webp
+tagging:
+  aliases: ["NexGen Cloud"]
+  match_case: true

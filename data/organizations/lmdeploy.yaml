@@ -1,0 +1,21 @@
+slug: lmdeploy
+name: "LMDeploy"
+kinds: [open_source]
+tagline: "Compression and serving toolkit (TurboMind)."
+description: "LMDeploy is a toolkit for compressing, deploying, and serving LLMs."
+website: "https://lmdeploy.readthedocs.io/en/latest"
+logo_url: /logos/lmdeploy.png
+links:
+  github: "https://github.com/InternLM"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: lmdeploy-engine
+    name: "LMDeploy"
+    type: oss_project
+    github: InternLM/lmdeploy
+    tagline: "Compression and serving toolkit (TurboMind)."
+    url: "https://github.com/InternLM/lmdeploy"
+    metadata:
+      license: "Apache-2.0"

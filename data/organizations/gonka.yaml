@@ -1,0 +1,9 @@
+slug: gonka
+name: "Gonka"
+kinds: [decentralized]
+tagline: "Decentralized inference network."
+description: "Learn to configure and use Gonka network"
+website: "https://gonka.ai"
+logo_url: /logos/gonka.png
+tagging:
+  match_case: true

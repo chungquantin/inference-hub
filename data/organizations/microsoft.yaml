@@ -8,3 +8,12 @@ hq_country: US
 founded_year: 1975
 tagging:
   aliases: [Azure, Azure AI Foundry]
+products:
+  - slug: onnx-runtime-genai
+    name: "ONNX Runtime GenAI"
+    type: oss_project
+    github: microsoft/onnxruntime-genai
+    tagline: "Generative AI loop for ONNX Runtime."
+    url: "https://github.com/microsoft/onnxruntime-genai"
+    metadata:
+      license: "MIT"

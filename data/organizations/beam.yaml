@@ -1,0 +1,12 @@
+slug: beam
+name: "Beam"
+kinds: [inference_provider]
+tagline: "Serverless GPU Python runtime."
+description: "Compute for agents. Bare-metal servers around the world as VMs, sandboxes, task queues, functions and endpoints, billed only while your code runs."
+website: "https://beam.cloud"
+logo_url: /logos/beam.png
+categories: [serverless-gpu]
+tagging:
+  aliases: ["Beam Cloud"]
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: outscale
+name: "Outscale"
+kinds: [gpu_cloud]
+tagline: "Sovereign cloud."
+website: "https://outscale.com"
+logo_url: /logos/outscale.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

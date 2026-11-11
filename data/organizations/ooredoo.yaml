@@ -1,0 +1,8 @@
+slug: ooredoo
+name: "Ooredoo"
+kinds: [gpu_cloud]
+tagline: "Qatar AI cloud."
+website: "https://ooredoo.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

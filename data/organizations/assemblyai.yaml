@@ -1,0 +1,8 @@
+slug: assemblyai
+name: "AssemblyAI"
+kinds: [model_provider]
+tagline: "Speech API."
+website: "https://assemblyai.com"
+logo_url: /logos/assemblyai.png
+tagging:
+  match_case: true

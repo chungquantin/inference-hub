@@ -1,0 +1,10 @@
+slug: nous-research
+name: "Nous Research"
+kinds: [model_provider]
+tagline: "Nous Research API."
+description: "Nous Portal — one account for Hermes Agent, the Inference API, and Hermes Cloud. Hundreds of models, tools included, free to start."
+website: "https://portal.nousresearch.com"
+logo_url: /logos/nous-research.png
+tagging:
+  aliases: ["Nous Portal"]
+  match_case: true

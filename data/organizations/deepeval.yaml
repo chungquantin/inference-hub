@@ -1,0 +1,21 @@
+slug: deepeval
+name: "DeepEval"
+kinds: [llmops]
+tagline: "LLM eval framework."
+description: "DeepEval is the open-source LLM evaluation framework for testing and benchmarking LLM applications — 50+ plug-and-play metrics for AI agents, voice AI, multi-turn chatbots, RAG, and more."
+website: "https://deepeval.com"
+logo_url: /logos/deepeval.png
+links:
+  github: "https://github.com/confident-ai"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+products:
+  - slug: deepeval-engine
+    name: "DeepEval"
+    type: oss_project
+    github: confident-ai/deepeval
+    tagline: "LLM eval framework."
+    url: "https://github.com/confident-ai/deepeval"
+    metadata:
+      license: "Apache-2.0"

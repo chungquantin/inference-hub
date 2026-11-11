@@ -1,0 +1,10 @@
+slug: sharon-ai
+name: "Sharon AI"
+kinds: [gpu_cloud]
+tagline: "Australian GPU cloud."
+description: "Sharon AI, Inc., Australia’s leading Neocloud, is a High-Performance Computing company focused on Artificial Intelligence and Cloud GPU Compute Infrastructure."
+website: "https://sharonai.com"
+logo_url: /logos/sharon-ai.png
+tagging:
+  match_case: true
+  match_name: false

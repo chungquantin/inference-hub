@@ -1,0 +1,21 @@
+slug: flexflow-serve
+name: "FlexFlow Serve"
+kinds: [open_source]
+tagline: "Speculative-inference serving system."
+description: "Automatically Discovering Fast Parallelization Strategies for Distributed Deep Neural Network Training"
+website: "https://flexflow.ai"
+logo_url: /logos/flexflow-serve.png
+links:
+  github: "https://github.com/flexflow"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: flexflow-serve-engine
+    name: "FlexFlow Serve"
+    type: oss_project
+    github: flexflow/flexflow-train
+    tagline: "Speculative-inference serving system."
+    url: "https://github.com/flexflow/FlexFlow"
+    metadata:
+      license: "Apache-2.0"

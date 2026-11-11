@@ -1,0 +1,10 @@
+slug: baseten
+name: "Baseten"
+kinds: [inference_provider]
+tagline: "Production inference platform, dedicated + model APIs."
+description: "Train, serve, and scale open-source and custom AI models on the fastest, most reliable inference platform."
+website: "https://baseten.co"
+logo_url: /logos/baseten.png
+categories: [serverless-gpu]
+tagging:
+  match_case: true

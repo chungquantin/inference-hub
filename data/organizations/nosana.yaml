@@ -1,0 +1,9 @@
+slug: nosana
+name: "Nosana"
+kinds: [decentralized]
+tagline: "Solana GPU inference marketplace."
+description: "Rent GPUs on demand for AI and high-performance workloads. Nosana lets you run workloads instantly or earn by sharing your GPU with flexible pricing."
+website: "https://nosana.com"
+logo_url: /logos/nosana.png
+tagging:
+  match_case: true

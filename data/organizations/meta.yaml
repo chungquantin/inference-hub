@@ -96,3 +96,9 @@ products:
         output: 0.08
         source_url: https://groq.com/pricing/
         observed_on: 2024-11-01
+  - slug: purplellama
+    name: "PurpleLlama"
+    type: oss_project
+    github: meta-llama/PurpleLlama
+    tagline: "Meta safety classifiers."
+    url: "https://github.com/meta-llama/PurpleLlama"

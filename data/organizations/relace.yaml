@@ -1,0 +1,10 @@
+slug: relace
+name: "Relace"
+kinds: [inference_provider]
+tagline: "Code models."
+description: "Open model inference. Trillions of tokens a day, #1 on OpenRouter."
+website: "https://relace.ai"
+logo_url: /logos/relace.svg
+tagging:
+  match_case: true
+  match_name: false

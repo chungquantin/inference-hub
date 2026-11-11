@@ -1,0 +1,23 @@
+slug: modular
+name: "Modular"
+kinds: [open_source]
+logo_url: /logos/modular.png
+links:
+  github: "https://github.com/modular"
+categories: [inference-engines]
+tagging:
+  aliases: ["Modular Inc", "Mojo"]
+  match_case: true
+  match_name: false
+products:
+  - slug: modular-max
+    name: "Modular MAX"
+    type: oss_project
+    tagline: "Mojo-based inference engine and framework, multi-silicon."
+    url: "https://www.modular.com/max"
+  - slug: max-mojo-kernels-modular-platform
+    name: "MAX / Mojo kernels (Modular platform)"
+    type: oss_project
+    github: modular/modular
+    tagline: "Open repository of MAX and Mojo."
+    url: "https://github.com/modular/modular"

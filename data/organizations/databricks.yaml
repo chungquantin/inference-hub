@@ -1,0 +1,10 @@
+slug: databricks
+name: "Databricks"
+kinds: [inference_provider]
+tagline: "Foundation Model APIs."
+description: "Databricks offers a unified platform for data, analytics and AI. Build better AI with a data-centric approach. Simplify ETL, data warehousing, governance and AI on the Data + AI Platform."
+website: "https://databricks.com"
+logo_url: /logos/databricks.png
+tagging:
+  aliases: ["Mosaic AI"]
+  match_case: true

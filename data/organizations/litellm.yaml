@@ -1,0 +1,18 @@
+slug: litellm
+name: "LiteLLM"
+kinds: [llm_gateway]
+tagline: "OpenAI-format proxy and SDK across 100+ providers."
+description: "The fastest, litest AI Gateway. Rust core with Python SDK. Call 100+ LLM APIs in OpenAI (or native) format with cost tracking, guardrails, load balancing, and logging [Bedrock, Azure, OpenAI, Anthropic, OpenAI, VertexAI, vLLM, Nvidia NIM]"
+website: "https://docs.litellm.ai/docs/"
+logo_url: /logos/litellm.png
+links:
+  github: "https://github.com/BerriAI"
+tagging:
+  match_case: true
+products:
+  - slug: litellm-engine
+    name: "LiteLLM"
+    type: oss_project
+    github: BerriAI/litellm
+    tagline: "OpenAI-format proxy and SDK across 100+ providers."
+    url: "https://github.com/BerriAI/litellm"

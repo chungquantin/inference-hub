@@ -1,0 +1,10 @@
+slug: unify
+name: "Unify"
+kinds: [llm_gateway]
+tagline: "Router and benchmark over endpoints."
+description: "Models that keep learning. Every user interaction trains the model driving your agent: quality keeps climbing, latency and cost keep falling, and you own the flywheel."
+website: "https://unify.ai"
+logo_url: /logos/unify.png
+tagging:
+  match_case: true
+  match_name: false

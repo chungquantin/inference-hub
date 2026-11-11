@@ -1,0 +1,8 @@
+slug: telus
+name: "TELUS"
+kinds: [gpu_cloud]
+tagline: "Canada sovereign AI."
+website: "https://telus.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

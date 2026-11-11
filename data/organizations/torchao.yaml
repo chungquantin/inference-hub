@@ -1,0 +1,19 @@
+slug: torchao
+name: "TorchAO"
+kinds: [open_source]
+tagline: "PyTorch quantization and sparsity."
+description: "PyTorch-Native Training-to-Serving Model Optimization: Pre-train Llama-3.1-70B 1.5x faster with float8 training, Recover 67% of quantized accuracy degradation on Gemma3-4B with QAT, Quantize Llama-..."
+website: "https://pytorch.org/ao/stable/index.html"
+logo_url: /logos/torchao.jpg
+links:
+  github: "https://github.com/pytorch"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: torchao-engine
+    name: "TorchAO"
+    type: oss_project
+    github: pytorch/ao
+    tagline: "PyTorch quantization and sparsity."
+    url: "https://github.com/pytorch/ao"

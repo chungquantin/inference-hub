@@ -1,0 +1,10 @@
+slug: ambient
+name: "Ambient"
+kinds: [decentralized]
+tagline: "Proof-of-logits inference chain."
+description: "Ambient is a decentralized inference network secured by Proof of Logits. Run top open models like GLM 5.2 through OpenAI- and Anthropic-compatible APIs, with cryptographic proof of exactly which model ran - private by default, no fee for verification."
+website: "https://ambient.xyz"
+logo_url: /logos/ambient.png
+tagging:
+  match_case: true
+  match_name: false

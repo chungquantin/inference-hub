@@ -1,0 +1,22 @@
+slug: traceloop
+name: "Traceloop"
+kinds: [llmops]
+tagline: "OTel instrumentation for LLMs."
+description: "Open-source observability for your GenAI or LLM application, based on OpenTelemetry"
+website: "https://www.traceloop.com/openllmetry"
+logo_url: /logos/traceloop.jpg
+links:
+  github: "https://github.com/traceloop"
+categories: [observability]
+tagging:
+  aliases: ["OpenLLMetry"]
+  match_case: true
+products:
+  - slug: openllmetry-traceloop
+    name: "OpenLLMetry (Traceloop)"
+    type: oss_project
+    github: traceloop/openllmetry
+    tagline: "OTel instrumentation for LLMs."
+    url: "https://github.com/traceloop/openllmetry"
+    metadata:
+      license: "Apache-2.0"

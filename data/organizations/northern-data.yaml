@@ -1,0 +1,10 @@
+slug: northern-data
+name: "Northern Data"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "Sovereign AI and high‑performance compute infrastructure. Secure, efficient and compliant platforms to run next‑gen workloads at scale."
+website: "https://northerndata.de"
+logo_url: /logos/northern-data.svg
+tagging:
+  aliases: ["Taiga Cloud"]
+  match_case: true

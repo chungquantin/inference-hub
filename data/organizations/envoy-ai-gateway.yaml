@@ -1,0 +1,9 @@
+slug: envoy-ai-gateway
+name: "Envoy AI Gateway"
+kinds: [llm_gateway]
+tagline: "Envoy-based AI gateway."
+description: "The open source control plane for agentic traffic, powered by Envoy. Formerly Envoy AI Gateway."
+website: "https://aigateway.envoyproxy.io"
+logo_url: /logos/envoy-ai-gateway.svg
+tagging:
+  match_case: true

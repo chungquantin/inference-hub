@@ -1,0 +1,2101 @@
+{
+ "skipped": [
+  {
+   "name": "Lamini",
+   "why": "site does not resolve (DNS failure)"
+  },
+  {
+   "name": "Mystic AI",
+   "why": "site does not resolve (DNS failure)"
+  },
+  {
+   "name": "Nexa SDK",
+   "why": "the repository moved to qualcomm/GenieX and the product is now called GenieX; the list's entry is out of date"
+  },
+  {
+   "name": "prima.cpp",
+   "why": "GitHub repo Lizonghang/prima.cpp returns 404; only unrelated forks remain"
+  }
+ ],
+ "merged": [
+  {
+   "name": "RunPod",
+   "into": "runpod"
+  },
+  {
+   "name": "Lambda",
+   "into": "lambda"
+  },
+  {
+   "name": "Vast.ai",
+   "into": "vast-ai"
+  },
+  {
+   "name": "Together AI",
+   "into": "together-ai"
+  },
+  {
+   "name": "Fireworks AI",
+   "into": "fireworks-ai"
+  },
+  {
+   "name": "DeepInfra",
+   "into": "deepinfra"
+  },
+  {
+   "name": "Novita AI",
+   "into": "novita-ai"
+  },
+  {
+   "name": "Hyperbolic",
+   "into": "hyperbolic"
+  },
+  {
+   "name": "Featherless AI",
+   "into": "featherless"
+  },
+  {
+   "name": "Chutes",
+   "into": "chutes"
+  },
+  {
+   "name": "Atlas Cloud",
+   "into": "atlas-cloud"
+  },
+  {
+   "name": "Inference.net",
+   "into": "inference-net"
+  },
+  {
+   "name": "Groq",
+   "into": "groq"
+  },
+  {
+   "name": "Cerebras",
+   "into": "cerebras"
+  },
+  {
+   "name": "SambaNova",
+   "into": "sambanova"
+  },
+  {
+   "name": "Mistral",
+   "into": "mistral-ai"
+  },
+  {
+   "name": "Amazon Bedrock",
+   "into": "aws"
+  },
+  {
+   "name": "Google Vertex AI",
+   "into": "google"
+  },
+  {
+   "name": "Google AI Studio",
+   "into": "google"
+  },
+  {
+   "name": "Azure AI Foundry",
+   "into": "microsoft"
+  },
+  {
+   "name": "Oracle OCI Generative AI",
+   "into": "oracle"
+  },
+  {
+   "name": "Vercel AI Gateway",
+   "into": "vercel"
+  },
+  {
+   "name": "CoreWeave",
+   "into": "coreweave"
+  },
+  {
+   "name": "Vultr",
+   "into": "vultr"
+  },
+  {
+   "name": "Verda (DataCrunch)",
+   "into": "verda"
+  },
+  {
+   "name": "HF Inference",
+   "into": "hugging-face"
+  },
+  {
+   "name": "Akash Network",
+   "into": "akash-network"
+  },
+  {
+   "name": "io.net",
+   "into": "io-net"
+  },
+  {
+   "name": "Venice",
+   "into": "venice"
+  },
+  {
+   "name": "DeepSeek",
+   "into": "deepseek"
+  },
+  {
+   "name": "NVIDIA NIM",
+   "into": "nvidia"
+  },
+  {
+   "name": "Meta Llama API",
+   "into": "meta"
+  },
+  {
+   "name": "OpenAI",
+   "into": "openai"
+  },
+  {
+   "name": "Anthropic / Claude Platform on AWS",
+   "into": "anthropic"
+  },
+  {
+   "name": "Shadeform",
+   "into": "shadeform"
+  },
+  {
+   "name": "Linode / Akamai Cloud",
+   "into": "akamai"
+  },
+  {
+   "name": "vLLM",
+   "into": "vllm"
+  },
+  {
+   "name": "SGLang",
+   "into": "sglang"
+  },
+  {
+   "name": "TensorRT-LLM",
+   "into": "nvidia"
+  },
+  {
+   "name": "llama.cpp",
+   "into": "ggml"
+  },
+  {
+   "name": "Ollama",
+   "into": "ollama"
+  },
+  {
+   "name": "TGI",
+   "into": "hugging-face"
+  },
+  {
+   "name": "OpenRouter",
+   "into": "openrouter"
+  },
+  {
+   "name": "Requesty",
+   "into": "requesty"
+  },
+  {
+   "name": "Azure API Management AI gateway",
+   "into": "microsoft"
+  }
+ ],
+ "products": [
+  {
+   "name": "Modular MAX",
+   "parent": "modular"
+  },
+  {
+   "name": "NVIDIA Dynamo",
+   "parent": "nvidia"
+  },
+  {
+   "name": "Mooncake",
+   "parent": "kvcache-ai"
+  },
+  {
+   "name": "KTransformers",
+   "parent": "kvcache-ai"
+  },
+  {
+   "name": "Ray Serve",
+   "parent": "anyscale"
+  },
+  {
+   "name": "BentoML",
+   "parent": "bentoml"
+  },
+  {
+   "name": "Triton Inference Server",
+   "parent": "nvidia"
+  },
+  {
+   "name": "OpenLLM",
+   "parent": "bentoml"
+  },
+  {
+   "name": "Jan",
+   "parent": "jan"
+  },
+  {
+   "name": "AIBrix",
+   "parent": "vllm"
+  },
+  {
+   "name": "vLLM production-stack",
+   "parent": "vllm"
+  },
+  {
+   "name": "vLLM Semantic Router",
+   "parent": "vllm"
+  },
+  {
+   "name": "Text Embeddings Inference",
+   "parent": "hugging-face"
+  },
+  {
+   "name": "MLC LLM",
+   "parent": "mlc-ai"
+  },
+  {
+   "name": "ONNX Runtime GenAI",
+   "parent": "microsoft"
+  },
+  {
+   "name": "MAX / Mojo kernels (Modular platform)",
+   "parent": "modular"
+  },
+  {
+   "name": "Candle",
+   "parent": "hugging-face"
+  },
+  {
+   "name": "whisper.cpp",
+   "parent": "ggml"
+  },
+  {
+   "name": "Cortex",
+   "parent": "jan"
+  },
+  {
+   "name": "LLM Compressor",
+   "parent": "vllm"
+  },
+  {
+   "name": "SpecForge",
+   "parent": "sglang"
+  },
+  {
+   "name": "NVIDIA TensorRT Model Optimizer",
+   "parent": "nvidia"
+  },
+  {
+   "name": "NIXL",
+   "parent": "nvidia"
+  },
+  {
+   "name": "XGrammar",
+   "parent": "mlc-ai"
+  },
+  {
+   "name": "OpenAI Evals",
+   "parent": "openai"
+  },
+  {
+   "name": "NeMo Guardrails",
+   "parent": "nvidia"
+  },
+  {
+   "name": "PurpleLlama",
+   "parent": "meta"
+  },
+  {
+   "name": "GuideLLM",
+   "parent": "vllm"
+  },
+  {
+   "name": "LLMPerf",
+   "parent": "anyscale"
+  },
+  {
+   "name": "AIPerf",
+   "parent": "nvidia"
+  },
+  {
+   "name": "Cog",
+   "parent": "replicate"
+  },
+  {
+   "name": "vLLM Ascend",
+   "parent": "vllm"
+  }
+ ],
+ "created": [
+  {
+   "slug": "modal",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/modal.svg"
+  },
+  {
+   "slug": "baseten",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/baseten.png"
+  },
+  {
+   "slug": "replicate",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/replicate.png"
+  },
+  {
+   "slug": "fal",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/fal.png"
+  },
+  {
+   "slug": "beam",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/beam.png"
+  },
+  {
+   "slug": "cerebrium",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/cerebrium.png"
+  },
+  {
+   "slug": "koyeb",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/koyeb.png"
+  },
+  {
+   "slug": "parasail",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/parasail.png"
+  },
+  {
+   "slug": "nebius",
+   "kinds": [
+    "gpu_cloud",
+    "inference_provider"
+   ],
+   "logo": "/logos/nebius.png"
+  },
+  {
+   "slug": "lepton-ai",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/lepton-ai.png"
+  },
+  {
+   "slug": "siliconflow",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/siliconflow.png"
+  },
+  {
+   "slug": "prime-intellect",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/prime-intellect.jpg"
+  },
+  {
+   "slug": "friendli",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/friendli.png"
+  },
+  {
+   "slug": "cohere",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/cohere.png"
+  },
+  {
+   "slug": "perplexity",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/perplexity.png"
+  },
+  {
+   "slug": "alibaba-cloud",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "volcengine",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/volcengine.png"
+  },
+  {
+   "slug": "baidu-ai-cloud",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/baidu-ai-cloud.png"
+  },
+  {
+   "slug": "tencent-cloud",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "huawei-cloud",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/huawei-cloud.png"
+  },
+  {
+   "slug": "cloudflare",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/cloudflare.png"
+  },
+  {
+   "slug": "databricks",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/databricks.png"
+  },
+  {
+   "slug": "snowflake",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/snowflake.png"
+  },
+  {
+   "slug": "ibm",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/ibm.png"
+  },
+  {
+   "slug": "digitalocean",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/digitalocean.svg"
+  },
+  {
+   "slug": "crusoe",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/crusoe.png"
+  },
+  {
+   "slug": "voltage-park",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/voltage-park.png"
+  },
+  {
+   "slug": "tensorwave",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/tensorwave.png"
+  },
+  {
+   "slug": "paperspace",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/paperspace.webp"
+  },
+  {
+   "slug": "hetzner",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/hetzner.png"
+  },
+  {
+   "slug": "ovhcloud",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/ovhcloud.png"
+  },
+  {
+   "slug": "scaleway",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/scaleway.png"
+  },
+  {
+   "slug": "nscale",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/nscale.png"
+  },
+  {
+   "slug": "fluidstack",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/fluidstack.png"
+  },
+  {
+   "slug": "gmi-cloud",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/gmi-cloud.png"
+  },
+  {
+   "slug": "hyperstack",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/hyperstack.webp"
+  },
+  {
+   "slug": "northern-data",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/northern-data.svg"
+  },
+  {
+   "slug": "ionos",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/ionos.png"
+  },
+  {
+   "slug": "outscale",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/outscale.png"
+  },
+  {
+   "slug": "aruba",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/aruba.png"
+  },
+  {
+   "slug": "infomaniak",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/infomaniak.png"
+  },
+  {
+   "slug": "t-systems",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "swisscom",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/swisscom.png"
+  },
+  {
+   "slug": "orange-business",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "proact-it",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/proact-it.webp"
+  },
+  {
+   "slug": "public-ai",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/public-ai.png"
+  },
+  {
+   "slug": "wavespeedai",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/wavespeedai.png"
+  },
+  {
+   "slug": "z-ai",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/z-ai.svg"
+  },
+  {
+   "slug": "render-network",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/render-network.png"
+  },
+  {
+   "slug": "gensyn",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/gensyn.png"
+  },
+  {
+   "slug": "bittensor",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "targon",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/targon.png"
+  },
+  {
+   "slug": "nosana",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/nosana.png"
+  },
+  {
+   "slug": "aethir",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/aethir.png"
+  },
+  {
+   "slug": "ritual",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/ritual.webp"
+  },
+  {
+   "slug": "near-ai",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/near-ai.svg"
+  },
+  {
+   "slug": "ambient",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/ambient.png"
+  },
+  {
+   "slug": "darkbloom",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "gonka",
+   "kinds": [
+    "decentralized"
+   ],
+   "logo": "/logos/gonka.png"
+  },
+  {
+   "slug": "cumulus-labs",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/cumulus-labs.png"
+  },
+  {
+   "slug": "ncompass",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/ncompass.png"
+  },
+  {
+   "slug": "wafer",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/wafer.png"
+  },
+  {
+   "slug": "tenstorrent",
+   "kinds": [
+    "inference_provider",
+    "hardware"
+   ],
+   "logo": "/logos/tenstorrent.png"
+  },
+  {
+   "slug": "mancer",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/mancer.svg"
+  },
+  {
+   "slug": "aionlabs",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/aionlabs.png"
+  },
+  {
+   "slug": "morph",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/morph.jpg"
+  },
+  {
+   "slug": "relace",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/relace.svg"
+  },
+  {
+   "slug": "upstage",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/upstage.png"
+  },
+  {
+   "slug": "kt",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/kt.png"
+  },
+  {
+   "slug": "sakana",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/sakana.png"
+  },
+  {
+   "slug": "ionstream",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/ionstream.png"
+  },
+  {
+   "slug": "respan",
+   "kinds": [
+    "llm_gateway",
+    "llmops"
+   ],
+   "logo": "/logos/respan.png"
+  },
+  {
+   "slug": "thinking-machines",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/thinking-machines.png"
+  },
+  {
+   "slug": "decart",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/decart.png"
+  },
+  {
+   "slug": "minimax",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/minimax.jpg"
+  },
+  {
+   "slug": "moonshot-ai",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/moonshot-ai.jpg"
+  },
+  {
+   "slug": "stepfun",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": "/logos/stepfun.svg"
+  },
+  {
+   "slug": "xai",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/xai.png"
+  },
+  {
+   "slug": "e2e-networks",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "yotta",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/yotta.png"
+  },
+  {
+   "slug": "sify",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "tata-communications",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "sarvam-ai",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/sarvam-ai.svg"
+  },
+  {
+   "slug": "sakura-internet",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/sakura-internet.png"
+  },
+  {
+   "slug": "gmo-internet-group",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/gmo-internet-group.png"
+  },
+  {
+   "slug": "samsung-sds",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/samsung-sds.png"
+  },
+  {
+   "slug": "sk-telecom",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/sk-telecom.png"
+  },
+  {
+   "slug": "core42",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/core42.png"
+  },
+  {
+   "slug": "ooredoo",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "humain",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "claro-brasil",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/claro-brasil.png"
+  },
+  {
+   "slug": "firmus",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/firmus.svg"
+  },
+  {
+   "slug": "iren",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/iren.svg"
+  },
+  {
+   "slug": "sharon-ai",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/sharon-ai.png"
+  },
+  {
+   "slug": "singtel",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/singtel.svg"
+  },
+  {
+   "slug": "viettel",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "lintasarta",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/lintasarta.png"
+  },
+  {
+   "slug": "kingsoft-cloud",
+   "kinds": [
+    "hyperscaler",
+    "inference_provider"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "telus",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "whitefiber",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/whitefiber.png"
+  },
+  {
+   "slug": "hut-8",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/hut-8.png"
+  },
+  {
+   "slug": "hive-digital",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/hive-digital.webp"
+  },
+  {
+   "slug": "bitdeer",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "rackspace",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/rackspace.png"
+  },
+  {
+   "slug": "liquid-web",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "qumulusai",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/qumulusai.webp"
+  },
+  {
+   "slug": "soluna",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/soluna.svg"
+  },
+  {
+   "slug": "sf-compute",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/sf-compute.svg"
+  },
+  {
+   "slug": "tensordock",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/tensordock.png"
+  },
+  {
+   "slug": "salad",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/salad.png"
+  },
+  {
+   "slug": "thunder-compute",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/thunder-compute.png"
+  },
+  {
+   "slug": "latitude-sh",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/latitude-sh.png"
+  },
+  {
+   "slug": "cirrascale",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/cirrascale.png"
+  },
+  {
+   "slug": "denvr-dataworks",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/denvr-dataworks.png"
+  },
+  {
+   "slug": "genesis-cloud",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/genesis-cloud.png"
+  },
+  {
+   "slug": "civo",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/civo.png"
+  },
+  {
+   "slug": "leaseweb",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/leaseweb.png"
+  },
+  {
+   "slug": "exoscale",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/exoscale.png"
+  },
+  {
+   "slug": "anyscale",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/anyscale.png"
+  },
+  {
+   "slug": "octoai",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/octoai.png"
+  },
+  {
+   "slug": "predibase",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/predibase.png"
+  },
+  {
+   "slug": "banana-dev",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/banana-dev.png"
+  },
+  {
+   "slug": "lightning-ai",
+   "kinds": [
+    "gpu_cloud"
+   ],
+   "logo": "/logos/lightning-ai.png"
+  },
+  {
+   "slug": "openpipe",
+   "kinds": [
+    "inference_provider"
+   ],
+   "logo": "/logos/openpipe.png"
+  },
+  {
+   "slug": "nous-research",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/nous-research.png"
+  },
+  {
+   "slug": "liquid-ai",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/liquid-ai.png"
+  },
+  {
+   "slug": "reka-ai",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/reka-ai.jpg"
+  },
+  {
+   "slug": "black-forest-labs",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/black-forest-labs.png"
+  },
+  {
+   "slug": "runway",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/runway.png"
+  },
+  {
+   "slug": "elevenlabs",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/elevenlabs.png"
+  },
+  {
+   "slug": "deepgram",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/deepgram.png"
+  },
+  {
+   "slug": "assemblyai",
+   "kinds": [
+    "model_provider"
+   ],
+   "logo": "/logos/assemblyai.png"
+  },
+  {
+   "slug": "lm-studio",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/lm-studio.png"
+  },
+  {
+   "slug": "mlx",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/mlx.png"
+  },
+  {
+   "slug": "lmdeploy",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/lmdeploy.png"
+  },
+  {
+   "slug": "modular",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/modular.png"
+  },
+  {
+   "slug": "llm-d",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/llm-d.png"
+  },
+  {
+   "slug": "kvcache-ai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/kvcache-ai.png"
+  },
+  {
+   "slug": "exllama",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/exllama.jpg"
+  },
+  {
+   "slug": "aphrodite-engine",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/aphrodite-engine.jpg"
+  },
+  {
+   "slug": "kserve",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/kserve.png"
+  },
+  {
+   "slug": "bentoml",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/bentoml.jpg"
+  },
+  {
+   "slug": "kubeai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/kubeai.png"
+  },
+  {
+   "slug": "kubeflow",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/kubeflow.png"
+  },
+  {
+   "slug": "skypilot",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/skypilot.png"
+  },
+  {
+   "slug": "dstack",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/dstack.png"
+  },
+  {
+   "slug": "truefoundry",
+   "kinds": [
+    "other"
+   ],
+   "logo": "/logos/truefoundry.png"
+  },
+  {
+   "slug": "xinference",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/xinference.png"
+  },
+  {
+   "slug": "localai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "jan",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/jan.png"
+  },
+  {
+   "slug": "gpt4all",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/gpt4all.png"
+  },
+  {
+   "slug": "llamafile",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/llamafile.png"
+  },
+  {
+   "slug": "infinity",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "mlc-ai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/mlc-ai.jpg"
+  },
+  {
+   "slug": "openvino-genai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/openvino-genai.png"
+  },
+  {
+   "slug": "deepspeed-mii",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/deepspeed-mii.png"
+  },
+  {
+   "slug": "flexflow-serve",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/flexflow-serve.png"
+  },
+  {
+   "slug": "mistral-rs",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "burn",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/burn.png"
+  },
+  {
+   "slug": "stable-diffusion-cpp",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "text-generation-webui",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "koboldcpp",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/koboldcpp.png"
+  },
+  {
+   "slug": "lemonade",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/lemonade.png"
+  },
+  {
+   "slug": "ramalama",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/ramalama.png"
+  },
+  {
+   "slug": "docker-model-runner",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/docker-model-runner.png"
+  },
+  {
+   "slug": "exo",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/exo.jpg"
+  },
+  {
+   "slug": "petals",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/petals.png"
+  },
+  {
+   "slug": "litellm",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/litellm.png"
+  },
+  {
+   "slug": "portkey",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/portkey.png"
+  },
+  {
+   "slug": "helicone",
+   "kinds": [
+    "llm_gateway",
+    "llmops"
+   ],
+   "logo": "/logos/helicone.png"
+  },
+  {
+   "slug": "kong",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/kong.png"
+  },
+  {
+   "slug": "martian",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/martian.png"
+  },
+  {
+   "slug": "not-diamond",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": null
+  },
+  {
+   "slug": "unify",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/unify.png"
+  },
+  {
+   "slug": "routellm",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/routellm.png"
+  },
+  {
+   "slug": "tensorzero",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/tensorzero.png"
+  },
+  {
+   "slug": "bifrost",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/bifrost.png"
+  },
+  {
+   "slug": "higress",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/higress.png"
+  },
+  {
+   "slug": "tyk",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/tyk.svg"
+  },
+  {
+   "slug": "envoy-ai-gateway",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/envoy-ai-gateway.svg"
+  },
+  {
+   "slug": "gateway-api-inference-extension",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/gateway-api-inference-extension.png"
+  },
+  {
+   "slug": "apache-apisix",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/apache-apisix.png"
+  },
+  {
+   "slug": "llm-gateway",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/llm-gateway.png"
+  },
+  {
+   "slug": "eden-ai",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/eden-ai.png"
+  },
+  {
+   "slug": "lmcache",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/lmcache.jpg"
+  },
+  {
+   "slug": "flashinfer",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/flashinfer.png"
+  },
+  {
+   "slug": "flashattention",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/flashattention.png"
+  },
+  {
+   "slug": "unsloth",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/unsloth.png"
+  },
+  {
+   "slug": "pruna-ai",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/pruna-ai.png"
+  },
+  {
+   "slug": "deci",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/deci.png"
+  },
+  {
+   "slug": "doubleword",
+   "kinds": [
+    "other"
+   ],
+   "logo": "/logos/doubleword.png"
+  },
+  {
+   "slug": "autoawq",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/autoawq.png"
+  },
+  {
+   "slug": "gptqmodel",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/gptqmodel.png"
+  },
+  {
+   "slug": "bitsandbytes",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/bitsandbytes.png"
+  },
+  {
+   "slug": "torchao",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/torchao.jpg"
+  },
+  {
+   "slug": "medusa",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/medusa.png"
+  },
+  {
+   "slug": "eagle",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/eagle.png"
+  },
+  {
+   "slug": "outlines",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/outlines.png"
+  },
+  {
+   "slug": "llguidance",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/llguidance.png"
+  },
+  {
+   "slug": "langfuse",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/langfuse.png"
+  },
+  {
+   "slug": "langchain",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/langchain.png"
+  },
+  {
+   "slug": "arize-ai",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/arize-ai.jpg"
+  },
+  {
+   "slug": "braintrust",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/braintrust.png"
+  },
+  {
+   "slug": "weights-and-biases",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/weights-and-biases.png"
+  },
+  {
+   "slug": "datadog",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/datadog.png"
+  },
+  {
+   "slug": "opik",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/opik.png"
+  },
+  {
+   "slug": "laminar",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/laminar.png"
+  },
+  {
+   "slug": "openlit",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/openlit.png"
+  },
+  {
+   "slug": "traceloop",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/traceloop.jpg"
+  },
+  {
+   "slug": "lunary",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/lunary.png"
+  },
+  {
+   "slug": "promptlayer",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/promptlayer.png"
+  },
+  {
+   "slug": "galileo",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/galileo.png"
+  },
+  {
+   "slug": "promptfoo",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/promptfoo.png"
+  },
+  {
+   "slug": "deepeval",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/deepeval.png"
+  },
+  {
+   "slug": "ragas",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/ragas.png"
+  },
+  {
+   "slug": "lm-evaluation-harness",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/lm-evaluation-harness.png"
+  },
+  {
+   "slug": "inspect-ai",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/inspect-ai.jpg"
+  },
+  {
+   "slug": "guardrails-ai",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/guardrails-ai.png"
+  },
+  {
+   "slug": "llm-guard",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/llm-guard.png"
+  },
+  {
+   "slug": "lakera",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/lakera.png"
+  },
+  {
+   "slug": "artificial-analysis",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/artificial-analysis.png"
+  },
+  {
+   "slug": "mlperf-inference",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/mlperf-inference.png"
+  },
+  {
+   "slug": "inferencemax",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/inferencemax.webp"
+  },
+  {
+   "slug": "lmarena",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/lmarena.png"
+  },
+  {
+   "slug": "epoch-ai",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/epoch-ai.svg"
+  },
+  {
+   "slug": "computeprices-com",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/computeprices-com.png"
+  },
+  {
+   "slug": "cloudrift",
+   "kinds": [
+    "llmops"
+   ],
+   "logo": "/logos/cloudrift.png"
+  },
+  {
+   "slug": "seldon-core",
+   "kinds": [
+    "open_source"
+   ],
+   "logo": "/logos/seldon-core.png"
+  },
+  {
+   "slug": "mlflow",
+   "kinds": [
+    "llm_gateway",
+    "llmops"
+   ],
+   "logo": "/logos/mlflow.png"
+  },
+  {
+   "slug": "llama-swap",
+   "kinds": [
+    "llm_gateway"
+   ],
+   "logo": "/logos/llama-swap.png"
+  }
+ ],
+ "no_logo": [
+  {
+   "slug": "alibaba-cloud",
+   "tried": [
+    "https://img.alicdn.com/tfs/TB1ugg7M9zqK1RjSZPxXXc4tVXa-32-32.png: too small (32x32)",
+    "https://www.alibabacloud.com/favicon.ico: not an image: cannot identify image file <_io.BytesIO object at 0x10a434c20>"
+   ]
+  },
+  {
+   "slug": "tencent-cloud",
+   "tried": [
+    "https://cloudcache.tencent-cloud.com/qcloud/favicon.ico?t=201902181234: too small (32x32)",
+    "https://cloud.tencent.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "t-systems",
+   "tried": [
+    "https://t-systems.com/favicon.ico: HTTP 403"
+   ]
+  },
+  {
+   "slug": "orange-business",
+   "tried": [
+    "https://www.orange-business.com/themes/theme_one_i/favicon.ico: too small (32x32)",
+    "https://www.orange-business.com/favicon.ico: HTTP 404"
+   ]
+  },
+  {
+   "slug": "bittensor",
+   "tried": [
+    "https://www.bittensor.com/favicon.ico?7ca8cf782439c3f2: too small (32x32)",
+    "https://www.bittensor.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "darkbloom",
+   "tried": []
+  },
+  {
+   "slug": "e2e-networks",
+   "tried": [
+    "https://www.e2enetworks.com/favicon.ico: too small (32x32)",
+    "https://www.e2enetworks.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "sify",
+   "tried": [
+    "https://www.sify.com/wp-content/uploads/2022/05/favicon.ico: too small (16x16)",
+    "https://www.sify.com/wp-content/uploads/2022/05/favicon.ico: too small (16x16)",
+    "https://www.sify.com/wp-content/uploads/2022/05/favicon.ico: too small (16x16)",
+    "https://www.sify.com/favicon.ico: too small (16x16)"
+   ]
+  },
+  {
+   "slug": "tata-communications",
+   "tried": [
+    "https://www.tatacommunications.com/hubfs/Tata-Communications/Icons/TATACommunication.png: too small (32x32)",
+    "https://www.tatacommunications.com/hubfs/Tata-Communications/Icons/TATACommunication.png: too small (32x32)",
+    "https://www.tatacommunications.com/hubfs/Tata-Communications/Icons/TATACommunication.png: too small (32x32)",
+    "https://www.tatacommunications.com/hubfs/TATACommunicationFavicon.ico: too small (32x32)",
+    "https://www.tatacommunications.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "ooredoo",
+   "tried": [
+    "https://www.ooredoo.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "humain",
+   "tried": [
+    "https://www.humain.com/favicon.ico: HTTP 403"
+   ]
+  },
+  {
+   "slug": "viettel",
+   "tried": [
+    "https://viettel.com.vn/favicon.ico: not an image: cannot identify image file <_io.BytesIO object at 0x109f13100>"
+   ]
+  },
+  {
+   "slug": "kingsoft-cloud",
+   "tried": [
+    "https://www.ksyun.com/favicon.ico: HTTP 000"
+   ]
+  },
+  {
+   "slug": "telus",
+   "tried": [
+    "https://www.telus.com/favicon.ico: HTTP 403"
+   ]
+  },
+  {
+   "slug": "bitdeer",
+   "tried": [
+    "https://www.bitdeer.com/favicon.ico: too small (32x32)",
+    "https://www.bitdeer.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "liquid-web",
+   "tried": [
+    "https://www.liquidweb.com/favicon.ico: too small (32x32)"
+   ]
+  },
+  {
+   "slug": "localai",
+   "tried": [
+    "https://localai.io/favicon.ico: HTTP 404"
+   ]
+  },
+  {
+   "slug": "infinity",
+   "tried": [
+    "https://michaelfeil.eu/favicon.ico: HTTP 404"
+   ]
+  },
+  {
+   "slug": "mistral-rs",
+   "tried": []
+  },
+  {
+   "slug": "stable-diffusion-cpp",
+   "tried": []
+  },
+  {
+   "slug": "text-generation-webui",
+   "tried": []
+  },
+  {
+   "slug": "not-diamond",
+   "tried": [
+    "https://www.notdiamond.ai/favicon.png: too small (32x32)",
+    "https://www.notdiamond.ai/favicon.ico: HTTP 404"
+   ]
+  }
+ ],
+ "warnings": []
+}

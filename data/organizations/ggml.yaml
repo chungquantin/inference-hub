@@ -20,3 +20,11 @@ products:
     url: https://github.com/ggml-org/llama.cpp
     metadata:
       license: MIT
+  - slug: whisper-cpp
+    name: "whisper.cpp"
+    type: oss_project
+    github: ggml-org/whisper.cpp
+    tagline: "Speech recognition in C/C++."
+    url: "https://github.com/ggml-org/whisper.cpp"
+    metadata:
+      license: "MIT"

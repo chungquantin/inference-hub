@@ -1,0 +1,21 @@
+slug: flashinfer
+name: "FlashInfer"
+kinds: [open_source]
+tagline: "Attention kernel library for serving."
+description: "Introduce Techniques to accelerate Large Language Model Deployment"
+website: "https://flashinfer.ai"
+logo_url: /logos/flashinfer.png
+links:
+  github: "https://github.com/flashinfer-ai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: flashinfer-engine
+    name: "FlashInfer"
+    type: oss_project
+    github: flashinfer-ai/flashinfer
+    tagline: "Attention kernel library for serving."
+    url: "https://github.com/flashinfer-ai/flashinfer"
+    metadata:
+      license: "Apache-2.0"

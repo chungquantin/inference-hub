@@ -1,0 +1,9 @@
+slug: iren
+name: "IREN"
+kinds: [gpu_cloud]
+tagline: "Australian AI cloud."
+description: "Explore IREN's 100% renewable-powered data centers offering AI Cloud, GPU clusters, colocation, and build-to-suit infrastructure for scalable compute workloads."
+website: "https://iren.com"
+logo_url: /logos/iren.svg
+tagging:
+  match_case: true

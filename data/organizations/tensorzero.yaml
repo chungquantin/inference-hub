@@ -1,0 +1,20 @@
+slug: tensorzero
+name: "TensorZero"
+kinds: [llm_gateway]
+tagline: "Gateway plus observability."
+description: "TensorZero builds open-source tools for production-grade LLM applications: LLM gateway, observability, optimization, evaluations, and experimentation."
+website: "https://tensorzero.com"
+logo_url: /logos/tensorzero.png
+links:
+  github: "https://github.com/tensorzero"
+tagging:
+  match_case: true
+products:
+  - slug: tensorzero-engine
+    name: "TensorZero"
+    type: oss_project
+    github: tensorzero/tensorzero
+    tagline: "Gateway plus observability."
+    url: "https://github.com/tensorzero/tensorzero"
+    metadata:
+      license: "Apache-2.0"

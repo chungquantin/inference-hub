@@ -1,0 +1,10 @@
+slug: exoscale
+name: "Exoscale"
+kinds: [gpu_cloud]
+tagline: "Swiss GPU cloud."
+description: "Exoscale is a European cloud provider for compute, storage, networking, Kubernetes, databases and AI workloads. GDPR-compliant, with zero lock-in."
+website: "https://exoscale.com"
+logo_url: /logos/exoscale.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

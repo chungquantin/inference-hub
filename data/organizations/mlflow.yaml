@@ -1,0 +1,11 @@
+slug: mlflow
+name: "MLflow"
+kinds: [llm_gateway, llmops]
+tagline: "Gateway and tracing inside MLflow."
+website: "https://mlflow.org"
+logo_url: /logos/mlflow.png
+links:
+  github: "https://github.com/mlflow"
+categories: [observability]
+tagging:
+  match_case: true

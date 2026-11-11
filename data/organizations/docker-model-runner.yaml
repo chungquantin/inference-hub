@@ -1,0 +1,10 @@
+slug: docker-model-runner
+name: "Docker Model Runner"
+kinds: [open_source]
+tagline: "Docker's built-in model runner."
+description: "Learn how to use Docker Model Runner to manage and run AI models."
+website: "https://docs.docker.com/ai/model-runner/"
+logo_url: /logos/docker-model-runner.png
+categories: [local-runtimes]
+tagging:
+  match_case: true

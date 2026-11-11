@@ -1,0 +1,9 @@
+slug: cirrascale
+name: "Cirrascale"
+kinds: [gpu_cloud]
+tagline: "AI cloud, inference platform."
+description: "Cloud-based AI infrastructure supporting NVIDIA, AMD, Qualcomm, and more. No egress fees, high-bandwidth networking, and managed services."
+website: "https://cirrascale.com"
+logo_url: /logos/cirrascale.png
+tagging:
+  match_case: true

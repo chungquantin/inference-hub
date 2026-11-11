@@ -1,0 +1,19 @@
+slug: llamafile
+name: "llamafile"
+kinds: [open_source]
+tagline: "Single-file executable LLMs (Mozilla)."
+description: "Distribute and run LLMs with a single file."
+website: "https://docs.mozilla.ai/llamafile"
+logo_url: /logos/llamafile.png
+links:
+  github: "https://github.com/mozilla-ai"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+products:
+  - slug: llamafile-engine
+    name: "llamafile"
+    type: oss_project
+    github: mozilla-ai/llamafile
+    tagline: "Single-file executable LLMs (Mozilla)."
+    url: "https://github.com/Mozilla-Ocho/llamafile"

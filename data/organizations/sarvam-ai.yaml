@@ -1,0 +1,9 @@
+slug: sarvam-ai
+name: "Sarvam AI"
+kinds: [gpu_cloud]
+tagline: "Indian LLM API."
+website: "https://sarvam.ai"
+logo_url: /logos/sarvam-ai.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

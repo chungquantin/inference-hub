@@ -1,0 +1,21 @@
+slug: openlit
+name: "OpenLIT"
+kinds: [llmops]
+tagline: "OpenTelemetry-native LLM observability."
+description: "OpenLIT is the open-source agent harness engineering platform: agent observability, evals, guardrails and prompt management on OpenTelemetry. Self-host free."
+website: "https://www.openlit.io"
+logo_url: /logos/openlit.png
+links:
+  github: "https://github.com/openlit"
+categories: [observability]
+tagging:
+  match_case: true
+products:
+  - slug: openlit-engine
+    name: "OpenLIT"
+    type: oss_project
+    github: openlit/openlit
+    tagline: "OpenTelemetry-native LLM observability."
+    url: "https://github.com/openlit/openlit"
+    metadata:
+      license: "Apache-2.0"

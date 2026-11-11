@@ -1,0 +1,9 @@
+slug: wavespeedai
+name: "WaveSpeedAI"
+kinds: [inference_provider]
+tagline: "Image/video inference."
+description: "WaveSpeedAI home – explore the platform that speeds up image, video and audio generation so you can build AI features, creative tools and workflows faster."
+website: "https://wavespeed.ai"
+logo_url: /logos/wavespeedai.png
+tagging:
+  match_case: true

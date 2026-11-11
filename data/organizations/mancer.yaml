@@ -1,0 +1,8 @@
+slug: mancer
+name: "Mancer"
+kinds: [inference_provider]
+tagline: "Uncensored hosting."
+website: "https://mancer.tech"
+logo_url: /logos/mancer.svg
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: denvr-dataworks
+name: "Denvr Dataworks"
+kinds: [gpu_cloud]
+tagline: "GPU cloud."
+description: "High performance computing services for developers and operators of AI. On-demand or dedicated access to the latest GPU architectures, optimized for AI Training or Inferencing."
+website: "https://denvrdata.com"
+logo_url: /logos/denvr-dataworks.png
+tagging:
+  match_case: true

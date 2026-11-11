@@ -1,0 +1,10 @@
+slug: datadog
+name: "Datadog"
+kinds: [llmops]
+tagline: "LLM monitoring inside Datadog."
+description: "Evaluate, improve, and trace your AI agents with offline experimentation and production observability in one platform."
+website: "https://www.datadoghq.com/product/llm-observability/"
+logo_url: /logos/datadog.png
+categories: [observability]
+tagging:
+  match_case: true

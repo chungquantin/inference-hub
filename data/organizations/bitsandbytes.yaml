@@ -1,0 +1,21 @@
+slug: bitsandbytes
+name: "bitsandbytes"
+kinds: [open_source]
+tagline: "8/4-bit quantization."
+description: "We’re on a journey to advance and democratize artificial intelligence through open source and open science."
+website: "https://huggingface.co/docs/bitsandbytes/main/en/index"
+logo_url: /logos/bitsandbytes.png
+links:
+  github: "https://github.com/bitsandbytes-foundation"
+categories: [model-optimization]
+tagging:
+  match_case: true
+products:
+  - slug: bitsandbytes-engine
+    name: "bitsandbytes"
+    type: oss_project
+    github: bitsandbytes-foundation/bitsandbytes
+    tagline: "8/4-bit quantization."
+    url: "https://github.com/bitsandbytes-foundation/bitsandbytes"
+    metadata:
+      license: "MIT"

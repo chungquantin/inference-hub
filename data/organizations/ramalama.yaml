@@ -1,0 +1,21 @@
+slug: ramalama
+name: "RamaLama"
+kinds: [open_source]
+tagline: "Container-native local model runner."
+description: "RamaLama is an open-source developer tool that simplifies the local serving of AI models from any source and facilitates their use for inference in production, all through the familiar language of containers."
+website: "https://ramalama.ai"
+logo_url: /logos/ramalama.png
+links:
+  github: "https://github.com/containers"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+products:
+  - slug: ramalama-engine
+    name: "RamaLama"
+    type: oss_project
+    github: containers/ramalama
+    tagline: "Container-native local model runner."
+    url: "https://github.com/containers/ramalama"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,20 @@
+slug: eagle
+name: "EAGLE"
+kinds: [open_source]
+tagline: "Speculative decoding via feature drafting."
+description: "Official Implementation of EAGLE-1 (ICML'24), EAGLE-2 (EMNLP'24), and EAGLE-3 (NeurIPS'25)."
+website: "https://github.com/SafeAILab/EAGLE"
+logo_url: /logos/eagle.png
+links:
+  github: "https://github.com/SafeAILab"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: eagle-engine
+    name: "EAGLE"
+    type: oss_project
+    github: SafeAILab/EAGLE
+    tagline: "Speculative decoding via feature drafting."
+    url: "https://github.com/SafeAILab/EAGLE"

@@ -1,0 +1,21 @@
+slug: exllama
+name: "ExLlama"
+kinds: [open_source]
+tagline: "Fast quantized inference library for consumer GPUs."
+description: "An optimized quantization and inference library for running LLMs locally on modern consumer-class GPUs"
+website: "https://github.com/turboderp-org/exllamav3"
+logo_url: /logos/exllama.jpg
+links:
+  github: "https://github.com/turboderp-org"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: exllamav2-v3
+    name: "ExLlamaV2 / V3"
+    type: oss_project
+    github: turboderp-org/exllamav3
+    tagline: "Fast quantized inference library for consumer GPUs."
+    url: "https://github.com/turboderp-org/exllamav3"
+    metadata:
+      license: "MIT"

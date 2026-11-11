@@ -1,0 +1,10 @@
+slug: fal
+name: "fal"
+kinds: [inference_provider]
+tagline: "Generative media inference."
+description: "Access 1,500+ AI models for image, video, and audio generation. Deploy with serverless GPUs, 10x faster inference, and 99.99% uptime. Trusted by 2.5M+ devs."
+website: "https://fal.ai"
+logo_url: /logos/fal.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,11 @@
+slug: lakera
+name: "Lakera"
+kinds: [llmops]
+tagline: "Prompt-injection protection."
+description: "The AI-native security platform to accelerate GenAI initiatives—trusted by Fortune 500s, backed by the world’s largest AI red team."
+website: "https://www.lakera.ai"
+logo_url: /logos/lakera.png
+status: acquired
+categories: [guardrails]
+tagging:
+  match_case: true
