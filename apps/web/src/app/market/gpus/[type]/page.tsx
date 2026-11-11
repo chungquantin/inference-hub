@@ -35,7 +35,7 @@ export default async function MarketGpuPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Market / GPUs"
+        crumbs={[{ href: "/market", label: "Market" }, { href: "/market/gpus", label: "GPUs" }, { label: data.name }]}
         title={data.name}
         lead="Every configuration we see, per GPU-hour on demand. Marketplace rows are medians of host offers; Shadeform rows name the cloud behind them."
       />

@@ -37,7 +37,7 @@ export default async function CompareGpusPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Compare / GPUs"
+        crumbs={[{ href: "/compare", label: "Compare" }, { label: "Tracked GPU clouds" }]}
         title="GPU cloud prices"
         lead="On-demand prices of GPU instances, cheapest per GPU-hour first. Reserved and spot prices are usually lower."
       />

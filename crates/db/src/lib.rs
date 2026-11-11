@@ -8,6 +8,7 @@ pub mod market_refresh;
 pub mod news;
 pub mod organizations;
 pub mod products;
+pub mod search;
 pub mod sitemap;
 
 use std::time::Duration;

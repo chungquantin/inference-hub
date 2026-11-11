@@ -1,13 +1,15 @@
 import Link from "next/link";
-import type { GpuPrice, ModelPrice } from "@inference-hub/api-client";
+import type { ModelPrice, components } from "@inference-hub/api-client";
+
+type MarketListing = components["schemas"]["MarketListing"];
 import { CategoryGrid } from "@/components/category-grid";
-import { SearchForm } from "@/components/listing";
 import { NewsList } from "@/components/news";
 import { Logo } from "@/components/ui/logo";
-import { LiveDot, PixelBar, PixelBullet, WindowFrame } from "@/components/ui/pixel";
+import { LiveDot, PixelBar, WindowFrame } from "@/components/ui/pixel";
+import { HeroSearch } from "@/components/shell/hero-search";
 import { SectionHeader, Stat, buttonClass } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
-import { formatDate, formatPrice } from "@/lib/format";
+import { formatCount, formatDate, formatPrice } from "@/lib/format";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
@@ -15,16 +17,22 @@ export const revalidate = 300; // seconds; must be a literal for Next.js
 const BOARD_GPUS = ["H100 SXM", "H200 SXM", "B200"];
 
 export default async function HomePage() {
-  const [gpus, models, categories, news, orgs, oss] = await Promise.all([
-    api.GET("/v1/compare/gpus"),
+  const [models, categories, news, orgs, oss, market, cheapest] = await Promise.all([
     api.GET("/v1/compare/models", { params: { query: { sort: "blended" } } }),
     api.GET("/v1/categories"),
     api.GET("/v1/news", { params: { query: { limit: 6 } } }),
     api.GET("/v1/organizations", { params: { query: { limit: 1 } } }),
     api.GET("/v1/compare/open-source"),
+    api.GET("/v1/market"),
+    // The most widely sold models, cheapest first: what most people compare.
+    api.GET("/v1/market/models", { params: { query: { min_providers: 8, sort: "price", limit: 8 } } }),
   ]);
+  // Live prices of the board's GPUs, from every cloud the worker reads.
+  const boards = await Promise.all(
+    BOARD_GPUS.map((gpu) => api.GET("/v1/market/gpus/{gpu_type}", { params: { path: { gpu_type: gpu } } })),
+  );
+  const m = market.data;
 
-  const gpuPrices = gpus.data?.prices ?? [];
   const modelPrices = models.data ?? [];
   // The cheapest price of each model, cheapest models first.
   const cheapestModels = Object.values(
@@ -37,10 +45,7 @@ export default async function HomePage() {
   )
     .sort((a, b) => (a.blended_per_mtok ?? 0) - (b.blended_per_mtok ?? 0))
     .slice(0, 6);
-  const latest = [...gpuPrices.map((p) => p.observed_at), ...modelPrices.map((p) => p.observed_at)]
-    .sort()
-    .at(-1);
-  const providers = new Set([...gpuPrices, ...modelPrices].map((p) => p.provider.slug)).size;
+  const latest = m?.updated_at;
 
   return (
     <div className="flex flex-col gap-20">
@@ -48,62 +53,73 @@ export default async function HomePage() {
         <div className="flex min-w-0 flex-col gap-6">
           <p className="flex items-center gap-2 font-mono text-[13px] text-s-7">
             <LiveDot />
-            {latest ? `Prices checked ${formatDate(latest)}` : "Market prices"}
+            {latest ? `Prices updated ${formatDate(latest)} · ${m?.providers} providers` : "Market prices"}
           </p>
           <h1 className="font-display text-[40px] leading-[44px] tracking-[-0.03em] text-ink sm:text-[56px] sm:leading-[60px]">
             What inference costs, and who sells it.
           </h1>
           <p className="max-w-[46ch] text-[17px] leading-7 text-ink-2">
-            Model API and GPU prices collected from the providers themselves, next to the
-            companies, open-source projects and investors of the market.
+            Every model API and GPU price we can read from the providers themselves, compared
+            across the market, next to the companies, projects and investors behind them.
           </p>
+          <HeroSearch />
           <div className="flex flex-wrap gap-3">
-            <Link href="/compare/gpus" className={buttonClass("primary")}>
-              Compare GPU prices
+            <Link href="/market" className={buttonClass("primary")}>
+              Open the market
             </Link>
-            <Link href="/compare/models" className={buttonClass("secondary")}>
-              Compare model APIs
+            <Link href="/market/models?min=2&sort=price" className={buttonClass("secondary")}>
+              Cheapest models
             </Link>
           </div>
-          <ul className="mt-2 flex flex-col gap-2 text-[14px] text-ink-2">
-            {[
-              "Refreshed from OpenRouter, Liquid, RunPod, Hyperbolic and CoreWeave",
-              "Every price links to where it was read",
-              "History kept for every change",
-            ].map((line) => (
-              <li key={line} className="flex items-center gap-3">
-                <PixelBullet />
-                {line}
-              </li>
-            ))}
-          </ul>
         </div>
 
         <WindowFrame
           title="GPU price board / per GPU-hour"
-          meta={<Link href="/compare/gpus" className="hover:text-wash hover:underline">all prices</Link>}
+          meta={<Link href="/market/gpus" className="hover:text-wash hover:underline">all GPUs</Link>}
           className="min-w-0"
         >
-          {BOARD_GPUS.map((gpu) => (
-            <GpuBoard key={gpu} gpu={gpu} prices={gpuPrices.filter((p) => p.gpu_type === gpu)} />
+          {BOARD_GPUS.map((gpu, i) => (
+            <GpuBoard key={gpu} gpu={gpu} listings={boards[i].data?.listings ?? []} />
           ))}
         </WindowFrame>
       </section>
 
-      <section className="grid grid-cols-2 pt-px pl-px lg:grid-cols-4 [&>*]:-mt-px [&>*]:-ml-px [&>*]:border [&>*]:border-line">
-        <Stat value={orgs.data?.total ?? "—"} label="Organizations tracked" href="/organizations" />
-        <Stat value={providers} label="Providers with live prices" href="/compare" />
-        <Stat
-          value={modelPrices.length + gpuPrices.length}
-          label="Prices compared"
-          href="/compare/models"
-        />
-        <Stat value={oss.data?.length ?? "—"} label="Open-source projects" href="/compare/open-source" />
+      <section className="grid grid-cols-2 pt-px pl-px lg:grid-cols-5 [&>*]:-mt-px [&>*]:-ml-px [&>*]:border [&>*]:border-line">
+        <Stat value={m ? formatCount(m.distinct_models) : "—"} label="Chat models priced" href="/market/models" />
+        <Stat value={m?.gpu_types ?? "—"} label="GPU types" href="/market/gpus" />
+        <Stat value={m ? formatCount(m.media_models) : "—"} label="Image, video, speech" href="/market/media" />
+        <Stat value={m?.providers ?? "—"} label="Providers with live prices" href="/market/providers" />
+        <Stat value={orgs.data?.total ?? "—"} label="Organizations" href="/organizations" />
       </section>
+
+      {cheapest.data && cheapest.data.items.length > 0 && (
+        <section className="flex flex-col gap-4">
+          <SectionHeader
+            title="Popular models, cheapest first"
+            href="/market/models?min=2&sort=price"
+            linkLabel="All comparable models"
+          />
+          <ul className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+            {cheapest.data.items.map((row) => (
+              <li key={row.model_key} className="bg-wash">
+                <Link href={`/market/models/${encodeURIComponent(row.model_key)}`} className="group flex h-full flex-col gap-2 p-4 hover:bg-s-1">
+                  <span className="truncate font-mono text-[13px] text-ink group-hover:text-s-7">{row.model_key}</span>
+                  <span className="font-display text-[28px] leading-8 tracking-[-0.02em] text-ink tabular">
+                    {formatPrice(row.min_blended_per_mtok)}
+                  </span>
+                  <span className="font-mono text-[12px] text-ink-3">
+                    per 1M · {row.providers} providers · via {row.cheapest.name}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
         <div className="flex min-w-0 flex-col gap-4">
-          <SectionHeader title="Cheapest model APIs" href="/compare/models" linkLabel="All model prices" />
+          <SectionHeader title="Tracked model APIs" href="/compare/models" linkLabel="All tracked prices" />
           <ModelBoard models={cheapestModels} />
           <p className="font-mono text-[12px] text-ink-3">
             Blended price per 1M tokens, weighing input 3:1 against output. Lowest price per model.
@@ -145,44 +161,42 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="flex flex-col items-start gap-5 border border-ink p-8 sm:p-10">
-        <h2 className="font-display text-[32px] leading-10 tracking-[-0.02em]">Find a company or project</h2>
-        <SearchForm action="/organizations" placeholder="vLLM, CoreWeave, Mistral..." />
-      </section>
     </div>
   );
 }
 
-/** One GPU type: every provider's lowest price, as pixel bars scaled to the dearest. */
-function GpuBoard({ gpu, prices }: { gpu: string; prices: GpuPrice[] }) {
-  // Lowest price per provider for this GPU.
+/** One GPU type: the cheapest clouds' lowest price, as pixel bars scaled to the dearest shown. */
+function GpuBoard({ gpu, listings }: { gpu: string; listings: MarketListing[] }) {
+  // Lowest price per GPU-hour per provider, the six cheapest.
   const byProvider = Object.values(
-    prices.reduce<Record<string, GpuPrice>>((acc, p) => {
-      const seen = acc[p.provider.slug];
-      if (!seen || seen.price_per_gpu_hour > p.price_per_gpu_hour) acc[p.provider.slug] = p;
+    listings.reduce<Record<string, MarketListing>>((acc, l) => {
+      const seen = acc[l.provider.slug];
+      if (l.price_per_gpu_hour != null && (!seen || (seen.price_per_gpu_hour ?? Infinity) > l.price_per_gpu_hour))
+        acc[l.provider.slug] = l;
       return acc;
     }, {}),
-  ).sort((a, b) => a.price_per_gpu_hour - b.price_per_gpu_hour);
-  const max = Math.max(...byProvider.map((p) => p.price_per_gpu_hour), 0);
+  ).sort((a, b) => (a.price_per_gpu_hour ?? 0) - (b.price_per_gpu_hour ?? 0));
+  const shown = byProvider.slice(0, 6);
+  const max = Math.max(...shown.map((p) => p.price_per_gpu_hour ?? 0), 0);
 
   return (
     <div className="border-b border-line px-4 py-4 last:border-0">
       <div className="mb-3 flex items-baseline justify-between">
         <Link
-          href={`/compare/gpus?gpu=${encodeURIComponent(gpu)}`}
+          href={`/market/gpus/${encodeURIComponent(gpu)}`}
           className="font-display text-[18px] tracking-[-0.01em] text-ink hover:text-s-7 hover:underline"
         >
           {gpu}
         </Link>
         <span className="font-mono text-[12px] text-ink-3">
-          {byProvider.length} {byProvider.length === 1 ? "cloud" : "clouds"}
+          {byProvider.length > shown.length ? `cheapest ${shown.length} of ${byProvider.length} clouds` : `${byProvider.length} clouds`}
         </span>
       </div>
-      {byProvider.length === 0 ? (
+      {shown.length === 0 ? (
         <p className="font-mono text-[12px] text-ink-3">No prices yet.</p>
       ) : (
         <ul className="flex flex-col gap-2">
-          {byProvider.map((p, i) => (
+          {shown.map((p, i) => (
             <li
               key={p.provider.slug}
               className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 sm:grid-cols-[132px_minmax(0,1fr)_72px]"
@@ -196,16 +210,14 @@ function GpuBoard({ gpu, prices }: { gpu: string; prices: GpuPrice[] }) {
               </Link>
               <span className="col-span-2 row-start-2 overflow-hidden sm:col-span-1 sm:col-start-2 sm:row-start-1">
                 <PixelBar
-                  value={p.price_per_gpu_hour}
+                  value={p.price_per_gpu_hour ?? 0}
                   max={max}
                   tone={i === 0 ? "lead" : "muted"}
-                  label={`${p.provider.name}: ${formatPrice(p.price_per_gpu_hour, p.currency)} per GPU-hour`}
+                  label={`${p.provider.name}: ${formatPrice(p.price_per_gpu_hour)} per GPU-hour`}
                 />
               </span>
-              <span
-                className={`text-right font-mono text-[13px] tabular ${i === 0 ? "font-medium text-s-7" : "text-ink-2"}`}
-              >
-                {formatPrice(p.price_per_gpu_hour, p.currency)}
+              <span className={`text-right font-mono text-[13px] tabular ${i === 0 ? "font-medium text-s-7" : "text-ink-2"}`}>
+                {formatPrice(p.price_per_gpu_hour)}
               </span>
             </li>
           ))}

@@ -839,6 +839,62 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "maker",
+            "in": "query",
+            "description": "Models only: keep this maker (as providers name it, such as `deepseek-ai`).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "description": "Lowest price at most / at least this: USD per 1M tokens (blend) for\nmodels, USD per GPU-hour for GPUs.",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "min_context",
+            "in": "query",
+            "description": "Models only: context window of at least this many tokens.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context` or `name`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "`asc` or `desc`; each sort has a natural default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -899,6 +955,41 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/makers": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Makers of chat models in the market, most models first, for filters.",
+        "operationId": "marketMakers",
+        "parameters": [
+          {
+            "name": "min_providers",
+            "in": "query",
+            "description": "Count models sold by at least this many providers. Default 1.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MakerCount"
+                  }
                 }
               }
             }
@@ -1044,6 +1135,62 @@
             "name": "provider",
             "in": "query",
             "description": "Keep models (or GPUs) this organization sells, by slug. Prices and\nprovider counts still cover the whole market.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maker",
+            "in": "query",
+            "description": "Models only: keep this maker (as providers name it, such as `deepseek-ai`).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "max_price",
+            "in": "query",
+            "description": "Lowest price at most / at least this: USD per 1M tokens (blend) for\nmodels, USD per GPU-hour for GPUs.",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "min_price",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "min_context",
+            "in": "query",
+            "description": "Models only: context window of at least this many tokens.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context` or `name`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "`asc` or `desc`; each sort has a natural default.",
             "required": false,
             "schema": {
               "type": "string"
@@ -1227,6 +1374,33 @@
             "schema": {
               "type": "integer",
               "format": "int64"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "`providers` (default), `price`, `rank`, `gap` (how far above the\nmarket low), or `name`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dir",
+            "in": "query",
+            "description": "`asc` or `desc`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "cheapest",
+            "in": "query",
+            "description": "Only items where this provider is the cheapest.",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             }
           }
         ],
@@ -1641,6 +1815,65 @@
         }
       }
     },
+    "/v1/search": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Search organizations, products, models (chat and media), GPU types and\nnews at once. Results come grouped by kind, best match first.",
+        "operationId": "search",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "The text to search for (at least 2 characters).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "kinds",
+            "in": "query",
+            "description": "Only these kinds, comma-separated, such as `model,gpu`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "per_kind",
+            "in": "query",
+            "description": "Results per kind. Default 6, at most 50.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResults"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/sitemap": {
       "get": {
         "tags": [
@@ -2030,6 +2263,23 @@
           },
           "kind": {
             "type": "string"
+          }
+        }
+      },
+      "MakerCount": {
+        "type": "object",
+        "description": "A maker and how many models it has, for filters.",
+        "required": [
+          "maker",
+          "models"
+        ],
+        "properties": {
+          "maker": {
+            "type": "string"
+          },
+          "models": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -4238,6 +4488,96 @@
           }
         }
       },
+      "SearchCount": {
+        "type": "object",
+        "required": [
+          "kind",
+          "count"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kind": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchHit": {
+        "type": "object",
+        "description": "One search result.",
+        "required": [
+          "kind",
+          "href",
+          "title",
+          "score"
+        ],
+        "properties": {
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "href": {
+            "type": "string",
+            "description": "The site path of the result, such as `/organizations/openai`."
+          },
+          "kind": {
+            "type": "string",
+            "description": "`organization`, `product`, `model`, `media`, `gpu` or `news`."
+          },
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "description": "Higher is better; exact and prefix matches score above substrings."
+          },
+          "subtitle": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "A short second line: maker, kind, price or source."
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchResults": {
+        "type": "object",
+        "description": "Results grouped by kind, best first, with how many of each matched.",
+        "required": [
+          "q",
+          "hits",
+          "counts"
+        ],
+        "properties": {
+          "counts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchCount"
+            }
+          },
+          "hits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchHit"
+            }
+          },
+          "q": {
+            "type": "string"
+          }
+        }
+      },
       "SetOrganizationsRequest": {
         "type": "object",
         "required": [
@@ -4493,6 +4833,10 @@
     {
       "name": "market",
       "description": "Every live price the adapters collect"
+    },
+    {
+      "name": "search",
+      "description": "Site-wide search"
     },
     {
       "name": "admin",

@@ -71,6 +71,11 @@ export default async function ProductPage({ params }: Props) {
       </nav>
 
       <ProfileHeader
+        crumbs={[
+          { href: "/products", label: "Products" },
+          { href: `/organizations/${product.organization.slug}`, label: product.organization.name },
+          { label: product.name },
+        ]}
         name={product.name}
         logoName={product.organization.name}
         logoUrl={product.organization.logo_url}

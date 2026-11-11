@@ -20,6 +20,7 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(gpu_detail))
         .routes(routes!(model_index))
         .routes(routes!(model_detail))
+        .routes(routes!(model_makers))
         .routes(routes!(media_index))
         .routes(routes!(providers))
         .routes(routes!(provider))
@@ -150,4 +151,23 @@ async fn provider_offerings(
         .await?
         .map(Json)
         .ok_or(ApiError::NotFound("provider offerings"))
+}
+
+/// Makers of chat models in the market, most models first, for filters.
+#[utoipa::path(get, path = "/market/makers", tag = "market", operation_id = "marketMakers",
+    params(("min_providers" = Option<i64>, Query, description = "Count models sold by at least this many providers. Default 1.")),
+    responses((status = 200, body = Vec<ih_core::MakerCount>)))]
+async fn model_makers(
+    State(state): State<AppState>,
+    Query(q): Query<MakersQuery>,
+) -> ApiResult<Json<Vec<ih_core::MakerCount>>> {
+    Ok(Json(
+        ih_db::market::model_makers(&state.pool, q.min_providers.unwrap_or(1)).await?,
+    ))
+}
+
+#[derive(serde::Deserialize, utoipa::IntoParams)]
+#[into_params(parameter_in = Query)]
+struct MakersQuery {
+    min_providers: Option<i64>,
 }

@@ -38,7 +38,7 @@ export default async function MarketModelPage({ params }: Props) {
     return (
       <div className="flex flex-col gap-6">
         <PageHeader
-          label={`Market / Models / ${data.key}`}
+          crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
           title={data.name}
           lead="Each provider's listing of this model, priced in its own unit, cheapest first."
         />
@@ -57,7 +57,7 @@ export default async function MarketModelPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label={`Market / Models / ${data.key}`}
+        crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
         title={data.name}
         lead="Each provider's listing of this model, matched by id. Routers such as Hugging Face show the provider behind each price. Blend is 3 input tokens per output token."
       />

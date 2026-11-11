@@ -1,3 +1,4 @@
+import { Breadcrumbs } from "@/components/shell/breadcrumbs";
 import { Logo } from "@/components/ui/logo";
 
 /** The top of an organization or product page: big logo plate, name, context, badges. */
@@ -9,19 +10,23 @@ export function ProfileHeader({
   subtitle,
   badges,
   actions,
+  crumbs,
 }: {
   name: string;
   logoUrl?: string | null;
   /** Whose logo to show when it is not the page's own, such as a product's maker. */
   logoName?: string;
-  /** A mono line above the name, such as the breadcrumb. */
+  /** A mono line above the name. */
   label?: React.ReactNode;
+  /** Breadcrumbs above the name; parent pages first. */
+  crumbs?: { href?: string; label: string }[];
   subtitle?: React.ReactNode;
   badges?: React.ReactNode;
   actions?: React.ReactNode;
 }) {
   return (
     <header className="flex flex-col gap-6 border-b border-line pb-8">
+      {crumbs && <Breadcrumbs items={crumbs} />}
       {label && <div className="font-mono text-[13px] leading-5 text-ink-3">{label}</div>}
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
         <Logo name={logoName ?? name} src={logoUrl} size="lg" />

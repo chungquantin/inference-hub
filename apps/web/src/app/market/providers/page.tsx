@@ -22,7 +22,7 @@ export default async function MarketProvidersPage() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Market / Providers"
+        crumbs={[{ href: "/market", label: "Market" }, { label: "Providers" }]}
         title="Providers"
         lead="Catalog size, and how many contested models or GPU types each provider sells cheapest. Chat models are distinct models; listings count every variant the provider lists (regions, :free, batch). Only items two or more providers sell count as contested."
       />

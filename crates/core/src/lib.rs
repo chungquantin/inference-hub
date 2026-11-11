@@ -10,6 +10,7 @@ pub mod news;
 pub mod organization;
 pub mod pagination;
 pub mod product;
+pub mod search;
 
 pub use category::Category;
 pub use compare::{
@@ -17,7 +18,7 @@ pub use compare::{
     PortfolioCompany, PortfolioRound, PricePoint, RepoLeader, RepoStats, RoundInvestor,
 };
 pub use market::{
-    FailedJob, GpuIndexRow, HoldResolution, KindCount, MarketDetail, MarketIndexQuery,
+    FailedJob, GpuIndexRow, HoldResolution, KindCount, MakerCount, MarketDetail, MarketIndexQuery,
     MarketListing, MarketOverview, MarketProvider, MarketSource, MediaIndexQuery, MediaIndexRow,
     ModelIndexRow, PriceHold, ProviderOffering, ProviderOfferings, ProviderOfferingsQuery,
 };
@@ -30,3 +31,4 @@ pub use pagination::{Page, PageParams};
 pub use product::{
     ModelSpec, Offering, OrganizationRef, ProductDetail, ProductSummary, ProductType,
 };
+pub use search::{SearchCount, SearchHit, SearchQuery, SearchResults};

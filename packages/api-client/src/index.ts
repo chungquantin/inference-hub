@@ -31,6 +31,12 @@ export type RepoLeader = Schemas["RepoLeader"];
 export type AdapterStatus = Schemas["AdapterStatus"];
 export type UnmappedListing = Schemas["UnmappedListing"];
 export type ApiErrorBody = Schemas["ErrorBody"];
+export type SearchResults = Schemas["SearchResults"];
+export type SearchHit = Schemas["SearchHit"];
+export type ModelIndexRow = Schemas["ModelIndexRow"];
+export type GpuIndexRow = Schemas["GpuIndexRow"];
+export type MediaIndexRow = Schemas["MediaIndexRow"];
+export type MakerCount = Schemas["MakerCount"];
 
 /** A typed client for the Inference Hub API, generated from its OpenAPI document. */
 export function createApiClient(options: ClientOptions) {

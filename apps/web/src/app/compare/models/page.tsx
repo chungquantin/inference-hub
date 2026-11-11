@@ -66,7 +66,7 @@ export default async function CompareModelsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Compare / Model APIs"
+        crumbs={[{ href: "/compare", label: "Compare" }, { label: "Tracked model APIs" }]}
         title="Model API prices"
         lead="The latest price of each model at each provider, in USD per million tokens. The blended price weighs input and output 3 to 1, a typical chat workload."
       />

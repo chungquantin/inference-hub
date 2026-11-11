@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/shell/breadcrumbs";
 
 /** A white panel with a 1px hairline frame. The basic grouping surface. */
 export function Frame({
@@ -18,17 +19,24 @@ export function PageHeader({
   title,
   lead,
   label,
+  crumbs,
   children,
 }: {
   title: React.ReactNode;
   lead?: React.ReactNode;
   /** A short mono line above the title naming the section, such as "Compare". */
   label?: string;
+  /** Breadcrumbs, shown instead of the label: parent pages first. */
+  crumbs?: { href?: string; label: string }[];
   children?: React.ReactNode;
 }) {
   return (
     <header className="flex flex-col gap-4 border-b border-line pb-8">
-      {label && <p className="font-mono text-[13px] leading-5 text-s-7">{label}</p>}
+      {crumbs ? (
+        <Breadcrumbs items={crumbs} />
+      ) : (
+        label && <p className="font-mono text-[13px] leading-5 text-s-7">{label}</p>
+      )}
       <div className="flex flex-wrap items-end justify-between gap-6">
         <h1 className="font-display text-[40px] leading-[48px] font-normal tracking-[-0.02em] text-ink">
           {title}

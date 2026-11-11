@@ -1284,3 +1284,59 @@ async fn a_providers_offerings_merge_live_and_curated_in_one_list(pool: PgPool) 
         "chips makes the GPU but sells it nowhere: no section"
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn search_finds_every_kind_ranked_and_grouped(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+    let (status, res) = get(&app, "/v1/search?q=deepseek%20v3").await;
+    assert_eq!(status, StatusCode::OK);
+    // Words match in order across separators.
+    let first = &res["hits"][0];
+    assert_eq!(
+        (first["kind"].as_str(), first["href"].as_str()),
+        (Some("model"), Some("/market/models/deepseek-v3.2"))
+    );
+    let (_, gpus) = get(&app, "/v1/search?q=h100&kinds=gpu").await;
+    assert_eq!(gpus["hits"][0]["title"], "H100 SXM");
+    assert!(
+        gpus["hits"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|h| h["kind"] == "gpu")
+    );
+    let (_, orgs) = get(&app, "/v1/search?q=alpha").await;
+    assert_eq!(orgs["hits"][0]["kind"], "organization");
+    assert!(
+        orgs["hits"][0]["score"].as_f64().unwrap() >= 3.0,
+        "exact name scores highest"
+    );
+    let (_, short) = get(&app, "/v1/search?q=a").await;
+    assert_eq!(
+        short["hits"].as_array().unwrap().len(),
+        0,
+        "one character is not a search"
+    );
+    assert_eq!(
+        get(&app, "/v1/search?q=x&kinds=bogus").await.0,
+        StatusCode::BAD_REQUEST
+    );
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn model_index_filters_and_sorts_safely(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+    let (_, by_name) = get(&app, "/v1/market/models?sort=name&dir=desc").await;
+    assert_eq!(by_name["items"][0]["model_key"], "only-here");
+    let (_, cheap) = get(&app, "/v1/market/models?max_price=0.5").await;
+    assert_eq!(cheap["total"], 1, "{cheap}");
+    let (_, pricey) = get(&app, "/v1/market/models?min_price=0.5").await;
+    assert_eq!(pricey["items"][0]["model_key"], "only-here");
+    // An unknown sort falls back to the default instead of reaching SQL.
+    let (status, _) = get(&app, "/v1/market/models?sort=providers%3Bdrop%20table%20x").await;
+    assert_eq!(status, StatusCode::OK);
+    let (_, gpus) = get(&app, "/v1/market/gpus?sort=price").await;
+    assert_eq!(gpus[0]["gpu_type"], "L4", "cheapest per GPU-hour first");
+}

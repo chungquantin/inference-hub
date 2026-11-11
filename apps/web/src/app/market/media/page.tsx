@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { DataTable } from "@/components/data-table";
 import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
-import { MEDIA_KINDS, RowLink, formatUnitPrice, modelHref, spread } from "@/components/market";
+import { MEDIA_KINDS, RowLink, UNIT_LABELS, formatUnitPrice, modelHref, spread } from "@/components/market";
+import { SmartTable, type Column } from "@/components/table/smart-table";
+import type { MediaIndexRow } from "@inference-hub/api-client";
 import { ProviderLink } from "@/components/price-cells";
 import { PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
@@ -40,10 +41,27 @@ export default async function MarketMediaPage({ searchParams }: Props) {
   const href = (o: Record<string, string | undefined>) =>
     listingHref("/market/media", current, { page: undefined, ...o });
 
+  const columns: Column<MediaIndexRow>[] = [
+    { id: "model", header: "Model", cell: (r) => <RowLink href={modelHref(r.model_key)}>{r.name}</RowLink>, csv: (r) => r.model_key },
+    {
+      id: "kind",
+      header: "Kind",
+      cell: (r) => <span className="text-ink-3">{MEDIA_KINDS.find((k) => k.kind === r.kind)?.label ?? r.kind}</span>,
+      csv: (r) => r.kind,
+    },
+    { id: "maker", header: "Maker", optional: true, cell: (r) => <span className="text-ink-3">{r.maker ?? "—"}</span>, csv: (r) => r.maker },
+    { id: "providers", header: "Providers", numeric: true, cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
+    { id: "low", header: "Lowest", numeric: true, cell: (r) => <Price strong>{formatUnitPrice(r.min_price, r.unit)}</Price>, csv: (r) => r.min_price },
+    { id: "median", header: "Median", numeric: true, optional: true, cell: (r) => <Price>{formatUnitPrice(r.median_price, r.unit)}</Price>, csv: (r) => r.median_price },
+    { id: "unit", header: "Unit", optional: true, cell: (r) => <span className="text-ink-3">{UNIT_LABELS[r.unit] ?? r.unit}</span>, csv: (r) => r.unit },
+    { id: "spread", header: "Spread", numeric: true, optional: true, cell: (r) => <Price>{r.providers > 1 ? spread(r.min_price, r.median_price) : "—"}</Price> },
+    { id: "cheapest", header: "Cheapest at", optional: true, cell: (r) => <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />, csv: (r) => r.cheapest.name },
+  ];
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Market / Media"
+        crumbs={[{ href: "/market", label: "Market" }, { label: "Image, video, speech" }]}
         title="Image, video, speech and embeddings"
         lead="Models that are not priced by chat tokens, compared in their own unit: per image, per second of video or audio, per character of speech, and per million input tokens for embeddings."
       />
@@ -67,38 +85,15 @@ export default async function MarketMediaPage({ searchParams }: Props) {
           Sold by 2+ providers
         </FilterChip>
       </nav>
-      {data.items.length === 0 ? (
-        <p className="font-mono text-[13px] text-ink-3">No model matches. Remove a filter to see more.</p>
-      ) : (
-        <DataTable
-          caption={`${formatCount(data.total)} models`}
-          headers={["Model", "Kind", "Providers", "Lowest", "Median", "Spread", "Cheapest at"]}
-          numeric={[2, 3, 4, 5]}
-          rows={data.items.map((row) => ({
-            key: `${row.kind}:${row.model_key}`,
-            cells: [
-              <RowLink key="m" href={modelHref(row.model_key)}>
-                {row.name}
-              </RowLink>,
-              <span key="k" className="text-ink-3">
-                {MEDIA_KINDS.find((k) => k.kind === row.kind)?.label ?? row.kind}
-              </span>,
-              <Price key="n">{row.providers}</Price>,
-              <Price key="lo" strong>
-                {formatUnitPrice(row.min_price, row.unit)}
-              </Price>,
-              <Price key="md">{formatUnitPrice(row.median_price, row.unit)}</Price>,
-              <Price key="sp">{row.providers > 1 ? spread(row.min_price, row.median_price) : "—"}</Price>,
-              <ProviderLink
-                key="c"
-                slug={row.cheapest.slug}
-                name={row.cheapest.name}
-                logoUrl={row.cheapest.logo_url}
-              />,
-            ],
-          }))}
-        />
-      )}
+      <SmartTable
+        id="market-media"
+        caption={`${formatCount(data.total)} models`}
+        columns={columns}
+        rows={data.items}
+        rowKey={(r) => `${r.kind}:${r.model_key}`}
+        csvName="inference-hub-media"
+        empty="No model matches. Remove a filter to see more."
+      />
       <Pagination
         page={pageNumber}
         lastPage={Math.max(1, Math.ceil(data.total / PAGE_SIZE))}

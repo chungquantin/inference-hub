@@ -6,6 +6,7 @@ pub mod market;
 pub mod news;
 pub mod organizations;
 pub mod products;
+pub mod search;
 pub mod sitemap;
 
 use utoipa_axum::router::OpenApiRouter;
@@ -20,5 +21,6 @@ pub fn v1_router() -> OpenApiRouter<AppState> {
         .merge(news::router())
         .merge(compare::router())
         .merge(market::router())
+        .merge(search::router())
         .merge(sitemap::router())
 }

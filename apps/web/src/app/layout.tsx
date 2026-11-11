@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Funnel_Display, IBM_Plex_Mono, Inter, Silkscreen } from "next/font/google";
 import Link from "next/link";
+import { CommandPalette } from "@/components/shell/command-palette";
 import { MainNav } from "@/components/shell/main-nav";
 import { LiveDot } from "@/components/ui/pixel";
 import { api } from "@/lib/api";
-import { NAV_LINKS } from "@/lib/nav";
+import { NAV_SECTIONS } from "@/lib/nav";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -40,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Skip to content
         </a>
         <header className="sticky top-0 z-40 border-b border-line bg-wash">
-          <div className="mx-auto flex h-14 max-w-[1200px] items-stretch gap-6 px-6">
+          <div className="mx-auto flex h-14 max-w-[1280px] items-stretch gap-6 px-4 sm:px-6">
             <Link href="/" className="flex shrink-0 items-center gap-2.5">
               <BrandMark />
               <span className="font-display text-[18px] tracking-[-0.02em] text-ink">{SITE_NAME}</span>
@@ -48,10 +49,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <MainNav />
           </div>
         </header>
-        <main id="main" className="mx-auto w-full max-w-[1200px] flex-1 px-6 pt-10 pb-20">
+        <main id="main" className="mx-auto w-full max-w-[1280px] flex-1 px-4 pt-8 pb-20 sm:px-6">
           {children}
         </main>
         <Footer />
+        <CommandPalette />
       </body>
     </html>
   );
@@ -71,22 +73,23 @@ function BrandMark() {
 
 async function Footer() {
   // Live counts for the status bar; the footer still renders if the API is down.
-  const [orgs, gpus, models, news] = await Promise.all([
+  const [orgs, market, news] = await Promise.all([
     api.GET("/v1/organizations", { params: { query: { limit: 1 } } }).catch(() => null),
-    api.GET("/v1/compare/gpus").catch(() => null),
-    api.GET("/v1/compare/models").catch(() => null),
+    api.GET("/v1/market").catch(() => null),
     api.GET("/v1/news", { params: { query: { limit: 1 } } }).catch(() => null),
   ]);
+  const m = market?.data;
   const status = [
     orgs?.data && `${orgs.data.total} organizations`,
-    models?.data && `${models.data.length} model prices`,
-    gpus?.data && `${gpus.data.prices.length} GPU prices`,
-    news?.data && `${news.data.total} stories`,
+    m && `${m.providers} providers`,
+    m && `${m.distinct_models.toLocaleString("en-US")} models`,
+    m && `${m.gpu_types} GPU types`,
+    news?.data && `${news.data.total.toLocaleString("en-US")} stories`,
   ].filter(Boolean);
 
   return (
     <footer className="bg-s-7 text-wash">
-      <div className="mx-auto grid max-w-[1200px] gap-10 px-6 py-14 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+      <div className="mx-auto grid max-w-[1280px] gap-10 px-6 py-14 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
         <div className="flex flex-col gap-4">
           <p className="font-display text-[28px] leading-9 tracking-[-0.02em]">
             The price of inference, from the providers themselves.
@@ -96,27 +99,27 @@ async function Footer() {
             data with sources. Check with the provider before you buy.
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-          <FooterCol title="Compare">
-            <Link href="/compare/models">Model API prices</Link>
-            <Link href="/compare/gpus">GPU cloud prices</Link>
-            <Link href="/compare/open-source">Open source</Link>
-          </FooterCol>
-          <FooterCol title="Browse">
-            {NAV_LINKS.filter((l) => l.href !== "/compare").map((l) => (
-              <Link key={l.href} href={l.href}>
-                {l.label}
-              </Link>
-            ))}
-          </FooterCol>
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          {NAV_SECTIONS.map((section) => (
+            <FooterCol key={section.href} title={section.label}>
+              {section.items.map((l) => (
+                <Link key={l.href} href={l.href}>
+                  {l.label}
+                </Link>
+              ))}
+            </FooterCol>
+          ))}
           <FooterCol title="Project">
             <a href="https://github.com/chungquantin/inference-hub">GitHub</a>
             <a href={`${SITE_URL}/sitemap.xml`}>Sitemap</a>
+            {process.env.PUBLIC_API_URL && (
+              <a href={`${process.env.PUBLIC_API_URL.replace(/\/$/, "")}/docs`}>API docs</a>
+            )}
           </FooterCol>
         </div>
       </div>
       <div className="bg-s-9">
-        <div className="mx-auto flex h-8 max-w-[1200px] items-center gap-4 overflow-hidden px-6 font-mono text-[12px] whitespace-nowrap text-s-3">
+        <div className="mx-auto flex h-8 max-w-[1280px] items-center gap-4 overflow-hidden px-6 font-mono text-[12px] whitespace-nowrap text-s-3">
           <span className="flex items-center gap-2 bg-s-3 px-2 text-s-10">
             <LiveDot />
             Live
@@ -124,7 +127,7 @@ async function Footer() {
           {status.map((s) => (
             <span key={s as string}>{s}</span>
           ))}
-          <span className="ml-auto hidden text-s-4 sm:inline">Prices refresh every 6 hours</span>
+          <span className="ml-auto hidden text-s-4 sm:inline">Marketplaces refresh hourly, price lists daily</span>
         </div>
       </div>
     </footer>

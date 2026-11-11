@@ -21,7 +21,7 @@ export default async function CompareOpenSourcePage() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        label="Compare / Open source"
+        crumbs={[{ href: "/compare", label: "Compare" }, { label: "Open source" }]}
         title="Open-source projects"
         lead="Inference engines and runtimes by GitHub stars. Stars over 30 days appear once the hub has 30 days of history. Archived projects are listed last."
       />

@@ -314,6 +314,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/makers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Makers of chat models in the market, most models first, for filters. */
+        get: operations["marketMakers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/media": {
         parameters: {
             query?: never;
@@ -541,6 +558,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search organizations, products, models (chat and media), GPU types and
+         *     news at once. Results come grouped by kind, best match first.
+         */
+        get: operations["search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/sitemap": {
         parameters: {
             query?: never;
@@ -698,6 +735,12 @@ export interface components {
             /** Format: int64 */
             count: number;
             kind: string;
+        };
+        /** @description A maker and how many models it has, for filters. */
+        MakerCount: {
+            maker: string;
+            /** Format: int64 */
+            models: number;
         };
         /** @description The organization that makes a product, read from `maker_*` columns. */
         MakerRef: {
@@ -1430,6 +1473,35 @@ export interface components {
             name: string;
             slug: string;
         };
+        SearchCount: {
+            /** Format: int64 */
+            count: number;
+            kind: string;
+        };
+        /** @description One search result. */
+        SearchHit: {
+            /** Format: date-time */
+            date?: string | null;
+            /** @description The site path of the result, such as `/organizations/openai`. */
+            href: string;
+            /** @description `organization`, `product`, `model`, `media`, `gpu` or `news`. */
+            kind: string;
+            logo_url?: string | null;
+            /**
+             * Format: float
+             * @description Higher is better; exact and prefix matches score above substrings.
+             */
+            score: number;
+            /** @description A short second line: maker, kind, price or source. */
+            subtitle?: string | null;
+            title: string;
+        };
+        /** @description Results grouped by kind, best first, with how many of each matched. */
+        SearchResults: {
+            counts: components["schemas"]["SearchCount"][];
+            hits: components["schemas"]["SearchHit"][];
+            q: string;
+        };
         SetOrganizationsRequest: {
             /** @description Slugs of the organizations the item is about. Unknown slugs are rejected. */
             organizations: string[];
@@ -2028,6 +2100,23 @@ export interface operations {
                  *     provider counts still cover the whole market.
                  */
                 provider?: string;
+                /** @description Models only: keep this maker (as providers name it, such as `deepseek-ai`). */
+                maker?: string;
+                /**
+                 * @description Lowest price at most / at least this: USD per 1M tokens (blend) for
+                 *     models, USD per GPU-hour for GPUs.
+                 */
+                max_price?: number;
+                min_price?: number;
+                /** @description Models only: context window of at least this many tokens. */
+                min_context?: number;
+                /**
+                 * @description `providers` (default), `price`, `median`, `input`, `output`,
+                 *     `context` or `name`.
+                 */
+                sort?: string;
+                /** @description `asc` or `desc`; each sort has a natural default. */
+                dir?: string;
             };
             header?: never;
             path?: never;
@@ -2079,6 +2168,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketMakers: {
+        parameters: {
+            query?: {
+                /** @description Count models sold by at least this many providers. Default 1. */
+                min_providers?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MakerCount"][];
                 };
             };
         };
@@ -2138,6 +2249,23 @@ export interface operations {
                  *     provider counts still cover the whole market.
                  */
                 provider?: string;
+                /** @description Models only: keep this maker (as providers name it, such as `deepseek-ai`). */
+                maker?: string;
+                /**
+                 * @description Lowest price at most / at least this: USD per 1M tokens (blend) for
+                 *     models, USD per GPU-hour for GPUs.
+                 */
+                max_price?: number;
+                min_price?: number;
+                /** @description Models only: context window of at least this many tokens. */
+                min_context?: number;
+                /**
+                 * @description `providers` (default), `price`, `median`, `input`, `output`,
+                 *     `context` or `name`.
+                 */
+                sort?: string;
+                /** @description `asc` or `desc`; each sort has a natural default. */
+                dir?: string;
             };
             header?: never;
             path?: never;
@@ -2252,6 +2380,15 @@ export interface operations {
                 /** @description Default 50, at most 500. */
                 limit?: number;
                 offset?: number;
+                /**
+                 * @description `providers` (default), `price`, `rank`, `gap` (how far above the
+                 *     market low), or `name`.
+                 */
+                sort?: string;
+                /** @description `asc` or `desc`. */
+                dir?: string;
+                /** @description Only items where this provider is the cheapest. */
+                cheapest?: boolean;
             };
             header?: never;
             path: {
@@ -2496,6 +2633,40 @@ export interface operations {
                 };
             };
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    search: {
+        parameters: {
+            query: {
+                /** @description The text to search for (at least 2 characters). */
+                q: string;
+                /** @description Only these kinds, comma-separated, such as `model,gpu`. */
+                kinds?: string;
+                /** @description Results per kind. Default 6, at most 50. */
+                per_kind?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResults"];
+                };
+            };
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };

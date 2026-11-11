@@ -97,6 +97,26 @@ pub struct MarketIndexQuery {
     /// Keep models (or GPUs) this organization sells, by slug. Prices and
     /// provider counts still cover the whole market.
     pub provider: Option<String>,
+    /// Models only: keep this maker (as providers name it, such as `deepseek-ai`).
+    pub maker: Option<String>,
+    /// Lowest price at most / at least this: USD per 1M tokens (blend) for
+    /// models, USD per GPU-hour for GPUs.
+    pub max_price: Option<f64>,
+    pub min_price: Option<f64>,
+    /// Models only: context window of at least this many tokens.
+    pub min_context: Option<i64>,
+    /// `providers` (default), `price`, `median`, `input`, `output`,
+    /// `context` or `name`.
+    pub sort: Option<String>,
+    /// `asc` or `desc`; each sort has a natural default.
+    pub dir: Option<String>,
+}
+
+/// A maker and how many models it has, for filters.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct MakerCount {
+    pub maker: String,
+    pub models: i64,
 }
 
 /// One provider's live price for a model or GPU, as the adapter saw it.
@@ -277,6 +297,13 @@ pub struct ProviderOfferingsQuery {
     /// Default 50, at most 500.
     pub limit: Option<i64>,
     pub offset: Option<i64>,
+    /// `providers` (default), `price`, `rank`, `gap` (how far above the
+    /// market low), or `name`.
+    pub sort: Option<String>,
+    /// `asc` or `desc`.
+    pub dir: Option<String>,
+    /// Only items where this provider is the cheapest.
+    pub cheapest: Option<bool>,
 }
 
 /// A provider's offerings, one page, with counts per kind.

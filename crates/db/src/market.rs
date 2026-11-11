@@ -27,17 +27,15 @@ fn offset(q: Option<i64>) -> i64 {
 
 /// Escapes `%`, `_` and `\` so user text matches literally in ILIKE.
 fn like(q: &Option<String>) -> Option<String> {
-    q.as_deref()
-        .map(str::trim)
-        .filter(|s| !s.is_empty())
-        .map(|s| {
-            format!(
-                "%{}%",
-                s.replace('\\', "\\\\")
-                    .replace('%', "\\%")
-                    .replace('_', "\\_")
-            )
-        })
+    // Words match in order with anything between, so `deepseek v3` finds
+    // `deepseek-v3` and `DeepSeek V3.1`.
+    let words: Vec<String> = q
+        .as_deref()?
+        .split(|c: char| c.is_whitespace() || matches!(c, '-' | '_' | '/' | ':'))
+        .filter(|w| !w.is_empty())
+        .map(|w| w.replace('\\', "\\\\").replace('%', "\\%"))
+        .collect();
+    (!words.is_empty()).then(|| format!("%{}%", words.join("%")))
 }
 
 fn blank(s: &Option<String>) -> Option<&str> {
@@ -50,6 +48,23 @@ const CHEAPEST: &str = "o.slug AS organization_slug, o.name AS organization_name
 
 /// GPU types across clouds, the most widely sold first.
 pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<GpuIndexRow>> {
+    let (column, natural_desc) = match q.sort.as_deref().unwrap_or("providers") {
+        "price" => ("g.min_per_gpu_hour", false),
+        "median" => ("g.median_per_gpu_hour", false),
+        "max" => ("g.max_per_gpu_hour", false),
+        "listings" => ("g.listings", true),
+        "name" => ("lower(g.gpu_type)", false),
+        _ => ("g.providers", true),
+    };
+    let desc = match q.dir.as_deref() {
+        Some("asc") => false,
+        Some("desc") => true,
+        _ => natural_desc,
+    };
+    let order = format!(
+        "{column} {}, g.providers DESC, g.listings DESC, g.gpu_type",
+        if desc { "DESC" } else { "ASC" }
+    );
     sqlx::query_as(sqlx::AssertSqlSafe(format!(
         "SELECT g.gpu_type, g.providers::int8 AS providers, g.listings::int8 AS listings,
                 g.min_per_gpu_hour, g.median_per_gpu_hour, g.max_per_gpu_hour, {CHEAPEST}
@@ -58,7 +73,9 @@ pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<
          WHERE g.providers >= $2
            AND ($1::text IS NULL OR g.gpu_type ILIKE $1)
            AND ($5::text IS NULL OR g.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $5)])
-         ORDER BY g.providers DESC, g.listings DESC, g.gpu_type
+           AND ($6::float8 IS NULL OR g.min_per_gpu_hour <= $6)
+           AND ($7::float8 IS NULL OR g.min_per_gpu_hour >= $7)
+         ORDER BY {order}
          LIMIT $3 OFFSET $4"
     )))
     .bind(like(&q.q))
@@ -66,6 +83,8 @@ pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<
     .bind(limit(q.limit))
     .bind(offset(q.offset))
     .bind(blank(&q.provider))
+    .bind(q.max_price)
+    .bind(q.min_price)
     .fetch_all(pool)
     .await
 }
@@ -86,9 +105,33 @@ fn page<T>(rows: Vec<Counted<T>>, limit: i64, offset: i64) -> Page<T> {
     }
 }
 
-/// Chat models across providers, the most widely sold first.
+/// The ORDER BY of the model index for a `sort` and `dir`. Sort columns come
+/// from this fixed list, never from user text.
+fn model_order(sort: Option<&str>, dir: Option<&str>) -> String {
+    let (column, natural_desc) = match sort.unwrap_or("providers") {
+        "price" => ("m.min_blended_per_mtok", false),
+        "median" => ("m.median_blended_per_mtok", false),
+        "input" => ("m.min_input_per_mtok", false),
+        "output" => ("m.min_output_per_mtok", false),
+        "context" => ("m.max_context_window", true),
+        "name" => ("lower(m.name)", false),
+        _ => ("m.providers", true),
+    };
+    let desc = match dir {
+        Some("asc") => false,
+        Some("desc") => true,
+        _ => natural_desc,
+    };
+    format!(
+        "{column} {} NULLS LAST, m.providers DESC, m.min_blended_per_mtok, m.model_key",
+        if desc { "DESC" } else { "ASC" }
+    )
+}
+
+/// Chat models across providers, filtered and sorted; the most widely sold first by default.
 pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Page<ModelIndexRow>> {
     let (limit, offset) = (limit(q.limit), offset(q.offset));
+    let order = model_order(q.sort.as_deref(), q.dir.as_deref());
     let rows: Vec<Counted<ModelIndexRow>> = sqlx::query_as(sqlx::AssertSqlSafe(format!(
         "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker,
                 m.providers::int8 AS providers,
@@ -99,7 +142,11 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
          WHERE m.kind = 'model' AND m.providers >= $2
            AND ($1::text IS NULL OR m.model_key ILIKE $1 OR m.name ILIKE $1)
            AND ($5::text IS NULL OR m.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $5)])
-         ORDER BY m.providers DESC, m.min_blended_per_mtok, m.model_key
+           AND ($6::text IS NULL OR lower(m.maker) = lower($6))
+           AND ($7::float8 IS NULL OR m.min_blended_per_mtok <= $7)
+           AND ($8::float8 IS NULL OR m.min_blended_per_mtok >= $8)
+           AND ($9::int8 IS NULL OR m.max_context_window >= $9)
+         ORDER BY {order}
          LIMIT $3 OFFSET $4"
     )))
     .bind(like(&q.q))
@@ -107,9 +154,28 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
     .bind(limit)
     .bind(offset)
     .bind(blank(&q.provider))
+    .bind(blank(&q.maker))
+    .bind(q.max_price)
+    .bind(q.min_price)
+    .bind(q.min_context)
     .fetch_all(pool)
     .await?;
     Ok(page(rows, limit, offset))
+}
+
+/// Makers of models sold by at least `min_providers` providers, most models first.
+pub async fn model_makers(
+    pool: &PgPool,
+    min_providers: i64,
+) -> sqlx::Result<Vec<ih_core::MakerCount>> {
+    sqlx::query_as(
+        "SELECT maker, count(*) AS models FROM market_models
+         WHERE kind = 'model' AND maker IS NOT NULL AND providers >= $1
+         GROUP BY maker ORDER BY count(*) DESC, maker LIMIT 60",
+    )
+    .bind(min_providers)
+    .fetch_all(pool)
+    .await
 }
 
 /// Models priced per unit, the most widely sold first.
@@ -407,8 +473,25 @@ pub async fn provider_offerings(
     }
     let limit = q.limit.unwrap_or(50).clamp(1, 500);
     let offset = offset(q.offset);
-    let rows: Vec<Counted<ih_core::ProviderOffering>> = sqlx::query_as(
-        "SELECT count(*) OVER () AS total, f.kind, f.item_key, f.name, f.maker,
+    let (column, natural_desc) = match q.sort.as_deref().unwrap_or("providers") {
+        "price" => ("f.price", false),
+        "rank" => ("f.rank", false),
+        "gap" => ("f.price / nullif(f.market_min, 0)", false),
+        "name" => ("lower(f.name)", false),
+        _ => ("f.market_providers", true),
+    };
+    let desc = match q.dir.as_deref() {
+        Some("asc") => false,
+        Some("desc") => true,
+        _ => natural_desc,
+    };
+    let order = format!(
+        "{column} {} NULLS LAST, f.market_providers DESC NULLS LAST, f.price NULLS LAST, f.item_key",
+        if desc { "DESC" } else { "ASC" }
+    );
+    let rows: Vec<Counted<ih_core::ProviderOffering>> =
+        sqlx::query_as(sqlx::AssertSqlSafe(format!(
+            "SELECT count(*) OVER () AS total, f.kind, f.item_key, f.name, f.maker,
                 p.slug AS product_slug, f.sources, f.variants, f.price, f.input_per_mtok,
                 f.output_per_mtok, f.unit, f.market_providers, f.market_min, f.market_median,
                 f.rank, f.context_window, f.source_url, f.last_seen_at
@@ -417,16 +500,18 @@ pub async fn provider_offerings(
          WHERE f.organization_id = $1
            AND ($2::text IS NULL OR f.kind = $2)
            AND ($3::text IS NULL OR f.name ILIKE $3 OR f.item_key ILIKE $3)
-         ORDER BY f.market_providers DESC NULLS LAST, f.price NULLS LAST, f.item_key
-         LIMIT $4 OFFSET $5",
-    )
-    .bind(org)
-    .bind(blank(&q.kind))
-    .bind(like(&q.q))
-    .bind(limit)
-    .bind(offset)
-    .fetch_all(pool)
-    .await?;
+           AND (NOT $6 OR (f.rank = 1 AND f.market_providers >= 2))
+         ORDER BY {order}
+         LIMIT $4 OFFSET $5"
+        )))
+        .bind(org)
+        .bind(blank(&q.kind))
+        .bind(like(&q.q))
+        .bind(limit)
+        .bind(offset)
+        .bind(q.cheapest.unwrap_or(false))
+        .fetch_all(pool)
+        .await?;
     let page = page(rows, limit, offset);
     Ok(Some(ih_core::ProviderOfferings {
         kinds,

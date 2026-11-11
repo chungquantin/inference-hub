@@ -18,7 +18,7 @@ export const revalidate = 300; // seconds; must be a literal for Next.js
 
 type Props = {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ kind?: string; q?: string; page?: string }>;
+  searchParams: Promise<{ kind?: string; q?: string; page?: string; sort?: string; dir?: string; cheapest?: string }>;
 };
 
 const OFFERINGS_PAGE = 50;
@@ -56,6 +56,9 @@ export default async function OrganizationPage({ params, searchParams }: Props) 
         query: {
           kind: query.kind || undefined,
           q: query.q || undefined,
+          sort: query.sort || undefined,
+          dir: query.dir === "asc" || query.dir === "desc" ? query.dir : undefined,
+          cheapest: query.cheapest ? true : undefined,
           limit: OFFERINGS_PAGE,
           offset: (page - 1) * OFFERINGS_PAGE,
         },
@@ -78,6 +81,7 @@ export default async function OrganizationPage({ params, searchParams }: Props) 
         })}
       />
       <ProfileHeader
+        crumbs={[{ href: "/organizations", label: "Directory" }, { label: org.name }]}
         name={org.name}
         logoUrl={org.logo_url}
         subtitle={org.tagline}
@@ -119,8 +123,13 @@ export default async function OrganizationPage({ params, searchParams }: Props) 
           slug={org.slug}
           provider={market.data}
           offerings={offerings.data}
-          kind={query.kind || undefined}
-          q={query.q || undefined}
+          params={{
+            kind: query.kind || undefined,
+            q: query.q || undefined,
+            sort: query.sort || undefined,
+            dir: query.dir || undefined,
+            cheapest: query.cheapest || undefined,
+          }}
           page={page}
           pageSize={OFFERINGS_PAGE}
         />
