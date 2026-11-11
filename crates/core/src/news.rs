@@ -26,6 +26,8 @@ pub enum NewsMatch {
     Body,
     /// An editor added the link.
     Manual,
+    /// The LLM enrichment found it.
+    Llm,
 }
 
 /// An organization a news item is about.
@@ -50,6 +52,22 @@ pub struct NewsItem {
     pub published_at: DateTime<Utc>,
     pub status: NewsStatus,
     pub organizations: Vec<NewsMention>,
+    /// The LLM's triage of the item, when it was enriched.
+    pub enrichment: Option<NewsEnrichment>,
+}
+
+/// An LLM's triage of a news item. A suggestion for editors; `summary_ai` is
+/// machine-written and must be shown labelled as such.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct NewsEnrichment {
+    pub topic: String,
+    /// `core`, `adjacent` or `off_topic`.
+    pub relevance: String,
+    /// `approve` or `reject`.
+    pub verdict: String,
+    pub confidence: f32,
+    pub summary_ai: Option<String>,
+    pub model: String,
 }
 
 /// A feed source with its fetch health, for the admin view.

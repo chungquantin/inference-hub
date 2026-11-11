@@ -826,9 +826,25 @@ export interface components {
              */
             parameters_b?: number | null;
         };
+        /**
+         * @description An LLM's triage of a news item. A suggestion for editors; `summary_ai` is
+         *     machine-written and must be shown labelled as such.
+         */
+        NewsEnrichment: {
+            /** Format: float */
+            confidence: number;
+            model: string;
+            /** @description `core`, `adjacent` or `off_topic`. */
+            relevance: string;
+            summary_ai?: string | null;
+            topic: string;
+            /** @description `approve` or `reject`. */
+            verdict: string;
+        };
         /** @description A news item as shown in feeds. */
         NewsItem: {
             author?: string | null;
+            enrichment?: components["schemas"]["NewsEnrichment"] | null;
             /** Format: uuid */
             id: string;
             image_url?: string | null;
@@ -845,7 +861,7 @@ export interface components {
          * @description How a news item was linked to an organization.
          * @enum {string}
          */
-        NewsMatch: "source" | "title" | "body" | "manual";
+        NewsMatch: "source" | "title" | "body" | "manual" | "llm";
         /** @description An organization a news item is about. */
         NewsMention: {
             logo_url?: string | null;
@@ -944,6 +960,7 @@ export interface components {
         Page_NewsItem: {
             items: {
                 author?: string | null;
+                enrichment?: components["schemas"]["NewsEnrichment"] | null;
                 /** Format: uuid */
                 id: string;
                 image_url?: string | null;

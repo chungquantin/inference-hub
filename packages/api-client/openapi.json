@@ -2275,6 +2275,43 @@
           }
         }
       },
+      "NewsEnrichment": {
+        "type": "object",
+        "description": "An LLM's triage of a news item. A suggestion for editors; `summary_ai` is\nmachine-written and must be shown labelled as such.",
+        "required": [
+          "topic",
+          "relevance",
+          "verdict",
+          "confidence",
+          "model"
+        ],
+        "properties": {
+          "confidence": {
+            "type": "number",
+            "format": "float"
+          },
+          "model": {
+            "type": "string"
+          },
+          "relevance": {
+            "type": "string",
+            "description": "`core`, `adjacent` or `off_topic`."
+          },
+          "summary_ai": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "topic": {
+            "type": "string"
+          },
+          "verdict": {
+            "type": "string",
+            "description": "`approve` or `reject`."
+          }
+        }
+      },
       "NewsItem": {
         "type": "object",
         "description": "A news item as shown in feeds.",
@@ -2291,6 +2328,17 @@
             "type": [
               "string",
               "null"
+            ]
+          },
+          "enrichment": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/NewsEnrichment",
+                "description": "The LLM's triage of the item, when it was enriched."
+              },
+              {
+                "type": "null"
+              }
             ]
           },
           "id": {
@@ -2343,7 +2391,8 @@
           "source",
           "title",
           "body",
-          "manual"
+          "manual",
+          "llm"
         ]
       },
       "NewsMention": {
@@ -2672,6 +2721,17 @@
                   "type": [
                     "string",
                     "null"
+                  ]
+                },
+                "enrichment": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/NewsEnrichment",
+                      "description": "The LLM's triage of the item, when it was enriched."
+                    },
+                    {
+                      "type": "null"
+                    }
                   ]
                 },
                 "id": {

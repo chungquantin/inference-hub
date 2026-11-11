@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 use chrono::{DateTime, Utc};
 use ih_core::{
-    AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, Page, PageParams, SourceStatus,
-    UnmappedListing,
+    AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, Page, PageParams,
+    SourceStatus, UnmappedListing,
 };
 use sqlx::{FromRow, PgPool};
 use uuid::Uuid;
@@ -125,6 +125,23 @@ async fn with_mentions(pool: &PgPool, rows: Vec<NewsRow>) -> sqlx::Result<Vec<Ne
     .fetch_all(pool)
     .await?;
 
+    #[derive(FromRow)]
+    struct EnrichmentRow {
+        news_item_id: Uuid,
+        #[sqlx(flatten)]
+        enrichment: NewsEnrichment,
+    }
+    let mut enrichments: HashMap<Uuid, NewsEnrichment> = sqlx::query_as::<_, EnrichmentRow>(
+        "SELECT news_item_id, topic, relevance, verdict, confidence, summary_ai, model
+         FROM news_enrichment WHERE news_item_id = ANY ($1)",
+    )
+    .bind(&ids)
+    .fetch_all(pool)
+    .await?
+    .into_iter()
+    .map(|r| (r.news_item_id, r.enrichment))
+    .collect();
+
     let mut by_item: HashMap<Uuid, Vec<NewsMention>> = HashMap::new();
     for (item, slug, name, logo_url, matched_by) in mentions {
         by_item.entry(item).or_default().push(NewsMention {
@@ -139,6 +156,7 @@ async fn with_mentions(pool: &PgPool, rows: Vec<NewsRow>) -> sqlx::Result<Vec<Ne
         .into_iter()
         .map(|r| NewsItem {
             organizations: by_item.remove(&r.id).unwrap_or_default(),
+            enrichment: enrichments.remove(&r.id),
             id: r.id,
             url: r.url,
             title: r.title,

@@ -5,6 +5,7 @@ pub mod adapters;
 pub mod feed;
 pub mod github;
 pub mod ingest;
+pub mod llm;
 pub mod market;
 pub mod tagger;
 pub mod url;

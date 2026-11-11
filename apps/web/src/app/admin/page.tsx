@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import type { NewsStatus } from "@inference-hub/api-client";
 import { FilterChip, Pagination, listingHref, parsePage } from "@/components/listing";
-import { NewsCard } from "@/components/news";
+import { AiSummary, NewsCard, TriageBadges } from "@/components/news";
 import { buttonClass } from "@/components/ui/primitives";
 import { adminApi, requireAdmin } from "@/lib/admin";
 import { formatDate } from "@/lib/format";
@@ -105,6 +105,10 @@ export default async function AdminPage({ searchParams }: Props) {
               />
               <div className="min-w-0 flex-1">
                 <NewsCard item={item}>
+                  <TriageBadges item={item} />
+                  {item.summary && item.enrichment?.summary_ai && (
+                    <AiSummary text={item.enrichment.summary_ai} />
+                  )}
                   <form action={setOrganizations} className="flex gap-2 pt-1 text-xs">
                     <input type="hidden" name="id" value={item.id} />
                     <input

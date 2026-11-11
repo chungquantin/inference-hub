@@ -17,6 +17,7 @@ use uuid::Uuid;
 pub const FETCH_SOURCE: &str = "fetch_source";
 pub const SYNC_REPO: &str = "sync_repo";
 pub const RUN_ADAPTER: &str = "run_adapter";
+pub const ENRICH_NEWS: &str = "enrich_news";
 
 fn market_adapters_from(adapters: Arc<Vec<MarketAdapter>>) -> Vec<MarketAdapter> {
     Arc::try_unwrap(adapters).unwrap_or_else(|_| panic!("adapters are shared"))
@@ -53,6 +54,8 @@ pub struct Context {
     pub adapter_every: Option<Duration>,
     /// Counters served on `/metrics`.
     pub metrics: Arc<health::Metrics>,
+    /// News enrichment through an LLM; `None` turns it off.
+    pub llm: Option<ih_ingest::llm::LlmConfig>,
 }
 
 impl Context {
@@ -69,6 +72,7 @@ impl Context {
             adapters: Arc::new(market_adapters(endpoints)),
             adapter_every: None,
             metrics: Arc::default(),
+            llm: None,
         }
     }
 
@@ -227,12 +231,50 @@ pub async fn schedule_due_adapters(pool: &PgPool, ctx: &Context) -> sqlx::Result
 pub async fn schedule_all(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
     Ok(schedule_due_sources(pool).await?
         + schedule_due_repos(pool, ctx.repo_sync_every).await?
-        + schedule_due_adapters(pool, ctx).await?)
+        + schedule_due_adapters(pool, ctx).await?
+        + schedule_enrichment(pool, ctx).await?)
+}
+
+/// Enqueues one enrichment pass when enrichment is on and pending items wait
+/// for it. The dedupe key keeps at most one pass queued at a time.
+pub async fn schedule_enrichment(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
+    if ctx.llm.is_none() {
+        return Ok(0);
+    }
+    let waiting: bool = sqlx::query_scalar(
+        "SELECT EXISTS (SELECT 1 FROM news_items n WHERE n.status = 'pending'
+                        AND NOT EXISTS (SELECT 1 FROM news_enrichment e WHERE e.news_item_id = n.id))",
+    )
+    .fetch_one(pool)
+    .await?;
+    if !waiting {
+        return Ok(0);
+    }
+    let job = jobs::enqueue(
+        pool,
+        NewJob {
+            kind: ENRICH_NEWS,
+            payload: serde_json::json!({}),
+            dedupe_key: Some(ENRICH_NEWS),
+            max_attempts: Some(1),
+            ..NewJob::default()
+        },
+    )
+    .await?;
+    Ok(usize::from(job.is_some()))
 }
 
 /// Runs one job. Errors are recorded on the job by the caller.
 pub async fn run_job(pool: &PgPool, ctx: &Context, job: &Job) -> anyhow::Result<()> {
     match job.kind.as_str() {
+        ENRICH_NEWS => {
+            let Some(cfg) = &ctx.llm else {
+                return Ok(());
+            };
+            let report = ih_ingest::llm::enrich_pending(pool, &ctx.http, cfg).await?;
+            tracing::info!(job = job.id, ?report, "enriched news");
+            Ok(())
+        }
         RUN_ADAPTER => {
             let payload: RunAdapterPayload = serde_json::from_value(job.payload.clone())?;
             let adapter = ctx

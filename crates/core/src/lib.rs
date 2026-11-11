@@ -21,7 +21,8 @@ pub use market::{
     MarketOverview, MarketProvider, MarketSource, ModelIndexRow, PriceHold,
 };
 pub use news::{
-    AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus, UnmappedListing,
+    AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus,
+    UnmappedListing,
 };
 pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail};
 pub use pagination::{Page, PageParams};

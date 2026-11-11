@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { NewsItem } from "@inference-hub/api-client";
 import { Logo } from "@/components/ui/logo";
+import { Badge } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/format";
 
 /** One news item: date in a mono column, headline, summary and the organizations it is about. */
@@ -16,7 +17,11 @@ export function NewsCard({ item, children }: { item: NewsItem; children?: React.
             {item.title}
           </a>
         </h3>
-        {item.summary && <p className="line-clamp-2 text-[14px] leading-5 text-ink-2">{item.summary}</p>}
+        {item.summary ? (
+          <p className="line-clamp-2 text-[14px] leading-5 text-ink-2">{item.summary}</p>
+        ) : (
+          item.enrichment?.summary_ai && <AiSummary text={item.enrichment.summary_ai} />
+        )}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-0.5">
           {item.publisher && <span className="font-mono text-[12px] text-ink-3">{item.publisher}</span>}
           {item.organizations.map((org) => (
@@ -33,6 +38,32 @@ export function NewsCard({ item, children }: { item: NewsItem; children?: React.
         {children}
       </div>
     </article>
+  );
+}
+
+/** A machine-written summary, always labelled as one. */
+export function AiSummary({ text }: { text: string }) {
+  return (
+    <p className="line-clamp-2 text-[14px] leading-5 text-ink-2">
+      <span className="mr-1.5 font-mono text-[11px] tracking-wide text-ink-3 uppercase">AI summary</span>
+      {text}
+    </p>
+  );
+}
+
+/** The LLM's triage, for editors: relevance, suggested verdict and confidence. */
+export function TriageBadges({ item }: { item: NewsItem }) {
+  const e = item.enrichment;
+  if (!e) return <span className="font-mono text-[12px] text-ink-3">not triaged</span>;
+  const relevance = e.relevance === "core" ? "brand" : e.relevance === "adjacent" ? "neutral" : "down";
+  return (
+    <div className="flex flex-wrap items-center gap-2" title={`Triaged by ${e.model}`}>
+      <Badge tone={relevance}>{e.relevance.replace("_", " ")}</Badge>
+      <Badge tone="neutral">{e.topic.replace("_", " ")}</Badge>
+      <Badge tone={e.verdict === "approve" ? "up" : "warn"}>
+        AI suggests {e.verdict} · {Math.round(e.confidence * 100)}%
+      </Badge>
+    </div>
   );
 }
 

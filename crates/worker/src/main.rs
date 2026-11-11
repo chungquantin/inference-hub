@@ -1,8 +1,10 @@
-//! `worker [--once] [--retag]`
+//! `worker [--once] [--retag] [--enrich-backlog]`
 //!
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
 //! `--once` schedules due feed fetches and repository syncs, runs them and exits.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
+//! `--enrich-backlog` enriches pending news through the LLM until none is
+//! left or a budget runs out, and exits.
 //!
 //! The long-running mode also serves `/healthz`, `/readyz` and `/metrics` on
 //! `WORKER_METRICS_PORT` (default 9090), for the platform's health checks.
@@ -30,7 +32,33 @@ async fn main() -> anyhow::Result<()> {
     if github.token.is_none() {
         tracing::info!("GITHUB_TOKEN is not set; GitHub allows 60 requests per hour");
     }
-    let ctx = worker::Context::new(http, github);
+    let mut ctx = worker::Context::new(http, github);
+    ctx.llm = ih_ingest::llm::LlmConfig::from_env();
+    match &ctx.llm {
+        Some(cfg) => tracing::info!(
+            model = %cfg.model,
+            max_usd_per_day = cfg.max_usd_per_day,
+            "news enrichment is on"
+        ),
+        None => {
+            tracing::info!("LIQUID_BASE_URL or LIQUID_API_KEY is not set; news enrichment is off")
+        }
+    }
+
+    if flag("--enrich-backlog") {
+        let Some(cfg) = &ctx.llm else {
+            anyhow::bail!("--enrich-backlog needs LIQUID_BASE_URL and LIQUID_API_KEY");
+        };
+        // Passes until nothing is left or a budget runs out.
+        loop {
+            let report = ih_ingest::llm::enrich_pending(&pool, &ctx.http, cfg).await?;
+            tracing::info!(?report, "enrichment pass");
+            if report.enriched == 0 || report.budget_exhausted {
+                break;
+            }
+        }
+        return Ok(());
+    }
 
     if flag("--retag") {
         let items = ih_ingest::retag_all(&pool).await?;

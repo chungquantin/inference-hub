@@ -60,6 +60,7 @@ services:
       GITHUB_TOKEN: ${GITHUB_TOKEN:-}
       LIQUID_BASE_URL: ${LIQUID_BASE_URL:-}
       LIQUID_API_KEY: ${LIQUID_API_KEY:-}
+      MAX_ENRICH_USD_PER_DAY: ${MAX_ENRICH_USD_PER_DAY:-1.00}
     healthcheck:
       test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/9090 && printf 'GET /healthz HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q '200 OK' <&3"]
       interval: 15s
