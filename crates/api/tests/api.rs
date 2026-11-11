@@ -123,6 +123,41 @@ async fn seed_fixtures(pool: &PgPool) {
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn a_parent_category_includes_its_sub_categories(pool: PgPool) {
+    let app = app(pool.clone());
+    let (_, before) = get(&app, "/v1/organizations?category=open-source").await;
+    let before = before["total"].as_i64().unwrap();
+    let (_, clouds) = get(&app, "/v1/organizations?category=gpu-clouds").await;
+
+    sqlx::raw_sql(
+        "INSERT INTO organizations (slug, name, kinds) VALUES ('eng', 'Eng', '{open_source}');
+         INSERT INTO organization_categories (organization_id, category_id)
+         SELECT o.id, c.id FROM organizations o, categories c
+          WHERE o.slug = 'eng' AND c.slug = 'inference-engines';",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+
+    // Listed in the sub-category, so it shows under the sub-category and its parent.
+    let (_, body) = get(&app, "/v1/organizations?category=inference-engines").await;
+    assert_eq!(body["total"], 1);
+    let (_, body) = get(&app, "/v1/organizations?category=open-source").await;
+    assert_eq!(body["total"], before + 1);
+    let (_, body) = get(&app, "/v1/organizations?category=gpu-clouds").await;
+    assert_eq!(
+        body["total"], clouds["total"],
+        "other categories are unaffected"
+    );
+
+    // The parent counts it once, the sub-category too.
+    let (_, body) = get(&app, "/v1/categories/open-source").await;
+    assert_eq!(body["organization_count"], before + 1);
+    let (_, body) = get(&app, "/v1/categories/inference-engines").await;
+    assert_eq!(body["organization_count"], 1);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
 async fn health_reports_database(pool: PgPool) {
     let (status, body) = get(&app(pool), "/health").await;
     assert_eq!(status, StatusCode::OK);
@@ -135,8 +170,16 @@ async fn categories_list_and_detail(pool: PgPool) {
     let (status, body) = get(&app, "/v1/categories").await;
     assert_eq!(status, StatusCode::OK);
     let categories = body.as_array().unwrap();
-    assert_eq!(categories.len(), 8);
+    assert_eq!(categories.len(), 21);
     assert_eq!(categories[0]["slug"], "model-providers");
+    let slugs: Vec<&str> = categories
+        .iter()
+        .map(|c| c["slug"].as_str().unwrap())
+        .collect();
+    assert!(
+        slugs.contains(&"inference-engines"),
+        "sub-categories are listed"
+    );
 
     let (status, body) = get(&app, "/v1/categories/gpu-clouds").await;
     assert_eq!(status, StatusCode::OK);
@@ -255,7 +298,7 @@ async fn sitemap_lists_every_slug(pool: PgPool) {
     seed_fixtures(&pool).await;
     let (status, body) = get(&app(pool), "/v1/sitemap").await;
     assert_eq!(status, StatusCode::OK);
-    assert_eq!(body["categories"].as_array().unwrap().len(), 8);
+    assert_eq!(body["categories"].as_array().unwrap().len(), 21);
     assert_eq!(body["organizations"].as_array().unwrap().len(), 14);
     assert_eq!(body["products"].as_array().unwrap().len(), 2);
 }

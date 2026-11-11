@@ -10,6 +10,6 @@ pub struct Category {
     pub name: String,
     pub description: Option<String>,
     pub parent_id: Option<Uuid>,
-    /// Number of organizations listed in this category.
+    /// Number of organizations listed in this category or in one of its sub-categories.
     pub organization_count: i64,
 }

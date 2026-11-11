@@ -1990,7 +1990,7 @@
           "organization_count": {
             "type": "integer",
             "format": "int64",
-            "description": "Number of organizations listed in this category."
+            "description": "Number of organizations listed in this category or in one of its sub-categories."
           },
           "parent_id": {
             "type": [
@@ -3160,6 +3160,9 @@
           "hyperscaler",
           "hardware",
           "open_source",
+          "decentralized",
+          "llmops",
+          "agent_tool",
           "investor",
           "other"
         ]

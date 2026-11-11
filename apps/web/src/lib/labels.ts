@@ -8,6 +8,9 @@ export const ORG_KIND_LABELS: Record<OrgKind, string> = {
   hyperscaler: "Hyperscaler",
   hardware: "Hardware",
   open_source: "Open source",
+  decentralized: "Decentralized compute",
+  llmops: "LLMOps",
+  agent_tool: "Agent tool",
   investor: "Investor",
   other: "Other",
 };

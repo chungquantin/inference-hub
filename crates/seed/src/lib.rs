@@ -163,16 +163,18 @@ async fn upsert_organization(
     let id: ih_db::sqlx::types::Uuid = sqlx::query_scalar(
         "INSERT INTO organizations
              (slug, name, kinds, tagline, description, website, logo_url,
-              hq_country, founded_year, status, links, aliases, exclude_phrases, match_case)
+              hq_country, founded_year, status, links, aliases, exclude_phrases, match_case,
+              match_name)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, coalesce($10, 'active'::org_status), $11,
-                 $12, $13, $14)
+                 $12, $13, $14, $15)
          ON CONFLICT (slug) DO UPDATE SET
              name = EXCLUDED.name, kinds = EXCLUDED.kinds, tagline = EXCLUDED.tagline,
              description = EXCLUDED.description, website = EXCLUDED.website,
              logo_url = EXCLUDED.logo_url, hq_country = EXCLUDED.hq_country,
              founded_year = EXCLUDED.founded_year, status = EXCLUDED.status,
              links = EXCLUDED.links, aliases = EXCLUDED.aliases,
-             exclude_phrases = EXCLUDED.exclude_phrases, match_case = EXCLUDED.match_case
+             exclude_phrases = EXCLUDED.exclude_phrases, match_case = EXCLUDED.match_case,
+             match_name = EXCLUDED.match_name
          RETURNING id",
     )
     .bind(&org.slug)
@@ -189,6 +191,7 @@ async fn upsert_organization(
     .bind(&org.tagging.aliases)
     .bind(&org.tagging.exclude)
     .bind(org.tagging.match_case)
+    .bind(org.tagging.match_name)
     .fetch_one(&mut **tx)
     .await?;
 

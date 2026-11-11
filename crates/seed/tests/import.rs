@@ -147,6 +147,19 @@ fn bundled_data_parses() {
         "hyperscalers",
         "hardware",
         "investors",
+        "decentralized-compute",
+        "llmops",
+        "agent-tools",
+        "serverless-gpu",
+        "gpu-marketplaces",
+        "sovereign-clouds",
+        "inference-engines",
+        "local-runtimes",
+        "serving-orchestration",
+        "model-optimization",
+        "observability",
+        "evals-benchmarks",
+        "guardrails",
     ]
     .map(str::to_owned)
     .into();

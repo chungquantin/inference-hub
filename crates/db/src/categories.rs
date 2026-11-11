@@ -6,9 +6,11 @@ use uuid::Uuid;
 macro_rules! select_category {
     () => {
         "SELECT c.id, c.slug, c.name, c.description, c.parent_id, \
-                count(oc.organization_id) AS organization_count \
-         FROM categories c \
-         LEFT JOIN organization_categories oc ON oc.category_id = c.id "
+                (SELECT count(DISTINCT oc.organization_id) \
+                   FROM organization_categories oc \
+                   JOIN categories sub ON sub.id = oc.category_id \
+                  WHERE sub.id = c.id OR sub.parent_id = c.id) AS organization_count \
+         FROM categories c "
     };
 }
 

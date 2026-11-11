@@ -628,7 +628,7 @@ export interface components {
             name: string;
             /**
              * Format: int64
-             * @description Number of organizations listed in this category.
+             * @description Number of organizations listed in this category or in one of its sub-categories.
              */
             organization_count: number;
             /** Format: uuid */
@@ -1076,7 +1076,7 @@ export interface components {
          * @description The roles an organization plays in the market. One organization can hold several.
          * @enum {string}
          */
-        OrgKind: "model_provider" | "inference_provider" | "llm_gateway" | "gpu_cloud" | "hyperscaler" | "hardware" | "open_source" | "investor" | "other";
+        OrgKind: "model_provider" | "inference_provider" | "llm_gateway" | "gpu_cloud" | "hyperscaler" | "hardware" | "open_source" | "decentralized" | "llmops" | "agent_tool" | "investor" | "other";
         /** @enum {string} */
         OrgStatus: "active" | "acquired" | "defunct";
         /** @description An organization as shown in listings. */

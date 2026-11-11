@@ -15,27 +15,36 @@ export const metadata: Metadata = {
 const PAGE_SIZE = 24;
 
 type Props = {
-  searchParams: Promise<{ q?: string; kind?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; kind?: string; category?: string; page?: string }>;
 };
 
 export default async function OrganizationsPage({ searchParams }: Props) {
-  const { q, kind, page } = await searchParams;
+  const { q, kind, category, page } = await searchParams;
   const activeKind = isOrgKind(kind) ? kind : undefined;
   const pageNumber = parsePage(page);
 
-  const { data, error } = await api.GET("/v1/organizations", {
-    params: {
-      query: {
-        q: q || undefined,
-        kind: activeKind,
-        limit: PAGE_SIZE,
-        offset: (pageNumber - 1) * PAGE_SIZE,
+  const [orgs, categories] = await Promise.all([
+    api.GET("/v1/organizations", {
+      params: {
+        query: {
+          q: q || undefined,
+          kind: activeKind,
+          category: category || undefined,
+          limit: PAGE_SIZE,
+          offset: (pageNumber - 1) * PAGE_SIZE,
+        },
       },
-    },
-  });
-  if (error || !data) throw new Error("Could not load organizations");
+    }),
+    api.GET("/v1/categories"),
+  ]);
+  const { data, error } = orgs;
+  if (error || !data || !categories.data) throw new Error("Could not load organizations");
+  // Sub-categories, with their parent's name for context.
+  const names = new Map(categories.data.map((c) => [c.id, c.name]));
+  const subs = categories.data.filter((c) => c.parent_id);
+  const activeCategory = categories.data.find((c) => c.slug === category);
 
-  const current = { q, kind: activeKind };
+  const current = { q, kind: activeKind, category: activeCategory?.slug };
   const href = (overrides: Record<string, string | undefined>) =>
     listingHref("/organizations", current, overrides);
 
@@ -46,17 +55,32 @@ export default async function OrganizationsPage({ searchParams }: Props) {
         <SearchForm
           defaultValue={q}
           placeholder="Search companies and projects"
-          hidden={{ kind: activeKind }}
+          hidden={{ kind: activeKind, category: activeCategory?.slug }}
         />
         <nav className="flex flex-wrap gap-2 text-sm" aria-label="Filter by role">
-          <FilterChip href={href({ kind: undefined })} active={!activeKind}>
+          <FilterChip href={href({ kind: undefined, page: undefined })} active={!activeKind}>
             All
           </FilterChip>
           {(Object.keys(ORG_KIND_LABELS) as OrgKind[]).map((k) => (
-            <FilterChip key={k} href={href({ kind: k })} active={k === activeKind}>
+            <FilterChip key={k} href={href({ kind: k, page: undefined })} active={k === activeKind}>
               {ORG_KIND_LABELS[k]}
             </FilterChip>
           ))}
+        </nav>
+        <nav className="flex flex-wrap gap-2 text-sm" aria-label="Filter by category">
+          {activeCategory && (
+            <FilterChip href={href({ category: undefined, page: undefined })} active>
+              {activeCategory.name} ×
+            </FilterChip>
+          )}
+          {subs
+            .filter((c) => c.slug !== activeCategory?.slug)
+            .map((c) => (
+              <FilterChip key={c.id} href={href({ category: c.slug, page: undefined })} active={false}>
+                {c.name}
+                <span className="text-ink-3"> · {names.get(c.parent_id ?? "")}</span>
+              </FilterChip>
+            ))}
         </nav>
       </header>
 

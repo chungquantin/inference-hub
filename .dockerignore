@@ -6,5 +6,7 @@
 !crates/
 !migrations/
 !data/
+data/archive/
+data/landscape/
 !docker/
 crates/**/target

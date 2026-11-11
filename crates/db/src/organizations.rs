@@ -29,7 +29,8 @@ macro_rules! filter_where {
             AND ($2::text IS NULL OR EXISTS (
                   SELECT 1 FROM organization_categories oc
                   JOIN categories c ON c.id = oc.category_id
-                  WHERE oc.organization_id = o.id AND c.slug = $2))
+                  LEFT JOIN categories parent ON parent.id = c.parent_id
+                  WHERE oc.organization_id = o.id AND $2 IN (c.slug, parent.slug)))
             AND ($3::text IS NULL
                  OR o.search @@ websearch_to_tsquery('english', $3)
                  OR o.name ILIKE '%' || $3 || '%') "

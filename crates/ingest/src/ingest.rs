@@ -281,19 +281,26 @@ struct TaggingRow {
     aliases: Vec<String>,
     exclude_phrases: Vec<String>,
     match_case: bool,
+    match_name: bool,
 }
 
 /// Builds the tagger from the organizations in the database.
 pub async fn load_tagger(pool: &PgPool) -> sqlx::Result<Tagger> {
-    let rows: Vec<TaggingRow> =
-        sqlx::query_as("SELECT id, name, aliases, exclude_phrases, match_case FROM organizations")
-            .fetch_all(pool)
-            .await?;
+    let rows: Vec<TaggingRow> = sqlx::query_as(
+        "SELECT id, name, aliases, exclude_phrases, match_case, match_name FROM organizations",
+    )
+    .fetch_all(pool)
+    .await?;
     Ok(Tagger::new(
         rows.into_iter()
             .map(|row| OrgRule {
                 id: row.id,
-                terms: std::iter::once(row.name).chain(row.aliases).collect(),
+                terms: row
+                    .match_name
+                    .then_some(row.name)
+                    .into_iter()
+                    .chain(row.aliases)
+                    .collect(),
                 exclude_phrases: row.exclude_phrases,
                 match_case: row.match_case,
             })

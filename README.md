@@ -22,7 +22,7 @@ apps/web  (Next.js, server-rendered)  ──HTTP──▶  crates/api  (Rust, Ax
 | `crates/api` | HTTP API. Interactive docs are at `/docs`, and the spec is at `/openapi.json`. |
 | `crates/worker` | Scheduler and job runners on a Postgres queue. Fetches feeds on their interval. |
 | `crates/ingest` | Provider adapters, feed parsing, URL canonicalization, organization tagging, GitHub sync. |
-| `crates/seed` | Validates and imports the curated YAML in `data/`. |
+| `crates/seed` | Validates and imports the curated YAML in `data/`; exports and restores the JSON archive. |
 | `data/organizations/` | Curated data: one YAML file per organization, with its products, prices, feeds and tagging rules. |
 | `data/sources.yaml` | Feeds not owned by one organization, such as newsletters and trade press. |
 | `migrations/` | SQL migrations. The API applies them on startup when `RUN_MIGRATIONS=true`. |
@@ -105,6 +105,22 @@ is a new observation. To record a price change, add a new offering with a newer 
 rather than editing the old one. The old one stays as price history. Unknown fields, broken
 references and bad slugs are rejected before anything is written.
 
+### The landscape list and the archive
+
+`data/landscape/` holds the market list the directory was extended from: `platforms.tsv` and
+`software.tsv` as given, `verification.json` (what was fetched for each row: HTTP status,
+redirects, page titles and descriptions, GitHub repository facts) and `report.json` (every
+row that was merged, skipped or created, and why). `scripts/landscape.py` turns them into
+`data/organizations/*.yaml` and logos; it writes only fetched or listed facts, never
+headquarters, founding years or funding. Logos come from the organization's own site icon or
+its verified GitHub organization, and each source is in `apps/web/public/logos/sources.json`.
+
+`pnpm archive:export` writes everything the worker fetched (market listings, held prices,
+adapter state, news with its tags and triage, repository stats) to `data/archive/*.jsonl`,
+keyed by slugs and URLs instead of row ids. `pnpm archive:import` loads it into a fresh
+database and rebuilds the market summaries in about ten seconds, so a new environment needs
+no refetch: `pnpm seed && pnpm archive:import`. The archive stays out of the Docker image.
+
 To use a different Postgres port, set `POSTGRES_PORT` for Docker Compose and update
 `DATABASE_URL` to match.
 
@@ -127,6 +143,7 @@ tagging:
   aliases: [Lambda Labs]         # other names to match, as whole words
   exclude: [AWS Lambda]          # phrases that contain a name but mean something else
   match_case: true               # for names that are also common words
+  match_name: false              # only the aliases match: for names like "Jan" or "Modal"
 ```
 
 Items from an organization's own feed are published at once (`auto_approve` defaults to

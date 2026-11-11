@@ -17,6 +17,12 @@ pub enum OrgKind {
     Hyperscaler,
     Hardware,
     OpenSource,
+    /// Networks and marketplaces that pool compute from many operators.
+    Decentralized,
+    /// Observability, evaluation, guardrails and benchmarks around serving.
+    Llmops,
+    /// Coding agents, agent frameworks and harnesses.
+    AgentTool,
     Investor,
     Other,
 }
@@ -32,6 +38,9 @@ impl OrgKind {
             OrgKind::Hyperscaler => "hyperscalers",
             OrgKind::Hardware => "hardware",
             OrgKind::OpenSource => "open-source",
+            OrgKind::Decentralized => "decentralized-compute",
+            OrgKind::Llmops => "llmops",
+            OrgKind::AgentTool => "agent-tools",
             OrgKind::Investor => "investors",
             OrgKind::Other => return None,
         })

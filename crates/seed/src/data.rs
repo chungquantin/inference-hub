@@ -68,7 +68,7 @@ pub struct FundingSeed {
 }
 
 /// News tagging rules. The organization's name is always a match term.
-#[derive(Debug, Clone, Default, Deserialize)]
+#[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct TaggingSeed {
     /// Other names to match, such as "AWS".
@@ -80,6 +80,21 @@ pub struct TaggingSeed {
     /// Match case-sensitively, for names that are also common words.
     #[serde(default)]
     pub match_case: bool,
+    /// Match the name itself. False for names that are ordinary words or belong
+    /// to other things too ("Jan", "Modal"): then only the aliases match.
+    #[serde(default = "default_true")]
+    pub match_name: bool,
+}
+
+impl Default for TaggingSeed {
+    fn default() -> Self {
+        Self {
+            aliases: Vec::new(),
+            exclude: Vec::new(),
+            match_case: false,
+            match_name: true,
+        }
+    }
 }
 
 /// A feed to ingest news from.
