@@ -895,6 +895,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "caps",
+            "in": "query",
+            "description": "Models only: keep those with every listed capability, comma-separated,\nsuch as `tools,in:image`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -1191,6 +1200,15 @@
             "name": "dir",
             "in": "query",
             "description": "`asc` or `desc`; each sort has a natural default.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "caps",
+            "in": "query",
+            "description": "Models only: keep those with every listed capability, comma-separated,\nsuch as `tools,in:image`.",
             "required": false,
             "schema": {
               "type": "string"
@@ -2337,6 +2355,7 @@
           "provider",
           "external_id",
           "name",
+          "capabilities",
           "last_seen_at"
         ],
         "properties": {
@@ -2349,6 +2368,13 @@
               "null"
             ],
             "format": "double"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "What this provider says the model can do."
           },
           "context_window": {
             "type": [
@@ -2627,9 +2653,16 @@
           "providers",
           "min_price",
           "median_price",
+          "capabilities",
           "cheapest"
         ],
         "properties": {
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "cheapest": {
             "$ref": "#/components/schemas/OrganizationRef"
           },
@@ -2678,9 +2711,17 @@
           "min_output_per_mtok",
           "min_blended_per_mtok",
           "median_blended_per_mtok",
+          "capabilities",
           "cheapest"
         ],
         "properties": {
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "What providers say it can do: `in:<modality>`, `out:<modality>` and\nfeatures (`tools`, `json`, `reasoning`, `web`, `caching`)."
+          },
           "cheapest": {
             "$ref": "#/components/schemas/OrganizationRef"
           },
@@ -3317,9 +3358,16 @@
                 "providers",
                 "min_price",
                 "median_price",
+                "capabilities",
                 "cheapest"
               ],
               "properties": {
+                "capabilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "cheapest": {
                   "$ref": "#/components/schemas/OrganizationRef"
                 },
@@ -3395,9 +3443,17 @@
                 "min_output_per_mtok",
                 "min_blended_per_mtok",
                 "median_blended_per_mtok",
+                "capabilities",
                 "cheapest"
               ],
               "properties": {
+                "capabilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "What providers say it can do: `in:<modality>`, `out:<modality>` and\nfeatures (`tools`, `json`, `reasoning`, `web`, `caching`)."
+                },
                 "cheapest": {
                   "$ref": "#/components/schemas/OrganizationRef"
                 },
@@ -4153,9 +4209,16 @@
           "item_key",
           "name",
           "sources",
-          "variants"
+          "variants",
+          "capabilities"
         ],
         "properties": {
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "context_window": {
             "type": [
               "integer",

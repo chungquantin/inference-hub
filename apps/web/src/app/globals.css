@@ -38,6 +38,9 @@
   --warn: #8a5300;
   --warn-tint: #fbf1de;
 
+  /* Content width. Data-heavy sections widen it (see body:has below). */
+  --page-width: 1280px;
+
   /* The pixel grid: one cell is 8px. */
   --px: 8px;
 
@@ -104,6 +107,13 @@ a {
 
 ::selection {
   background: var(--s-2);
+}
+
+/* Wide pages: market indexes, provider pages and search use most of the
+ * screen, so tables show more columns without scrolling. The header and
+ * footer follow, so edges line up. */
+body:has([data-wide]) {
+  --page-width: 1680px;
 }
 
 /* Compact density of smart tables (set by the table toolbar). */

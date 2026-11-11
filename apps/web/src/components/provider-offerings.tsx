@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FilterChip, Pagination, SearchForm, listingHref } from "@/components/listing";
 import { MEDIA_KINDS, formatUnitPrice, gpuHref, modelHref } from "@/components/market";
+import { Capabilities } from "@/components/capabilities";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price, SectionHeader, Stat } from "@/components/ui/primitives";
@@ -107,6 +108,14 @@ export function ProviderOfferingsSection({
         </span>
       ),
       csv: (o) => o.name,
+    },
+    {
+      id: "caps",
+      header: "Capabilities",
+      optional: true,
+      title: "What this provider says the model can do",
+      cell: (o) => (o.kind === "gpu" ? null : <Capabilities caps={o.capabilities} />),
+      csv: (o) => o.capabilities.join(" "),
     },
     {
       id: "kind",

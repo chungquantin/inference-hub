@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Pagination, listingHref, parsePage } from "@/components/listing";
 import { RowLink, modelHref } from "@/components/market";
 import { ProviderLink } from "@/components/price-cells";
+import { CAPABILITIES, Capabilities, CapabilityLegend } from "@/components/capabilities";
 import { FilterBar, type Filter } from "@/components/table/filter-bar";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import { PixelBar } from "@/components/ui/pixel";
@@ -24,6 +25,7 @@ type Params = {
   min?: string;
   max_price?: string;
   min_context?: string;
+  caps?: string;
   sort?: string;
   dir?: string;
   page?: string;
@@ -57,6 +59,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
           min_providers: min,
           max_price: num(params.max_price),
           min_context: num(params.min_context),
+          caps: params.caps || undefined,
           sort: params.sort || undefined,
           dir,
           limit: PAGE_SIZE,
@@ -76,6 +79,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
     min: params.min,
     max_price: params.max_price,
     min_context: params.min_context,
+    caps: params.caps,
   };
   const current = { ...filterValues, sort: params.sort, dir: params.dir };
   const sortHref = (sort: string, d: "asc" | "desc") =>
@@ -103,6 +107,17 @@ export default async function MarketModelsPage({ searchParams }: Props) {
     { type: "select", name: "min_context", label: "Context", options: CONTEXTS },
     {
       type: "select",
+      name: "caps",
+      label: "Can do",
+      options: [
+        ...CAPABILITIES.map((c) => ({ value: c.id, label: c.label })),
+        { value: "tools,json", label: "Tools + structured output" },
+        { value: "in:image,tools", label: "Vision + tools" },
+        { value: "reasoning,tools", label: "Reasoning + tools" },
+      ],
+    },
+    {
+      type: "select",
       name: "min",
       label: "Providers",
       any: "Any",
@@ -122,18 +137,25 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       cell: (r) => (
         <span className="flex flex-col">
           <RowLink href={modelHref(r.model_key)}>{r.model_key}</RowLink>
-          {r.name !== r.model_key && <span className="max-w-[320px] truncate text-[12px] text-ink-3">{r.name}</span>}
+          {r.name !== r.model_key && <span className="max-w-[260px] truncate text-[12px] text-ink-3">{r.name}</span>}
         </span>
       ),
       csv: (r) => r.model_key,
     },
-    { id: "maker", header: "Maker", optional: true, cell: (r) => <span className="text-ink-3">{r.maker ?? "—"}</span>, csv: (r) => r.maker },
-    { id: "providers", header: "Providers", numeric: true, sort: "providers", sortDir: "desc", cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
-    { id: "input", header: "Lowest in", numeric: true, optional: true, sort: "input", cell: (r) => <Price>{formatPrice(r.min_input_per_mtok)}</Price>, csv: (r) => r.min_input_per_mtok },
-    { id: "output", header: "Lowest out", numeric: true, optional: true, sort: "output", cell: (r) => <Price>{formatPrice(r.min_output_per_mtok)}</Price>, csv: (r) => r.min_output_per_mtok },
+    {
+      id: "caps",
+      header: "Capabilities",
+      title: "Inputs, → outputs, then features. Text in and out is not drawn.",
+      cell: (r) => <Capabilities caps={r.capabilities} />,
+      csv: (r) => r.capabilities.join(" "),
+    },
+    { id: "maker", header: "Maker", optional: true, minWidth: "2xl", cell: (r) => <span className="text-ink-3">{r.maker ?? "—"}</span>, csv: (r) => r.maker },
+    { id: "providers", header: "Sellers", numeric: true, sort: "providers", sortDir: "desc", cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
+    { id: "input", header: "In", numeric: true, optional: true, minWidth: "xl", sort: "input", cell: (r) => <Price>{formatPrice(r.min_input_per_mtok)}</Price>, csv: (r) => r.min_input_per_mtok },
+    { id: "output", header: "Out", numeric: true, optional: true, minWidth: "xl", sort: "output", cell: (r) => <Price>{formatPrice(r.min_output_per_mtok)}</Price>, csv: (r) => r.min_output_per_mtok },
     {
       id: "blend",
-      header: "Lowest blend",
+      header: "Blend",
       title: "3 input tokens per output token, per million",
       numeric: true,
       sort: "price",
@@ -146,19 +168,23 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       id: "bar",
       header: "",
       optional: false,
-      className: "hidden lg:table-cell w-[110px]",
+      className: "hidden 2xl:table-cell w-[100px]",
       cell: (r) =>
         r.min_blended_per_mtok != null && (
           <PixelBar value={r.min_blended_per_mtok} max={maxBlend} cells={14} label={formatPrice(r.min_blended_per_mtok)} />
         ),
     },
-    { id: "median", header: "Median blend", numeric: true, optional: true, sort: "median", cell: (r) => <Price>{formatPrice(r.median_blended_per_mtok)}</Price>, csv: (r) => r.median_blended_per_mtok },
-    { id: "context", header: "Context", numeric: true, optional: true, sort: "context", sortDir: "desc", cell: (r) => <Price>{formatTokens(r.max_context_window)}</Price>, csv: (r) => r.max_context_window },
+    { id: "median", header: "Median", numeric: true, optional: true, minWidth: "lg", sort: "median", cell: (r) => <Price>{formatPrice(r.median_blended_per_mtok)}</Price>, csv: (r) => r.median_blended_per_mtok },
+    { id: "context", header: "Context", numeric: true, optional: true, minWidth: "md", sort: "context", sortDir: "desc", cell: (r) => <Price>{formatTokens(r.max_context_window)}</Price>, csv: (r) => r.max_context_window },
     {
       id: "cheapest",
       header: "Cheapest at",
       optional: true,
-      cell: (r) => <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />,
+      cell: (r) => (
+        <span className="block max-w-[180px] truncate">
+          <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />
+        </span>
+      ),
       csv: (r) => r.cheapest.name,
     },
   ];
@@ -168,27 +194,34 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       <PageHeader
         crumbs={[{ href: "/market", label: "Market" }, { label: "Models" }]}
         title="Model price index"
-        lead="Every chat model we see, matched across providers by its id, with the lowest and median price. Blend is 3 input tokens per output token; free promotional listings are left out of prices."
+        lead="Every chat model we see, matched across providers by its id, with what it can do and its lowest and median price per 1M tokens. Blend is 3 input tokens per output token; free promotional listings are left out of prices."
       />
       <FilterBar
         action="/market/models"
         filters={filters}
         values={filterValues}
         keep={{ sort: params.sort, dir: params.dir }}
-        labels={{ q: "Model", maker: "Maker", provider: "Sold by", min: "Providers", max_price: "Max", min_context: "Context" }}
+        labels={{ q: "Model", maker: "Maker", provider: "Sold by", min: "Providers", max_price: "Max", min_context: "Context", caps: "Can do" }}
         describe={{
           max_price: (v) => `$${v} / 1M`,
           min_context: (v) => `${formatTokens(Number(v))}+`,
           min: (v) => `${v}+`,
+          caps: (v) =>
+            v
+              .split(",")
+              .map((c) => CAPABILITIES.find((x) => x.id === c)?.label ?? c)
+              .join(" + "),
         }}
         presets={[
           { label: "Comparable (2+ providers)", params: { min: "2" } },
           { label: "Under $0.10 / 1M", params: { max_price: "0.1", min: "2" } },
           { label: "1M+ context", params: { min_context: "1000000", sort: "price" } },
           { label: "Cheapest first", params: { sort: "price", min: "2" } },
-          { label: "Most sold", params: { sort: "providers" } },
+          { label: "Vision + tools", params: { caps: "in:image,tools", min: "2" } },
+          { label: "Reasoning", params: { caps: "reasoning", min: "2", sort: "price" } },
         ]}
       />
+      <CapabilityLegend />
       <SmartTable
         id="market-models"
         caption={

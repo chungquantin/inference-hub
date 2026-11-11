@@ -17,12 +17,22 @@ export type Column<T> = {
   sort?: string;
   /** Natural direction of the sort (prices ascend, counts descend). */
   sortDir?: "asc" | "desc";
-  /** Hidden by default on narrow screens and in the column picker. */
+  /** Can be hidden from the column picker. */
   optional?: boolean;
+  /** Only shown on screens at least this wide, so the essentials fit without scrolling. */
+  minWidth?: "md" | "lg" | "xl" | "2xl";
   /** A hint shown on the header. */
   title?: string;
   className?: string;
 };
+
+/** Tailwind classes that show a cell only from a breakpoint up (static, for the compiler). */
+const SHOW_FROM = {
+  md: "hidden md:table-cell",
+  lg: "hidden lg:table-cell",
+  xl: "hidden xl:table-cell",
+  "2xl": "hidden 2xl:table-cell",
+} as const;
 
 export type SortState = { sort?: string; dir?: "asc" | "desc" };
 
@@ -105,7 +115,7 @@ export function SmartTable<T>({
                       data-col={c.id}
                       title={c.title}
                       aria-sort={active ? (dir === "asc" ? "ascending" : "descending") : undefined}
-                      className={`h-9 px-3 font-normal whitespace-nowrap ${c.numeric ? "text-right" : "text-left"} ${c.className ?? ""}`}
+                      className={`h-9 px-2.5 font-normal whitespace-nowrap ${c.numeric ? "text-right" : "text-left"} ${c.minWidth ? SHOW_FROM[c.minWidth] : ""} ${c.className ?? ""}`}
                     >
                       {c.sort && sortHref ? (
                         <Link
@@ -136,9 +146,9 @@ export function SmartTable<T>({
                       <td
                         key={c.id}
                         data-col={c.id}
-                        className={`h-11 px-3 align-middle ${
+                        className={`h-11 px-2.5 align-middle ${
                           c.numeric ? "text-right tabular" : "text-left"
-                        } ${c.className ?? ""}`}
+                        } ${c.minWidth ? SHOW_FROM[c.minWidth] : ""} ${c.className ?? ""}`}
                       >
                         {c.cell(r)}
                       </td>

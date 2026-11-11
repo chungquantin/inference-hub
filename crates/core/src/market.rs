@@ -66,6 +66,9 @@ pub struct ModelIndexRow {
     pub min_blended_per_mtok: f64,
     pub median_blended_per_mtok: f64,
     pub max_context_window: Option<i32>,
+    /// What providers say it can do: `in:<modality>`, `out:<modality>` and
+    /// features (`tools`, `json`, `reasoning`, `web`, `caching`).
+    pub capabilities: Vec<String>,
     #[sqlx(flatten)]
     pub cheapest: OrganizationRef,
 }
@@ -110,6 +113,9 @@ pub struct MarketIndexQuery {
     pub sort: Option<String>,
     /// `asc` or `desc`; each sort has a natural default.
     pub dir: Option<String>,
+    /// Models only: keep those with every listed capability, comma-separated,
+    /// such as `tools,in:image`.
+    pub caps: Option<String>,
 }
 
 /// A maker and how many models it has, for filters.
@@ -139,6 +145,8 @@ pub struct MarketListing {
     /// Non-chat models: what the price is per, and the price.
     pub unit: Option<String>,
     pub price_per_unit: Option<f64>,
+    /// What this provider says the model can do.
+    pub capabilities: Vec<String>,
     pub source_url: Option<String>,
     pub last_seen_at: DateTime<Utc>,
 }
@@ -228,6 +236,7 @@ pub struct MediaIndexRow {
     pub providers: i64,
     pub min_price: f64,
     pub median_price: f64,
+    pub capabilities: Vec<String>,
     #[sqlx(flatten)]
     pub cheapest: OrganizationRef,
 }
@@ -275,6 +284,7 @@ pub struct ProviderOffering {
     pub market_median: Option<f64>,
     /// 1 = cheapest in the market.
     pub rank: Option<i32>,
+    pub capabilities: Vec<String>,
     pub context_window: Option<i32>,
     pub source_url: Option<String>,
     pub last_seen_at: Option<DateTime<Utc>>,

@@ -57,6 +57,10 @@ struct Provider {
     pricing: Option<Pricing>,
     first_token_latency_ms: Option<f64>,
     throughput: Option<f64>,
+    #[serde(default)]
+    supports_tools: bool,
+    #[serde(default)]
+    supports_structured_output: bool,
 }
 
 #[derive(Deserialize)]
@@ -119,6 +123,17 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
                 }),
                 variant: Some(p.provider),
                 media: None,
+                capabilities: super::caps::normalize(
+                    [
+                        (p.supports_tools, "tools"),
+                        (p.supports_structured_output, "json"),
+                    ]
+                    .into_iter()
+                    .filter(|(on, _)| *on)
+                    .map(|(_, c)| c.to_owned())
+                    .chain(["in:text".to_owned(), "out:text".to_owned()])
+                    .collect::<Vec<_>>(),
+                ),
             });
         }
     }

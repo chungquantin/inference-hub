@@ -3,6 +3,7 @@ import { CheckedOn, ProviderLink } from "@/components/price-cells";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price } from "@/components/ui/primitives";
 import type { components } from "@inference-hub/api-client";
+import { Capabilities } from "@/components/capabilities";
 import { formatUnitPrice } from "@/components/market";
 import { formatPrice, formatTokens } from "@/lib/format";
 
@@ -19,12 +20,12 @@ export function MarketListings({ listings, kind }: { listings: Listing[]; kind: 
       ? ["Provider", "Configuration", "GPUs", "Per GPU-hour", "", "Per hour", "Checked"]
       : kind === "media"
         ? ["Provider", "Listed as", "Price", "", "Checked"]
-        : ["Provider", "Listed as", "Input", "Output", "Blend", "", "Context", "Checked"];
+        : ["Provider", "Listed as", "Capabilities", "Input", "Output", "Blend", "", "Context", "Checked"];
   return (
     <DataTable
       caption={`${listings.length} prices, cheapest first`}
       headers={headers}
-      numeric={kind === "gpu" ? [2, 3, 5] : kind === "media" ? [2] : [2, 3, 4, 6]}
+      numeric={kind === "gpu" ? [2, 3, 5] : kind === "media" ? [2] : [3, 4, 5, 7]}
       highlight={listings.length > 1 ? key(listings[0], 0) : undefined}
       rows={listings.map((l, i) => {
         const provider = (
@@ -73,6 +74,7 @@ export function MarketListings({ listings, kind }: { listings: Listing[]; kind: 
               : [
                   provider,
                   via,
+                  <Capabilities key="cap" caps={l.capabilities} />,
                   <Price key="i">{formatPrice(l.price_input_per_mtok)}</Price>,
                   <Price key="o">{formatPrice(l.price_output_per_mtok)}</Price>,
                   <Price key="b" strong>

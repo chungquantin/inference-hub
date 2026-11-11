@@ -124,6 +124,7 @@ pub fn parse_items(spec: &CatalogSpec, items: &[Value]) -> Result<Vec<ModelListi
         let Some(e) = (spec.entry)(item).map_err(&fail)? else {
             continue;
         };
+        let capabilities = super::caps::from_json(item);
         if e.id.trim().is_empty() || !seen.insert(e.id.clone()) {
             continue;
         }
@@ -162,6 +163,7 @@ pub fn parse_items(spec: &CatalogSpec, items: &[Value]) -> Result<Vec<ModelListi
             output_per_mtok: round6(e.output),
             variant: None,
             media: None,
+            capabilities,
             extra: e.extra,
             external_id: e.id,
         });

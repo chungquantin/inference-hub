@@ -97,6 +97,8 @@ pub struct ModelListing {
     /// For models not priced by chat tokens: what they make and the unit
     /// price. `input_per_mtok` and `output_per_mtok` are then not stored.
     pub media: Option<MediaPrice>,
+    /// What the model can do at this provider, in the [`caps`] vocabulary.
+    pub capabilities: Vec<String>,
 }
 
 /// What a non-chat model produces, which decides its unit.
@@ -180,6 +182,7 @@ impl ModelListing {
             source_url,
             extra,
             media: Some(MediaPrice { kind, price }),
+            capabilities: Vec::new(),
         }
     }
 }
@@ -554,4 +557,228 @@ pub(crate) fn round_sig(x: f64) -> f64 {
 /// floating-point noise such as 0.7100000000000001.
 pub(crate) fn round6(x: f64) -> f64 {
     (x * 1e6).round() / 1e6
+}
+
+/// What a model can do, in one vocabulary across providers.
+///
+/// Input and output modalities are `in:<m>` and `out:<m>` with `m` one of
+/// `text`, `image`, `audio`, `video`, `file`. Features: `tools` (function
+/// calling), `json` (JSON mode or structured outputs), `reasoning`, `web`
+/// (built-in web search) and `caching` (prompt caching).
+pub mod caps {
+    pub const MODALITIES: [&str; 5] = ["text", "image", "audio", "video", "file"];
+    pub const FEATURES: [&str; 5] = ["tools", "json", "reasoning", "web", "caching"];
+
+    /// Maps one provider term to the vocabulary, or `None` when it names
+    /// nothing we show. `direction` is `in` or `out` for modality lists.
+    pub fn modality(direction: &str, raw: &str) -> Option<String> {
+        let m = match raw.trim().to_ascii_lowercase().as_str() {
+            "text" | "transcript" => "text",
+            "image" | "images" | "vision" => "image",
+            "audio" | "speech" => "audio",
+            "video" => "video",
+            "file" | "files" | "pdf" | "document" => "file",
+            _ => return None,
+        };
+        Some(format!("{direction}:{m}"))
+    }
+
+    /// Maps a feature name from any provider (`function-calling`,
+    /// `structured_outputs`, `response_format.json_schema`, `tool-use`, ...).
+    pub fn feature(raw: &str) -> Option<&'static str> {
+        let r = raw.trim().to_ascii_lowercase().replace(['_', '-', ' '], "");
+        Some(match r.as_str() {
+            "tools" | "tool" | "tooluse" | "toolcalling" | "functioncalling" | "function"
+            | "functions" | "toolchoice" => "tools",
+            "json"
+            | "jsonmode"
+            | "structuredoutputs"
+            | "structuredoutput"
+            | "responseformat"
+            | "responseformat.jsonobject"
+            | "responseformat.jsonschema"
+            | "responseschema"
+            | "outputjsonobject"
+            | "outputjsonschema" => "json",
+            "reasoning"
+            | "includereasoning"
+            | "reasoningeffort"
+            | "thinking"
+            | "reasoning.effort"
+            | "reasoning.budgettokens" => "reasoning",
+            "websearch" | "web" | "search" => "web",
+            "caching" | "promptcaching" | "cache" => "caching",
+            _ => return None,
+        })
+    }
+
+    /// Sorted, deduplicated, in display order: inputs, outputs, features.
+    pub fn normalize(mut caps: Vec<String>) -> Vec<String> {
+        let rank = |c: &str| -> usize {
+            if let Some(m) = c.strip_prefix("in:") {
+                MODALITIES.iter().position(|x| *x == m).unwrap_or(9)
+            } else if let Some(m) = c.strip_prefix("out:") {
+                10 + MODALITIES.iter().position(|x| *x == m).unwrap_or(9)
+            } else {
+                20 + FEATURES.iter().position(|x| *x == c).unwrap_or(9)
+            }
+        };
+        caps.sort_by_key(|c| (rank(c), c.clone()));
+        caps.dedup();
+        caps
+    }
+
+    /// Reads capabilities from common JSON shapes: modality lists (strings or
+    /// `{type}` objects), feature lists, and `supports_*` booleans.
+    pub fn from_json(v: &serde_json::Value) -> Vec<String> {
+        use serde_json::Value;
+        let mut out = Vec::new();
+        let strings = |x: &Value| -> Vec<String> {
+            x.as_array()
+                .into_iter()
+                .flatten()
+                .filter_map(|e| match e {
+                    Value::String(s) => Some(s.clone()),
+                    Value::Object(o) => o.get("type").and_then(Value::as_str).map(str::to_owned),
+                    _ => None,
+                })
+                .collect()
+        };
+        let at = |path: &[&str]| path.iter().try_fold(v, |v, k| v.get(*k));
+        for (dir, paths) in [
+            (
+                "in",
+                [
+                    &["input_modalities"][..],
+                    &["architecture", "input_modalities"],
+                    &["modalities", "input"],
+                ],
+            ),
+            (
+                "out",
+                [
+                    &["output_modalities"][..],
+                    &["architecture", "output_modalities"],
+                    &["modalities", "output"],
+                ],
+            ),
+        ] {
+            for p in paths {
+                if let Some(x) = at(p) {
+                    out.extend(strings(x).iter().filter_map(|m| modality(dir, m)));
+                }
+            }
+        }
+        for p in [
+            &["supported_features"][..],
+            &["supported_parameters"],
+            &["features"],
+            &["tags"],
+        ] {
+            if let Some(x) = at(p) {
+                out.extend(
+                    strings(x)
+                        .iter()
+                        .filter_map(|f| feature(f))
+                        .map(str::to_owned),
+                );
+            }
+        }
+        // `supports_vision`, `supportsFunctionCalling`, `supports_tools`, ...
+        let flags = [
+            ("vision", "in:image"),
+            ("audioinput", "in:audio"),
+            ("videoinput", "in:video"),
+            ("toolcalling", "tools"),
+            ("tools", "tools"),
+            ("functioncalling", "tools"),
+            ("structuredoutput", "json"),
+            ("responseschema", "json"),
+            ("outputjsonschema", "json"),
+            ("outputjsonobject", "json"),
+            ("reasoning", "reasoning"),
+            ("websearch", "web"),
+            ("caching", "caching"),
+            ("imagegeneration", "out:image"),
+        ];
+        for obj in [
+            Some(v),
+            at(&["capabilities"]),
+            at(&["model_spec", "capabilities"]),
+        ]
+        .into_iter()
+        .flatten()
+        .filter_map(Value::as_object)
+        {
+            for (k, val) in obj {
+                if val.as_bool() != Some(true) {
+                    continue;
+                }
+                let key = k.to_ascii_lowercase().replace('_', "");
+                let Some(name) = key.strip_prefix("supports") else {
+                    continue;
+                };
+                if let Some((_, cap)) = flags.iter().find(|(f, _)| *f == name) {
+                    out.push((*cap).to_owned());
+                }
+            }
+        }
+        normalize(out)
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+        use serde_json::json;
+
+        #[test]
+        fn reads_each_providers_shape() {
+            // OpenRouter
+            let or = json!({"architecture":{"input_modalities":["text","image"],"output_modalities":["text"]},
+                            "supported_parameters":["tools","response_format","include_reasoning","top_p"]});
+            assert_eq!(
+                from_json(&or),
+                [
+                    "in:text",
+                    "in:image",
+                    "out:text",
+                    "tools",
+                    "json",
+                    "reasoning"
+                ]
+            );
+            // Liquid: objects, dotted features
+            let lq = json!({"input_modalities":[{"type":"text"},{"type":"audio"}],"output_modalities":[{"type":"text"}],
+                            "supported_features":["tools","response_format.json_schema","reasoning.effort","sampling.seed"]});
+            assert_eq!(
+                from_json(&lq),
+                [
+                    "in:text",
+                    "in:audio",
+                    "out:text",
+                    "tools",
+                    "json",
+                    "reasoning"
+                ]
+            );
+            // Requesty / Venice flags
+            let rq = json!({"supports_vision":true,"supports_tool_calling":true,"supports_web_search":true,
+                            "supports_caching":true,"supports_image_generation":false});
+            assert_eq!(from_json(&rq), ["in:image", "tools", "web", "caching"]);
+            let ve = json!({"model_spec":{"capabilities":{"supportsVision":true,"supportsFunctionCalling":true,
+                            "supportsReasoning":true,"supportsVideoInput":true}}});
+            assert_eq!(
+                from_json(&ve),
+                ["in:image", "in:video", "tools", "reasoning"]
+            );
+            // Novita, Vercel
+            let nv = json!({"features":["function-calling","structured-outputs"],"input_modalities":["text","image"]});
+            assert_eq!(from_json(&nv), ["in:text", "in:image", "tools", "json"]);
+            let vc = json!({"modalities":{"input":["text","file"],"output":["text"]},"tags":["tool-use","reasoning"]});
+            assert_eq!(
+                from_json(&vc),
+                ["in:text", "in:file", "out:text", "tools", "reasoning"]
+            );
+        }
+    }
 }

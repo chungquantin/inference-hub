@@ -33,7 +33,7 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
     sqlx::query(
         "CREATE TEMP TABLE live ON COMMIT DROP AS
          SELECT l.kind, l.external_id, l.name, l.maker, l.context_window, l.gpu_type,
-                l.gpu_count, l.unit, l.last_seen_at, l.source_url,
+                l.gpu_count, l.unit, l.last_seen_at, l.source_url, l.capabilities,
                 a.organization_id AS org,
                 o.name AS org_name,
                 CASE WHEN l.kind = 'gpu' THEN l.gpu_type
@@ -73,7 +73,7 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
         "INSERT INTO market_models
              (kind, model_key, name, maker, providers, listings, organization_ids,
               cheapest_organization_id, min_input_per_mtok, min_output_per_mtok,
-              min_blended_per_mtok, median_blended_per_mtok, max_context_window)
+              min_blended_per_mtok, median_blended_per_mtok, max_context_window, capabilities)
          SELECT 'model', item,
                 mode() WITHIN GROUP (ORDER BY name),
                 -- The maker as most providers name it; routing prefixes
@@ -90,7 +90,8 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                 round(min(blended) FILTER (WHERE blended > 0)::numeric, 6)::float8,
                 round((percentile_cont(0.5) WITHIN GROUP (ORDER BY blended)
                        FILTER (WHERE blended > 0))::numeric, 6)::float8,
-                max(context_window)
+                max(context_window),
+                '{}'
          FROM live WHERE kind = 'model'
          GROUP BY item
          HAVING count(*) FILTER (WHERE blended > 0) > 0",
@@ -103,7 +104,7 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
     let media = sqlx::query(
         "INSERT INTO market_models
              (kind, model_key, name, maker, providers, listings, organization_ids,
-              cheapest_organization_id, unit, min_price, median_price)
+              cheapest_organization_id, unit, min_price, median_price, capabilities)
          SELECT kind, item,
                 mode() WITHIN GROUP (ORDER BY name),
                 mode() WITHIN GROUP (ORDER BY maker),
@@ -112,7 +113,8 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                 (array_agg(org ORDER BY per_unit, org_name))[1],
                 mode() WITHIN GROUP (ORDER BY unit),
                 min(per_unit),
-                percentile_cont(0.5) WITHIN GROUP (ORDER BY per_unit)
+                percentile_cont(0.5) WITHIN GROUP (ORDER BY per_unit),
+                '{}'
          FROM live WHERE kind NOT IN ('model', 'gpu') AND per_unit > 0
          GROUP BY kind, item",
     )
@@ -136,12 +138,51 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
     .await?
     .rows_affected();
 
+    // Capabilities: the union of what every provider says a model can do.
+    // A capability counts when at least half of the sellers that report that
+    // kind of information agree, so one provider's mistaken flag (a text model
+    // listed as taking images) does not label the model for the whole market.
+    // Chat listings without modality data take and return text.
+    sqlx::query(
+        "WITH per_seller AS (
+             SELECT kind, item, seller,
+                    array_agg(DISTINCT cap) FILTER (WHERE cap IS NOT NULL) AS caps
+             FROM (SELECT kind, item, seller,
+                          unnest(CASE WHEN kind = 'model' AND NOT EXISTS (
+                                          SELECT 1 FROM unnest(capabilities) c WHERE c LIKE 'in:%')
+                                      THEN capabilities || ARRAY['in:text', 'out:text']
+                                      ELSE capabilities END) AS cap
+                   FROM live WHERE kind <> 'gpu' AND cardinality(capabilities) > 0) x
+             GROUP BY kind, item, seller
+         ),
+         reporting AS (
+             SELECT kind, item,
+                    count(*) FILTER (WHERE EXISTS (SELECT 1 FROM unnest(caps) c WHERE c LIKE 'in:%' OR c LIKE 'out:%')) AS modal,
+                    count(*) FILTER (WHERE EXISTS (SELECT 1 FROM unnest(caps) c WHERE c NOT LIKE '%:%')) AS featured
+             FROM per_seller GROUP BY kind, item
+         ),
+         votes AS (
+             SELECT p.kind, p.item, cap, count(*) AS n
+             FROM per_seller p, unnest(p.caps) AS cap
+             GROUP BY p.kind, p.item, cap
+         )
+         UPDATE market_models m SET capabilities = c.caps
+         FROM (SELECT v.kind, v.item, array_agg(v.cap ORDER BY v.cap) AS caps
+               FROM votes v JOIN reporting r USING (kind, item)
+               WHERE v.n * 2 >= CASE WHEN v.cap LIKE '%:%' THEN r.modal ELSE r.featured END
+               GROUP BY v.kind, v.item) c
+         WHERE m.kind = c.kind AND m.model_key = c.item",
+    )
+    .execute(&mut *tx)
+    .await?;
+
     // Everything each provider sells, from its adapter and from the curated
     // data, one row per item. Adapter items first, compared with the market.
     sqlx::query(
         "INSERT INTO market_provider_offerings
              (organization_id, kind, item_key, name, maker, sources, variants, price,
-              input_per_mtok, output_per_mtok, unit, context_window, source_url, last_seen_at)
+              input_per_mtok, output_per_mtok, unit, context_window, source_url, last_seen_at,
+              capabilities)
          SELECT org, kind, item,
                 mode() WITHIN GROUP (ORDER BY name),
                 mode() WITHIN GROUP (ORDER BY maker) FILTER (WHERE maker NOT IN
@@ -158,9 +199,26 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                 mode() WITHIN GROUP (ORDER BY unit),
                 max(context_window),
                 (array_agg(source_url ORDER BY coalesce(blended, per_gpu, per_unit)))[1],
-                max(last_seen_at)
+                max(last_seen_at),
+                '{}'
          FROM live
          GROUP BY org, kind, item",
+    )
+    .execute(&mut *tx)
+    .await?;
+
+    // What each provider says its own listing can do.
+    sqlx::query(
+        "UPDATE market_provider_offerings o SET capabilities = c.caps
+         FROM (SELECT org, kind, item, array_agg(DISTINCT cap ORDER BY cap) AS caps
+               FROM live,
+                    unnest(CASE WHEN kind = 'model' AND NOT EXISTS (
+                                    SELECT 1 FROM unnest(capabilities) c WHERE c LIKE 'in:%')
+                                THEN capabilities || ARRAY['in:text', 'out:text']
+                                ELSE capabilities END) AS cap
+               WHERE cardinality(capabilities) > 0
+               GROUP BY org, kind, item) c
+         WHERE o.organization_id = c.org AND o.kind = c.kind AND o.item_key = c.item",
     )
     .execute(&mut *tx)
     .await?;

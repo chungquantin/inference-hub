@@ -760,6 +760,8 @@ export interface components {
             adapter: string;
             /** Format: double */
             blended_per_mtok?: number | null;
+            /** @description What this provider says the model can do. */
+            capabilities: string[];
             /** Format: int32 */
             context_window?: number | null;
             external_id: string;
@@ -880,6 +882,7 @@ export interface components {
         };
         /** @description One non-chat model across providers: its unit price. */
         MediaIndexRow: {
+            capabilities: string[];
             cheapest: components["schemas"]["OrganizationRef"];
             /** @description `embedding`, `image`, `video`, `speech` or `transcription`. */
             kind: string;
@@ -900,6 +903,11 @@ export interface components {
         };
         /** @description One model across every provider: price per million tokens. */
         ModelIndexRow: {
+            /**
+             * @description What providers say it can do: `in:<modality>`, `out:<modality>` and
+             *     features (`tools`, `json`, `reasoning`, `web`, `caching`).
+             */
+            capabilities: string[];
             cheapest: components["schemas"]["OrganizationRef"];
             maker?: string | null;
             /** Format: int32 */
@@ -1116,6 +1124,7 @@ export interface components {
         /** @description One page of results plus the total count across all pages. */
         Page_MediaIndexRow: {
             items: {
+                capabilities: string[];
                 cheapest: components["schemas"]["OrganizationRef"];
                 /** @description `embedding`, `image`, `video`, `speech` or `transcription`. */
                 kind: string;
@@ -1144,6 +1153,11 @@ export interface components {
         /** @description One page of results plus the total count across all pages. */
         Page_ModelIndexRow: {
             items: {
+                /**
+                 * @description What providers say it can do: `in:<modality>`, `out:<modality>` and
+                 *     features (`tools`, `json`, `reasoning`, `web`, `caching`).
+                 */
+                capabilities: string[];
                 cheapest: components["schemas"]["OrganizationRef"];
                 maker?: string | null;
                 /** Format: int32 */
@@ -1362,6 +1376,7 @@ export interface components {
         ProductType: "model" | "inference_api" | "gateway" | "gpu_instance" | "oss_project" | "hardware" | "platform" | "other";
         /** @description One thing a provider sells: its price next to the market's. */
         ProviderOffering: {
+            capabilities: string[];
             /** Format: int32 */
             context_window?: number | null;
             /** Format: double */
@@ -2117,6 +2132,11 @@ export interface operations {
                 sort?: string;
                 /** @description `asc` or `desc`; each sort has a natural default. */
                 dir?: string;
+                /**
+                 * @description Models only: keep those with every listed capability, comma-separated,
+                 *     such as `tools,in:image`.
+                 */
+                caps?: string;
             };
             header?: never;
             path?: never;
@@ -2266,6 +2286,11 @@ export interface operations {
                 sort?: string;
                 /** @description `asc` or `desc`; each sort has a natural default. */
                 dir?: string;
+                /**
+                 * @description Models only: keep those with every listed capability, comma-separated,
+                 *     such as `tools,in:image`.
+                 */
+                caps?: string;
             };
             header?: never;
             path?: never;

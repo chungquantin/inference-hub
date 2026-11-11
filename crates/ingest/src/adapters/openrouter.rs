@@ -45,7 +45,7 @@ impl Adapter for OpenRouterAdapter {
 
 #[derive(Deserialize)]
 struct ModelsResponse {
-    data: Vec<Model>,
+    data: Vec<serde_json::Value>,
 }
 
 #[derive(Deserialize)]
@@ -96,7 +96,10 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
     let response: ModelsResponse =
         serde_json::from_str(body).map_err(|e| AdapterError::Format(ID, e.to_string()))?;
     let mut listings = Vec::with_capacity(response.data.len());
-    for model in response.data {
+    for raw in response.data {
+        let capabilities = super::caps::from_json(&raw);
+        let model: Model =
+            serde_json::from_value(raw).map_err(|e| AdapterError::Format(ID, e.to_string()))?;
         // Routers such as `openrouter/auto` price per request, not per token.
         if model.pricing.prompt.starts_with('-') || model.pricing.completion.starts_with('-') {
             continue;
@@ -136,6 +139,7 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
             output_per_mtok: round6(output),
             variant: None,
             media: None,
+            capabilities,
             extra: serde_json::Value::Null,
         });
     }

@@ -66,6 +66,10 @@ struct Offer {
     input_length_band: Option<Band>,
     #[serde(default)]
     output_modalities: Vec<Modality>,
+    #[serde(default)]
+    input_modalities: Vec<Modality>,
+    #[serde(default)]
+    supported_features: Vec<String>,
     /// Offers with unverified pricing, such as bring-your-own-key routes.
     #[serde(default)]
     unverified: bool,
@@ -244,9 +248,33 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
                 "cheapest_with_request_fee": fee_offer,
             });
             let source_url = Some(format!("https://liquidinference.ai/models/{name}"));
+            let o = &best.offer;
+            let capabilities = super::caps::normalize(
+                o.input_modalities
+                    .iter()
+                    .filter_map(|m| super::caps::modality("in", &m.kind))
+                    .chain(
+                        o.output_modalities
+                            .iter()
+                            .filter_map(|m| super::caps::modality("out", &m.kind)),
+                    )
+                    .chain(
+                        o.supported_features
+                            .iter()
+                            .filter_map(|f| super::caps::feature(f))
+                            .map(str::to_owned),
+                    )
+                    // `input.image` style feature names
+                    .chain(o.supported_features.iter().filter_map(|f| {
+                        f.strip_prefix("input.")
+                            .and_then(|m| super::caps::modality("in", m))
+                    }))
+                    .collect(),
+            );
             let maker = best.offer.creator.clone();
             Some(match best.pricing {
                 Pricing::Tokens { input, output } => ModelListing {
+                    capabilities: capabilities.clone(),
                     source_url,
                     maker,
                     context_window: best
@@ -259,19 +287,23 @@ pub(crate) fn parse(body: &str) -> Result<Vec<ModelListing>, AdapterError> {
                     output_per_mtok: round6(output),
                     variant: None,
                     media: None,
+
                     extra,
                     external_id: name.clone(),
                     name,
                 },
-                Pricing::Unit(kind, rate) => ModelListing::media(
-                    name.clone(),
-                    name,
-                    maker,
-                    kind,
-                    round_sig(rate),
-                    source_url,
-                    extra,
-                ),
+                Pricing::Unit(kind, rate) => ModelListing {
+                    capabilities,
+                    ..ModelListing::media(
+                        name.clone(),
+                        name,
+                        maker,
+                        kind,
+                        round_sig(rate),
+                        source_url,
+                        extra,
+                    )
+                },
             })
         })
         .collect();

@@ -38,6 +38,35 @@ fn like(q: &Option<String>) -> Option<String> {
     (!words.is_empty()).then(|| format!("%{}%", words.join("%")))
 }
 
+/// Capability filter: known names only, so the array never carries user junk.
+fn caps(s: &Option<String>) -> Option<Vec<String>> {
+    const KNOWN: [&str; 15] = [
+        "in:text",
+        "in:image",
+        "in:audio",
+        "in:video",
+        "in:file",
+        "out:text",
+        "out:image",
+        "out:audio",
+        "out:video",
+        "out:file",
+        "tools",
+        "json",
+        "reasoning",
+        "web",
+        "caching",
+    ];
+    let list: Vec<String> = s
+        .as_deref()?
+        .split(',')
+        .map(str::trim)
+        .filter(|c| KNOWN.contains(c))
+        .map(str::to_owned)
+        .collect();
+    (!list.is_empty()).then_some(list)
+}
+
 fn blank(s: &Option<String>) -> Option<&str> {
     s.as_deref().map(str::trim).filter(|s| !s.is_empty())
 }
@@ -136,7 +165,7 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
         "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker,
                 m.providers::int8 AS providers,
                 m.min_input_per_mtok, m.min_output_per_mtok, m.min_blended_per_mtok,
-                m.median_blended_per_mtok, m.max_context_window, {CHEAPEST}
+                m.median_blended_per_mtok, m.max_context_window, m.capabilities, {CHEAPEST}
          FROM market_models m
          JOIN organizations o ON o.id = m.cheapest_organization_id
          WHERE m.kind = 'model' AND m.providers >= $2
@@ -146,6 +175,7 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
            AND ($7::float8 IS NULL OR m.min_blended_per_mtok <= $7)
            AND ($8::float8 IS NULL OR m.min_blended_per_mtok >= $8)
            AND ($9::int8 IS NULL OR m.max_context_window >= $9)
+           AND ($10::text[] IS NULL OR m.capabilities @> $10)
          ORDER BY {order}
          LIMIT $3 OFFSET $4"
     )))
@@ -158,6 +188,7 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
     .bind(q.max_price)
     .bind(q.min_price)
     .bind(q.min_context)
+    .bind(caps(&q.caps))
     .fetch_all(pool)
     .await?;
     Ok(page(rows, limit, offset))
@@ -183,7 +214,7 @@ pub async fn media_index(pool: &PgPool, q: &MediaIndexQuery) -> sqlx::Result<Pag
     let (limit, offset) = (limit(q.limit), offset(q.offset));
     let rows: Vec<Counted<MediaIndexRow>> = sqlx::query_as(sqlx::AssertSqlSafe(format!(
         "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker, m.kind, m.unit,
-                m.providers::int8 AS providers, m.min_price, m.median_price, {CHEAPEST}
+                m.providers::int8 AS providers, m.min_price, m.median_price, m.capabilities, {CHEAPEST}
          FROM market_models m
          JOIN organizations o ON o.id = m.cheapest_organization_id
          WHERE m.kind <> 'model' AND m.providers >= $3
@@ -212,7 +243,7 @@ const LISTING_COLUMNS: &str = "l.adapter, o.slug AS organization_slug, o.name AS
         AS blended_per_mtok,
     l.gpu_count, l.price_per_hour::float8 AS price_per_hour,
     round(l.price_per_hour / nullif(l.gpu_count, 0), 4)::float8 AS price_per_gpu_hour,
-    l.unit, l.price_per_unit::float8 AS price_per_unit,
+    l.unit, l.price_per_unit::float8 AS price_per_unit, l.capabilities,
     l.source_url, l.last_seen_at";
 
 /// Every live price of one model, cheapest first. `None` when no provider lists it.
@@ -494,7 +525,7 @@ pub async fn provider_offerings(
             "SELECT count(*) OVER () AS total, f.kind, f.item_key, f.name, f.maker,
                 p.slug AS product_slug, f.sources, f.variants, f.price, f.input_per_mtok,
                 f.output_per_mtok, f.unit, f.market_providers, f.market_min, f.market_median,
-                f.rank, f.context_window, f.source_url, f.last_seen_at
+                f.rank, f.capabilities, f.context_window, f.source_url, f.last_seen_at
          FROM market_provider_offerings f
          LEFT JOIN products p ON p.id = f.product_id
          WHERE f.organization_id = $1

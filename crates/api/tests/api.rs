@@ -1340,3 +1340,51 @@ async fn model_index_filters_and_sorts_safely(pool: PgPool) {
     let (_, gpus) = get(&app, "/v1/market/gpus?sort=price").await;
     assert_eq!(gpus[0]["gpu_type"], "L4", "cheapest per GPU-hour first");
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn capabilities_follow_the_majority_of_reporting_providers(pool: PgPool) {
+    seed_market_index(&pool).await;
+    // DeepSeek V3.2 at alpha and beta: both report tools; only beta claims image input.
+    sqlx::query(
+        "UPDATE market_listings SET capabilities = CASE adapter
+             WHEN 'a' THEN ARRAY['in:text', 'out:text', 'tools', 'json']
+             WHEN 'b' THEN ARRAY['in:text', 'in:image', 'out:text', 'tools']
+         END
+         WHERE kind = 'model' AND market_model_key(external_id) = 'deepseek-v3.2'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    ih_db::market_refresh::refresh(&pool).await.unwrap();
+    let app = app(pool);
+
+    let (_, page) = get(&app, "/v1/market/models?q=deepseek").await;
+    let caps = page["items"][0]["capabilities"].clone();
+    // tools: 2 of 2; json and in:image: 1 of 2, which is half, so they count.
+    assert_eq!(
+        caps,
+        serde_json::json!(["in:image", "in:text", "json", "out:text", "tools"])
+    );
+
+    let (_, tools) = get(&app, "/v1/market/models?caps=tools").await;
+    assert_eq!(tools["total"], 1);
+    let (_, none) = get(&app, "/v1/market/models?caps=web").await;
+    assert_eq!(none["total"], 0);
+    let (_, junk) = get(&app, "/v1/market/models?caps=drop%20table").await;
+    assert_eq!(
+        junk["total"], 2,
+        "unknown capabilities are ignored, not matched"
+    );
+
+    let (_, detail) = get(&app, "/v1/market/models/deepseek-v3.2").await;
+    let beta = detail["listings"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|l| l["adapter"] == "b")
+        .unwrap();
+    assert_eq!(
+        beta["capabilities"],
+        serde_json::json!(["in:text", "in:image", "out:text", "tools"])
+    );
+}

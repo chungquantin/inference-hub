@@ -175,6 +175,7 @@ struct Row {
     region: Option<String>,
     source_url: Option<String>,
     extra: serde_json::Value,
+    capabilities: Vec<String>,
 }
 
 impl From<ModelListing> for Row {
@@ -194,6 +195,7 @@ impl From<ModelListing> for Row {
             gpu_type: None,
             gpu_count: None,
             per_hour: None,
+            capabilities: l.capabilities,
             unit: l.media.map(|m| m.kind.unit()),
             per_unit: l.media.map(|m| m.price),
             max_per_unit: l.media.map(|m| m.kind.max_price()),
@@ -226,6 +228,7 @@ impl From<GpuListing> for Row {
             unit: None,
             per_unit: None,
             max_per_unit: None,
+            capabilities: Vec::new(),
             region: l.region,
             source_url: l.source_url,
             extra: l.extra,
@@ -560,10 +563,11 @@ async fn upsert_listing(
              (adapter, listing_key, external_id, kind, name, maker, context_window,
               price_input_per_mtok, price_output_per_mtok, gpu_type, gpu_count, price_per_hour,
               region, source_url, extra, first_seen_at, last_seen_at, delisted_at,
-              unit, price_per_unit)
+              unit, price_per_unit, capabilities)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $16, NULL,
-                 $17, $18::float8::numeric)
+                 $17, $18::float8::numeric, $19)
          ON CONFLICT (adapter, listing_key) DO UPDATE SET
+             capabilities = EXCLUDED.capabilities,
              kind = EXCLUDED.kind, unit = EXCLUDED.unit, price_per_unit = EXCLUDED.price_per_unit,
              external_id = EXCLUDED.external_id, name = EXCLUDED.name, maker = EXCLUDED.maker,
              context_window = EXCLUDED.context_window,
@@ -592,6 +596,7 @@ async fn upsert_listing(
     .bind(now)
     .bind(row.unit)
     .bind(row.per_unit)
+    .bind(&row.capabilities)
     .execute(&mut **tx)
     .await?;
     Ok(())
@@ -697,6 +702,7 @@ mod tests {
             output_per_mtok: output,
             variant: None,
             media: None,
+            capabilities: Vec::new(),
             source_url: None,
             extra: serde_json::Value::Null,
         })

@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           Skip to content
         </a>
         <header className="sticky top-0 z-40 border-b border-line bg-wash">
-          <div className="mx-auto flex h-14 max-w-[1280px] items-stretch gap-6 px-4 sm:px-6">
+          <div className="mx-auto flex h-14 max-w-(--page-width) items-stretch gap-6 px-4 sm:px-6">
             <Link href="/" className="flex shrink-0 items-center gap-2.5">
               <BrandMark />
               <span className="font-display text-[18px] tracking-[-0.02em] text-ink">{SITE_NAME}</span>
@@ -49,7 +49,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <MainNav />
           </div>
         </header>
-        <main id="main" className="mx-auto w-full max-w-[1280px] flex-1 px-4 pt-8 pb-20 sm:px-6">
+        <main id="main" className="mx-auto w-full max-w-(--page-width) flex-1 px-4 pt-8 pb-20 sm:px-6">
           {children}
         </main>
         <Footer />
@@ -89,7 +89,7 @@ async function Footer() {
 
   return (
     <footer className="bg-s-7 text-wash">
-      <div className="mx-auto grid max-w-[1280px] gap-10 px-6 py-14 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+      <div className="mx-auto grid max-w-(--page-width) gap-10 px-6 py-14 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
         <div className="flex flex-col gap-4">
           <p className="font-display text-[28px] leading-9 tracking-[-0.02em]">
             The price of inference, from the providers themselves.
@@ -119,7 +119,7 @@ async function Footer() {
         </div>
       </div>
       <div className="bg-s-9">
-        <div className="mx-auto flex h-8 max-w-[1280px] items-center gap-4 overflow-hidden px-6 font-mono text-[12px] whitespace-nowrap text-s-3">
+        <div className="mx-auto flex h-8 max-w-(--page-width) items-center gap-4 overflow-hidden px-6 font-mono text-[12px] whitespace-nowrap text-s-3">
           <span className="flex items-center gap-2 bg-s-3 px-2 text-s-10">
             <LiveDot />
             Live
