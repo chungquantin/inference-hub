@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Pagination, listingHref, parsePage } from "@/components/listing";
-import { RowLink, modelHref } from "@/components/market";
+import { modelHref } from "@/components/market";
+import { CreatorBadge, ModelName } from "@/components/model-name";
 import { ProviderLink } from "@/components/price-cells";
 import { CAPABILITIES, Capabilities, CapabilityLegend } from "@/components/capabilities";
 import { FilterBar, type Filter } from "@/components/table/filter-bar";
@@ -9,6 +10,7 @@ import { PixelBar } from "@/components/ui/pixel";
 import { PageHeader, Price } from "@/components/ui/primitives";
 import type { ModelIndexRow } from "@inference-hub/api-client";
 import { api } from "@/lib/api";
+import { creatorName } from "@/lib/catalog";
 import { formatCount, formatPrice, formatTokens } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -92,8 +94,11 @@ export default async function MarketModelsPage({ searchParams }: Props) {
     {
       type: "select",
       name: "maker",
-      label: "Maker",
-      options: (makers.data ?? []).map((m) => ({ value: m.maker, label: `${m.maker} (${m.models})` })),
+      label: "Creator",
+      options: (makers.data ?? []).map((m) => ({
+        value: m.maker,
+        label: `${creatorName(m.maker)}${creatorName(m.maker) === m.maker ? "" : ` · ${m.maker}`} (${m.models})`,
+      })),
     },
     {
       type: "select",
@@ -134,12 +139,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       id: "model",
       header: "Model",
       sort: "name",
-      cell: (r) => (
-        <span className="flex flex-col">
-          <RowLink href={modelHref(r.model_key)}>{r.model_key}</RowLink>
-          {r.name !== r.model_key && <span className="max-w-[260px] truncate text-[12px] text-ink-3">{r.name}</span>}
-        </span>
-      ),
+      cell: (r) => <ModelName id={r.model_key} href={modelHref(r.model_key)} maker={r.maker} />,
       csv: (r) => r.model_key,
     },
     {
@@ -149,7 +149,14 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       cell: (r) => <Capabilities caps={r.capabilities} />,
       csv: (r) => r.capabilities.join(" "),
     },
-    { id: "maker", header: "Maker", optional: true, minWidth: "2xl", cell: (r) => <span className="text-ink-3">{r.maker ?? "—"}</span>, csv: (r) => r.maker },
+    {
+      id: "maker",
+      header: "Creator",
+      optional: true,
+      minWidth: "2xl",
+      cell: (r) => <CreatorBadge maker={r.maker} />,
+      csv: (r) => creatorName(r.maker) ?? r.maker,
+    },
     { id: "providers", header: "Sellers", numeric: true, sort: "providers", sortDir: "desc", cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
     { id: "input", header: "In", numeric: true, optional: true, minWidth: "xl", sort: "input", cell: (r) => <Price>{formatPrice(r.min_input_per_mtok)}</Price>, csv: (r) => r.min_input_per_mtok },
     { id: "output", header: "Out", numeric: true, optional: true, minWidth: "xl", sort: "output", cell: (r) => <Price>{formatPrice(r.min_output_per_mtok)}</Price>, csv: (r) => r.min_output_per_mtok },
@@ -201,8 +208,9 @@ export default async function MarketModelsPage({ searchParams }: Props) {
         filters={filters}
         values={filterValues}
         keep={{ sort: params.sort, dir: params.dir }}
-        labels={{ q: "Model", maker: "Maker", provider: "Sold by", min: "Providers", max_price: "Max", min_context: "Context", caps: "Can do" }}
+        labels={{ q: "Model", maker: "Creator", provider: "Sold by", min: "Providers", max_price: "Max", min_context: "Context", caps: "Can do" }}
         describe={{
+          maker: (v) => creatorName(v) ?? v,
           max_price: (v) => `$${v} / 1M`,
           min_context: (v) => `${formatTokens(Number(v))}+`,
           min: (v) => `${v}+`,

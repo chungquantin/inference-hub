@@ -16,6 +16,8 @@ pub struct SearchHit {
     /// A short second line: maker, kind, price or source.
     pub subtitle: Option<String>,
     pub logo_url: Option<String>,
+    /// Models: the maker as providers name it (`deepseek-ai`), for its logo.
+    pub maker: Option<String>,
     /// Higher is better; exact and prefix matches score above substrings.
     pub score: f32,
     pub date: Option<DateTime<Utc>>,

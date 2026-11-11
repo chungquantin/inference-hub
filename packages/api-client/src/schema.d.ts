@@ -1502,6 +1502,8 @@ export interface components {
             /** @description `organization`, `product`, `model`, `media`, `gpu` or `news`. */
             kind: string;
             logo_url?: string | null;
+            /** @description Models: the maker as providers name it (`deepseek-ai`), for its logo. */
+            maker?: string | null;
             /**
              * Format: float
              * @description Higher is better; exact and prefix matches score above substrings.

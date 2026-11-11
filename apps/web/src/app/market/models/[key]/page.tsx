@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MarketListings } from "@/components/market-detail";
+import { CreatorBadge } from "@/components/model-name";
+import { Logo } from "@/components/ui/logo";
 import { PageHeader, Stat } from "@/components/ui/primitives";
+import { creatorName, modelLogoUrl } from "@/lib/catalog";
 import { api } from "@/lib/api";
 import { formatUnitPrice } from "@/components/market";
 import { formatPrice } from "@/lib/format";
@@ -30,6 +33,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MarketModelPage({ params }: Props) {
   const data = await load((await params).key);
+  // The maker most listings name, for the logo and the creator line.
+  const makers = data.listings
+    .map((l) => l.external_id.includes("/") ? l.external_id.split("/")[0] : null)
+    .filter((m): m is string => !!m && !["bedrock", "vertex", "azure", "coding"].includes(m.toLowerCase()));
+  const maker = makers.sort((a, b) => makers.filter((x) => x === b).length - makers.filter((x) => x === a).length)[0] ?? null;
+  const logo = <Logo name={creatorName(maker) ?? data.key} src={modelLogoUrl(data.key, maker)} size="lg" />;
+  const byline = maker && (
+    <span className="flex items-center gap-2 text-[15px]">
+      by <CreatorBadge maker={maker} size="sm" />
+    </span>
+  );
   const media = data.listings.filter((l) => l.unit);
   const chat = data.listings.filter((l) => !l.unit);
   if (chat.length === 0) {
@@ -39,8 +53,14 @@ export default async function MarketModelPage({ params }: Props) {
       <div className="flex flex-col gap-6">
         <PageHeader
           crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
+          logo={logo}
           title={data.name}
-          lead="Each provider's listing of this model, priced in its own unit, cheapest first."
+          lead={
+          <>
+            {byline}
+            <span className="mt-1 block">Each provider&apos;s listing of this model, priced in its own unit, cheapest first.</span>
+          </>
+        }
         />
         <section className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-3">
           <Stat value={formatUnitPrice(prices[0], unit)} label="lowest" />
@@ -58,8 +78,17 @@ export default async function MarketModelPage({ params }: Props) {
     <div className="flex flex-col gap-6">
       <PageHeader
         crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
+        logo={logo}
         title={data.name}
-        lead="Each provider's listing of this model, matched by id. Routers such as Hugging Face show the provider behind each price. Blend is 3 input tokens per output token."
+        lead={
+          <>
+            {byline}
+            <span className="mt-1 block">
+              Each provider&apos;s listing of this model, matched by id. Routers such as Hugging Face show the provider behind
+              each price. Blend is 3 input tokens per output token.
+            </span>
+          </>
+        }
       />
       <section className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-4">
         <Stat value={formatPrice(blends[0])} label="lowest blend / 1M" />

@@ -17,6 +17,22 @@ export function Logo({
   size?: keyof typeof SIZES;
 }) {
   const px = SIZES[size];
+  // Catalog icons are square artwork with their own background: fill the plate.
+  if (src?.startsWith("/catalog/")) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element -- 64px static icons, many per table
+      <img
+        src={src}
+        alt=""
+        width={px}
+        height={px}
+        loading="lazy"
+        decoding="async"
+        className="shrink-0 border border-line object-cover"
+        style={{ width: px, height: px }}
+      />
+    );
+  }
   if (src) {
     return (
       <span

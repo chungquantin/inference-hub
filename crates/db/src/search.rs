@@ -34,7 +34,7 @@ pub async fn search(
     if want("organization") {
         parts.push(format!(
             "(SELECT 'organization' AS kind, '/organizations/' || slug AS href, name AS title,
-                     tagline AS subtitle, logo_url, {} AS score, NULL::timestamptz AS date
+                     tagline AS subtitle, logo_url, NULL AS maker, {} AS score, NULL::timestamptz AS date
               FROM organizations
               WHERE name ILIKE $2 OR slug ILIKE $2 OR $1 ILIKE ANY (aliases)
               ORDER BY score DESC, name LIMIT $3)",
@@ -45,7 +45,7 @@ pub async fn search(
         parts.push(format!(
             "(SELECT 'product' AS kind, '/products/' || p.slug AS href, p.name AS title,
                      o.name || ' · ' || replace(p.product_type::text, '_', ' ') AS subtitle,
-                     o.logo_url, {} AS score, NULL::timestamptz AS date
+                     o.logo_url, NULL AS maker, {} AS score, NULL::timestamptz AS date
               FROM products p JOIN organizations o ON o.id = p.organization_id
               WHERE p.name ILIKE $2 OR p.slug ILIKE $2
               ORDER BY score DESC, p.name LIMIT $3)",
@@ -57,7 +57,7 @@ pub async fn search(
             "(SELECT 'model' AS kind, '/market/models/' || m.model_key AS href, m.name AS title,
                      concat_ws(' · ', m.maker, m.providers || ' providers',
                                'from $' || round(m.min_blended_per_mtok::numeric, 4) || ' / 1M') AS subtitle,
-                     NULL AS logo_url, ({} + ln(1 + m.providers))::float4 AS score,
+                     NULL AS logo_url, m.maker AS maker, ({} + ln(1 + m.providers))::float4 AS score,
                      NULL::timestamptz AS date
               FROM market_models m
               WHERE m.kind = 'model' AND (m.model_key ILIKE $2 OR m.name ILIKE $2)
@@ -69,7 +69,7 @@ pub async fn search(
         parts.push(format!(
             "(SELECT 'media' AS kind, '/market/models/' || m.model_key AS href, m.name AS title,
                      concat_ws(' · ', m.kind, m.maker, m.providers || ' providers') AS subtitle,
-                     NULL AS logo_url, ({} + ln(1 + m.providers))::float4 AS score,
+                     NULL AS logo_url, m.maker AS maker, ({} + ln(1 + m.providers))::float4 AS score,
                      NULL::timestamptz AS date
               FROM market_models m
               WHERE m.kind <> 'model' AND (m.model_key ILIKE $2 OR m.name ILIKE $2)
@@ -82,7 +82,7 @@ pub async fn search(
             "(SELECT 'gpu' AS kind, '/market/gpus/' || g.gpu_type AS href, g.gpu_type AS title,
                      g.providers || ' clouds · from $' || round(g.min_per_gpu_hour::numeric, 2)
                          || ' / GPU-hour' AS subtitle,
-                     NULL AS logo_url, {} AS score, NULL::timestamptz AS date
+                     NULL AS logo_url, NULL AS maker, {} AS score, NULL::timestamptz AS date
               FROM market_gpus g WHERE g.gpu_type ILIKE $2
               ORDER BY score DESC, g.providers DESC LIMIT $3)",
             score("g.gpu_type")
@@ -91,7 +91,7 @@ pub async fn search(
     if want("news") {
         parts.push(format!(
             "(SELECT 'news' AS kind, n.url AS href, n.title AS title, n.publisher AS subtitle,
-                     NULL AS logo_url, ({} * 0.9)::float4 AS score, n.published_at AS date
+                     NULL AS logo_url, NULL AS maker, ({} * 0.9)::float4 AS score, n.published_at AS date
               FROM news_items n
               WHERE n.status = 'approved' AND n.title ILIKE $2
               ORDER BY n.published_at DESC LIMIT $3)",

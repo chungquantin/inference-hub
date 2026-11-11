@@ -20,6 +20,7 @@ export function PageHeader({
   lead,
   label,
   crumbs,
+  logo,
   children,
 }: {
   title: React.ReactNode;
@@ -28,6 +29,8 @@ export function PageHeader({
   label?: string;
   /** Breadcrumbs, shown instead of the label: parent pages first. */
   crumbs?: { href?: string; label: string }[];
+  /** A logo shown before the title, such as a model's. */
+  logo?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
@@ -38,12 +41,15 @@ export function PageHeader({
         label && <p className="font-mono text-[13px] leading-5 text-s-7">{label}</p>
       )}
       <div className="flex flex-wrap items-end justify-between gap-6">
-        <h1 className="font-display text-[40px] leading-[48px] font-normal tracking-[-0.02em] text-ink">
-          {title}
-        </h1>
+        <span className="flex min-w-0 items-center gap-4">
+          {logo}
+          <h1 className="min-w-0 font-display text-[40px] leading-[48px] font-normal tracking-[-0.02em] break-words text-ink">
+            {title}
+          </h1>
+        </span>
         {children}
       </div>
-      {lead && <p className="max-w-[62ch] text-[16px] leading-6 text-ink-2">{lead}</p>}
+      {lead && <div className="max-w-[62ch] text-[16px] leading-6 text-ink-2">{lead}</div>}
     </header>
   );
 }

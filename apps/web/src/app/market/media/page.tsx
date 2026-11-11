@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
-import { MEDIA_KINDS, RowLink, UNIT_LABELS, formatUnitPrice, modelHref, spread } from "@/components/market";
+import { MEDIA_KINDS, UNIT_LABELS, formatUnitPrice, modelHref, spread } from "@/components/market";
+import { CreatorBadge, ModelName } from "@/components/model-name";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import type { MediaIndexRow } from "@inference-hub/api-client";
 import { ProviderLink } from "@/components/price-cells";
@@ -42,14 +43,19 @@ export default async function MarketMediaPage({ searchParams }: Props) {
     listingHref("/market/media", current, { page: undefined, ...o });
 
   const columns: Column<MediaIndexRow>[] = [
-    { id: "model", header: "Model", cell: (r) => <RowLink href={modelHref(r.model_key)}>{r.name}</RowLink>, csv: (r) => r.model_key },
+    {
+      id: "model",
+      header: "Model",
+      cell: (r) => <ModelName id={r.model_key} href={modelHref(r.model_key)} maker={r.maker} />,
+      csv: (r) => r.model_key,
+    },
     {
       id: "kind",
       header: "Kind",
       cell: (r) => <span className="text-ink-3">{MEDIA_KINDS.find((k) => k.kind === r.kind)?.label ?? r.kind}</span>,
       csv: (r) => r.kind,
     },
-    { id: "maker", header: "Maker", optional: true, cell: (r) => <span className="text-ink-3">{r.maker ?? "—"}</span>, csv: (r) => r.maker },
+    { id: "maker", header: "Creator", optional: true, minWidth: "2xl", cell: (r) => <CreatorBadge maker={r.maker} />, csv: (r) => r.maker },
     { id: "providers", header: "Providers", numeric: true, cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
     { id: "low", header: "Lowest", numeric: true, cell: (r) => <Price strong>{formatUnitPrice(r.min_price, r.unit)}</Price>, csv: (r) => r.min_price },
     { id: "median", header: "Median", numeric: true, optional: true, cell: (r) => <Price>{formatUnitPrice(r.median_price, r.unit)}</Price>, csv: (r) => r.median_price },

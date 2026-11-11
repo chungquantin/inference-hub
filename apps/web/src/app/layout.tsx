@@ -111,6 +111,7 @@ async function Footer() {
           ))}
           <FooterCol title="Project">
             <a href="https://github.com/chungquantin/inference-hub">GitHub</a>
+            <a href="/catalog/NOTICE.md">Model icons: inference-catalog (MIT)</a>
             <a href={`${SITE_URL}/sitemap.xml`}>Sitemap</a>
             {process.env.PUBLIC_API_URL && (
               <a href={`${process.env.PUBLIC_API_URL.replace(/\/$/, "")}/docs`}>API docs</a>

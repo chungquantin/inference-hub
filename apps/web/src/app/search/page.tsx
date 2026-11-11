@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FilterChip, SearchForm, listingHref } from "@/components/listing";
 import { Badge, PageHeader } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
+import { modelLogoUrl } from "@/lib/catalog";
 import { formatCount, formatDate } from "@/lib/format";
 
 export const metadata: Metadata = {
@@ -62,7 +63,13 @@ export default async function SearchPage({ searchParams }: Props) {
       )}
       {data &&
         KINDS.filter((k) => data.hits.some((h) => h.kind === k.kind)).map((k) => {
-          const hits = data.hits.filter((h) => h.kind === k.kind);
+          const hits = data.hits
+            .filter((h) => h.kind === k.kind)
+            .map((h) =>
+              (h.kind === "model" || h.kind === "media") && !h.logo_url
+                ? { ...h, logo_url: modelLogoUrl(decodeURIComponent(h.href.split("/").pop() ?? h.title), h.maker) }
+                : h,
+            );
           const more = (counts.get(k.kind) ?? 0) - hits.length;
           return (
             <section key={k.kind} className="flex flex-col gap-2">
@@ -87,7 +94,7 @@ export default async function SearchPage({ searchParams }: Props) {
                     <>
                       {h.logo_url ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={h.logo_url} alt="" width={24} height={24} className="size-6 shrink-0 object-contain" />
+                        <img src={h.logo_url} alt="" width={24} height={24} className="size-6 shrink-0 border border-line object-cover" />
                       ) : (
                         <span aria-hidden className="size-6 shrink-0 bg-field" />
                       )}

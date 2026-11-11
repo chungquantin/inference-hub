@@ -2,6 +2,8 @@ import Link from "next/link";
 import { FilterChip, Pagination, SearchForm, listingHref } from "@/components/listing";
 import { MEDIA_KINDS, formatUnitPrice, gpuHref, modelHref } from "@/components/market";
 import { Capabilities } from "@/components/capabilities";
+import { ModelName } from "@/components/model-name";
+import { Logo } from "@/components/ui/logo";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price, SectionHeader, Stat } from "@/components/ui/primitives";
@@ -23,6 +25,11 @@ function priceOf(o: Offering, value: number | null | undefined): string {
   if (o.kind === "model") return formatPrice(value);
   if (o.kind === "gpu") return `${formatPrice(value)} / GPU-h`;
   return formatUnitPrice(value, o.unit);
+}
+
+/** The GPU maker's logo, from the name (`AMD MI300X`, everything else NVIDIA). */
+function gpuMakerLogo(name: string): string | null {
+  return /\bamd\b|mi3\d\d/i.test(name) ? "/catalog/icons/amd.jpg" : "/catalog/icons/nvidia.jpg";
 }
 
 /** The page of the item: the curated product when there is one, else the market's. */
@@ -91,22 +98,30 @@ export function ProviderOfferingsSection({
       id: "item",
       header: "Item",
       sort: "name",
-      cell: (o) => (
-        <span className="flex flex-col">
-          <Link href={itemHref(o)} className="font-sans text-[14px] text-ink underline decoration-line-strong hover:text-s-7">
-            {o.name}
-          </Link>
-          <span className="text-[12px] text-ink-3">
-            {[
-              o.maker,
-              o.kind === "model" && o.context_window ? `${formatTokens(o.context_window)} ctx` : null,
-              o.variants > 1 ? `${o.variants} variants` : null,
-            ]
-              .filter(Boolean)
-              .join(" · ")}
+      cell: (o) =>
+        o.kind === "gpu" ? (
+          <span className="flex items-center gap-2.5">
+            <Logo name={o.name} src={gpuMakerLogo(o.name)} size="sm" />
+            <Link href={itemHref(o)} className="font-sans text-[14px] text-ink underline decoration-line-strong hover:text-s-7">
+              {o.name}
+            </Link>
           </span>
-        </span>
-      ),
+        ) : (
+          <ModelName
+            id={o.item_key}
+            href={itemHref(o)}
+            maker={o.maker}
+            subtitle={
+              [
+                o.name !== o.item_key ? o.name : null,
+                o.kind === "model" && o.context_window ? `${formatTokens(o.context_window)} ctx` : null,
+                o.variants > 1 ? `${o.variants} variants` : null,
+              ]
+                .filter(Boolean)
+                .join(" · ") || undefined
+            }
+          />
+        ),
       csv: (o) => o.name,
     },
     {

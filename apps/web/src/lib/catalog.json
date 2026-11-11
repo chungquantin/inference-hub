@@ -1,0 +1,1347 @@
+{
+ "source": "https://github.com/architect-xyz/inference-catalog/tree/8deecc0490e9ecf4d4b18c2904d7cd498b482df3",
+ "icons": {
+  "ace": "ace.jpg",
+  "adobe": "adobe.jpg",
+  "adobefirefly": "adobefirefly.jpg",
+  "agentvoice": "agentvoice.jpg",
+  "agnesai": "agnesai.jpg",
+  "agui": "agui.jpg",
+  "ai2": "ai2.jpg",
+  "ai21": "ai21.jpg",
+  "ai302": "ai302.jpg",
+  "ai360": "ai360.jpg",
+  "aihubmix": "aihubmix.jpg",
+  "aimass": "aimass.jpg",
+  "aionlabs": "aionlabs.jpg",
+  "airjelly": "airjelly.jpg",
+  "aistudio": "aistudio.jpg",
+  "akashchat": "akashchat.jpg",
+  "alephalpha": "alephalpha.jpg",
+  "alibaba": "alibaba.jpg",
+  "alibabacloud": "alibabacloud.jpg",
+  "amd": "amd.jpg",
+  "amp": "amp.jpg",
+  "anspire": "anspire.jpg",
+  "antgroup": "antgroup.jpg",
+  "anthropic": "anthropic.jpg",
+  "antigravity": "antigravity.jpg",
+  "anyscale": "anyscale.jpg",
+  "apertis": "apertis.jpg",
+  "apple": "apple.jpg",
+  "arcee": "arcee.jpg",
+  "askverdict": "askverdict.jpg",
+  "assemblyai": "assemblyai.jpg",
+  "atlascloud": "atlascloud.jpg",
+  "automatic": "automatic.jpg",
+  "aws": "aws.jpg",
+  "aya": "aya.jpg",
+  "azure-openai": "azure-openai.png",
+  "azure": "azure.jpg",
+  "azureai": "azureai.jpg",
+  "baai": "baai.jpg",
+  "baichuan": "baichuan.jpg",
+  "baidu": "baidu.jpg",
+  "baiducloud": "baiducloud.jpg",
+  "bailian": "bailian.jpg",
+  "baseten": "baseten.jpg",
+  "bedrock": "bedrock.jpg",
+  "bfl": "bfl.jpg",
+  "bilibili": "bilibili.jpg",
+  "bilibiliindex": "bilibiliindex.jpg",
+  "bing": "bing.jpg",
+  "bocha": "bocha.jpg",
+  "brave": "brave.jpg",
+  "briaai": "briaai.jpg",
+  "browserless": "browserless.jpg",
+  "burncloud": "burncloud.jpg",
+  "bytedance": "bytedance.jpg",
+  "capcut": "capcut.jpg",
+  "celeris": "celeris.jpg",
+  "celestoai": "celestoai.jpg",
+  "centml": "centml.jpg",
+  "cerebras": "cerebras.jpg",
+  "chatglm": "chatglm.jpg",
+  "cherrystudio": "cherrystudio.jpg",
+  "chutes": "chutes.jpg",
+  "civitai-text": "civitai-text.jpg",
+  "civitai": "civitai.jpg",
+  "clarifai": "clarifai.jpg",
+  "claude": "claude.jpg",
+  "claudecode": "claudecode.jpg",
+  "cline": "cline.jpg",
+  "clipdrop": "clipdrop.jpg",
+  "cloudferro": "cloudferro.jpg",
+  "cloudflare": "cloudflare.jpg",
+  "codebuddy": "codebuddy.jpg",
+  "codeflicker": "codeflicker.jpg",
+  "codegeex": "codegeex.jpg",
+  "codex": "codex.jpg",
+  "cogvideo": "cogvideo.jpg",
+  "cogview": "cogview.jpg",
+  "cohere": "cohere.jpg",
+  "colab": "colab.jpg",
+  "cometapi": "cometapi.jpg",
+  "comfyui": "comfyui.svg",
+  "commanda": "commanda.jpg",
+  "copilot": "copilot.jpg",
+  "copilotkit": "copilotkit.jpg",
+  "coqui": "coqui.jpg",
+  "coze": "coze.jpg",
+  "crewai": "crewai.jpg",
+  "crusoe": "crusoe.jpg",
+  "cursor": "cursor.jpg",
+  "cybercut": "cybercut.jpg",
+  "dalle": "dalle.jpg",
+  "databricks": "databricks.jpg",
+  "dbrx": "dbrx.jpg",
+  "deepai": "deepai.jpg",
+  "deepcogito": "deepcogito.jpg",
+  "deepinfra": "deepinfra.jpg",
+  "deepl": "deepl.jpg",
+  "deepmind": "deepmind.jpg",
+  "deepseek": "deepseek.jpg",
+  "devin": "devin.jpg",
+  "dify": "dify.jpg",
+  "digitalocean": "digitalocean.jpg",
+  "doc2x": "doc2x.jpg",
+  "docsearch": "docsearch.jpg",
+  "dolphin": "dolphin.jpg",
+  "doubao": "doubao.jpg",
+  "dreammachine": "dreammachine.jpg",
+  "edenai": "edenai.jpg",
+  "elevenlabs": "elevenlabs.jpg",
+  "elevenx": "elevenx.jpg",
+  "essentialai": "essentialai.jpg",
+  "exa": "exa.jpg",
+  "fal": "fal.jpg",
+  "falcon": "falcon.png",
+  "fastgpt": "fastgpt.jpg",
+  "featherless": "featherless.jpg",
+  "figma": "figma.jpg",
+  "firecrawl": "firecrawl.jpg",
+  "fireworks": "fireworks.jpg",
+  "fishaudio": "fishaudio.jpg",
+  "flora": "flora.jpg",
+  "flowith": "flowith.jpg",
+  "flux": "flux.jpg",
+  "friendli": "friendli.jpg",
+  "gemini": "gemini.jpg",
+  "geminicli": "geminicli.jpg",
+  "gemma": "gemma.jpg",
+  "giteeai": "giteeai.jpg",
+  "github": "github.jpg",
+  "githubcopilot": "githubcopilot.jpg",
+  "gitlab": "gitlab.jpg",
+  "glama": "glama.jpg",
+  "glif": "glif.jpg",
+  "glmv": "glmv.jpg",
+  "gmicloud": "gmicloud.jpg",
+  "google": "google.jpg",
+  "googlecloud": "googlecloud.jpg",
+  "goose": "goose.jpg",
+  "gpt-3.5": "gpt-3.5.png",
+  "gpt-4": "gpt-4.png",
+  "gpt4all": "gpt4all.png",
+  "gradio": "gradio.jpg",
+  "greptile": "greptile.jpg",
+  "grok": "grok.jpg",
+  "groq": "groq.jpg",
+  "gryphe": "gryphe.png",
+  "hailuo": "hailuo.jpg",
+  "haiper": "haiper.jpg",
+  "happyhorse": "happyhorse.jpg",
+  "hedra": "hedra.jpg",
+  "helicone": "helicone.jpg",
+  "hermesagent": "hermesagent.jpg",
+  "hetzner": "hetzner.jpg",
+  "hidream": "hidream.png",
+  "higress": "higress.jpg",
+  "huawei": "huawei.jpg",
+  "huaweicloud": "huaweicloud.jpg",
+  "huggingface": "huggingface.jpg",
+  "hunyuan": "hunyuan.jpg",
+  "hyperbolic": "hyperbolic.jpg",
+  "ibm": "ibm.jpg",
+  "ideogram": "ideogram.jpg",
+  "iflow": "iflow.jpg",
+  "iflytekcloud": "iflytekcloud.jpg",
+  "inception": "inception.jpg",
+  "inference": "inference.jpg",
+  "infermatic": "infermatic.jpg",
+  "infinigence": "infinigence.jpg",
+  "inflection": "inflection.jpg",
+  "infomaniak": "infomaniak.jpg",
+  "internlm": "internlm.jpg",
+  "jimeng": "jimeng.jpg",
+  "jina": "jina.jpg",
+  "junie": "junie.jpg",
+  "kagi": "kagi.jpg",
+  "kilocode": "kilocode.jpg",
+  "kimi": "kimi.jpg",
+  "kiro": "kiro.jpg",
+  "kling": "kling.jpg",
+  "kluster": "kluster.jpg",
+  "kolors": "kolors.jpg",
+  "krea": "krea.jpg",
+  "kuaecloud": "kuaecloud.jpg",
+  "kwaikat-text": "kwaikat-text.jpg",
+  "kwaikat": "kwaikat.jpg",
+  "kwaipilot": "kwaipilot.jpg",
+  "lambda": "lambda.jpg",
+  "langchain": "langchain.jpg",
+  "langfuse": "langfuse.jpg",
+  "langgraph": "langgraph.jpg",
+  "langsmith": "langsmith.jpg",
+  "leptonai": "leptonai.jpg",
+  "lg": "lg.jpg",
+  "lightricks": "lightricks.jpg",
+  "liquid": "liquid.jpg",
+  "litellm": "litellm.svg",
+  "livekit": "livekit.jpg",
+  "llama": "llama.png",
+  "llamaindex": "llamaindex.jpg",
+  "llava": "llava.jpg",
+  "llmapi": "llmapi.jpg",
+  "llmgateway": "llmgateway.jpg",
+  "lmstudio": "lmstudio.jpg",
+  "longcat": "longcat.jpg",
+  "lovable": "lovable.jpg",
+  "lovart": "lovart.jpg",
+  "lucidity": "lucidity.png",
+  "luma": "luma.jpg",
+  "magic": "magic.jpg",
+  "make": "make.jpg",
+  "manus": "manus.jpg",
+  "mastra": "mastra.jpg",
+  "mcp": "mcp.jpg",
+  "mcpso": "mcpso.jpg",
+  "meganova": "meganova.jpg",
+  "menlo": "menlo.jpg",
+  "mergegateway": "mergegateway.jpg",
+  "meshy": "meshy.jpg",
+  "meta": "meta.jpg",
+  "metaai": "metaai.jpg",
+  "metagpt": "metagpt.jpg",
+  "microsoft": "microsoft.jpg",
+  "midjourney": "midjourney.jpg",
+  "minimax": "minimax.jpg",
+  "mistral": "mistral.jpg",
+  "modal": "modal.jpg",
+  "modelis": "modelis.jpg",
+  "modelscope": "modelscope.jpg",
+  "monica": "monica.jpg",
+  "moonshot": "moonshot.jpg",
+  "morph": "morph.jpg",
+  "moxt": "moxt.jpg",
+  "myshell": "myshell.jpg",
+  "n8n": "n8n.jpg",
+  "nanobanana": "nanobanana.jpg",
+  "nearai": "nearai.jpg",
+  "nebius": "nebius.jpg",
+  "neon": "neon.jpg",
+  "newapi": "newapi.jpg",
+  "notebooklm": "notebooklm.jpg",
+  "notion": "notion.jpg",
+  "nousresearch": "nousresearch.jpg",
+  "nova": "nova.jpg",
+  "novelai": "novelai.jpg",
+  "novita": "novita.jpg",
+  "nplcloud": "nplcloud.jpg",
+  "nvidia": "nvidia.jpg",
+  "obsidian": "obsidian.jpg",
+  "ollama": "ollama.jpg",
+  "open-assistant": "open-assistant.png",
+  "openai": "openai.svg",
+  "openchat": "openchat.jpg",
+  "openclaw": "openclaw.jpg",
+  "opencode": "opencode.jpg",
+  "openhands": "openhands.jpg",
+  "openhuman": "openhuman.jpg",
+  "openrouter": "openrouter.jpg",
+  "openrouterai": "openrouterai.png",
+  "openwebui": "openwebui.jpg",
+  "opper": "opper.jpg",
+  "orca-mini": "orca-mini.png",
+  "ovhcloud": "ovhcloud.jpg",
+  "palm": "palm.jpg",
+  "parasail": "parasail.jpg",
+  "perplexity": "perplexity.jpg",
+  "phi-2": "phi-2.png",
+  "phidata": "phidata.jpg",
+  "phind": "phind.jpg",
+  "pi": "pi.png",
+  "pika": "pika.jpg",
+  "pixverse": "pixverse.jpg",
+  "player2": "player2.jpg",
+  "playground": "playground.jpg",
+  "poe": "poe.jpg",
+  "pollinations": "pollinations.jpg",
+  "poolside": "poolside.jpg",
+  "ppio": "ppio.jpg",
+  "prismml": "prismml.jpg",
+  "prunaai": "prunaai.jpg",
+  "pydanticai": "pydanticai.jpg",
+  "qingyan": "qingyan.jpg",
+  "qiniu": "qiniu.jpg",
+  "qoder": "qoder.jpg",
+  "qvac": "qvac.jpg",
+  "qwen": "qwen.jpg",
+  "qwen2": "qwen2.png",
+  "railway": "railway.jpg",
+  "recraft": "recraft.jpg",
+  "relace": "relace.jpg",
+  "replicate": "replicate.jpg",
+  "replit": "replit.jpg",
+  "reve": "reve.jpg",
+  "roocode": "roocode.jpg",
+  "rsshub": "rsshub.jpg",
+  "rundiffusion": "rundiffusion.png",
+  "runway": "runway.jpg",
+  "rwkv": "rwkv.jpg",
+  "sakana": "sakana.jpg",
+  "saladcloud": "saladcloud.jpg",
+  "sambanova": "sambanova.jpg",
+  "sao10k": "sao10k.jpg",
+  "sarvam": "sarvam.jpg",
+  "scaleway": "scaleway.jpg",
+  "scnet": "scnet.jpg",
+  "search1api": "search1api.jpg",
+  "searchapi": "searchapi.jpg",
+  "searxng": "searxng.jpg",
+  "sensenova": "sensenova.jpg",
+  "siliconcloud": "siliconcloud.jpg",
+  "sillytavern": "sillytavern.jpg",
+  "skywork": "skywork.jpg",
+  "slock": "slock.jpg",
+  "smithery": "smithery.jpg",
+  "snowflake": "snowflake.jpg",
+  "sophnet": "sophnet.jpg",
+  "sora": "sora.jpg",
+  "spark": "spark.jpg",
+  "speedai": "speedai.jpg",
+  "stability": "stability.jpg",
+  "stackit": "stackit.jpg",
+  "statecloud": "statecloud.jpg",
+  "stepfun": "stepfun.jpg",
+  "straico": "straico.jpg",
+  "streamlake": "streamlake.jpg",
+  "submodel": "submodel.jpg",
+  "suno": "suno.jpg",
+  "sync": "sync.jpg",
+  "targon": "targon.jpg",
+  "tavily": "tavily.jpg",
+  "tencent": "tencent.jpg",
+  "tencentcloud": "tencentcloud.jpg",
+  "tensorx": "tensorx.jpg",
+  "thinkingmachines": "thinkingmachines.jpg",
+  "tiangong": "tiangong.jpg",
+  "tii": "tii.jpg",
+  "tinfoil": "tinfoil.jpg",
+  "together": "together.jpg",
+  "topazlabs": "topazlabs.jpg",
+  "trae": "trae.jpg",
+  "tripo": "tripo.jpg",
+  "turix": "turix.jpg",
+  "udio": "udio.jpg",
+  "unsloth": "unsloth.jpg",
+  "unstructured": "unstructured.jpg",
+  "upstage": "upstage.jpg",
+  "v0": "v0.jpg",
+  "vectorizerai": "vectorizerai.jpg",
+  "venice": "venice.jpg",
+  "vercel": "vercel.jpg",
+  "vertexai": "vertexai.jpg",
+  "vicuna": "vicuna.png",
+  "vidu": "vidu.jpg",
+  "viggle": "viggle.jpg",
+  "vllm": "vllm.jpg",
+  "volcengine": "volcengine.jpg",
+  "voyage": "voyage.jpg",
+  "vultr": "vultr.jpg",
+  "wandb": "wandb.jpg",
+  "wenxin": "wenxin.jpg",
+  "windsurf": "windsurf.jpg",
+  "workersai": "workersai.jpg",
+  "worldrouter": "worldrouter.jpg",
+  "xai": "xai.jpg",
+  "xiaomi": "xiaomi.svg",
+  "xiaomimimo": "xiaomimimo.jpg",
+  "xinference": "xinference.jpg",
+  "xpay": "xpay.jpg",
+  "xuanyuan": "xuanyuan.jpg",
+  "yandex": "yandex.jpg",
+  "yi": "yi.jpg",
+  "youmind": "youmind.jpg",
+  "yuanbao": "yuanbao.jpg",
+  "zai": "zai.jpg",
+  "zapier": "zapier.jpg",
+  "zeabur": "zeabur.jpg",
+  "zencoder": "zencoder.jpg",
+  "zenmux": "zenmux.jpg",
+  "zeroone": "zeroone.jpg",
+  "zhipu": "zhipu.jpg"
+ },
+ "creators": {
+  "01-ai": {
+   "name": "01.AI",
+   "aliases": [],
+   "icon": "zeroone"
+  },
+  "abliteration": {
+   "name": "Abliteration",
+   "aliases": [],
+   "icon": null
+  },
+  "adobe": {
+   "name": "Adobe",
+   "aliases": [],
+   "icon": "adobefirefly"
+  },
+  "agnes": {
+   "name": "Agnes",
+   "aliases": [],
+   "icon": null
+  },
+  "ai2": {
+   "name": "Ai2",
+   "aliases": [],
+   "icon": "ai2"
+  },
+  "ai21": {
+   "name": "AI21 Labs",
+   "aliases": [],
+   "icon": "ai21"
+  },
+  "ai21labs": {
+   "name": "AI21 Labs",
+   "aliases": [],
+   "icon": "ai21"
+  },
+  "aion-labs": {
+   "name": "Aion Labs",
+   "aliases": [
+    "aionlabs"
+   ],
+   "icon": "aionlabs"
+  },
+  "aisingapore": {
+   "name": "Aisingapore",
+   "aliases": [],
+   "icon": null
+  },
+  "aleph-alpha": {
+   "name": "Aleph Alpha",
+   "aliases": [],
+   "icon": "alephalpha"
+  },
+  "alibaba": {
+   "name": "Alibaba",
+   "aliases": [
+    "qwen"
+   ],
+   "icon": "qwen"
+  },
+  "allenai": {
+   "name": "Ai2",
+   "aliases": [],
+   "icon": "ai2"
+  },
+  "amazon": {
+   "name": "Amazon",
+   "aliases": [],
+   "icon": "nova"
+  },
+  "amd": {
+   "name": "AMD",
+   "aliases": [],
+   "icon": "amd"
+  },
+  "anthracite": {
+   "name": "Anthracite",
+   "aliases": [],
+   "icon": null
+  },
+  "anthropic": {
+   "name": "Anthropic",
+   "aliases": [],
+   "icon": "claude"
+  },
+  "apple": {
+   "name": "Apple",
+   "aliases": [],
+   "icon": "apple"
+  },
+  "arcee-ai": {
+   "name": "Arcee AI",
+   "aliases": [
+    "arcee"
+   ],
+   "icon": "arcee"
+  },
+  "baai": {
+   "name": "BAAI",
+   "aliases": [],
+   "icon": "baai"
+  },
+  "baichuan-inc": {
+   "name": "Baichuan",
+   "aliases": [],
+   "icon": "baichuan"
+  },
+  "baichuan": {
+   "name": "Baichuan",
+   "aliases": [],
+   "icon": "baichuan"
+  },
+  "baidu": {
+   "name": "Baidu",
+   "aliases": [],
+   "icon": "baidu"
+  },
+  "blackforestlabs": {
+   "name": "Black Forest Labs",
+   "aliases": [
+    "black-forest-labs"
+   ],
+   "icon": "bfl"
+  },
+  "bria": {
+   "name": "Bria",
+   "aliases": [],
+   "icon": "briaai"
+  },
+  "briaai": {
+   "name": "Bria",
+   "aliases": [],
+   "icon": "briaai"
+  },
+  "bytedance-seed": {
+   "name": "ByteDance Seed",
+   "aliases": [
+    "bytedance",
+    "doubao"
+   ],
+   "icon": "bytedance"
+  },
+  "celeris": {
+   "name": "Celeris",
+   "aliases": [],
+   "icon": "celeris"
+  },
+  "cognitivecomputations": {
+   "name": "Cognitive Computations",
+   "aliases": [],
+   "icon": "dolphin"
+  },
+  "cohere": {
+   "name": "Cohere",
+   "aliases": [],
+   "icon": "cohere"
+  },
+  "coqui": {
+   "name": "Coqui",
+   "aliases": [],
+   "icon": "coqui"
+  },
+  "databricks": {
+   "name": "Databricks",
+   "aliases": [],
+   "icon": "databricks"
+  },
+  "deepcogito": {
+   "name": "Deep Cogito",
+   "aliases": [],
+   "icon": "deepcogito"
+  },
+  "deepgram": {
+   "name": "Deepgram",
+   "aliases": [],
+   "icon": null
+  },
+  "deepreinforce": {
+   "name": "DeepReinforce",
+   "aliases": [
+    "ornith"
+   ],
+   "icon": null
+  },
+  "deepseek": {
+   "name": "DeepSeek",
+   "aliases": [
+    "deepseek-ai"
+   ],
+   "icon": "deepseek"
+  },
+  "ehristoforu": {
+   "name": "Ehristoforu",
+   "aliases": [],
+   "icon": null
+  },
+  "elevenlabs": {
+   "name": "ElevenLabs",
+   "aliases": [],
+   "icon": "elevenlabs"
+  },
+  "elorian": {
+   "name": "Elorian",
+   "aliases": [],
+   "icon": null
+  },
+  "empiriolabs": {
+   "name": "Empiriolabs",
+   "aliases": [],
+   "icon": null
+  },
+  "essential-ai": {
+   "name": "Essential AI",
+   "aliases": [],
+   "icon": "essentialai"
+  },
+  "essentialai": {
+   "name": "Essential AI",
+   "aliases": [],
+   "icon": "essentialai"
+  },
+  "eva-unit-01": {
+   "name": "Eva-unit-01",
+   "aliases": [],
+   "icon": null
+  },
+  "fetchai": {
+   "name": "Fetchai",
+   "aliases": [],
+   "icon": null
+  },
+  "fireworks": {
+   "name": "Fireworks",
+   "aliases": [],
+   "icon": "fireworks"
+  },
+  "fishaudio": {
+   "name": "Fish Audio",
+   "aliases": [],
+   "icon": "fishaudio"
+  },
+  "galrionsoftworks": {
+   "name": "Galrionsoftworks",
+   "aliases": [],
+   "icon": null
+  },
+  "google": {
+   "name": "Google",
+   "aliases": [
+    "gemini"
+   ],
+   "icon": "gemini"
+  },
+  "gryphe": {
+   "name": "Gryphe",
+   "aliases": [],
+   "icon": "gryphe"
+  },
+  "haiper": {
+   "name": "Haiper",
+   "aliases": [],
+   "icon": "haiper"
+  },
+  "heabsy": {
+   "name": "Heabsy",
+   "aliases": [],
+   "icon": null
+  },
+  "hedra": {
+   "name": "Hedra",
+   "aliases": [],
+   "icon": "hedra"
+  },
+  "hidream": {
+   "name": "HiDream",
+   "aliases": [],
+   "icon": "hidream"
+  },
+  "holo": {
+   "name": "Holo",
+   "aliases": [],
+   "icon": null
+  },
+  "huggingface": {
+   "name": "Hugging Face",
+   "aliases": [],
+   "icon": "huggingface"
+  },
+  "huggingfaceh4": {
+   "name": "Hugging Face",
+   "aliases": [],
+   "icon": "huggingface"
+  },
+  "ibm": {
+   "name": "IBM",
+   "aliases": [
+    "ibm-granite"
+   ],
+   "icon": "ibm"
+  },
+  "ideogram": {
+   "name": "Ideogram",
+   "aliases": [
+    "ideogram-ai"
+   ],
+   "icon": "ideogram"
+  },
+  "inception": {
+   "name": "Inception",
+   "aliases": [],
+   "icon": "inception"
+  },
+  "inclusionai": {
+   "name": "inclusionAI",
+   "aliases": [],
+   "icon": "antgroup"
+  },
+  "inference-net": {
+   "name": "Inference-net",
+   "aliases": [],
+   "icon": null
+  },
+  "inflection": {
+   "name": "Inflection",
+   "aliases": [],
+   "icon": "inflection"
+  },
+  "internlm": {
+   "name": "InternLM",
+   "aliases": [],
+   "icon": "internlm"
+  },
+  "k2": {
+   "name": "K2",
+   "aliases": [],
+   "icon": null
+  },
+  "kandinsky": {
+   "name": "Kandinsky",
+   "aliases": [],
+   "icon": null
+  },
+  "kling": {
+   "name": "Kling AI",
+   "aliases": [],
+   "icon": "kling"
+  },
+  "kotoba-technologies": {
+   "name": "Kotoba-technologies",
+   "aliases": [],
+   "icon": null
+  },
+  "krea": {
+   "name": "Krea",
+   "aliases": [],
+   "icon": "krea"
+  },
+  "kuaishou": {
+   "name": "Kuaishou",
+   "aliases": [],
+   "icon": "kling"
+  },
+  "kwaipilot": {
+   "name": "Kwaipilot",
+   "aliases": [],
+   "icon": "kwaipilot"
+  },
+  "lighton": {
+   "name": "Lighton",
+   "aliases": [],
+   "icon": null
+  },
+  "lightricks": {
+   "name": "Lightricks",
+   "aliases": [
+    "ltxv"
+   ],
+   "icon": "lightricks"
+  },
+  "liquid": {
+   "name": "Liquid AI",
+   "aliases": [],
+   "icon": "liquid"
+  },
+  "liquidai": {
+   "name": "Liquid AI",
+   "aliases": [],
+   "icon": "liquid"
+  },
+  "lodestones": {
+   "name": "Lodestones",
+   "aliases": [],
+   "icon": null
+  },
+  "ltxv-2": {
+   "name": "Ltxv-2",
+   "aliases": [],
+   "icon": null
+  },
+  "lucidity": {
+   "name": "Lucidity",
+   "aliases": [],
+   "icon": "lucidity"
+  },
+  "luma": {
+   "name": "Luma AI",
+   "aliases": [],
+   "icon": "luma"
+  },
+  "lykon": {
+   "name": "Lykon",
+   "aliases": [],
+   "icon": null
+  },
+  "mancer": {
+   "name": "Mancer",
+   "aliases": [],
+   "icon": null
+  },
+  "meganova": {
+   "name": "MegaNova",
+   "aliases": [],
+   "icon": "meganova"
+  },
+  "meituan": {
+   "name": "Meituan",
+   "aliases": [
+    "longcat"
+   ],
+   "icon": "longcat"
+  },
+  "meshy": {
+   "name": "Meshy",
+   "aliases": [],
+   "icon": "meshy"
+  },
+  "meta": {
+   "name": "Meta",
+   "aliases": [
+    "meta-llama",
+    "meta-models"
+   ],
+   "icon": "llama"
+  },
+  "microsoft": {
+   "name": "Microsoft",
+   "aliases": [],
+   "icon": "microsoft"
+  },
+  "midjourney": {
+   "name": "Midjourney",
+   "aliases": [],
+   "icon": "midjourney"
+  },
+  "minimax": {
+   "name": "MiniMax",
+   "aliases": [
+    "minimaxai"
+   ],
+   "icon": "minimax"
+  },
+  "mistral": {
+   "name": "Mistral",
+   "aliases": [
+    "mistralai"
+   ],
+   "icon": "mistral"
+  },
+  "moondream": {
+   "name": "Moondream",
+   "aliases": [],
+   "icon": null
+  },
+  "moonshotai": {
+   "name": "Moonshot",
+   "aliases": [
+    "moonshot"
+   ],
+   "icon": "kimi"
+  },
+  "morph": {
+   "name": "Morph",
+   "aliases": [],
+   "icon": "morph"
+  },
+  "nanogpt": {
+   "name": "Nanogpt",
+   "aliases": [],
+   "icon": null
+  },
+  "neversleep": {
+   "name": "Neversleep",
+   "aliases": [],
+   "icon": null
+  },
+  "nex-agi": {
+   "name": "Nex-agi",
+   "aliases": [],
+   "icon": null
+  },
+  "nousresearch": {
+   "name": "Nous Research",
+   "aliases": [],
+   "icon": "nousresearch"
+  },
+  "novelai": {
+   "name": "NovelAI",
+   "aliases": [],
+   "icon": "novelai"
+  },
+  "nvidia": {
+   "name": "NVIDIA",
+   "aliases": [],
+   "icon": "nvidia"
+  },
+  "openai": {
+   "name": "OpenAI",
+   "aliases": [],
+   "icon": "openai"
+  },
+  "openmoss": {
+   "name": "Openmoss",
+   "aliases": [],
+   "icon": null
+  },
+  "other": {
+   "name": "Other",
+   "aliases": [],
+   "icon": null
+  },
+  "ovhcloud": {
+   "name": "Ovhcloud",
+   "aliases": [],
+   "icon": null
+  },
+  "perceptron": {
+   "name": "Perceptron",
+   "aliases": [],
+   "icon": null
+  },
+  "perplexity": {
+   "name": "Perplexity",
+   "aliases": [],
+   "icon": "perplexity"
+  },
+  "pika": {
+   "name": "Pika",
+   "aliases": [],
+   "icon": "pika"
+  },
+  "pixverse": {
+   "name": "PixVerse",
+   "aliases": [],
+   "icon": "pixverse"
+  },
+  "playground": {
+   "name": "Playground",
+   "aliases": [],
+   "icon": "playground"
+  },
+  "pokee": {
+   "name": "Pokee",
+   "aliases": [],
+   "icon": null
+  },
+  "poolside": {
+   "name": "Poolside",
+   "aliases": [],
+   "icon": "poolside"
+  },
+  "prism-ml": {
+   "name": "Prism ML",
+   "aliases": [],
+   "icon": "prismml"
+  },
+  "proteus": {
+   "name": "Proteus",
+   "aliases": [],
+   "icon": null
+  },
+  "pruna": {
+   "name": "Pruna AI",
+   "aliases": [
+    "pruna-ai"
+   ],
+   "icon": "prunaai"
+  },
+  "prunaai": {
+   "name": "Pruna AI",
+   "aliases": [],
+   "icon": "prunaai"
+  },
+  "qihoo360": {
+   "name": "Qihoo 360",
+   "aliases": [],
+   "icon": "ai360"
+  },
+  "recraft": {
+   "name": "Recraft",
+   "aliases": [
+    "recraft-ai"
+   ],
+   "icon": "recraft"
+  },
+  "reflection": {
+   "name": "Reflection",
+   "aliases": [],
+   "icon": null
+  },
+  "reka": {
+   "name": "Reka",
+   "aliases": [],
+   "icon": null
+  },
+  "rekaai": {
+   "name": "Rekaai",
+   "aliases": [],
+   "icon": null
+  },
+  "relace": {
+   "name": "Relace",
+   "aliases": [],
+   "icon": "relace"
+  },
+  "reve": {
+   "name": "Reve",
+   "aliases": [],
+   "icon": "reve"
+  },
+  "rundiffusion": {
+   "name": "RunDiffusion",
+   "aliases": [],
+   "icon": "rundiffusion"
+  },
+  "runway": {
+   "name": "Runway",
+   "aliases": [],
+   "icon": "runway"
+  },
+  "runwayml": {
+   "name": "Runway",
+   "aliases": [],
+   "icon": "runway"
+  },
+  "sakana": {
+   "name": "Sakana AI",
+   "aliases": [],
+   "icon": "sakana"
+  },
+  "sao10k": {
+   "name": "Sao10K",
+   "aliases": [],
+   "icon": "sao10k"
+  },
+  "sarvam": {
+   "name": "Sarvam",
+   "aliases": [],
+   "icon": "sarvam"
+  },
+  "sensenova": {
+   "name": "SenseNova",
+   "aliases": [],
+   "icon": "sensenova"
+  },
+  "shisa": {
+   "name": "Shisa",
+   "aliases": [],
+   "icon": null
+  },
+  "skywork": {
+   "name": "Skywork",
+   "aliases": [],
+   "icon": "skywork"
+  },
+  "snowflake": {
+   "name": "Snowflake",
+   "aliases": [],
+   "icon": "snowflake"
+  },
+  "soob3123": {
+   "name": "Soob3123",
+   "aliases": [],
+   "icon": null
+  },
+  "soul-ai-lab": {
+   "name": "Soul-ai-lab",
+   "aliases": [],
+   "icon": null
+  },
+  "sourceful": {
+   "name": "Sourceful",
+   "aliases": [],
+   "icon": null
+  },
+  "speakleash": {
+   "name": "Speakleash",
+   "aliases": [],
+   "icon": null
+  },
+  "stabilityai": {
+   "name": "Stability AI",
+   "aliases": [
+    "stability",
+    "stability-ai"
+   ],
+   "icon": "stability"
+  },
+  "stepfun": {
+   "name": "StepFun",
+   "aliases": [
+    "stepfun-ai"
+   ],
+   "icon": "stepfun"
+  },
+  "suno": {
+   "name": "Suno",
+   "aliases": [],
+   "icon": "suno"
+  },
+  "swiss-ai": {
+   "name": "Swiss-ai",
+   "aliases": [],
+   "icon": null
+  },
+  "tencent": {
+   "name": "Tencent",
+   "aliases": [],
+   "icon": "hunyuan"
+  },
+  "thedrummer": {
+   "name": "Thedrummer",
+   "aliases": [],
+   "icon": null
+  },
+  "thinkingmachines": {
+   "name": "Thinking Machines",
+   "aliases": [],
+   "icon": "thinkingmachines"
+  },
+  "tiiuae": {
+   "name": "TII",
+   "aliases": [],
+   "icon": "tii"
+  },
+  "topazlabs": {
+   "name": "Topaz Labs",
+   "aliases": [],
+   "icon": "topazlabs"
+  },
+  "tripo": {
+   "name": "Tripo",
+   "aliases": [],
+   "icon": "tripo"
+  },
+  "udio": {
+   "name": "Udio",
+   "aliases": [],
+   "icon": "udio"
+  },
+  "unbiased": {
+   "name": "Unbiased",
+   "aliases": [],
+   "icon": null
+  },
+  "undi95": {
+   "name": "Undi95",
+   "aliases": [],
+   "icon": null
+  },
+  "upstage": {
+   "name": "Upstage",
+   "aliases": [],
+   "icon": "upstage"
+  },
+  "venice": {
+   "name": "Venice",
+   "aliases": [],
+   "icon": "venice"
+  },
+  "veo3.1": {
+   "name": "Veo3.1",
+   "aliases": [],
+   "icon": null
+  },
+  "vidu": {
+   "name": "Vidu",
+   "aliases": [],
+   "icon": "vidu"
+  },
+  "viggle": {
+   "name": "Viggle",
+   "aliases": [],
+   "icon": "viggle"
+  },
+  "vita-epfl": {
+   "name": "Vita-epfl",
+   "aliases": [],
+   "icon": null
+  },
+  "voyage": {
+   "name": "Voyage",
+   "aliases": [],
+   "icon": null
+  },
+  "writer": {
+   "name": "Writer",
+   "aliases": [],
+   "icon": null
+  },
+  "xai": {
+   "name": "xAI",
+   "aliases": [
+    "x-ai"
+   ],
+   "icon": "grok"
+  },
+  "xiaomi": {
+   "name": "Xiaomi",
+   "aliases": [
+    "xiaomimimo"
+   ],
+   "icon": "xiaomimimo"
+  },
+  "zeroone": {
+   "name": "01.AI",
+   "aliases": [],
+   "icon": "zeroone"
+  },
+  "zhipuai": {
+   "name": "Zhipu",
+   "aliases": [
+    "z-ai",
+    "zai",
+    "zai-org",
+    "zhipu"
+   ],
+   "icon": "zhipu"
+  },
+  "zovya": {
+   "name": "Zovya",
+   "aliases": [],
+   "icon": null
+  },
+  "zro": {
+   "name": "Zro",
+   "aliases": [],
+   "icon": null
+  }
+ },
+ "rules": {
+  "exact": {
+   "aya-23-35b": "aya",
+   "aya-23-8b": "aya",
+   "claude-1": "claude",
+   "claude-2": "claude",
+   "claude-2.1": "claude",
+   "claude-3-haiku-20240307": "claude",
+   "claude-3-opus-20240229": "claude",
+   "claude-3-sonnet-20240229": "claude",
+   "claude-instant-1": "claude",
+   "claude-instant-1.2": "claude",
+   "codellama-34b-instruct": "llama",
+   "codellama-70b-instruct": "llama",
+   "deepseek-coder": "deepseek",
+   "deepseek-coder-v2": "deepseek",
+   "deepseek-llm": "deepseek",
+   "deepseek-v2": "deepseek",
+   "gemini-1.5-pro-latest": "gemini",
+   "gemini-pro": "gemini",
+   "gemini-pro-vision": "gemini",
+   "gemini-ultra": "gemini",
+   "gpt-3.5-turbo": "gpt-3.5",
+   "gpt-3.5-turbo-0125": "gpt-3.5",
+   "gpt-3.5-turbo-1106": "gpt-3.5",
+   "gpt-3.5-turbo-16k": "gpt-3.5",
+   "gpt-4": "gpt-4",
+   "gpt-4-0125-preview": "gpt-4",
+   "gpt-4-1106-preview": "gpt-4",
+   "gpt-4-32k": "gpt-4",
+   "gpt-4-turbo": "gpt-4",
+   "gpt-4-turbo-preview": "gpt-4",
+   "gpt-4-vision-preview": "gpt-4",
+   "llama-3-70b-instruct:nitro": "llama",
+   "llama-3-8b-instruct:extended": "llama",
+   "mistral-7b-instruct": "mistral",
+   "mistral-large": "mistral",
+   "mistral-medium": "mistral",
+   "mistral-small": "mistral",
+   "mistral-tiny": "mistral",
+   "mixtral-8x22b": "mistral",
+   "orca-mini": "orca-mini",
+   "phi-2": "phi-2",
+   "qwen2-72b": "qwen2",
+   "qwen2-72b-instruct2": "qwen2",
+   "qwen2-7b-instruct": "qwen2",
+   "replit-code-v1-3b": "replit"
+  },
+  "families": {
+   "agnes": "agnesai",
+   "aion": "aionlabs",
+   "autoglm": "zhipu",
+   "aya": "cohere",
+   "celeris": "celeris",
+   "claude": "claude",
+   "command": "cohere",
+   "dall": "dalle",
+   "dbrx": "dbrx",
+   "deepseek": "deepseek",
+   "falcon": "tii",
+   "flux": "bfl",
+   "gemini": "gemini",
+   "gemma": "gemma",
+   "glm": "zhipu",
+   "gpt": "openai",
+   "grok": "grok",
+   "hidream": "hidream",
+   "hunyuan": "hunyuan",
+   "hy": "hunyuan",
+   "ideogram": "ideogram",
+   "imagen": "gemini",
+   "internlm": "internlm",
+   "jamba": "ai21",
+   "kimi": "kimi",
+   "kling": "kling",
+   "lfm": "liquid",
+   "lightricks": "lightricks",
+   "ling": "antgroup",
+   "llama": "llama",
+   "ltx": "lightricks",
+   "ltxv": "lightricks",
+   "midjourney": "midjourney",
+   "mimo": "xiaomimimo",
+   "minimax": "minimax",
+   "mistral": "mistral",
+   "nemotron": "nvidia",
+   "nova": "nova",
+   "olmo": "ai2",
+   "olmocr": "ai2",
+   "phi": "microsoft",
+   "playground": "playground",
+   "pruna": "prunaai",
+   "qwen": "qwen",
+   "ray": "luma",
+   "ring": "antgroup",
+   "recraft": "recraft",
+   "sarvam": "sarvam",
+   "schematron": "inference",
+   "seed": "bytedance",
+   "seedream": "bytedance",
+   "sonar": "perplexity",
+   "sora": "openai",
+   "stable": "stability",
+   "trinity": "arcee",
+   "veo": "gemini",
+   "whisper": "openai",
+   "yi": "zeroone"
+  },
+  "familyAliases": {
+   "hy": "hunyuan"
+  },
+  "fallback": "huggingface"
+ }
+}

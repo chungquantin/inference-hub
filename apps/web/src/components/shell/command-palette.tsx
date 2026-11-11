@@ -315,7 +315,7 @@ export function CommandPalette() {
                 >
                   {item.logo ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.logo} alt="" width={20} height={20} className="size-5 shrink-0 object-contain" />
+                    <img src={item.logo} alt="" width={20} height={20} className="size-5 shrink-0 border border-line object-cover" />
                   ) : (
                     item.group !== "all" && <span aria-hidden className="size-5 shrink-0 bg-field" />
                   )}

@@ -9,6 +9,7 @@ import { LiveDot, PixelBar, WindowFrame } from "@/components/ui/pixel";
 import { HeroSearch } from "@/components/shell/hero-search";
 import { SectionHeader, Stat, buttonClass } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
+import { creatorName, modelLogoUrl } from "@/lib/catalog";
 import { formatCount, formatDate, formatPrice } from "@/lib/format";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
@@ -103,7 +104,10 @@ export default async function HomePage() {
             {cheapest.data.items.map((row) => (
               <li key={row.model_key} className="bg-wash">
                 <Link href={`/market/models/${encodeURIComponent(row.model_key)}`} className="group flex h-full flex-col gap-2 p-4 hover:bg-s-1">
-                  <span className="truncate font-mono text-[13px] text-ink group-hover:text-s-7">{row.model_key}</span>
+                  <span className="flex min-w-0 items-center gap-2">
+                    <Logo name={creatorName(row.maker) ?? row.model_key} src={modelLogoUrl(row.model_key, row.maker)} size="sm" />
+                    <span className="truncate font-mono text-[13px] text-ink group-hover:text-s-7">{row.model_key}</span>
+                  </span>
                   <span className="font-display text-[28px] leading-8 tracking-[-0.02em] text-ink tabular">
                     {formatPrice(row.min_blended_per_mtok)}
                   </span>
