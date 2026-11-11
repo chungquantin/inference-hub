@@ -7,7 +7,7 @@ export function OrganizationCard({ org }: { org: Organization }) {
   return (
     <Link
       href={`/organizations/${org.slug}`}
-      className="group -mt-px -ml-px flex min-w-0 gap-4 border border-line bg-wash p-5 hover:z-10 hover:border-s-7"
+      className="group -mt-px -ml-px flex min-w-0 gap-4 border border-line bg-wash p-5 hover:z-10 hover:border-[color:var(--s-7)]"
     >
       <Logo name={org.name} src={org.logo_url} size="lg" />
       <div className="flex min-w-0 flex-1 flex-col gap-1">
@@ -15,7 +15,11 @@ export function OrganizationCard({ org }: { org: Organization }) {
           <h3 className="truncate font-display text-[18px] leading-6 tracking-[-0.01em] text-ink group-hover:text-s-7">
             {org.name}
           </h3>
-          {org.hq_country && <span className="font-mono text-[12px] text-ink-3">{org.hq_country}</span>}
+          {org.status !== "active" ? (
+            <span className="font-mono text-[12px] text-ink-3 capitalize">{org.status}</span>
+          ) : (
+            org.hq_country && <span className="font-mono text-[12px] text-ink-3">{org.hq_country}</span>
+          )}
         </div>
         {org.tagline && <p className="line-clamp-2 text-[14px] leading-5 text-ink-2">{org.tagline}</p>}
         <p className="mt-auto pt-2 font-mono text-[12px] leading-4 text-s-7">

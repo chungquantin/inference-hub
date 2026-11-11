@@ -7,6 +7,11 @@ export type NavSection = { href: string; label: string; items: NavItem[] };
 
 export const NAV_SECTIONS: NavSection[] = [
   {
+    href: "/directory",
+    label: "Directory",
+    items: [{ href: "/directory", label: "Search the directory", description: "GPUs, models and companies in one searchable table" }],
+  },
+  {
     href: "/market",
     label: "Market",
     items: [
@@ -28,7 +33,7 @@ export const NAV_SECTIONS: NavSection[] = [
   },
   {
     href: "/organizations",
-    label: "Directory",
+    label: "Explore",
     items: [
       { href: "/organizations", label: "Organizations", description: "Labs, clouds, gateways, investors" },
       { href: "/products", label: "Products", description: "Models, APIs, GPUs, projects" },

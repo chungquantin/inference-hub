@@ -82,9 +82,9 @@ export function MainNav() {
               {!single && isOpen && (
                 <div
                   id={`menu-${section.label}`}
-                  className="absolute top-full left-0 z-50 w-[320px] border border-ink bg-wash"
+                  className="absolute top-full left-0 z-50 w-[340px] border border-line bg-wash p-1.5 shadow-[0_12px_32px_-12px_rgba(14,19,48,0.25)]"
                 >
-                  <ul className="flex flex-col py-1">
+                  <ul className="flex flex-col">
                     {section.items.map((item) => {
                       const current = pathname === item.href;
                       return (
@@ -92,12 +92,12 @@ export function MainNav() {
                           <Link
                             href={item.href}
                             aria-current={current ? "page" : undefined}
-                            className={`flex flex-col gap-0.5 px-4 py-2.5 hover:bg-s-1 focus-visible:bg-s-1 ${
+                            className={`flex flex-col gap-0.5 px-3 py-2.5 hover:bg-s-1 focus-visible:bg-s-1 ${
                               current ? "bg-s-1" : ""
                             }`}
                           >
-                            <span className="text-[14px] text-ink">{item.label}</span>
-                            <span className="text-[12px] leading-4 text-ink-3">{item.description}</span>
+                            <span className="text-[15px] font-medium text-ink">{item.label}</span>
+                            <span className="text-[13px] leading-4 text-ink-3">{item.description}</span>
                           </Link>
                         </li>
                       );
@@ -114,16 +114,16 @@ export function MainNav() {
         <button
           type="button"
           onClick={openCommandPalette}
-          className="flex h-9 items-center gap-3 border border-line bg-paper px-3 text-left font-mono text-[13px] text-ink-3 hover:border-ink hover:text-ink md:w-[260px]"
+          className="flex h-10 items-center gap-3 border border-line bg-wash px-3 text-left text-[14px] text-ink-3 hover:border-[color:var(--s-7)] hover:text-ink lg:w-[300px]"
           aria-label="Search the hub"
         >
           <SearchIcon />
-          <span className="hidden flex-1 sm:inline">Search models, GPUs…</span>
-          <kbd className="hidden border border-line bg-wash px-1.5 text-[11px] text-ink-3 md:inline">⌘K</kbd>
+          <span className="hidden flex-1 truncate lg:inline">Search models, GPUs, companies</span>
+          <kbd className="hidden border border-line bg-wash px-1.5 font-mono text-[11px] text-ink-3 lg:inline">⌘K</kbd>
         </button>
         <button
           type="button"
-          className="flex h-9 w-9 items-center justify-center border border-line md:hidden"
+          className="flex h-10 w-10 items-center justify-center border border-line md:hidden"
           aria-expanded={mobile}
           aria-controls="mobile-menu"
           aria-label={mobile ? "Close menu" : "Open menu"}
@@ -136,12 +136,12 @@ export function MainNav() {
       {mobile && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto border-t border-line bg-wash md:hidden"
+          className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-wash md:hidden"
         >
           <nav aria-label="Main" className="flex flex-col gap-6 px-6 py-6">
             {NAV_SECTIONS.map((section) => (
               <div key={section.href} className="flex flex-col gap-1">
-                <span className="font-mono text-[12px] text-s-7">{section.label}</span>
+                <span className="text-[13px] font-semibold text-s-7">{section.label}</span>
                 {section.items.map((item) => (
                   <Link
                     key={item.href}
@@ -163,8 +163,10 @@ export function MainNav() {
 }
 
 function tabClass(active: boolean): string {
-  return `flex items-center gap-1.5 border-b-2 px-3 font-mono text-[13px] whitespace-nowrap ${
-    active ? "border-s-7 text-ink" : "border-transparent text-ink-2 hover:text-ink"
+  return `flex items-center gap-1.5 px-3.5 text-[15px] whitespace-nowrap ${
+    active
+      ? "font-semibold text-ink shadow-[inset_0_-2px_0_var(--s-7)]"
+      : "font-medium text-ink-2 hover:text-ink"
   }`;
 }
 

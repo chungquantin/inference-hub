@@ -1,49 +1,44 @@
 /**
- * Pixel components: the one place the design gets playful. Bars are drawn as
- * rows of square cells on an 8px grid, like boat.dev's character-cell charts,
- * so a column of prices reads at a glance.
+ * Data-visual atoms shared by the market pages: bars, framed panels and the
+ * live dot. (The file keeps its old name; the exports are imported widely.)
  */
 
-const CELLS = 24;
-
 /**
- * A horizontal bar of square cells. `value / max` of the cells are filled;
- * the rest are drawn as empty ticks, so bars of different rows line up.
+ * A horizontal bar: `value / max` of the track is filled. `lead` fills with
+ * the brand color for the cheapest or the highlighted row; the rest are a
+ * quiet tint, so the leader stands out without a legend.
  */
 export function PixelBar({
   value,
   max,
-  cells = CELLS,
   tone = "muted",
   label,
+  index = 0,
+  animate = false,
 }: {
   value: number;
   max: number;
+  /** Kept for callers that used to set the cell count; bars are continuous now. */
   cells?: number;
-  /** `lead` fills with the brand color, for the cheapest or the highlighted row. */
   tone?: "lead" | "muted";
   /** Accessible description, such as "$2.99 per GPU-hour". */
   label: string;
+  /** Position in the list, for the staggered grow-in. */
+  index?: number;
+  animate?: boolean;
 }) {
-  const filled = max > 0 ? Math.max(1, Math.round((value / max) * cells)) : 0;
-  const on = tone === "lead" ? "bg-s-7" : "bg-s-4";
+  const pct = max > 0 ? Math.max(2, Math.round((value / max) * 100)) : 0;
   return (
-    <span role="img" aria-label={label} className="pixelated flex gap-px" style={{ height: 8 }}>
-      {Array.from({ length: cells }, (_, i) => (
-        <span
-          key={i}
-          className={i < filled ? on : "bg-line"}
-          style={{ width: 6, height: 8, flex: "none" }}
-        />
-      ))}
+    <span role="img" aria-label={label} className="block h-2 w-full overflow-hidden bg-field">
+      <span
+        className={`block h-full ${tone === "lead" ? "bg-lo" : "bg-s-4"} ${animate ? "bar-grow" : ""}`}
+        style={{ width: `${pct}%`, ["--i" as string]: index }}
+      />
     </span>
   );
 }
 
-/**
- * A framed panel with a pixel-font title bar, like a window. Used for the
- * home page price boards and other "live data" panels.
- */
+/** A white sheet with a title row. Used for "live data" panels. */
 export function WindowFrame({
   title,
   meta,
@@ -51,16 +46,16 @@ export function WindowFrame({
   className = "",
 }: {
   title: string;
-  /** Right side of the title bar, such as an update time. */
+  /** Right side of the title row, such as a link to the full list. */
   meta?: React.ReactNode;
   children: React.ReactNode;
   className?: string;
 }) {
   return (
-    <section className={`border border-ink bg-wash ${className}`}>
-      <header className="flex h-6 items-center justify-between gap-3 bg-ink px-2 text-wash">
-        <h2 className="font-pixel text-[10px] leading-none tracking-wide uppercase">{title}</h2>
-        {meta && <span className="font-mono text-[11px] leading-none text-s-3">{meta}</span>}
+    <section className={`border border-line bg-wash ${className}`}>
+      <header className="flex h-11 items-center justify-between gap-3 border-b border-line px-4">
+        <h2 className="text-[15px] leading-none font-semibold tracking-[-0.01em] text-ink">{title}</h2>
+        {meta && <span className="text-[13px] leading-none text-s-7">{meta}</span>}
       </header>
       {children}
     </section>
@@ -72,12 +67,12 @@ export function PixelBullet({ className = "bg-s-7" }: { className?: string }) {
   return <span aria-hidden className={`inline-block size-2 shrink-0 ${className}`} />;
 }
 
-/** A pulsing square that marks data as live. */
+/** A pulsing dot that marks data as live. */
 export function LiveDot() {
   return (
     <span aria-hidden className="relative inline-flex size-2">
-      <span className="absolute inline-flex size-full animate-ping bg-s-5 opacity-60" />
-      <span className="relative inline-flex size-2 bg-s-7" />
+      <span className="absolute inline-flex size-full animate-ping rounded-full bg-down opacity-50" />
+      <span className="relative inline-flex size-2 rounded-full bg-down" />
     </span>
   );
 }

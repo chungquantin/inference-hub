@@ -241,7 +241,7 @@ export function CommandPalette() {
         role="dialog"
         aria-modal="true"
         aria-label="Search"
-        className="flex max-h-[70vh] w-full max-w-[640px] flex-col border border-ink bg-wash"
+        className="flex max-h-[70vh] w-full max-w-[640px] flex-col border border-line bg-wash shadow-[0_24px_64px_-16px_rgba(14,19,48,0.45)]"
         onMouseDown={(e) => e.stopPropagation()}
       >
         <div className="flex h-14 items-center gap-3 border-b border-line px-4">
@@ -264,14 +264,14 @@ export function CommandPalette() {
             aria-controls={listId}
             aria-activedescendant={items[active] ? `${listId}-${active}` : undefined}
             aria-autocomplete="list"
-            className="h-full flex-1 bg-transparent font-mono text-[15px] text-ink outline-none placeholder:text-ink-3"
+            className="h-full flex-1 bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-3"
           />
           {loading && <span className="font-mono text-[12px] text-ink-3">searching…</span>}
           <kbd className="border border-line px-1.5 font-mono text-[11px] text-ink-3">esc</kbd>
         </div>
         <ul ref={listRef} id={listId} role="listbox" aria-label="Results" className="flex-1 overflow-y-auto py-1">
           {term.length >= 2 && results?.q === term && results.hits.length === 0 && (
-            <li className="px-4 py-6 font-mono text-[13px] text-ink-3" role="presentation">
+            <li className="px-4 py-6 text-[14px] text-ink-3" role="presentation">
               Nothing matches “{term}”. Try fewer words or another spelling.
             </li>
           )}
@@ -283,7 +283,7 @@ export function CommandPalette() {
             return (
               <li key={item.key} role="presentation">
                 {header && (
-                  <div className="flex items-baseline justify-between px-4 pt-3 pb-1 font-mono text-[11px] text-ink-3 uppercase">
+                  <div className="flex items-baseline justify-between px-4 pt-3 pb-1 text-[12px] font-semibold text-ink-3">
                     <span>{GROUP_LABELS[item.group] ?? item.group}</span>
                     {more && all && more > 5 && (
                       <a
@@ -311,7 +311,7 @@ export function CommandPalette() {
                   onClick={() => go(item)}
                   className={`flex cursor-pointer items-center gap-3 px-4 py-2 ${
                     i === active ? "bg-s-1" : ""
-                  } ${item.group === "all" ? "mt-1 border-t border-line font-mono text-[13px] text-s-7" : ""}`}
+                  } ${item.group === "all" ? "mt-1 border-t border-line text-[14px] font-medium text-s-7" : ""}`}
                 >
                   {item.logo ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -329,7 +329,7 @@ export function CommandPalette() {
             );
           })}
         </ul>
-        <div className="flex gap-4 border-t border-line px-4 py-2 font-mono text-[11px] text-ink-3">
+        <div className="flex gap-4 border-t border-line px-4 py-2 text-[12px] text-ink-3">
           <span>↑↓ move</span>
           <span>↵ open</span>
           <span>esc close</span>

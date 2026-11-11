@@ -1,59 +1,67 @@
 @import "tailwindcss";
 
 /*
- * Inference Hub design system: white, square, framed.
+ * Inference Hub design system: calm paper, hairline frames, one blue.
  *
- * - Radius is 0 everywhere. Surfaces are separated by 1px hairline frames,
- *   never by drop shadows.
- * - One brand ramp ("signal", teal) supplies every tint, hover and fill.
- * - Numbers, labels and tables are set in IBM Plex Mono; headings in Funnel
- *   Display; text in Inter. A pixel font is reserved for the price bars.
+ * - The page is warm paper; content sits in white or paper frames with 1px
+ *   hairlines. Square corners, no drop shadows (menus are the exception).
+ * - One brand ramp ("signal", royal blue) supplies actions, links and tints.
+ *   Green marks the cheapest price; red and amber appear only in data.
+ * - Instrument Sans sets text and headlines (tight tracking when large);
+ *   Geist Mono sets numbers in tables and the price texture.
  */
 :root {
+  --ground: #fcfbf8;
   --wash: #ffffff;
-  --paper: #fafafa;
-  --field: #f5f5f5;
-  --line: #e5e5e5;
-  --line-strong: #d4d4d4;
-  --ink: #0a0a0a;
-  --ink-2: #525252;
-  --ink-3: #6b6b6b;
+  --paper: #f6f4ee;
+  --field: #efece4;
+  --line: #e7e4dc;
+  --line-strong: #d6d2c7;
+  --ink: #1f1e1a;
+  --ink-2: #55534b;
+  --ink-3: #75726a;
+  --charcoal: #2b2a25;
 
-  /* Signal ramp, light to dark. s-7 is the key brand color. */
-  --s-1: #f0f7f5;
-  --s-2: #dcefea;
-  --s-3: #b9dfd5;
-  --s-4: #8cc9b9;
-  --s-5: #57ab96;
-  --s-6: #2a8a75;
-  --s-7: #0b6e5f;
-  --s-8: #08584c;
-  --s-9: #064239;
-  --s-10: #042b25;
+  /* Signal ramp, light to dark. s-7 is the key brand blue. */
+  --s-1: #f0f3fd;
+  --s-2: #e3e9fb;
+  --s-3: #b8c6f3;
+  --s-4: #8ea4ec;
+  --s-5: #6783e3;
+  --s-6: #4d6bdd;
+  --s-7: #3a5bd9;
+  --s-8: #2c47b3;
+  --s-9: #223a92;
+  --s-10: #1a2b6e;
+
+  /* Price meaning: cheapest is green, the dearest is red. */
+  --lo: #0f7a48;
+  --mid: #c98a00;
+  --hi: #cc3a21;
+  --mark: #cdeedd;
+  --mark-soft: #e8f6ee;
 
   --up: #b42318;
   --up-tint: #fbe9e7;
-  --down: #156b47;
-  --down-tint: #e8f3ed;
+  --down: #0f7a48;
+  --down-tint: #e8f6ee;
   --warn: #8a5300;
   --warn-tint: #fbf1de;
 
   /* Content width. Data-heavy sections widen it (see body:has below). */
   --page-width: 1280px;
 
-  /* The pixel grid: one cell is 8px. */
-  --px: 8px;
-
   color-scheme: light;
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-funnel), var(--font-inter), ui-sans-serif, sans-serif;
-  --font-mono: var(--font-plex-mono), ui-monospace, Menlo, monospace;
-  --font-pixel: var(--font-silkscreen), var(--font-plex-mono), monospace;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Menlo, monospace;
 
+  --color-ground: var(--ground);
   --color-wash: var(--wash);
+  --color-charcoal: var(--charcoal);
   --color-paper: var(--paper);
   --color-field: var(--field);
   --color-line: var(--line);
@@ -71,6 +79,11 @@
   --color-s-8: var(--s-8);
   --color-s-9: var(--s-9);
   --color-s-10: var(--s-10);
+  --color-lo: var(--lo);
+  --color-mid: var(--mid);
+  --color-hi: var(--hi);
+  --color-mark: var(--mark);
+  --color-mark-soft: var(--mark-soft);
   --color-up: var(--up);
   --color-up-tint: var(--up-tint);
   --color-down: var(--down);
@@ -83,16 +96,16 @@
 }
 
 html {
-  background: var(--wash);
+  background: var(--ground);
 }
 
 body {
-  background: var(--wash);
+  background: var(--ground);
   color: var(--ink);
   font-size: 15px;
   line-height: 24px;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: "cv11", "ss01";
+  overflow-x: clip;
 }
 
 a {
@@ -106,7 +119,8 @@ a {
 }
 
 ::selection {
-  background: var(--s-2);
+  background: var(--mark);
+  color: var(--ink);
 }
 
 /* Wide pages: market indexes, provider pages and search use most of the
@@ -126,9 +140,34 @@ table[data-density="compact"] td {
   font-variant-numeric: tabular-nums;
 }
 
-/* Pixel art and bitmap text stay crisp. */
+/* Bitmap images stay crisp. */
 .pixelated {
   image-rendering: pixelated;
+}
+
+/* The cheapest price: a green highlighter stroke behind the figure. */
+.marker {
+  background: linear-gradient(175deg, transparent 8%, var(--mark) 8%, var(--mark) 92%, transparent 92%);
+  padding-inline: 0.3em;
+  margin-inline: -0.3em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/*
+ * The one orchestrated moment: when the price board loads, bars grow from
+ * the left, top row first.
+ */
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -137,5 +176,39 @@ table[data-density="compact"] td {
   *::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* Hero: the price texture's light beams, and the wires that draw once on load. */
+.beams {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 58px,
+    rgba(112, 168, 235, 0.1) 58px 64px,
+    transparent 64px 150px
+  );
+  mask-image: linear-gradient(#000, transparent 85%);
+}
+
+.wire {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  animation: wire-draw 1.4s 0.2s ease-out forwards;
+}
+
+.wire-end {
+  opacity: 0;
+  animation: wire-end 0.3s 1.3s forwards;
+}
+
+@keyframes wire-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes wire-end {
+  to {
+    opacity: 1;
   }
 }

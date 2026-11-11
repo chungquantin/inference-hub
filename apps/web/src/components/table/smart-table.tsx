@@ -94,10 +94,10 @@ export function SmartTable<T>({
         csvName={csvName}
       />
       {rows.length === 0 ? (
-        <p className="px-4 py-10 text-center font-mono text-[13px] text-ink-3">{empty}</p>
+        <p className="px-4 py-10 text-center text-[14px] text-ink-3">{empty}</p>
       ) : (
         <div className="max-h-[75vh] overflow-auto">
-          <table className="w-full border-collapse font-mono text-[13px] leading-4">
+          <table className="w-full border-collapse text-[14px] leading-5">
             <thead className="sticky top-0 z-10">
               <tr className="bg-paper text-ink-3 shadow-[inset_0_-1px_0_var(--line)]">
                 {columns.map((c) => {
@@ -115,7 +115,7 @@ export function SmartTable<T>({
                       data-col={c.id}
                       title={c.title}
                       aria-sort={active ? (dir === "asc" ? "ascending" : "descending") : undefined}
-                      className={`h-9 px-2.5 font-normal whitespace-nowrap ${c.numeric ? "text-right" : "text-left"} ${c.minWidth ? SHOW_FROM[c.minWidth] : ""} ${c.className ?? ""}`}
+                      className={`h-10 px-2.5 text-[13px] font-medium whitespace-nowrap ${c.numeric ? "text-right" : "text-left"} ${c.minWidth ? SHOW_FROM[c.minWidth] : ""} ${c.className ?? ""}`}
                     >
                       {c.sort && sortHref ? (
                         <Link
@@ -146,8 +146,8 @@ export function SmartTable<T>({
                       <td
                         key={c.id}
                         data-col={c.id}
-                        className={`h-11 px-2.5 align-middle ${
-                          c.numeric ? "text-right tabular" : "text-left"
+                        className={`h-12 px-2.5 align-middle ${
+                          c.numeric ? "text-right font-mono text-[13px] tabular" : "text-left"
                         } ${c.minWidth ? SHOW_FROM[c.minWidth] : ""} ${c.className ?? ""}`}
                       >
                         {c.cell(r)}

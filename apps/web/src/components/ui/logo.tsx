@@ -43,7 +43,7 @@ export function Logo({
       </span>
     );
   }
-  const shades = ["#0b6e5f", "#08584c", "#2a8a75", "#064239", "#57ab96"];
+  const shades = ["#3a5bd9", "#2c47b3", "#4d6bdd", "#223a92", "#55534b"];
   return (
     <span
       aria-hidden

@@ -92,7 +92,7 @@ export function TableToolbar({
   return (
     <div className="flex min-h-10 flex-wrap items-center gap-2 border-b border-line px-3 py-1.5">
       {hiddenCss && <style>{hiddenCss}</style>}
-      <div className="mr-auto font-mono text-[12px] text-ink-3">{caption}</div>
+      <div className="mr-auto text-[13px] text-ink-3">{caption}</div>
       {columns.length > 0 && (
         <div className="relative" ref={menuRef}>
           <button
@@ -100,7 +100,7 @@ export function TableToolbar({
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
             aria-haspopup="true"
-            className="h-7 border border-line px-2 font-mono text-[12px] text-ink-2 hover:border-ink hover:text-ink"
+            className="h-7 border border-line px-2 text-[13px] text-ink-2 hover:border-ink hover:text-ink"
           >
             Columns{prefs.hidden.length ? ` · ${prefs.hidden.length} hidden` : ""}
           </button>
@@ -121,7 +121,7 @@ export function TableToolbar({
                 <button
                   type="button"
                   onClick={() => setPrefs((p) => ({ ...p, hidden: [] }))}
-                  className="w-full border-t border-line px-3 pt-2 pb-1 text-left font-mono text-[12px] text-s-7 hover:underline"
+                  className="w-full border-t border-line px-3 pt-2 pb-1 text-left text-[13px] text-s-7 hover:underline"
                 >
                   Show all columns
                 </button>
@@ -134,7 +134,7 @@ export function TableToolbar({
         type="button"
         onClick={() => setPrefs((p) => ({ ...p, compact: !p.compact }))}
         aria-pressed={prefs.compact}
-        className="h-7 border border-line px-2 font-mono text-[12px] text-ink-2 hover:border-ink hover:text-ink aria-pressed:border-s-7 aria-pressed:text-s-7"
+        className="h-7 border border-line px-2 text-[13px] text-ink-2 hover:border-ink hover:text-ink aria-pressed:border-[color:var(--s-7)] aria-pressed:text-s-7"
       >
         Compact
       </button>
@@ -142,7 +142,7 @@ export function TableToolbar({
         <button
           type="button"
           onClick={download}
-          className="h-7 border border-line px-2 font-mono text-[12px] text-ink-2 hover:border-ink hover:text-ink"
+          className="h-7 border border-line px-2 text-[13px] text-ink-2 hover:border-ink hover:text-ink"
         >
           CSV
         </button>

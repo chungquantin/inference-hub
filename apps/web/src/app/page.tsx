@@ -1,272 +1,284 @@
 import Link from "next/link";
-import type { ModelPrice, components } from "@inference-hub/api-client";
+import type { components } from "@inference-hub/api-client";
+import { CheapestTable, type CheapTab } from "@/components/home/cheapest-table";
+import { Hero } from "@/components/home/hero";
+import { api } from "@/lib/api";
+import { formatCount, formatPrice } from "@/lib/format";
 
 type MarketListing = components["schemas"]["MarketListing"];
-import { CategoryGrid } from "@/components/category-grid";
-import { NewsList } from "@/components/news";
-import { Logo } from "@/components/ui/logo";
-import { LiveDot, PixelBar, WindowFrame } from "@/components/ui/pixel";
-import { HeroSearch } from "@/components/shell/hero-search";
-import { SectionHeader, Stat, buttonClass } from "@/components/ui/primitives";
-import { api } from "@/lib/api";
-import { creatorName, modelLogoUrl } from "@/lib/catalog";
-import { formatCount, formatDate, formatPrice } from "@/lib/format";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
-/** GPU types on the board, in order. */
-const BOARD_GPUS = ["H100 SXM", "H200 SXM", "B200"];
+/** Model makers above the card, and the clouds that run their models below it. */
+const MAKERS = [
+  { name: "Anthropic", src: "/logos/anthropic.svg" },
+  { name: "OpenAI", src: "/logos/openai.svg" },
+  { name: "DeepSeek", src: "/logos/deepseek.png" },
+];
+const CLOUDS = [
+  { name: "RunPod", src: "/logos/runpod.png" },
+  { name: "CoreWeave", src: "/logos/coreweave.png" },
+  { name: "Together AI", src: "/logos/together-ai.png" },
+];
+
+const FAQ = [
+  {
+    q: "Where do the prices come from?",
+    a: "From each provider's public API or price page. Where a provider publishes no machine-readable prices, we use curated data and link the source.",
+  },
+  {
+    q: "How fresh are they?",
+    a: "Marketplaces refresh hourly and price lists daily. Every page shows when it was last checked.",
+  },
+  {
+    q: "What is a blended price?",
+    a: "One number for a model: three parts input price to one part output price. Use the input and output columns when your mix is different.",
+  },
+  {
+    q: "Why do marketplace GPU prices look so low?",
+    a: "Marketplaces such as Vast.ai and Akash list individual hosts. We show the median of their offers, which can differ from a cloud's fixed price. Check availability before you commit.",
+  },
+  {
+    q: "Can I buy through you?",
+    a: "No. Inference Hub only compares. You buy from the provider, so confirm the price there first.",
+  },
+];
 
 export default async function HomePage() {
-  const [models, categories, news, orgs, oss, market, cheapest] = await Promise.all([
-    api.GET("/v1/compare/models", { params: { query: { sort: "blended" } } }),
-    api.GET("/v1/categories"),
-    api.GET("/v1/news", { params: { query: { limit: 6 } } }),
-    api.GET("/v1/organizations", { params: { query: { limit: 1 } } }),
-    api.GET("/v1/compare/open-source"),
+  const [market, popular, orgs] = await Promise.all([
     api.GET("/v1/market"),
-    // The most widely sold models, cheapest first: what most people compare.
-    api.GET("/v1/market/models", { params: { query: { min_providers: 8, sort: "price", limit: 8 } } }),
+    // The most widely sold models: what most people compare.
+    api.GET("/v1/market/models", { params: { query: { min_providers: 8, sort: "price", limit: 6 } } }),
+    api.GET("/v1/organizations", { params: { query: { limit: 1 } } }),
   ]);
-  // Live prices of the board's GPUs, from every cloud the worker reads.
-  const boards = await Promise.all(
-    BOARD_GPUS.map((gpu) => api.GET("/v1/market/gpus/{gpu_type}", { params: { path: { gpu_type: gpu } } })),
-  );
   const m = market.data;
+  const gpuIndex = m?.gpu_index ?? [];
 
-  const modelPrices = models.data ?? [];
-  // The cheapest price of each model, cheapest models first.
-  const cheapestModels = Object.values(
-    modelPrices.reduce<Record<string, ModelPrice>>((acc, m) => {
-      if (m.blended_per_mtok == null || m.blended_per_mtok <= 0) return acc;
-      const seen = acc[m.product_slug];
-      if (!seen || (seen.blended_per_mtok ?? Infinity) > m.blended_per_mtok) acc[m.product_slug] = m;
-      return acc;
-    }, {}),
-  )
-    .sort((a, b) => (a.blended_per_mtok ?? 0) - (b.blended_per_mtok ?? 0))
-    .slice(0, 6);
-  const latest = m?.updated_at;
+  // The band: the most widely rented GPU, every cloud's lowest price.
+  const lead = gpuIndex[0];
+  const leadListings = lead
+    ? await api.GET("/v1/market/gpus/{gpu_type}", { params: { path: { gpu_type: lead.gpu_type } } })
+    : null;
+  const points = lead ? cheapestPerProvider(leadListings?.data?.listings ?? []) : [];
+
+  // Real prices for the hero texture.
+  const prices = [
+    ...gpuIndex.flatMap((g) => [g.min_per_gpu_hour, g.median_per_gpu_hour, g.max_per_gpu_hour].map((n) => n.toFixed(2))),
+    ...(m?.model_index ?? []).flatMap((x) => [x.min_blended_per_mtok.toFixed(4), x.median_blended_per_mtok.toFixed(3)]),
+  ];
+
+  const tabs: CheapTab[] = [
+    {
+      id: "gpus",
+      label: "GPUs",
+      unit: "per GPU-hour",
+      total: m ? `${m.gpu_types} GPU types tracked` : "",
+      allHref: "/directory?tab=gpus",
+      allLabel: "See all GPU prices",
+      rows: gpuIndex
+        .filter((g) => g.providers >= 5)
+        .sort((a, b) => a.min_per_gpu_hour - b.min_per_gpu_hour)
+        .slice(0, 6)
+        .map((g) => ({
+          name: g.gpu_type,
+          href: `/market/gpus/${encodeURIComponent(g.gpu_type)}`,
+          lo: formatPrice(g.min_per_gpu_hour),
+          median: formatPrice(g.median_per_gpu_hour),
+          at: g.cheapest.name,
+        })),
+    },
+    {
+      id: "models",
+      label: "Models",
+      unit: "per 1M tokens, blended",
+      total: m ? `${formatCount(m.distinct_models)} models tracked` : "",
+      allHref: "/directory?tab=models",
+      allLabel: "See all model prices",
+      rows: (popular.data?.items ?? []).map((x) => ({
+        name: x.model_key,
+        href: `/market/models/${encodeURIComponent(x.model_key)}`,
+        lo: formatPrice(x.min_blended_per_mtok),
+        median: formatPrice(x.median_blended_per_mtok),
+        at: x.cheapest.name,
+      })),
+    },
+  ];
+
+  const low = points[0];
+  const high = points.at(-1);
+  const t = (p: number) => (low && high && high.price > low.price ? (Math.log(p) - Math.log(low.price)) / (Math.log(high.price) - Math.log(low.price)) : 0);
 
   return (
-    <div className="flex flex-col gap-20">
-      <section className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
-        <div className="flex min-w-0 flex-col gap-6">
-          <p className="flex items-center gap-2 font-mono text-[13px] text-s-7">
-            <LiveDot />
-            {latest ? `Prices updated ${formatDate(latest)} · ${m?.providers} providers` : "Market prices"}
-          </p>
-          <h1 className="font-display text-[40px] leading-[44px] tracking-[-0.03em] text-ink sm:text-[56px] sm:leading-[60px]">
-            What inference costs, and who sells it.
-          </h1>
-          <p className="max-w-[46ch] text-[17px] leading-7 text-ink-2">
-            Every model API and GPU price we can read from the providers themselves, compared
-            across the market, next to the companies, projects and investors behind them.
-          </p>
-          <HeroSearch />
-          <div className="flex flex-wrap gap-3">
-            <Link href="/market" className={buttonClass("primary")}>
-              Open the market
-            </Link>
-            <Link href="/market/models?min=2&sort=price" className={buttonClass("secondary")}>
-              Cheapest models
+    <div className="flex flex-col">
+      <Hero providers={m?.providers ?? 0} prices={prices} makers={MAKERS} clouds={CLOUDS} />
+
+      {lead && low && high && (
+        <section aria-labelledby="band-title" className="relative mt-14 grid overflow-hidden border border-line bg-s-2 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-70 [background-image:radial-gradient(circle,#9fb2ee_1.1px,transparent_1.3px)] [background-size:11px_11px] [mask-image:linear-gradient(90deg,transparent_20%,#000)]"
+          />
+          <div className="relative flex flex-col items-start gap-3.5 bg-charcoal p-8 text-[#f3f1ea] sm:p-9 lg:mt-14 lg:self-end">
+            <h2 id="band-title" className="text-[clamp(28px,3.4vw,38px)] leading-[1.08] font-medium tracking-[-0.04em]">
+              {lead.gpu_type} from {formatPrice(low.price)} an hour
+            </h2>
+            <p className="max-w-[38ch] text-[#c9c6bb]">
+              {points.length} clouds rent it, from {formatPrice(low.price)} at {low.name} to {formatPrice(high.price)} at {high.name}. The dearest costs{" "}
+              {(high.price / low.price).toFixed(1)}× the cheapest.
+            </p>
+            <Link
+              href={`/market/gpus/${encodeURIComponent(lead.gpu_type)}`}
+              className="mt-1.5 inline-flex h-[42px] items-center bg-s-7 px-5 text-[15px] font-medium text-wash hover:bg-s-6"
+            >
+              Compare every cloud
             </Link>
           </div>
-        </div>
-
-        <WindowFrame
-          title="GPU price board / per GPU-hour"
-          meta={<Link href="/market/gpus" className="hover:text-wash hover:underline">all GPUs</Link>}
-          className="min-w-0"
-        >
-          {BOARD_GPUS.map((gpu, i) => (
-            <GpuBoard key={gpu} gpu={gpu} listings={boards[i].data?.listings ?? []} />
-          ))}
-        </WindowFrame>
-      </section>
-
-      <section className="grid grid-cols-2 pt-px pl-px lg:grid-cols-5 [&>*]:-mt-px [&>*]:-ml-px [&>*]:border [&>*]:border-line">
-        <Stat value={m ? formatCount(m.distinct_models) : "—"} label="Chat models priced" href="/market/models" />
-        <Stat value={m?.gpu_types ?? "—"} label="GPU types" href="/market/gpus" />
-        <Stat value={m ? formatCount(m.media_models) : "—"} label="Image, video, speech" href="/market/media" />
-        <Stat value={m?.providers ?? "—"} label="Providers with live prices" href="/market/providers" />
-        <Stat value={orgs.data?.total ?? "—"} label="Organizations" href="/organizations" />
-      </section>
-
-      {cheapest.data && cheapest.data.items.length > 0 && (
-        <section className="flex flex-col gap-4">
-          <SectionHeader
-            title="Popular models, cheapest first"
-            href="/market/models?min=2&sort=price"
-            linkLabel="All comparable models"
-          />
-          <ul className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-            {cheapest.data.items.map((row) => (
-              <li key={row.model_key} className="bg-wash">
-                <Link href={`/market/models/${encodeURIComponent(row.model_key)}`} className="group flex h-full flex-col gap-2 p-4 hover:bg-s-1">
-                  <span className="flex min-w-0 items-center gap-2">
-                    <Logo name={creatorName(row.maker) ?? row.model_key} src={modelLogoUrl(row.model_key, row.maker)} size="sm" />
-                    <span className="truncate font-mono text-[13px] text-ink group-hover:text-s-7">{row.model_key}</span>
-                  </span>
-                  <span className="font-display text-[28px] leading-8 tracking-[-0.02em] text-ink tabular">
-                    {formatPrice(row.min_blended_per_mtok)}
-                  </span>
-                  <span className="font-mono text-[12px] text-ink-3">
-                    per 1M · {row.providers} providers · via {row.cheapest.name}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <section className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
-        <div className="flex min-w-0 flex-col gap-4">
-          <SectionHeader title="Tracked model APIs" href="/compare/models" linkLabel="All tracked prices" />
-          <ModelBoard models={cheapestModels} />
-          <p className="font-mono text-[12px] text-ink-3">
-            Blended price per 1M tokens, weighing input 3:1 against output. Lowest price per model.
-          </p>
-        </div>
-        <div className="flex min-w-0 flex-col gap-4">
-          <SectionHeader title="Most starred engines" href="/compare/open-source" linkLabel="All projects" />
-          <ul className="border border-line">
-            {(oss.data ?? []).slice(0, 5).map((p, i) => (
-              <li key={p.product_slug} className="border-b border-line last:border-0">
-                <Link
-                  href={`/products/${p.product_slug}`}
-                  className="group flex items-center gap-3 px-4 py-3 hover:bg-s-1"
-                >
-                  <span className="w-5 font-mono text-[12px] text-ink-3 tabular">{i + 1}</span>
-                  <Logo name={p.organization.name} src={p.organization.logo_url} size="sm" />
-                  <span className="flex-1 truncate text-[15px] group-hover:text-s-7">{p.product_name}</span>
-                  <span className="font-mono text-[13px] text-ink tabular">
-                    {p.stars != null ? `${(p.stars / 1000).toFixed(1)}K` : "—"}
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {news.data && news.data.items.length > 0 && (
-        <section className="flex flex-col gap-4">
-          <SectionHeader title="Latest news" href="/news" linkLabel={`All ${news.data.total} stories`} />
-          <NewsList items={news.data.items} />
-        </section>
-      )}
-
-      {categories.data && (
-        <section className="flex flex-col gap-4">
-          <SectionHeader title="Browse the market" href="/categories" linkLabel="All categories" />
-          <CategoryGrid categories={categories.data} />
-        </section>
-      )}
-
-    </div>
-  );
-}
-
-/** One GPU type: the cheapest clouds' lowest price, as pixel bars scaled to the dearest shown. */
-function GpuBoard({ gpu, listings }: { gpu: string; listings: MarketListing[] }) {
-  // Lowest price per GPU-hour per provider, the six cheapest.
-  const byProvider = Object.values(
-    listings.reduce<Record<string, MarketListing>>((acc, l) => {
-      const seen = acc[l.provider.slug];
-      if (l.price_per_gpu_hour != null && (!seen || (seen.price_per_gpu_hour ?? Infinity) > l.price_per_gpu_hour))
-        acc[l.provider.slug] = l;
-      return acc;
-    }, {}),
-  ).sort((a, b) => (a.price_per_gpu_hour ?? 0) - (b.price_per_gpu_hour ?? 0));
-  const shown = byProvider.slice(0, 6);
-  const max = Math.max(...shown.map((p) => p.price_per_gpu_hour ?? 0), 0);
-
-  return (
-    <div className="border-b border-line px-4 py-4 last:border-0">
-      <div className="mb-3 flex items-baseline justify-between">
-        <Link
-          href={`/market/gpus/${encodeURIComponent(gpu)}`}
-          className="font-display text-[18px] tracking-[-0.01em] text-ink hover:text-s-7 hover:underline"
-        >
-          {gpu}
-        </Link>
-        <span className="font-mono text-[12px] text-ink-3">
-          {byProvider.length > shown.length ? `cheapest ${shown.length} of ${byProvider.length} clouds` : `${byProvider.length} clouds`}
-        </span>
-      </div>
-      {shown.length === 0 ? (
-        <p className="font-mono text-[12px] text-ink-3">No prices yet.</p>
-      ) : (
-        <ul className="flex flex-col gap-2">
-          {shown.map((p, i) => (
-            <li
-              key={p.provider.slug}
-              className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 sm:grid-cols-[132px_minmax(0,1fr)_72px]"
-            >
-              <Link
-                href={`/organizations/${p.provider.slug}`}
-                className="flex min-w-0 items-center gap-2 text-[13px] text-ink hover:text-s-7"
-              >
-                <Logo name={p.provider.name} src={p.provider.logo_url} size="xs" />
-                <span className="truncate">{p.provider.name}</span>
-              </Link>
-              <span className="col-span-2 row-start-2 overflow-hidden sm:col-span-1 sm:col-start-2 sm:row-start-1">
-                <PixelBar
-                  value={p.price_per_gpu_hour ?? 0}
-                  max={max}
-                  tone={i === 0 ? "lead" : "muted"}
-                  label={`${p.provider.name}: ${formatPrice(p.price_per_gpu_hour)} per GPU-hour`}
-                />
+          <div className="relative flex flex-col justify-center gap-2.5 p-8 sm:p-10">
+            <span className="text-[14px] text-ink-2">Price per GPU-hour, every cloud</span>
+            <ul className="relative h-[54px]" aria-label={`${lead.gpu_type} price at each cloud`}>
+              <span aria-hidden className="absolute inset-x-0 top-[26px] h-px bg-[#8fa3e6]" />
+              {points.map((p) => (
+                <li key={p.slug} className="group absolute top-[26px]" style={{ left: `${t(p.price) * 100}%` }}>
+                  <Link
+                    href={`/organizations/${p.slug}`}
+                    aria-label={`${p.name}: ${formatPrice(p.price)} per GPU-hour`}
+                    className="relative -mt-2 -ml-2 block size-4 rounded-full border-2 border-s-2 bg-s-7 transition-transform hover:z-10 hover:scale-150 focus-visible:z-10 focus-visible:scale-150"
+                  >
+                    <span className="pointer-events-none absolute bottom-[22px] left-1/2 -translate-x-1/2 bg-charcoal px-2 py-0.5 text-[12px] whitespace-nowrap text-wash opacity-0 group-focus-within:opacity-100 group-hover:opacity-100">
+                      {p.name} {formatPrice(p.price)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="flex justify-between text-[14px]">
+              <span>
+                <b className="block font-mono text-[34px] leading-[1.1] font-medium tracking-[-0.04em]">{formatPrice(low.price)}</b>
+                <span className="text-ink-2">{low.name}</span>
               </span>
-              <span className={`text-right font-mono text-[13px] tabular ${i === 0 ? "font-medium text-s-7" : "text-ink-2"}`}>
-                {formatPrice(p.price_per_gpu_hour)}
+              <span className="text-right">
+                <b className="block font-mono text-[34px] leading-[1.1] font-medium tracking-[-0.04em]">{formatPrice(high.price)}</b>
+                <span className="text-ink-2">{high.name}</span>
               </span>
-            </li>
-          ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <Section id="why" title="Built for finding the right price" lead="One place to check what a model or a GPU costs, from the people who sell it.">
+        <div className="mt-12 grid border-t border-line-strong sm:grid-cols-2 lg:grid-cols-4">
+          <Fact n={m ? formatCount(m.distinct_models) : "—"} title="Models, priced" text="Chat, image, video and speech models, across every provider that sells them." />
+          <Fact n={m?.gpu_types ?? "—"} title="GPUs, per hour" text="Each type normalized to one GPU, so a node of eight never skews the number." />
+          <Fact n={m?.sources.length ?? "—"} title="Sources read" text="Provider APIs and public price pages, checked every hour or day." />
+          <Fact n={orgs.data?.total ?? "—"} title="Companies mapped" text="Labs, clouds, gateways, hardware makers and the investors behind them." />
+        </div>
+      </Section>
+
+      <section aria-labelledby="now-title" className="grid items-start gap-10 pt-28 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+        <Head id="now-title" title="Cheapest right now" lead="The lowest price we have seen for the most widely sold GPUs and models. Open any row to see every provider." />
+        <CheapestTable tabs={tabs} />
+      </section>
+
+      <Section id="start" title="Where do you want to start?">
+        <ul className="mt-12 border-t border-line-strong">
+          <PathRow href="/directory?tab=models" title="Pick a model" text="See who sells it, and what it costs at each provider." cta="Model prices" />
+          <PathRow href="/directory?tab=gpus" title="Rent a GPU" text="Hourly prices by GPU type, across clouds and marketplaces." cta="GPU prices" />
+          <PathRow href="/directory?tab=orgs" title="Research a company" text="What they sell, who backs them, and what they charge." cta="Companies" />
         </ul>
-      )}
+      </Section>
+
+      <section aria-labelledby="faq-title" className="grid gap-10 pt-28 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
+        <Head id="faq-title" title="Questions people ask first" lead="Where the numbers come from, and how far to trust them." />
+        <div className="border-t border-line-strong">
+          {FAQ.map((f) => (
+            <details key={f.q} className="group border-b border-line">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 py-5 text-[19px] font-medium tracking-[-0.02em] [&::-webkit-details-marker]:hidden">
+                {f.q}
+                <span aria-hidden className="text-[24px] leading-none text-ink-3 transition-transform group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p className="max-w-[62ch] pb-6 text-ink-2">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section aria-labelledby="cta-title" className="mt-28 border border-line-strong bg-paper px-6 py-16 text-center">
+        <h2 id="cta-title" className="mb-2.5 text-[clamp(30px,4vw,44px)] leading-[1.06] font-medium tracking-[-0.045em]">
+          Check the price before you buy.
+        </h2>
+        <p className="mx-auto mb-7 max-w-[46ch] text-ink-2">Search a model or a GPU and see every provider in one table.</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link href="/directory" className="inline-flex h-[42px] items-center bg-s-7 px-5 text-[15px] font-medium text-wash hover:bg-s-8">
+            Open the directory
+          </Link>
+          <Link
+            href="/market/providers"
+            className="inline-flex h-[42px] items-center px-5 text-[15px] font-medium shadow-[inset_0_0_0_1px_var(--line-strong)] hover:shadow-[inset_0_0_0_1px_var(--ink)]"
+          >
+            See how providers compare
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
 
-/** The cheapest models as a pixel-bar list. */
-function ModelBoard({ models }: { models: ModelPrice[] }) {
-  const max = Math.max(...models.map((m) => m.blended_per_mtok ?? 0), 0);
+function Head({ id, title, lead }: { id: string; title: string; lead?: string }) {
   return (
-    <ul className="border border-line">
-      {models.map((m, i) => (
-        <li key={m.product_slug} className="border-b border-line last:border-0">
-          <Link
-            href={`/products/${m.product_slug}`}
-            className="group grid grid-cols-[28px_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 px-4 py-3 hover:bg-s-1 md:grid-cols-[28px_minmax(0,1fr)_minmax(0,160px)_88px]"
-          >
-            <Logo name={m.maker.name} src={m.maker.logo_url} size="md" />
-            <span className="min-w-0">
-              <span className="block truncate text-[15px] text-ink group-hover:text-s-7">{m.product_name}</span>
-              <span className="block truncate font-mono text-[12px] text-ink-3">
-                via {m.provider.name}
-                {m.open_weights && " / open weights"}
-              </span>
-            </span>
-            <span className="col-span-3 row-start-2 overflow-hidden md:col-span-1 md:col-start-3 md:row-start-1">
-              <PixelBar
-                value={m.blended_per_mtok ?? 0}
-                max={max}
-                cells={20}
-                tone={i === 0 ? "lead" : "muted"}
-                label={`${m.product_name}: ${formatPrice(m.blended_per_mtok, m.currency)} per million tokens`}
-              />
-            </span>
-            <span
-              className={`text-right font-mono text-[14px] tabular ${i === 0 ? "font-medium text-s-7" : "text-ink"}`}
-            >
-              {formatPrice(m.blended_per_mtok, m.currency)}
-            </span>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className="max-w-[560px]">
+      <h2 id={id} className="mb-3 text-[clamp(30px,4vw,44px)] leading-[1.06] font-medium tracking-[-0.045em]">
+        {title}
+      </h2>
+      {lead && <p className="max-w-[46ch] text-[18px] leading-[1.55] text-ink-2">{lead}</p>}
+    </div>
   );
+}
+
+function Section({ id, title, lead, children }: { id: string; title: string; lead?: string; children: React.ReactNode }) {
+  return (
+    <section aria-labelledby={`${id}-title`} className="pt-28">
+      <Head id={`${id}-title`} title={title} lead={lead} />
+      {children}
+    </section>
+  );
+}
+
+function Fact({ n, title, text }: { n: React.ReactNode; title: string; text: string }) {
+  return (
+    <div className="border-line pt-6 pr-6 pb-2 sm:pl-6 sm:[&:nth-child(2n+1)]:border-l-0 sm:[&:nth-child(2n+1)]:pl-0 lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+2)]:pl-6 lg:[&:nth-child(2n+1)]:border-l">
+      <span className="mb-2.5 block font-mono text-[34px] leading-[1.1] font-medium tracking-[-0.04em] text-s-7">{n}</span>
+      <h3 className="mb-1.5 text-[18px] font-semibold tracking-[-0.02em]">{title}</h3>
+      <p className="max-w-[30ch] text-[15px] text-ink-2">{text}</p>
+    </div>
+  );
+}
+
+function PathRow({ href, title, text, cta }: { href: string; title: string; text: string; cta: string }) {
+  return (
+    <li className="border-b border-line">
+      <Link
+        href={href}
+        className="grid items-baseline gap-x-6 gap-y-1 py-6 hover:bg-paper md:grid-cols-[minmax(0,4fr)_minmax(0,6fr)_120px] md:hover:-mx-3.5 md:hover:px-3.5"
+      >
+        <span className="text-[clamp(22px,2.6vw,30px)] font-medium tracking-[-0.04em]">{title}</span>
+        <span className="text-ink-2">{text}</span>
+        <span className="text-[15px] text-s-7 md:text-right">{cta}</span>
+      </Link>
+    </li>
+  );
+}
+
+/** Each cloud's lowest price per GPU-hour for one GPU type, cheapest first. */
+function cheapestPerProvider(listings: MarketListing[]): { slug: string; name: string; price: number }[] {
+  const by: Record<string, MarketListing> = {};
+  for (const l of listings) {
+    const seen = by[l.provider.slug];
+    if (l.price_per_gpu_hour != null && (!seen || (seen.price_per_gpu_hour ?? Infinity) > l.price_per_gpu_hour)) by[l.provider.slug] = l;
+  }
+  return Object.values(by)
+    .map((l) => ({ slug: l.provider.slug, name: l.provider.name, price: l.price_per_gpu_hour ?? 0 }))
+    .filter((p) => p.price > 0)
+    .sort((a, b) => a.price - b.price);
 }

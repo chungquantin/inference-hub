@@ -50,12 +50,12 @@ export function FilterBar({
       <form action={action} className="flex flex-wrap items-end gap-3 border border-line bg-paper p-3" role="search">
         {filters.map((f) => (
           <label key={f.name} className={`flex flex-col gap-1 ${f.type === "search" ? "min-w-[220px] flex-[2]" : "min-w-[130px] flex-1"}`}>
-            <span className="font-mono text-[11px] text-ink-3 uppercase">{f.label}</span>
+            <span className="text-[13px] font-medium text-ink-3">{f.label}</span>
             {f.type === "select" ? (
               <select
                 name={f.name}
                 defaultValue={values[f.name] ?? ""}
-                className="h-9 border border-line bg-wash px-2 font-mono text-[13px] text-ink focus:border-ink"
+                className="h-10 border border-line bg-wash px-2 text-[14px] text-ink focus:border-ink"
               >
                 <option value="">{f.any ?? "Any"}</option>
                 {f.options.map((o) => (
@@ -83,7 +83,7 @@ export function FilterBar({
                   placeholder={f.placeholder}
                   step={f.type === "number" ? (f.step ?? "any") : undefined}
                   min={f.type === "number" ? (f.min ?? "0") : undefined}
-                  className="h-full w-full min-w-0 bg-transparent px-2 font-mono text-[13px] text-ink outline-none placeholder:text-ink-3"
+                  className="h-full w-full min-w-0 bg-transparent px-2 text-[14px] text-ink outline-none placeholder:text-ink-3"
                 />
               </span>
             )}
@@ -100,7 +100,7 @@ export function FilterBar({
             <Link
               key={k}
               href={href({ ...values, ...keep, [k]: undefined })}
-              className="inline-flex h-7 items-center gap-1.5 bg-s-7 px-2 font-mono text-[12px] text-wash hover:bg-s-8"
+              className="inline-flex h-7 items-center gap-1.5 bg-s-7 px-2 text-[13px] text-wash hover:bg-s-8"
               aria-label={`Remove filter ${labels[k] ?? k}`}
             >
               {labels[k] ?? k}: {describe[k] ? describe[k](v!) : v}
@@ -108,16 +108,16 @@ export function FilterBar({
             </Link>
           ))}
           {active.length > 1 && (
-            <Link href={href(keep)} className="font-mono text-[12px] text-s-7 underline">
+            <Link href={href(keep)} className="text-[13px] text-s-7 underline">
               Clear all
             </Link>
           )}
-          {presets.length > 0 && <span className="ml-1 font-mono text-[11px] text-ink-3 uppercase">Try</span>}
+          {presets.length > 0 && <span className="ml-1 text-[13px] font-medium text-ink-3">Try</span>}
           {presets.map((p) => (
             <Link
               key={p.label}
               href={href({ ...keep, ...p.params })}
-              className="inline-flex h-7 items-center bg-field px-2 font-mono text-[12px] text-ink hover:bg-s-2"
+              className="inline-flex h-7 items-center bg-field px-2 text-[13px] text-ink hover:bg-s-2"
             >
               {p.label}
             </Link>

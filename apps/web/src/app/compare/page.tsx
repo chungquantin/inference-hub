@@ -39,7 +39,7 @@ export default function ComparePage() {
           <Link
             key={page.href}
             href={page.href}
-            className="group -mt-px -ml-px flex flex-col gap-3 border border-line p-6 hover:z-10 hover:border-s-7"
+            className="group -mt-px -ml-px flex flex-col gap-3 border border-line p-6 hover:z-10 hover:border-[color:var(--s-7)]"
           >
             <span className="font-mono text-[13px] text-s-7 tabular">0{i + 1}</span>
             <h2 className="font-display text-[24px] leading-8 tracking-[-0.02em] text-ink group-hover:text-s-7">
