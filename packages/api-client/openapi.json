@@ -633,6 +633,278 @@
         }
       }
     },
+    "/v1/market": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Headline numbers, the most traded GPUs and models, and source health.",
+        "operationId": "marketOverview",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketOverview"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/gpus": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "GPU types across every cloud: min, median and max price per GPU-hour.",
+        "operationId": "marketGpus",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text the GPU type or model id must contain (case-insensitive).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "min_providers",
+            "in": "query",
+            "description": "Keep rows sold by at least this many providers. Default 1.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Most rows to return. Default 100, at most 500.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GpuIndexRow"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/gpus/{gpu_type}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Every cloud's price for one GPU type, such as `H100 SXM`.",
+        "operationId": "marketGpu",
+        "parameters": [
+          {
+            "name": "gpu_type",
+            "in": "path",
+            "description": "GPU type, such as `H100 SXM`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/models": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Models across every provider: cheapest and median price per million tokens.",
+        "operationId": "marketModels",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Text the GPU type or model id must contain (case-insensitive).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "min_providers",
+            "in": "query",
+            "description": "Keep rows sold by at least this many providers. Default 1.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Most rows to return. Default 100, at most 500.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ModelIndexRow"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/models/{key}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Every provider's price for one model, by its normalized key.",
+        "operationId": "marketModel",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Normalized model key, such as `deepseek-v3.2`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/providers": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Providers by coverage, with how often they are the cheapest.",
+        "operationId": "marketProviders",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarketProvider"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/sources": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Every data source and its health.",
+        "operationId": "marketSources",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MarketSource"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/news": {
       "get": {
         "tags": [
@@ -1207,6 +1479,49 @@
           }
         }
       },
+      "GpuIndexRow": {
+        "type": "object",
+        "description": "One GPU type across every cloud: price per GPU-hour.",
+        "required": [
+          "gpu_type",
+          "providers",
+          "listings",
+          "min_per_gpu_hour",
+          "median_per_gpu_hour",
+          "max_per_gpu_hour",
+          "cheapest"
+        ],
+        "properties": {
+          "cheapest": {
+            "$ref": "#/components/schemas/OrganizationRef",
+            "description": "Who sells it cheapest."
+          },
+          "gpu_type": {
+            "type": "string"
+          },
+          "listings": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "max_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "median_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Organizations selling it."
+          }
+        }
+      },
       "GpuPrice": {
         "type": "object",
         "description": "A row of the GPU price comparison: one configuration at one provider.",
@@ -1302,6 +1617,334 @@
           },
           "slug": {
             "type": "string"
+          }
+        }
+      },
+      "MarketDetail": {
+        "type": "object",
+        "description": "Every provider's price for one model or GPU type.",
+        "required": [
+          "key",
+          "name",
+          "listings"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "listings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketListing"
+            },
+            "description": "Cheapest first."
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "MarketListing": {
+        "type": "object",
+        "description": "One provider's live price for a model or GPU, as the adapter saw it.",
+        "required": [
+          "adapter",
+          "provider",
+          "external_id",
+          "name",
+          "last_seen_at"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "blended_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "external_id": {
+            "type": "string"
+          },
+          "gpu_count": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_per_gpu_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "price_per_hour": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Reseller detail: the hosting provider behind a router, or a region or plan."
+          }
+        }
+      },
+      "MarketOverview": {
+        "type": "object",
+        "description": "Headline numbers of the whole market.",
+        "required": [
+          "providers",
+          "model_providers",
+          "gpu_providers",
+          "model_listings",
+          "distinct_models",
+          "gpu_listings",
+          "gpu_types",
+          "gpu_index",
+          "model_index",
+          "sources"
+        ],
+        "properties": {
+          "distinct_models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Distinct models across providers, by normalized id."
+          },
+          "gpu_index": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GpuIndexRow"
+            },
+            "description": "The most widely sold GPUs, for the headline index."
+          },
+          "gpu_listings": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Live GPU configurations with an hourly price."
+          },
+          "gpu_providers": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "gpu_types": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "model_index": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelIndexRow"
+            },
+            "description": "The most widely served models."
+          },
+          "model_listings": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Live (provider, model) price listings."
+          },
+          "model_providers": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Organizations with at least one live listing."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketSource"
+            }
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the freshest listing was last seen."
+          }
+        }
+      },
+      "MarketProvider": {
+        "type": "object",
+        "description": "A provider in the market leaderboard.",
+        "required": [
+          "organization",
+          "models",
+          "gpu_configurations",
+          "cheapest_count"
+        ],
+        "properties": {
+          "cheapest_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "GPU types or models sold by two or more providers where this one is cheapest."
+          },
+          "gpu_configurations": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "last_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "models": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          }
+        }
+      },
+      "MarketSource": {
+        "type": "object",
+        "description": "One data source of the market: a provider's adapter and its health.",
+        "required": [
+          "adapter",
+          "organization",
+          "listings",
+          "healthy"
+        ],
+        "properties": {
+          "adapter": {
+            "type": "string"
+          },
+          "healthy": {
+            "type": "boolean"
+          },
+          "kind": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "`model` or `gpu`; `None` before the first successful run."
+          },
+          "last_success_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "listings": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          }
+        }
+      },
+      "ModelIndexRow": {
+        "type": "object",
+        "description": "One model across every provider: price per million tokens.",
+        "required": [
+          "model_key",
+          "name",
+          "providers",
+          "min_input_per_mtok",
+          "min_output_per_mtok",
+          "min_blended_per_mtok",
+          "median_blended_per_mtok",
+          "cheapest"
+        ],
+        "properties": {
+          "cheapest": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "max_context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "median_blended_per_mtok": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_blended_per_mtok": {
+            "type": "number",
+            "format": "double",
+            "description": "Cheapest 3:1 blend of input and output."
+          },
+          "min_input_per_mtok": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_output_per_mtok": {
+            "type": "number",
+            "format": "double"
+          },
+          "model_key": {
+            "type": "string",
+            "description": "Normalized id shared by providers, such as `deepseek-v3.2`."
+          },
+          "name": {
+            "type": "string",
+            "description": "A display name: the most common name providers give it."
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -2816,6 +3459,10 @@
     {
       "name": "compare",
       "description": "Prices and stats across providers"
+    },
+    {
+      "name": "market",
+      "description": "Every live price the adapters collect"
     },
     {
       "name": "admin",

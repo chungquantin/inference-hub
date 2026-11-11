@@ -3,6 +3,7 @@
 pub mod categories;
 pub mod compare;
 pub mod jobs;
+pub mod market;
 pub mod news;
 pub mod organizations;
 pub mod products;

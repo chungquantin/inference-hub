@@ -133,6 +133,30 @@ impl From<GpuListing> for Row {
     }
 }
 
+/// Records which organization each adapter reports for, for market views.
+/// Cheap (one statement), so the scheduler runs it on every pass and picks up
+/// organizations seeded after the worker started.
+pub async fn register_adapters(pool: &PgPool, adapters: &[MarketAdapter]) -> sqlx::Result<()> {
+    let ids: Vec<&str> = adapters.iter().map(|a| a.info().id()).collect();
+    let orgs: Vec<&str> = adapters
+        .iter()
+        .map(|a| a.info().organization_slug())
+        .collect();
+    sqlx::query(
+        "INSERT INTO adapter_state (adapter, organization_id)
+         SELECT a.adapter, o.id
+         FROM unnest($1::text[], $2::text[]) AS a (adapter, slug)
+         JOIN organizations o ON o.slug = a.slug
+         ON CONFLICT (adapter) DO UPDATE SET organization_id = EXCLUDED.organization_id
+         WHERE adapter_state.organization_id IS DISTINCT FROM EXCLUDED.organization_id",
+    )
+    .bind(&ids)
+    .bind(&orgs)
+    .execute(pool)
+    .await?;
+    Ok(())
+}
+
 /// Fetches from one adapter and stores the result. Records success or failure
 /// in `adapter_state` either way.
 pub async fn run_adapter(
@@ -142,6 +166,7 @@ pub async fn run_adapter(
 ) -> Result<RunReport, MarketError> {
     let id = adapter.info().id();
     let result = fetch_and_store(pool, client, adapter).await;
+
     match &result {
         Ok(report) => {
             sqlx::query(

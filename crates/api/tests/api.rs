@@ -927,3 +927,102 @@ async fn admin_sees_adapter_health_and_unmapped_listings(pool: PgPool) {
     let (status, _) = send(&app, Method::GET, "/v1/admin/adapters", None, None).await;
     assert_eq!(status, StatusCode::UNAUTHORIZED);
 }
+
+/// Three providers listing overlapping models and GPUs, straight into the
+/// tables the adapters write.
+async fn seed_market_index(pool: &PgPool) {
+    sqlx::query(
+        "INSERT INTO organizations (slug, name) VALUES
+             ('alpha', 'Alpha'), ('beta', 'Beta'), ('gamma', 'Gamma')",
+    )
+    .execute(pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO adapter_state (adapter, organization_id, last_success_at)
+         SELECT a, id, now() FROM organizations o
+         JOIN (VALUES ('a', 'alpha'), ('b', 'beta'), ('g', 'gamma')) v (a, s) ON v.s = o.slug",
+    )
+    .execute(pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO market_listings (adapter, listing_key, external_id, kind, name,
+             price_input_per_mtok, price_output_per_mtok, gpu_type, gpu_count, price_per_hour, region)
+         VALUES
+           ('a', 'm1', 'deepseek-ai/DeepSeek-V3.2', 'model', 'DeepSeek V3.2', 0.28, 0.42, NULL, NULL, NULL, NULL),
+           ('b', 'm1', 'deepseek/deepseek-v3.2', 'model', 'DeepSeek V3.2', 0.20, 0.40, NULL, NULL, NULL, NULL),
+           ('b', 'm2', 'deepseek/deepseek-v3.2:free', 'model', 'DeepSeek V3.2 (free)', 0, 0, NULL, NULL, NULL, NULL),
+           ('g', 'm1', 'solo/only-here', 'model', 'Only Here', 1, 2, NULL, NULL, NULL, NULL),
+           ('a', 'g1', 'H100', 'gpu', '8x H100', NULL, NULL, 'H100 SXM', 8, 24.0, NULL),
+           ('b', 'g1', 'H100', 'gpu', '1x H100', NULL, NULL, 'H100 SXM', 1, 2.0, NULL),
+           ('g', 'g1', 'H100', 'gpu', '1x H100', NULL, NULL, 'H100 SXM', 1, 4.0, 'us'),
+           ('g', 'g2', 'L4', 'gpu', '1x L4', NULL, NULL, 'L4', 1, 0.5, NULL)",
+    )
+    .execute(pool)
+    .await
+    .unwrap();
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn market_indexes_match_models_across_providers(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+
+    let (status, gpus) = get(&app, "/v1/market/gpus").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(gpus[0]["gpu_type"], "H100 SXM");
+    assert_eq!(gpus[0]["providers"], 3);
+    assert_eq!(gpus[0]["min_per_gpu_hour"], 2.0);
+    assert_eq!(
+        gpus[0]["median_per_gpu_hour"], 3.0,
+        "8×$3, 1×$2, 1×$4 per GPU-hour"
+    );
+    assert_eq!(gpus[0]["cheapest"]["slug"], "beta");
+
+    let (_, models) = get(&app, "/v1/market/models?min_providers=2").await;
+    assert_eq!(models.as_array().unwrap().len(), 1, "{models}");
+    let m = &models[0];
+    assert_eq!(
+        m["model_key"], "deepseek-v3.2",
+        "maker prefixes and :free variants are one model"
+    );
+    assert_eq!(m["providers"], 2);
+    assert_eq!(
+        m["min_input_per_mtok"], 0.2,
+        "free listings do not set the minimum"
+    );
+    assert_eq!(m["cheapest"]["slug"], "beta");
+
+    let (status, detail) = get(&app, "/v1/market/models/deepseek-v3.2").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(detail["listings"].as_array().unwrap().len(), 3);
+    assert_eq!(detail["name"], "DeepSeek V3.2");
+
+    let (status, detail) = get(&app, "/v1/market/gpus/h100%20sxm").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(detail["name"], "H100 SXM");
+    assert_eq!(detail["listings"][0]["price_per_gpu_hour"], 2.0);
+    assert_eq!(
+        get(&app, "/v1/market/gpus/nope").await.0,
+        StatusCode::NOT_FOUND
+    );
+
+    let (_, providers) = get(&app, "/v1/market/providers").await;
+    let beta = providers
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|p| p["organization"]["slug"] == "beta")
+        .unwrap();
+    assert_eq!(
+        beta["cheapest_count"], 2,
+        "H100 and DeepSeek; L4 and Only Here are uncontested"
+    );
+
+    let (_, overview) = get(&app, "/v1/market").await;
+    assert_eq!(overview["providers"], 3);
+    assert_eq!(overview["gpu_types"], 2);
+    assert_eq!(overview["distinct_models"], 2);
+    assert_eq!(overview["sources"].as_array().unwrap().len(), 3);
+}

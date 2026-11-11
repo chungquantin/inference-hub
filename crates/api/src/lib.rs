@@ -51,6 +51,7 @@ impl AppState {
         (name = "products", description = "Models, APIs, GPU instances and projects"),
         (name = "news", description = "Published news about the market"),
         (name = "compare", description = "Prices and stats across providers"),
+        (name = "market", description = "Every live price the adapters collect"),
         (name = "admin", description = "Editorial endpoints; need the admin token"),
     )
 )]

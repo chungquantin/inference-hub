@@ -212,6 +212,125 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Headline numbers, the most traded GPUs and models, and source health. */
+        get: operations["marketOverview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/gpus": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GPU types across every cloud: min, median and max price per GPU-hour. */
+        get: operations["marketGpus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/gpus/{gpu_type}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every cloud's price for one GPU type, such as `H100 SXM`. */
+        get: operations["marketGpu"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/models": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Models across every provider: cheapest and median price per million tokens. */
+        get: operations["marketModels"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/models/{key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every provider's price for one model, by its normalized key. */
+        get: operations["marketModel"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/providers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Providers by coverage, with how often they are the cheapest. */
+        get: operations["marketProviders"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every data source and its health. */
+        get: operations["marketSources"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/news": {
         parameters: {
             query?: never;
@@ -403,6 +522,25 @@ export interface components {
             /** @description Cheapest per GPU-hour first. */
             prices: components["schemas"]["GpuPrice"][];
         };
+        /** @description One GPU type across every cloud: price per GPU-hour. */
+        GpuIndexRow: {
+            /** @description Who sells it cheapest. */
+            cheapest: components["schemas"]["OrganizationRef"];
+            gpu_type: string;
+            /** Format: int64 */
+            listings: number;
+            /** Format: double */
+            max_per_gpu_hour: number;
+            /** Format: double */
+            median_per_gpu_hour: number;
+            /** Format: double */
+            min_per_gpu_hour: number;
+            /**
+             * Format: int64
+             * @description Organizations selling it.
+             */
+            providers: number;
+        };
         /** @description A row of the GPU price comparison: one configuration at one provider. */
         GpuPrice: {
             currency: string;
@@ -433,6 +571,129 @@ export interface components {
             logo_url?: string | null;
             name: string;
             slug: string;
+        };
+        /** @description Every provider's price for one model or GPU type. */
+        MarketDetail: {
+            key: string;
+            /** @description Cheapest first. */
+            listings: components["schemas"]["MarketListing"][];
+            name: string;
+        };
+        /** @description One provider's live price for a model or GPU, as the adapter saw it. */
+        MarketListing: {
+            adapter: string;
+            /** Format: double */
+            blended_per_mtok?: number | null;
+            /** Format: int32 */
+            context_window?: number | null;
+            external_id: string;
+            /** Format: int32 */
+            gpu_count?: number | null;
+            /** Format: date-time */
+            last_seen_at: string;
+            name: string;
+            /** Format: double */
+            price_input_per_mtok?: number | null;
+            /** Format: double */
+            price_output_per_mtok?: number | null;
+            /** Format: double */
+            price_per_gpu_hour?: number | null;
+            /** Format: double */
+            price_per_hour?: number | null;
+            provider: components["schemas"]["OrganizationRef"];
+            source_url?: string | null;
+            /** @description Reseller detail: the hosting provider behind a router, or a region or plan. */
+            variant?: string | null;
+        };
+        /** @description Headline numbers of the whole market. */
+        MarketOverview: {
+            /**
+             * Format: int64
+             * @description Distinct models across providers, by normalized id.
+             */
+            distinct_models: number;
+            /** @description The most widely sold GPUs, for the headline index. */
+            gpu_index: components["schemas"]["GpuIndexRow"][];
+            /**
+             * Format: int64
+             * @description Live GPU configurations with an hourly price.
+             */
+            gpu_listings: number;
+            /** Format: int64 */
+            gpu_providers: number;
+            /** Format: int64 */
+            gpu_types: number;
+            /** @description The most widely served models. */
+            model_index: components["schemas"]["ModelIndexRow"][];
+            /**
+             * Format: int64
+             * @description Live (provider, model) price listings.
+             */
+            model_listings: number;
+            /** Format: int64 */
+            model_providers: number;
+            /**
+             * Format: int64
+             * @description Organizations with at least one live listing.
+             */
+            providers: number;
+            sources: components["schemas"]["MarketSource"][];
+            /**
+             * Format: date-time
+             * @description When the freshest listing was last seen.
+             */
+            updated_at?: string | null;
+        };
+        /** @description A provider in the market leaderboard. */
+        MarketProvider: {
+            /**
+             * Format: int64
+             * @description GPU types or models sold by two or more providers where this one is cheapest.
+             */
+            cheapest_count: number;
+            /** Format: int64 */
+            gpu_configurations: number;
+            /** Format: date-time */
+            last_seen_at?: string | null;
+            /** Format: int64 */
+            models: number;
+            organization: components["schemas"]["OrganizationRef"];
+        };
+        /** @description One data source of the market: a provider's adapter and its health. */
+        MarketSource: {
+            adapter: string;
+            healthy: boolean;
+            /** @description `model` or `gpu`; `None` before the first successful run. */
+            kind?: string | null;
+            /** Format: date-time */
+            last_success_at?: string | null;
+            /** Format: int64 */
+            listings: number;
+            organization: components["schemas"]["OrganizationRef"];
+        };
+        /** @description One model across every provider: price per million tokens. */
+        ModelIndexRow: {
+            cheapest: components["schemas"]["OrganizationRef"];
+            maker?: string | null;
+            /** Format: int32 */
+            max_context_window?: number | null;
+            /** Format: double */
+            median_blended_per_mtok: number;
+            /**
+             * Format: double
+             * @description Cheapest 3:1 blend of input and output.
+             */
+            min_blended_per_mtok: number;
+            /** Format: double */
+            min_input_per_mtok: number;
+            /** Format: double */
+            min_output_per_mtok: number;
+            /** @description Normalized id shared by providers, such as `deepseek-v3.2`. */
+            model_key: string;
+            /** @description A display name: the most common name providers give it. */
+            name: string;
+            /** Format: int64 */
+            providers: number;
         };
         /** @description A row of the model price comparison: one model at one provider, latest price. */
         ModelPrice: {
@@ -1281,6 +1542,191 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RepoLeader"][];
+                };
+            };
+        };
+    };
+    marketOverview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketOverview"];
+                };
+            };
+        };
+    };
+    marketGpus: {
+        parameters: {
+            query?: {
+                /** @description Text the GPU type or model id must contain (case-insensitive). */
+                q?: string;
+                /** @description Keep rows sold by at least this many providers. Default 1. */
+                min_providers?: number;
+                /** @description Most rows to return. Default 100, at most 500. */
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GpuIndexRow"][];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketGpu: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description GPU type, such as `H100 SXM` */
+                gpu_type: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketDetail"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketModels: {
+        parameters: {
+            query?: {
+                /** @description Text the GPU type or model id must contain (case-insensitive). */
+                q?: string;
+                /** @description Keep rows sold by at least this many providers. Default 1. */
+                min_providers?: number;
+                /** @description Most rows to return. Default 100, at most 500. */
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelIndexRow"][];
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketModel: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Normalized model key, such as `deepseek-v3.2` */
+                key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketDetail"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketProviders: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketProvider"][];
+                };
+            };
+        };
+    };
+    marketSources: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketSource"][];
                 };
             };
         };

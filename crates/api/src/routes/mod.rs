@@ -2,6 +2,7 @@ pub mod admin;
 pub mod categories;
 pub mod compare;
 pub mod health;
+pub mod market;
 pub mod news;
 pub mod organizations;
 pub mod products;
@@ -18,5 +19,6 @@ pub fn v1_router() -> OpenApiRouter<AppState> {
         .merge(products::router())
         .merge(news::router())
         .merge(compare::router())
+        .merge(market::router())
         .merge(sitemap::router())
 }

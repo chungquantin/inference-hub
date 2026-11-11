@@ -5,6 +5,7 @@
 
 pub mod category;
 pub mod compare;
+pub mod market;
 pub mod news;
 pub mod organization;
 pub mod pagination;
@@ -14,6 +15,10 @@ pub use category::Category;
 pub use compare::{
     FundingRound, GpuPrice, GpuPriceQuery, MakerRef, ModelPrice, ModelPriceQuery, ModelPriceSort,
     PortfolioCompany, PortfolioRound, PricePoint, RepoLeader, RepoStats, RoundInvestor,
+};
+pub use market::{
+    GpuIndexRow, MarketDetail, MarketIndexQuery, MarketListing, MarketOverview, MarketProvider,
+    MarketSource, ModelIndexRow,
 };
 pub use news::{
     AdapterStatus, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus, UnmappedListing,

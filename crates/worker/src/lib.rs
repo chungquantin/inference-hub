@@ -182,6 +182,7 @@ pub async fn schedule_due_repos(pool: &PgPool, every: Duration) -> sqlx::Result<
 /// Enqueues a run of every market adapter that has not run within its interval.
 /// A failing adapter backs off like a feed: the interval doubles per failure, up to a day.
 pub async fn schedule_due_adapters(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
+    ih_ingest::market::register_adapters(pool, &ctx.adapters).await?;
     let mut enqueued = 0;
     for adapter in ctx.adapters.iter() {
         let id = adapter.info().id();
