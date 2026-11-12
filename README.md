@@ -40,7 +40,7 @@ apps/web  (Next.js, server-rendered)  ──HTTP──▶  crates/api  (Rust, Ax
 ```sh
 cp .env.example .env
 pnpm install
-pnpm db:up          # Postgres 17 + pgvector on localhost:5434
+pnpm db:up          # Postgres 17 + pgvector on localhost:5435
 pnpm seed           # runs the migrations and imports data/
 pnpm dev:api        # http://127.0.0.1:4000, docs at /docs
 pnpm dev:web        # http://localhost:3000 (in a second terminal)

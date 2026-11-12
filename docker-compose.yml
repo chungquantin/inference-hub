@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: inference_hub
       POSTGRES_DB: inference_hub
     ports:
-      - "${POSTGRES_PORT:-5434}:5432"
+      - "${POSTGRES_PORT:-5435}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
