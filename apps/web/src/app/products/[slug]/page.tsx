@@ -10,6 +10,7 @@ import { api } from "@/lib/api";
 import { formatCount, formatDate, formatParams, formatTokens } from "@/lib/format";
 import { PRODUCT_TYPE_LABELS } from "@/lib/labels";
 import { SITE_URL, jsonLd } from "@/lib/site";
+import { HyperLink } from "@/components/hyper-link";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
@@ -82,12 +83,14 @@ export default async function ProductPage({ params }: Props) {
         subtitle={
           <>
             by{" "}
-            <Link
-              href={`/organizations/${product.organization.slug}`}
-              className="font-medium text-ink hover:text-s-7"
-            >
-              {product.organization.name}
-            </Link>
+            <HyperLink
+              type="org"
+              slug={product.organization.slug}
+              name={product.organization.name}
+              logoUrl={product.organization.logo_url}
+              size="xs"
+              className="inline-flex items-center gap-1.5 align-middle font-medium text-ink hover:text-s-7"
+            />
             {product.tagline && <span className="text-ink-2">. {product.tagline}</span>}
           </>
         }

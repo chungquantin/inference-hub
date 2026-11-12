@@ -3,7 +3,8 @@ import Link from "next/link";
 import type { ModelPriceSort } from "@inference-hub/api-client";
 import { DataTable } from "@/components/data-table";
 import { FilterChip, listingHref } from "@/components/listing";
-import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { CheckedOn } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, PageHeader, Price } from "@/components/ui/primitives";
@@ -127,18 +128,25 @@ export default async function CompareModelsPage({ searchParams }: Props) {
                     {row.product_name}
                   </Link>
                   <div className="flex items-center gap-1.5 text-[12px] text-ink-3">
-                    {row.maker.name}
+                    <HyperLink
+                      type="org"
+                      slug={row.maker.slug}
+                      name={row.maker.name}
+                      logoUrl={row.maker.logo_url}
+                      size="xs"
+                      className="inline-flex items-center gap-1 hover:text-s-7 hover:underline"
+                    />
                     {row.open_weights && <Badge tone="brand">open</Badge>}
                     {i === 0 && sort === "blended" && <Badge tone="solid">lowest</Badge>}
                   </div>
                 </div>
               </div>,
-              <ProviderLink
+              <HyperLink
                 key="p"
+                type="org"
                 slug={row.provider.slug}
                 name={row.provider.name}
-                logoUrl={row.provider.logo_url}
-              />,
+                logoUrl={row.provider.logo_url} />,
               <Price key="c">{formatTokens(row.context_window)}</Price>,
               <Price key="i">{formatPrice(row.price_input_per_mtok, row.currency)}</Price>,
               <Price key="o">{formatPrice(row.price_output_per_mtok, row.currency)}</Price>,

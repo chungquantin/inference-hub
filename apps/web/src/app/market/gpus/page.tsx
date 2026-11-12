@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { listingHref } from "@/components/listing";
-import { RowLink, SpreadBar, gpuHref, spread } from "@/components/market";
-import { ProviderLink } from "@/components/price-cells";
+import { SpreadBar, spread } from "@/components/market";
+import { HyperLink } from "@/components/hyper-link";
+import { gpuProducer } from "@/lib/gpu";
 import { FilterBar } from "@/components/table/filter-bar";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import { PageHeader, Price } from "@/components/ui/primitives";
@@ -47,7 +48,8 @@ export default async function MarketGpusPage({ searchParams }: Props) {
   const current = { ...values, sort: params.sort, dir: params.dir };
 
   const columns: Column<GpuIndexRow>[] = [
-    { id: "gpu", header: "GPU", sort: "name", cell: (r) => <RowLink href={gpuHref(r.gpu_type)}>{r.gpu_type}</RowLink>, csv: (r) => r.gpu_type },
+    { id: "gpu", header: "GPU", sort: "name", cell: (r) => <HyperLink type="gpu" gpuType={r.gpu_type} className="inline-flex items-center gap-2 text-ink underline decoration-line-strong hover:text-s-7" />, csv: (r) => r.gpu_type },
+    { id: "producer", header: "Made by", optional: true, cell: (r) => <HyperLink type="producer" gpuType={r.gpu_type} />, csv: (r) => gpuProducer(r.gpu_type)?.name ?? "" },
     { id: "clouds", header: "Clouds", numeric: true, sort: "providers", sortDir: "desc", cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
     { id: "configs", header: "Configs", numeric: true, optional: true, sort: "listings", sortDir: "desc", cell: (r) => <Price>{r.listings}</Price>, csv: (r) => r.listings },
     { id: "low", header: "Lowest", numeric: true, sort: "price", cell: (r) => <Price strong>{formatPrice(r.min_per_gpu_hour)}</Price>, csv: (r) => r.min_per_gpu_hour },
@@ -60,7 +62,7 @@ export default async function MarketGpusPage({ searchParams }: Props) {
       className: "hidden lg:table-cell w-[110px]",
       cell: (r) => <SpreadBar min={r.min_per_gpu_hour} median={r.median_per_gpu_hour} max={r.max_per_gpu_hour} unit="per GPU-hour" />,
     },
-    { id: "cheapest", header: "Cheapest at", optional: true, cell: (r) => <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />, csv: (r) => r.cheapest.name },
+    { id: "cheapest", header: "Cheapest at", optional: true, cell: (r) => <HyperLink type="org" slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />, csv: (r) => r.cheapest.name },
   ];
 
   return (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ProductSummary } from "@inference-hub/api-client";
-import { Logo } from "@/components/ui/logo";
+import { HyperLink } from "@/components/hyper-link";
 import { formatDate } from "@/lib/format";
 import { PRODUCT_TYPE_LABELS } from "@/lib/labels";
 
@@ -20,16 +20,34 @@ export function ProductList({
   return (
     <ul className="border border-line bg-wash">
       {products.map((product) => (
-        <li key={product.id} className="border-b border-line last:border-0">
-          <Link href={`/products/${product.slug}`} className="group flex items-center gap-4 px-4 py-3 hover:bg-s-1">
+        <li key={product.id} className="relative border-b border-line last:border-0 hover:bg-s-1">
+          <div className="flex items-center gap-4 px-4 py-3">
             {showMaker && (
-              <Logo name={product.organization.name} src={product.organization.logo_url} size="md" />
+              <HyperLink
+                type="org"
+                slug={product.organization.slug}
+                name={product.organization.name}
+                logoUrl={product.organization.logo_url}
+                size="md"
+                label={<span className="sr-only">{product.organization.name}</span>}
+                className="relative z-10 shrink-0"
+              />
             )}
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[15px] text-ink group-hover:text-s-7">
-                {product.name}
+              <p className="truncate text-[15px] text-ink">
+                {/* The name link covers the whole row; the maker link sits above it. */}
+                <Link href={`/products/${product.slug}`} className="hover:text-s-7 after:absolute after:inset-0">
+                  {product.name}
+                </Link>
                 {showMaker && (
-                  <span className="ml-2 font-mono text-[12px] text-ink-3">{product.organization.name}</span>
+                  <HyperLink
+                    type="org"
+                    slug={product.organization.slug}
+                    name={product.organization.name}
+                    logoUrl={product.organization.logo_url}
+                    size="xs"
+                    className="relative z-10 ml-2 inline-flex items-center gap-1 align-middle font-mono text-[12px] text-ink-3 hover:text-s-7 hover:underline"
+                  />
                 )}
               </p>
               {product.tagline && <p className="truncate text-[14px] leading-5 text-ink-2">{product.tagline}</p>}
@@ -38,7 +56,7 @@ export function ProductList({
               <span className="text-s-7">{PRODUCT_TYPE_LABELS[product.product_type]}</span>
               {product.launched_at && <span>{formatDate(product.launched_at)}</span>}
             </div>
-          </Link>
+          </div>
         </li>
       ))}
     </ul>

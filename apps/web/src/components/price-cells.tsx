@@ -1,27 +1,4 @@
-import Link from "next/link";
-import { Logo } from "@/components/ui/logo";
 import { formatDate } from "@/lib/format";
-
-/** A provider with its logo, linking to its page. */
-export function ProviderLink({
-  slug,
-  name,
-  logoUrl,
-}: {
-  slug: string;
-  name: string;
-  logoUrl?: string | null;
-}) {
-  return (
-    <Link
-      href={`/organizations/${slug}`}
-      className="inline-flex items-center gap-2 font-sans text-[14px] text-ink hover:text-s-7 hover:underline"
-    >
-      <Logo name={name} src={logoUrl} size="sm" />
-      {name}
-    </Link>
-  );
-}
 
 /** When a price was last checked, linking to its source when there is one. */
 export function CheckedOn({ date, source }: { date: string; source?: string | null }) {

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { DataTable } from "@/components/data-table";
 import { FilterChip, listingHref } from "@/components/listing";
-import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { CheckedOn } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
@@ -74,20 +74,20 @@ export default async function CompareGpusPage({ searchParams }: Props) {
             key: rowKey(i),
             cells: [
               <span key="g" className="flex items-center gap-2 whitespace-nowrap">
-                <Link
+                <HyperLink
+                  type="gpu"
+                  gpuType={row.gpu_type}
                   href={`/products/${row.product_slug}`}
-                  className="text-ink underline decoration-line-strong hover:text-s-7"
-                >
-                  {row.gpu_type}
-                </Link>
+                  className="inline-flex items-center gap-2 text-ink underline decoration-line-strong hover:text-s-7"
+                />
                 {i === 0 && highlight && <Badge tone="solid">lowest</Badge>}
               </span>,
-              <ProviderLink
+              <HyperLink
                 key="p"
+                type="org"
                 slug={row.provider.slug}
                 name={row.provider.name}
-                logoUrl={row.provider.logo_url}
-              />,
+                logoUrl={row.provider.logo_url} />,
               <Price key="n">{row.gpu_count}</Price>,
               <Price key="g1" strong>
                 {formatPrice(row.price_per_gpu_hour, row.currency)}

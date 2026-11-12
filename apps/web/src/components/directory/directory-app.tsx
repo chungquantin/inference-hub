@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { HyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
 import type { DirectoryData, Row, Tab } from "@/components/directory/types";
 
@@ -70,6 +71,7 @@ const OPS: Record<Tab, Op[]> = {
     { key: "clouds", desc: "Number of clouds", examples: ["clouds>=8", "clouds>5"], test: (r, o, v) => cmp(r.clouds ?? 0, o, v) },
     { key: "gap", desc: "Highest vs lowest price", examples: ["gap>5", "gap>=10"], test: (r, o, v) => cmp(r.gap ?? 0, o, v) },
     { key: "at", desc: "Cheapest provider", examples: ["at:runpod", "at:shadeform"], text: true, test: (r, _o, v) => has(r.at, v) },
+    { key: "by", desc: "GPU maker", examples: ["by:nvidia", "by:amd"], text: true, test: (r, _o, v) => has(r.producer, v) },
   ],
   models: [
     { key: "price", desc: "Lowest blended price per 1M tokens", examples: ["price<0.1", "price<0.5"], test: (r, o, v) => cmp(r.lo ?? 0, o, v) },
@@ -172,7 +174,7 @@ function matches(r: Row, p: Parsed, tab: Tab): boolean {
     const def = OPS[tab].find((o) => o.key === t.key);
     if (def && !def.test(r, t.op, t.v)) return false;
   }
-  const hay = `${r.name} ${r.sub} ${r.maker ?? ""} ${r.at ?? ""} ${(r.kinds ?? []).map((k) => KIND[k] ?? k).join(" ")} ${r.tagline ?? ""} ${(r.caps ?? []).join(" ")}`.toLowerCase();
+  const hay = `${r.name} ${r.sub} ${r.maker ?? ""} ${r.producer ?? ""} ${r.at ?? ""} ${(r.kinds ?? []).map((k) => KIND[k] ?? k).join(" ")} ${r.tagline ?? ""} ${(r.caps ?? []).join(" ")}`.toLowerCase();
   for (const w of p.free) {
     const syn = SYNONYMS[tab]?.[w];
     if (syn) {
@@ -225,18 +227,19 @@ function RangeBar({ r, ctx }: { r: Row; ctx: { min: number; max: number } }) {
 const COLS: Record<Tab, Col[]> = {
   gpus: [
     { k: "name", h: "GPU", sort: "name", cell: () => null },
+    { k: "producer", h: "Made by", sort: "producer", cell: (r) => <HyperLink type="producer" gpuType={r.name} /> },
     { k: "clouds", h: "Clouds", num: true, cell: (r) => <Mono>{r.clouds}</Mono> },
     { k: "lo", h: "Lowest", num: true, cell: (r) => <Mono className="font-medium text-lo">{money(r.lo)}</Mono> },
     { k: "mid", h: "Median", num: true, cell: (r) => <Mono>{money(r.mid)}</Mono> },
     { k: "hi", h: "Highest", num: true, optional: true, cell: (r) => <Mono>{money(r.hi)}</Mono> },
     { k: "range", h: "Price range", sort: "gap", cell: (r, c) => <RangeBar r={r} ctx={c} /> },
     { k: "gap", h: "Gap", num: true, cell: (r) => <Mono>{times(r.gap ?? 1)}</Mono> },
-    { k: "at", h: "Cheapest at", cell: (r) => r.at },
+    { k: "at", h: "Cheapest at", cell: (r) => (r.atOrg ? <HyperLink type="org" slug={r.atOrg.slug} name={r.atOrg.name} logoUrl={r.atOrg.logo} /> : "—") },
     { k: "offers", h: "Offers", num: true, optional: true, hiddenByDefault: true, cell: (r) => <Mono>{r.offers}</Mono> },
   ],
   models: [
     { k: "name", h: "Model", sort: "name", cell: () => null },
-    { k: "maker", h: "Maker", cell: (r) => r.maker },
+    { k: "maker", h: "Maker", sort: "maker", cell: (r) => <HyperLink type="creator" maker={r.maker} /> },
     { k: "providers", h: "Providers", num: true, cell: (r) => <Mono>{r.providers}</Mono> },
     { k: "lo", h: "Lowest", num: true, cell: (r) => <Mono className="font-medium text-lo">{money(r.lo)}</Mono> },
     { k: "mid", h: "Median", num: true, cell: (r) => <Mono>{money(r.mid)}</Mono> },
@@ -253,7 +256,7 @@ const COLS: Record<Tab, Col[]> = {
           </span>
         )),
     },
-    { k: "at", h: "Cheapest at", cell: (r) => r.at },
+    { k: "at", h: "Cheapest at", cell: (r) => (r.atOrg ? <HyperLink type="org" {...r.atOrg} logoUrl={r.atOrg.logo} /> : "—") },
     { k: "inPrice", h: "Input / 1M", num: true, optional: true, hiddenByDefault: true, cell: (r) => <Mono>{money(r.inPrice)}</Mono> },
     { k: "outPrice", h: "Output / 1M", num: true, optional: true, hiddenByDefault: true, cell: (r) => <Mono>{money(r.outPrice)}</Mono> },
   ],
@@ -798,7 +801,7 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
                       <button
                         onClick={() => {
                           if (on) setSort({ k: key, dir: sortDir === "asc" ? "desc" : "asc" });
-                          else setSort({ k: key, dir: key === "name" || key === "kinds" || key === "at" || key === "lo" || key === "mid" ? "asc" : "desc" });
+                          else setSort({ k: key, dir: key === "name" || key === "kinds" || key === "at" || key === "producer" || key === "maker" || key === "lo" || key === "mid" ? "asc" : "desc" });
                           setPage(1);
                         }}
                         className="inline-flex items-center gap-1.5 hover:text-ink"

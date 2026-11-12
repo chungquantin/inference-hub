@@ -2,15 +2,7 @@ import Link from "next/link";
 import { PixelBar } from "@/components/ui/pixel";
 import { formatPrice } from "@/lib/format";
 
-/** Path of a GPU type's market page. */
-export function gpuHref(gpuType: string): string {
-  return `/market/gpus/${encodeURIComponent(gpuType)}`;
-}
-
-/** Path of a model's market page, by its normalized key. */
-export function modelHref(key: string): string {
-  return `/market/models/${encodeURIComponent(key)}`;
-}
+export { gpuHref, modelHref } from "@/lib/hrefs";
 
 /**
  * Where a price sits between the market's low and high, as a pixel bar with

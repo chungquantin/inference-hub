@@ -1,6 +1,7 @@
 import type { Offering } from "@inference-hub/api-client";
 import { DataTable } from "@/components/data-table";
-import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { CheckedOn } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { Price } from "@/components/ui/primitives";
 import { formatPrice } from "@/lib/format";
 
@@ -25,7 +26,7 @@ export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
           rows={tokenPriced.map((o) => ({
             key: o.id,
             cells: [
-              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
+              <HyperLink type="org" key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
               <Price key="i">{formatPrice(o.price_input_per_mtok, o.currency)}</Price>,
               <Price key="o" strong>
                 {formatPrice(o.price_output_per_mtok, o.currency)}
@@ -44,7 +45,7 @@ export function OfferingsTable({ offerings }: { offerings: Offering[] }) {
           rows={timePriced.map((o) => ({
             key: o.id,
             cells: [
-              <ProviderLink key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
+              <HyperLink type="org" key="p" slug={o.provider.slug} name={o.provider.name} logoUrl={o.provider.logo_url} />,
               [o.gpu_count && `${o.gpu_count}×`, o.gpu_type].filter(Boolean).join(" ") || "—",
               <Price key="h">{formatPrice(o.price_per_hour, o.currency)}</Price>,
               <Price key="g" strong>

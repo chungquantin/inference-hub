@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Pagination, listingHref, parsePage } from "@/components/listing";
 import { modelHref } from "@/components/market";
-import { CreatorBadge, ModelName } from "@/components/model-name";
-import { ProviderLink } from "@/components/price-cells";
+import { ModelName } from "@/components/model-name";
+import { HyperLink } from "@/components/hyper-link";
 import { CAPABILITIES, Capabilities, CapabilityLegend } from "@/components/capabilities";
 import { FilterBar, type Filter } from "@/components/table/filter-bar";
 import { SmartTable, type Column } from "@/components/table/smart-table";
@@ -154,7 +154,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       header: "Creator",
       optional: true,
       minWidth: "2xl",
-      cell: (r) => <CreatorBadge maker={r.maker} />,
+      cell: (r) => <HyperLink type="creator" maker={r.maker} />,
       csv: (r) => creatorName(r.maker) ?? r.maker,
     },
     { id: "providers", header: "Sellers", numeric: true, sort: "providers", sortDir: "desc", cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
@@ -189,7 +189,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       optional: true,
       cell: (r) => (
         <span className="block max-w-[180px] truncate">
-          <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />
+          <HyperLink type="org" slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />
         </span>
       ),
       csv: (r) => r.cheapest.name,

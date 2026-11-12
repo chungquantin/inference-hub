@@ -2,8 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { HyperLink, type HyperLinkProps } from "@/components/hyper-link";
 
-export type CheapRow = { name: string; href: string; lo: string; median: string; at: string };
+export type CheapRow = {
+  /** The GPU or model, as a typed link entity (logo and page follow from it). */
+  entity: HyperLinkProps;
+  /** Key of the row. */
+  name: string;
+  lo: string;
+  median: string;
+  /** The cheapest seller. */
+  at: { slug: string; name: string; logo: string | null };
+};
 export type CheapTab = { id: string; label: string; unit: string; total: string; allHref: string; allLabel: string; rows: CheapRow[] };
 
 /** "Cheapest right now": the lowest prices for the most widely sold GPUs and models, in tabs. */
@@ -42,13 +52,13 @@ export function CheapestTable({ tabs }: { tabs: CheapTab[] }) {
           {tab.rows.map((r) => (
             <tr key={r.name} className="border-t border-line hover:bg-ground">
               <td className="h-[52px] px-4">
-                <Link href={r.href} className="font-medium hover:text-s-7 hover:underline">
-                  {r.name}
-                </Link>
+                <HyperLink {...r.entity} className="inline-flex items-center gap-2.5 font-medium hover:text-s-7 hover:underline" />
               </td>
               <td className="px-4 text-right font-mono font-medium text-lo tabular">{r.lo}</td>
               <td className="hidden px-4 text-right font-mono tabular sm:table-cell">{r.median}</td>
-              <td className="hidden px-4 md:table-cell">{r.at}</td>
+              <td className="hidden px-4 md:table-cell">
+                <HyperLink type="org" slug={r.at.slug} name={r.at.name} logoUrl={r.at.logo} />
+              </td>
             </tr>
           ))}
         </tbody>

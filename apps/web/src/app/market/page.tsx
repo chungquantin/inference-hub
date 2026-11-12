@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DataTable } from "@/components/data-table";
-import { RowLink, SpreadBar, ago, gpuHref, modelHref, spread } from "@/components/market";
-import { ProviderLink } from "@/components/price-cells";
+import { RowLink, SpreadBar, ago, modelHref, spread } from "@/components/market";
+import { HyperLink } from "@/components/hyper-link";
 import { LiveDot, WindowFrame } from "@/components/ui/pixel";
 import { Badge, PageHeader, Price, SectionHeader, Stat } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
@@ -58,9 +58,12 @@ export default async function MarketPage() {
           rows={data.gpu_index.map((row) => ({
             key: row.gpu_type,
             cells: [
-              <RowLink key="g" href={gpuHref(row.gpu_type)}>
-                {row.gpu_type}
-              </RowLink>,
+              <HyperLink
+                key="g"
+                type="gpu"
+                gpuType={row.gpu_type}
+                className="inline-flex items-center gap-2 text-ink underline decoration-line-strong hover:text-s-7"
+              />,
               <Price key="n">{row.providers}</Price>,
               <Price key="lo" strong>
                 {formatPrice(row.min_per_gpu_hour)}
@@ -76,12 +79,12 @@ export default async function MarketPage() {
                   unit="per GPU-hour"
                 />
               </span>,
-              <ProviderLink
+              <HyperLink
                 key="c"
+                type="org"
                 slug={row.cheapest.slug}
                 name={row.cheapest.name}
-                logoUrl={row.cheapest.logo_url}
-              />,
+                logoUrl={row.cheapest.logo_url} />,
             ],
           }))}
         />
@@ -108,12 +111,12 @@ export default async function MarketPage() {
               </Price>,
               <Price key="mb">{formatPrice(row.median_blended_per_mtok)}</Price>,
               <Price key="c">{formatTokens(row.max_context_window)}</Price>,
-              <ProviderLink
+              <HyperLink
                 key="p"
+                type="org"
                 slug={row.cheapest.slug}
                 name={row.cheapest.name}
-                logoUrl={row.cheapest.logo_url}
-              />,
+                logoUrl={row.cheapest.logo_url} />,
             ],
           }))}
         />
@@ -135,12 +138,12 @@ export default async function MarketPage() {
           rows={data.sources.map((s) => ({
             key: s.adapter,
             cells: [
-              <ProviderLink
+              <HyperLink
                 key="p"
+                type="org"
                 slug={s.organization.slug}
                 name={s.organization.name}
-                logoUrl={s.organization.logo_url}
-              />,
+                logoUrl={s.organization.logo_url} />,
               <span key="k" className="text-ink-3">
                 {s.kind === "gpu" ? "GPU cloud" : s.kind === "model" ? "Model API" : "—"}
               </span>,

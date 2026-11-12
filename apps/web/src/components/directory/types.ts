@@ -19,6 +19,11 @@ export type Row = {
   offers?: number;
   providers?: number;
   at?: string;
+  /** The cheapest seller as an entity, for a link with its logo. */
+  atOrg?: { slug: string; name: string; logo: string | null };
+  /** The company that makes a GPU, by name (`NVIDIA`): for sorting and search. */
+  producer?: string;
+  /** The maker of a model, as the market lists it (`deepseek-ai`). */
   maker?: string;
   ctx?: number | null;
   caps?: string[];

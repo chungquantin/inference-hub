@@ -81,10 +81,10 @@ export default async function HomePage() {
         .slice(0, 6)
         .map((g) => ({
           name: g.gpu_type,
-          href: `/market/gpus/${encodeURIComponent(g.gpu_type)}`,
+          entity: { type: "gpu", gpuType: g.gpu_type },
           lo: formatPrice(g.min_per_gpu_hour),
           median: formatPrice(g.median_per_gpu_hour),
-          at: g.cheapest.name,
+          at: { slug: g.cheapest.slug, name: g.cheapest.name, logo: g.cheapest.logo_url ?? null },
         })),
     },
     {
@@ -96,10 +96,10 @@ export default async function HomePage() {
       allLabel: "See all model prices",
       rows: (popular.data?.items ?? []).map((x) => ({
         name: x.model_key,
-        href: `/market/models/${encodeURIComponent(x.model_key)}`,
+        entity: { type: "model", id: x.model_key, maker: x.maker },
         lo: formatPrice(x.min_blended_per_mtok),
         median: formatPrice(x.median_blended_per_mtok),
-        at: x.cheapest.name,
+        at: { slug: x.cheapest.slug, name: x.cheapest.name, logo: x.cheapest.logo_url ?? null },
       })),
     },
   ];

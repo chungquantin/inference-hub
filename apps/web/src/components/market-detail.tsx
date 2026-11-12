@@ -1,5 +1,6 @@
 import { DataTable } from "@/components/data-table";
-import { CheckedOn, ProviderLink } from "@/components/price-cells";
+import { CheckedOn } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price } from "@/components/ui/primitives";
 import type { components } from "@inference-hub/api-client";
@@ -30,7 +31,7 @@ export function MarketListings({ listings, kind }: { listings: Listing[]; kind: 
       rows={listings.map((l, i) => {
         const provider = (
           <span key="p" className="flex items-center gap-2 whitespace-nowrap">
-            <ProviderLink slug={l.provider.slug} name={l.provider.name} logoUrl={l.provider.logo_url} />
+            <HyperLink type="org" slug={l.provider.slug} name={l.provider.name} logoUrl={l.provider.logo_url} />
             {i === 0 && listings.length > 1 && <Badge tone="solid">lowest</Badge>}
           </span>
         );

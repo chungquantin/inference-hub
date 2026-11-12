@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MarketListings } from "@/components/market-detail";
-import { CreatorBadge } from "@/components/model-name";
+import { HyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
 import { PageHeader, Stat } from "@/components/ui/primitives";
 import { creatorName, modelLogoUrl } from "@/lib/catalog";
@@ -41,7 +41,7 @@ export default async function MarketModelPage({ params }: Props) {
   const logo = <Logo name={creatorName(maker) ?? data.key} src={modelLogoUrl(data.key, maker)} size="lg" />;
   const byline = maker && (
     <span className="flex items-center gap-2 text-[15px]">
-      by <CreatorBadge maker={maker} size="sm" />
+      by <HyperLink type="creator" maker={maker} />
     </span>
   );
   const media = data.listings.filter((l) => l.unit);

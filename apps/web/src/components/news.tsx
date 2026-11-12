@@ -1,6 +1,5 @@
-import Link from "next/link";
 import type { NewsItem } from "@inference-hub/api-client";
-import { Logo } from "@/components/ui/logo";
+import { HyperLink } from "@/components/hyper-link";
 import { Badge } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/format";
 
@@ -25,14 +24,15 @@ export function NewsCard({ item, children }: { item: NewsItem; children?: React.
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-0.5">
           {item.publisher && <span className="text-[13px] text-ink-3">{item.publisher}</span>}
           {item.organizations.map((org) => (
-            <Link
+            <HyperLink
               key={org.slug}
-              href={`/organizations/${org.slug}`}
+              type="org"
+              slug={org.slug}
+              name={org.name}
+              logoUrl={org.logo_url}
+              size="xs"
               className="inline-flex h-6 items-center gap-1.5 bg-field pr-2 text-[13px] text-ink-2 hover:bg-s-2 hover:text-ink"
-            >
-              <Logo name={org.name} src={org.logo_url} size="xs" />
-              {org.name}
-            </Link>
+            />
           ))}
         </div>
         {children}

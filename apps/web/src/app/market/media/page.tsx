@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { FilterChip, Pagination, SearchForm, listingHref, parsePage } from "@/components/listing";
 import { MEDIA_KINDS, UNIT_LABELS, formatUnitPrice, modelHref, spread } from "@/components/market";
-import { CreatorBadge, ModelName } from "@/components/model-name";
+import { ModelName } from "@/components/model-name";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import type { MediaIndexRow } from "@inference-hub/api-client";
-import { ProviderLink } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
 import { formatCount } from "@/lib/format";
@@ -55,13 +55,13 @@ export default async function MarketMediaPage({ searchParams }: Props) {
       cell: (r) => <span className="text-ink-3">{MEDIA_KINDS.find((k) => k.kind === r.kind)?.label ?? r.kind}</span>,
       csv: (r) => r.kind,
     },
-    { id: "maker", header: "Creator", optional: true, minWidth: "2xl", cell: (r) => <CreatorBadge maker={r.maker} />, csv: (r) => r.maker },
+    { id: "maker", header: "Creator", optional: true, minWidth: "2xl", cell: (r) => <HyperLink type="creator" maker={r.maker} />, csv: (r) => r.maker },
     { id: "providers", header: "Providers", numeric: true, cell: (r) => <Price>{r.providers}</Price>, csv: (r) => r.providers },
     { id: "low", header: "Lowest", numeric: true, cell: (r) => <Price strong>{formatUnitPrice(r.min_price, r.unit)}</Price>, csv: (r) => r.min_price },
     { id: "median", header: "Median", numeric: true, optional: true, cell: (r) => <Price>{formatUnitPrice(r.median_price, r.unit)}</Price>, csv: (r) => r.median_price },
     { id: "unit", header: "Unit", optional: true, cell: (r) => <span className="text-ink-3">{UNIT_LABELS[r.unit] ?? r.unit}</span>, csv: (r) => r.unit },
     { id: "spread", header: "Spread", numeric: true, optional: true, cell: (r) => <Price>{r.providers > 1 ? spread(r.min_price, r.median_price) : "—"}</Price> },
-    { id: "cheapest", header: "Cheapest at", optional: true, cell: (r) => <ProviderLink slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />, csv: (r) => r.cheapest.name },
+    { id: "cheapest", header: "Cheapest at", optional: true, cell: (r) => <HyperLink type="org" slug={r.cheapest.slug} name={r.cheapest.name} logoUrl={r.cheapest.logo_url} />, csv: (r) => r.cheapest.name },
   ];
 
   return (

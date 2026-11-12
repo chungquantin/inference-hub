@@ -3,6 +3,7 @@ import { DirectoryApp } from "@/components/directory/directory-app";
 import type { DirectoryData, Row, Tab } from "@/components/directory/types";
 import { api } from "@/lib/api";
 import { modelLogoUrl } from "@/lib/catalog";
+import { gpuProducer } from "@/lib/gpu";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
@@ -45,6 +46,9 @@ export default async function DirectoryPage({
           mid: g.median_per_gpu_hour,
           hi: g.max_per_gpu_hour,
           at: g.cheapest.name,
+          atOrg: { slug: g.cheapest.slug, name: g.cheapest.name, logo: g.cheapest.logo_url ?? null },
+          logo: gpuProducer(g.gpu_type)?.logo ?? null,
+          producer: gpuProducer(g.gpu_type)?.name ?? "",
           gap: g.max_per_gpu_hour / g.min_per_gpu_hour,
         }),
       ),
@@ -66,6 +70,7 @@ export default async function DirectoryPage({
           ctx: m.max_context_window,
           caps: m.capabilities.filter((c) => !c.startsWith("in:") && !c.startsWith("out:")),
           at: m.cheapest.name,
+          atOrg: { slug: m.cheapest.slug, name: m.cheapest.name, logo: m.cheapest.logo_url ?? null },
           gap: m.median_blended_per_mtok / m.min_blended_per_mtok,
         }),
       ),

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DataTable } from "@/components/data-table";
-import { ProviderLink } from "@/components/price-cells";
+import { HyperLink } from "@/components/hyper-link";
 import { PixelBar } from "@/components/ui/pixel";
 import { PageHeader, Price } from "@/components/ui/primitives";
 import { api } from "@/lib/api";
@@ -34,7 +34,7 @@ export default async function MarketProvidersPage() {
           key: p.organization.slug,
           cells: [
             <Price key="r">{i + 1}</Price>,
-            <ProviderLink key="p" slug={p.organization.slug} name={p.organization.name} logoUrl={p.organization.logo_url} />,
+            <HyperLink type="org" key="p" slug={p.organization.slug} name={p.organization.name} logoUrl={p.organization.logo_url} />,
             p.models ? (
               <Link
                 key="m"

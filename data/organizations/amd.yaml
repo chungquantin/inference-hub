@@ -1,0 +1,11 @@
+slug: amd
+name: "AMD"
+kinds: [hardware]
+description: "AMD delivers leadership high-performance and adaptive computing solutions to advance data center AI, AI PCs, intelligent edge devices, gaming, & beyond."
+website: "https://www.amd.com"
+logo_url: /logos/amd.png
+links:
+  github: "https://github.com/amd"
+tagging:
+  aliases: ["Instinct", "ROCm"]
+  match_case: true

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { FundingRound, PortfolioCompany } from "@inference-hub/api-client";
 import { DataTable } from "@/components/data-table";
+import { HyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
 import { Badge, Price } from "@/components/ui/primitives";
 import { formatDate, formatMoney, formatRound } from "@/lib/format";
@@ -31,15 +32,21 @@ export function FundingTable({ rounds }: { rounds: FundingRound[] }) {
           <div key="i" className="flex flex-col gap-1.5 py-2">
             <div className="flex flex-wrap gap-1">
               {r.investors.map((inv) => (
-                <Link
+                <HyperLink
                   key={inv.slug}
-                  href={`/organizations/${inv.slug}`}
+                  type="org"
+                  slug={inv.slug}
+                  name={inv.name}
+                  logoUrl={inv.logo_url}
+                  size="xs"
+                  label={
+                    <>
+                      {inv.name}
+                      {inv.lead && <span className="ml-1.5 text-s-7">lead</span>}
+                    </>
+                  }
                   className={`inline-flex h-6 items-center gap-1.5 pr-2 text-[12px] ${inv.lead ? "bg-s-1 text-s-8 hover:bg-s-2" : "bg-field text-ink-2 hover:bg-s-2"}`}
-                >
-                  <Logo name={inv.name} src={inv.logo_url} size="xs" />
-                  {inv.name}
-                  {inv.lead && <span className="text-s-7">lead</span>}
-                </Link>
+                />
               ))}
             </div>
             {r.notes && <span className="font-sans text-[12px] text-ink-3">{r.notes}</span>}

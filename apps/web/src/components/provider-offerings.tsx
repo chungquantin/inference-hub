@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { FilterChip, Pagination, SearchForm, listingHref } from "@/components/listing";
 import { MEDIA_KINDS, formatUnitPrice, gpuHref, modelHref } from "@/components/market";
 import { Capabilities } from "@/components/capabilities";
+import { HyperLink } from "@/components/hyper-link";
 import { ModelName } from "@/components/model-name";
-import { Logo } from "@/components/ui/logo";
 import { SmartTable, type Column } from "@/components/table/smart-table";
 import { PixelBar } from "@/components/ui/pixel";
 import { Badge, Price, SectionHeader, Stat } from "@/components/ui/primitives";
@@ -25,11 +24,6 @@ function priceOf(o: Offering, value: number | null | undefined): string {
   if (o.kind === "model") return formatPrice(value);
   if (o.kind === "gpu") return `${formatPrice(value)} / GPU-h`;
   return formatUnitPrice(value, o.unit);
-}
-
-/** The GPU maker's logo, from the name (`AMD MI300X`, everything else NVIDIA). */
-function gpuMakerLogo(name: string): string | null {
-  return /\bamd\b|mi3\d\d/i.test(name) ? "/catalog/icons/amd.jpg" : "/catalog/icons/nvidia.jpg";
 }
 
 /** The page of the item: the curated product when there is one, else the market's. */
@@ -100,12 +94,12 @@ export function ProviderOfferingsSection({
       sort: "name",
       cell: (o) =>
         o.kind === "gpu" ? (
-          <span className="flex items-center gap-2.5">
-            <Logo name={o.name} src={gpuMakerLogo(o.name)} size="sm" />
-            <Link href={itemHref(o)} className="font-sans text-[14px] text-ink underline decoration-line-strong hover:text-s-7">
-              {o.name}
-            </Link>
-          </span>
+          <HyperLink
+            type="gpu"
+            gpuType={o.name}
+            href={itemHref(o)}
+            className="inline-flex items-center gap-2.5 font-sans text-[14px] text-ink underline decoration-line-strong hover:text-s-7"
+          />
         ) : (
           <ModelName
             id={o.item_key}

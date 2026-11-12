@@ -23,6 +23,10 @@
   "file": "/logos/ambient.png",
   "source": "https://ambient.xyz/apple-touch-icon.png"
  },
+ "amd": {
+  "file": "/logos/amd.png",
+  "source": "https://github.com/amd.png?size=256"
+ },
  "anthropic": {
   "file": "/logos/anthropic.svg",
   "source": "https://www.anthropic.com/images/icons/safari-pinned-tab.svg"
