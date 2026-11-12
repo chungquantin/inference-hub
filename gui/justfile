@@ -1,0 +1,22 @@
+# Next.js web app (apps/web). Recipes delegate to pnpm so package.json stays
+# the source of truth for flags and ports.
+
+# Start the dev server on port 3000.
+dev:
+    pnpm --filter web dev
+
+# Production build.
+build:
+    pnpm --filter web build
+
+# Start the production server (after `just gui/build`).
+start:
+    pnpm --filter web start
+
+# ESLint.
+lint:
+    pnpm --filter web lint
+
+# TypeScript type check.
+typecheck:
+    pnpm --filter web typecheck

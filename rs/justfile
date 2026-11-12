@@ -1,0 +1,25 @@
+# Cargo workspace recipes.
+
+# Format all crates in place.
+format:
+    cargo fmt --all
+
+# Check formatting without writing.
+format-check:
+    cargo fmt --all --check
+
+# Clippy with warnings as errors across all targets.
+lint:
+    cargo clippy --workspace --all-targets -- -D warnings
+
+# Run the workspace test suite (needs Postgres from `pnpm db:up`).
+test:
+    cargo test --workspace
+
+# Run the API server.
+api:
+    cargo run -p api
+
+# Run the worker.
+worker:
+    cargo run -p worker
