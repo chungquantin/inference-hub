@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 };
 
 const KINDS = [
-  { kind: "model", label: "Models", all: "/market/models" },
-  { kind: "media", label: "Image, video, speech", all: "/market/media" },
-  { kind: "gpu", label: "GPUs", all: "/market/gpus" },
+  { kind: "model", label: "Models", all: "/analytics/models" },
+  { kind: "media", label: "Image, video, speech", all: "/analytics/media" },
+  { kind: "gpu", label: "GPUs", all: "/analytics/gpus" },
   { kind: "organization", label: "Organizations", all: "/organizations" },
   { kind: "product", label: "Products", all: "/products" },
   { kind: "news", label: "News", all: "/news" },

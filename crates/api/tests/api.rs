@@ -1603,3 +1603,55 @@ async fn metrics_rank_by_direction_and_report_change(pool: PgPool) {
     let (status, _) = get(&app, "/v1/market/metrics/not_a_metric").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn curves_show_the_term_structure_and_daily_history(pool: PgPool) {
+    seed_market_index(&pool).await;
+    // Beta also sells H100 for a 12 month commitment and spot; alpha has on-demand only.
+    sqlx::query(
+        "INSERT INTO gpu_term_prices (organization_id, gpu_type, tier, term_months, per_gpu_hour, source)
+         SELECT id, 'H100 SXM', t.tier, t.months, t.price, 'test' FROM organizations o
+         JOIN (VALUES ('beta', 'on_demand', 0, 2.0), ('beta', 'spot', 0, 1.0),
+                      ('beta', 'committed', 12, 1.4), ('alpha', 'on_demand', 0, 3.0))
+              t (slug, tier, months, price) ON t.slug = o.slug",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    ih_db::market_refresh::refresh(&pool).await.unwrap();
+    let app = app(pool);
+
+    let (status, curve) = get(&app, "/v1/market/curves/gpus/H100%20SXM").await;
+    assert_eq!(status, StatusCode::OK, "{curve}");
+    let nodes = curve["nodes"].as_array().unwrap();
+    let node = |tier: &str, months: i64| {
+        nodes
+            .iter()
+            .find(|n| n["tier"] == tier && n["term_months"] == months)
+            .unwrap_or_else(|| panic!("no {tier} {months} node: {curve}"))
+    };
+    assert_eq!(node("on_demand", 0)["providers"], 2);
+    assert_eq!(node("on_demand", 0)["median"], 2.5);
+    assert_eq!(node("committed", 12)["min"], 1.4);
+    assert_eq!(curve["points"].as_array().unwrap().len(), 4);
+    // The refresh recorded today's snapshot: cheapest 2.0 per GPU-hour across alpha 3.0 and beta 2.0.
+    let history = curve["history"].as_array().unwrap();
+    assert_eq!(history.len(), 1, "{curve}");
+    assert_eq!(history[0]["min"], 2.0);
+
+    let (_, index) = get(&app, "/v1/market/curves").await;
+    assert_eq!(
+        index["gpus"][0]["key"], "H100 SXM",
+        "most tiers first: {index}"
+    );
+    assert_eq!(index["gpus"][0]["tiers"], 3);
+
+    let (_, model) = get(&app, "/v1/market/curves/models/deepseek-v3.2").await;
+    let ladder = model["ladder"].as_array().unwrap();
+    assert_eq!(ladder.len(), 2, "{model}");
+    assert_eq!(ladder[0]["organization"]["slug"], "beta", "cheapest first");
+    assert_eq!(model["history"].as_array().unwrap().len(), 1);
+
+    let (status, _) = get(&app, "/v1/market/curves/gpus/NOPE").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+}

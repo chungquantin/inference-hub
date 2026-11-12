@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${data.name} API prices across providers`,
     description: `${data.name} input and output token prices at ${data.listings.length} providers and gateways.`,
-    alternates: { canonical: `/market/models/${encodeURIComponent(data.key)}` },
+    alternates: { canonical: `/analytics/models/${encodeURIComponent(data.key)}` },
   };
 }
 
@@ -48,7 +48,7 @@ export default async function MarketModelPage({ params }: Props) {
     return (
       <div className="flex flex-col gap-6">
         <PageHeader
-          crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
+          crumbs={[{ href: "/analytics", label: "Analytics" }, { href: "/analytics/models", label: "Models" }, { label: data.key }]}
           logo={logo}
           title={data.name}
           lead={
@@ -73,7 +73,7 @@ export default async function MarketModelPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { href: "/market/models", label: "Models" }, { label: data.key }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { href: "/analytics/models", label: "Models" }, { label: data.key }]}
         logo={logo}
         title={data.name}
         lead={

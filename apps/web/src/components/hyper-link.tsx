@@ -48,7 +48,7 @@ export function resolveHyperLink(props: HyperLinkProps): Resolved {
       const name = creatorName(props.maker) ?? props.maker;
       const orgSlug = (creatorOrgs as Record<string, string>)[catalogCreator(props.maker)?.id ?? ""];
       return {
-        href: orgSlug ? orgHref(orgSlug) : `/market/models?maker=${encodeURIComponent(props.maker)}`,
+        href: orgSlug ? orgHref(orgSlug) : `/analytics/models?maker=${encodeURIComponent(props.maker)}`,
         name,
         logo: creatorLogoUrl(props.maker),
         title: name === props.maker ? undefined : props.maker,

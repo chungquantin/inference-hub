@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title: `${board.label} ranking`,
     description: board.description,
-    alternates: { canonical: `/market/terminal/${metric}` },
+    alternates: { canonical: `/analytics/metrics/${metric}` },
   };
 }
 
@@ -37,7 +37,7 @@ export default async function MetricPage({ params }: { params: Promise<Params> }
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { href: "/market/terminal", label: "Terminal" }, { label: board.label }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { href: "/analytics/metrics", label: "Terminal" }, { label: board.label }]}
         title={board.label}
         lead={board.description}
       >

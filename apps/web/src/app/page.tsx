@@ -127,7 +127,7 @@ export default async function HomePage() {
               {(high.price / low.price).toFixed(1)}× the cheapest.
             </p>
             <Link
-              href={`/market/gpus/${encodeURIComponent(lead.gpu_type)}`}
+              href={`/analytics/gpus/${encodeURIComponent(lead.gpu_type)}`}
               className="mt-1.5 inline-flex h-[42px] items-center bg-s-7 px-5 text-[15px] font-medium text-wash hover:bg-s-6"
             >
               Compare every cloud
@@ -166,11 +166,13 @@ export default async function HomePage() {
       )}
 
       <Section id="why" title="Built for finding the right price" lead="One place to check what a model or a GPU costs, from the people who sell it.">
-        <div className="mt-12 grid border-t border-line-strong sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 overflow-hidden border-y border-line-strong">
+          <div className="-ml-6 grid sm:grid-cols-2 lg:grid-cols-4">
           <Fact n={m ? formatCount(m.distinct_models) : "—"} title="Models, priced" text="Chat, image, video and speech models, across every provider that sells them." />
           <Fact n={m?.gpu_types ?? "—"} title="GPUs, per hour" text="Each type normalized to one GPU, so a node of eight never skews the number." />
           <Fact n={m?.sources.length ?? "—"} title="Sources read" text="Provider APIs and public price pages, checked every hour or day." />
           <Fact n={orgs.data?.total ?? "—"} title="Companies mapped" text="Labs, clouds, gateways, hardware makers and the investors behind them." />
+          </div>
         </div>
       </Section>
 
@@ -214,7 +216,7 @@ export default async function HomePage() {
             Open the directory
           </Link>
           <Link
-            href="/market/providers"
+            href="/analytics/providers"
             className="inline-flex h-[42px] items-center px-5 text-[15px] font-medium shadow-[inset_0_0_0_1px_var(--line-strong)] hover:shadow-[inset_0_0_0_1px_var(--ink)]"
           >
             See how providers compare
@@ -247,8 +249,8 @@ function Section({ id, title, lead, children }: { id: string; title: string; lea
 
 function Fact({ n, title, text }: { n: React.ReactNode; title: string; text: string }) {
   return (
-    <div className="border-line pt-6 pr-6 pb-2 sm:pl-6 sm:[&:nth-child(2n+1)]:border-l-0 sm:[&:nth-child(2n+1)]:pl-0 lg:[&:nth-child(n+2)]:border-l lg:[&:nth-child(n+2)]:pl-6 lg:[&:nth-child(2n+1)]:border-l">
-      <span className="mb-2.5 block font-mono text-[34px] leading-[1.1] font-medium tracking-[-0.04em] text-s-7">{n}</span>
+    <div className="border-l border-line py-8 pr-6 pl-6">
+      <span className="mb-3 block font-mono text-[34px] leading-[1.1] font-medium tracking-[-0.04em] text-s-7 tabular">{n}</span>
       <h3 className="mb-1.5 text-[18px] font-semibold tracking-[-0.02em]">{title}</h3>
       <p className="max-w-[30ch] text-[15px] text-ink-2">{text}</p>
     </div>

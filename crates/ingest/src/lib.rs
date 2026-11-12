@@ -10,6 +10,7 @@ pub mod llm;
 pub mod market;
 pub mod metrics;
 pub mod tagger;
+pub mod terms;
 pub mod url;
 
 pub use ingest::{

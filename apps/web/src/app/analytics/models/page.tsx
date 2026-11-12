@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Model price index",
   description:
     "Every chat model across providers, routers and gateways: lowest and median price per million tokens, context window and who sells it cheapest. Filter by maker, price, context and provider.",
-  alternates: { canonical: "/market/models" },
+  alternates: { canonical: "/analytics/models" },
 };
 
 type Params = {
@@ -85,7 +85,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
   };
   const current = { ...filterValues, sort: params.sort, dir: params.dir };
   const sortHref = (sort: string, d: "asc" | "desc") =>
-    listingHref("/market/models", current, { sort, dir: d, page: undefined });
+    listingHref("/analytics/models", current, { sort, dir: d, page: undefined });
   const first = (pageNumber - 1) * PAGE_SIZE + 1;
   const maxBlend = Math.max(...page.items.map((m) => m.median_blended_per_mtok ?? 0), 0);
 
@@ -199,12 +199,12 @@ export default async function MarketModelsPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "Models" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "Models" }]}
         title="Model price index"
         lead="Every chat model we see, matched across providers by its id, with what it can do and its lowest and median price per 1M tokens. Blend is 3 input tokens per output token; free promotional listings are left out of prices."
       />
       <FilterBar
-        action="/market/models"
+        action="/analytics/models"
         filters={filters}
         values={filterValues}
         keep={{ sort: params.sort, dir: params.dir }}
@@ -248,7 +248,7 @@ export default async function MarketModelsPage({ searchParams }: Props) {
       <Pagination
         page={pageNumber}
         lastPage={Math.max(1, Math.ceil(page.total / PAGE_SIZE))}
-        hrefFor={(p) => listingHref("/market/models", current, { page: String(p) })}
+        hrefFor={(p) => listingHref("/analytics/models", current, { page: String(p) })}
       />
     </div>
   );

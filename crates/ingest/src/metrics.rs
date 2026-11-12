@@ -39,12 +39,14 @@ pub enum Source {
     HuggingFaceHub,
     HuggingFaceSpeed,
     GitHub,
+    GpuTerms,
 }
 
 pub const SOURCES: &[Source] = &[
     Source::HuggingFaceHub,
     Source::HuggingFaceSpeed,
     Source::GitHub,
+    Source::GpuTerms,
 ];
 
 impl Source {
@@ -53,6 +55,7 @@ impl Source {
             Source::HuggingFaceHub => "huggingface-hub",
             Source::HuggingFaceSpeed => "huggingface-speed",
             Source::GitHub => "github-metrics",
+            Source::GpuTerms => "gpu-terms",
         }
     }
 
@@ -70,6 +73,7 @@ impl Source {
 pub struct Origins {
     pub huggingface: String,
     pub router: String,
+    pub azure: String,
 }
 
 impl Default for Origins {
@@ -77,6 +81,7 @@ impl Default for Origins {
         Self {
             huggingface: "https://huggingface.co".into(),
             router: "https://router.huggingface.co".into(),
+            azure: "https://prices.azure.com".into(),
         }
     }
 }
@@ -89,7 +94,7 @@ pub async fn collect(
     let samples = match source {
         Source::HuggingFaceHub => hub(client, &origins.huggingface).await?,
         Source::HuggingFaceSpeed => speed(client, &origins.router).await?,
-        Source::GitHub => {
+        Source::GitHub | Source::GpuTerms => {
             return Ok(Collected {
                 samples: Vec::new(),
             });
@@ -335,6 +340,7 @@ pub async fn run_source(
     let result = async {
         let mut report = match source {
             Source::GitHub => github(pool).await?,
+            Source::GpuTerms => gpu_terms(pool, client, origins).await?,
             _ => {
                 store(
                     pool,
@@ -453,6 +459,22 @@ async fn store(
     Ok(RunReport {
         series: series_ids.len(),
         points,
+    })
+}
+
+/// The term structure of GPU prices: Azure's spot and reservations, and the on-demand and
+/// spot prices of the listings. A failing Azure request keeps the stored Azure rows.
+async fn gpu_terms(
+    pool: &PgPool,
+    client: &Client,
+    origins: &Origins,
+) -> Result<RunReport, MetricsError> {
+    let azure = crate::terms::azure(client, &origins.azure).await?;
+    let mut series = crate::terms::store_azure(pool, &azure).await?;
+    series += crate::terms::store_from_listings(pool).await?;
+    Ok(RunReport {
+        series,
+        points: series,
     })
 }
 

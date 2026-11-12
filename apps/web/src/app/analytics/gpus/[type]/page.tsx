@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${data.name} prices across clouds`,
     description: `On-demand ${data.name} prices per GPU-hour at ${new Set(data.listings.map((l) => l.provider.slug)).size} clouds.`,
-    alternates: { canonical: `/market/gpus/${encodeURIComponent(data.key)}` },
+    alternates: { canonical: `/analytics/gpus/${encodeURIComponent(data.key)}` },
   };
 }
 
@@ -35,7 +35,7 @@ export default async function MarketGpuPage({ params }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { href: "/market/gpus", label: "GPUs" }, { label: data.name }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { href: "/analytics/gpus", label: "GPUs" }, { label: data.name }]}
         title={data.name}
         lead="Every configuration we see, per GPU-hour on demand. Marketplace rows are medians of host offers; Shadeform rows name the cloud behind them."
       />

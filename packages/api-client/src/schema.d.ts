@@ -300,6 +300,60 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/curves": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** GPU types and models that have a curve: the term structure of a GPU-hour, the price history of both. */
+        get: operations["marketCurves"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/curves/gpus/{gpu_type}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * One GPU type: what a GPU-hour costs as spot, on demand and committed for a term, by provider,
+         *     and the market's daily price history.
+         */
+        get: operations["marketGpuCurve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/curves/models/{model_key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One model: each provider's price from cheapest to dearest, and the market's daily price history. */
+        get: operations["marketModelCurve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/gpus": {
         parameters: {
             query?: never;
@@ -689,6 +743,39 @@ export interface components {
             parent_id?: string | null;
             slug: string;
         };
+        CurveIndex: {
+            gpus: components["schemas"]["CurveItem"][];
+            models: components["schemas"]["CurveItem"][];
+        };
+        /** @description A GPU type or a model that has a curve page. */
+        CurveItem: {
+            key: string;
+            name: string;
+            /**
+             * Format: int64
+             * @description Providers selling it.
+             */
+            providers: number;
+            /**
+             * Format: int64
+             * @description Distinct price tiers reported for it. A GPU with 1 has only an on-demand price.
+             */
+            tiers: number;
+        };
+        /** @description The market at one point of the term structure: the spread of the providers that report it. */
+        CurveNode: {
+            /** Format: double */
+            max: number;
+            /** Format: double */
+            median: number;
+            /** Format: double */
+            min: number;
+            /** Format: int64 */
+            providers: number;
+            /** Format: int32 */
+            term_months: number;
+            tier: string;
+        };
         /** @description Error body returned by every failing endpoint. */
         ErrorBody: {
             /** @description Machine-readable code: `bad_request`, `unauthorized`, `not_found` or `internal`. */
@@ -751,6 +838,13 @@ export interface components {
             gpu_types: string[];
             /** @description Cheapest per GPU-hour first. */
             prices: components["schemas"]["GpuPrice"][];
+        };
+        GpuCurve: {
+            gpu_type: string;
+            history: components["schemas"]["SnapshotPoint"][];
+            /** @description USD per GPU-hour. */
+            nodes: components["schemas"]["CurveNode"][];
+            points: components["schemas"]["TermPoint"][];
         };
         /** @description One GPU type across every cloud: price per GPU-hour. */
         GpuIndexRow: {
@@ -826,6 +920,15 @@ export interface components {
             /** Format: int64 */
             count: number;
             kind: string;
+        };
+        /** @description One provider's price for a model: a rung of the ladder from cheapest to dearest. */
+        LadderRung: {
+            /**
+             * Format: double
+             * @description USD per million tokens, 3:1 input:output blend.
+             */
+            blended_per_mtok: number;
+            organization: components["schemas"]["OrganizationRef"];
         };
         /** @description A maker and how many models it has, for filters. */
         MakerCount: {
@@ -1145,6 +1248,12 @@ export interface components {
             total?: number | null;
             /** Format: double */
             total_change_30d?: number | null;
+        };
+        ModelCurve: {
+            history: components["schemas"]["SnapshotPoint"][];
+            ladder: components["schemas"]["LadderRung"][];
+            model_key: string;
+            name: string;
         };
         /** @description One model across every provider: price per million tokens. */
         ModelIndexRow: {
@@ -1894,6 +2003,22 @@ export interface components {
             organizations: components["schemas"]["SitemapEntry"][];
             products: components["schemas"]["SitemapEntry"][];
         };
+        /** @description One day of a price series. */
+        SnapshotPoint: {
+            /** Format: date */
+            day: string;
+            /**
+             * Format: double
+             * @description Priciest provider; models do not carry it.
+             */
+            max?: number | null;
+            /** Format: double */
+            median: number;
+            /** Format: double */
+            min: number;
+            /** Format: int64 */
+            providers: number;
+        };
         /** @description A feed source with its fetch health, for the admin view. */
         SourceStatus: {
             auto_approve: boolean;
@@ -1926,6 +2051,20 @@ export interface components {
             pending_count: number;
             slug: string;
             url?: string | null;
+        };
+        /** @description One provider's price of a GPU-hour at one tier. */
+        TermPoint: {
+            organization: components["schemas"]["OrganizationRef"];
+            /** Format: double */
+            per_gpu_hour: number;
+            source_url?: string | null;
+            /**
+             * Format: int32
+             * @description Months committed, 0 for spot and on demand.
+             */
+            term_months: number;
+            /** @description `spot`, `on_demand` or `committed`. */
+            tier: string;
         };
         /** @description A listing an adapter saw that no product is mapped to yet. */
         UnmappedListing: {
@@ -2476,6 +2615,85 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarketAnalytics"];
+                };
+            };
+        };
+    };
+    marketCurves: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CurveIndex"];
+                };
+            };
+        };
+    };
+    marketGpuCurve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Normalized GPU type, such as `H100 SXM` */
+                gpu_type: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GpuCurve"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketModelCurve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Normalized model key */
+                model_key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelCurve"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
                 };
             };
         };

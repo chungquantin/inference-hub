@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Inference market rankings",
   description:
     "Rank models, GPUs and providers by price, spread and how often they are the cheapest: where shopping around saves the most.",
-  alternates: { canonical: "/market/rankings" },
+  alternates: { canonical: "/analytics/rankings" },
 };
 
 const TABS = ["models", "gpus", "providers"] as const;
@@ -24,7 +24,7 @@ export default async function RankingsPage({ searchParams }: { searchParams: Pro
   return (
     <div className="flex flex-col gap-8">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "Rankings" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "Rankings" }]}
         title="Rankings"
         lead="Which models, GPUs and providers are cheapest, and where the price gap between sellers is widest. Computed from every live price our adapters collect: per million tokens at a 3:1 input-to-output blend, and per GPU-hour. Free promotional listings are left out."
       >

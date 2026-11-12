@@ -12,17 +12,9 @@ export const NAV_SECTIONS: NavSection[] = [
     items: [{ href: "/directory", label: "Search the directory", description: "GPUs, models and companies in one searchable table" }],
   },
   {
-    href: "/market",
-    label: "Market",
-    items: [
-      { href: "/market", label: "Overview", description: "Totals, top GPUs and models, source health" },
-      { href: "/market/terminal", label: "Terminal", description: "Downloads, serving speed and open-source momentum" },
-      { href: "/market/rankings", label: "Rankings", description: "Models, GPUs and providers by price and spread" },
-      { href: "/market/models", label: "Model prices", description: "Every chat model across providers" },
-      { href: "/market/gpus", label: "GPU prices", description: "Per GPU-hour across clouds" },
-      { href: "/market/media", label: "Image, video, speech", description: "Priced per image, second or character" },
-      { href: "/market/providers", label: "Providers", description: "Catalog size and cheapest wins" },
-    ],
+    href: "/analytics",
+    label: "Analytics",
+    items: [{ href: "/analytics", label: "Analytics", description: "Prices, rankings, forward curves and signals for models, GPUs and providers" }],
   },
   {
     href: "/compare",

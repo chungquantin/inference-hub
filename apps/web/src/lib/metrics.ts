@@ -42,7 +42,7 @@ export function changeTone(f: number | null | undefined, higherIsBetter: boolean
 export const GROUP_ORDER = ["Adoption", "Serving", "Open source"];
 
 export function metricHref(key: string): string {
-  return `/market/terminal/${key}`;
+  return `/analytics/metrics/${key}`;
 }
 
 /** Link for a ranked subject: its organization's page when it has one. */

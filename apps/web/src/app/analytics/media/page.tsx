@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Image, video, speech and embedding model prices",
   description:
     "Image, video, text-to-speech, transcription and embedding models across providers, priced per image, per second, per character and per token.",
-  alternates: { canonical: "/market/media" },
+  alternates: { canonical: "/analytics/media" },
 };
 
 type Props = { searchParams: Promise<{ kind?: string; q?: string; min?: string; page?: string }> };
@@ -40,7 +40,7 @@ export default async function MarketMediaPage({ searchParams }: Props) {
   if (error || !data) throw new Error("Could not load the media index");
   const current = { kind, q: params.q, min: params.min };
   const href = (o: Record<string, string | undefined>) =>
-    listingHref("/market/media", current, { page: undefined, ...o });
+    listingHref("/analytics/media", current, { page: undefined, ...o });
 
   const columns: Column<MediaIndexRow>[] = [
     {
@@ -67,12 +67,12 @@ export default async function MarketMediaPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "Image, video, speech" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "Image, video, speech" }]}
         title="Image, video, speech and embeddings"
         lead="Models that are not priced by chat tokens, compared in their own unit: per image, per second of video or audio, per character of speech, and per million input tokens for embeddings."
       />
       <SearchForm
-        action="/market/media"
+        action="/analytics/media"
         defaultValue={params.q}
         placeholder="Search models, such as flux or whisper"
         hidden={{ kind, min: params.min }}
@@ -103,7 +103,7 @@ export default async function MarketMediaPage({ searchParams }: Props) {
       <Pagination
         page={pageNumber}
         lastPage={Math.max(1, Math.ceil(data.total / PAGE_SIZE))}
-        hrefFor={(p) => listingHref("/market/media", current, { page: String(p) })}
+        hrefFor={(p) => listingHref("/analytics/media", current, { page: String(p) })}
       />
     </div>
   );

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "Inference terminal",
   description:
     "Every number that describes the inference market beyond price: model downloads, serving speed, open-source momentum. Ranked, with history.",
-  alternates: { canonical: "/market/terminal" },
+  alternates: { canonical: "/analytics/metrics" },
 };
 
 export default async function TerminalPage() {
@@ -26,7 +26,7 @@ export default async function TerminalPage() {
   return (
     <div className="flex flex-col gap-10">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "Terminal" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "Terminal" }]}
         title="Terminal"
         lead="Who is used, who is fast and who is gaining ground in inference. Prices are on the market pages; these are the numbers around them, collected daily from public sources."
       >

@@ -17,6 +17,9 @@ pub fn router() -> OpenApiRouter<AppState> {
     OpenApiRouter::new()
         .routes(routes!(overview))
         .routes(routes!(analytics))
+        .routes(routes!(curve_index))
+        .routes(routes!(gpu_curve))
+        .routes(routes!(model_curve))
         .routes(routes!(metric_catalog))
         .routes(routes!(metric_board))
         .routes(routes!(gpu_index))
@@ -44,6 +47,44 @@ async fn overview(State(state): State<AppState>) -> ApiResult<Json<MarketOvervie
     responses((status = 200, body = ih_core::MarketAnalytics)))]
 async fn analytics(State(state): State<AppState>) -> ApiResult<Json<ih_core::MarketAnalytics>> {
     Ok(Json(ih_db::analytics::analytics(&state.pool).await?))
+}
+
+/// GPU types and models that have a curve: the term structure of a GPU-hour, the price history of both.
+#[utoipa::path(get, path = "/market/curves", tag = "market", operation_id = "marketCurves",
+    responses((status = 200, body = ih_core::curves::CurveIndex)))]
+async fn curve_index(
+    State(state): State<AppState>,
+) -> ApiResult<Json<ih_core::curves::CurveIndex>> {
+    Ok(Json(ih_db::curves::index(&state.pool).await?))
+}
+
+/// One GPU type: what a GPU-hour costs as spot, on demand and committed for a term, by provider,
+/// and the market's daily price history.
+#[utoipa::path(get, path = "/market/curves/gpus/{gpu_type}", tag = "market", operation_id = "marketGpuCurve",
+    params(("gpu_type" = String, Path, description = "Normalized GPU type, such as `H100 SXM`")),
+    responses((status = 200, body = ih_core::curves::GpuCurve), (status = 404, body = ErrorBody)))]
+async fn gpu_curve(
+    State(state): State<AppState>,
+    Path(gpu_type): Path<String>,
+) -> ApiResult<Json<ih_core::curves::GpuCurve>> {
+    ih_db::curves::gpu(&state.pool, &gpu_type)
+        .await?
+        .map(Json)
+        .ok_or(ApiError::NotFound("GPU type"))
+}
+
+/// One model: each provider's price from cheapest to dearest, and the market's daily price history.
+#[utoipa::path(get, path = "/market/curves/models/{model_key}", tag = "market", operation_id = "marketModelCurve",
+    params(("model_key" = String, Path, description = "Normalized model key")),
+    responses((status = 200, body = ih_core::curves::ModelCurve), (status = 404, body = ErrorBody)))]
+async fn model_curve(
+    State(state): State<AppState>,
+    Path(model_key): Path<String>,
+) -> ApiResult<Json<ih_core::curves::ModelCurve>> {
+    ih_db::curves::model(&state.pool, &model_key)
+        .await?
+        .map(Json)
+        .ok_or(ApiError::NotFound("model"))
 }
 
 /// Every metric beyond price (downloads, serving speed, repository stars) with its leaders.

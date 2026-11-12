@@ -353,6 +353,26 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
     .execute(&mut *tx)
     .await?;
 
+    // Today's snapshot of every GPU type and of every chat model sold by two or more providers, so price history accumulates
+    // with the refresh. A later refresh the same day replaces the row.
+    sqlx::query(
+        "INSERT INTO price_snapshots (day, kind, item_key, providers, min_price, median_price, max_price)
+         SELECT current_date, 'gpu', gpu_type, providers, min_per_gpu_hour, median_per_gpu_hour,
+                max_per_gpu_hour
+         FROM market_gpus WHERE min_per_gpu_hour > 0
+         UNION ALL
+         SELECT current_date, 'model', model_key, providers, min_blended_per_mtok,
+                median_blended_per_mtok, NULL
+         FROM market_models
+         WHERE kind = 'model' AND providers >= 2 AND min_blended_per_mtok > 0
+           AND median_blended_per_mtok > 0
+         ON CONFLICT (kind, item_key, day) DO UPDATE SET
+             providers = EXCLUDED.providers, min_price = EXCLUDED.min_price,
+             median_price = EXCLUDED.median_price, max_price = EXCLUDED.max_price",
+    )
+    .execute(&mut *tx)
+    .await?;
+
     tx.commit().await?;
     Ok(RefreshReport {
         models: models + media,

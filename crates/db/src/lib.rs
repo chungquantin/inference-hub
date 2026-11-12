@@ -6,6 +6,7 @@ mod sql;
 pub mod analytics;
 pub mod categories;
 pub mod compare;
+pub mod curves;
 pub mod jobs;
 pub mod market;
 pub mod market_refresh;

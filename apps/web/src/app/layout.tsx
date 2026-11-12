@@ -151,7 +151,7 @@ async function AnnouncementBar() {
   return (
     <div className="bg-charcoal px-4 py-2 text-center text-[14px] text-[#f3f1ea]">
       <span className="mr-2.5 bg-[#f0d9a0] px-1.5 py-0.5 text-[11px] font-semibold text-charcoal">NEW</span>
-      <Link href="/market/providers" className="underline underline-offset-[3px]">
+      <Link href="/analytics/providers" className="underline underline-offset-[3px]">
         Prices from {m.providers} providers, refreshed hourly
       </Link>
     </div>

@@ -12,7 +12,7 @@ export const revalidate = 300; // seconds; must be a literal for Next.js
 export const metadata: Metadata = {
   title: "Inference providers by coverage",
   description: "Every model API provider and GPU cloud we track, by catalog size and how often they are the cheapest.",
-  alternates: { canonical: "/market/providers" },
+  alternates: { canonical: "/analytics/providers" },
 };
 
 export default async function MarketProvidersPage() {
@@ -22,7 +22,7 @@ export default async function MarketProvidersPage() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "Providers" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "Providers" }]}
         title="Providers"
         lead="Catalog size, and how many contested models or GPU types each provider sells cheapest. Chat models are distinct models; listings count every variant the provider lists (regions, :free, batch). Only items two or more providers sell count as contested."
       />
@@ -38,7 +38,7 @@ export default async function MarketProvidersPage() {
             p.models ? (
               <Link
                 key="m"
-                href={`/market/models?provider=${p.organization.slug}`}
+                href={`/analytics/models?provider=${p.organization.slug}`}
                 className="font-mono text-ink underline decoration-line-strong tabular hover:text-s-7"
               >
                 {formatCount(p.models)}

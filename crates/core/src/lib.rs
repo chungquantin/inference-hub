@@ -6,6 +6,7 @@
 pub mod analytics;
 pub mod category;
 pub mod compare;
+pub mod curves;
 pub mod market;
 pub mod metrics;
 pub mod news;

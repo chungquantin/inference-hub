@@ -29,11 +29,11 @@ function seeAllHref(kind: string, q: string): string | undefined {
   const e = encodeURIComponent(q);
   switch (kind) {
     case "model":
-      return `/market/models?q=${e}`;
+      return `/analytics/models?q=${e}`;
     case "media":
-      return `/market/media?q=${e}`;
+      return `/analytics/media?q=${e}`;
     case "gpu":
-      return `/market/gpus?q=${e}`;
+      return `/analytics/gpus?q=${e}`;
     case "organization":
       return `/organizations?q=${e}`;
     case "product":

@@ -804,6 +804,106 @@
         }
       }
     },
+    "/v1/market/curves": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "GPU types and models that have a curve: the term structure of a GPU-hour, the price history of both.",
+        "operationId": "marketCurves",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurveIndex"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/curves/gpus/{gpu_type}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "One GPU type: what a GPU-hour costs as spot, on demand and committed for a term, by provider,\nand the market's daily price history.",
+        "operationId": "marketGpuCurve",
+        "parameters": [
+          {
+            "name": "gpu_type",
+            "in": "path",
+            "description": "Normalized GPU type, such as `H100 SXM`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GpuCurve"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/curves/models/{model_key}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "One model: each provider's price from cheapest to dearest, and the market's daily price history.",
+        "operationId": "marketModelCurve",
+        "parameters": [
+          {
+            "name": "model_key",
+            "in": "path",
+            "description": "Normalized model key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelCurve"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market/gpus": {
       "get": {
         "tags": [
@@ -2097,6 +2197,92 @@
           }
         }
       },
+      "CurveIndex": {
+        "type": "object",
+        "required": [
+          "gpus",
+          "models"
+        ],
+        "properties": {
+          "gpus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurveItem"
+            }
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurveItem"
+            }
+          }
+        }
+      },
+      "CurveItem": {
+        "type": "object",
+        "description": "A GPU type or a model that has a curve page.",
+        "required": [
+          "key",
+          "name",
+          "providers",
+          "tiers"
+        ],
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Providers selling it."
+          },
+          "tiers": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Distinct price tiers reported for it. A GPU with 1 has only an on-demand price."
+          }
+        }
+      },
+      "CurveNode": {
+        "type": "object",
+        "description": "The market at one point of the term structure: the spread of the providers that report it.",
+        "required": [
+          "tier",
+          "term_months",
+          "providers",
+          "min",
+          "median",
+          "max"
+        ],
+        "properties": {
+          "max": {
+            "type": "number",
+            "format": "double"
+          },
+          "median": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "term_months": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tier": {
+            "type": "string"
+          }
+        }
+      },
       "ErrorBody": {
         "type": "object",
         "description": "Error body returned by every failing endpoint.",
@@ -2263,6 +2449,39 @@
               "$ref": "#/components/schemas/GpuPrice"
             },
             "description": "Cheapest per GPU-hour first."
+          }
+        }
+      },
+      "GpuCurve": {
+        "type": "object",
+        "required": [
+          "gpu_type",
+          "nodes",
+          "points",
+          "history"
+        ],
+        "properties": {
+          "gpu_type": {
+            "type": "string"
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SnapshotPoint"
+            }
+          },
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CurveNode"
+            },
+            "description": "USD per GPU-hour."
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TermPoint"
+            }
           }
         }
       },
@@ -2454,6 +2673,24 @@
           },
           "kind": {
             "type": "string"
+          }
+        }
+      },
+      "LadderRung": {
+        "type": "object",
+        "description": "One provider's price for a model: a rung of the ladder from cheapest to dearest.",
+        "required": [
+          "organization",
+          "blended_per_mtok"
+        ],
+        "properties": {
+          "blended_per_mtok": {
+            "type": "number",
+            "format": "double",
+            "description": "USD per million tokens, 3:1 input:output blend."
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef"
           }
         }
       },
@@ -3328,6 +3565,35 @@
           }
         ],
         "description": "A metric with its current leaders: one card of the terminal's overview."
+      },
+      "ModelCurve": {
+        "type": "object",
+        "required": [
+          "model_key",
+          "name",
+          "ladder",
+          "history"
+        ],
+        "properties": {
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SnapshotPoint"
+            }
+          },
+          "ladder": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LadderRung"
+            }
+          },
+          "model_key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
       },
       "ModelIndexRow": {
         "type": "object",
@@ -5564,6 +5830,42 @@
           }
         }
       },
+      "SnapshotPoint": {
+        "type": "object",
+        "description": "One day of a price series.",
+        "required": [
+          "day",
+          "providers",
+          "min",
+          "median"
+        ],
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "max": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Priciest provider; models do not carry it."
+          },
+          "median": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
       "SourceStatus": {
         "type": "object",
         "description": "A feed source with its fetch health, for the admin view.",
@@ -5657,6 +5959,40 @@
               "string",
               "null"
             ]
+          }
+        }
+      },
+      "TermPoint": {
+        "type": "object",
+        "description": "One provider's price of a GPU-hour at one tier.",
+        "required": [
+          "organization",
+          "tier",
+          "term_months",
+          "per_gpu_hour"
+        ],
+        "properties": {
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "term_months": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Months committed, 0 for spot and on demand."
+          },
+          "tier": {
+            "type": "string",
+            "description": "`spot`, `on_demand` or `committed`."
           }
         }
       },

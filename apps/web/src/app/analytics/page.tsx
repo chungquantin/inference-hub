@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Inference market",
   description:
     "Live prices of model APIs and GPU clouds across every provider we track: the cheapest offer, the median and the spread.",
-  alternates: { canonical: "/market" },
+  alternates: { canonical: "/analytics" },
 };
 
 export default async function MarketPage() {
@@ -26,7 +26,7 @@ export default async function MarketPage() {
   return (
     <div className="flex flex-col gap-10">
       <PageHeader
-        label="Market"
+        label="Analytics"
         title="The inference market"
         lead="Every price our adapters collect from model APIs, routers and GPU clouds, refreshed hourly to daily. Unit prices only: per GPU-hour, and per million tokens at a 3:1 input-to-output blend."
       >
@@ -36,17 +36,17 @@ export default async function MarketPage() {
       </PageHeader>
 
       <section aria-label="Market totals" className="grid grid-cols-2 border border-line bg-wash sm:grid-cols-5">
-        <Stat value={data.providers} label="providers tracked" href="/market/providers" />
+        <Stat value={data.providers} label="providers tracked" href="/analytics/providers" />
         <Stat
           value={formatCount(data.distinct_models)}
           label={`chat models · ${formatCount(data.multi_provider_models)} on 2+ providers`}
-          href="/market/models"
+          href="/analytics/models"
         />
-        <Stat value={data.gpu_types} label={`GPU types · ${data.gpu_listings} configs`} href="/market/gpus" />
+        <Stat value={data.gpu_types} label={`GPU types · ${data.gpu_listings} configs`} href="/analytics/gpus" />
         <Stat
           value={formatCount(data.media_models)}
           label={`image, video, speech, embedding · ${formatCount(data.media_listings)} prices`}
-          href="/market/media"
+          href="/analytics/media"
         />
         <Stat value={`${healthy}/${data.sources.length}`} label="sources healthy" href="#sources" />
       </section>
@@ -88,7 +88,7 @@ export default async function MarketPage() {
             ],
           }))}
         />
-        <Link href="/market/gpus" className="block border-t border-line px-3 py-2 font-mono text-[13px] text-s-7 underline">
+        <Link href="/analytics/gpus" className="block border-t border-line px-3 py-2 font-mono text-[13px] text-s-7 underline">
           All {data.gpu_types} GPU types
         </Link>
       </WindowFrame>
@@ -120,7 +120,7 @@ export default async function MarketPage() {
             ],
           }))}
         />
-        <Link href="/market/models" className="block border-t border-line px-3 py-2 font-mono text-[13px] text-s-7 underline">
+        <Link href="/analytics/models" className="block border-t border-line px-3 py-2 font-mono text-[13px] text-s-7 underline">
           All {formatCount(data.distinct_models)} chat models ({formatCount(data.multi_provider_models)} sold by 2+ providers)
         </Link>
       </WindowFrame>

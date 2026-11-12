@@ -17,7 +17,7 @@ function modelRows(p: ModelsPayload): Row[] {
       id: key,
       name: key,
       sub: maker ? (creatorName(maker) ?? maker) : "",
-      href: `/market/models/${encodeURIComponent(key)}`,
+      href: `/analytics/models/${encodeURIComponent(key)}`,
       logo: modelLogoUrl(key, maker),
       maker: maker ?? "",
       providers,
@@ -1037,7 +1037,7 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
       >
         <span className="text-[14px]">{selected.size} selected</span>
         <Link
-          href={selected.size >= 2 && tab === "models" ? `/market/models/${encodeURIComponent([...selected][0])}` : "#"}
+          href={selected.size >= 2 && tab === "models" ? `/analytics/models/${encodeURIComponent([...selected][0])}` : "#"}
           aria-disabled={selected.size < 2}
           tabIndex={selected.size < 2 ? -1 : 0}
           onClick={(e) => selected.size < 2 && e.preventDefault()}

@@ -7,10 +7,10 @@ export function orgHref(slug: string): string {
 
 /** Path of a GPU type's market page. */
 export function gpuHref(gpuType: string): string {
-  return `/market/gpus/${encodeURIComponent(gpuType)}`;
+  return `/analytics/gpus/${encodeURIComponent(gpuType)}`;
 }
 
 /** Path of a model's market page, by its normalized key. */
 export function modelHref(key: string): string {
-  return `/market/models/${encodeURIComponent(key)}`;
+  return `/analytics/models/${encodeURIComponent(key)}`;
 }

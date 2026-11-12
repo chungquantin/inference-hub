@@ -13,7 +13,7 @@ import { formatCount, formatPrice } from "@/lib/format";
 export const metadata: Metadata = {
   title: "GPU price index",
   description: "Every GPU type across every cloud we track: lowest, median and highest price per GPU-hour.",
-  alternates: { canonical: "/market/gpus" },
+  alternates: { canonical: "/analytics/gpus" },
 };
 
 type Params = { q?: string; min?: string; provider?: string; max_price?: string; sort?: string; dir?: string };
@@ -68,12 +68,12 @@ export default async function MarketGpusPage({ searchParams }: Props) {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
-        crumbs={[{ href: "/market", label: "Market" }, { label: "GPUs" }]}
+        crumbs={[{ href: "/analytics", label: "Analytics" }, { label: "GPUs" }]}
         title="GPU price index"
         lead="On-demand price per GPU-hour of each GPU type, across clouds, marketplaces and hyperscalers. Marketplace prices (Vast.ai, Akash) are medians of host offers."
       />
       <FilterBar
-        action="/market/gpus"
+        action="/analytics/gpus"
         values={values}
         keep={{ sort: params.sort, dir: params.dir }}
         filters={[
@@ -105,7 +105,7 @@ export default async function MarketGpusPage({ searchParams }: Props) {
         rows={data}
         rowKey={(r) => r.gpu_type}
         sort={{ sort: params.sort ?? "providers", dir }}
-        sortHref={(sort, d) => listingHref("/market/gpus", current, { sort, dir: d })}
+        sortHref={(sort, d) => listingHref("/analytics/gpus", current, { sort, dir: d })}
         csvName="inference-hub-gpus"
         empty="No GPU matches these filters."
       />
