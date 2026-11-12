@@ -7,3 +7,8 @@ website: "https://denvrdata.com"
 logo_url: /logos/denvr-dataworks.png
 tagging:
   match_case: true
+feeds:
+  - slug: denvr-dataworks-blog
+    name: "Denvr Dataworks blog"
+    url: "https://www.denvr.com/blog-feed.xml"
+    interval_minutes: 180

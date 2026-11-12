@@ -10,6 +10,11 @@ categories: [local-runtimes]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: exo-releases
+    name: "Exo releases"
+    url: "https://github.com/exo-explore/exo/releases.atom"
+    interval_minutes: 360
 products:
   - slug: exo-engine
     name: "Exo"

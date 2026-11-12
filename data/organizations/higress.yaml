@@ -9,6 +9,11 @@ links:
   github: "https://github.com/higress-group"
 tagging:
   match_case: true
+feeds:
+  - slug: higress-releases
+    name: "Higress releases"
+    url: "https://github.com/higress-group/higress/releases.atom"
+    interval_minutes: 360
 products:
   - slug: higress-engine
     name: "Higress"

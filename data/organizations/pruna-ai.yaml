@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: pruna-ai-releases
+    name: "Pruna AI releases"
+    url: "https://github.com/PrunaAI/pruna/releases.atom"
+    interval_minutes: 360
 products:
   - slug: pruna-ai-engine
     name: "Pruna AI"

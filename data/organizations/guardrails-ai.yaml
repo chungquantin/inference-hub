@@ -10,6 +10,11 @@ links:
 categories: [guardrails]
 tagging:
   match_case: true
+feeds:
+  - slug: guardrails-ai-releases
+    name: "Guardrails AI releases"
+    url: "https://github.com/guardrails-ai/guardrails/releases.atom"
+    interval_minutes: 360
 products:
   - slug: guardrails-ai-engine
     name: "Guardrails AI"

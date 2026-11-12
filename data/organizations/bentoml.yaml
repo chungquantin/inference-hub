@@ -7,6 +7,11 @@ links:
 categories: [serving-orchestration]
 tagging:
   match_case: true
+feeds:
+  - slug: bentoml-releases
+    name: "BentoML releases"
+    url: "https://github.com/bentoml/BentoML/releases.atom"
+    interval_minutes: 360
 products:
   - slug: bentoml
     name: "BentoML"

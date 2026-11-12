@@ -10,3 +10,8 @@ tagging:
   aliases: ["Modal Labs"]
   match_case: true
   match_name: false
+feeds:
+  - slug: modal-blog
+    name: "Modal blog"
+    url: "https://modal.com/blog/atom.xml"
+    interval_minutes: 180

@@ -8,3 +8,9 @@ logo_url: /logos/epoch-ai.svg
 categories: [evals-benchmarks]
 tagging:
   match_case: true
+feeds:
+  - slug: epoch-ai-blog
+    name: "Epoch AI blog"
+    url: "https://epoch.ai/atom.xml"
+    interval_minutes: 180
+    auto_approve: false

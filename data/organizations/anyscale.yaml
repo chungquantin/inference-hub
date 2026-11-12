@@ -9,6 +9,11 @@ categories: [serverless-gpu]
 tagging:
   aliases: ["Ray Serve"]
   match_case: true
+feeds:
+  - slug: anyscale-blog
+    name: "Anyscale blog"
+    url: "https://www.anyscale.com/rss.xml"
+    interval_minutes: 180
 products:
   - slug: ray-serve
     name: "Ray Serve"

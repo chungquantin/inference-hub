@@ -10,6 +10,11 @@ categories: [observability]
 tagging:
   aliases: ["Arize Phoenix"]
   match_case: true
+feeds:
+  - slug: arize-ai-blog
+    name: "Arize AI blog"
+    url: "https://arize.com/feed/"
+    interval_minutes: 180
 products:
   - slug: arize-ax-phoenix
     name: "Arize AX / Phoenix"

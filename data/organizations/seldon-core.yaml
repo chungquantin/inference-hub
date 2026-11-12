@@ -10,6 +10,11 @@ links:
 categories: [serving-orchestration]
 tagging:
   match_case: true
+feeds:
+  - slug: seldon-core-releases
+    name: "Seldon Core releases"
+    url: "https://github.com/SeldonIO/seldon-core/releases.atom"
+    interval_minutes: 360
 products:
   - slug: seldon-core-engine
     name: "Seldon Core"

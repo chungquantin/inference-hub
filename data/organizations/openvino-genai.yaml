@@ -10,6 +10,11 @@ links:
 categories: [inference-engines]
 tagging:
   match_case: true
+feeds:
+  - slug: openvino-genai-releases
+    name: "OpenVINO GenAI releases"
+    url: "https://github.com/openvinotoolkit/openvino.genai/releases.atom"
+    interval_minutes: 360
 products:
   - slug: openvino-genai-engine
     name: "OpenVINO GenAI"

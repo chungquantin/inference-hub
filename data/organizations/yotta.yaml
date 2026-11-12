@@ -9,3 +9,8 @@ categories: [sovereign-clouds]
 tagging:
   aliases: ["Shakti Cloud"]
   match_case: true
+feeds:
+  - slug: yotta-blog
+    name: "Yotta blog"
+    url: "https://yotta.com/feed/"
+    interval_minutes: 180

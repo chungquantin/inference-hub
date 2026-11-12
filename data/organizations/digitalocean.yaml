@@ -8,3 +8,9 @@ logo_url: /logos/digitalocean.svg
 tagging:
   aliases: ["DigitalOcean Gradient"]
   match_case: true
+feeds:
+  - slug: digitalocean-blog
+    name: "DigitalOcean blog"
+    url: "https://www.digitalocean.com/rss/blog.atom"
+    interval_minutes: 180
+    auto_approve: false

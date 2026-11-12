@@ -10,3 +10,8 @@ links:
   github: "https://github.com/OpenPipe"
 tagging:
   match_case: true
+feeds:
+  - slug: openpipe-blog
+    name: "OpenPipe blog"
+    url: "https://openpipe.ai/rss.xml"
+    interval_minutes: 180

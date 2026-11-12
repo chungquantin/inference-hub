@@ -4,3 +4,8 @@ kinds: [gpu_cloud]
 tagline: GPU cloud with on-demand pods and serverless GPUs.
 website: https://www.runpod.io
 logo_url: /logos/runpod.png
+feeds:
+  - slug: runpod-blog
+    name: "RunPod blog"
+    url: "https://www.runpod.io/blog/rss.xml"
+    interval_minutes: 180

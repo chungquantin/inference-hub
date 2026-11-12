@@ -1,0 +1,1014 @@
+[
+ {
+  "slug": "a16z",
+  "site": "https://a16z.com"
+ },
+ {
+  "slug": "aethir",
+  "site": "https://aethir.com"
+ },
+ {
+  "slug": "aionlabs",
+  "site": "https://aionlabs.ai"
+ },
+ {
+  "slug": "akamai",
+  "site": "https://www.akamai.com/products/cloud-gpu"
+ },
+ {
+  "slug": "akash-network",
+  "site": "https://akash.network"
+ },
+ {
+  "slug": "alibaba-cloud",
+  "site": "https://alibabacloud.com"
+ },
+ {
+  "slug": "ambient",
+  "site": "https://ambient.xyz"
+ },
+ {
+  "slug": "amd",
+  "site": "https://www.amd.com"
+ },
+ {
+  "slug": "anthropic",
+  "site": "https://www.anthropic.com"
+ },
+ {
+  "slug": "anyscale",
+  "site": "https://anyscale.com"
+ },
+ {
+  "slug": "apache-apisix",
+  "site": "https://apisix.apache.org"
+ },
+ {
+  "slug": "aphrodite-engine",
+  "site": "https://sonar.dphn.ai"
+ },
+ {
+  "slug": "arize-ai",
+  "site": "https://arize.com/docs/phoenix"
+ },
+ {
+  "slug": "artificial-analysis",
+  "site": "https://artificialanalysis.ai"
+ },
+ {
+  "slug": "aruba",
+  "site": "https://arubacloud.com"
+ },
+ {
+  "slug": "asml",
+  "site": "https://www.asml.com"
+ },
+ {
+  "slug": "assemblyai",
+  "site": "https://assemblyai.com"
+ },
+ {
+  "slug": "atlas-cloud",
+  "site": "https://www.atlascloud.ai"
+ },
+ {
+  "slug": "autoawq",
+  "site": "https://casper-hansen.github.io/AutoAWQ/"
+ },
+ {
+  "slug": "baidu-ai-cloud",
+  "site": "https://cloud.baidu.com"
+ },
+ {
+  "slug": "banana-dev",
+  "site": "https://banana.dev"
+ },
+ {
+  "slug": "baseten",
+  "site": "https://baseten.co"
+ },
+ {
+  "slug": "beam",
+  "site": "https://beam.cloud"
+ },
+ {
+  "slug": "bifrost",
+  "site": "https://www.getmaxim.ai/bifrost"
+ },
+ {
+  "slug": "bitdeer",
+  "site": "https://bitdeer.com"
+ },
+ {
+  "slug": "bitsandbytes",
+  "site": "https://huggingface.co/docs/bitsandbytes/main/en/index"
+ },
+ {
+  "slug": "bittensor",
+  "site": "https://bittensor.com"
+ },
+ {
+  "slug": "black-forest-labs",
+  "site": "https://bfl.ai"
+ },
+ {
+  "slug": "braintrust",
+  "site": "https://www.braintrust.dev"
+ },
+ {
+  "slug": "burn",
+  "site": "https://burn.dev"
+ },
+ {
+  "slug": "cerebras",
+  "site": "https://www.cerebras.ai"
+ },
+ {
+  "slug": "cerebrium",
+  "site": "https://cerebrium.ai"
+ },
+ {
+  "slug": "chutes",
+  "site": "https://chutes.ai"
+ },
+ {
+  "slug": "cirrascale",
+  "site": "https://cirrascale.com"
+ },
+ {
+  "slug": "civo",
+  "site": "https://civo.com"
+ },
+ {
+  "slug": "claro-brasil",
+  "site": "https://claro.com.br"
+ },
+ {
+  "slug": "cloudflare",
+  "site": "https://developers.cloudflare.com/workers-ai"
+ },
+ {
+  "slug": "cloudrift",
+  "site": "https://www.cloudrift.ai"
+ },
+ {
+  "slug": "cohere",
+  "site": "https://cohere.com"
+ },
+ {
+  "slug": "computeprices-com",
+  "site": "https://computeprices.com"
+ },
+ {
+  "slug": "core42",
+  "site": "https://core42.ai"
+ },
+ {
+  "slug": "crusoe",
+  "site": "https://crusoe.ai"
+ },
+ {
+  "slug": "cudo-compute",
+  "site": "https://www.cudocompute.com"
+ },
+ {
+  "slug": "cumulus-labs",
+  "site": "https://cumuluslabs.io"
+ },
+ {
+  "slug": "darkbloom",
+  "site": "https://www.darkbloom.ai"
+ },
+ {
+  "slug": "databricks",
+  "site": "https://databricks.com"
+ },
+ {
+  "slug": "datadog",
+  "site": "https://www.datadoghq.com/product/llm-observability/"
+ },
+ {
+  "slug": "decart",
+  "site": "https://decart.ai"
+ },
+ {
+  "slug": "deci",
+  "site": "https://deci.ai"
+ },
+ {
+  "slug": "deepeval",
+  "site": "https://deepeval.com"
+ },
+ {
+  "slug": "deepgram",
+  "site": "https://deepgram.com"
+ },
+ {
+  "slug": "deepinfra",
+  "site": "https://deepinfra.com"
+ },
+ {
+  "slug": "deepseek",
+  "site": "https://www.deepseek.com"
+ },
+ {
+  "slug": "denvr-dataworks",
+  "site": "https://denvrdata.com"
+ },
+ {
+  "slug": "digitalocean",
+  "site": "https://digitalocean.com"
+ },
+ {
+  "slug": "docker-model-runner",
+  "site": "https://docs.docker.com/ai/model-runner/"
+ },
+ {
+  "slug": "doubleword",
+  "site": "https://www.doubleword.ai"
+ },
+ {
+  "slug": "dstack",
+  "site": "https://dstack.ai/docs"
+ },
+ {
+  "slug": "e2e-networks",
+  "site": "https://e2enetworks.com"
+ },
+ {
+  "slug": "eden-ai",
+  "site": "https://www.edenai.co"
+ },
+ {
+  "slug": "elevenlabs",
+  "site": "https://elevenlabs.io"
+ },
+ {
+  "slug": "envoy-ai-gateway",
+  "site": "https://aigateway.envoyproxy.io"
+ },
+ {
+  "slug": "epoch-ai",
+  "site": "https://epoch.ai"
+ },
+ {
+  "slug": "exoscale",
+  "site": "https://exoscale.com"
+ },
+ {
+  "slug": "fal",
+  "site": "https://fal.ai"
+ },
+ {
+  "slug": "featherless",
+  "site": "https://featherless.ai"
+ },
+ {
+  "slug": "fireworks-ai",
+  "site": "https://fireworks.ai"
+ },
+ {
+  "slug": "firmus",
+  "site": "https://firmus.co"
+ },
+ {
+  "slug": "flashinfer",
+  "site": "https://flashinfer.ai"
+ },
+ {
+  "slug": "flexflow-serve",
+  "site": "https://flexflow.ai"
+ },
+ {
+  "slug": "fluidstack",
+  "site": "https://fluidstack.io"
+ },
+ {
+  "slug": "friendli",
+  "site": "https://friendli.ai"
+ },
+ {
+  "slug": "galileo",
+  "site": "https://www.galileo.ai"
+ },
+ {
+  "slug": "gateway-api-inference-extension",
+  "site": "https://gateway-api-inference-extension.sigs.k8s.io/"
+ },
+ {
+  "slug": "general-catalyst",
+  "site": "https://www.generalcatalyst.com"
+ },
+ {
+  "slug": "genesis-cloud",
+  "site": "https://genesiscloud.com"
+ },
+ {
+  "slug": "gensyn",
+  "site": "https://gensyn.ai"
+ },
+ {
+  "slug": "ggml",
+  "site": "https://ggml.ai"
+ },
+ {
+  "slug": "gmi-cloud",
+  "site": "https://gmicloud.ai"
+ },
+ {
+  "slug": "gmo-internet-group",
+  "site": "https://gmo.jp"
+ },
+ {
+  "slug": "gonka",
+  "site": "https://gonka.ai"
+ },
+ {
+  "slug": "gpt4all",
+  "site": "https://nomic.ai/gpt4all"
+ },
+ {
+  "slug": "gptqmodel",
+  "site": "https://x.com/Qubitium"
+ },
+ {
+  "slug": "groq",
+  "site": "https://groq.com"
+ },
+ {
+  "slug": "helicone",
+  "site": "https://www.helicone.ai"
+ },
+ {
+  "slug": "hetzner",
+  "site": "https://hetzner.com"
+ },
+ {
+  "slug": "higress",
+  "site": "https://higress.ai"
+ },
+ {
+  "slug": "hive-digital",
+  "site": "https://hivedigitaltechnologies.com"
+ },
+ {
+  "slug": "huawei-cloud",
+  "site": "https://huaweicloud.com"
+ },
+ {
+  "slug": "humain",
+  "site": "https://humain.ai"
+ },
+ {
+  "slug": "hut-8",
+  "site": "https://hut8.com"
+ },
+ {
+  "slug": "hyperbolic",
+  "site": "https://www.hyperbolic.ai"
+ },
+ {
+  "slug": "hyperstack",
+  "site": "https://hyperstack.cloud"
+ },
+ {
+  "slug": "ibm",
+  "site": "https://ibm.com/watsonx"
+ },
+ {
+  "slug": "index-ventures",
+  "site": "https://www.indexventures.com"
+ },
+ {
+  "slug": "inference-net",
+  "site": "https://inference.net"
+ },
+ {
+  "slug": "inferencemax",
+  "site": "https://inferencemax.semianalysis.com"
+ },
+ {
+  "slug": "infinity",
+  "site": "https://michaelfeil.github.io/infinity/"
+ },
+ {
+  "slug": "infomaniak",
+  "site": "https://infomaniak.com"
+ },
+ {
+  "slug": "inspect-ai",
+  "site": "https://inspect.aisi.org.uk/"
+ },
+ {
+  "slug": "io-net",
+  "site": "https://io.net"
+ },
+ {
+  "slug": "ionos",
+  "site": "https://ionos.com"
+ },
+ {
+  "slug": "ionstream",
+  "site": "https://ionstream.ai"
+ },
+ {
+  "slug": "iren",
+  "site": "https://iren.com"
+ },
+ {
+  "slug": "kingsoft-cloud",
+  "site": "https://ksyun.com"
+ },
+ {
+  "slug": "koboldcpp",
+  "site": "https://koboldcpp.net"
+ },
+ {
+  "slug": "kong",
+  "site": "https://konghq.com/products/kong-ai-gateway"
+ },
+ {
+  "slug": "koyeb",
+  "site": "https://koyeb.com"
+ },
+ {
+  "slug": "kserve",
+  "site": "https://kserve.github.io"
+ },
+ {
+  "slug": "kt",
+  "site": "https://kt.com"
+ },
+ {
+  "slug": "kubeai",
+  "site": "https://www.kubeai.org"
+ },
+ {
+  "slug": "kubeflow",
+  "site": "https://www.kubeflow.org"
+ },
+ {
+  "slug": "lakera",
+  "site": "https://www.lakera.ai"
+ },
+ {
+  "slug": "laminar",
+  "site": "https://laminar.sh"
+ },
+ {
+  "slug": "langchain",
+  "site": "https://www.langchain.com/langsmith"
+ },
+ {
+  "slug": "langfuse",
+  "site": "https://langfuse.com"
+ },
+ {
+  "slug": "latitude-sh",
+  "site": "https://latitude.sh"
+ },
+ {
+  "slug": "leaseweb",
+  "site": "https://leaseweb.com"
+ },
+ {
+  "slug": "lemonade",
+  "site": "https://lemonade-server.ai/"
+ },
+ {
+  "slug": "lepton-ai",
+  "site": "https://lepton.ai"
+ },
+ {
+  "slug": "lightning-ai",
+  "site": "https://lightning.ai"
+ },
+ {
+  "slug": "lightspeed",
+  "site": "https://lsvp.com"
+ },
+ {
+  "slug": "lintasarta",
+  "site": "https://lintasarta.net"
+ },
+ {
+  "slug": "liquid-ai",
+  "site": "https://liquid.ai"
+ },
+ {
+  "slug": "liquid-inference",
+  "site": "https://liquidinference.ai"
+ },
+ {
+  "slug": "liquid-web",
+  "site": "https://liquidweb.com"
+ },
+ {
+  "slug": "litellm",
+  "site": "https://docs.litellm.ai/docs/"
+ },
+ {
+  "slug": "llama-swap",
+  "site": "https://llama-swap.ai"
+ },
+ {
+  "slug": "llamafile",
+  "site": "https://docs.mozilla.ai/llamafile"
+ },
+ {
+  "slug": "llm-d",
+  "site": "https://www.llm-d.ai"
+ },
+ {
+  "slug": "llm-gateway",
+  "site": "https://llmgateway.io"
+ },
+ {
+  "slug": "llm-guard",
+  "site": "https://protectai.github.io/llm-guard/"
+ },
+ {
+  "slug": "lm-evaluation-harness",
+  "site": "https://www.eleuther.ai"
+ },
+ {
+  "slug": "lm-studio",
+  "site": "https://lmstudio.ai"
+ },
+ {
+  "slug": "lmarena",
+  "site": "https://lmarena.ai"
+ },
+ {
+  "slug": "lmcache",
+  "site": "https://lmcache.ai/"
+ },
+ {
+  "slug": "lmdeploy",
+  "site": "https://lmdeploy.readthedocs.io/en/latest"
+ },
+ {
+  "slug": "localai",
+  "site": "https://localai.io"
+ },
+ {
+  "slug": "mancer",
+  "site": "https://mancer.tech"
+ },
+ {
+  "slug": "martian",
+  "site": "https://withmartian.com"
+ },
+ {
+  "slug": "medusa",
+  "site": "https://sites.google.com/view/medusa-llm"
+ },
+ {
+  "slug": "menlo-ventures",
+  "site": "https://menlovc.com"
+ },
+ {
+  "slug": "meta",
+  "site": "https://ai.meta.com"
+ },
+ {
+  "slug": "microsoft",
+  "site": "https://azure.microsoft.com"
+ },
+ {
+  "slug": "minimax",
+  "site": "https://minimax.io"
+ },
+ {
+  "slug": "mistral-ai",
+  "site": "https://mistral.ai"
+ },
+ {
+  "slug": "mlflow",
+  "site": "https://mlflow.org"
+ },
+ {
+  "slug": "mlperf-inference",
+  "site": "https://mlcommons.org/benchmarks/inference-datacenter/"
+ },
+ {
+  "slug": "modal",
+  "site": "https://modal.com"
+ },
+ {
+  "slug": "moonshot-ai",
+  "site": "https://moonshot.ai"
+ },
+ {
+  "slug": "morph",
+  "site": "https://morphllm.com"
+ },
+ {
+  "slug": "ncompass",
+  "site": "https://ncompass.tech"
+ },
+ {
+  "slug": "near-ai",
+  "site": "https://near.ai"
+ },
+ {
+  "slug": "nebius",
+  "site": "https://nebius.com"
+ },
+ {
+  "slug": "northern-data",
+  "site": "https://northerndata.de"
+ },
+ {
+  "slug": "nosana",
+  "site": "https://nosana.com"
+ },
+ {
+  "slug": "not-diamond",
+  "site": "https://www.notdiamond.ai"
+ },
+ {
+  "slug": "nous-research",
+  "site": "https://portal.nousresearch.com"
+ },
+ {
+  "slug": "novita-ai",
+  "site": "https://novita.ai"
+ },
+ {
+  "slug": "nscale",
+  "site": "https://nscale.com"
+ },
+ {
+  "slug": "octoai",
+  "site": "https://octo.ai"
+ },
+ {
+  "slug": "ollama",
+  "site": "https://ollama.com"
+ },
+ {
+  "slug": "ooredoo",
+  "site": "https://ooredoo.com"
+ },
+ {
+  "slug": "openlit",
+  "site": "https://www.openlit.io"
+ },
+ {
+  "slug": "openpipe",
+  "site": "https://openpipe.ai"
+ },
+ {
+  "slug": "openrouter",
+  "site": "https://openrouter.ai"
+ },
+ {
+  "slug": "openvino-genai",
+  "site": "https://openvinotoolkit.github.io/openvino.genai/"
+ },
+ {
+  "slug": "opik",
+  "site": "https://www.comet.com/docs/opik/"
+ },
+ {
+  "slug": "oracle",
+  "site": "https://www.oracle.com/cloud/"
+ },
+ {
+  "slug": "orange-business",
+  "site": "https://orange-business.com"
+ },
+ {
+  "slug": "outlines",
+  "site": "https://dottxt-ai.github.io/outlines/"
+ },
+ {
+  "slug": "outscale",
+  "site": "https://outscale.com"
+ },
+ {
+  "slug": "ovhcloud",
+  "site": "https://ovhcloud.com"
+ },
+ {
+  "slug": "paperspace",
+  "site": "https://paperspace.com"
+ },
+ {
+  "slug": "parasail",
+  "site": "https://parasail.io"
+ },
+ {
+  "slug": "perplexity",
+  "site": "https://perplexity.ai"
+ },
+ {
+  "slug": "petals",
+  "site": "https://petals.dev"
+ },
+ {
+  "slug": "portkey",
+  "site": "https://portkey.ai"
+ },
+ {
+  "slug": "predibase",
+  "site": "https://predibase.com"
+ },
+ {
+  "slug": "prime-intellect",
+  "site": "https://primeintellect.ai"
+ },
+ {
+  "slug": "proact-it",
+  "site": "https://proact.eu"
+ },
+ {
+  "slug": "promptfoo",
+  "site": "https://promptfoo.dev"
+ },
+ {
+  "slug": "promptlayer",
+  "site": "https://www.promptlayer.com"
+ },
+ {
+  "slug": "pruna-ai",
+  "site": "https://docs.pruna.ai"
+ },
+ {
+  "slug": "public-ai",
+  "site": "https://publicai.co"
+ },
+ {
+  "slug": "qumulusai",
+  "site": "https://qumulusai.com"
+ },
+ {
+  "slug": "rackspace",
+  "site": "https://rackspace.com"
+ },
+ {
+  "slug": "ragas",
+  "site": "https://docs.ragas.io"
+ },
+ {
+  "slug": "ramalama",
+  "site": "https://ramalama.ai"
+ },
+ {
+  "slug": "reka-ai",
+  "site": "https://reka.ai"
+ },
+ {
+  "slug": "relace",
+  "site": "https://relace.ai"
+ },
+ {
+  "slug": "render-network",
+  "site": "https://rendernetwork.com"
+ },
+ {
+  "slug": "replicate",
+  "site": "https://replicate.com"
+ },
+ {
+  "slug": "requesty",
+  "site": "https://www.requesty.ai"
+ },
+ {
+  "slug": "respan",
+  "site": "https://respan.ai"
+ },
+ {
+  "slug": "ritual",
+  "site": "https://ritual.net"
+ },
+ {
+  "slug": "runpod",
+  "site": "https://www.runpod.io"
+ },
+ {
+  "slug": "runway",
+  "site": "https://runwayml.com"
+ },
+ {
+  "slug": "sakana",
+  "site": "https://sakana.ai"
+ },
+ {
+  "slug": "sakura-internet",
+  "site": "https://sakura.ad.jp"
+ },
+ {
+  "slug": "salad",
+  "site": "https://salad.com"
+ },
+ {
+  "slug": "sambanova",
+  "site": "https://sambanova.ai"
+ },
+ {
+  "slug": "samsung-sds",
+  "site": "https://samsungsds.com"
+ },
+ {
+  "slug": "sarvam-ai",
+  "site": "https://sarvam.ai"
+ },
+ {
+  "slug": "scaleway",
+  "site": "https://scaleway.com"
+ },
+ {
+  "slug": "sequoia-capital",
+  "site": "https://www.sequoiacap.com"
+ },
+ {
+  "slug": "sf-compute",
+  "site": "https://sfcompute.com"
+ },
+ {
+  "slug": "sglang",
+  "site": "https://docs.sglang.ai"
+ },
+ {
+  "slug": "shadeform",
+  "site": "https://www.shadeform.ai"
+ },
+ {
+  "slug": "sharon-ai",
+  "site": "https://sharonai.com"
+ },
+ {
+  "slug": "sify",
+  "site": "https://sify.com"
+ },
+ {
+  "slug": "siliconflow",
+  "site": "https://siliconflow.com"
+ },
+ {
+  "slug": "singtel",
+  "site": "https://singtel.com"
+ },
+ {
+  "slug": "sk-telecom",
+  "site": "https://sktelecom.com"
+ },
+ {
+  "slug": "skypilot",
+  "site": "https://skypilot.ai/"
+ },
+ {
+  "slug": "snowflake",
+  "site": "https://snowflake.com"
+ },
+ {
+  "slug": "soluna",
+  "site": "https://solunacomputing.com"
+ },
+ {
+  "slug": "stepfun",
+  "site": "https://stepfun.com"
+ },
+ {
+  "slug": "swisscom",
+  "site": "https://swisscom.ch"
+ },
+ {
+  "slug": "t-systems",
+  "site": "https://t-systems.com"
+ },
+ {
+  "slug": "targon",
+  "site": "https://targon.com"
+ },
+ {
+  "slug": "tata-communications",
+  "site": "https://tatacommunications.com"
+ },
+ {
+  "slug": "telus",
+  "site": "https://telus.com"
+ },
+ {
+  "slug": "tencent-cloud",
+  "site": "https://cloud.tencent.com"
+ },
+ {
+  "slug": "tensordock",
+  "site": "https://tensordock.com"
+ },
+ {
+  "slug": "tensorwave",
+  "site": "https://tensorwave.com"
+ },
+ {
+  "slug": "tensorzero",
+  "site": "https://tensorzero.com"
+ },
+ {
+  "slug": "tenstorrent",
+  "site": "https://tenstorrent.com"
+ },
+ {
+  "slug": "thinking-machines",
+  "site": "https://thinkingmachines.ai"
+ },
+ {
+  "slug": "thunder-compute",
+  "site": "https://thundercompute.com"
+ },
+ {
+  "slug": "torchao",
+  "site": "https://pytorch.org/ao/stable/index.html"
+ },
+ {
+  "slug": "traceloop",
+  "site": "https://www.traceloop.com/openllmetry"
+ },
+ {
+  "slug": "truefoundry",
+  "site": "https://www.truefoundry.com"
+ },
+ {
+  "slug": "tyk",
+  "site": "https://tyk.io"
+ },
+ {
+  "slug": "unify",
+  "site": "https://unify.ai"
+ },
+ {
+  "slug": "unsloth",
+  "site": "https://unsloth.ai/docs"
+ },
+ {
+  "slug": "upstage",
+  "site": "https://upstage.ai"
+ },
+ {
+  "slug": "vast-ai",
+  "site": "https://vast.ai"
+ },
+ {
+  "slug": "venice",
+  "site": "https://venice.ai"
+ },
+ {
+  "slug": "vercel",
+  "site": "https://vercel.com/ai-gateway"
+ },
+ {
+  "slug": "verda",
+  "site": "https://verda.com"
+ },
+ {
+  "slug": "viettel",
+  "site": "https://viettel.com.vn"
+ },
+ {
+  "slug": "volcengine",
+  "site": "https://volcengine.com"
+ },
+ {
+  "slug": "voltage-park",
+  "site": "https://voltagepark.com"
+ },
+ {
+  "slug": "vultr",
+  "site": "https://www.vultr.com"
+ },
+ {
+  "slug": "wafer",
+  "site": "https://wafer.ai"
+ },
+ {
+  "slug": "wavespeedai",
+  "site": "https://wavespeed.ai"
+ },
+ {
+  "slug": "weights-and-biases",
+  "site": "https://wandb.ai/site/weave"
+ },
+ {
+  "slug": "whitefiber",
+  "site": "https://whitefiber.com"
+ },
+ {
+  "slug": "xai",
+  "site": "https://x.ai"
+ },
+ {
+  "slug": "xinference",
+  "site": "https://inference.readthedocs.io"
+ },
+ {
+  "slug": "yotta",
+  "site": "https://yotta.com"
+ },
+ {
+  "slug": "z-ai",
+  "site": "https://z.ai"
+ }
+]

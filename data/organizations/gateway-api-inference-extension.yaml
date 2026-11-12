@@ -9,6 +9,11 @@ links:
   github: "https://github.com/kubernetes-sigs"
 tagging:
   match_case: true
+feeds:
+  - slug: gateway-api-inference-extension-releases
+    name: "Gateway API Inference Extension releases"
+    url: "https://github.com/kubernetes-sigs/gateway-api-inference-extension/releases.atom"
+    interval_minutes: 360
 products:
   - slug: gateway-api-inference-extension-engine
     name: "Gateway API Inference Extension"

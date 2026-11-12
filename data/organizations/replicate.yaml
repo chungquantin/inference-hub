@@ -9,6 +9,11 @@ tagging:
   aliases: ["Replicate.com"]
   match_case: true
   match_name: false
+feeds:
+  - slug: replicate-blog
+    name: "Replicate blog"
+    url: "https://replicate.com/blog/rss"
+    interval_minutes: 180
 products:
   - slug: cog
     name: "Cog"

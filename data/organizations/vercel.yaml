@@ -7,3 +7,8 @@ logo_url: /logos/vercel.png
 tagging:
   aliases: [Vercel AI Gateway, AI Gateway]
   match_case: true
+feeds:
+  - slug: vercel-blog
+    name: "Vercel blog"
+    url: "https://vercel.com/atom"
+    interval_minutes: 180

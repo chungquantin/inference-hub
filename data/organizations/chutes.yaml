@@ -4,3 +4,8 @@ kinds: [inference_provider]
 tagline: Serverless inference on the Bittensor network, with confidential-compute models.
 website: https://chutes.ai
 logo_url: /logos/chutes.png
+feeds:
+  - slug: chutes-blog
+    name: "Chutes blog"
+    url: "https://chutes.ai/news/rss.xml"
+    interval_minutes: 180

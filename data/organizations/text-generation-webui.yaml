@@ -9,6 +9,11 @@ links:
 categories: [local-runtimes]
 tagging:
   match_case: true
+feeds:
+  - slug: text-generation-webui-releases
+    name: "Text Generation WebUI releases"
+    url: "https://github.com/oobabooga/textgen/releases.atom"
+    interval_minutes: 360
 products:
   - slug: text-generation-webui-engine
     name: "Text Generation WebUI"

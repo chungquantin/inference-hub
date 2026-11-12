@@ -7,3 +7,8 @@ website: "https://gensyn.ai"
 logo_url: /logos/gensyn.png
 tagging:
   match_case: true
+feeds:
+  - slug: gensyn-blog
+    name: "Gensyn blog"
+    url: "https://www.gensyn.ai/news/rss.xml"
+    interval_minutes: 180

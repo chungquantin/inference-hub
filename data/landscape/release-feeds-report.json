@@ -1,0 +1,332 @@
+{
+ "written": [
+  {
+   "slug": "aphrodite-engine",
+   "repo": "dphnAI/sonar",
+   "releases": 10,
+   "latest": "2026-11-08"
+  },
+  {
+   "slug": "bentoml",
+   "repo": "bentoml/BentoML",
+   "releases": 10,
+   "latest": "2026-10-23"
+  },
+  {
+   "slug": "bitsandbytes",
+   "repo": "bitsandbytes-foundation/bitsandbytes",
+   "releases": 10,
+   "latest": "2026-10-27"
+  },
+  {
+   "slug": "burn",
+   "repo": "tracel-ai/burn",
+   "releases": 10,
+   "latest": "2026-11-09"
+  },
+  {
+   "slug": "deepeval",
+   "repo": "confident-ai/deepeval",
+   "releases": 10,
+   "latest": "2026-11-11"
+  },
+  {
+   "slug": "dstack",
+   "repo": "dstackai/dstack",
+   "releases": 10,
+   "latest": "2026-11-05"
+  },
+  {
+   "slug": "exllama",
+   "repo": "turboderp-org/exllamav3",
+   "releases": 10,
+   "latest": "2026-10-31"
+  },
+  {
+   "slug": "exo",
+   "repo": "exo-explore/exo",
+   "releases": 10,
+   "latest": "2026-04-23"
+  },
+  {
+   "slug": "flashattention",
+   "repo": "Dao-AILab/flash-attention",
+   "releases": 10,
+   "latest": "2026-11-11"
+  },
+  {
+   "slug": "gateway-api-inference-extension",
+   "repo": "kubernetes-sigs/gateway-api-inference-extension",
+   "releases": 10,
+   "latest": "2026-09-17"
+  },
+  {
+   "slug": "ggml",
+   "repo": "ggml-org/llama.cpp",
+   "releases": 10,
+   "latest": "2026-11-12"
+  },
+  {
+   "slug": "gptqmodel",
+   "repo": "ModelCloud/GPTQModel",
+   "releases": 10,
+   "latest": "2026-11-07"
+  },
+  {
+   "slug": "guardrails-ai",
+   "repo": "guardrails-ai/guardrails",
+   "releases": 10,
+   "latest": "2026-08-14"
+  },
+  {
+   "slug": "higress",
+   "repo": "higress-group/higress",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "infinity",
+   "repo": "michaelfeil/infinity",
+   "releases": 10,
+   "latest": "2026-11-09"
+  },
+  {
+   "slug": "inspect-ai",
+   "repo": "UKGovernmentBEIS/inspect_ai",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "jan",
+   "repo": "janhq/jan",
+   "releases": 10,
+   "latest": "2026-10-28"
+  },
+  {
+   "slug": "koboldcpp",
+   "repo": "LostRuins/koboldcpp",
+   "releases": 10,
+   "latest": "2026-11-02"
+  },
+  {
+   "slug": "kubeai",
+   "repo": "kubeai-project/kubeai",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "kvcache-ai",
+   "repo": "kvcache-ai/Mooncake",
+   "releases": 10,
+   "latest": "2026-11-04"
+  },
+  {
+   "slug": "laminar",
+   "repo": "lmnr-ai/lmnr",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "lemonade",
+   "repo": "lemonade-sdk/lemonade",
+   "releases": 10,
+   "latest": "2026-11-12"
+  },
+  {
+   "slug": "llama-swap",
+   "repo": "mostlygeek/llama-swap",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "llamafile",
+   "repo": "mozilla-ai/llamafile",
+   "releases": 10,
+   "latest": "2026-09-15"
+  },
+  {
+   "slug": "llguidance",
+   "repo": "guidance-ai/llguidance",
+   "releases": 10,
+   "latest": "2026-09-30"
+  },
+  {
+   "slug": "lm-evaluation-harness",
+   "repo": "EleutherAI/lm-evaluation-harness",
+   "releases": 10,
+   "latest": "2026-08-31"
+  },
+  {
+   "slug": "lmcache",
+   "repo": "LMCache/LMCache",
+   "releases": 10,
+   "latest": "2026-11-12"
+  },
+  {
+   "slug": "lmdeploy",
+   "repo": "InternLM/lmdeploy",
+   "releases": 10,
+   "latest": "2026-09-28"
+  },
+  {
+   "slug": "mistral-rs",
+   "repo": "EricLBuehler/mistral.rs",
+   "releases": 10,
+   "latest": "2026-10-19"
+  },
+  {
+   "slug": "mlc-ai",
+   "repo": "mlc-ai/mlc-llm",
+   "releases": 10,
+   "latest": "2026-07-07"
+  },
+  {
+   "slug": "mlx",
+   "repo": "ml-explore/mlx",
+   "releases": 10,
+   "latest": "2026-10-14"
+  },
+  {
+   "slug": "modular",
+   "repo": "modular/modular",
+   "releases": 10,
+   "latest": "2026-10-22"
+  },
+  {
+   "slug": "openvino-genai",
+   "repo": "openvinotoolkit/openvino.genai",
+   "releases": 10,
+   "latest": "2026-10-01"
+  },
+  {
+   "slug": "outlines",
+   "repo": "dottxt-ai/outlines",
+   "releases": 10,
+   "latest": "2026-08-06"
+  },
+  {
+   "slug": "pruna-ai",
+   "repo": "PrunaAI/pruna",
+   "releases": 10,
+   "latest": "2026-10-29"
+  },
+  {
+   "slug": "ragas",
+   "repo": "vibrantlabsai/ragas",
+   "releases": 10,
+   "latest": "2026-01-13"
+  },
+  {
+   "slug": "ramalama",
+   "repo": "containers/ramalama",
+   "releases": 10,
+   "latest": "2026-11-04"
+  },
+  {
+   "slug": "seldon-core",
+   "repo": "SeldonIO/seldon-core",
+   "releases": 10,
+   "latest": "2026-01-23"
+  },
+  {
+   "slug": "sglang",
+   "repo": "sgl-project/sglang",
+   "releases": 10,
+   "latest": "2026-11-02"
+  },
+  {
+   "slug": "skypilot",
+   "repo": "skypilot-org/skypilot",
+   "releases": 10,
+   "latest": "2026-11-12"
+  },
+  {
+   "slug": "stable-diffusion-cpp",
+   "repo": "leejet/stable-diffusion.cpp",
+   "releases": 10,
+   "latest": "2026-11-10"
+  },
+  {
+   "slug": "text-generation-webui",
+   "repo": "oobabooga/textgen",
+   "releases": 10,
+   "latest": "2026-05-20"
+  },
+  {
+   "slug": "torchao",
+   "repo": "pytorch/ao",
+   "releases": 10,
+   "latest": "2026-11-11"
+  },
+  {
+   "slug": "traceloop",
+   "repo": "traceloop/openllmetry",
+   "releases": 10,
+   "latest": "2026-11-05"
+  },
+  {
+   "slug": "unsloth",
+   "repo": "unslothai/unsloth",
+   "releases": 10,
+   "latest": "2026-11-11"
+  },
+  {
+   "slug": "xinference",
+   "repo": "xorbitsai/inference",
+   "releases": 10,
+   "latest": "2026-11-07"
+  }
+ ],
+ "refused": [
+  {
+   "slug": "autoawq",
+   "repo": "casper-hansen/AutoAWQ",
+   "why": "stale: latest release 2025-05-11"
+  },
+  {
+   "slug": "deepspeed-mii",
+   "repo": "deepspeedai/DeepSpeed-MII",
+   "why": "stale: latest release 2025-03-25"
+  },
+  {
+   "slug": "eagle",
+   "repo": "SafeAILab/EAGLE",
+   "why": "only 0 releases"
+  },
+  {
+   "slug": "flexflow-serve",
+   "repo": "flexflow/flexflow-train",
+   "why": "stale: latest release 2024-09-22"
+  },
+  {
+   "slug": "gpt4all",
+   "repo": "nomic-ai/gpt4all",
+   "why": "stale: latest release 2025-02-25"
+  },
+  {
+   "slug": "llm-guard",
+   "repo": "protectai/llm-guard",
+   "why": "stale: latest release 2025-05-19"
+  },
+  {
+   "slug": "medusa",
+   "repo": "FasterDecoding/Medusa",
+   "why": "only 1 releases"
+  },
+  {
+   "slug": "meta",
+   "repo": "meta-llama/PurpleLlama",
+   "why": "only 0 releases"
+  },
+  {
+   "slug": "petals",
+   "repo": "bigscience-workshop/petals",
+   "why": "stale: latest release 2023-09-06"
+  },
+  {
+   "slug": "routellm",
+   "repo": "lm-sys/RouteLLM",
+   "why": "only 0 releases"
+  }
+ ]
+}

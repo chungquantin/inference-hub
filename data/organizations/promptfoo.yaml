@@ -10,6 +10,11 @@ links:
 categories: [evals-benchmarks]
 tagging:
   match_case: true
+feeds:
+  - slug: promptfoo-blog
+    name: "Promptfoo blog"
+    url: "https://www.promptfoo.dev/blog/rss.xml"
+    interval_minutes: 180
 products:
   - slug: promptfoo-engine
     name: "Promptfoo"

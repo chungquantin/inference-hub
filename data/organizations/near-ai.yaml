@@ -7,3 +7,8 @@ website: "https://near.ai"
 logo_url: /logos/near-ai.svg
 tagging:
   match_case: true
+feeds:
+  - slug: near-ai-blog
+    name: "NEAR AI blog"
+    url: "https://near.ai/feed.xml"
+    interval_minutes: 180

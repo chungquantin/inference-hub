@@ -11,6 +11,11 @@ categories: [local-runtimes]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: lemonade-releases
+    name: "Lemonade releases"
+    url: "https://github.com/lemonade-sdk/lemonade/releases.atom"
+    interval_minutes: 360
 products:
   - slug: lemonade-engine
     name: "Lemonade"

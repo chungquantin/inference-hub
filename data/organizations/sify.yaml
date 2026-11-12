@@ -8,3 +8,8 @@ categories: [sovereign-clouds]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: sify-blog
+    name: "Sify blog"
+    url: "https://www.sify.com/feed/"
+    interval_minutes: 180

@@ -8,3 +8,8 @@ categories: [sovereign-clouds]
 tagging:
   aliases: ["TCS SuperCompute"]
   match_case: true
+feeds:
+  - slug: tata-communications-blog
+    name: "Tata Communications blog"
+    url: "https://www.tatacommunications.com/blog/rss.xml"
+    interval_minutes: 180

@@ -8,3 +8,8 @@ logo_url: /logos/inferencemax.webp
 categories: [evals-benchmarks]
 tagging:
   match_case: true
+feeds:
+  - slug: inferencemax-blog
+    name: "InferenceMAX blog"
+    url: "https://inferencex.semianalysis.com/feed.xml"
+    interval_minutes: 180

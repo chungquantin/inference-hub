@@ -9,6 +9,11 @@ links:
   github: "https://github.com/tensorzero"
 tagging:
   match_case: true
+feeds:
+  - slug: tensorzero-blog
+    name: "TensorZero blog"
+    url: "https://www.tensorzero.com/blog/rss.xml"
+    interval_minutes: 180
 products:
   - slug: tensorzero-engine
     name: "TensorZero"

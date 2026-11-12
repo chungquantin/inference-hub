@@ -11,6 +11,11 @@ links:
 tagging:
   aliases: [llama.cpp]
   match_case: true
+feeds:
+  - slug: ggml-releases
+    name: "ggml releases"
+    url: "https://github.com/ggml-org/llama.cpp/releases.atom"
+    interval_minutes: 360
 products:
   - slug: llama-cpp
     name: llama.cpp

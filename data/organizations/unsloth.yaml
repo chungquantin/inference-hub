@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: unsloth-releases
+    name: "Unsloth releases"
+    url: "https://github.com/unslothai/unsloth/releases.atom"
+    interval_minutes: 360
 products:
   - slug: unsloth-engine
     name: "Unsloth"

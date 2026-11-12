@@ -7,3 +7,8 @@ website: "https://sakana.ai"
 logo_url: /logos/sakana.png
 tagging:
   match_case: true
+feeds:
+  - slug: sakana-blog
+    name: "Sakana blog"
+    url: "https://sakana.ai/feed.xml"
+    interval_minutes: 180

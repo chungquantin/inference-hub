@@ -7,6 +7,11 @@ links:
 categories: [inference-engines, model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: kvcache-ai-releases
+    name: "kvcache.ai releases"
+    url: "https://github.com/kvcache-ai/Mooncake/releases.atom"
+    interval_minutes: 360
 products:
   - slug: mooncake
     name: "Mooncake"

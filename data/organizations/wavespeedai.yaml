@@ -7,3 +7,8 @@ website: "https://wavespeed.ai"
 logo_url: /logos/wavespeedai.png
 tagging:
   match_case: true
+feeds:
+  - slug: wavespeedai-blog
+    name: "WaveSpeedAI blog"
+    url: "https://wavespeed.ai/blog/rss.xml"
+    interval_minutes: 180

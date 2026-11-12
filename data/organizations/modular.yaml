@@ -9,6 +9,11 @@ tagging:
   aliases: ["Modular Inc", "Mojo"]
   match_case: true
   match_name: false
+feeds:
+  - slug: modular-releases
+    name: "Modular releases"
+    url: "https://github.com/modular/modular/releases.atom"
+    interval_minutes: 360
 products:
   - slug: modular-max
     name: "Modular MAX"

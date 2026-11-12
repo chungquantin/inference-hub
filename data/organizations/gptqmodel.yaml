@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: gptqmodel-releases
+    name: "GPTQModel releases"
+    url: "https://github.com/ModelCloud/GPTQModel/releases.atom"
+    interval_minutes: 360
 products:
   - slug: gptqmodel-engine
     name: "GPTQModel"

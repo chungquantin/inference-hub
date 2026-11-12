@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: torchao-releases
+    name: "TorchAO releases"
+    url: "https://github.com/pytorch/ao/releases.atom"
+    interval_minutes: 360
 products:
   - slug: torchao-engine
     name: "TorchAO"

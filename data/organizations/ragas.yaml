@@ -11,6 +11,11 @@ categories: [evals-benchmarks]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: ragas-releases
+    name: "Ragas releases"
+    url: "https://github.com/vibrantlabsai/ragas/releases.atom"
+    interval_minutes: 360
 products:
   - slug: ragas-engine
     name: "Ragas"

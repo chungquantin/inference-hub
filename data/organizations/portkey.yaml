@@ -8,3 +8,8 @@ logo_url: /logos/portkey.png
 status: acquired
 tagging:
   match_case: true
+feeds:
+  - slug: portkey-blog
+    name: "Portkey blog"
+    url: "https://portkey.ai/blog/rss/"
+    interval_minutes: 180

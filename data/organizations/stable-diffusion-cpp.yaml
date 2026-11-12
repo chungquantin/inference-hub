@@ -9,6 +9,11 @@ links:
 categories: [inference-engines]
 tagging:
   match_case: true
+feeds:
+  - slug: stable-diffusion-cpp-releases
+    name: "stable-diffusion.cpp releases"
+    url: "https://github.com/leejet/stable-diffusion.cpp/releases.atom"
+    interval_minutes: 360
 products:
   - slug: stable-diffusion-cpp-engine
     name: "stable-diffusion.cpp"

@@ -6,3 +6,8 @@ website: https://sambanova.ai
 logo_url: /logos/sambanova.png
 tagging:
   aliases: [SambaNova Systems, SambaNova Cloud]
+feeds:
+  - slug: sambanova-blog
+    name: "SambaNova blog"
+    url: "https://sambanova.ai/blog/rss.xml"
+    interval_minutes: 180

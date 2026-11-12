@@ -8,3 +8,9 @@ logo_url: /logos/kong.png
 tagging:
   aliases: ["Kong AI Gateway"]
   match_case: true
+feeds:
+  - slug: kong-blog
+    name: "Kong blog"
+    url: "https://konghq.com/feed/rss/blogs"
+    interval_minutes: 180
+    auto_approve: false

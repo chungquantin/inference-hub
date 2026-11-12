@@ -11,6 +11,11 @@ categories: [observability]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: laminar-releases
+    name: "Laminar releases"
+    url: "https://github.com/lmnr-ai/lmnr/releases.atom"
+    interval_minutes: 360
 products:
   - slug: laminar-engine
     name: "Laminar"

@@ -4,3 +4,8 @@ kinds: [llm_gateway]
 tagline: Auction exchange where providers compete to serve each model request.
 website: https://liquidinference.ai
 logo_url: /logos/liquid-inference.svg
+feeds:
+  - slug: liquid-inference-blog
+    name: "Liquid Inference blog"
+    url: "https://liquidinference.ai/feeds.xml"
+    interval_minutes: 180

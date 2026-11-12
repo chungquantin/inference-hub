@@ -11,6 +11,11 @@ categories: [inference-engines]
 tagging:
   aliases: ["mlx-lm"]
   match_case: true
+feeds:
+  - slug: mlx-releases
+    name: "MLX releases"
+    url: "https://github.com/ml-explore/mlx/releases.atom"
+    interval_minutes: 360
 products:
   - slug: mlx-mlx-lm
     name: "MLX / mlx-lm"

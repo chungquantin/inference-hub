@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: flashinfer-blog
+    name: "FlashInfer blog"
+    url: "https://flashinfer.ai/feed.xml"
+    interval_minutes: 180
 products:
   - slug: flashinfer-engine
     name: "FlashInfer"

@@ -8,3 +8,8 @@ logo_url: /logos/fal.png
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: fal-blog
+    name: "fal blog"
+    url: "https://fal.ai/changelog/rss.xml"
+    interval_minutes: 180

@@ -10,6 +10,12 @@ links:
 categories: [observability]
 tagging:
   match_case: true
+feeds:
+  - slug: opik-blog
+    name: "Opik blog"
+    url: "https://www.comet.com/site/blog/feed/"
+    interval_minutes: 180
+    auto_approve: false
 products:
   - slug: comet-opik
     name: "Comet Opik"

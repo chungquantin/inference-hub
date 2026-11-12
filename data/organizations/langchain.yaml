@@ -9,3 +9,8 @@ categories: [observability]
 tagging:
   aliases: ["LangSmith"]
   match_case: true
+feeds:
+  - slug: langchain-blog
+    name: "LangChain blog"
+    url: "https://www.langchain.com/blog/rss.xml"
+    interval_minutes: 180

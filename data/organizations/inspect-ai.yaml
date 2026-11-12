@@ -11,6 +11,11 @@ categories: [evals-benchmarks]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: inspect-ai-releases
+    name: "Inspect AI releases"
+    url: "https://github.com/UKGovernmentBEIS/inspect_ai/releases.atom"
+    interval_minutes: 360
 products:
   - slug: inspect-ai-engine
     name: "Inspect AI"

@@ -8,6 +8,11 @@ hq_country: US
 founded_year: 2023
 links:
   github: https://github.com/ollama
+feeds:
+  - slug: ollama-blog
+    name: "Ollama blog"
+    url: "https://ollama.com/blog/rss.xml"
+    interval_minutes: 180
 products:
   - slug: ollama-runtime
     name: Ollama

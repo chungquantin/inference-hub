@@ -10,6 +10,11 @@ categories: [model-optimization]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: outlines-releases
+    name: "Outlines releases"
+    url: "https://github.com/dottxt-ai/outlines/releases.atom"
+    interval_minutes: 360
 products:
   - slug: outlines-engine
     name: "Outlines"

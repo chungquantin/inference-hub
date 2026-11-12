@@ -7,6 +7,11 @@ links:
 categories: [inference-engines, model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: mlc-ai-releases
+    name: "MLC AI releases"
+    url: "https://github.com/mlc-ai/mlc-llm/releases.atom"
+    interval_minutes: 360
 products:
   - slug: mlc-llm
     name: "MLC LLM"

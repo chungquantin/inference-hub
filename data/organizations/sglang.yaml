@@ -7,6 +7,11 @@ logo_url: /logos/sglang.png
 founded_year: 2024
 links:
   github: https://github.com/sgl-project
+feeds:
+  - slug: sglang-releases
+    name: "SGLang releases"
+    url: "https://github.com/sgl-project/sglang/releases.atom"
+    interval_minutes: 360
 products:
   - slug: sglang-engine
     name: SGLang

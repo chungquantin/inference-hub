@@ -8,6 +8,11 @@ categories: [local-runtimes]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: jan-releases
+    name: "Jan releases"
+    url: "https://github.com/janhq/jan/releases.atom"
+    interval_minutes: 360
 products:
   - slug: jan
     name: "Jan"

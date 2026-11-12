@@ -7,3 +7,8 @@ logo_url: /logos/akash-network.png
 tagging:
   aliases: [Akash]
   match_case: true
+feeds:
+  - slug: akash-network-blog
+    name: "Akash Network blog"
+    url: "https://akash.network/blog.xml"
+    interval_minutes: 180

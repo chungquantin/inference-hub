@@ -11,6 +11,11 @@ categories: [observability]
 tagging:
   aliases: ["OpenLLMetry"]
   match_case: true
+feeds:
+  - slug: traceloop-releases
+    name: "Traceloop releases"
+    url: "https://github.com/traceloop/openllmetry/releases.atom"
+    interval_minutes: 360
 products:
   - slug: openllmetry-traceloop
     name: "OpenLLMetry (Traceloop)"

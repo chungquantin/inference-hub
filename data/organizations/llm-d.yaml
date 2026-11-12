@@ -10,6 +10,11 @@ links:
 categories: [serving-orchestration]
 tagging:
   match_case: true
+feeds:
+  - slug: llm-d-blog
+    name: "llm-d blog"
+    url: "https://llm-d.ai/blog/rss.xml"
+    interval_minutes: 180
 products:
   - slug: llm-d-engine
     name: "llm-d"

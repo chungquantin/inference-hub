@@ -8,3 +8,8 @@ logo_url: /logos/lm-studio.png
 categories: [local-runtimes]
 tagging:
   match_case: true
+feeds:
+  - slug: lm-studio-blog
+    name: "LM Studio blog"
+    url: "https://lmstudio.ai/rss.xml"
+    interval_minutes: 180

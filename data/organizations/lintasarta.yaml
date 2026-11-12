@@ -7,3 +7,8 @@ logo_url: /logos/lintasarta.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+feeds:
+  - slug: lintasarta-blog
+    name: "Lintasarta blog"
+    url: "https://www.lintasarta.net/feed/"
+    interval_minutes: 180

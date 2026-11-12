@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: flashattention-releases
+    name: "FlashAttention releases"
+    url: "https://github.com/Dao-AILab/flash-attention/releases.atom"
+    interval_minutes: 360
 products:
   - slug: flashattention-engine
     name: "FlashAttention"

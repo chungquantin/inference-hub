@@ -10,6 +10,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: lmcache-releases
+    name: "LMCache releases"
+    url: "https://github.com/LMCache/LMCache/releases.atom"
+    interval_minutes: 360
 products:
   - slug: lmcache-engine
     name: "LMCache"

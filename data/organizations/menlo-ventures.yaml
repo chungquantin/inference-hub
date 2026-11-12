@@ -5,3 +5,9 @@ website: https://menlovc.com
 logo_url: /logos/menlo-ventures.png
 hq_country: US
 founded_year: 1976
+feeds:
+  - slug: menlo-ventures-blog
+    name: "Menlo Ventures blog"
+    url: "https://menlovc.com/feed/"
+    interval_minutes: 180
+    auto_approve: false

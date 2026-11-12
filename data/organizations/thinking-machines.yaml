@@ -7,3 +7,8 @@ website: "https://thinkingmachines.ai"
 logo_url: /logos/thinking-machines.png
 tagging:
   match_case: true
+feeds:
+  - slug: thinking-machines-blog
+    name: "Thinking Machines blog"
+    url: "https://thinkingmachines.ai/index.xml"
+    interval_minutes: 180

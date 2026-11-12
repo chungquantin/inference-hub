@@ -6,3 +6,8 @@ website: https://openrouter.ai
 logo_url: /logos/openrouter.png
 hq_country: US
 founded_year: 2023
+feeds:
+  - slug: openrouter-blog
+    name: "OpenRouter blog"
+    url: "https://openrouter.ai/blog/feed.xml"
+    interval_minutes: 180

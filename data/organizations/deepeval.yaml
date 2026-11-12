@@ -10,6 +10,11 @@ links:
 categories: [evals-benchmarks]
 tagging:
   match_case: true
+feeds:
+  - slug: deepeval-releases
+    name: "DeepEval releases"
+    url: "https://github.com/confident-ai/deepeval/releases.atom"
+    interval_minutes: 360
 products:
   - slug: deepeval-engine
     name: "DeepEval"

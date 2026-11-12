@@ -10,6 +10,11 @@ links:
 categories: [inference-engines]
 tagging:
   match_case: true
+feeds:
+  - slug: exllama-releases
+    name: "ExLlama releases"
+    url: "https://github.com/turboderp-org/exllamav3/releases.atom"
+    interval_minutes: 360
 products:
   - slug: exllamav2-v3
     name: "ExLlamaV2 / V3"

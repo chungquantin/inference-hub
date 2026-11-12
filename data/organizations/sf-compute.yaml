@@ -8,3 +8,8 @@ logo_url: /logos/sf-compute.svg
 categories: [gpu-marketplaces]
 tagging:
   match_case: true
+feeds:
+  - slug: sf-compute-blog
+    name: "SF Compute blog"
+    url: "https://sfcompute.com/news/rss.xml"
+    interval_minutes: 180

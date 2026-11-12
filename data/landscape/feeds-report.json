@@ -1,0 +1,1453 @@
+{
+ "written": [
+  {
+   "slug": "akash-network",
+   "feed": "https://akash.network/blog.xml",
+   "entries": 240,
+   "latest": "2026-10-26",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "anyscale",
+   "feed": "https://www.anyscale.com/rss.xml",
+   "entries": 18,
+   "latest": "2026-11-09",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "apache-apisix",
+   "feed": "https://apisix.apache.org/blog/rss",
+   "entries": 20,
+   "latest": "2026-10-31",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "arize-ai",
+   "feed": "https://arize.com/feed/",
+   "entries": 10,
+   "latest": "2026-11-05",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "bifrost",
+   "feed": "https://www.getmaxim.ai/blog/rss/",
+   "entries": 15,
+   "latest": "2026-04-18",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "chutes",
+   "feed": "https://chutes.ai/news/rss.xml",
+   "entries": 24,
+   "latest": "2026-11-04",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "civo",
+   "feed": "https://www.civo.com/blog/rss.xml",
+   "entries": 100,
+   "latest": "2026-11-07",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "cudo-compute",
+   "feed": "https://www.cudocompute.com/feed",
+   "entries": 10,
+   "latest": "2026-10-14",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "databricks",
+   "feed": "https://www.databricks.com/feed",
+   "entries": 10,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "datadog",
+   "feed": "https://www.datadoghq.com/blog/index.xml",
+   "entries": 97,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "denvr-dataworks",
+   "feed": "https://www.denvr.com/blog-feed.xml",
+   "entries": 20,
+   "latest": "2026-09-10",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "digitalocean",
+   "feed": "https://www.digitalocean.com/rss/blog.atom",
+   "entries": 100,
+   "latest": "2026-11-10",
+   "how": "declared",
+   "auto_approve": false
+  },
+  {
+   "slug": "elevenlabs",
+   "feed": "https://elevenlabs.io/blog/rss.xml",
+   "entries": 50,
+   "latest": "2026-11-11",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "epoch-ai",
+   "feed": "https://epoch.ai/atom.xml",
+   "entries": 50,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": false
+  },
+  {
+   "slug": "exoscale",
+   "feed": "https://www.exoscale.com/blog/rss.xml",
+   "entries": 20,
+   "latest": "2026-11-10",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "fal",
+   "feed": "https://fal.ai/changelog/rss.xml",
+   "entries": 50,
+   "latest": "2026-11-12",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "flashinfer",
+   "feed": "https://flashinfer.ai/feed.xml",
+   "entries": 9,
+   "latest": "2026-09-22",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "gensyn",
+   "feed": "https://www.gensyn.ai/news/rss.xml",
+   "entries": 17,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "hetzner",
+   "feed": "https://www.hetzner.com/blog/rss.xml",
+   "entries": 20,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "inferencemax",
+   "feed": "https://inferencex.semianalysis.com/feed.xml",
+   "entries": 35,
+   "latest": "2026-09-28",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "kong",
+   "feed": "https://konghq.com/feed/rss/blogs",
+   "entries": 10,
+   "latest": "2026-11-10",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "koyeb",
+   "feed": "https://www.koyeb.com/feed.xml",
+   "entries": 139,
+   "latest": "2026-02-17",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "langchain",
+   "feed": "https://www.langchain.com/blog/rss.xml",
+   "entries": 99,
+   "latest": "2026-11-12",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "lightspeed",
+   "feed": "https://lsvp.com/feed/",
+   "entries": 10,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "lintasarta",
+   "feed": "https://www.lintasarta.net/feed/",
+   "entries": 10,
+   "latest": "2026-10-06",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "liquid-inference",
+   "feed": "https://liquidinference.ai/feeds.xml",
+   "entries": 133,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "litellm",
+   "feed": "https://docs.litellm.ai/blog/rss.xml",
+   "entries": 168,
+   "latest": "2026-11-11",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "llm-d",
+   "feed": "https://llm-d.ai/blog/rss.xml",
+   "entries": 20,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "lm-studio",
+   "feed": "https://lmstudio.ai/rss.xml",
+   "entries": 65,
+   "latest": "2026-09-18",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "localai",
+   "feed": "https://localai.io/blog/index.xml",
+   "entries": 14,
+   "latest": "2026-10-02",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "menlo-ventures",
+   "feed": "https://menlovc.com/feed/",
+   "entries": 10,
+   "latest": "2026-11-03",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "microsoft",
+   "feed": "https://azure.microsoft.com/en-us/blog/feed/",
+   "entries": 10,
+   "latest": "2026-10-29",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "mistral-ai",
+   "feed": "https://mistral.ai/news/rss",
+   "entries": 94,
+   "latest": "2026-11-05",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "mlflow",
+   "feed": "https://mlflow.org/blog/rss.xml",
+   "entries": 20,
+   "latest": "2026-11-03",
+   "how": "declared",
+   "auto_approve": false
+  },
+  {
+   "slug": "modal",
+   "feed": "https://modal.com/blog/atom.xml",
+   "entries": 155,
+   "latest": "2026-11-11",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "near-ai",
+   "feed": "https://near.ai/feed.xml",
+   "entries": 33,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "ollama",
+   "feed": "https://ollama.com/blog/rss.xml",
+   "entries": 63,
+   "latest": "2026-10-24",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "openlit",
+   "feed": "https://www.openlit.io/feed.xml",
+   "entries": 17,
+   "latest": "2026-09-21",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "openpipe",
+   "feed": "https://openpipe.ai/rss.xml",
+   "entries": 34,
+   "latest": "2026-05-18",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "openrouter",
+   "feed": "https://openrouter.ai/blog/feed.xml",
+   "entries": 177,
+   "latest": "2026-11-12",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "opik",
+   "feed": "https://www.comet.com/site/blog/feed/",
+   "entries": 11,
+   "latest": "2026-11-06",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "portkey",
+   "feed": "https://portkey.ai/blog/rss/",
+   "entries": 15,
+   "latest": "2026-06-28",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "promptfoo",
+   "feed": "https://www.promptfoo.dev/blog/rss.xml",
+   "entries": 20,
+   "latest": "2026-03-12",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "replicate",
+   "feed": "https://replicate.com/blog/rss",
+   "entries": 125,
+   "latest": "2026-11-03",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "runpod",
+   "feed": "https://www.runpod.io/blog/rss.xml",
+   "entries": 99,
+   "latest": "2026-11-12",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "sakana",
+   "feed": "https://sakana.ai/feed.xml",
+   "entries": 10,
+   "latest": "2026-11-10",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "sambanova",
+   "feed": "https://sambanova.ai/blog/rss.xml",
+   "entries": 10,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "sarvam-ai",
+   "feed": "https://www.sarvam.ai/rss.xml",
+   "entries": 32,
+   "latest": "2026-11-09",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "scaleway",
+   "feed": "https://www.scaleway.com/en/blog/rss.xml",
+   "entries": 335,
+   "latest": "2026-10-28",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "sequoia-capital",
+   "feed": "https://framerusercontent.com/assets/zL3bmnWLCRBV9qNPIY7sqnKBuE.xml",
+   "entries": 50,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": false
+  },
+  {
+   "slug": "sf-compute",
+   "feed": "https://sfcompute.com/news/rss.xml",
+   "entries": 10,
+   "latest": "2026-10-03",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "sify",
+   "feed": "https://www.sify.com/feed/",
+   "entries": 10,
+   "latest": "2026-11-11",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "tata-communications",
+   "feed": "https://www.tatacommunications.com/blog/rss.xml",
+   "entries": 10,
+   "latest": "2026-10-14",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "tensorzero",
+   "feed": "https://www.tensorzero.com/blog/rss.xml",
+   "entries": 12,
+   "latest": "2026-05-12",
+   "how": "declared",
+   "auto_approve": true
+  },
+  {
+   "slug": "thinking-machines",
+   "feed": "https://thinkingmachines.ai/index.xml",
+   "entries": 7,
+   "latest": "2026-07-31",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "vercel",
+   "feed": "https://vercel.com/atom",
+   "entries": 100,
+   "latest": "2026-11-11",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "voltage-park",
+   "feed": "https://voltagepark.com/blog/rss.xml",
+   "entries": 49,
+   "latest": "2026-03-21",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "vultr",
+   "feed": "https://blogs.vultr.com/rss.xml",
+   "entries": 50,
+   "latest": "2026-11-10",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "wavespeedai",
+   "feed": "https://wavespeed.ai/blog/rss.xml",
+   "entries": 50,
+   "latest": "2026-11-12",
+   "how": "path",
+   "auto_approve": true
+  },
+  {
+   "slug": "yotta",
+   "feed": "https://yotta.com/feed/",
+   "entries": 10,
+   "latest": "2026-06-03",
+   "how": "declared",
+   "auto_approve": true
+  }
+ ],
+ "refused": [
+  {
+   "slug": "bitsandbytes",
+   "url": "https://huggingface.co/blog/feed.xml",
+   "why": "the feed is Hugging Face's blog, not the project's"
+  },
+  {
+   "slug": "envoy-ai-gateway",
+   "url": "https://theagentrouter.ai/blog/rss.xml",
+   "why": "the site redirects to an unrelated domain"
+  },
+  {
+   "slug": "gmo-internet-group",
+   "url": "https://group.gmo/rss/",
+   "why": "undated group press releases, not about AI"
+  },
+  {
+   "slug": "gpt4all",
+   "url": "https://www.nomic.ai/feed.xml",
+   "why": "the feed is Nomic's company news, not the project's"
+  },
+  {
+   "slug": "liquid-web",
+   "url": "https://www.liquidweb.com/feed/",
+   "why": "the feed has no dates"
+  },
+  {
+   "slug": "mlperf-inference",
+   "url": "https://mlcommons.org/feed/",
+   "why": "the feed is MLCommons' blog, which covers every benchmark"
+  },
+  {
+   "slug": "morph",
+   "url": "https://www.morphllm.com/blog/rss.xml",
+   "why": "stale: latest entry 2023-09-20"
+  },
+  {
+   "slug": "ooredoo",
+   "url": "https://www.ooredoo.com/sitemap.rss",
+   "why": "the feed is a sitemap of corporate pages, not news"
+  },
+  {
+   "slug": "proact-it",
+   "url": "https://www.proact.eu/feed/",
+   "why": "stale: latest entry 2025-09-01"
+  },
+  {
+   "slug": "rackspace",
+   "url": "https://www.rackspace.com/feed/",
+   "why": "only 1 entries"
+  },
+  {
+   "slug": "snowflake",
+   "url": "https://publish-p57963-e462109.adobeaemcloud.com/feed/?lang=en",
+   "why": "the feed URL is an unlabelled publishing host with no title"
+  },
+  {
+   "slug": "soluna",
+   "url": "https://www.solunacomputing.com/feed/",
+   "why": "stale: latest entry 2021-08-26"
+  },
+  {
+   "slug": "torchao",
+   "url": "https://pytorch.org/feed/",
+   "why": "the feed is the PyTorch blog, not the project's"
+  }
+ ],
+ "none": [
+  {
+   "slug": "a16z",
+   "site": "https://a16z.com",
+   "why": "https://a16z.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fa16z.com%2F: HTTP 404"
+  },
+  {
+   "slug": "aethir",
+   "site": "https://aethir.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "aionlabs",
+   "site": "https://aionlabs.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "akamai",
+   "site": "https://www.akamai.com/products/cloud-gpu",
+   "why": "home page: HTTP 403"
+  },
+  {
+   "slug": "alibaba-cloud",
+   "site": "https://alibabacloud.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ambient",
+   "site": "https://ambient.xyz",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "amd",
+   "site": "https://www.amd.com",
+   "why": "home page: error sending request for url (https://www.amd.com/)"
+  },
+  {
+   "slug": "anthropic",
+   "site": "https://www.anthropic.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "aphrodite-engine",
+   "site": "https://sonar.dphn.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "artificial-analysis",
+   "site": "https://artificialanalysis.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "aruba",
+   "site": "https://arubacloud.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "asml",
+   "site": "https://www.asml.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "assemblyai",
+   "site": "https://assemblyai.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "atlas-cloud",
+   "site": "https://www.atlascloud.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "autoawq",
+   "site": "https://casper-hansen.github.io/AutoAWQ/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "baidu-ai-cloud",
+   "site": "https://cloud.baidu.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "banana-dev",
+   "site": "https://banana.dev",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "baseten",
+   "site": "https://baseten.co",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "beam",
+   "site": "https://beam.cloud",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "bitdeer",
+   "site": "https://bitdeer.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "bittensor",
+   "site": "https://bittensor.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "black-forest-labs",
+   "site": "https://bfl.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "braintrust",
+   "site": "https://www.braintrust.dev",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "burn",
+   "site": "https://burn.dev",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cerebras",
+   "site": "https://www.cerebras.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cerebrium",
+   "site": "https://cerebrium.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cirrascale",
+   "site": "https://cirrascale.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "claro-brasil",
+   "site": "https://claro.com.br",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cloudflare",
+   "site": "https://developers.cloudflare.com/workers-ai",
+   "why": "https://developers.cloudflare.com/changelog/index.xml: HTTP 404"
+  },
+  {
+   "slug": "cloudrift",
+   "site": "https://www.cloudrift.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cohere",
+   "site": "https://cohere.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "computeprices-com",
+   "site": "https://computeprices.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "core42",
+   "site": "https://core42.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "crusoe",
+   "site": "https://crusoe.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "cumulus-labs",
+   "site": "https://cumuluslabs.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "darkbloom",
+   "site": "https://www.darkbloom.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "decart",
+   "site": "https://decart.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "deci",
+   "site": "https://deci.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "deepeval",
+   "site": "https://deepeval.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "deepgram",
+   "site": "https://deepgram.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "deepinfra",
+   "site": "https://deepinfra.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "deepseek",
+   "site": "https://www.deepseek.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "docker-model-runner",
+   "site": "https://docs.docker.com/ai/model-runner/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "doubleword",
+   "site": "https://www.doubleword.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "dstack",
+   "site": "https://dstack.ai/docs",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "e2e-networks",
+   "site": "https://e2enetworks.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "eden-ai",
+   "site": "https://www.edenai.co",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "featherless",
+   "site": "https://featherless.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "fireworks-ai",
+   "site": "https://fireworks.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "firmus",
+   "site": "https://firmus.co",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "flexflow-serve",
+   "site": "https://flexflow.ai",
+   "why": "https://flexflow.ai/feed.xml: feed has no entries"
+  },
+  {
+   "slug": "fluidstack",
+   "site": "https://fluidstack.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "friendli",
+   "site": "https://friendli.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "galileo",
+   "site": "https://www.galileo.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "gateway-api-inference-extension",
+   "site": "https://gateway-api-inference-extension.sigs.k8s.io/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "general-catalyst",
+   "site": "https://www.generalcatalyst.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "genesis-cloud",
+   "site": "https://genesiscloud.com",
+   "why": "home page: HTTP 522"
+  },
+  {
+   "slug": "ggml",
+   "site": "https://ggml.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "gmi-cloud",
+   "site": "https://gmicloud.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "gonka",
+   "site": "https://gonka.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "gptqmodel",
+   "site": "https://x.com/Qubitium",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "groq",
+   "site": "https://groq.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "helicone",
+   "site": "https://www.helicone.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "higress",
+   "site": "https://higress.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "hive-digital",
+   "site": "https://hivedigitaltechnologies.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "huawei-cloud",
+   "site": "https://huaweicloud.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "humain",
+   "site": "https://humain.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "hut-8",
+   "site": "https://hut8.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "hyperbolic",
+   "site": "https://www.hyperbolic.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "hyperstack",
+   "site": "https://hyperstack.cloud",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ibm",
+   "site": "https://ibm.com/watsonx",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "index-ventures",
+   "site": "https://www.indexventures.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "inference-net",
+   "site": "https://inference.net",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "infinity",
+   "site": "https://michaelfeil.github.io/infinity/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "infomaniak",
+   "site": "https://infomaniak.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "inspect-ai",
+   "site": "https://inspect.aisi.org.uk/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "io-net",
+   "site": "https://io.net",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ionos",
+   "site": "https://ionos.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ionstream",
+   "site": "https://ionstream.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "iren",
+   "site": "https://iren.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "kingsoft-cloud",
+   "site": "https://ksyun.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "koboldcpp",
+   "site": "https://koboldcpp.net",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "kserve",
+   "site": "https://kserve.github.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "kt",
+   "site": "https://kt.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "kubeai",
+   "site": "https://www.kubeai.org",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "kubeflow",
+   "site": "https://www.kubeflow.org",
+   "why": "https://www.kubeflow.org/index.xml: feed has no entries"
+  },
+  {
+   "slug": "lakera",
+   "site": "https://www.lakera.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "laminar",
+   "site": "https://laminar.sh",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "langfuse",
+   "site": "https://langfuse.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "latitude-sh",
+   "site": "https://latitude.sh",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "leaseweb",
+   "site": "https://leaseweb.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lemonade",
+   "site": "https://lemonade-server.ai/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lepton-ai",
+   "site": "https://lepton.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lightning-ai",
+   "site": "https://lightning.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "liquid-ai",
+   "site": "https://liquid.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "llama-swap",
+   "site": "https://llama-swap.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "llamafile",
+   "site": "https://docs.mozilla.ai/llamafile",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "llm-gateway",
+   "site": "https://llmgateway.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "llm-guard",
+   "site": "https://protectai.github.io/llm-guard/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lm-evaluation-harness",
+   "site": "https://www.eleuther.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lmarena",
+   "site": "https://lmarena.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "lmcache",
+   "site": "https://lmcache.ai/",
+   "why": "https://lmcache.ai/en/feed/: feed has no entries"
+  },
+  {
+   "slug": "lmdeploy",
+   "site": "https://lmdeploy.readthedocs.io/en/latest",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "mancer",
+   "site": "https://mancer.tech",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "martian",
+   "site": "https://withmartian.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "medusa",
+   "site": "https://sites.google.com/view/medusa-llm",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "meta",
+   "site": "https://ai.meta.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "minimax",
+   "site": "https://minimax.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "moonshot-ai",
+   "site": "https://moonshot.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ncompass",
+   "site": "https://ncompass.tech",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "nebius",
+   "site": "https://nebius.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "northern-data",
+   "site": "https://northerndata.de",
+   "why": "home page: HTTP 404"
+  },
+  {
+   "slug": "nosana",
+   "site": "https://nosana.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "not-diamond",
+   "site": "https://www.notdiamond.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "nous-research",
+   "site": "https://portal.nousresearch.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "novita-ai",
+   "site": "https://novita.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "nscale",
+   "site": "https://nscale.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "octoai",
+   "site": "https://octo.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "openvino-genai",
+   "site": "https://openvinotoolkit.github.io/openvino.genai/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "oracle",
+   "site": "https://www.oracle.com/cloud/",
+   "why": "home page: HTTP 403"
+  },
+  {
+   "slug": "orange-business",
+   "site": "https://orange-business.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "outlines",
+   "site": "https://dottxt-ai.github.io/outlines/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "outscale",
+   "site": "https://outscale.com",
+   "why": "https://en.outscale.com/feed/: HTTP 404"
+  },
+  {
+   "slug": "ovhcloud",
+   "site": "https://ovhcloud.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "paperspace",
+   "site": "https://paperspace.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "parasail",
+   "site": "https://parasail.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "perplexity",
+   "site": "https://perplexity.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "petals",
+   "site": "https://petals.dev",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "predibase",
+   "site": "https://predibase.com",
+   "why": "home page: HTTP 403"
+  },
+  {
+   "slug": "prime-intellect",
+   "site": "https://primeintellect.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "promptlayer",
+   "site": "https://www.promptlayer.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "pruna-ai",
+   "site": "https://docs.pruna.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "public-ai",
+   "site": "https://publicai.co",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "qumulusai",
+   "site": "https://qumulusai.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ragas",
+   "site": "https://docs.ragas.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ramalama",
+   "site": "https://ramalama.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "reka-ai",
+   "site": "https://reka.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "relace",
+   "site": "https://relace.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "render-network",
+   "site": "https://rendernetwork.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "requesty",
+   "site": "https://www.requesty.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "respan",
+   "site": "https://respan.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "ritual",
+   "site": "https://ritual.net",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "runway",
+   "site": "https://runwayml.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "sakura-internet",
+   "site": "https://sakura.ad.jp",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "salad",
+   "site": "https://salad.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "samsung-sds",
+   "site": "https://samsungsds.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "sglang",
+   "site": "https://docs.sglang.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "shadeform",
+   "site": "https://www.shadeform.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "sharon-ai",
+   "site": "https://sharonai.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "siliconflow",
+   "site": "https://siliconflow.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "singtel",
+   "site": "https://singtel.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "sk-telecom",
+   "site": "https://sktelecom.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "skypilot",
+   "site": "https://skypilot.ai/",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "stepfun",
+   "site": "https://stepfun.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "swisscom",
+   "site": "https://swisscom.ch",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "t-systems",
+   "site": "https://t-systems.com",
+   "why": "home page: HTTP 403"
+  },
+  {
+   "slug": "targon",
+   "site": "https://targon.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "telus",
+   "site": "https://telus.com",
+   "why": "home page: HTTP 403"
+  },
+  {
+   "slug": "tencent-cloud",
+   "site": "https://cloud.tencent.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "tensordock",
+   "site": "https://tensordock.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "tensorwave",
+   "site": "https://tensorwave.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "tenstorrent",
+   "site": "https://tenstorrent.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "thunder-compute",
+   "site": "https://thundercompute.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "traceloop",
+   "site": "https://www.traceloop.com/openllmetry",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "truefoundry",
+   "site": "https://www.truefoundry.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "tyk",
+   "site": "https://tyk.io",
+   "why": "https://tyk.io/feed/: HTTP 404"
+  },
+  {
+   "slug": "unify",
+   "site": "https://unify.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "unsloth",
+   "site": "https://unsloth.ai/docs",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "upstage",
+   "site": "https://upstage.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "vast-ai",
+   "site": "https://vast.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "venice",
+   "site": "https://venice.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "verda",
+   "site": "https://verda.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "viettel",
+   "site": "https://viettel.com.vn",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "volcengine",
+   "site": "https://volcengine.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "wafer",
+   "site": "https://wafer.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "weights-and-biases",
+   "site": "https://wandb.ai/site/weave",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "whitefiber",
+   "site": "https://whitefiber.com",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "xai",
+   "site": "https://x.ai",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "xinference",
+   "site": "https://inference.readthedocs.io",
+   "why": "no feed declared or at a common path"
+  },
+  {
+   "slug": "z-ai",
+   "site": "https://z.ai",
+   "why": "no feed declared or at a common path"
+  }
+ ]
+}

@@ -10,6 +10,11 @@ categories: [inference-engines]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: infinity-releases
+    name: "Infinity releases"
+    url: "https://github.com/michaelfeil/infinity/releases.atom"
+    interval_minutes: 360
 products:
   - slug: infinity-engine
     name: "Infinity"

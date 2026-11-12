@@ -9,6 +9,11 @@ links:
 categories: [model-optimization]
 tagging:
   match_case: true
+feeds:
+  - slug: llguidance-releases
+    name: "llguidance releases"
+    url: "https://github.com/guidance-ai/llguidance/releases.atom"
+    interval_minutes: 360
 products:
   - slug: llguidance-engine
     name: "llguidance"

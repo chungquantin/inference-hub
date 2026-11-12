@@ -10,6 +10,11 @@ links:
 categories: [evals-benchmarks]
 tagging:
   match_case: true
+feeds:
+  - slug: lm-evaluation-harness-releases
+    name: "lm-evaluation-harness releases"
+    url: "https://github.com/EleutherAI/lm-evaluation-harness/releases.atom"
+    interval_minutes: 360
 products:
   - slug: lm-evaluation-harness-engine
     name: "lm-evaluation-harness"

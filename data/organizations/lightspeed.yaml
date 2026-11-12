@@ -8,3 +8,9 @@ founded_year: 2000
 tagging:
   aliases: [Lightspeed]
   match_case: true
+feeds:
+  - slug: lightspeed-blog
+    name: "Lightspeed Venture Partners blog"
+    url: "https://lsvp.com/feed/"
+    interval_minutes: 180
+    auto_approve: false

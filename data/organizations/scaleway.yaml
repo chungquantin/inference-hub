@@ -8,3 +8,8 @@ logo_url: /logos/scaleway.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+feeds:
+  - slug: scaleway-blog
+    name: "Scaleway blog"
+    url: "https://www.scaleway.com/en/blog/rss.xml"
+    interval_minutes: 180

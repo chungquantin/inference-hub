@@ -11,6 +11,11 @@ categories: [inference-engines]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: burn-releases
+    name: "Burn releases"
+    url: "https://github.com/tracel-ai/burn/releases.atom"
+    interval_minutes: 360
 products:
   - slug: burn-engine
     name: "Burn"

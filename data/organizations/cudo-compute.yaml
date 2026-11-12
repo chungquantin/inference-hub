@@ -7,3 +7,8 @@ logo_url: /logos/cudo-compute.png
 tagging:
   aliases: [Cudo]
   match_case: true
+feeds:
+  - slug: cudo-compute-blog
+    name: "Cudo Compute blog"
+    url: "https://www.cudocompute.com/feed"
+    interval_minutes: 180

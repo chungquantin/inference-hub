@@ -9,3 +9,9 @@ links:
 categories: [observability]
 tagging:
   match_case: true
+feeds:
+  - slug: mlflow-blog
+    name: "MLflow blog"
+    url: "https://mlflow.org/blog/rss.xml"
+    interval_minutes: 180
+    auto_approve: false

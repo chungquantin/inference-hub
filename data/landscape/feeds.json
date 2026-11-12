@@ -1,0 +1,2011 @@
+[
+  {
+    "slug": "a16z",
+    "site": "https://a16z.com",
+    "feed": null,
+    "tried": [
+      "https://a16z.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fa16z.com%2F: HTTP 404",
+      "https://a16z.com/wp-json/wp/v2/pages/22686: HTTP 404"
+    ]
+  },
+  {
+    "slug": "aethir",
+    "site": "https://aethir.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "aionlabs",
+    "site": "https://aionlabs.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "akamai",
+    "site": "https://www.akamai.com/products/cloud-gpu",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "akash-network",
+    "site": "https://akash.network",
+    "feed": {
+      "url": "https://akash.network/blog.xml",
+      "title": "Akash Network Blog",
+      "entries": 240,
+      "how": "declared",
+      "latest": "2026-10-26"
+    },
+    "tried": []
+  },
+  {
+    "slug": "alibaba-cloud",
+    "site": "https://alibabacloud.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ambient",
+    "site": "https://ambient.xyz",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "amd",
+    "site": "https://www.amd.com",
+    "feed": null,
+    "tried": [
+      "home page: error sending request for url (https://www.amd.com/)"
+    ]
+  },
+  {
+    "slug": "anthropic",
+    "site": "https://www.anthropic.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "anyscale",
+    "site": "https://anyscale.com",
+    "feed": {
+      "url": "https://www.anyscale.com/rss.xml",
+      "title": "Anyscale blog posts | RSS Feed",
+      "entries": 18,
+      "how": "path",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "apache-apisix",
+    "site": "https://apisix.apache.org",
+    "feed": {
+      "url": "https://apisix.apache.org/blog/rss",
+      "title": "Apache APISIX Blog",
+      "entries": 20,
+      "how": "path",
+      "latest": "2026-10-31"
+    },
+    "tried": []
+  },
+  {
+    "slug": "aphrodite-engine",
+    "site": "https://sonar.dphn.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "arize-ai",
+    "site": "https://arize.com/docs/phoenix",
+    "feed": {
+      "url": "https://arize.com/feed/",
+      "title": "Arize AI",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-05"
+    },
+    "tried": []
+  },
+  {
+    "slug": "artificial-analysis",
+    "site": "https://artificialanalysis.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "aruba",
+    "site": "https://arubacloud.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "asml",
+    "site": "https://www.asml.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "assemblyai",
+    "site": "https://assemblyai.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "atlas-cloud",
+    "site": "https://www.atlascloud.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "autoawq",
+    "site": "https://casper-hansen.github.io/AutoAWQ/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "baidu-ai-cloud",
+    "site": "https://cloud.baidu.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "banana-dev",
+    "site": "https://banana.dev",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "baseten",
+    "site": "https://baseten.co",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "beam",
+    "site": "https://beam.cloud",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "bifrost",
+    "site": "https://www.getmaxim.ai/bifrost",
+    "feed": {
+      "url": "https://www.getmaxim.ai/blog/rss/",
+      "title": "Maxim Blog",
+      "entries": 15,
+      "how": "path",
+      "latest": "2026-04-18"
+    },
+    "tried": []
+  },
+  {
+    "slug": "bitdeer",
+    "site": "https://bitdeer.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "bitsandbytes",
+    "site": "https://huggingface.co/docs/bitsandbytes/main/en/index",
+    "feed": {
+      "url": "https://huggingface.co/blog/feed.xml",
+      "title": "Hugging Face - Blog",
+      "entries": 904,
+      "how": "declared",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "bittensor",
+    "site": "https://bittensor.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "black-forest-labs",
+    "site": "https://bfl.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "braintrust",
+    "site": "https://www.braintrust.dev",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "burn",
+    "site": "https://burn.dev",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "cerebras",
+    "site": "https://www.cerebras.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "cerebrium",
+    "site": "https://cerebrium.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "chutes",
+    "site": "https://chutes.ai",
+    "feed": {
+      "url": "https://chutes.ai/news/rss.xml",
+      "title": "Chutes News & Updates",
+      "entries": 24,
+      "how": "declared",
+      "latest": "2026-11-04"
+    },
+    "tried": []
+  },
+  {
+    "slug": "cirrascale",
+    "site": "https://cirrascale.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "civo",
+    "site": "https://civo.com",
+    "feed": {
+      "url": "https://www.civo.com/blog/rss.xml",
+      "title": "The Civo Blog | Civo",
+      "entries": 100,
+      "how": "declared",
+      "latest": "2026-11-07"
+    },
+    "tried": []
+  },
+  {
+    "slug": "claro-brasil",
+    "site": "https://claro.com.br",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "cloudflare",
+    "site": "https://developers.cloudflare.com/workers-ai",
+    "feed": null,
+    "tried": [
+      "https://developers.cloudflare.com/changelog/index.xml: HTTP 404"
+    ]
+  },
+  {
+    "slug": "cloudrift",
+    "site": "https://www.cloudrift.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "cohere",
+    "site": "https://cohere.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "computeprices-com",
+    "site": "https://computeprices.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "core42",
+    "site": "https://core42.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "crusoe",
+    "site": "https://crusoe.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "cudo-compute",
+    "site": "https://www.cudocompute.com",
+    "feed": {
+      "url": "https://www.cudocompute.com/feed",
+      "title": "CUDO Compute",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2026-10-14"
+    },
+    "tried": []
+  },
+  {
+    "slug": "cumulus-labs",
+    "site": "https://cumuluslabs.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "darkbloom",
+    "site": "https://www.darkbloom.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "databricks",
+    "site": "https://databricks.com",
+    "feed": {
+      "url": "https://www.databricks.com/feed",
+      "title": "Databricks",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "datadog",
+    "site": "https://www.datadoghq.com/product/llm-observability/",
+    "feed": {
+      "url": "https://www.datadoghq.com/blog/index.xml",
+      "title": "Datadog | The Monitor blog",
+      "entries": 97,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "decart",
+    "site": "https://decart.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "deci",
+    "site": "https://deci.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "deepeval",
+    "site": "https://deepeval.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "deepgram",
+    "site": "https://deepgram.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "deepinfra",
+    "site": "https://deepinfra.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "deepseek",
+    "site": "https://www.deepseek.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "denvr-dataworks",
+    "site": "https://denvrdata.com",
+    "feed": {
+      "url": "https://www.denvr.com/blog-feed.xml",
+      "title": "Denvr",
+      "entries": 20,
+      "how": "declared",
+      "latest": "2026-09-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "digitalocean",
+    "site": "https://digitalocean.com",
+    "feed": {
+      "url": "https://www.digitalocean.com/rss/blog.atom",
+      "title": "DigitalOcean Blog",
+      "entries": 100,
+      "how": "declared",
+      "latest": "2026-11-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "docker-model-runner",
+    "site": "https://docs.docker.com/ai/model-runner/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "doubleword",
+    "site": "https://www.doubleword.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "dstack",
+    "site": "https://dstack.ai/docs",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "e2e-networks",
+    "site": "https://e2enetworks.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "eden-ai",
+    "site": "https://www.edenai.co",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "elevenlabs",
+    "site": "https://elevenlabs.io",
+    "feed": {
+      "url": "https://elevenlabs.io/blog/rss.xml",
+      "title": "ElevenLabs Blog",
+      "entries": 50,
+      "how": "declared",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "envoy-ai-gateway",
+    "site": "https://aigateway.envoyproxy.io",
+    "feed": {
+      "url": "https://theagentrouter.ai/blog/rss.xml",
+      "title": "Agent Router Blog",
+      "entries": 15,
+      "how": "declared",
+      "latest": "2026-11-06"
+    },
+    "tried": []
+  },
+  {
+    "slug": "epoch-ai",
+    "site": "https://epoch.ai",
+    "feed": {
+      "url": "https://epoch.ai/atom.xml",
+      "title": "Epoch AI — Latest",
+      "entries": 50,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "exoscale",
+    "site": "https://exoscale.com",
+    "feed": {
+      "url": "https://www.exoscale.com/blog/rss.xml",
+      "title": "Exoscale Blog",
+      "entries": 20,
+      "how": "path",
+      "latest": "2026-11-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "fal",
+    "site": "https://fal.ai",
+    "feed": {
+      "url": "https://fal.ai/changelog/rss.xml",
+      "title": "fal Changelog",
+      "entries": 50,
+      "how": "path",
+      "latest": "2026-11-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "featherless",
+    "site": "https://featherless.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "fireworks-ai",
+    "site": "https://fireworks.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "firmus",
+    "site": "https://firmus.co",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "flashinfer",
+    "site": "https://flashinfer.ai",
+    "feed": {
+      "url": "https://flashinfer.ai/feed.xml",
+      "title": "FlashInfer",
+      "entries": 9,
+      "how": "declared",
+      "latest": "2026-09-22"
+    },
+    "tried": []
+  },
+  {
+    "slug": "flexflow-serve",
+    "site": "https://flexflow.ai",
+    "feed": null,
+    "tried": [
+      "https://flexflow.ai/feed.xml: feed has no entries"
+    ]
+  },
+  {
+    "slug": "fluidstack",
+    "site": "https://fluidstack.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "friendli",
+    "site": "https://friendli.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "galileo",
+    "site": "https://www.galileo.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "gateway-api-inference-extension",
+    "site": "https://gateway-api-inference-extension.sigs.k8s.io/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "general-catalyst",
+    "site": "https://www.generalcatalyst.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "genesis-cloud",
+    "site": "https://genesiscloud.com",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 522"
+    ]
+  },
+  {
+    "slug": "gensyn",
+    "site": "https://gensyn.ai",
+    "feed": {
+      "url": "https://www.gensyn.ai/news/rss.xml",
+      "title": "News | Gensyn",
+      "entries": 17,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "ggml",
+    "site": "https://ggml.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "gmi-cloud",
+    "site": "https://gmicloud.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "gmo-internet-group",
+    "site": "https://gmo.jp",
+    "feed": {
+      "url": "https://group.gmo/rss/",
+      "title": "GMOインターネットグループ株式会社 - プレスリリース",
+      "entries": 10,
+      "how": "path",
+      "latest": null
+    },
+    "tried": []
+  },
+  {
+    "slug": "gonka",
+    "site": "https://gonka.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "gpt4all",
+    "site": "https://nomic.ai/gpt4all",
+    "feed": {
+      "url": "https://www.nomic.ai/feed.xml",
+      "title": "Nomic - News & Updates",
+      "entries": 11,
+      "how": "declared",
+      "latest": "2026-09-03"
+    },
+    "tried": []
+  },
+  {
+    "slug": "gptqmodel",
+    "site": "https://x.com/Qubitium",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "groq",
+    "site": "https://groq.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "helicone",
+    "site": "https://www.helicone.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "hetzner",
+    "site": "https://hetzner.com",
+    "feed": {
+      "url": "https://www.hetzner.com/blog/rss.xml",
+      "title": "Hetzner Blog",
+      "entries": 20,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "higress",
+    "site": "https://higress.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "hive-digital",
+    "site": "https://hivedigitaltechnologies.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "huawei-cloud",
+    "site": "https://huaweicloud.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "humain",
+    "site": "https://humain.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "hut-8",
+    "site": "https://hut8.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "hyperbolic",
+    "site": "https://www.hyperbolic.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "hyperstack",
+    "site": "https://hyperstack.cloud",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ibm",
+    "site": "https://ibm.com/watsonx",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "index-ventures",
+    "site": "https://www.indexventures.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "inference-net",
+    "site": "https://inference.net",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "inferencemax",
+    "site": "https://inferencemax.semianalysis.com",
+    "feed": {
+      "url": "https://inferencex.semianalysis.com/feed.xml",
+      "title": "InferenceX Articles",
+      "entries": 35,
+      "how": "path",
+      "latest": "2026-09-28"
+    },
+    "tried": []
+  },
+  {
+    "slug": "infinity",
+    "site": "https://michaelfeil.github.io/infinity/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "infomaniak",
+    "site": "https://infomaniak.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "inspect-ai",
+    "site": "https://inspect.aisi.org.uk/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "io-net",
+    "site": "https://io.net",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ionos",
+    "site": "https://ionos.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ionstream",
+    "site": "https://ionstream.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "iren",
+    "site": "https://iren.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "kingsoft-cloud",
+    "site": "https://ksyun.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "koboldcpp",
+    "site": "https://koboldcpp.net",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "kong",
+    "site": "https://konghq.com/products/kong-ai-gateway",
+    "feed": {
+      "url": "https://konghq.com/feed/rss/blogs",
+      "title": "Kong Konnect | Kong Inc.",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "koyeb",
+    "site": "https://koyeb.com",
+    "feed": {
+      "url": "https://www.koyeb.com/feed.xml",
+      "title": "Koyeb - Blog",
+      "entries": 139,
+      "how": "path",
+      "latest": "2026-02-17"
+    },
+    "tried": []
+  },
+  {
+    "slug": "kserve",
+    "site": "https://kserve.github.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "kt",
+    "site": "https://kt.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "kubeai",
+    "site": "https://www.kubeai.org",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "kubeflow",
+    "site": "https://www.kubeflow.org",
+    "feed": null,
+    "tried": [
+      "https://www.kubeflow.org/index.xml: feed has no entries"
+    ]
+  },
+  {
+    "slug": "lakera",
+    "site": "https://www.lakera.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "laminar",
+    "site": "https://laminar.sh",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "langchain",
+    "site": "https://www.langchain.com/langsmith",
+    "feed": {
+      "url": "https://www.langchain.com/blog/rss.xml",
+      "title": "LangChain Blog",
+      "entries": 99,
+      "how": "path",
+      "latest": "2026-11-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "langfuse",
+    "site": "https://langfuse.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "latitude-sh",
+    "site": "https://latitude.sh",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "leaseweb",
+    "site": "https://leaseweb.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lemonade",
+    "site": "https://lemonade-server.ai/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lepton-ai",
+    "site": "https://lepton.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lightning-ai",
+    "site": "https://lightning.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lightspeed",
+    "site": "https://lsvp.com",
+    "feed": {
+      "url": "https://lsvp.com/feed/",
+      "title": "Lightspeed Venture Partners",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "lintasarta",
+    "site": "https://lintasarta.net",
+    "feed": {
+      "url": "https://www.lintasarta.net/feed/",
+      "title": "Lintasarta",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-10-06"
+    },
+    "tried": [
+      "https://www.lintasarta.net/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.lintasarta.net%2F&#038;lang=id: parse: not a valid feed: unable to parse JSON: missing field `items` at line 1 column 2041"
+    ]
+  },
+  {
+    "slug": "liquid-ai",
+    "site": "https://liquid.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "liquid-inference",
+    "site": "https://liquidinference.ai",
+    "feed": {
+      "url": "https://liquidinference.ai/feeds.xml",
+      "title": "Liquid Inference docs",
+      "entries": 133,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "liquid-web",
+    "site": "https://liquidweb.com",
+    "feed": {
+      "url": "https://www.liquidweb.com/feed/",
+      "title": "Liquid Web",
+      "entries": 12,
+      "how": "declared",
+      "latest": null
+    },
+    "tried": []
+  },
+  {
+    "slug": "litellm",
+    "site": "https://docs.litellm.ai/docs/",
+    "feed": {
+      "url": "https://docs.litellm.ai/blog/rss.xml",
+      "title": "liteLLM Blog",
+      "entries": 168,
+      "how": "declared",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "llama-swap",
+    "site": "https://llama-swap.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "llamafile",
+    "site": "https://docs.mozilla.ai/llamafile",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "llm-d",
+    "site": "https://www.llm-d.ai",
+    "feed": {
+      "url": "https://llm-d.ai/blog/rss.xml",
+      "title": "llm-d Blog",
+      "entries": 20,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "llm-gateway",
+    "site": "https://llmgateway.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "llm-guard",
+    "site": "https://protectai.github.io/llm-guard/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lm-evaluation-harness",
+    "site": "https://www.eleuther.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lm-studio",
+    "site": "https://lmstudio.ai",
+    "feed": {
+      "url": "https://lmstudio.ai/rss.xml",
+      "title": "LM Studio Blog",
+      "entries": 65,
+      "how": "path",
+      "latest": "2026-09-18"
+    },
+    "tried": []
+  },
+  {
+    "slug": "lmarena",
+    "site": "https://lmarena.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "lmcache",
+    "site": "https://lmcache.ai/",
+    "feed": null,
+    "tried": [
+      "https://lmcache.ai/en/feed/: feed has no entries",
+      "https://lmcache.ai/en/comments/feed/: feed has no entries",
+      "https://lmcache.ai/wp-json/oembed/1.0/embed?url=https%3A%2F%2Flmcache.ai%2Fen%2F&#038;lang=en: parse: not a valid feed: unable to parse JSON: missing field `items` at line 1 column 2075",
+      "https://lmcache.ai/wp-json/wp/v2/pages/2336: parse: not a valid feed: unable to parse JSON: invalid type: map, expected a string at line 1 column 307"
+    ]
+  },
+  {
+    "slug": "lmdeploy",
+    "site": "https://lmdeploy.readthedocs.io/en/latest",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "localai",
+    "site": "https://localai.io",
+    "feed": {
+      "url": "https://localai.io/blog/index.xml",
+      "title": "Blog on LocalAI",
+      "entries": 14,
+      "how": "path",
+      "latest": "2026-10-02"
+    },
+    "tried": []
+  },
+  {
+    "slug": "mancer",
+    "site": "https://mancer.tech",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "martian",
+    "site": "https://withmartian.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "medusa",
+    "site": "https://sites.google.com/view/medusa-llm",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "menlo-ventures",
+    "site": "https://menlovc.com",
+    "feed": {
+      "url": "https://menlovc.com/feed/",
+      "title": "Menlo Ventures",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-03"
+    },
+    "tried": [
+      "https://menlovc.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmenlovc.com%2F: parse: not a valid feed: unable to parse JSON: missing field `items` at line 1 column 2340",
+      "https://menlovc.com/wp-json/wp/v2/pages/15212: parse: not a valid feed: unable to parse JSON: invalid type: map, expected a string at line 1 column 285"
+    ]
+  },
+  {
+    "slug": "meta",
+    "site": "https://ai.meta.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "microsoft",
+    "site": "https://azure.microsoft.com",
+    "feed": {
+      "url": "https://azure.microsoft.com/en-us/blog/feed/",
+      "title": "Microsoft Azure Blog",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-10-29"
+    },
+    "tried": []
+  },
+  {
+    "slug": "minimax",
+    "site": "https://minimax.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "mistral-ai",
+    "site": "https://mistral.ai",
+    "feed": {
+      "url": "https://mistral.ai/news/rss",
+      "title": "Mistral Blog",
+      "entries": 94,
+      "how": "declared",
+      "latest": "2026-11-05"
+    },
+    "tried": []
+  },
+  {
+    "slug": "mlflow",
+    "site": "https://mlflow.org",
+    "feed": {
+      "url": "https://mlflow.org/blog/rss.xml",
+      "title": "MLflow Blog",
+      "entries": 20,
+      "how": "declared",
+      "latest": "2026-11-03"
+    },
+    "tried": []
+  },
+  {
+    "slug": "mlperf-inference",
+    "site": "https://mlcommons.org/benchmarks/inference-datacenter/",
+    "feed": {
+      "url": "https://mlcommons.org/feed/",
+      "title": "MLCommons",
+      "entries": 12,
+      "how": "declared",
+      "latest": "2026-10-29"
+    },
+    "tried": []
+  },
+  {
+    "slug": "modal",
+    "site": "https://modal.com",
+    "feed": {
+      "url": "https://modal.com/blog/atom.xml",
+      "title": "Modal Blog",
+      "entries": 155,
+      "how": "declared",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "moonshot-ai",
+    "site": "https://moonshot.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "morph",
+    "site": "https://morphllm.com",
+    "feed": {
+      "url": "https://www.morphllm.com/blog/rss.xml",
+      "title": "Morph Blog - AI Code Transformation",
+      "entries": 3,
+      "how": "path",
+      "latest": "2023-09-20"
+    },
+    "tried": []
+  },
+  {
+    "slug": "ncompass",
+    "site": "https://ncompass.tech",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "near-ai",
+    "site": "https://near.ai",
+    "feed": {
+      "url": "https://near.ai/feed.xml",
+      "title": "NEAR AI Blog",
+      "entries": 33,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "nebius",
+    "site": "https://nebius.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "northern-data",
+    "site": "https://northerndata.de",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 404"
+    ]
+  },
+  {
+    "slug": "nosana",
+    "site": "https://nosana.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "not-diamond",
+    "site": "https://www.notdiamond.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "nous-research",
+    "site": "https://portal.nousresearch.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "novita-ai",
+    "site": "https://novita.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "nscale",
+    "site": "https://nscale.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "octoai",
+    "site": "https://octo.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ollama",
+    "site": "https://ollama.com",
+    "feed": {
+      "url": "https://ollama.com/blog/rss.xml",
+      "title": "Ollama",
+      "entries": 63,
+      "how": "declared",
+      "latest": "2026-10-24"
+    },
+    "tried": []
+  },
+  {
+    "slug": "ooredoo",
+    "site": "https://ooredoo.com",
+    "feed": {
+      "url": "https://www.ooredoo.com/sitemap.rss",
+      "title": "Ooredoo corporate",
+      "entries": 50,
+      "how": "path",
+      "latest": "2026-11-05"
+    },
+    "tried": [
+      "https://www.ooredoo.com/wp-json/wp/v2/pages/2: HTTP 500",
+      "https://www.ooredoo.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ooredoo.com%2Fen%2F: HTTP 500"
+    ]
+  },
+  {
+    "slug": "openlit",
+    "site": "https://www.openlit.io",
+    "feed": {
+      "url": "https://www.openlit.io/feed.xml",
+      "title": "OpenLIT",
+      "entries": 17,
+      "how": "declared",
+      "latest": "2026-09-21"
+    },
+    "tried": []
+  },
+  {
+    "slug": "openpipe",
+    "site": "https://openpipe.ai",
+    "feed": {
+      "url": "https://openpipe.ai/rss.xml",
+      "title": "OpenPipe Blog",
+      "entries": 34,
+      "how": "path",
+      "latest": "2026-05-18"
+    },
+    "tried": []
+  },
+  {
+    "slug": "openrouter",
+    "site": "https://openrouter.ai",
+    "feed": {
+      "url": "https://openrouter.ai/blog/feed.xml",
+      "title": "OpenRouter Blog",
+      "entries": 177,
+      "how": "declared",
+      "latest": "2026-11-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "openvino-genai",
+    "site": "https://openvinotoolkit.github.io/openvino.genai/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "opik",
+    "site": "https://www.comet.com/docs/opik/",
+    "feed": {
+      "url": "https://www.comet.com/site/blog/feed/",
+      "title": "Our Blogs | Opik by Comet",
+      "entries": 11,
+      "how": "path",
+      "latest": "2026-11-06"
+    },
+    "tried": []
+  },
+  {
+    "slug": "oracle",
+    "site": "https://www.oracle.com/cloud/",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "orange-business",
+    "site": "https://orange-business.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "outlines",
+    "site": "https://dottxt-ai.github.io/outlines/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "outscale",
+    "site": "https://outscale.com",
+    "feed": null,
+    "tried": [
+      "https://en.outscale.com/feed/: HTTP 404",
+      "https://en.outscale.com/comments/feed/: HTTP 404",
+      "https://en.outscale.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fen.outscale.com%2F: HTTP 404",
+      "https://en.outscale.com/wp-json/wp/v2/pages/58100: HTTP 404"
+    ]
+  },
+  {
+    "slug": "ovhcloud",
+    "site": "https://ovhcloud.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "paperspace",
+    "site": "https://paperspace.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "parasail",
+    "site": "https://parasail.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "perplexity",
+    "site": "https://perplexity.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "petals",
+    "site": "https://petals.dev",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "portkey",
+    "site": "https://portkey.ai",
+    "feed": {
+      "url": "https://portkey.ai/blog/rss/",
+      "title": "Portkey Blog",
+      "entries": 15,
+      "how": "path",
+      "latest": "2026-06-28"
+    },
+    "tried": []
+  },
+  {
+    "slug": "predibase",
+    "site": "https://predibase.com",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "prime-intellect",
+    "site": "https://primeintellect.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "proact-it",
+    "site": "https://proact.eu",
+    "feed": {
+      "url": "https://www.proact.eu/feed/",
+      "title": "Proact Group",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2025-09-01"
+    },
+    "tried": []
+  },
+  {
+    "slug": "promptfoo",
+    "site": "https://promptfoo.dev",
+    "feed": {
+      "url": "https://www.promptfoo.dev/blog/rss.xml",
+      "title": "Promptfoo Blog",
+      "entries": 20,
+      "how": "declared",
+      "latest": "2026-03-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "promptlayer",
+    "site": "https://www.promptlayer.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "pruna-ai",
+    "site": "https://docs.pruna.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "public-ai",
+    "site": "https://publicai.co",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "qumulusai",
+    "site": "https://qumulusai.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "rackspace",
+    "site": "https://rackspace.com",
+    "feed": {
+      "url": "https://www.rackspace.com/feed/",
+      "title": "Rackspace",
+      "entries": 1,
+      "how": "declared",
+      "latest": "2026-03-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "ragas",
+    "site": "https://docs.ragas.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ramalama",
+    "site": "https://ramalama.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "reka-ai",
+    "site": "https://reka.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "relace",
+    "site": "https://relace.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "render-network",
+    "site": "https://rendernetwork.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "replicate",
+    "site": "https://replicate.com",
+    "feed": {
+      "url": "https://replicate.com/blog/rss",
+      "title": "Replicate's blog",
+      "entries": 125,
+      "how": "path",
+      "latest": "2026-11-03"
+    },
+    "tried": []
+  },
+  {
+    "slug": "requesty",
+    "site": "https://www.requesty.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "respan",
+    "site": "https://respan.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "ritual",
+    "site": "https://ritual.net",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "runpod",
+    "site": "https://www.runpod.io",
+    "feed": {
+      "url": "https://www.runpod.io/blog/rss.xml",
+      "title": "Runpod Blog.",
+      "entries": 99,
+      "how": "path",
+      "latest": "2026-11-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "runway",
+    "site": "https://runwayml.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sakana",
+    "site": "https://sakana.ai",
+    "feed": {
+      "url": "https://sakana.ai/feed.xml",
+      "title": "Blog",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2026-11-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "sakura-internet",
+    "site": "https://sakura.ad.jp",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "salad",
+    "site": "https://salad.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sambanova",
+    "site": "https://sambanova.ai",
+    "feed": {
+      "url": "https://sambanova.ai/blog/rss.xml",
+      "title": "Blog",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "samsung-sds",
+    "site": "https://samsungsds.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sarvam-ai",
+    "site": "https://sarvam.ai",
+    "feed": {
+      "url": "https://www.sarvam.ai/rss.xml",
+      "title": "Sarvam AI Blog",
+      "entries": 32,
+      "how": "declared",
+      "latest": "2026-11-09"
+    },
+    "tried": []
+  },
+  {
+    "slug": "scaleway",
+    "site": "https://scaleway.com",
+    "feed": {
+      "url": "https://www.scaleway.com/en/blog/rss.xml",
+      "title": "Scaleway Blog",
+      "entries": 335,
+      "how": "path",
+      "latest": "2026-10-28"
+    },
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "sequoia-capital",
+    "site": "https://www.sequoiacap.com",
+    "feed": {
+      "url": "https://framerusercontent.com/assets/zL3bmnWLCRBV9qNPIY7sqnKBuE.xml",
+      "title": "Sequoia Capital — Stories",
+      "entries": 50,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "sf-compute",
+    "site": "https://sfcompute.com",
+    "feed": {
+      "url": "https://sfcompute.com/news/rss.xml",
+      "title": "SF Compute news",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2026-10-03"
+    },
+    "tried": []
+  },
+  {
+    "slug": "sglang",
+    "site": "https://docs.sglang.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "shadeform",
+    "site": "https://www.shadeform.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sharon-ai",
+    "site": "https://sharonai.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sify",
+    "site": "https://sify.com",
+    "feed": {
+      "url": "https://www.sify.com/feed/",
+      "title": "Sify",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "siliconflow",
+    "site": "https://siliconflow.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "singtel",
+    "site": "https://singtel.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "sk-telecom",
+    "site": "https://sktelecom.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "skypilot",
+    "site": "https://skypilot.ai/",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "snowflake",
+    "site": "https://snowflake.com",
+    "feed": {
+      "url": "https://publish-p57963-e462109.adobeaemcloud.com/feed/?lang=en",
+      "title": null,
+      "entries": 20,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "soluna",
+    "site": "https://solunacomputing.com",
+    "feed": {
+      "url": "https://www.solunacomputing.com/feed/",
+      "title": "Soluna",
+      "entries": 3,
+      "how": "declared",
+      "latest": "2021-08-26"
+    },
+    "tried": []
+  },
+  {
+    "slug": "stepfun",
+    "site": "https://stepfun.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "swisscom",
+    "site": "https://swisscom.ch",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "t-systems",
+    "site": "https://t-systems.com",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "targon",
+    "site": "https://targon.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "tata-communications",
+    "site": "https://tatacommunications.com",
+    "feed": {
+      "url": "https://www.tatacommunications.com/blog/rss.xml",
+      "title": "New World Blog",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-10-14"
+    },
+    "tried": []
+  },
+  {
+    "slug": "telus",
+    "site": "https://telus.com",
+    "feed": null,
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "tencent-cloud",
+    "site": "https://cloud.tencent.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "tensordock",
+    "site": "https://tensordock.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "tensorwave",
+    "site": "https://tensorwave.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "tensorzero",
+    "site": "https://tensorzero.com",
+    "feed": {
+      "url": "https://www.tensorzero.com/blog/rss.xml",
+      "title": "TensorZero Blog",
+      "entries": 12,
+      "how": "declared",
+      "latest": "2026-05-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "tenstorrent",
+    "site": "https://tenstorrent.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "thinking-machines",
+    "site": "https://thinkingmachines.ai",
+    "feed": {
+      "url": "https://thinkingmachines.ai/index.xml",
+      "title": "Thinking Machines Lab",
+      "entries": 7,
+      "how": "path",
+      "latest": "2026-07-31"
+    },
+    "tried": []
+  },
+  {
+    "slug": "thunder-compute",
+    "site": "https://thundercompute.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "torchao",
+    "site": "https://pytorch.org/ao/stable/index.html",
+    "feed": {
+      "url": "https://pytorch.org/feed/",
+      "title": "PyTorch",
+      "entries": 10,
+      "how": "path",
+      "latest": "2026-11-10"
+    },
+    "tried": []
+  },
+  {
+    "slug": "traceloop",
+    "site": "https://www.traceloop.com/openllmetry",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "truefoundry",
+    "site": "https://www.truefoundry.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "tyk",
+    "site": "https://tyk.io",
+    "feed": null,
+    "tried": [
+      "https://tyk.io/feed/: HTTP 404",
+      "https://tyk.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftyk.io%2F: HTTP 403",
+      "https://tyk.io/wp-json/wp/v2/pages/3679: HTTP 403",
+      "https://tyk.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftyk.io%2Fblog%2F: HTTP 403",
+      "https://tyk.io/wp-json/wp/v2/pages/4534: HTTP 403"
+    ]
+  },
+  {
+    "slug": "unify",
+    "site": "https://unify.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "unsloth",
+    "site": "https://unsloth.ai/docs",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "upstage",
+    "site": "https://upstage.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "vast-ai",
+    "site": "https://vast.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "venice",
+    "site": "https://venice.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "vercel",
+    "site": "https://vercel.com/ai-gateway",
+    "feed": {
+      "url": "https://vercel.com/atom",
+      "title": "Vercel News",
+      "entries": 100,
+      "how": "path",
+      "latest": "2026-11-11"
+    },
+    "tried": []
+  },
+  {
+    "slug": "verda",
+    "site": "https://verda.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "viettel",
+    "site": "https://viettel.com.vn",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "volcengine",
+    "site": "https://volcengine.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "voltage-park",
+    "site": "https://voltagepark.com",
+    "feed": {
+      "url": "https://voltagepark.com/blog/rss.xml",
+      "title": "Voltage Park Blog",
+      "entries": 49,
+      "how": "path",
+      "latest": "2026-03-21"
+    },
+    "tried": []
+  },
+  {
+    "slug": "vultr",
+    "site": "https://www.vultr.com",
+    "feed": {
+      "url": "https://blogs.vultr.com/rss.xml",
+      "title": "Vultr Blogs",
+      "entries": 50,
+      "how": "path",
+      "latest": "2026-11-10"
+    },
+    "tried": [
+      "home page: HTTP 403"
+    ]
+  },
+  {
+    "slug": "wafer",
+    "site": "https://wafer.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "wavespeedai",
+    "site": "https://wavespeed.ai",
+    "feed": {
+      "url": "https://wavespeed.ai/blog/rss.xml",
+      "title": "WaveSpeed Blog",
+      "entries": 50,
+      "how": "path",
+      "latest": "2026-11-12"
+    },
+    "tried": []
+  },
+  {
+    "slug": "weights-and-biases",
+    "site": "https://wandb.ai/site/weave",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "whitefiber",
+    "site": "https://whitefiber.com",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "xai",
+    "site": "https://x.ai",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "xinference",
+    "site": "https://inference.readthedocs.io",
+    "feed": null,
+    "tried": []
+  },
+  {
+    "slug": "yotta",
+    "site": "https://yotta.com",
+    "feed": {
+      "url": "https://yotta.com/feed/",
+      "title": "yotta",
+      "entries": 10,
+      "how": "declared",
+      "latest": "2026-06-03"
+    },
+    "tried": []
+  },
+  {
+    "slug": "z-ai",
+    "site": "https://z.ai",
+    "feed": null,
+    "tried": []
+  }
+]

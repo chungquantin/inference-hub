@@ -8,3 +8,9 @@ logo_url: /logos/databricks.png
 tagging:
   aliases: ["Mosaic AI"]
   match_case: true
+feeds:
+  - slug: databricks-blog
+    name: "Databricks blog"
+    url: "https://www.databricks.com/feed"
+    interval_minutes: 180
+    auto_approve: false

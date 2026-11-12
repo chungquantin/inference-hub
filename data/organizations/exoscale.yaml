@@ -8,3 +8,8 @@ logo_url: /logos/exoscale.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+feeds:
+  - slug: exoscale-blog
+    name: "Exoscale blog"
+    url: "https://www.exoscale.com/blog/rss.xml"
+    interval_minutes: 180

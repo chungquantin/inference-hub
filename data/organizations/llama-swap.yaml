@@ -9,6 +9,11 @@ links:
   github: "https://github.com/mostlygeek"
 tagging:
   match_case: true
+feeds:
+  - slug: llama-swap-releases
+    name: "llama-swap releases"
+    url: "https://github.com/mostlygeek/llama-swap/releases.atom"
+    interval_minutes: 360
 products:
   - slug: llama-swap-engine
     name: "llama-swap"

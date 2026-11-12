@@ -9,3 +9,8 @@ categories: [serverless-gpu]
 tagging:
   match_case: true
   match_name: false
+feeds:
+  - slug: koyeb-blog
+    name: "Koyeb blog"
+    url: "https://www.koyeb.com/feed.xml"
+    interval_minutes: 180

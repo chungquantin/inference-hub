@@ -9,6 +9,11 @@ links:
   github: "https://github.com/BerriAI"
 tagging:
   match_case: true
+feeds:
+  - slug: litellm-blog
+    name: "LiteLLM blog"
+    url: "https://docs.litellm.ai/blog/rss.xml"
+    interval_minutes: 180
 products:
   - slug: litellm-engine
     name: "LiteLLM"

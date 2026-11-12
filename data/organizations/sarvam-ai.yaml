@@ -7,3 +7,8 @@ logo_url: /logos/sarvam-ai.svg
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+feeds:
+  - slug: sarvam-ai-blog
+    name: "Sarvam AI blog"
+    url: "https://www.sarvam.ai/rss.xml"
+    interval_minutes: 180

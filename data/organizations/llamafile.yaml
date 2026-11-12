@@ -10,6 +10,11 @@ links:
 categories: [local-runtimes]
 tagging:
   match_case: true
+feeds:
+  - slug: llamafile-releases
+    name: "llamafile releases"
+    url: "https://github.com/mozilla-ai/llamafile/releases.atom"
+    interval_minutes: 360
 products:
   - slug: llamafile-engine
     name: "llamafile"

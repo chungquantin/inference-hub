@@ -7,3 +7,8 @@ website: "https://voltagepark.com"
 logo_url: /logos/voltage-park.png
 tagging:
   match_case: true
+feeds:
+  - slug: voltage-park-blog
+    name: "Voltage Park blog"
+    url: "https://voltagepark.com/blog/rss.xml"
+    interval_minutes: 180

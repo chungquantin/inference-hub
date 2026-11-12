@@ -7,3 +7,8 @@ website: "https://elevenlabs.io"
 logo_url: /logos/elevenlabs.png
 tagging:
   match_case: true
+feeds:
+  - slug: elevenlabs-blog
+    name: "ElevenLabs blog"
+    url: "https://elevenlabs.io/blog/rss.xml"
+    interval_minutes: 180

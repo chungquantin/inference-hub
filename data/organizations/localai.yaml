@@ -9,6 +9,11 @@ links:
 categories: [local-runtimes]
 tagging:
   match_case: true
+feeds:
+  - slug: localai-blog
+    name: "LocalAI blog"
+    url: "https://localai.io/blog/index.xml"
+    interval_minutes: 180
 products:
   - slug: localai-engine
     name: "LocalAI"

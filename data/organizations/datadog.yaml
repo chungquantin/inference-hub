@@ -8,3 +8,9 @@ logo_url: /logos/datadog.png
 categories: [observability]
 tagging:
   match_case: true
+feeds:
+  - slug: datadog-blog
+    name: "Datadog blog"
+    url: "https://www.datadoghq.com/blog/index.xml"
+    interval_minutes: 180
+    auto_approve: false

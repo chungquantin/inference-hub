@@ -10,6 +10,11 @@ links:
 categories: [serving-orchestration]
 tagging:
   match_case: true
+feeds:
+  - slug: dstack-releases
+    name: "dstack releases"
+    url: "https://github.com/dstackai/dstack/releases.atom"
+    interval_minutes: 360
 products:
   - slug: dstack-engine
     name: "dstack"

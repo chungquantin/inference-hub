@@ -10,6 +10,11 @@ links:
 categories: [local-runtimes]
 tagging:
   match_case: true
+feeds:
+  - slug: koboldcpp-releases
+    name: "KoboldCpp releases"
+    url: "https://github.com/LostRuins/koboldcpp/releases.atom"
+    interval_minutes: 360
 products:
   - slug: koboldcpp-engine
     name: "KoboldCpp"

@@ -10,6 +10,11 @@ links:
 categories: [observability]
 tagging:
   match_case: true
+feeds:
+  - slug: openlit-blog
+    name: "OpenLIT blog"
+    url: "https://www.openlit.io/feed.xml"
+    interval_minutes: 180
 products:
   - slug: openlit-engine
     name: "OpenLIT"

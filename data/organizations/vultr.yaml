@@ -4,3 +4,8 @@ kinds: [gpu_cloud]
 tagline: Cloud provider with cloud GPU and bare-metal GPU servers.
 website: https://www.vultr.com
 logo_url: /logos/vultr.png
+feeds:
+  - slug: vultr-blog
+    name: "Vultr blog"
+    url: "https://blogs.vultr.com/rss.xml"
+    interval_minutes: 180

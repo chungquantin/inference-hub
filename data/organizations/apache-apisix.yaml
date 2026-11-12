@@ -8,3 +8,8 @@ logo_url: /logos/apache-apisix.png
 tagging:
   aliases: ["APISIX"]
   match_case: true
+feeds:
+  - slug: apache-apisix-blog
+    name: "Apache APISIX blog"
+    url: "https://apisix.apache.org/blog/rss"
+    interval_minutes: 180

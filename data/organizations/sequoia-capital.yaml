@@ -6,3 +6,9 @@ website: https://www.sequoiacap.com
 logo_url: /logos/sequoia-capital.png
 hq_country: US
 founded_year: 1972
+feeds:
+  - slug: sequoia-capital-blog
+    name: "Sequoia Capital blog"
+    url: "https://framerusercontent.com/assets/zL3bmnWLCRBV9qNPIY7sqnKBuE.xml"
+    interval_minutes: 180
+    auto_approve: false

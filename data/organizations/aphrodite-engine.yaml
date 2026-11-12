@@ -10,6 +10,11 @@ links:
 categories: [inference-engines]
 tagging:
   match_case: true
+feeds:
+  - slug: aphrodite-engine-releases
+    name: "Aphrodite Engine releases"
+    url: "https://github.com/dphnAI/sonar/releases.atom"
+    interval_minutes: 360
 products:
   - slug: aphrodite-engine-engine
     name: "Aphrodite Engine"

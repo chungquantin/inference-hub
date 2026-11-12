@@ -9,6 +9,12 @@ links:
   github: "https://github.com/maximhq"
 tagging:
   match_case: true
+feeds:
+  - slug: bifrost-blog
+    name: "Bifrost blog"
+    url: "https://www.getmaxim.ai/blog/rss/"
+    interval_minutes: 180
+    auto_approve: false
 products:
   - slug: bifrost-maxim
     name: "Bifrost (Maxim)"

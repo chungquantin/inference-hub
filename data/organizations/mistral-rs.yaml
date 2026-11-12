@@ -8,6 +8,11 @@ links:
 categories: [inference-engines]
 tagging:
   match_case: true
+feeds:
+  - slug: mistral-rs-releases
+    name: "mistral.rs releases"
+    url: "https://github.com/EricLBuehler/mistral.rs/releases.atom"
+    interval_minutes: 360
 products:
   - slug: mistral-rs-engine
     name: "mistral.rs"

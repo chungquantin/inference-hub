@@ -8,6 +8,11 @@ hq_country: FR
 founded_year: 2023
 tagging:
   aliases: [Mistral, Mixtral]
+feeds:
+  - slug: mistral-ai-blog
+    name: "Mistral AI blog"
+    url: "https://mistral.ai/news/rss"
+    interval_minutes: 180
 products:
   - slug: mistral-large-2
     name: Mistral Large 2

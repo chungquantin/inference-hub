@@ -8,3 +8,8 @@ logo_url: /logos/hetzner.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+feeds:
+  - slug: hetzner-blog
+    name: "Hetzner blog"
+    url: "https://www.hetzner.com/blog/rss.xml"
+    interval_minutes: 180
