@@ -9,6 +9,7 @@ use sqlx::PgPool;
 use uuid::Uuid;
 
 use crate::{
+    article_date,
     feed::{self, FeedEntry},
     tagger::{MatchKind, OrgRule, Tagger},
     url,
@@ -175,7 +176,14 @@ async fn fetch_and_store(
         ..FetchReport::default()
     };
     for entry in &parsed.entries {
-        if store_entry(pool, source, &publisher, entry, &tagger).await? {
+        let mut entry = entry.clone();
+        if !news_exists(pool, &entry.url).await? {
+            // The feed's date is a fallback: many feeds report the last edit, not the first publication.
+            if let Some(date) = article_date::fetch_published(client, &entry.url).await {
+                entry.published_at = Some(date);
+            }
+        }
+        if store_entry(pool, source, &publisher, &entry, &tagger).await? {
             report.inserted += 1;
         }
     }
@@ -188,6 +196,71 @@ async fn fetch_and_store(
         .execute(pool)
         .await?;
 
+    Ok(report)
+}
+
+async fn news_exists(pool: &PgPool, url: &str) -> sqlx::Result<bool> {
+    sqlx::query_scalar("SELECT EXISTS (SELECT 1 FROM news_items WHERE url = $1)")
+        .bind(url)
+        .fetch_one(pool)
+        .await
+}
+
+/// What `redate_all` did.
+#[derive(Debug, Default, Clone, Copy)]
+pub struct RedateReport {
+    pub checked: usize,
+    pub found: usize,
+    pub changed: usize,
+}
+
+/// Re-reads the publication date of stored news from the article pages and corrects
+/// `published_at` where the page disagrees. Items whose page declares no date keep theirs.
+pub async fn redate_all(
+    pool: &PgPool,
+    client: &reqwest::Client,
+    concurrency: usize,
+) -> sqlx::Result<RedateReport> {
+    let items: Vec<(Uuid, String, chrono::DateTime<Utc>)> =
+        sqlx::query_as("SELECT id, url, published_at FROM news_items ORDER BY published_at DESC")
+            .fetch_all(pool)
+            .await?;
+    let gate = std::sync::Arc::new(tokio::sync::Semaphore::new(concurrency.max(1)));
+    let mut tasks = tokio::task::JoinSet::new();
+    for (id, url, stored) in items {
+        let client = client.clone();
+        let gate = gate.clone();
+        tasks.spawn(async move {
+            let _permit = gate.acquire_owned().await.ok();
+            (
+                id,
+                stored,
+                article_date::fetch_published(&client, &url).await,
+            )
+        });
+    }
+    let mut report = RedateReport::default();
+    while let Some(done) = tasks.join_next().await {
+        let Ok((id, stored, page)) = done else {
+            continue;
+        };
+        report.checked += 1;
+        let Some(page) = page else { continue };
+        report.found += 1;
+        // A date-only value is stored as noon UTC; do not rewrite a same-day timestamp.
+        if (page - stored).abs() < chrono::TimeDelta::hours(24) {
+            continue;
+        }
+        sqlx::query("UPDATE news_items SET published_at = $2 WHERE id = $1")
+            .bind(id)
+            .bind(page)
+            .execute(pool)
+            .await?;
+        report.changed += 1;
+        if report.checked % 200 == 0 {
+            tracing::info!(?report, "redating");
+        }
+    }
     Ok(report)
 }
 

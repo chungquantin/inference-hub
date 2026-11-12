@@ -2,6 +2,7 @@
 //! and GitHub repository stats.
 
 pub mod adapters;
+pub mod article_date;
 pub mod feed;
 pub mod github;
 pub mod ingest;
@@ -10,4 +11,6 @@ pub mod market;
 pub mod tagger;
 pub mod url;
 
-pub use ingest::{FetchReport, IngestError, fetch_source, http_client, load_tagger, retag_all};
+pub use ingest::{
+    FetchReport, IngestError, fetch_source, http_client, load_tagger, redate_all, retag_all,
+};

@@ -1,9 +1,10 @@
-//! `worker [--once | --feeds] [--retag] [--enrich-backlog]`
+//! `worker [--once | --feeds] [--retag] [--redate] [--enrich-backlog]`
 //!
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
 //! `--once` schedules due feed fetches and repository syncs, runs them and exits.
 //! `--feeds` fetches only the news feeds that are due, and exits: the way to
 //! pick up newly added feeds without running every market adapter.
+//! `--redate` re-reads every item's publication date from its article page and exits.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
 //! `--enrich-backlog` enriches pending news through the LLM until none is
 //! left or a budget runs out, and exits.
@@ -59,6 +60,12 @@ async fn main() -> anyhow::Result<()> {
                 break;
             }
         }
+        return Ok(());
+    }
+
+    if flag("--redate") {
+        let report = ih_ingest::redate_all(&pool, &ctx.http, 16).await?;
+        tracing::info!(?report, "redated news from article pages");
         return Ok(());
     }
 
