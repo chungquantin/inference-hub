@@ -1113,6 +1113,79 @@
         }
       }
     },
+    "/v1/market/metrics": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Every metric beyond price (downloads, serving speed, repository stars) with its leaders.",
+        "operationId": "marketMetrics",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricCatalog"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/metrics/{metric}": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "One metric: the ranking of every subject, and the last year of the ten leaders.",
+        "operationId": "marketMetric",
+        "parameters": [
+          {
+            "name": "metric",
+            "in": "path",
+            "description": "Metric key, such as `provider_throughput`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Rows to return, 1 to 500. Default 100.",
+            "required": false,
+            "schema": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetricBoard"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market/models": {
       "get": {
         "tags": [
@@ -2907,6 +2980,354 @@
             "description": "What the price is per: `mtok_input`, `image`, `video_second`,\n`character` or `audio_second`."
           }
         }
+      },
+      "MetricBoard": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MetricDef"
+          },
+          {
+            "type": "object",
+            "required": [
+              "history_days",
+              "rows",
+              "lines"
+            ],
+            "properties": {
+              "as_of": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "history_days": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "lines": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MetricLine"
+                },
+                "description": "The ten leaders' history over the last year."
+              },
+              "rows": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MetricRow"
+                }
+              },
+              "total": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "double"
+              },
+              "total_change_30d": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "double"
+              }
+            }
+          }
+        ],
+        "description": "A whole metric: its ranking and the history of its leaders."
+      },
+      "MetricCatalog": {
+        "type": "object",
+        "required": [
+          "metrics",
+          "sources"
+        ],
+        "properties": {
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricSummary"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricSourceStatus"
+            }
+          }
+        }
+      },
+      "MetricDef": {
+        "type": "object",
+        "description": "What a metric measures. The list is fixed in code so sources and pages agree on units.",
+        "required": [
+          "key",
+          "label",
+          "description",
+          "unit",
+          "group",
+          "subject_type",
+          "source",
+          "source_url",
+          "higher_is_better",
+          "additive"
+        ],
+        "properties": {
+          "additive": {
+            "type": "boolean",
+            "description": "Whether the values add up to a meaningful total (market caps do, speeds do not)."
+          },
+          "description": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string",
+            "description": "The section it sits under: `Adoption`, `Serving` or `Open source`."
+          },
+          "higher_is_better": {
+            "type": "boolean",
+            "description": "Whether a bigger number is the better one. `false` for latency."
+          },
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "description": "Where the numbers come from."
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "subject_type": {
+            "type": "string",
+            "description": "`organization`, `model` or `project`."
+          },
+          "unit": {
+            "type": "string",
+            "description": "`usd`, `count`, `tokens_per_second` or `ms`."
+          }
+        }
+      },
+      "MetricLine": {
+        "type": "object",
+        "description": "One line of the chart.",
+        "required": [
+          "subject_key",
+          "name",
+          "points"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "organization": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MetricPoint"
+            },
+            "description": "Oldest first."
+          },
+          "subject_key": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricPoint": {
+        "type": "object",
+        "description": "One day's value of a series.",
+        "required": [
+          "day",
+          "value"
+        ],
+        "properties": {
+          "day": {
+            "type": "string",
+            "format": "date"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MetricRow": {
+        "type": "object",
+        "description": "One subject in a ranking of a metric.",
+        "required": [
+          "rank",
+          "subject_key",
+          "name",
+          "value",
+          "spark"
+        ],
+        "properties": {
+          "change_30d": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "change_7d": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Change over 7, 30 and 90 days, as a fraction (0.12 is +12%). Absent until the series is that old."
+          },
+          "change_90d": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "name": {
+            "type": "string"
+          },
+          "organization": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OrganizationRef",
+                "description": "The organization the subject belongs to, when the directory has it."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "share": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Share of the metric's total, for metrics that add up."
+          },
+          "spark": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "The last 60 days, oldest first."
+          },
+          "subject_key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "MetricSourceStatus": {
+        "type": "object",
+        "required": [
+          "source",
+          "consecutive_failures",
+          "series"
+        ],
+        "properties": {
+          "consecutive_failures": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "last_error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "last_success_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "series": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "MetricSummary": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MetricDef"
+          },
+          {
+            "type": "object",
+            "required": [
+              "subjects",
+              "history_days",
+              "leaders"
+            ],
+            "properties": {
+              "as_of": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date"
+              },
+              "history_days": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Days of history behind the oldest series."
+              },
+              "leaders": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MetricRow"
+                }
+              },
+              "subjects": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "total": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "double",
+                "description": "Sum of the latest values, for metrics that add up."
+              },
+              "total_change_30d": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "double"
+              }
+            }
+          }
+        ],
+        "description": "A metric with its current leaders: one card of the terminal's overview."
       },
       "ModelIndexRow": {
         "type": "object",

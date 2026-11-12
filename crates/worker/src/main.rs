@@ -1,9 +1,10 @@
-//! `worker [--once | --feeds] [--retag] [--redate] [--enrich-backlog]`
+//! `worker [--once | --feeds] [--retag] [--redate] [--metrics] [--enrich-backlog]`
 //!
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
 //! `--once` schedules due feed fetches and repository syncs, runs them and exits.
 //! `--feeds` fetches only the news feeds that are due, and exits: the way to
 //! pick up newly added feeds without running every market adapter.
+//! `--metrics` runs every metric source once and exits.
 //! `--redate` re-reads every item's publication date from its article page and exits.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
 //! `--enrich-backlog` enriches pending news through the LLM until none is
@@ -58,6 +59,18 @@ async fn main() -> anyhow::Result<()> {
             tracing::info!(?report, "enrichment pass");
             if report.enriched == 0 || report.budget_exhausted {
                 break;
+            }
+        }
+        return Ok(());
+    }
+
+    if flag("--metrics") {
+        for source in ih_ingest::metrics::SOURCES {
+            match ih_ingest::metrics::run_source(&pool, &ctx.http, &ctx.metric_origins, *source)
+                .await
+            {
+                Ok(report) => tracing::info!(source = source.id(), ?report, "ran metric source"),
+                Err(e) => tracing::error!(source = source.id(), error = %e, "metric source failed"),
             }
         }
         return Ok(());

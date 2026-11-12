@@ -17,6 +17,8 @@ pub fn router() -> OpenApiRouter<AppState> {
     OpenApiRouter::new()
         .routes(routes!(overview))
         .routes(routes!(analytics))
+        .routes(routes!(metric_catalog))
+        .routes(routes!(metric_board))
         .routes(routes!(gpu_index))
         .routes(routes!(gpu_detail))
         .routes(routes!(model_index))
@@ -42,6 +44,34 @@ async fn overview(State(state): State<AppState>) -> ApiResult<Json<MarketOvervie
     responses((status = 200, body = ih_core::MarketAnalytics)))]
 async fn analytics(State(state): State<AppState>) -> ApiResult<Json<ih_core::MarketAnalytics>> {
     Ok(Json(ih_db::analytics::analytics(&state.pool).await?))
+}
+
+/// Every metric beyond price (downloads, serving speed, repository stars) with its leaders.
+#[utoipa::path(get, path = "/market/metrics", tag = "market", operation_id = "marketMetrics",
+    responses((status = 200, body = ih_core::MetricCatalog)))]
+async fn metric_catalog(State(state): State<AppState>) -> ApiResult<Json<ih_core::MetricCatalog>> {
+    Ok(Json(ih_db::metrics::catalog(&state.pool).await?))
+}
+
+#[derive(serde::Deserialize, utoipa::IntoParams)]
+struct MetricQuery {
+    /// Rows to return, 1 to 500. Default 100.
+    limit: Option<i64>,
+}
+
+/// One metric: the ranking of every subject, and the last year of the ten leaders.
+#[utoipa::path(get, path = "/market/metrics/{metric}", tag = "market", operation_id = "marketMetric",
+    params(("metric" = String, Path, description = "Metric key, such as `provider_throughput`"), MetricQuery),
+    responses((status = 200, body = ih_core::MetricBoard), (status = 404, body = ErrorBody)))]
+async fn metric_board(
+    State(state): State<AppState>,
+    Path(metric): Path<String>,
+    Query(q): Query<MetricQuery>,
+) -> ApiResult<Json<ih_core::MetricBoard>> {
+    let def = ih_core::metric_def(&metric).ok_or(ApiError::NotFound("metric"))?;
+    Ok(Json(
+        ih_db::metrics::board(&state.pool, def, q.limit.unwrap_or(100)).await?,
+    ))
 }
 
 /// GPU types across every cloud: min, median and max price per GPU-hour.

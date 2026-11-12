@@ -9,6 +9,7 @@ pub mod compare;
 pub mod jobs;
 pub mod market;
 pub mod market_refresh;
+pub mod metrics;
 pub mod news;
 pub mod organizations;
 pub mod products;

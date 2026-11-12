@@ -17,6 +17,7 @@
     "dev:worker": "cargo run -p worker",
     "worker:once": "cargo run -q -p worker -- --once",
     "worker:retag": "cargo run -q -p worker -- --retag",
+    "worker:metrics": "cargo run -q -p worker -- --metrics",
     "worker:redate": "cargo run -q -p worker -- --redate",
     "gen:api": "cargo run -q -p api --bin openapi > packages/api-client/openapi.json && pnpm --filter @inference-hub/api-client generate",
     "build:web": "pnpm --filter web build",

@@ -19,6 +19,7 @@ pub const SYNC_REPO: &str = "sync_repo";
 pub const RUN_ADAPTER: &str = "run_adapter";
 pub const ENRICH_NEWS: &str = "enrich_news";
 pub const REFRESH_MARKET: &str = "refresh_market";
+pub const RUN_METRICS: &str = "run_metrics";
 
 /// How long after an adapter run the market summaries are rebuilt, so the
 /// adapters of one scheduler pass share one refresh.
@@ -49,6 +50,11 @@ pub struct RunAdapterPayload {
     pub adapter: String,
 }
 
+#[derive(Debug, Serialize, Deserialize)]
+pub struct RunMetricsPayload {
+    pub source: String,
+}
+
 /// What jobs need besides the database.
 #[derive(Clone)]
 pub struct Context {
@@ -64,6 +70,8 @@ pub struct Context {
     pub metrics: Arc<health::Metrics>,
     /// News enrichment through an LLM; `None` turns it off.
     pub llm: Option<ih_ingest::llm::LlmConfig>,
+    /// Where the metric sources call (tests use local servers).
+    pub metric_origins: ih_ingest::metrics::Origins,
 }
 
 impl Context {
@@ -81,6 +89,7 @@ impl Context {
             adapter_every: None,
             metrics: Arc::default(),
             llm: None,
+            metric_origins: ih_ingest::metrics::Origins::default(),
         }
     }
 
@@ -235,11 +244,50 @@ pub async fn schedule_due_adapters(pool: &PgPool, ctx: &Context) -> sqlx::Result
     Ok(enqueued)
 }
 
+/// Enqueues a run of every metric source that has not run within its interval.
+/// A failing source backs off: the interval doubles per failure, up to a day.
+pub async fn schedule_due_metrics(pool: &PgPool) -> sqlx::Result<usize> {
+    let mut enqueued = 0;
+    for source in ih_ingest::metrics::SOURCES {
+        let due: bool = sqlx::query_scalar(
+            "SELECT coalesce((
+                 SELECT last_run_at + make_interval(secs => least(
+                            $2 * power(2, least(consecutive_failures, 10)), 86400)) <= now()
+                 FROM metric_source_state WHERE source = $1), true)",
+        )
+        .bind(source.id())
+        .bind(source.interval().as_secs_f64())
+        .fetch_one(pool)
+        .await?;
+        if !due {
+            continue;
+        }
+        let key = format!("{RUN_METRICS}:{}", source.id());
+        let job = jobs::enqueue(
+            pool,
+            NewJob {
+                kind: RUN_METRICS,
+                payload: serde_json::to_value(RunMetricsPayload {
+                    source: source.id().to_owned(),
+                })
+                .unwrap_or_default(),
+                dedupe_key: Some(&key),
+                max_attempts: Some(1),
+                ..NewJob::default()
+            },
+        )
+        .await?;
+        enqueued += usize::from(job.is_some());
+    }
+    Ok(enqueued)
+}
+
 /// Schedules every kind of due work. Returns how many jobs were enqueued.
 pub async fn schedule_all(pool: &PgPool, ctx: &Context) -> sqlx::Result<usize> {
     Ok(schedule_due_sources(pool).await?
         + schedule_due_repos(pool, ctx.repo_sync_every).await?
         + schedule_due_adapters(pool, ctx).await?
+        + schedule_due_metrics(pool).await?
         + schedule_enrichment(pool, ctx).await?
         + schedule_market_refresh(pool).await?)
 }
@@ -329,6 +377,18 @@ pub async fn run_job(pool: &PgPool, ctx: &Context, job: &Job) -> anyhow::Result<
             tracing::info!(job = job.id, adapter = %payload.adapter, ?report, "ran market adapter");
             // Rebuild the summaries shortly; adapters finishing meanwhile share it.
             enqueue_market_refresh(pool, REFRESH_DEBOUNCE).await?;
+            Ok(())
+        }
+        RUN_METRICS => {
+            let payload: RunMetricsPayload = serde_json::from_value(job.payload.clone())?;
+            let source = ih_ingest::metrics::SOURCES
+                .iter()
+                .find(|s| s.id() == payload.source)
+                .ok_or_else(|| anyhow::anyhow!("unknown metric source `{}`", payload.source))?;
+            let report =
+                ih_ingest::metrics::run_source(pool, &ctx.http, &ctx.metric_origins, *source)
+                    .await?;
+            tracing::info!(job = job.id, source = %payload.source, ?report, "ran metric source");
             Ok(())
         }
         REFRESH_MARKET => {

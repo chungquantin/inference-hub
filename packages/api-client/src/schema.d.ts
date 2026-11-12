@@ -371,6 +371,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every metric beyond price (downloads, serving speed, repository stars) with its leaders. */
+        get: operations["marketMetrics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/market/metrics/{metric}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One metric: the ranking of every subject, and the last year of the ten leaders. */
+        get: operations["marketMetric"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/models": {
         parameters: {
             query?: never;
@@ -1003,6 +1037,114 @@ export interface components {
              *     `character` or `audio_second`.
              */
             unit: string;
+        };
+        /** @description A whole metric: its ranking and the history of its leaders. */
+        MetricBoard: components["schemas"]["MetricDef"] & {
+            /** Format: date */
+            as_of?: string | null;
+            /** Format: int64 */
+            history_days: number;
+            /** @description The ten leaders' history over the last year. */
+            lines: components["schemas"]["MetricLine"][];
+            rows: components["schemas"]["MetricRow"][];
+            /** Format: double */
+            total?: number | null;
+            /** Format: double */
+            total_change_30d?: number | null;
+        };
+        MetricCatalog: {
+            metrics: components["schemas"]["MetricSummary"][];
+            sources: components["schemas"]["MetricSourceStatus"][];
+        };
+        /** @description What a metric measures. The list is fixed in code so sources and pages agree on units. */
+        MetricDef: {
+            /** @description Whether the values add up to a meaningful total (market caps do, speeds do not). */
+            additive: boolean;
+            description: string;
+            /** @description The section it sits under: `Adoption`, `Serving` or `Open source`. */
+            group: string;
+            /** @description Whether a bigger number is the better one. `false` for latency. */
+            higher_is_better: boolean;
+            key: string;
+            label: string;
+            /** @description Where the numbers come from. */
+            source: string;
+            source_url: string;
+            /** @description `organization`, `model` or `project`. */
+            subject_type: string;
+            /** @description `usd`, `count`, `tokens_per_second` or `ms`. */
+            unit: string;
+        };
+        /** @description One line of the chart. */
+        MetricLine: {
+            name: string;
+            organization?: components["schemas"]["OrganizationRef"] | null;
+            /** @description Oldest first. */
+            points: components["schemas"]["MetricPoint"][];
+            subject_key: string;
+        };
+        /** @description One day's value of a series. */
+        MetricPoint: {
+            /** Format: date */
+            day: string;
+            /** Format: double */
+            value: number;
+        };
+        /** @description One subject in a ranking of a metric. */
+        MetricRow: {
+            /** Format: double */
+            change_30d?: number | null;
+            /**
+             * Format: double
+             * @description Change over 7, 30 and 90 days, as a fraction (0.12 is +12%). Absent until the series is that old.
+             */
+            change_7d?: number | null;
+            /** Format: double */
+            change_90d?: number | null;
+            name: string;
+            organization?: components["schemas"]["OrganizationRef"] | null;
+            /** Format: int64 */
+            rank: number;
+            /**
+             * Format: double
+             * @description Share of the metric's total, for metrics that add up.
+             */
+            share?: number | null;
+            /** @description The last 60 days, oldest first. */
+            spark: number[];
+            subject_key: string;
+            /** Format: double */
+            value: number;
+        };
+        MetricSourceStatus: {
+            /** Format: int32 */
+            consecutive_failures: number;
+            last_error?: string | null;
+            /** Format: date-time */
+            last_success_at?: string | null;
+            /** Format: int32 */
+            series: number;
+            source: string;
+        };
+        /** @description A metric with its current leaders: one card of the terminal's overview. */
+        MetricSummary: components["schemas"]["MetricDef"] & {
+            /** Format: date */
+            as_of?: string | null;
+            /**
+             * Format: int64
+             * @description Days of history behind the oldest series.
+             */
+            history_days: number;
+            leaders: components["schemas"]["MetricRow"][];
+            /** Format: int64 */
+            subjects: number;
+            /**
+             * Format: double
+             * @description Sum of the latest values, for metrics that add up.
+             */
+            total?: number | null;
+            /** Format: double */
+            total_change_30d?: number | null;
         };
         /** @description One model across every provider: price per million tokens. */
         ModelIndexRow: {
@@ -2483,6 +2625,58 @@ export interface operations {
                 };
             };
             400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketMetrics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MetricCatalog"];
+                };
+            };
+        };
+    };
+    marketMetric: {
+        parameters: {
+            query?: {
+                /** @description Rows to return, 1 to 500. Default 100. */
+                limit?: number | null;
+            };
+            header?: never;
+            path: {
+                /** @description Metric key, such as `provider_throughput` */
+                metric: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MetricBoard"];
+                };
+            };
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };

@@ -8,6 +8,7 @@ pub mod github;
 pub mod ingest;
 pub mod llm;
 pub mod market;
+pub mod metrics;
 pub mod tagger;
 pub mod url;
 

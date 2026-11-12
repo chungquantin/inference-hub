@@ -7,6 +7,7 @@ pub mod analytics;
 pub mod category;
 pub mod compare;
 pub mod market;
+pub mod metrics;
 pub mod news;
 pub mod organization;
 pub mod pagination;
@@ -23,6 +24,10 @@ pub use market::{
     FailedJob, GpuIndexRow, HoldResolution, KindCount, MakerCount, MarketDetail, MarketIndexQuery,
     MarketListing, MarketOverview, MarketProvider, MarketSource, MediaIndexQuery, MediaIndexRow,
     ModelIndexRow, PriceHold, ProviderOffering, ProviderOfferings, ProviderOfferingsQuery,
+};
+pub use metrics::{
+    METRICS, MetricBoard, MetricCatalog, MetricDef, MetricLine, MetricPoint, MetricRow,
+    MetricSourceStatus, MetricSummary, metric_def,
 };
 pub use news::{
     AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus,

@@ -1529,3 +1529,77 @@ async fn capabilities_follow_the_majority_of_reporting_providers(pool: PgPool) {
         serde_json::json!(["in:text", "in:image", "out:text", "tools"])
     );
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn metrics_rank_by_direction_and_report_change(pool: PgPool) {
+    sqlx::query("INSERT INTO organizations (slug, name) VALUES ('fast', 'Fast'), ('slow', 'Slow')")
+        .execute(&pool)
+        .await
+        .unwrap();
+    // Two providers of serving speed and of first-token latency, with a reading 30 days ago.
+    for (metric, subject, org, then, now) in [
+        ("provider_throughput", "fast", "fast", 100.0, 150.0),
+        ("provider_throughput", "slow", "slow", 40.0, 40.0),
+        ("provider_first_token", "fast", "fast", 400.0, 200.0),
+        ("provider_first_token", "slow", "slow", 900.0, 900.0),
+    ] {
+        let id: i64 = sqlx::query_scalar(
+            "INSERT INTO metric_series (metric, subject_type, subject_key, subject_name,
+                 organization_id, source, latest_value, latest_day)
+             SELECT $1, 'organization', $2, $2, id, 'test', $4, current_date
+             FROM organizations WHERE slug = $3 RETURNING id",
+        )
+        .bind(metric)
+        .bind(subject)
+        .bind(org)
+        .bind(now)
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+        sqlx::query(
+            "INSERT INTO metric_points (series_id, day, value)
+             VALUES ($1, current_date - 30, $2), ($1, current_date, $3)",
+        )
+        .bind(id)
+        .bind(then)
+        .bind(now)
+        .execute(&pool)
+        .await
+        .unwrap();
+    }
+    let app = app(pool);
+
+    let (status, speed) = get(&app, "/v1/market/metrics/provider_throughput").await;
+    assert_eq!(status, StatusCode::OK, "{speed}");
+    assert_eq!(speed["rows"][0]["subject_key"], "fast", "fastest first");
+    assert_eq!(speed["rows"][0]["organization"]["slug"], "fast");
+    let change = speed["rows"][0]["change_30d"].as_f64().unwrap();
+    assert!((change - 0.5).abs() < 1e-9, "100 to 150 is +50%: {speed}");
+    assert!(
+        speed["rows"][0]["change_7d"].is_null(),
+        "no reading near 7 days ago"
+    );
+    assert!(speed["total"].is_null(), "speeds do not add up");
+    assert_eq!(speed["lines"][0]["points"].as_array().unwrap().len(), 2);
+
+    // Latency: the lowest is the best, so it ranks first.
+    let (_, latency) = get(&app, "/v1/market/metrics/provider_first_token").await;
+    assert_eq!(latency["rows"][0]["subject_key"], "fast", "{latency}");
+    assert_eq!(latency["rows"][0]["value"], 200.0);
+
+    let (_, catalog) = get(&app, "/v1/market/metrics").await;
+    let keys: Vec<_> = catalog["metrics"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|m| m["key"].clone())
+        .collect();
+    assert_eq!(
+        keys,
+        ["provider_throughput", "provider_first_token"],
+        "empty metrics are left out"
+    );
+
+    let (status, _) = get(&app, "/v1/market/metrics/not_a_metric").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+}

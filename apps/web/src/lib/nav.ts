@@ -16,6 +16,7 @@ export const NAV_SECTIONS: NavSection[] = [
     label: "Market",
     items: [
       { href: "/market", label: "Overview", description: "Totals, top GPUs and models, source health" },
+      { href: "/market/terminal", label: "Terminal", description: "Downloads, serving speed and open-source momentum" },
       { href: "/market/rankings", label: "Rankings", description: "Models, GPUs and providers by price and spread" },
       { href: "/market/models", label: "Model prices", description: "Every chat model across providers" },
       { href: "/market/gpus", label: "GPU prices", description: "Per GPU-hour across clouds" },
