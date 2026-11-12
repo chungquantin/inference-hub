@@ -16,6 +16,7 @@ use crate::{
 pub fn router() -> OpenApiRouter<AppState> {
     OpenApiRouter::new()
         .routes(routes!(overview))
+        .routes(routes!(analytics))
         .routes(routes!(gpu_index))
         .routes(routes!(gpu_detail))
         .routes(routes!(model_index))
@@ -33,6 +34,14 @@ pub fn router() -> OpenApiRouter<AppState> {
     responses((status = 200, body = MarketOverview)))]
 async fn overview(State(state): State<AppState>) -> ApiResult<Json<MarketOverview>> {
     Ok(Json(ih_db::market::overview(&state.pool).await?))
+}
+
+/// Rankings and distributions: models by price spread, makers, GPU price matrix and
+/// providers scored against the market median.
+#[utoipa::path(get, path = "/market/analytics", tag = "market", operation_id = "marketAnalytics",
+    responses((status = 200, body = ih_core::MarketAnalytics)))]
+async fn analytics(State(state): State<AppState>) -> ApiResult<Json<ih_core::MarketAnalytics>> {
+    Ok(Json(ih_db::analytics::analytics(&state.pool).await?))
 }
 
 /// GPU types across every cloud: min, median and max price per GPU-hour.

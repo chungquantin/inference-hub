@@ -1042,6 +1042,73 @@ async fn seed_market_index(pool: &PgPool) {
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn market_analytics_ranks_spread_and_price_index(pool: PgPool) {
+    seed_market_index(&pool).await;
+    let app = app(pool);
+    let (status, a) = get(&app, "/v1/market/analytics").await;
+    assert_eq!(status, StatusCode::OK, "{a}");
+
+    // Only DeepSeek is sold by two providers. Blended 3:1: alpha 0.315, beta 0.25.
+    let models = a["models"].as_array().unwrap();
+    assert_eq!(models.len(), 1, "{a}");
+    let m = &models[0];
+    assert_eq!(m["model_key"], "deepseek-v3.2");
+    assert_eq!(m["cheapest"]["slug"], "beta");
+    assert_eq!(m["min_blended_per_mtok"], 0.25);
+    assert_eq!(m["max_blended_per_mtok"], 0.315);
+    assert!(
+        (m["spread"].as_f64().unwrap() - 1.26).abs() < 1e-9,
+        "0.315 / 0.25"
+    );
+
+    // H100: per GPU-hour alpha 3.0, beta 2.0, gamma 4.0. L4 is sold by one cloud.
+    let gpus = a["gpus"].as_array().unwrap();
+    assert_eq!(gpus[0]["gpu_type"], "H100 SXM");
+    assert!(
+        (gpus[0]["spread"].as_f64().unwrap() - 2.0).abs() < 1e-9,
+        "4.0 / 2.0"
+    );
+    let cells = a["gpu_prices"].as_array().unwrap();
+    assert_eq!(
+        cells.len(),
+        3,
+        "one cell per cloud selling the contested GPU: {a}"
+    );
+    let beta = cells
+        .iter()
+        .find(|c| c["provider"]["slug"] == "beta")
+        .unwrap();
+    assert_eq!(beta["rank"], 1);
+    assert!((beta["vs_median"].as_f64().unwrap() - 2.0 / 3.0).abs() < 1e-9);
+
+    // Beta is cheapest on both contested items, so it leads the provider ranking, and its
+    // price index is below the market median; gamma sells the dearest H100.
+    let providers = a["providers"].as_array().unwrap();
+    assert_eq!(providers[0]["organization"]["slug"], "beta", "{a}");
+    assert_eq!(providers[0]["model_wins"], 1);
+    assert_eq!(providers[0]["gpu_wins"], 1);
+    assert!(providers[0]["gpu_price_index"].as_f64().unwrap() < 1.0);
+    let gamma = providers
+        .iter()
+        .find(|p| p["organization"]["slug"] == "gamma")
+        .unwrap();
+    assert!(gamma["gpu_price_index"].as_f64().unwrap() > 1.0);
+    assert!(
+        gamma["model_price_index"].is_null(),
+        "gamma sells no contested model"
+    );
+
+    // The histogram covers the whole range with fixed half-decade bands.
+    let hist = a["price_histogram"].as_array().unwrap();
+    assert_eq!(hist.len(), 12);
+    let total: i64 = hist.iter().map(|b| b["models"].as_i64().unwrap()).sum();
+    assert_eq!(
+        total, 2,
+        "DeepSeek and Only Here are priced; the free variant is not a model"
+    );
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
 async fn market_indexes_match_models_across_providers(pool: PgPool) {
     seed_market_index(&pool).await;
     let app = app(pool);

@@ -37,6 +37,13 @@ export type ModelIndexRow = Schemas["ModelIndexRow"];
 export type GpuIndexRow = Schemas["GpuIndexRow"];
 export type MediaIndexRow = Schemas["MediaIndexRow"];
 export type MakerCount = Schemas["MakerCount"];
+export type MarketAnalytics = Schemas["MarketAnalytics"];
+export type ModelRank = Schemas["ModelRank"];
+export type GpuRank = Schemas["GpuRank"];
+export type GpuCell = Schemas["GpuCell"];
+export type MakerRank = Schemas["MakerRank"];
+export type ProviderRank = Schemas["ProviderRank"];
+export type PriceBucket = Schemas["PriceBucket"];
 
 /** A typed client for the Inference Hub API, generated from its OpenAPI document. */
 export function createApiClient(options: ClientOptions) {

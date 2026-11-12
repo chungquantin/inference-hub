@@ -784,6 +784,26 @@
         }
       }
     },
+    "/v1/market/analytics": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "Rankings and distributions: models by price spread, makers, GPU price matrix and\nproviders scored against the market median.",
+        "operationId": "marketAnalytics",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketAnalytics"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market/gpus": {
       "get": {
         "tags": [
@@ -2117,6 +2137,39 @@
           }
         }
       },
+      "GpuCell": {
+        "type": "object",
+        "description": "One cloud's lowest price for one GPU type: a cell of the price matrix.",
+        "required": [
+          "gpu_type",
+          "provider",
+          "per_gpu_hour",
+          "rank",
+          "vs_median"
+        ],
+        "properties": {
+          "gpu_type": {
+            "type": "string"
+          },
+          "per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int32",
+            "description": "1 is the cheapest in the market."
+          },
+          "vs_median": {
+            "type": "number",
+            "format": "double",
+            "description": "This price over the market median for the GPU type: below 1 is cheaper than most."
+          }
+        }
+      },
       "GpuComparison": {
         "type": "object",
         "required": [
@@ -2244,6 +2297,53 @@
           }
         }
       },
+      "GpuRank": {
+        "type": "object",
+        "description": "One GPU type across clouds.",
+        "required": [
+          "gpu_type",
+          "providers",
+          "listings",
+          "min_per_gpu_hour",
+          "median_per_gpu_hour",
+          "max_per_gpu_hour",
+          "spread",
+          "cheapest"
+        ],
+        "properties": {
+          "cheapest": {
+            "$ref": "#/components/schemas/OrganizationRef"
+          },
+          "gpu_type": {
+            "type": "string"
+          },
+          "listings": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "max_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "median_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_per_gpu_hour": {
+            "type": "number",
+            "format": "double"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "spread": {
+            "type": "number",
+            "format": "double",
+            "description": "Priciest listing over the cheapest."
+          }
+        }
+      },
       "Health": {
         "type": "object",
         "required": [
@@ -2301,6 +2401,48 @@
           }
         }
       },
+      "MakerRank": {
+        "type": "object",
+        "description": "A model maker's footprint in the market.",
+        "required": [
+          "maker",
+          "models",
+          "contested_models",
+          "avg_providers",
+          "median_min_price",
+          "contested_share"
+        ],
+        "properties": {
+          "avg_providers": {
+            "type": "number",
+            "format": "double",
+            "description": "Mean number of providers per model."
+          },
+          "contested_models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Of which sold by two or more providers."
+          },
+          "contested_share": {
+            "type": "number",
+            "format": "double",
+            "description": "Share of the maker's models sold by two or more providers, 0 to 1."
+          },
+          "maker": {
+            "type": "string"
+          },
+          "median_min_price": {
+            "type": "number",
+            "format": "double",
+            "description": "Median over the maker's models of the cheapest blended price, USD per million tokens."
+          },
+          "models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Priced chat models, variants merged."
+          }
+        }
+      },
       "MakerRef": {
         "type": "object",
         "description": "The organization that makes a product, read from `maker_*` columns.",
@@ -2320,6 +2462,65 @@
           },
           "slug": {
             "type": "string"
+          }
+        }
+      },
+      "MarketAnalytics": {
+        "type": "object",
+        "description": "Everything the rankings dashboard shows.",
+        "required": [
+          "models",
+          "price_histogram",
+          "makers",
+          "gpus",
+          "gpu_prices",
+          "providers"
+        ],
+        "properties": {
+          "gpu_prices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GpuCell"
+            }
+          },
+          "gpus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GpuRank"
+            }
+          },
+          "makers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MakerRank"
+            }
+          },
+          "models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelRank"
+            },
+            "description": "Chat models sold by two or more providers, widest sold first."
+          },
+          "price_histogram": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PriceBucket"
+            }
+          },
+          "providers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProviderRank"
+            }
+          },
+          "refreshed_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the summaries these were computed from were refreshed."
           }
         }
       },
@@ -2867,6 +3068,89 @@
           "output",
           "context_window"
         ]
+      },
+      "ModelRank": {
+        "type": "object",
+        "description": "One chat model sold by two or more providers.",
+        "required": [
+          "model_key",
+          "name",
+          "providers",
+          "min_blended_per_mtok",
+          "median_blended_per_mtok",
+          "max_blended_per_mtok",
+          "spread",
+          "capabilities",
+          "cheapest"
+        ],
+        "properties": {
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cheapest": {
+            "$ref": "#/components/schemas/OrganizationRef",
+            "description": "Who sells it cheapest."
+          },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "max_blended_per_mtok": {
+            "type": "number",
+            "format": "double"
+          },
+          "max_context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "median_blended_per_mtok": {
+            "type": "number",
+            "format": "double"
+          },
+          "min_blended_per_mtok": {
+            "type": "number",
+            "format": "double",
+            "description": "Cheapest, median and priciest provider price, USD per million tokens (3:1 input:output blend)."
+          },
+          "min_input_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "min_output_per_mtok": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "model_key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "providers": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Providers selling it at a price."
+          },
+          "spread": {
+            "type": "number",
+            "format": "double",
+            "description": "Priciest provider over the cheapest: what a buyer saves by shopping around."
+          }
+        }
       },
       "ModelSpec": {
         "type": "object",
@@ -3972,6 +4256,38 @@
           }
         }
       },
+      "PriceBucket": {
+        "type": "object",
+        "description": "A price band of the model histogram.",
+        "required": [
+          "from",
+          "to",
+          "models",
+          "contested"
+        ],
+        "properties": {
+          "contested": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Of which sold by two or more providers."
+          },
+          "from": {
+            "type": "number",
+            "format": "double",
+            "description": "Lower bound, inclusive, USD per million tokens."
+          },
+          "models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Chat models whose cheapest price falls in the band."
+          },
+          "to": {
+            "type": "number",
+            "format": "double",
+            "description": "Upper bound, exclusive."
+          }
+        }
+      },
       "PriceHold": {
         "type": "object",
         "description": "A price an adapter reported that failed a sanity check, waiting for an editor.",
@@ -4416,6 +4732,78 @@
           "total": {
             "type": "integer",
             "format": "int64"
+          }
+        }
+      },
+      "ProviderRank": {
+        "type": "object",
+        "description": "A provider scored across the items it shares with other providers.",
+        "required": [
+          "organization",
+          "models",
+          "media_models",
+          "gpu_configurations",
+          "contested_models",
+          "contested_gpus",
+          "model_wins",
+          "gpu_wins"
+        ],
+        "properties": {
+          "contested_gpus": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "contested_models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Chat models and GPU types it sells that at least one other provider sells too."
+          },
+          "gpu_configurations": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "gpu_price_index": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double"
+          },
+          "gpu_wins": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "last_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "media_models": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "model_price_index": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Geometric mean of its price over the market median on contested items.\n1.0 is the market, 0.5 is half the median; null when it sells none."
+          },
+          "model_wins": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Contested items where its price is the lowest in the market."
+          },
+          "models": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Priced chat models in its catalog."
+          },
+          "organization": {
+            "$ref": "#/components/schemas/OrganizationRef"
           }
         }
       },

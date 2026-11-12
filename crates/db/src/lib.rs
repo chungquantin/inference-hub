@@ -3,6 +3,7 @@
 #[macro_use]
 mod sql;
 
+pub mod analytics;
 pub mod categories;
 pub mod compare;
 pub mod jobs;

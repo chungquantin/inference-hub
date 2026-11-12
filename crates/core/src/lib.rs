@@ -3,6 +3,7 @@
 //! These types are the public contract of the API: they derive `ToSchema` so
 //! the OpenAPI document (and the generated TypeScript client) follows them.
 
+pub mod analytics;
 pub mod category;
 pub mod compare;
 pub mod market;
@@ -12,6 +13,7 @@ pub mod pagination;
 pub mod product;
 pub mod search;
 
+pub use analytics::MarketAnalytics;
 pub use category::Category;
 pub use compare::{
     FundingRound, GpuPrice, GpuPriceQuery, MakerRef, ModelPrice, ModelPriceQuery, ModelPriceSort,

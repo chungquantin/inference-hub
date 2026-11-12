@@ -280,6 +280,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/analytics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Rankings and distributions: models by price spread, makers, GPU price matrix and
+         *     providers scored against the market median.
+         */
+        get: operations["marketAnalytics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/gpus": {
         parameters: {
             query?: never;
@@ -675,6 +695,23 @@ export interface components {
              */
             valuation?: number | null;
         };
+        /** @description One cloud's lowest price for one GPU type: a cell of the price matrix. */
+        GpuCell: {
+            gpu_type: string;
+            /** Format: double */
+            per_gpu_hour: number;
+            provider: components["schemas"]["OrganizationRef"];
+            /**
+             * Format: int32
+             * @description 1 is the cheapest in the market.
+             */
+            rank: number;
+            /**
+             * Format: double
+             * @description This price over the market median for the GPU type: below 1 is cheaper than most.
+             */
+            vs_median: number;
+        };
         GpuComparison: {
             /** @description GPU types with a current offering, for filters. */
             gpu_types: string[];
@@ -721,6 +758,26 @@ export interface components {
             region?: string | null;
             source_url?: string | null;
         };
+        /** @description One GPU type across clouds. */
+        GpuRank: {
+            cheapest: components["schemas"]["OrganizationRef"];
+            gpu_type: string;
+            /** Format: int64 */
+            listings: number;
+            /** Format: double */
+            max_per_gpu_hour: number;
+            /** Format: double */
+            median_per_gpu_hour: number;
+            /** Format: double */
+            min_per_gpu_hour: number;
+            /** Format: int64 */
+            providers: number;
+            /**
+             * Format: double
+             * @description Priciest listing over the cheapest.
+             */
+            spread: number;
+        };
         Health: {
             database: string;
             status: string;
@@ -742,11 +799,55 @@ export interface components {
             /** Format: int64 */
             models: number;
         };
+        /** @description A model maker's footprint in the market. */
+        MakerRank: {
+            /**
+             * Format: double
+             * @description Mean number of providers per model.
+             */
+            avg_providers: number;
+            /**
+             * Format: int64
+             * @description Of which sold by two or more providers.
+             */
+            contested_models: number;
+            /**
+             * Format: double
+             * @description Share of the maker's models sold by two or more providers, 0 to 1.
+             */
+            contested_share: number;
+            maker: string;
+            /**
+             * Format: double
+             * @description Median over the maker's models of the cheapest blended price, USD per million tokens.
+             */
+            median_min_price: number;
+            /**
+             * Format: int64
+             * @description Priced chat models, variants merged.
+             */
+            models: number;
+        };
         /** @description The organization that makes a product, read from `maker_*` columns. */
         MakerRef: {
             logo_url?: string | null;
             name: string;
             slug: string;
+        };
+        /** @description Everything the rankings dashboard shows. */
+        MarketAnalytics: {
+            gpu_prices: components["schemas"]["GpuCell"][];
+            gpus: components["schemas"]["GpuRank"][];
+            makers: components["schemas"]["MakerRank"][];
+            /** @description Chat models sold by two or more providers, widest sold first. */
+            models: components["schemas"]["ModelRank"][];
+            price_histogram: components["schemas"]["PriceBucket"][];
+            providers: components["schemas"]["ProviderRank"][];
+            /**
+             * Format: date-time
+             * @description When the summaries these were computed from were refreshed.
+             */
+            refreshed_at?: string | null;
         };
         /** @description Every provider's price for one model or GPU type. */
         MarketDetail: {
@@ -970,6 +1071,40 @@ export interface components {
          * @enum {string}
          */
         ModelPriceSort: "blended" | "input" | "output" | "context_window";
+        /** @description One chat model sold by two or more providers. */
+        ModelRank: {
+            capabilities: string[];
+            /** @description Who sells it cheapest. */
+            cheapest: components["schemas"]["OrganizationRef"];
+            maker?: string | null;
+            /** Format: double */
+            max_blended_per_mtok: number;
+            /** Format: int32 */
+            max_context_window?: number | null;
+            /** Format: double */
+            median_blended_per_mtok: number;
+            /**
+             * Format: double
+             * @description Cheapest, median and priciest provider price, USD per million tokens (3:1 input:output blend).
+             */
+            min_blended_per_mtok: number;
+            /** Format: double */
+            min_input_per_mtok?: number | null;
+            /** Format: double */
+            min_output_per_mtok?: number | null;
+            model_key: string;
+            name: string;
+            /**
+             * Format: int64
+             * @description Providers selling it at a price.
+             */
+            providers: number;
+            /**
+             * Format: double
+             * @description Priciest provider over the cheapest: what a buyer saves by shopping around.
+             */
+            spread: number;
+        };
         /** @description Technical attributes of a model. */
         ModelSpec: {
             /**
@@ -1319,6 +1454,29 @@ export interface components {
             lead: boolean;
             round: string;
         };
+        /** @description A price band of the model histogram. */
+        PriceBucket: {
+            /**
+             * Format: int64
+             * @description Of which sold by two or more providers.
+             */
+            contested: number;
+            /**
+             * Format: double
+             * @description Lower bound, inclusive, USD per million tokens.
+             */
+            from: number;
+            /**
+             * Format: int64
+             * @description Chat models whose cheapest price falls in the band.
+             */
+            models: number;
+            /**
+             * Format: double
+             * @description Upper bound, exclusive.
+             */
+            to: number;
+        };
         /** @description A price an adapter reported that failed a sanity check, waiting for an editor. */
         PriceHold: {
             adapter: string;
@@ -1456,6 +1614,43 @@ export interface components {
             offset: number;
             /** Format: int64 */
             total: number;
+        };
+        /** @description A provider scored across the items it shares with other providers. */
+        ProviderRank: {
+            /** Format: int64 */
+            contested_gpus: number;
+            /**
+             * Format: int64
+             * @description Chat models and GPU types it sells that at least one other provider sells too.
+             */
+            contested_models: number;
+            /** Format: int64 */
+            gpu_configurations: number;
+            /** Format: double */
+            gpu_price_index?: number | null;
+            /** Format: int64 */
+            gpu_wins: number;
+            /** Format: date-time */
+            last_seen_at?: string | null;
+            /** Format: int64 */
+            media_models: number;
+            /**
+             * Format: double
+             * @description Geometric mean of its price over the market median on contested items.
+             *     1.0 is the market, 0.5 is half the median; null when it sells none.
+             */
+            model_price_index?: number | null;
+            /**
+             * Format: int64
+             * @description Contested items where its price is the lowest in the market.
+             */
+            model_wins: number;
+            /**
+             * Format: int64
+             * @description Priced chat models in its catalog.
+             */
+            models: number;
+            organization: components["schemas"]["OrganizationRef"];
         };
         /** @description A row of the open-source leaderboard. */
         RepoLeader: components["schemas"]["RepoStats"] & {
@@ -2120,6 +2315,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarketOverview"];
+                };
+            };
+        };
+    };
+    marketAnalytics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MarketAnalytics"];
                 };
             };
         };
