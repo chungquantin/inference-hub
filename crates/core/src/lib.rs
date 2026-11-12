@@ -26,7 +26,7 @@ pub use news::{
     AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus,
     UnmappedListing,
 };
-pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail};
+pub use organization::{OrgKind, OrgStatus, Organization, OrganizationDetail, OrganizationFeed};
 pub use pagination::{Page, PageParams};
 pub use product::{
     ModelSpec, Offering, OrganizationRef, ProductDetail, ProductSummary, ProductType,

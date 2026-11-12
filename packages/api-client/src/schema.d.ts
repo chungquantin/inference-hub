@@ -1099,6 +1099,8 @@ export interface components {
         OrganizationDetail: components["schemas"]["Organization"] & {
             categories: components["schemas"]["Category"][];
             description?: string | null;
+            /** @description The news feeds the hub reads for this organization. */
+            feeds: components["schemas"]["OrganizationFeed"][];
             /** @description Rounds the organization raised, newest first. */
             funding: components["schemas"]["FundingRound"][];
             /** @description Named external links, such as `github`, `x` or `docs`. */
@@ -1113,6 +1115,27 @@ export interface components {
             served_products: components["schemas"]["ProductSummary"][];
             /** Format: date-time */
             updated_at: string;
+        };
+        /** @description A news feed an organization publishes, as the hub reads it. */
+        OrganizationFeed: {
+            /**
+             * Format: date-time
+             * @description When the feed was last read successfully.
+             */
+            last_success_at?: string | null;
+            name: string;
+            /**
+             * Format: int64
+             * @description Items stored from this feed that wait for review.
+             */
+            pending: number;
+            /**
+             * Format: int64
+             * @description Items stored from this feed that are published.
+             */
+            published: number;
+            /** @description The RSS, Atom or JSON feed. */
+            url: string;
         };
         /** @description A short reference to an organization, embedded in product and offering responses. */
         OrganizationRef: {

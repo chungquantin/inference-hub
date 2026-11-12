@@ -266,7 +266,13 @@ fn decode_entities(s: &str) -> String {
     while let Some(start) = rest.find('&') {
         out.push_str(&rest[..start]);
         rest = &rest[start..];
-        let Some(end) = rest[..rest.len().min(12)].find(';') else {
+        // An entity is short; look at most 12 bytes ahead, cut on a character boundary
+        // (the text after a bare `&` can be any script).
+        let mut window = rest.len().min(12);
+        while !rest.is_char_boundary(window) {
+            window -= 1;
+        }
+        let Some(end) = rest[..window].find(';') else {
             out.push('&');
             rest = &rest[1..];
             continue;
@@ -452,6 +458,20 @@ mod tests {
         assert_eq!(
             clean_text("<p>One</p><p>Two<br/>Three</p>"),
             "One Two Three"
+        );
+    }
+
+    #[test]
+    fn a_bare_ampersand_before_multibyte_text_does_not_panic() {
+        // A byte offset of 12 falls inside the curly quote here.
+        assert_eq!(
+            clean_text("Q&A: &“Quoted text” and more"),
+            "Q&A: &“Quoted text” and more"
+        );
+        assert_eq!(clean_text("AT&T &amp; AT&”T"), "AT&T & AT&”T");
+        assert_eq!(
+            clean_text("&日本語日本語日本語; end"),
+            "&日本語日本語日本語; end"
         );
     }
 

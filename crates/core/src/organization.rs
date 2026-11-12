@@ -72,6 +72,20 @@ pub struct Organization {
     pub status: OrgStatus,
 }
 
+/// A news feed an organization publishes, as the hub reads it.
+#[derive(Debug, Clone, Serialize, ToSchema, sqlx::FromRow)]
+pub struct OrganizationFeed {
+    pub name: String,
+    /// The RSS, Atom or JSON feed.
+    pub url: String,
+    /// Items stored from this feed that are published.
+    pub published: i64,
+    /// Items stored from this feed that wait for review.
+    pub pending: i64,
+    /// When the feed was last read successfully.
+    pub last_success_at: Option<DateTime<Utc>>,
+}
+
 /// The full profile of an organization.
 #[derive(Debug, Clone, Serialize, ToSchema)]
 pub struct OrganizationDetail {
@@ -90,5 +104,7 @@ pub struct OrganizationDetail {
     pub funding: Vec<FundingRound>,
     /// Companies the organization invested in, most recent first.
     pub portfolio: Vec<PortfolioCompany>,
+    /// The news feeds the hub reads for this organization.
+    pub feeds: Vec<OrganizationFeed>,
     pub updated_at: DateTime<Utc>,
 }

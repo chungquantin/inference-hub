@@ -1,7 +1,9 @@
-//! `worker [--once] [--retag] [--enrich-backlog]`
+//! `worker [--once | --feeds] [--retag] [--enrich-backlog]`
 //!
 //! Without flags, runs the scheduler and job runners until SIGINT or SIGTERM.
 //! `--once` schedules due feed fetches and repository syncs, runs them and exits.
+//! `--feeds` fetches only the news feeds that are due, and exits: the way to
+//! pick up newly added feeds without running every market adapter.
 //! `--retag` re-runs the organization tagger on all stored news and exits.
 //! `--enrich-backlog` enriches pending news through the LLM until none is
 //! left or a budget runs out, and exits.
@@ -70,6 +72,13 @@ async fn main() -> anyhow::Result<()> {
         concurrency: env_parse("WORKER_CONCURRENCY", 4),
         ..Config::default()
     };
+
+    if flag("--feeds") {
+        let scheduled = worker::schedule_due_sources(&pool).await?;
+        let ran = worker::drain(&pool, &ctx, &config.worker_id).await?;
+        tracing::info!(scheduled, ran, "feeds fetched");
+        return Ok(());
+    }
 
     if flag("--once") {
         let scheduled = worker::schedule_all(&pool, &ctx).await?;

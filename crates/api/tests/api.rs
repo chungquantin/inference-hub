@@ -225,6 +225,39 @@ async fn invalid_parameters_get_json_errors(pool: PgPool) {
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn organization_detail_lists_its_feeds_with_counts(pool: PgPool) {
+    sqlx::raw_sql(
+        "INSERT INTO organizations (slug, name, kinds) VALUES ('feedco', 'FeedCo', '{open_source}'),
+                                                              ('quiet', 'Quiet', '{open_source}');
+         INSERT INTO sources (name, slug, source_type, url, organization_id, enabled)
+         SELECT 'FeedCo blog', 'feedco-blog', 'rss', 'https://feedco.example/feed.xml', id, true
+           FROM organizations WHERE slug = 'feedco';
+         INSERT INTO sources (name, slug, source_type, url, organization_id, enabled)
+         SELECT 'Old feed', 'feedco-old', 'rss', 'https://feedco.example/old.xml', id, false
+           FROM organizations WHERE slug = 'feedco';
+         INSERT INTO news_items (source_id, url, title, published_at, status)
+         SELECT s.id, 'https://feedco.example/' || t.n, 'Post ' || t.n, now(), t.status::news_status
+           FROM sources s, (VALUES ('a', 'approved'), ('b', 'approved'), ('c', 'pending')) t(n, status)
+          WHERE s.slug = 'feedco-blog';",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    let app = app(pool);
+
+    let (status, body) = get(&app, "/v1/organizations/feedco").await;
+    assert_eq!(status, StatusCode::OK);
+    let feeds = body["feeds"].as_array().unwrap();
+    assert_eq!(feeds.len(), 1, "a disabled feed is not listed");
+    assert_eq!(feeds[0]["url"], "https://feedco.example/feed.xml");
+    assert_eq!(feeds[0]["published"], 2);
+    assert_eq!(feeds[0]["pending"], 1);
+
+    let (_, body) = get(&app, "/v1/organizations/quiet").await;
+    assert_eq!(body["feeds"].as_array().unwrap().len(), 0);
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
 async fn organization_detail_lists_made_and_served_products(pool: PgPool) {
     seed_fixtures(&pool).await;
     let app = app(pool);

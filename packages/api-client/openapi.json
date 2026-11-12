@@ -3253,6 +3253,7 @@
               "served_products",
               "funding",
               "portfolio",
+              "feeds",
               "updated_at"
             ],
             "properties": {
@@ -3267,6 +3268,13 @@
                   "string",
                   "null"
                 ]
+              },
+              "feeds": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OrganizationFeed"
+                },
+                "description": "The news feeds the hub reads for this organization."
               },
               "funding": {
                 "type": "array",
@@ -3314,6 +3322,43 @@
           }
         ],
         "description": "The full profile of an organization."
+      },
+      "OrganizationFeed": {
+        "type": "object",
+        "description": "A news feed an organization publishes, as the hub reads it.",
+        "required": [
+          "name",
+          "url",
+          "published",
+          "pending"
+        ],
+        "properties": {
+          "last_success_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "When the feed was last read successfully."
+          },
+          "name": {
+            "type": "string"
+          },
+          "pending": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Items stored from this feed that wait for review."
+          },
+          "published": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Items stored from this feed that are published."
+          },
+          "url": {
+            "type": "string",
+            "description": "The RSS, Atom or JSON feed."
+          }
+        }
       },
       "OrganizationRef": {
         "type": "object",

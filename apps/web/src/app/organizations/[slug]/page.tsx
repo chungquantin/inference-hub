@@ -47,7 +47,7 @@ export default async function OrganizationPage({ params, searchParams }: Props) 
   const page = parsePage(query.page);
   const [org, news, market, offerings] = await Promise.all([
     loadOrganization(slug),
-    api.GET("/v1/news", { params: { query: { organization: slug, limit: 8 } } }),
+    api.GET("/v1/news", { params: { query: { organization: slug, limit: 10 } } }),
     api.GET("/v1/market/providers/{slug}", { params: { path: { slug } } }),
     // Everything it sells, from its live catalog and the curated data, merged.
     api.GET("/v1/market/providers/{slug}/offerings", {
@@ -156,14 +156,38 @@ export default async function OrganizationPage({ params, searchParams }: Props) 
         </section>
       )}
 
-      {news.data && news.data.items.length > 0 && (
-        <section className="flex flex-col gap-3">
+      {news.data && (
+        <section className="flex flex-col gap-3" id="news">
           <SectionHeader
             title="News"
             href={news.data.total > news.data.items.length ? `/news?organization=${org.slug}` : undefined}
             linkLabel={`All ${news.data.total} stories`}
           />
-          <NewsList items={news.data.items} />
+          {news.data.items.length > 0 ? (
+            <NewsList items={news.data.items} />
+          ) : (
+            <p className="text-[14px] text-ink-3">
+              {org.feeds.length > 0
+                ? "No published stories yet. The feed is read every few hours."
+                : "No stories yet. We found no news feed on this site; stories about it from other sources appear here."}
+            </p>
+          )}
+          {org.feeds.length > 0 && (
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[13px] text-ink-3">
+              <li>Reads</li>
+              {org.feeds.map((feed) => (
+                <li key={feed.url} className="flex items-center gap-1.5">
+                  <a href={feed.url} rel="noopener" target="_blank" className="font-mono text-ink-2 underline hover:text-s-7">
+                    {feed.name}
+                  </a>
+                  <span>
+                    {feed.published} published{feed.pending > 0 ? `, ${feed.pending} in review` : ""}
+                    {feed.last_success_at ? ` · read ${formatDate(feed.last_success_at)}` : ""}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       )}
 

@@ -113,6 +113,20 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
     let served_products = products::list_served_by(pool, org_id).await?;
     let funding = compare::funding_rounds(pool, org_id).await?;
     let portfolio = compare::portfolio(pool, org_id).await?;
+    let feeds = sqlx::query_as(
+        "SELECT s.name, s.url,
+                count(n.id) FILTER (WHERE n.status = 'approved') AS published,
+                count(n.id) FILTER (WHERE n.status = 'pending') AS pending,
+                s.last_success_at
+         FROM sources s
+         LEFT JOIN news_items n ON n.source_id = s.id
+         WHERE s.organization_id = $1 AND s.enabled AND s.url IS NOT NULL
+         GROUP BY s.id
+         ORDER BY s.name",
+    )
+    .bind(org_id)
+    .fetch_all(pool)
+    .await?;
 
     Ok(Some(OrganizationDetail {
         organization: row.organization,
@@ -123,6 +137,7 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
         served_products,
         funding,
         portfolio,
+        feeds,
         updated_at: row.updated_at,
     }))
 }
