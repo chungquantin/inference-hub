@@ -37,4 +37,17 @@ export type Row = {
   status?: string;
 };
 
-export type DirectoryData = { gpus: Row[]; models: Row[]; orgs: Row[] };
+/**
+ * `models` starts as the comparable models (sold by 2+ providers) so the tab is
+ * instant; the full list is fetched on demand. `modelTotal` is every model.
+ */
+export type DirectoryData = { gpus: Row[]; models: Row[]; orgs: Row[]; modelTotal: number };
+
+/** The compact payload of `/api/directory/models`: one array per model, organizations once. */
+export type ModelsPayload = {
+  /** Cheapest sellers, referenced by index: [slug, name, logo]. */
+  orgs: [string, string, string | null][];
+  /** [key, maker, providers, lowest, median, input, output, context, capabilities, cheapest org index] */
+  rows: [string, string | null, number, number, number, number, number, number | null, string, number][];
+  total: number;
+};

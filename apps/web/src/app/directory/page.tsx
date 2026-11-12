@@ -16,6 +16,25 @@ export const metadata: Metadata = {
 
 const TABS: Tab[] = ["gpus", "models", "orgs"];
 
+/** The largest page the API serves (market lists allow 500, other lists 100). */
+const PAGE = 100;
+
+/**
+ * Every item of a paged list, fetched page by page: the API caps a page, so a
+ * single request silently drops the rest. Returns null if any page fails.
+ */
+async function allPages<T>(
+  get: (offset: number, limit: number) => Promise<{ data?: { items: T[]; total: number }; error?: unknown }>,
+): Promise<T[] | null> {
+  const items: T[] = [];
+  for (let offset = 0; ; offset += PAGE) {
+    const { data, error } = await get(offset, PAGE);
+    if (error || !data) return null;
+    items.push(...data.items);
+    if (data.items.length === 0 || items.length >= data.total) return items;
+  }
+}
+
 export default async function DirectoryPage({
   searchParams,
 }: {
@@ -24,12 +43,16 @@ export default async function DirectoryPage({
   const params = await searchParams;
   const tab = TABS.includes(params.tab as Tab) ? (params.tab as Tab) : "gpus";
 
-  const [gpus, models, orgs] = await Promise.all([
+  const [gpus, models, orgs, everyModel] = await Promise.all([
     api.GET("/v1/market/gpus"),
-    api.GET("/v1/market/models", { params: { query: { min_providers: 2, sort: "price", limit: 500 } } }),
-    api.GET("/v1/organizations", { params: { query: { limit: 100 } } }),
+    allPages((offset, limit) =>
+      api.GET("/v1/market/models", { params: { query: { min_providers: 2, sort: "price", limit, offset } } }),
+    ),
+    allPages((offset, limit) => api.GET("/v1/organizations", { params: { query: { limit, offset } } })),
+    // Only the count: the full list loads in the browser when the Models tab opens.
+    api.GET("/v1/market/models", { params: { query: { min_providers: 1, limit: 1 } } }),
   ]);
-  if (gpus.error || models.error || orgs.error) throw new Error("Could not load the directory");
+  if (gpus.error || !models || !orgs || !everyModel.data) throw new Error("Could not load the directory");
 
   const data: DirectoryData = {
     gpus: (gpus.data ?? [])
@@ -52,7 +75,7 @@ export default async function DirectoryPage({
           gap: g.max_per_gpu_hour / g.min_per_gpu_hour,
         }),
       ),
-    models: (models.data?.items ?? [])
+    models: models
       .filter((m) => m.min_blended_per_mtok > 0)
       .map(
         (m): Row => ({
@@ -74,7 +97,7 @@ export default async function DirectoryPage({
           gap: m.median_blended_per_mtok / m.min_blended_per_mtok,
         }),
       ),
-    orgs: (orgs.data?.items ?? []).map(
+    orgs: orgs.map(
       (o): Row => ({
         id: o.slug,
         name: o.name,
@@ -89,6 +112,7 @@ export default async function DirectoryPage({
         status: o.status,
       }),
     ),
+    modelTotal: everyModel.data.total,
   };
 
   return (

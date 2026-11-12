@@ -4,7 +4,35 @@ import Link from "next/link";
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { HyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
-import type { DirectoryData, Row, Tab } from "@/components/directory/types";
+import type { DirectoryData, ModelsPayload, Row, Tab } from "@/components/directory/types";
+import { creatorName, modelLogoUrl } from "@/lib/catalog";
+
+/* ---------- the full model list ---------- */
+
+/** Rows of the compact `/api/directory/models` payload. */
+function modelRows(p: ModelsPayload): Row[] {
+  return p.rows.map(([key, maker, providers, lo, mid, inPrice, outPrice, ctx, caps, at]): Row => {
+    const [slug, name, logo] = p.orgs[at];
+    return {
+      id: key,
+      name: key,
+      sub: maker ? (creatorName(maker) ?? maker) : "",
+      href: `/market/models/${encodeURIComponent(key)}`,
+      logo: modelLogoUrl(key, maker),
+      maker: maker ?? "",
+      providers,
+      lo,
+      mid,
+      inPrice,
+      outPrice,
+      ctx,
+      caps: caps ? caps.split(",") : [],
+      at: name,
+      atOrg: { slug, name, logo },
+      gap: lo > 0 ? mid / lo : 1,
+    };
+  });
+}
 
 /* ---------- formatting ---------- */
 
@@ -153,10 +181,18 @@ function parse(q: string, tab: Tab): Parsed {
   return { toks, free, unknown };
 }
 
-/** Substring first, then an ordered subsequence so "h1oo" still finds "h100". */
-function fuzzy(hay: string, needle: string): boolean {
+/** The most rows a typo-tolerant search may return. */
+const NEAR_MAX = 60;
+
+/**
+ * A substring, or with `loose` an ordered subsequence so "h1oo" still finds
+ * "h100". Loose matching is only a fallback (see `base`): over thousands of
+ * rows it matches far too much ("mistral" would find 7 times the models that
+ * contain the word).
+ */
+function fuzzy(hay: string, needle: string, loose: boolean): boolean {
   if (hay.includes(needle)) return true;
-  if (needle.length < 3) return false;
+  if (!loose || needle.length < 3) return false;
   let i = 0;
   for (const c of hay) {
     if (c === needle[i]) i++;
@@ -169,7 +205,7 @@ const SYNONYMS: Partial<Record<Tab, Record<string, RegExp>>> = {
   gpus: { blackwell: /^(b\d{2,3}|gb\d{3}|rtx pro 6000)/i },
 };
 
-function matches(r: Row, p: Parsed, tab: Tab): boolean {
+function matches(r: Row, p: Parsed, tab: Tab, loose: boolean): boolean {
   for (const t of p.toks) {
     const def = OPS[tab].find((o) => o.key === t.key);
     if (def && !def.test(r, t.op, t.v)) return false;
@@ -181,7 +217,7 @@ function matches(r: Row, p: Parsed, tab: Tab): boolean {
       if (!syn.test(r.name)) return false;
       continue;
     }
-    if (!fuzzy(hay, w)) return false;
+    if (!fuzzy(hay, w, loose)) return false;
   }
   return true;
 }
@@ -304,7 +340,7 @@ const META: Record<Tab, { title: string; sub: string; histTitle: string }> = {
   orgs: { title: "Companies", sub: "Labs, clouds, gateways, hardware makers and the investors behind them.", histTitle: "Companies by kind" },
 };
 
-function metricsOf(tab: Tab, rows: Row[]): [string, string, string][] {
+function metricsOf(tab: Tab, rows: Row[], everyModel = false): [string, string, string][] {
   const byLo = [...rows].sort((a, b) => (a.lo ?? 0) - (b.lo ?? 0))[0];
   const byGap = [...rows].sort((a, b) => (b.gap ?? 0) - (a.gap ?? 0))[0];
   const med = median(rows.map((r) => r.lo ?? 0).filter(Boolean));
@@ -317,7 +353,7 @@ function metricsOf(tab: Tab, rows: Row[]): [string, string, string][] {
     ];
   if (tab === "models")
     return [
-      ["Models", rows.length.toLocaleString("en-US"), "sold by 2+ providers"],
+      ["Models", rows.length.toLocaleString("en-US"), everyModel ? "every model any provider lists" : "sold by 2+ providers"],
       ["Median lowest price", money(med), "per 1M tokens"],
       ["Cheapest", byLo ? money(byLo.lo) : "—", byLo ? `${byLo.name} at ${byLo.at}` : ""],
       ["Widest gap", byGap ? times(byGap.gap ?? 1) : "—", byGap ? `${byGap.name}, median vs lowest` : ""],
@@ -350,10 +386,15 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
   const [active, setActive] = useState(0);
   const [colMenu, setColMenu] = useState(false);
   const [flash, setFlash] = useState<string | null>(null);
+  // "Comparable" is the models two or more providers sell: instant, and what the
+  // page ships. "All" is every model any provider lists, fetched when asked for.
+  const [scope, setScope] = useState<"comparable" | "all">("comparable");
+  const [all, setAll] = useState<{ state: "idle" | "loading" | "ready" | "error"; rows: Row[] }>({ state: "idle", rows: [] });
   const inputRef = useRef<HTMLInputElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const rows = data[tab];
+  const everyModel = tab === "models" && scope === "all" && all.state === "ready";
+  const rows = everyModel ? all.rows : data[tab];
   const parsed = useMemo(() => parse(q, tab), [q, tab]);
 
   // Keep the address bar in step, so a search can be shared.
@@ -386,7 +427,14 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
     };
   }, []);
 
-  const base = useMemo(() => rows.filter((r) => matches(r, parsed, tab)), [rows, parsed, tab]);
+  const base = useMemo(() => {
+    const exact = rows.filter((r) => matches(r, parsed, tab, false));
+    if (exact.length || !parsed.free.length) return exact;
+    // Typos still work: when nothing contains the words, offer near matches, but
+    // only a short list. A near match that lets in thousands of rows is noise.
+    const near = rows.filter((r) => matches(r, parsed, tab, true));
+    return near.length <= NEAR_MAX ? near : exact;
+  }, [rows, parsed, tab]);
 
   const histVal = (r: Row) => r.lo ?? 0;
   const filtered = useMemo(() => {
@@ -417,12 +465,16 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
   const view = filtered.slice(start, start + per);
 
   const ctx = useMemo(() => {
-    const all = data[tab];
-    return {
-      min: Math.min(...all.map((r) => r.lo ?? Infinity).filter(Number.isFinite), 1),
-      max: Math.max(...all.map((r) => r.hi ?? r.mid ?? 0), 1),
-    };
-  }, [data, tab]);
+    // A loop, not Math.min(...rows): spreading 22,000 values overflows the call stack.
+    let min = 1;
+    let max = 1;
+    for (const r of rows) {
+      if (r.lo != null && Number.isFinite(r.lo) && r.lo < min) min = r.lo;
+      const hi = r.hi ?? r.mid ?? 0;
+      if (hi > max) max = hi;
+    }
+    return { min, max };
+  }, [rows]);
 
   const cols = COLS[tab].filter((c) => (c.hiddenByDefault ? shown[c.k] === true : shown[c.k] !== false));
   const sortKey = sort?.k ?? DEFAULT_SORT[tab][0];
@@ -472,7 +524,7 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
       setOpen(false);
       const [dk, dd] = DEFAULT_SORT[tab];
       // Land on the page that holds the row, in default order.
-      const ordered = [...data[tab]].sort((a, b) => {
+      const ordered = [...rows].sort((a, b) => {
         const x = a[dk as keyof Row] as number | string | undefined;
         const y = b[dk as keyof Row] as number | string | undefined;
         if (x == null || y == null) return 0;
@@ -484,6 +536,18 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
       setTimeout(() => document.querySelector(`[data-row="${CSS.escape(s.row.id)}"]`)?.scrollIntoView({ block: "center", behavior: "smooth" }), 60);
       setTimeout(() => setFlash(null), 1800);
     }
+  };
+
+  const loadAll = () => {
+    setScope("all");
+    setPage(1);
+    setHist(null);
+    if (all.state === "loading" || all.state === "ready") return;
+    setAll({ state: "loading", rows: [] });
+    fetch("/api/directory/models")
+      .then((r) => (r.ok ? (r.json() as Promise<ModelsPayload>) : Promise.reject(new Error(String(r.status)))))
+      .then((p) => setAll({ state: "ready", rows: modelRows(p) }))
+      .catch(() => setAll({ state: "error", rows: [] }));
   };
 
   const switchTab = (t: Tab) => {
@@ -516,7 +580,7 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
     a.click();
   };
 
-  const metrics = metricsOf(tab, filtered);
+  const metrics = metricsOf(tab, filtered, everyModel);
   const meta = META[tab];
 
   return (
@@ -533,8 +597,7 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
           >
             {t === "gpus" ? "GPUs" : t === "models" ? "Models" : "Companies"}
             <span className="bg-field px-1.5 font-mono text-[12px] text-ink-3">
-              {data[t].length}
-              {t === "models" ? "+" : ""}
+              {(t === "models" ? data.modelTotal : data[t].length).toLocaleString("en-US")}
             </span>
           </button>
         ))}
@@ -722,9 +785,44 @@ export function DirectoryApp({ data, initialTab, initialQuery }: { data: Directo
 
       {/* toolbar */}
       <div className="mb-2.5 flex flex-wrap items-center gap-2.5">
+        {tab === "models" && (
+          <div role="group" aria-label="Which models" className="inline-flex border border-line-strong">
+            <button
+              aria-pressed={scope === "comparable"}
+              onClick={() => {
+                setScope("comparable");
+                setPage(1);
+                setHist(null);
+              }}
+              className={`h-8 px-3 text-[14px] ${scope === "comparable" ? "bg-ink text-wash" : "bg-wash text-ink-2 hover:text-ink"}`}
+            >
+              Comparable ({data.models.length.toLocaleString("en-US")})
+            </button>
+            <button
+              aria-pressed={scope === "all"}
+              onClick={loadAll}
+              className={`h-8 px-3 text-[14px] ${scope === "all" ? "bg-ink text-wash" : "bg-wash text-ink-2 hover:text-ink"}`}
+            >
+              All ({data.modelTotal.toLocaleString("en-US")})
+            </button>
+          </div>
+        )}
         <p className="mr-auto text-[14px] text-ink-2" aria-live="polite">
-          <b className="font-semibold text-ink">{filtered.length.toLocaleString("en-US")}</b> of {rows.length.toLocaleString("en-US")} {NOUN[tab]}
-          {UNIT[tab] ? `, prices ${UNIT[tab]}` : ""}
+          {tab === "models" && scope === "all" && all.state === "loading" ? (
+            <>Loading all {data.modelTotal.toLocaleString("en-US")} models…</>
+          ) : tab === "models" && scope === "all" && all.state === "error" ? (
+            <>
+              Could not load every model.{" "}
+              <button onClick={() => { setAll({ state: "idle", rows: [] }); loadAll(); }} className="underline hover:text-s-7">
+                Try again
+              </button>
+            </>
+          ) : (
+            <>
+              <b className="font-semibold text-ink">{filtered.length.toLocaleString("en-US")}</b> of {rows.length.toLocaleString("en-US")} {NOUN[tab]}
+              {UNIT[tab] ? `, prices ${UNIT[tab]}` : ""}
+            </>
+          )}
         </p>
         <div role="group" aria-label="Row height" className="inline-flex border border-line-strong">
           {[
