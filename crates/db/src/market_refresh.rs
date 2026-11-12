@@ -30,7 +30,7 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
         .await?;
 
     // Live listings with their organization, computed once for this refresh.
-    sqlx::query(
+    sqlx::query(concat!(
         "CREATE TEMP TABLE live ON COMMIT DROP AS
          SELECT l.kind, l.external_id, l.name, l.maker, l.context_window, l.gpu_type,
                 l.gpu_count, l.unit, l.last_seen_at, l.source_url, l.capabilities,
@@ -42,15 +42,18 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                 coalesce(l.region, a.organization_id::text) AS seller,
                 l.price_input_per_mtok::float8 AS input,
                 l.price_output_per_mtok::float8 AS output,
-                ((l.price_input_per_mtok * $1::numeric + l.price_output_per_mtok)
-                    / ($1::numeric + 1))::float8 AS blended,
-                (l.price_per_hour / nullif(l.gpu_count, 0))::float8 AS per_gpu,
+                (",
+        blended!("l.price_input_per_mtok", "l.price_output_per_mtok", "$1"),
+        ")::float8 AS blended,
+                (",
+        per_gpu_hour!("l.price_per_hour", "l.gpu_count"),
+        ")::float8 AS per_gpu,
                 l.price_per_unit::float8 AS per_unit
          FROM market_listings l
          JOIN adapter_state a ON a.adapter = l.adapter
          JOIN organizations o ON o.id = a.organization_id
-         WHERE l.delisted_at IS NULL",
-    )
+         WHERE l.delisted_at IS NULL"
+    ))
     .bind(BLEND_INPUT_WEIGHT)
     .execute(&mut *tx)
     .await?;
@@ -226,7 +229,7 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
     // Curated offerings. A product mapped to adapter listings joins the item
     // those listings form; an unmapped one gets its own row, keyed by the
     // product (models) or its GPU type.
-    sqlx::query(
+    sqlx::query(concat!(
         "WITH curated AS (
              SELECT f.provider_id AS org, p.id AS product_id, p.name, mk.name AS maker,
                     CASE WHEN f.gpu_type IS NOT NULL THEN 'gpu' ELSE 'model' END AS kind,
@@ -240,10 +243,15 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
                         market_model_key(p.slug)) AS item,
                     f.price_input_per_mtok::float8 AS input,
                     f.price_output_per_mtok::float8 AS output,
-                    ((f.price_input_per_mtok * $1::numeric + f.price_output_per_mtok)
-                        / ($1::numeric + 1))::float8 AS blended,
-                    (f.price_per_hour / nullif(f.gpu_count, 0))::float8 AS per_gpu,
-                    f.source_url, coalesce(f.confirmed_at, f.observed_at) AS seen
+                    (",
+        blended!("f.price_input_per_mtok", "f.price_output_per_mtok", "$1"),
+        ")::float8 AS blended,
+                    (",
+        per_gpu_hour!("f.price_per_hour", "f.gpu_count"),
+        ")::float8 AS per_gpu,
+                    f.source_url, ",
+        observed_at!("f"),
+        " AS seen
              FROM latest_offerings f
              JOIN products p ON p.id = f.product_id
              JOIN organizations mk ON mk.id = p.organization_id
@@ -271,8 +279,8 @@ pub async fn refresh(pool: &PgPool) -> sqlx::Result<RefreshReport> {
              -- The curated product's name reads better than a raw model id.
              name = EXCLUDED.name,
              maker = coalesce(EXCLUDED.maker, o.maker),
-             sources = o.sources || EXCLUDED.sources",
-    )
+             sources = o.sources || EXCLUDED.sources"
+    ))
     .bind(BLEND_INPUT_WEIGHT)
     .execute(&mut *tx)
     .await?;

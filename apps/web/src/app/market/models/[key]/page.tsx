@@ -33,11 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function MarketModelPage({ params }: Props) {
   const data = await load((await params).key);
-  // The maker most listings name, for the logo and the creator line.
-  const makers = data.listings
-    .map((l) => l.external_id.includes("/") ? l.external_id.split("/")[0] : null)
-    .filter((m): m is string => !!m && !["bedrock", "vertex", "azure", "coding"].includes(m.toLowerCase()));
-  const maker = makers.sort((a, b) => makers.filter((x) => x === b).length - makers.filter((x) => x === a).length)[0] ?? null;
+  const maker = data.maker ?? null;
   const logo = <Logo name={creatorName(maker) ?? data.key} src={modelLogoUrl(data.key, maker)} size="lg" />;
   const byline = maker && (
     <span className="flex items-center gap-2 text-[15px]">

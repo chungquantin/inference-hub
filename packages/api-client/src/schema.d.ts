@@ -753,6 +753,8 @@ export interface components {
             key: string;
             /** @description Cheapest first. */
             listings: components["schemas"]["MarketListing"][];
+            /** @description Models: the maker as most providers name it, such as `deepseek-ai`. */
+            maker?: string | null;
             name: string;
         };
         /** @description One provider's live price for a model or GPU, as the adapter saw it. */
@@ -1111,8 +1113,6 @@ export interface components {
             portfolio: components["schemas"]["PortfolioCompany"][];
             /** @description Products the organization makes. */
             products: components["schemas"]["ProductSummary"][];
-            /** @description Products made by others that the organization sells or serves. */
-            served_products: components["schemas"]["ProductSummary"][];
             /** Format: date-time */
             updated_at: string;
         };

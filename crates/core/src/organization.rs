@@ -98,8 +98,6 @@ pub struct OrganizationDetail {
     pub categories: Vec<Category>,
     /// Products the organization makes.
     pub products: Vec<ProductSummary>,
-    /// Products made by others that the organization sells or serves.
-    pub served_products: Vec<ProductSummary>,
     /// Rounds the organization raised, newest first.
     pub funding: Vec<FundingRound>,
     /// Companies the organization invested in, most recent first.

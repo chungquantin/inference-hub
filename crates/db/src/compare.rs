@@ -22,19 +22,24 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
         ModelPriceSort::Output => "output",
         ModelPriceSort::ContextWindow => "context",
     };
-    sqlx::query_as(
+    sqlx::query_as(concat!(
         "SELECT * FROM (
              SELECT p.slug AS product_slug, p.name AS product_name,
                     mk.slug AS maker_slug, mk.name AS maker_name, mk.logo_url AS maker_logo,
-                    pr.slug AS organization_slug, pr.name AS organization_name, pr.logo_url AS organization_logo,
+                    ",
+        org_ref!("pr"),
+        ",
                     m.open_weights, m.context_window, m.parameters_b::float8 AS parameters_b,
                     f.price_input_per_mtok::float8 AS price_input_per_mtok,
                     f.price_output_per_mtok::float8 AS price_output_per_mtok,
-                    -- numeric math, rounded, so 0.175 does not become 0.17500000000000002
-                    round((f.price_input_per_mtok * $5::numeric + f.price_output_per_mtok)
-                          / ($5::numeric + 1), 6)::float8 AS blended_per_mtok,
+                    round(",
+        blended!("f.price_input_per_mtok", "f.price_output_per_mtok", "$5"),
+        ", 6)::float8
+                        AS blended_per_mtok,
                     f.currency::text AS currency, f.source_url,
-                    coalesce(f.confirmed_at, f.observed_at) AS observed_at
+                    ",
+        observed_at!("f"),
+        " AS observed_at
              FROM latest_offerings f
              JOIN products p ON p.id = f.product_id AND p.product_type = 'model'
              JOIN models m ON m.product_id = p.id
@@ -51,8 +56,8 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
                      WHEN 'input' THEN price_input_per_mtok
                      WHEN 'output' THEN price_output_per_mtok END ASC NULLS LAST,
              CASE WHEN $6 = 'context' THEN context_window END DESC NULLS LAST,
-             blended_per_mtok ASC NULLS LAST, product_name, organization_name",
-    )
+             blended_per_mtok ASC NULLS LAST, product_name, organization_name"
+    ))
     .bind(q.open_weights)
     .bind(q.maker.as_deref())
     .bind(q.provider.as_deref())
@@ -65,13 +70,19 @@ pub async fn model_prices(pool: &PgPool, q: &ModelPriceQuery) -> sqlx::Result<Ve
 
 /// Latest price of every GPU configuration at every provider, cheapest per GPU-hour first.
 pub async fn gpu_prices(pool: &PgPool, q: &GpuPriceQuery) -> sqlx::Result<Vec<GpuPrice>> {
-    sqlx::query_as(
+    sqlx::query_as(concat!(
         "SELECT p.slug AS product_slug, p.name AS product_name,
-                pr.slug AS organization_slug, pr.name AS organization_name, pr.logo_url AS organization_logo,
+                ",
+        org_ref!("pr"),
+        ",
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
-                (f.price_per_hour / f.gpu_count)::float8 AS price_per_gpu_hour,
+                (",
+        per_gpu_hour!("f.price_per_hour", "f.gpu_count"),
+        ")::float8 AS price_per_gpu_hour,
                 f.region, f.currency::text AS currency, f.source_url,
-                    coalesce(f.confirmed_at, f.observed_at) AS observed_at
+                ",
+        observed_at!("f"),
+        " AS observed_at
          FROM latest_offerings f
          JOIN products p ON p.id = f.product_id
          JOIN organizations pr ON pr.id = f.provider_id
@@ -79,8 +90,8 @@ pub async fn gpu_prices(pool: &PgPool, q: &GpuPriceQuery) -> sqlx::Result<Vec<Gp
            AND coalesce(f.gpu_count, 0) > 0
            AND ($1::text IS NULL OR lower(f.gpu_type) = lower($1))
            AND ($2::text IS NULL OR pr.slug = $2)
-         ORDER BY price_per_gpu_hour, f.gpu_type, pr.name",
-    )
+         ORDER BY price_per_gpu_hour, f.gpu_type, pr.name"
+    ))
     .bind(q.gpu.as_deref())
     .bind(q.provider.as_deref())
     .fetch_all(pool)
@@ -106,8 +117,10 @@ pub async fn price_history(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Vec
     let Some(product) = product else {
         return Ok(None);
     };
-    let points = sqlx::query_as(
-        "SELECT o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
+    let points = sqlx::query_as(concat!(
+        "SELECT ",
+        org_ref!("o"),
+        ",
                 nullif(concat_ws(' · ',
                     CASE WHEN f.gpu_type IS NOT NULL
                          THEN concat_ws('× ', f.gpu_count::text, f.gpu_type) END,
@@ -118,8 +131,8 @@ pub async fn price_history(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Vec
                 f.currency::text AS currency, f.observed_at
          FROM offerings f JOIN organizations o ON o.id = f.provider_id
          WHERE f.product_id = $1
-         ORDER BY f.observed_at, o.name, f.id",
-    )
+         ORDER BY f.observed_at, o.name, f.id"
+    ))
     .bind(product)
     .fetch_all(pool)
     .await?;
@@ -281,7 +294,9 @@ struct LeaderRow {
 pub async fn repo_leaderboard(pool: &PgPool) -> sqlx::Result<Vec<RepoLeader>> {
     let rows: Vec<LeaderRow> = sqlx::query_as(concat!(
         "SELECT p.slug AS product_slug, p.name AS product_name, p.product_type,
-                o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo, ",
+                ",
+        org_ref!("o"),
+        ", ",
         repo_stats_columns!(),
         " FROM products p
           JOIN repo_stats s ON s.product_id = p.id

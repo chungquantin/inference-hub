@@ -1,5 +1,8 @@
 //! Postgres access: connection pool, migrations and queries.
 
+#[macro_use]
+mod sql;
+
 pub mod categories;
 pub mod compare;
 pub mod jobs;

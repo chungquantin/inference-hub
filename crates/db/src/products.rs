@@ -18,8 +18,10 @@ pub struct ProductFilter {
 // Macros (not consts) so the fragments splice with `concat!` into static SQL.
 macro_rules! product_columns {
     () => {
-        "p.id, p.slug, p.name, p.product_type, p.tagline, p.url, p.launched_at, \
-         o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo"
+        concat!(
+            "p.id, p.slug, p.name, p.product_type, p.tagline, p.url, p.launched_at, ",
+            org_ref!("o")
+        )
     };
 }
 
@@ -144,18 +146,22 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Produ
 /// The newest observation for each (provider, configuration) of a product,
 /// cheapest first. Older rows are kept as price history.
 pub async fn latest_offerings(pool: &PgPool, product_id: Uuid) -> sqlx::Result<Vec<Offering>> {
-    sqlx::query_as(
-        "SELECT f.id, o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
+    sqlx::query_as(concat!(
+        "SELECT f.id, ",
+        org_ref!("o"),
+        ",
                 f.price_input_per_mtok::float8 AS price_input_per_mtok,
                 f.price_output_per_mtok::float8 AS price_output_per_mtok,
                 f.gpu_type, f.gpu_count, f.price_per_hour::float8 AS price_per_hour,
                 f.region, f.currency::text AS currency, f.source_url,
-                coalesce(f.confirmed_at, f.observed_at) AS observed_at
+                ",
+        observed_at!("f"),
+        " AS observed_at
          FROM latest_offerings f
          JOIN organizations o ON o.id = f.provider_id
          WHERE f.product_id = $1
-         ORDER BY coalesce(f.price_output_per_mtok, f.price_per_hour) NULLS LAST, o.name",
-    )
+         ORDER BY coalesce(f.price_output_per_mtok, f.price_per_hour) NULLS LAST, o.name"
+    ))
     .bind(product_id)
     .fetch_all(pool)
     .await
@@ -171,25 +177,6 @@ pub async fn list_made_by(
         product_columns!(),
         " FROM products p JOIN organizations o ON o.id = p.organization_id
           WHERE p.organization_id = $1
-          ORDER BY p.launched_at DESC NULLS LAST, p.name"
-    ))
-    .bind(organization_id)
-    .fetch_all(pool)
-    .await
-}
-
-/// Products made by others that an organization offers.
-pub async fn list_served_by(
-    pool: &PgPool,
-    organization_id: Uuid,
-) -> sqlx::Result<Vec<ProductSummary>> {
-    sqlx::query_as(concat!(
-        "SELECT ",
-        product_columns!(),
-        " FROM products p JOIN organizations o ON o.id = p.organization_id
-          WHERE p.organization_id <> $1
-            AND EXISTS (SELECT 1 FROM offerings f
-                        WHERE f.product_id = p.id AND f.provider_id = $1)
           ORDER BY p.launched_at DESC NULLS LAST, p.name"
     ))
     .bind(organization_id)

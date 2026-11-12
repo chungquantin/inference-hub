@@ -27,15 +27,7 @@ fn offset(q: Option<i64>) -> i64 {
 
 /// Escapes `%`, `_` and `\` so user text matches literally in ILIKE.
 fn like(q: &Option<String>) -> Option<String> {
-    // Words match in order with anything between, so `deepseek v3` finds
-    // `deepseek-v3` and `DeepSeek V3.1`.
-    let words: Vec<String> = q
-        .as_deref()?
-        .split(|c: char| c.is_whitespace() || matches!(c, '-' | '_' | '/' | ':'))
-        .filter(|w| !w.is_empty())
-        .map(|w| w.replace('\\', "\\\\").replace('%', "\\%"))
-        .collect();
-    (!words.is_empty()).then(|| format!("%{}%", words.join("%")))
+    crate::sql::words_like(q.as_deref()?)
 }
 
 /// Capability filter: known names only, so the array never carries user junk.
@@ -72,8 +64,7 @@ fn blank(s: &Option<String>) -> Option<&str> {
 }
 
 /// The organization columns every index row carries, for `cheapest`.
-const CHEAPEST: &str = "o.slug AS organization_slug, o.name AS organization_name,
-    o.logo_url AS organization_logo";
+const CHEAPEST: &str = org_ref!("o");
 
 /// GPU types across clouds, the most widely sold first.
 pub async fn gpu_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Vec<GpuIndexRow>> {
@@ -235,16 +226,23 @@ pub async fn media_index(pool: &PgPool, q: &MediaIndexQuery) -> sqlx::Result<Pag
     Ok(page(rows, limit, offset))
 }
 
-const LISTING_COLUMNS: &str = "l.adapter, o.slug AS organization_slug, o.name AS organization_name,
-    o.logo_url AS organization_logo, l.external_id, l.name, l.region AS variant, l.context_window,
+const LISTING_COLUMNS: &str = concat!(
+    "l.adapter, ",
+    org_ref!("o"),
+    ", l.external_id, l.name, l.region AS variant, l.context_window,
     l.price_input_per_mtok::float8 AS price_input_per_mtok,
     l.price_output_per_mtok::float8 AS price_output_per_mtok,
-    round((l.price_input_per_mtok * $2::numeric + l.price_output_per_mtok) / ($2::numeric + 1), 6)::float8
+    round(",
+    blended!("l.price_input_per_mtok", "l.price_output_per_mtok", "$2"),
+    ", 6)::float8
         AS blended_per_mtok,
     l.gpu_count, l.price_per_hour::float8 AS price_per_hour,
-    round(l.price_per_hour / nullif(l.gpu_count, 0), 4)::float8 AS price_per_gpu_hour,
+    round(",
+    per_gpu_hour!("l.price_per_hour", "l.gpu_count"),
+    ", 4)::float8 AS price_per_gpu_hour,
     l.unit, l.price_per_unit::float8 AS price_per_unit, l.capabilities,
-    l.source_url, l.last_seen_at";
+    l.source_url, l.last_seen_at"
+);
 
 /// Every live price of one model, cheapest first. `None` when no provider lists it.
 pub async fn model_detail(pool: &PgPool, key: &str) -> sqlx::Result<Option<MarketDetail>> {
@@ -261,7 +259,14 @@ pub async fn model_detail(pool: &PgPool, key: &str) -> sqlx::Result<Option<Marke
     .bind(BLEND_INPUT_WEIGHT)
     .fetch_all(pool)
     .await?;
-    Ok(detail(key, listings))
+    // The maker the summaries settled on, routing prefixes already excluded.
+    let maker: Option<String> = sqlx::query_scalar(
+        "SELECT maker FROM market_models WHERE model_key = $1 AND maker IS NOT NULL LIMIT 1",
+    )
+    .bind(key)
+    .fetch_optional(pool)
+    .await?;
+    Ok(detail(key, listings).map(|d| MarketDetail { maker, ..d }))
 }
 
 /// Every live price of one GPU type, cheapest per GPU-hour first.
@@ -310,22 +315,24 @@ fn detail(key: &str, listings: Vec<MarketListing>) -> Option<MarketDetail> {
     Some(MarketDetail {
         key: key.to_owned(),
         name,
+        maker: None,
         listings,
     })
 }
 
 /// Providers by how much of the market they cover.
 pub async fn providers(pool: &PgPool) -> sqlx::Result<Vec<MarketProvider>> {
-    sqlx::query_as(
-        "SELECT o.slug AS organization_slug, o.name AS organization_name,
-                o.logo_url AS organization_logo,
+    sqlx::query_as(concat!(
+        "SELECT ",
+        org_ref!("o"),
+        ",
                 p.models::int8 AS models, p.model_listings::int8 AS model_listings,
                 p.media_models::int8 AS media_models,
                 p.gpu_configurations::int8 AS gpu_configurations,
                 p.cheapest_count::int8 AS cheapest_count, p.last_seen_at
          FROM market_providers p JOIN organizations o ON o.id = p.organization_id
-         ORDER BY p.models + p.media_models + p.gpu_configurations DESC, o.name",
-    )
+         ORDER BY p.models + p.media_models + p.gpu_configurations DESC, o.name"
+    ))
     .fetch_all(pool)
     .await
 }
@@ -394,16 +401,17 @@ pub async fn overview(pool: &PgPool) -> sqlx::Result<MarketOverview> {
 
 /// Every adapter with its organization and health.
 pub async fn sources(pool: &PgPool) -> sqlx::Result<Vec<MarketSource>> {
-    sqlx::query_as(
-        "SELECT a.adapter, o.slug AS organization_slug, o.name AS organization_name,
-                o.logo_url AS organization_logo,
+    sqlx::query_as(concat!(
+        "SELECT a.adapter, ",
+        org_ref!("o"),
+        ",
                 (SELECT min(kind) FROM market_listings l WHERE l.adapter = a.adapter) AS kind,
                 a.listings_seen::int8 AS listings,
                 a.last_success_at,
                 a.consecutive_failures = 0 AND a.last_success_at IS NOT NULL AS healthy
          FROM adapter_state a JOIN organizations o ON o.id = a.organization_id
-         ORDER BY o.name",
-    )
+         ORDER BY o.name"
+    ))
     .fetch_all(pool)
     .await
 }
@@ -461,16 +469,17 @@ pub async fn failed_jobs(pool: &PgPool, limit: i64) -> sqlx::Result<Vec<ih_core:
 
 /// One provider's catalog size, `None` when no adapter reports for it.
 pub async fn provider(pool: &PgPool, slug: &str) -> sqlx::Result<Option<MarketProvider>> {
-    sqlx::query_as(
-        "SELECT o.slug AS organization_slug, o.name AS organization_name,
-                o.logo_url AS organization_logo,
+    sqlx::query_as(concat!(
+        "SELECT ",
+        org_ref!("o"),
+        ",
                 p.models::int8 AS models, p.model_listings::int8 AS model_listings,
                 p.media_models::int8 AS media_models,
                 p.gpu_configurations::int8 AS gpu_configurations,
                 p.cheapest_count::int8 AS cheapest_count, p.last_seen_at
          FROM market_providers p JOIN organizations o ON o.id = p.organization_id
-         WHERE o.slug = $1",
-    )
+         WHERE o.slug = $1"
+    ))
     .bind(slug)
     .fetch_optional(pool)
     .await

@@ -2342,6 +2342,13 @@
             },
             "description": "Cheapest first."
           },
+          "maker": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Models: the maker as most providers name it, such as `deepseek-ai`."
+          },
           "name": {
             "type": "string"
           }
@@ -3250,7 +3257,6 @@
               "links",
               "categories",
               "products",
-              "served_products",
               "funding",
               "portfolio",
               "feeds",
@@ -3306,13 +3312,6 @@
                   "$ref": "#/components/schemas/ProductSummary"
                 },
                 "description": "Products the organization makes."
-              },
-              "served_products": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ProductSummary"
-                },
-                "description": "Products made by others that the organization sells or serves."
               },
               "updated_at": {
                 "type": "string",

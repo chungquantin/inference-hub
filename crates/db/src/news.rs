@@ -215,9 +215,11 @@ pub async fn set_organizations(pool: &PgPool, id: Uuid, slugs: &[String]) -> sql
 
 /// Feed sources with their fetch health and item counts, failing ones first.
 pub async fn list_sources(pool: &PgPool) -> sqlx::Result<Vec<SourceStatus>> {
-    sqlx::query_as(
+    sqlx::query_as(concat!(
         "SELECT s.id, s.slug, s.name, s.url, s.enabled, s.auto_approve, s.fetch_interval_minutes,
-                o.slug AS organization_slug, o.name AS organization_name, o.logo_url AS organization_logo,
+                ",
+        org_ref!("o"),
+        ",
                 s.last_run_at, s.last_success_at, s.last_error, s.consecutive_failures,
                 count(n.id) AS item_count,
                 count(n.id) FILTER (WHERE n.status = 'pending') AS pending_count
@@ -225,8 +227,8 @@ pub async fn list_sources(pool: &PgPool) -> sqlx::Result<Vec<SourceStatus>> {
          LEFT JOIN organizations o ON o.id = s.organization_id
          LEFT JOIN news_items n ON n.source_id = s.id
          GROUP BY s.id, o.slug, o.name, o.logo_url
-         ORDER BY s.consecutive_failures DESC, s.name",
-    )
+         ORDER BY s.consecutive_failures DESC, s.name"
+    ))
     .fetch_all(pool)
     .await
 }

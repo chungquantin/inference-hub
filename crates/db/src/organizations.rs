@@ -110,7 +110,6 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
     let org_id = row.organization.id;
     let categories = categories::list_for_organization(pool, org_id).await?;
     let products = products::list_made_by(pool, org_id).await?;
-    let served_products = products::list_served_by(pool, org_id).await?;
     let funding = compare::funding_rounds(pool, org_id).await?;
     let portfolio = compare::portfolio(pool, org_id).await?;
     let feeds = sqlx::query_as(
@@ -134,7 +133,6 @@ pub async fn get_by_slug(pool: &PgPool, slug: &str) -> sqlx::Result<Option<Organ
         links: row.links,
         categories,
         products,
-        served_products,
         funding,
         portfolio,
         feeds,

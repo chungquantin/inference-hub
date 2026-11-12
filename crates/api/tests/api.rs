@@ -258,7 +258,7 @@ async fn organization_detail_lists_its_feeds_with_counts(pool: PgPool) {
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]
-async fn organization_detail_lists_made_and_served_products(pool: PgPool) {
+async fn organization_detail_lists_made_products(pool: PgPool) {
     seed_fixtures(&pool).await;
     let app = app(pool);
 
@@ -272,11 +272,9 @@ async fn organization_detail_lists_made_and_served_products(pool: PgPool) {
         .collect();
     assert_eq!(categories, ["inference-providers", "gpu-clouds"]);
     assert_eq!(body["products"].as_array().unwrap().len(), 0);
-    assert_eq!(body["served_products"][0]["slug"], "test-model-open");
 
     let (_, body) = get(&app, "/v1/organizations/test-lab").await;
     assert_eq!(body["products"].as_array().unwrap().len(), 2);
-    assert_eq!(body["served_products"].as_array().unwrap().len(), 0);
 
     let (status, _) = get(&app, "/v1/organizations/nope").await;
     assert_eq!(status, StatusCode::NOT_FOUND);

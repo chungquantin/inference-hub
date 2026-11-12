@@ -15,14 +15,7 @@ pub async fn search(
     per_kind: i64,
 ) -> sqlx::Result<SearchResults> {
     let q = q.trim();
-    // Words match in order with anything between them, so `deepseek v3` finds
-    // `deepseek-v3` and `DeepSeek: DeepSeek V3.1`.
-    let words: Vec<String> = q
-        .split(|c: char| c.is_whitespace() || c == '-' || c == '_' || c == '/' || c == ':')
-        .filter(|w| !w.is_empty())
-        .map(|w| w.replace('\\', "\\\\").replace('%', "\\%"))
-        .collect();
-    let pattern = format!("%{}%", words.join("%"));
+    let pattern = crate::sql::words_like(q).unwrap_or_else(|| "%%".to_owned());
     let want = |k: &str| kinds.is_empty() || kinds.contains(&k);
     // Score: 3 exact, 2 prefix, else similarity (0..1), on lower-cased text.
     const SCORE: &str = "(CASE WHEN lower({f}) = lower($1) THEN 3

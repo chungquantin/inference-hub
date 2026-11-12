@@ -156,6 +156,8 @@ pub struct MarketListing {
 pub struct MarketDetail {
     pub key: String,
     pub name: String,
+    /// Models: the maker as most providers name it, such as `deepseek-ai`.
+    pub maker: Option<String>,
     /// Cheapest first.
     pub listings: Vec<MarketListing>,
 }
