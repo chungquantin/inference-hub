@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { HyperLink } from "@/components/hyper-link";
+import { HyperLink, resolveHyperLink } from "@/components/hyper-link";
 import { Logo } from "@/components/ui/logo";
-import { creatorName, modelLogoUrl } from "@/lib/catalog";
+import { creatorLogoUrl, creatorName, modelLogoUrl } from "@/lib/catalog";
 import { modelHref } from "@/lib/hrefs";
 
 /**
@@ -25,10 +25,14 @@ export function ModelName({
   showCreator?: boolean;
 }) {
   const creator = maker ? creatorName(maker) : null;
+  const logo = modelLogoUrl(id, maker);
+  // Most models wear their creator's logo; repeating it beside the creator's name adds nothing.
+  const sameLogo = !!logo && logo === creatorLogoUrl(maker);
+  const creatorLink = maker && sameLogo ? resolveHyperLink({ type: "creator", maker }) : null;
   const link = "truncate text-ink underline decoration-line-strong hover:text-s-7";
   return (
     <span className="flex min-w-0 items-center gap-2.5">
-      <Logo name={creator ?? id} src={modelLogoUrl(id, maker)} size="sm" />
+      <Logo name={creator ?? id} src={logo} size="sm" />
       <span className="flex min-w-0 flex-col">
         <Link href={href ?? modelHref(id)} className={link}>
           {id}
@@ -37,14 +41,19 @@ export function ModelName({
           <span className="max-w-[300px] truncate text-[12px] text-ink-3">{subtitle}</span>
         ) : (
           showCreator &&
-          maker && (
+          maker &&
+          (creatorLink ? (
+            <Link href={creatorLink.href} className="truncate text-[12px] text-ink-3 hover:text-s-7 hover:underline">
+              {creatorLink.name}
+            </Link>
+          ) : (
             <HyperLink
               type="creator"
               maker={maker}
               size="xs"
               className="inline-flex min-w-0 items-center gap-1 text-[12px] text-ink-3 hover:text-s-7 hover:underline"
             />
-          )
+          ))
         )}
       </span>
     </span>
