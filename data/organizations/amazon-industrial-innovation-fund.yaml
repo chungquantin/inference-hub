@@ -1,0 +1,8 @@
+slug: amazon-industrial-innovation-fund
+name: "Amazon Industrial Innovation Fund"
+kinds: [investor]
+description: "News announcements, original stories, and facts about Amazon."
+website: "https://www.aboutamazon.com"
+logo_url: /logos/amazon-industrial-innovation-fund.png
+tagging:
+  match_case: true

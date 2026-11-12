@@ -1,0 +1,9 @@
+slug: distserve
+name: "DistServe"
+kinds: [open_source]
+description: "Disaggregated serving system for Large Language Models (LLMs). - LLMServe/DistServe"
+website: "https://github.com/LLMServe/DistServe"
+logo_url: /logos/distserve.png
+categories: [inference-engines]
+tagging:
+  match_case: true

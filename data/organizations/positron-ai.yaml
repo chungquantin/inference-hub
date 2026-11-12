@@ -1,0 +1,7 @@
+slug: positron-ai
+name: "Positron AI"
+kinds: [hardware]
+description: "Positron makes purpose-built hardware to accelerate generative AI."
+website: "https://www.positron.ai"
+tagging:
+  match_case: true

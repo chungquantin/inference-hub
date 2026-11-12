@@ -1,0 +1,9 @@
+slug: llumnix
+name: "Llumnix"
+kinds: [open_source]
+description: "Efficient and easy multi-instance LLM serving. Contribute to llumnix-project/llumnix-ray development by creating an account on GitHub."
+website: "https://github.com/AlibabaPAI/llumnix"
+logo_url: /logos/llumnix.jpg
+categories: [inference-engines]
+tagging:
+  match_case: true

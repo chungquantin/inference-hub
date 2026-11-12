@@ -1,0 +1,9 @@
+slug: lium
+name: "Lium"
+kinds: [decentralized]
+description: "Agent-first compute on Lium: rent H100, B200, RTX 4090 and more GPU pods at marketplace prices. Deploy in seconds via browser or CLI. Billed per second."
+website: "https://lium.io"
+logo_url: /logos/lium.svg
+tagging:
+  match_case: true
+  match_name: false

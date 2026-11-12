@@ -1,0 +1,8 @@
+slug: conviction
+name: "Conviction"
+kinds: [investor]
+description: "AI Seed and Series A Venture Fund"
+website: "https://www.conviction.com"
+tagging:
+  match_case: true
+  match_name: false

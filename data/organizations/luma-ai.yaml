@@ -1,0 +1,8 @@
+slug: luma-ai
+name: "Luma AI"
+kinds: [model_provider]
+description: "Luma AI is the creative AI platform for video generation and image creation. Powered by the world's leading video generation models, Ray and Uni, and creative agents handling end-to-end workflows. Trusted by leading agencies and brands. Try it free."
+website: "https://lumalabs.ai"
+logo_url: /logos/luma-ai.png
+tagging:
+  match_case: true

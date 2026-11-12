@@ -1,0 +1,20 @@
+slug: apple
+name: "Apple"
+kinds: [open_source]
+website: "https://apple.com"
+logo_url: /logos/apple.jpg
+links:
+  github: "https://github.com/apple"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: coremltools
+    name: "coremltools"
+    type: oss_project
+    github: apple/coremltools
+    tagline: "Core ML tools contain supporting tools for Core ML model conversion, editing, and validation."
+    url: "https://github.com/apple/coremltools"
+    metadata:
+      license: "BSD-3-Clause"

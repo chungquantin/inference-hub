@@ -1,0 +1,9 @@
+slug: jetstream
+name: "JetStream"
+kinds: [open_source]
+description: "JetStream is a throughput and memory optimized engine for LLM inference on XLA devices, starting with TPUs (and GPUs in future -- PRs welcome). - AI-Hypercomputer/JetStream"
+website: "https://github.com/AI-Hypercomputer/JetStream"
+logo_url: /logos/jetstream.png
+categories: [inference-engines]
+tagging:
+  match_case: true

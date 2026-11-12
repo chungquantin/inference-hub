@@ -29,3 +29,11 @@ products:
     url: "https://github.com/mlc-ai/xgrammar"
     metadata:
       license: "Apache-2.0"
+  - slug: web-llm
+    name: "web-llm"
+    type: oss_project
+    github: mlc-ai/web-llm
+    tagline: "High-performance In-browser LLM Inference Engine"
+    url: "https://github.com/mlc-ai/web-llm"
+    metadata:
+      license: "Apache-2.0"

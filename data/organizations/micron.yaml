@@ -1,0 +1,9 @@
+slug: micron
+name: "Micron"
+kinds: [hardware]
+description: "Micron is a global leader in memory and storage, powering AI and compute-intensive applications from cloud to edge with innovative semiconductor solutions."
+website: "https://www.micron.com"
+logo_url: /logos/micron.png
+tagging:
+  match_case: true
+  match_name: false

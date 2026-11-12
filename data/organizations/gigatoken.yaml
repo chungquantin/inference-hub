@@ -1,0 +1,19 @@
+slug: gigatoken
+name: "gigatoken"
+kinds: [open_source]
+website: "https://github.com/marcelroed/gigatoken"
+links:
+  github: "https://github.com/marcelroed/gigatoken"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gigatoken
+    name: "gigatoken"
+    type: oss_project
+    github: marcelroed/gigatoken
+    tagline: "Language model tokenization at GB/s"
+    url: "https://github.com/marcelroed/gigatoken"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,21 @@
+slug: runanywhereai
+name: "RunAnywhere"
+kinds: [open_source]
+description: "on-device inference"
+website: "https://www.runanywhere.ai/"
+logo_url: /logos/runanywhereai.png
+links:
+  github: "https://github.com/RunanywhereAI"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: trnrt
+    name: "trnrt"
+    type: oss_project
+    github: RunanywhereAI/trnrt
+    tagline: "The open LLM inference engine for AWS Trainium: NKI megakernels, 1M-token context, OpenAI-compatible API. By RunAnywhere."
+    url: "https://github.com/RunanywhereAI/trnrt"
+    metadata:
+      license: "Apache-2.0"

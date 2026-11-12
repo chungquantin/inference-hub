@@ -1,0 +1,8 @@
+slug: ontario-teachers
+name: "Ontario Teachers"
+kinds: [investor]
+description: "As one of the largest pension plans in the world, Ontario Teachers' invests strategically across key markets and sectors to deliver steady returns."
+website: "https://www.otpp.com"
+logo_url: /logos/ontario-teachers.svg
+tagging:
+  match_case: true

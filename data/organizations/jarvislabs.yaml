@@ -1,0 +1,8 @@
+slug: jarvislabs
+name: "Jarvislabs"
+kinds: [gpu_cloud]
+description: "Rent NVIDIA H200 GPUs with 141GB memory at $4.59/hr for LLM training and inference. On-demand access, per-minute billing. H100 GPUs also available."
+website: "https://jarvislabs.ai"
+logo_url: /logos/jarvislabs.png
+tagging:
+  match_case: true

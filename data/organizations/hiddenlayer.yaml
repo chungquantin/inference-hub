@@ -1,0 +1,9 @@
+slug: hiddenlayer
+name: "HiddenLayer"
+kinds: [llmops]
+description: "Secure your AI with HiddenLayer’s end-to-end platform that detects threats, protects models, and ensures safe, compliant AI adoption at scale."
+website: "https://hiddenlayer.com"
+logo_url: /logos/hiddenlayer.png
+categories: [guardrails]
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: bpifrance
+name: "Bpifrance"
+kinds: [investor]
+website: "https://www.bpifrance.fr"
+tagging:
+  match_case: true
+  match_name: false

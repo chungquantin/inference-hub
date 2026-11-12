@@ -1,0 +1,19 @@
+slug: llama2-c
+name: "llama2.c"
+kinds: [open_source]
+website: "https://twitter.com/karpathy"
+links:
+  github: "https://github.com/karpathy/llama2.c"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llama2-c
+    name: "llama2.c"
+    type: oss_project
+    github: karpathy/llama2.c
+    tagline: "Inference Llama 2 in one file of pure C"
+    url: "https://github.com/karpathy/llama2.c"
+    metadata:
+      license: "MIT"

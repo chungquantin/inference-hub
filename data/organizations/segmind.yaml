@@ -1,0 +1,8 @@
+slug: segmind
+name: "Segmind"
+kinds: [inference_provider]
+description: "Segmind is a developer platform with APIs to automate image and video generation workflows"
+website: "https://www.segmind.com"
+logo_url: /logos/segmind.svg
+tagging:
+  match_case: true

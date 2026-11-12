@@ -1,0 +1,19 @@
+slug: llama-cpp-python
+name: "llama-cpp-python"
+kinds: [open_source]
+website: "https://llama-cpp-python.readthedocs.io"
+links:
+  github: "https://github.com/abetlen/llama-cpp-python"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llama-cpp-python
+    name: "llama-cpp-python"
+    type: oss_project
+    github: abetlen/llama-cpp-python
+    tagline: "Python bindings for llama.cpp"
+    url: "https://github.com/abetlen/llama-cpp-python"
+    metadata:
+      license: "MIT"

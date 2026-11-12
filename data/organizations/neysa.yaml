@@ -1,0 +1,9 @@
+slug: neysa
+name: "Neysa"
+kinds: [gpu_cloud]
+description: "Neysa offers AI Acceleration Cloud System for fast training & inference on GPUs—built on open source with full-stack AI infrastructure."
+website: "https://neysa.ai"
+logo_url: /logos/neysa.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

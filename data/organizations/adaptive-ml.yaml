@@ -1,0 +1,8 @@
+slug: adaptive-ml
+name: "Adaptive ML"
+kinds: [model_provider]
+description: "Evaluate, tune, and serve the best LLMs for your business. If you can measure it, Adaptive Engine can optimize it with reinforcement learning."
+website: "https://www.adaptive-ml.com"
+logo_url: /logos/adaptive-ml.png
+tagging:
+  match_case: true

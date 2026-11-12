@@ -1,0 +1,9 @@
+slug: dayone
+name: "DayOne"
+kinds: [gpu_cloud]
+description: "Day One is the Basecamp and Trailhead for an Entrepreneur about to consider each of the six major components of Entrepreneurial success. Please join us on the trail."
+website: "https://www.dayone.com"
+logo_url: /logos/dayone.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

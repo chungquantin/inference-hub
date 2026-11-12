@@ -1,0 +1,8 @@
+slug: qualcomm-ventures
+name: "Qualcomm Ventures"
+kinds: [investor]
+description: "As a global corporate venture firm, we invest in entrepreneurs who are building revolutionary businesses that redefine the world around us."
+website: "https://www.qualcommventures.com"
+logo_url: /logos/qualcomm-ventures.png
+tagging:
+  match_case: true

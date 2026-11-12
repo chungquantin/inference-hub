@@ -1,0 +1,9 @@
+slug: cognition
+name: "Cognition"
+kinds: [model_provider]
+description: "Cognition is the applied AI lab behind Devin, the first autonomous software engineer. We build agents and tools that expand human capacity."
+website: "https://cognition.ai"
+logo_url: /logos/cognition.svg
+tagging:
+  match_case: true
+  match_name: false

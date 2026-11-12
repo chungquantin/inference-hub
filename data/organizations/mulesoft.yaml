@@ -1,0 +1,7 @@
+slug: mulesoft
+name: "MuleSoft"
+kinds: [llm_gateway]
+description: "A single cross-platform AI control plane with one registry to find, govern, orchestrate, and control AI agents and costs across the enterprise, from MuleSoft."
+website: "https://www.mulesoft.com"
+tagging:
+  match_case: true

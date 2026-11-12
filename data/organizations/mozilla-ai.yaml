@@ -1,0 +1,21 @@
+slug: mozilla-ai
+name: "Mozilla.ai"
+kinds: [open_source]
+description: "main development portal for mozilla.ai"
+website: "https://mozilla.ai"
+logo_url: /logos/mozilla-ai.png
+links:
+  github: "https://github.com/mozilla-ai"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: otari
+    name: "otari"
+    type: oss_project
+    github: mozilla-ai/otari
+    tagline: "Open-source AI gateway you run yourself. One endpoint for 40+ providers, with virtual keys, budgets, and usage tracking."
+    url: "https://github.com/mozilla-ai/otari"
+    metadata:
+      license: "Apache-2.0"

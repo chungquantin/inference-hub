@@ -1,0 +1,7 @@
+slug: sinovation-ventures
+name: "Sinovation Ventures"
+kinds: [investor]
+website: "https://www.sinovationventures.com"
+logo_url: /logos/sinovation-ventures.png
+tagging:
+  match_case: true

@@ -1,0 +1,21 @@
+slug: beam-cloud
+name: "Beam"
+kinds: [open_source]
+description: "AI Infrastructure for Developers"
+website: "https://beam.cloud"
+logo_url: /logos/beam-cloud.png
+links:
+  github: "https://github.com/beam-cloud"
+categories: [serverless-gpu]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: beta9
+    name: "beta9"
+    type: oss_project
+    github: beam-cloud/beta9
+    tagline: "Ultrafast serverless GPU inference, sandboxes, and background jobs"
+    url: "https://github.com/beam-cloud/beta9"
+    metadata:
+      license: "AGPL-3.0"

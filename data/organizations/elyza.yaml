@@ -1,0 +1,7 @@
+slug: elyza
+name: "ELYZA"
+kinds: [model_provider]
+website: "https://elyza.ai"
+logo_url: /logos/elyza.svg
+tagging:
+  match_case: true

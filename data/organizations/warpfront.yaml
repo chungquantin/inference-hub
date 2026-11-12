@@ -1,0 +1,18 @@
+slug: warpfront
+name: "warpfront"
+kinds: [open_source]
+website: "https://github.com/warpfront"
+logo_url: /logos/warpfront.png
+links:
+  github: "https://github.com/warpfront"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: hipfire
+    name: "hipfire"
+    type: oss_project
+    github: warpfront/hipfire
+    tagline: "RDNA-native LLM inference engine in Rust."
+    url: "https://github.com/warpfront/hipfire"

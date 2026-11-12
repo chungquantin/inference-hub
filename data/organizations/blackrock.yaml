@@ -1,0 +1,6 @@
+slug: blackrock
+name: "BlackRock"
+kinds: [investor]
+website: "https://www.blackrock.com"
+tagging:
+  match_case: true

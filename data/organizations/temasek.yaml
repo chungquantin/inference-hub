@@ -1,0 +1,8 @@
+slug: temasek
+name: "Temasek"
+kinds: [investor]
+website: "https://www.temasek.com.sg"
+logo_url: /logos/temasek.png
+tagging:
+  match_case: true
+  match_name: false

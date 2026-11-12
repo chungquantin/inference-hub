@@ -1,0 +1,8 @@
+slug: wing-vc
+name: "Wing VC"
+kinds: [investor]
+description: "Wing is an early-stage AI-first venture firm investing in companies building the next generation of AI applications, infrastructure, data, and more. Seed to Series A funding."
+website: "https://www.wing.vc"
+logo_url: /logos/wing-vc.png
+tagging:
+  match_case: true

@@ -1,0 +1,19 @@
+slug: whisperx
+name: "whisperX"
+kinds: [open_source]
+website: "https://maxbain.com"
+links:
+  github: "https://github.com/m-bain/whisperX"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: whisperx
+    name: "whisperX"
+    type: oss_project
+    github: m-bain/whisperX
+    tagline: "WhisperX:  Automatic Speech Recognition with Word-level Timestamps (& Diarization)"
+    url: "https://github.com/m-bain/whisperX"
+    metadata:
+      license: "BSD-2-Clause"

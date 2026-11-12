@@ -1,0 +1,8 @@
+slug: granite-asia
+name: "Granite Asia"
+kinds: [investor]
+description: "Granite Asia is Asia’s leading multi-asset investment platform. It has $5 billion in assets under management (AUM), 48 companies with valuations exceeding $1 billion and 29 IPOs."
+website: "https://www.graniteasia.com"
+logo_url: /logos/granite-asia.svg
+tagging:
+  match_case: true

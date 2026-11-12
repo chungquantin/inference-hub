@@ -1,0 +1,8 @@
+slug: recraft
+name: "Recraft"
+kinds: [model_provider]
+description: "Recraft is a top-ranked text-to-image model and design platform for photorealism, vector generation, custom styles, mockups, and more"
+website: "https://www.recraft.ai"
+logo_url: /logos/recraft.png
+tagging:
+  match_case: true

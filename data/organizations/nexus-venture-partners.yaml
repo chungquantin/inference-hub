@@ -1,0 +1,8 @@
+slug: nexus-venture-partners
+name: "Nexus Venture Partners"
+kinds: [investor]
+description: "Nexus Venture Partners backs extraordinary entrepreneurs building product-first companies across AI, enterprise, fintech, and consumer."
+website: "https://nexusvp.com"
+logo_url: /logos/nexus-venture-partners.png
+tagging:
+  match_case: true

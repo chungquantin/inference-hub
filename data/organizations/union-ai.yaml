@@ -1,0 +1,9 @@
+slug: union-ai
+name: "Union.ai"
+kinds: [open_source]
+description: "One platform to orchestrate durable AI workflows, real-time apps, and compute optimization. Your data never leaves your infrastructure."
+website: "https://www.union.ai"
+logo_url: /logos/union-ai.png
+categories: [inference-engines]
+tagging:
+  match_case: true

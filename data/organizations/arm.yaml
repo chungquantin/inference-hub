@@ -1,0 +1,9 @@
+slug: arm
+name: "Arm"
+kinds: [hardware]
+description: "From cloud to edge, Arm provides the compute platforms behind today’s most advanced AI, trusted by innovators worldwide."
+website: "https://www.arm.com"
+logo_url: /logos/arm.png
+tagging:
+  match_case: true
+  match_name: false

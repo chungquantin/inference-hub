@@ -1,0 +1,6 @@
+slug: one-api
+name: "one-api"
+kinds: [llm_gateway]
+website: "https://github.com/songquanpeng/one-api"
+tagging:
+  match_case: true

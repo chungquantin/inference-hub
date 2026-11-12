@@ -1,0 +1,20 @@
+slug: deepspeedai
+name: "deepspeedai"
+kinds: [open_source]
+website: "https://github.com/deepspeedai"
+logo_url: /logos/deepspeedai.png
+links:
+  github: "https://github.com/deepspeedai"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: deepspeedexamples
+    name: "DeepSpeedExamples"
+    type: oss_project
+    github: deepspeedai/DeepSpeedExamples
+    tagline: "Example models using DeepSpeed"
+    url: "https://github.com/deepspeedai/DeepSpeedExamples"
+    metadata:
+      license: "Apache-2.0"

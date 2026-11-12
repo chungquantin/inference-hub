@@ -1,0 +1,8 @@
+slug: yandex-cloud
+name: "Yandex Cloud"
+kinds: [gpu_cloud]
+website: "https://yandex.cloud"
+logo_url: /logos/yandex-cloud.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: golem-network
+name: "Golem Network"
+kinds: [decentralized]
+description: "Golem is a decentralized marketplace for computing power. It consists of a network of nodes that implement the Golem network protocol."
+website: "https://www.golem.network"
+logo_url: /logos/golem-network.png
+tagging:
+  match_case: true

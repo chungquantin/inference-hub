@@ -1,0 +1,18 @@
+slug: kai-scheduler
+name: "KAI Scheduler"
+kinds: [open_source]
+description: "KAI Scheduler is an open source Kubernetes Native scheduler for AI workloads at large scale - kai-scheduler/KAI-Scheduler"
+website: "https://github.com/NVIDIA/KAI-Scheduler"
+logo_url: /logos/kai-scheduler.png
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: kai-scheduler
+    name: "KAI-Scheduler"
+    type: oss_project
+    github: kai-scheduler/KAI-Scheduler
+    tagline: "KAI Scheduler is an open source Kubernetes Native scheduler for AI workloads at large scale"
+    url: "https://github.com/kai-scheduler/KAI-Scheduler"
+    metadata:
+      license: "Apache-2.0"

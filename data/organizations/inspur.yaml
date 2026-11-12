@@ -1,0 +1,6 @@
+slug: inspur
+name: "Inspur"
+kinds: [hardware]
+website: "https://en.inspur.com"
+tagging:
+  match_case: true

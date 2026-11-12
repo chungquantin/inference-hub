@@ -1,0 +1,7 @@
+slug: jio-platforms
+name: "Jio Platforms"
+kinds: [gpu_cloud]
+website: "https://www.jio.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

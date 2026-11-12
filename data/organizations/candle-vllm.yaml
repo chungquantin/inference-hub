@@ -1,0 +1,19 @@
+slug: candle-vllm
+name: "candle-vllm"
+kinds: [open_source]
+website: "https://github.com/EricLBuehler/candle-vllm"
+links:
+  github: "https://github.com/EricLBuehler/candle-vllm"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: candle-vllm
+    name: "candle-vllm"
+    type: oss_project
+    github: EricLBuehler/candle-vllm
+    tagline: "Efficent platform for inference and serving local LLMs including an OpenAI compatible API server."
+    url: "https://github.com/EricLBuehler/candle-vllm"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,8 @@
+slug: new-api
+name: "new-api"
+kinds: [llm_gateway]
+description: "Open-source AI gateway. Self-hosted LLM gateway with OpenAI-, Claude- and Gemini-compatible APIs, model routing, access control, usage tracking and cost accounting. - QuantumNous/new-api"
+website: "https://github.com/QuantumNous/new-api"
+logo_url: /logos/new-api.png
+tagging:
+  match_case: true

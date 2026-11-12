@@ -1,0 +1,7 @@
+slug: naver-hyperclova-x
+name: "Naver HyperCLOVA X"
+kinds: [model_provider]
+website: "https://clova.ai"
+logo_url: /logos/naver-hyperclova-x.png
+tagging:
+  match_case: true

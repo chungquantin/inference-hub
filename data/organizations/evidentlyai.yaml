@@ -1,0 +1,21 @@
+slug: evidentlyai
+name: "Evidently AI"
+kinds: [open_source]
+description: "Open-source tools to analyze, monitor, and debug machine learning models in production"
+website: "https://evidentlyai.com/"
+logo_url: /logos/evidentlyai.jpg
+links:
+  github: "https://github.com/evidentlyai"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: evidently
+    name: "evidently"
+    type: oss_project
+    github: evidentlyai/evidently
+    tagline: "Evidently is ​​an open-source ML and LLM observability framework. Evaluate, test, and monitor any AI-powered system or data pipeline. From tabular data to Gen AI. 100+ metrics."
+    url: "https://github.com/evidentlyai/evidently"
+    metadata:
+      license: "Apache-2.0"

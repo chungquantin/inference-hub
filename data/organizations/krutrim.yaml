@@ -1,0 +1,8 @@
+slug: krutrim
+name: "Krutrim"
+kinds: [gpu_cloud]
+description: "India's AI-first cloud platform - Industry Leading. Future Ready. India Native. Developer First."
+website: "https://olakrutrim.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: kuaishou-kling
+name: "Kuaishou Kling"
+kinds: [model_provider]
+description: "Create high-quality AI videos and images with Kling AI. Turn text, images, and references into multimodal creative content in one studio."
+website: "https://klingai.com"
+logo_url: /logos/kuaishou-kling.png
+tagging:
+  match_case: true

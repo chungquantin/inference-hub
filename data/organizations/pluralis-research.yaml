@@ -1,0 +1,7 @@
+slug: pluralis-research
+name: "Pluralis Research"
+kinds: [decentralized]
+description: "Pluralis Research works on Protocol Learning — decentralized, communication-efficient model-parallel training for foundation models."
+website: "https://pluralis.ai"
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: brainchip
+name: "BrainChip"
+kinds: [hardware]
+description: "Unlock the power of AI with BrainChip. Enhance data processing, Edge apps and neural networks at the speed of tomorrow. Explore now!"
+website: "https://brainchip.com"
+logo_url: /logos/brainchip.png
+tagging:
+  match_case: true

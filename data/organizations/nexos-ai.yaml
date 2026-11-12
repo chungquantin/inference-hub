@@ -1,0 +1,6 @@
+slug: nexos-ai
+name: "Nexos.ai"
+kinds: [llm_gateway]
+website: "https://nexos.ai"
+tagging:
+  match_case: true

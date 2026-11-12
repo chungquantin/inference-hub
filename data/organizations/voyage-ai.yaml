@@ -1,0 +1,8 @@
+slug: voyage-ai
+name: "Voyage AI"
+kinds: [model_provider]
+description: "Voyage AI provides cutting-edge embedding models and rerankers for search and retrieval"
+website: "https://www.voyageai.com"
+logo_url: /logos/voyage-ai.svg
+tagging:
+  match_case: true

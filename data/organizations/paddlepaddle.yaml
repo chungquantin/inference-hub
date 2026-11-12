@@ -1,0 +1,19 @@
+slug: paddlepaddle
+name: "PaddlePaddle"
+kinds: [open_source]
+website: "http://paddlepaddle.org"
+logo_url: /logos/paddlepaddle.jpg
+links:
+  github: "https://github.com/PaddlePaddle"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: paddle-lite
+    name: "Paddle-Lite"
+    type: oss_project
+    github: PaddlePaddle/Paddle-Lite
+    url: "https://github.com/PaddlePaddle/Paddle-Lite"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: amplify-partners
+name: "Amplify Partners"
+kinds: [investor]
+description: "The first investor for technical founders. Amplify Partners invests in and supports founders building the infrastructure of tomorrow."
+website: "https://www.amplifypartners.com"
+logo_url: /logos/amplify-partners.png
+tagging:
+  match_case: true

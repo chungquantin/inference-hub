@@ -1,0 +1,20 @@
+slug: safetensors
+name: "safetensors"
+kinds: [open_source]
+website: "https://github.com/safetensors"
+logo_url: /logos/safetensors.png
+links:
+  github: "https://github.com/safetensors"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: safetensors
+    name: "safetensors"
+    type: oss_project
+    github: safetensors/safetensors
+    tagline: "Simple, safe way to store and distribute tensors"
+    url: "https://github.com/safetensors/safetensors"
+    metadata:
+      license: "Apache-2.0"

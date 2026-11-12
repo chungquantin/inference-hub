@@ -1,0 +1,18 @@
+slug: langwatch
+name: "LangWatch"
+kinds: [llmops]
+description: "Trace, test, route and govern every LLM call in your company, from your own agents to the coding assistants your engineers use. Built for AI platform teams."
+website: "https://langwatch.ai"
+logo_url: /logos/langwatch.svg
+categories: [observability]
+tagging:
+  match_case: true
+products:
+  - slug: langwatch
+    name: "langwatch"
+    type: oss_project
+    github: langwatch/langwatch
+    tagline: "Open-Source Agent Observability & Evals for AI Platform teams. Trace, test, route and govern every agent & coding assistant in the company."
+    url: "https://github.com/langwatch/langwatch"
+    metadata:
+      license: "Apache-2.0"

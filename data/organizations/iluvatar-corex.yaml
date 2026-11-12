@@ -1,0 +1,7 @@
+slug: iluvatar-corex
+name: "Iluvatar CoreX"
+kinds: [hardware]
+website: "https://www.iluvatar.com"
+logo_url: /logos/iluvatar-corex.png
+tagging:
+  match_case: true

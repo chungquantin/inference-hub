@@ -1,0 +1,7 @@
+slug: moore-threads
+name: "Moore Threads"
+kinds: [hardware]
+website: "https://www.mthreads.com"
+logo_url: /logos/moore-threads.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: creandum
+name: "Creandum"
+kinds: [investor]
+description: "We support early-stage founders in building global, category-defining companies. From Seed to IPO and beyond."
+website: "https://creandum.com"
+logo_url: /logos/creandum.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: battery-ventures
+name: "Battery Ventures"
+kinds: [investor]
+description: "Battery Ventures is a global venture capital and private equity firm with a 40-year history of backing innovative technology companies."
+website: "https://www.battery.com"
+logo_url: /logos/battery-ventures.png
+tagging:
+  match_case: true

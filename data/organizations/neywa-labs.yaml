@@ -1,0 +1,20 @@
+slug: neywa-labs
+name: "Neywa Labs"
+kinds: [open_source]
+website: "https://neywalabs.ai"
+logo_url: /logos/neywa-labs.png
+links:
+  github: "https://github.com/Neywa-Labs"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mlx-vlm
+    name: "mlx-vlm"
+    type: oss_project
+    github: Neywa-Labs/mlx-vlm
+    tagline: "MLX-VLM is a package for inference and fine-tuning of Vision Language Models (VLMs) on your Mac using MLX."
+    url: "https://github.com/Neywa-Labs/mlx-vlm"
+    metadata:
+      license: "MIT"

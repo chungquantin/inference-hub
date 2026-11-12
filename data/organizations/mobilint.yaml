@@ -1,0 +1,8 @@
+slug: mobilint
+name: "Mobilint"
+kinds: [hardware]
+description: "Mobilint, Inc. creates power-efficient, high-performance AI chips to bring AI closer to everyday life the right way."
+website: "https://www.mobilint.com"
+logo_url: /logos/mobilint.svg
+tagging:
+  match_case: true

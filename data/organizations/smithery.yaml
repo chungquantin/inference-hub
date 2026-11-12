@@ -1,0 +1,8 @@
+slug: smithery
+name: "Smithery"
+kinds: [llm_gateway]
+description: "Discover MCP servers that connect agents to thousands of tools and services."
+website: "https://smithery.ai"
+logo_url: /logos/smithery.svg
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: ori
+name: "Ori"
+kinds: [gpu_cloud]
+description: "From shovel to model, Radiant builds and operates the infrastructure that turns power, land and capital into working AI."
+website: "https://www.ori.co"
+logo_url: /logos/ori.png
+tagging:
+  match_case: true
+  match_name: false

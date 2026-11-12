@@ -26,3 +26,35 @@ products:
       context_window: 2000000
       modalities: [text, image, audio, video]
       license: Proprietary
+  - slug: litert-torch
+    name: "litert-torch"
+    type: oss_project
+    github: google-ai-edge/litert-torch
+    tagline: "Support PyTorch model conversion with LiteRT."
+    url: "https://github.com/google-ai-edge/litert-torch"
+    metadata:
+      license: "Apache-2.0"
+  - slug: gallery
+    name: "gallery"
+    type: oss_project
+    github: google-ai-edge/gallery
+    tagline: "A gallery that showcases on-device ML/GenAI use cases and allows people to try and use models locally."
+    url: "https://github.com/google-ai-edge/gallery"
+    metadata:
+      license: "Apache-2.0"
+  - slug: mediapipe
+    name: "mediapipe"
+    type: oss_project
+    github: google-ai-edge/mediapipe
+    tagline: "Cross-platform, customizable ML solutions for live and streaming media."
+    url: "https://github.com/google-ai-edge/mediapipe"
+    metadata:
+      license: "Apache-2.0"
+  - slug: gemma-cpp
+    name: "gemma.cpp"
+    type: oss_project
+    github: google/gemma.cpp
+    tagline: "lightweight, standalone C++ inference engine for Google's Gemma models."
+    url: "https://github.com/google/gemma.cpp"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,9 @@
+slug: openxla
+name: "OpenXLA"
+kinds: [open_source]
+description: "Developer documentation for OpenXLA"
+website: "https://openxla.org"
+logo_url: /logos/openxla.png
+categories: [inference-engines]
+tagging:
+  match_case: true

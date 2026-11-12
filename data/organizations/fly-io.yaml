@@ -1,0 +1,8 @@
+slug: fly-io
+name: "Fly.io"
+kinds: [gpu_cloud]
+description: "Deploy apps, agents, and databases on hardware-isolated VMs. Pay only for the seconds they run. Sign up free."
+website: "https://fly.io"
+logo_url: /logos/fly-io.svg
+tagging:
+  match_case: true

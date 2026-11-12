@@ -1,0 +1,7 @@
+slug: biren-technology
+name: "Biren Technology"
+kinds: [hardware]
+website: "https://www.birentech.com"
+logo_url: /logos/biren-technology.png
+tagging:
+  match_case: true

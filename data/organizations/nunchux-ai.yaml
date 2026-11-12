@@ -1,0 +1,21 @@
+slug: nunchux-ai
+name: "Nunchux"
+kinds: [open_source]
+description: "Building the frontier of multimodal inference for image, video, and world models."
+website: "https://www.nunchux.ai/"
+logo_url: /logos/nunchux-ai.png
+links:
+  github: "https://github.com/nunchux-ai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: nunchaku
+    name: "nunchaku"
+    type: oss_project
+    github: nunchux-ai/nunchaku
+    tagline: "[ICLR2025 Spotlight] SVDQuant: Absorbing Outliers by Low-Rank Components for 4-Bit Diffusion Models"
+    url: "https://github.com/nunchux-ai/nunchaku"
+    metadata:
+      license: "Apache-2.0"

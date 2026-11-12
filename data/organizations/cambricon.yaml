@@ -1,0 +1,7 @@
+slug: cambricon
+name: "Cambricon"
+kinds: [hardware]
+website: "https://www.cambricon.com"
+logo_url: /logos/cambricon.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: gladia
+name: "Gladia"
+kinds: [model_provider]
+description: "Gladia is the AI audio infrastructure that transcribes and enriches every conversation through a single API - so developers can turn audio into structured, actionable data for their products."
+website: "https://www.gladia.io"
+logo_url: /logos/gladia.svg
+tagging:
+  match_case: true

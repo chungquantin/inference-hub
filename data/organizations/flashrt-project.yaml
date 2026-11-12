@@ -1,0 +1,19 @@
+slug: flashrt-project
+name: "FlashRT"
+kinds: [open_source]
+website: "https://github.com/flashrt-project"
+logo_url: /logos/flashrt-project.png
+links:
+  github: "https://github.com/flashrt-project"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: flashrt
+    name: "FlashRT"
+    type: oss_project
+    github: flashrt-project/FlashRT
+    url: "https://github.com/flashrt-project/FlashRT"
+    metadata:
+      license: "Apache-2.0"

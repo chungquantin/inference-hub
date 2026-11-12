@@ -1,0 +1,29 @@
+slug: modeltc
+name: "ModelTC"
+kinds: [open_source]
+description: "https://light-ai.top/"
+website: "https://github.com/ModelTC"
+logo_url: /logos/modeltc.png
+links:
+  github: "https://github.com/ModelTC"
+categories: [evals-benchmarks, inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lightx2v
+    name: "LightX2V"
+    type: oss_project
+    github: ModelTC/LightX2V
+    tagline: "Lightweight Image Video Action Generation Inference Framework"
+    url: "https://github.com/ModelTC/LightX2V"
+    metadata:
+      license: "Apache-2.0"
+  - slug: lightcompress
+    name: "LightCompress"
+    type: oss_project
+    github: ModelTC/LightCompress
+    tagline: "[EMNLP 2024 & AAAI 2026] A powerful toolkit for compressing large models including LLMs, VLMs, and video generative models."
+    url: "https://github.com/ModelTC/LightCompress"
+    metadata:
+      license: "Apache-2.0"

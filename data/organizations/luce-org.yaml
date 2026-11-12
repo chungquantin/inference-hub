@@ -1,0 +1,21 @@
+slug: luce-org
+name: "Lucebox AI"
+kinds: [open_source]
+description: "Your Inference Workstation"
+website: "https://www.lucebox.com/"
+logo_url: /logos/luce-org.png
+links:
+  github: "https://github.com/Luce-Org"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lucebox
+    name: "lucebox"
+    type: oss_project
+    github: Luce-Org/lucebox
+    tagline: "LLM speculative inference server for heterogeneous hardware & consumer GPUs"
+    url: "https://github.com/Luce-Org/lucebox"
+    metadata:
+      license: "Apache-2.0"

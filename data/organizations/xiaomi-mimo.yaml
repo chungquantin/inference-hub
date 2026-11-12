@@ -1,0 +1,6 @@
+slug: xiaomi-mimo
+name: "Xiaomi MiMo"
+kinds: [model_provider]
+website: "https://mimo.xiaomi.com"
+tagging:
+  match_case: true

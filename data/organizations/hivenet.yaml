@@ -1,0 +1,9 @@
+slug: hivenet
+name: "Hivenet"
+kinds: [decentralized]
+description: "Run AI inference, open-source and foundational models, HPC workloads, compute, and storage on distributed infrastructure with transparent pricing, benchmarked performance, and practical sovereignty."
+website: "https://www.hivenet.com"
+logo_url: /logos/hivenet.png
+tagging:
+  match_case: true
+  match_name: false

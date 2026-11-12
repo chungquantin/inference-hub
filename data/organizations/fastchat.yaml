@@ -1,0 +1,9 @@
+slug: fastchat
+name: "FastChat"
+kinds: [open_source]
+description: "An open platform for training, serving, and evaluating large language models. Release repo for Vicuna and Chatbot Arena. - lm-sys/FastChat"
+website: "https://github.com/lm-sys/FastChat"
+logo_url: /logos/fastchat.png
+categories: [serving-orchestration]
+tagging:
+  match_case: true

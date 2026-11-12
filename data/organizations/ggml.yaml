@@ -33,3 +33,11 @@ products:
     url: "https://github.com/ggml-org/whisper.cpp"
     metadata:
       license: "MIT"
+  - slug: ggml
+    name: "ggml"
+    type: oss_project
+    github: ggml-org/ggml
+    tagline: "Tensor library for machine learning"
+    url: "https://github.com/ggml-org/ggml"
+    metadata:
+      license: "MIT"

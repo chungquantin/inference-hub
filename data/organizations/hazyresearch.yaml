@@ -1,0 +1,21 @@
+slug: hazyresearch
+name: "HazyResearch"
+kinds: [open_source]
+description: "We are a CS research group led by Prof. Chris Ré."
+website: "https://cs.stanford.edu/people/chrismre/"
+logo_url: /logos/hazyresearch.png
+links:
+  github: "https://github.com/HazyResearch"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: thunderkittens
+    name: "ThunderKittens"
+    type: oss_project
+    github: HazyResearch/ThunderKittens
+    tagline: "Tile primitives for speedy kernels"
+    url: "https://github.com/HazyResearch/ThunderKittens"
+    metadata:
+      license: "MIT"

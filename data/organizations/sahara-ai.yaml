@@ -1,0 +1,8 @@
+slug: sahara-ai
+name: "Sahara AI"
+kinds: [decentralized]
+description: "Your AI workforce across every app, every task, every day. Sahara AI powers agents built to operate across everything you do online, running continuously and acting the moment something demands it."
+website: "https://saharaai.com"
+logo_url: /logos/sahara-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,21 @@
+slug: bigcode-project
+name: "BigCode Project"
+kinds: [open_source]
+description: "BigCode Project is an open scientific collaboration run by Hugging Face and ServiceNow Research, focused on open and responsible development of LLMs for code."
+website: "https://www.bigcode-project.org/"
+logo_url: /logos/bigcode-project.png
+links:
+  github: "https://github.com/bigcode-project"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: bigcode-evaluation-harness
+    name: "bigcode-evaluation-harness"
+    type: oss_project
+    github: bigcode-project/bigcode-evaluation-harness
+    tagline: "A framework for the evaluation of autoregressive code generation language models."
+    url: "https://github.com/bigcode-project/bigcode-evaluation-harness"
+    metadata:
+      license: "Apache-2.0"

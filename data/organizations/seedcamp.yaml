@@ -1,0 +1,8 @@
+slug: seedcamp
+name: "Seedcamp"
+kinds: [investor]
+website: "https://seedcamp.com"
+logo_url: /logos/seedcamp.svg
+tagging:
+  match_case: true
+  match_name: false

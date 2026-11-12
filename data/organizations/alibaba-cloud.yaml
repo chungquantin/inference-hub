@@ -7,3 +7,12 @@ website: "https://alibabacloud.com"
 tagging:
   aliases: ["Model Studio", "Alibaba Cloud Model Studio"]
   match_case: true
+products:
+  - slug: rtp-llm
+    name: "rtp-llm"
+    type: oss_project
+    github: alibaba/rtp-llm
+    tagline: "RTP-LLM: Alibaba's high-performance LLM inference engine for diverse applications."
+    url: "https://github.com/alibaba/rtp-llm"
+    metadata:
+      license: "Apache-2.0"

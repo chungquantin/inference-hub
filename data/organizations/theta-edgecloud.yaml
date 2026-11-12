@@ -1,0 +1,8 @@
+slug: theta-edgecloud
+name: "Theta EdgeCloud"
+kinds: [decentralized]
+description: "Theta EdgeCloud brings together GPU compute, AI inference, AI agents, and developer tooling into one distributed cloud-edge infrastructure platform."
+website: "https://www.thetaedgecloud.com"
+logo_url: /logos/theta-edgecloud.png
+tagging:
+  match_case: true

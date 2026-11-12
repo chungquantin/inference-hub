@@ -1,0 +1,19 @@
+slug: agenta-ai
+name: "agenta"
+kinds: [open_source]
+description: "The open-source workspace for your agents."
+website: "https://agenta.ai"
+logo_url: /logos/agenta-ai.png
+links:
+  github: "https://github.com/Agenta-AI"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: agenta
+    name: "agenta"
+    type: oss_project
+    github: Agenta-AI/agenta
+    tagline: "Agenta is a workspace where you and your team build agents and automations."
+    url: "https://github.com/Agenta-AI/agenta"

@@ -1,0 +1,9 @@
+slug: maxtext
+name: "MaxText"
+kinds: [open_source]
+description: "A simple, performant, and scalable Jax LLM! Contribute to AI-Hypercomputer/maxtext development by creating an account on GitHub."
+website: "https://github.com/AI-Hypercomputer/maxtext"
+logo_url: /logos/maxtext.png
+categories: [inference-engines]
+tagging:
+  match_case: true

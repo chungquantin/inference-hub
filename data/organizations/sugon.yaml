@@ -1,0 +1,6 @@
+slug: sugon
+name: "Sugon"
+kinds: [hardware]
+website: "https://www.sugon.com"
+tagging:
+  match_case: true

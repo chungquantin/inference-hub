@@ -1,0 +1,17 @@
+slug: gpu-poor
+name: "gpu_poor"
+kinds: [open_source]
+website: "https://rahulschand.github.io/gpu_poor/"
+links:
+  github: "https://github.com/RahulSChand/gpu_poor"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gpu-poor
+    name: "gpu_poor"
+    type: oss_project
+    github: RahulSChand/gpu_poor
+    tagline: "Calculate token/s & GPU memory requirement for any LLM.  Supports llama.cpp/ggml/bnb/QLoRA quantization"
+    url: "https://github.com/RahulSChand/gpu_poor"

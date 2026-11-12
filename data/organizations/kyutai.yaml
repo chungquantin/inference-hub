@@ -1,0 +1,8 @@
+slug: kyutai
+name: "Kyutai"
+kinds: [model_provider]
+description: "Our mission is to build and democratize artificial general intelligence through open science."
+website: "https://kyutai.org"
+logo_url: /logos/kyutai.png
+tagging:
+  match_case: true

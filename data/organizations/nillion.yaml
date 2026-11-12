@@ -1,0 +1,6 @@
+slug: nillion
+name: "Nillion"
+kinds: [decentralized]
+website: "https://nillion.com"
+tagging:
+  match_case: true

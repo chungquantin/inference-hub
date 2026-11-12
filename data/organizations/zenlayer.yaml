@@ -1,0 +1,8 @@
+slug: zenlayer
+name: "Zenlayer"
+kinds: [gpu_cloud]
+description: "The Distributed Cloud for AI Deploy and scale intelligence globally, powered by the world’s most distributed cloud. Get started Deploy and scale AI"
+website: "https://www.zenlayer.com"
+logo_url: /logos/zenlayer.svg
+tagging:
+  match_case: true

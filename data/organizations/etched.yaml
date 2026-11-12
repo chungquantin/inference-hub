@@ -1,0 +1,9 @@
+slug: etched
+name: "Etched"
+kinds: [hardware]
+description: "Co-designed chips, racks, and software to push the pareto frontier to best-in-class throughput and interactivity."
+website: "https://www.etched.com"
+logo_url: /logos/etched.png
+tagging:
+  match_case: true
+  match_name: false

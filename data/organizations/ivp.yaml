@@ -1,0 +1,9 @@
+slug: ivp
+name: "IVP"
+kinds: [investor]
+description: "Over four decades, IVP has accelerated 400 breakout companies to breakthrough impact. Leverage our unstoppable momentum to your unfair advantage."
+website: "https://www.ivp.com"
+logo_url: /logos/ivp.svg
+tagging:
+  match_case: true
+  match_name: false

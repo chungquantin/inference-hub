@@ -1,0 +1,7 @@
+slug: esperanto-technologies
+name: "Esperanto Technologies"
+kinds: [hardware]
+website: "https://www.esperanto.ai"
+logo_url: /logos/esperanto-technologies.png
+tagging:
+  match_case: true

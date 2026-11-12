@@ -1,0 +1,7 @@
+slug: softbank-vision-fund
+name: "SoftBank Vision Fund"
+kinds: [investor]
+description: "Our global reach, unrivaled ecosystem, and freedom-level capital help founders build market-leading companies."
+website: "https://visionfund.com"
+tagging:
+  match_case: true

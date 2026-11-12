@@ -1,0 +1,8 @@
+slug: nextbit
+name: "NextBit"
+kinds: [inference_provider]
+description: "Modelos abiertos servidos desde infraestructura propia en España, con API compatible con OpenAI y Anthropic. RGPD y AI Act cubiertos, sin matriz estadounidense."
+website: "https://www.nextbit256.com"
+logo_url: /logos/nextbit.svg
+tagging:
+  match_case: true

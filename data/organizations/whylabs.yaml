@@ -1,0 +1,15 @@
+slug: whylabs
+name: "WhyLabs"
+kinds: [llmops]
+website: "https://whylabs.ai"
+categories: [observability]
+tagging:
+  match_case: true
+products:
+  - slug: langkit
+    name: "langkit"
+    type: oss_project
+    github: whylabs/langkit
+    url: "https://github.com/whylabs/langkit"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: piapi
+name: "PiAPI"
+kinds: [inference_provider]
+description: "Create videos, images, music and 3D with 50+ AI models. Use our playground or integrate via API."
+website: "https://piapi.ai"
+logo_url: /logos/piapi.png
+tagging:
+  match_case: true

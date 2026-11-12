@@ -1,0 +1,8 @@
+slug: cartesia
+name: "Cartesia"
+kinds: [model_provider]
+description: "Cartesia builds real-time voice AI: production voice agents, lifelike text-to-speech, and accurate speech-to-text in 44 languages."
+website: "https://cartesia.ai"
+logo_url: /logos/cartesia.svg
+tagging:
+  match_case: true

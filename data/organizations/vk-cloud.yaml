@@ -1,0 +1,8 @@
+slug: vk-cloud
+name: "VK Cloud"
+kinds: [gpu_cloud]
+website: "https://cloud.vk.ru"
+logo_url: /logos/vk-cloud.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

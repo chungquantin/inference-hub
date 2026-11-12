@@ -1,0 +1,8 @@
+slug: playground-ai
+name: "Playground AI"
+kinds: [model_provider]
+description: "Create custom designs and graphics with Playground"
+website: "https://playgroundai.com"
+logo_url: /logos/playground-ai.png
+tagging:
+  match_case: true

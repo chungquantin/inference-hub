@@ -1,0 +1,8 @@
+slug: zyphra
+name: "Zyphra"
+kinds: [model_provider]
+description: "Full stack open superintelligence. Zyphra offers multisilicon infrastructure, optimized and customizable open frontier models, and a productivity agent so companies can choose, customize, and control their intelligence."
+website: "https://www.zyphra.com"
+logo_url: /logos/zyphra.svg
+tagging:
+  match_case: true

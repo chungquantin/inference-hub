@@ -1,0 +1,6 @@
+slug: sk-hynix
+name: "SK hynix"
+kinds: [hardware]
+website: "https://www.skhynix.com"
+tagging:
+  match_case: true

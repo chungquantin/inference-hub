@@ -1,0 +1,8 @@
+slug: peak-xv-partners
+name: "Peak XV Partners"
+kinds: [investor]
+description: "Peak XV is a global Venture Capital firm with over 20 years of experience partnering deeply with founders to build enduring companies."
+website: "https://www.peakxv.com"
+logo_url: /logos/peak-xv-partners.png
+tagging:
+  match_case: true

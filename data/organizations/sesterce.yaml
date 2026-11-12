@@ -1,0 +1,10 @@
+slug: sesterce
+name: "Sesterce"
+kinds: [gpu_cloud]
+description: "An elite team building the best supercomputers in the world, in campuses designed with the towns that host them: award-winning architecture, a living building, new renewable power one for one, rain and recycled water for cooling, local jobs and a fund for every town."
+website: "https://www.sesterce.com"
+logo_url: /logos/sesterce.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true
+  match_name: false

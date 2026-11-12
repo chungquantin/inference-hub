@@ -14,3 +14,12 @@ feeds:
     url: "https://konghq.com/feed/rss/blogs"
     interval_minutes: 180
     auto_approve: false
+products:
+  - slug: kong
+    name: "kong"
+    type: oss_project
+    github: Kong/kong
+    tagline: "🦍 The API and AI Gateway"
+    url: "https://github.com/Kong/kong"
+    metadata:
+      license: "Apache-2.0"

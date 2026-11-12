@@ -1,0 +1,19 @@
+slug: tiny-vllm
+name: "tiny-vllm"
+kinds: [open_source]
+website: "https://jedrzej.maczan.pl"
+links:
+  github: "https://github.com/jmaczan/tiny-vllm"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tiny-vllm
+    name: "tiny-vllm"
+    type: oss_project
+    github: jmaczan/tiny-vllm
+    tagline: "Build your own high performance LLM inference engine in C++ and CUDA - a smaller version of vLLM"
+    url: "https://github.com/jmaczan/tiny-vllm"
+    metadata:
+      license: "Apache-2.0"

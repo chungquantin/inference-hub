@@ -1,0 +1,8 @@
+slug: blaize
+name: "Blaize"
+kinds: [hardware]
+description: "Blaize® leads a new generation of computing, unleashing the potential of AI to enable significant increases in the value that technology delivers to improve how people work and live."
+website: "https://www.blaize.com"
+logo_url: /logos/blaize.png
+tagging:
+  match_case: true

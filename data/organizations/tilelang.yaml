@@ -1,0 +1,9 @@
+slug: tilelang
+name: "TileLang"
+kinds: [open_source]
+description: "Domain-specific language designed to streamline the development of high-performance GPU/CPU/Accelerators kernels - tile-ai/tilelang"
+website: "https://github.com/tile-ai/tilelang"
+logo_url: /logos/tilelang.png
+categories: [inference-engines]
+tagging:
+  match_case: true

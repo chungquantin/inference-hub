@@ -1,0 +1,20 @@
+slug: algorithmicsuperintelligence
+name: "Algorithmic SuperIntelligence Labs"
+kinds: [open_source]
+website: "https://algorithmicsuperintelligence.ai"
+logo_url: /logos/algorithmicsuperintelligence.png
+links:
+  github: "https://github.com/algorithmicsuperintelligence"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: optillm
+    name: "optillm"
+    type: oss_project
+    github: algorithmicsuperintelligence/optillm
+    tagline: "Optimizing inference proxy for LLMs"
+    url: "https://github.com/algorithmicsuperintelligence/optillm"
+    metadata:
+      license: "Apache-2.0"

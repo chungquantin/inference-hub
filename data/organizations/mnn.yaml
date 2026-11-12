@@ -1,0 +1,9 @@
+slug: mnn
+name: "MNN"
+kinds: [open_source]
+description: "MNN: A blazing-fast, lightweight inference engine battle-tested by Alibaba, powering high-performance on-device LLMs and Edge AI. - alibaba/MNN"
+website: "https://github.com/alibaba/MNN"
+logo_url: /logos/mnn.png
+categories: [inference-engines]
+tagging:
+  match_case: true

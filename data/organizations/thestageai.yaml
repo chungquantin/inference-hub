@@ -1,0 +1,21 @@
+slug: thestageai
+name: "thestage.ai labs"
+kinds: [open_source]
+description: "TheStage.AI labs is the union of the AI researchers and entrepreneurs which builds highly optimized AI"
+website: "https://thestage.ai"
+logo_url: /logos/thestageai.png
+links:
+  github: "https://github.com/TheStageAI"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: thewhisper
+    name: "TheWhisper"
+    type: oss_project
+    github: TheStageAI/TheWhisper
+    tagline: "Optimized Whisper models for streaming and on-device use"
+    url: "https://github.com/TheStageAI/TheWhisper"
+    metadata:
+      license: "MIT"

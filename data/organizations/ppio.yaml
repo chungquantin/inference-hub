@@ -1,0 +1,6 @@
+slug: ppio
+name: "PPIO"
+kinds: [inference_provider]
+website: "https://ppio.com"
+tagging:
+  match_case: true

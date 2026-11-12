@@ -1,0 +1,8 @@
+slug: spheron
+name: "Spheron"
+kinds: [decentralized]
+description: "Rent NVIDIA H100, A100, B200 and AMD MI300X GPUs on-demand. No contracts, fast deployment from Tier 3/4 data centers. AI training & LLM inference."
+website: "https://www.spheron.network"
+logo_url: /logos/spheron.png
+tagging:
+  match_case: true

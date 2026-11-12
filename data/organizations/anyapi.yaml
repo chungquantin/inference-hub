@@ -1,0 +1,8 @@
+slug: anyapi
+name: "AnyAPI"
+kinds: [llm_gateway]
+description: "Power your product with access to 400+ AI models via scalable, low-latency APIs. Bring GPT, Claude, and other top AIs into your app with one integration."
+website: "https://anyapi.ai"
+logo_url: /logos/anyapi.png
+tagging:
+  match_case: true

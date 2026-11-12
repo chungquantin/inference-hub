@@ -1,0 +1,8 @@
+slug: kkr
+name: "KKR"
+kinds: [investor]
+description: "KKR is a leading global investment firm offering solutions in alternative assets spanning real estate, private credit, private equity, and infrastructure, as well as liquid credit, capital markets and insurance."
+website: "https://www.kkr.com"
+logo_url: /logos/kkr.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: kite-ai
+name: "Kite AI"
+kinds: [decentralized]
+description: "An agnetic payment infrastructure empowering autonomous agents can operate with trust, governance, and native stablecoin settlement"
+website: "https://gokite.ai"
+logo_url: /logos/kite-ai.svg
+tagging:
+  match_case: true

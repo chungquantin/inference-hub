@@ -1,0 +1,8 @@
+slug: cloud-ru
+name: "Cloud.ru"
+kinds: [gpu_cloud]
+website: "https://cloud.ru"
+logo_url: /logos/cloud-ru.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,21 @@
+slug: kuberay-project
+name: "KubeRay"
+kinds: [open_source]
+description: "KubeRay, a CNCF Project"
+website: "https://github.com/kuberay-project"
+logo_url: /logos/kuberay-project.png
+links:
+  github: "https://github.com/kuberay-project"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kuberay
+    name: "kuberay"
+    type: oss_project
+    github: kuberay-project/kuberay
+    tagline: "A toolkit to run Ray applications on Kubernetes"
+    url: "https://github.com/kuberay-project/kuberay"
+    metadata:
+      license: "Apache-2.0"

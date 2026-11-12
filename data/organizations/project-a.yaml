@@ -1,0 +1,8 @@
+slug: project-a
+name: "Project A"
+kinds: [investor]
+description: "Project A is the early-stage VC for entrepreneurs building the next generation of European icons. Since 2012, we’ve partnered with 130+ founding teams at the earliest and most decisive stages."
+website: "https://www.project-a.vc"
+logo_url: /logos/project-a.png
+tagging:
+  match_case: true

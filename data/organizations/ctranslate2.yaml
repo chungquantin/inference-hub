@@ -1,0 +1,9 @@
+slug: ctranslate2
+name: "CTranslate2"
+kinds: [open_source]
+description: "Fast inference engine for Transformer models. Contribute to OpenNMT/CTranslate2 development by creating an account on GitHub."
+website: "https://github.com/OpenNMT/CTranslate2"
+logo_url: /logos/ctranslate2.png
+categories: [inference-engines]
+tagging:
+  match_case: true

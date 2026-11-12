@@ -1,0 +1,8 @@
+slug: mythic
+name: "Mythic"
+kinds: [hardware]
+website: "https://mythic.ai"
+logo_url: /logos/mythic.webp
+tagging:
+  match_case: true
+  match_name: false

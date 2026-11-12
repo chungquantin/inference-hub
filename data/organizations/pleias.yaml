@@ -1,0 +1,7 @@
+slug: pleias
+name: "Pleias"
+kinds: [model_provider]
+website: "https://pleias.ai"
+logo_url: /logos/pleias.png
+tagging:
+  match_case: true

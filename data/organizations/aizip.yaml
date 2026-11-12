@@ -1,0 +1,8 @@
+slug: aizip
+name: "Aizip"
+kinds: [hardware]
+description: "Aizip builds efficient and production-grade audio, vision, time-series, and language models running on millions of devices and systems worldwide."
+website: "https://aizip.ai"
+logo_url: /logos/aizip.png
+tagging:
+  match_case: true

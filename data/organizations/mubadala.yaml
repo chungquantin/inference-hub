@@ -1,0 +1,9 @@
+slug: mubadala
+name: "Mubadala"
+kinds: [investor]
+description: "Mubadala Investment Company — a sovereign investor — manages a diverse portfolio of assets and investments in the United Arab Emirates and abroad, to generate sustainable financial returns for its shareholder, the Government of Abu Dhabi."
+website: "https://www.mubadala.com"
+logo_url: /logos/mubadala.png
+tagging:
+  match_case: true
+  match_name: false

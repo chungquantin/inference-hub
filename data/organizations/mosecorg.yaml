@@ -1,0 +1,21 @@
+slug: mosecorg
+name: "mosec"
+kinds: [open_source]
+description: "machine learning model serving infra"
+website: "https://mosecorg.github.io"
+logo_url: /logos/mosecorg.png
+links:
+  github: "https://github.com/mosecorg"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mosec
+    name: "mosec"
+    type: oss_project
+    github: mosecorg/mosec
+    tagline: "A high-performance ML model serving framework, offers dynamic batching and CPU/GPU pipelines to fully exploit your compute machine"
+    url: "https://github.com/mosecorg/mosec"
+    metadata:
+      license: "Apache-2.0"

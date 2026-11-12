@@ -1,0 +1,6 @@
+slug: lancium
+name: "Lancium"
+kinds: [gpu_cloud]
+website: "https://lancium.com"
+tagging:
+  match_case: true

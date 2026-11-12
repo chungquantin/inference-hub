@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 128 128"
+     width="32"
+     height="32">
+  <title>Favicon</title>
+    <g fill="#706F70" fill-rule="evenodd">
+    <path d="M 21 48 L 7 59 L 2 70 L 0 71 L 0 103 L 7 114 L 24 127 L 54 127 L 71 115 L 73 109 L 70 104 L 59 101 L 52 103 L 50 106 L 45 107 L 42 110 L 30 110 L 27 107 L 22 106 L 13 94 L 13 77 L 15 76 L 17 70 L 24 64 L 26 58 L 25 53 Z"/>
+  </g>
+    <g fill="#D41100" fill-rule="evenodd">
+    <path d="M 28 62 L 26 64 L 27 70 L 32 79 L 47 96 L 53 100 L 56 100 L 58 98 L 60 87 L 58 74 L 50 65 L 42 61 Z"/>
+    <path d="M 31 11 L 28 14 L 26 23 L 23 27 L 22 46 L 52 46 L 68 56 L 73 62 L 80 76 L 81 90 L 76 108 L 98 108 L 102 105 L 110 104 L 117 99 L 117 92 L 113 87 L 91 85 L 93 77 L 98 72 L 127 51 L 127 38 L 118 38 L 96 50 L 92 49 L 92 43 L 96 38 L 97 33 L 108 19 L 108 8 L 96 8 L 73 32 L 69 31 L 72 21 L 72 0 L 60 0 L 55 9 L 50 25 L 45 32 L 41 31 L 40 14 L 37 11 Z"/>
+  </g>
+    <g fill="#FEFEFE" fill-rule="evenodd">
+    <path d="M 30 50 L 30 58 L 48 58 L 60 68 L 61 73 L 65 77 L 65 94 L 62 98 L 69 102 L 73 102 L 75 86 L 74 74 L 66 61 L 58 54 L 52 53 L 49 50 Z"/>
+  </g>
+</svg>

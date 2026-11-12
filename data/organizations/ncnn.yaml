@@ -1,0 +1,9 @@
+slug: ncnn
+name: "ncnn"
+kinds: [open_source]
+description: "ncnn is a high-performance neural network inference framework optimized for the mobile platform - Tencent/ncnn"
+website: "https://github.com/Tencent/ncnn"
+logo_url: /logos/ncnn.png
+categories: [inference-engines]
+tagging:
+  match_case: true

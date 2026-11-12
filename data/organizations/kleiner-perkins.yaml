@@ -1,0 +1,8 @@
+slug: kleiner-perkins
+name: "Kleiner Perkins"
+kinds: [investor]
+description: "Kleiner Perkins is an American venture capital firm headquartered on Sand Hill Road in Menlo Park in Silicon Valley."
+website: "https://www.kleinerperkins.com"
+logo_url: /logos/kleiner-perkins.png
+tagging:
+  match_case: true

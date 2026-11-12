@@ -1,0 +1,9 @@
+slug: sentient
+name: "Sentient"
+kinds: [decentralized]
+description: "Open-source AI reasoning lab. Research and products that enable AI systems to reason, reflect, learn, and self-improve."
+website: "https://www.sentient.xyz"
+logo_url: /logos/sentient.png
+tagging:
+  match_case: true
+  match_name: false

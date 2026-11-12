@@ -1,0 +1,9 @@
+slug: dataiku
+name: "Dataiku"
+kinds: [llmops]
+description: "Dataiku is the Platform for AI Success that unites people, orchestration, and governance to turn AI investments into measurable business outcomes."
+website: "https://www.dataiku.com"
+logo_url: /logos/dataiku.png
+categories: [observability]
+tagging:
+  match_case: true

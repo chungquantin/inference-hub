@@ -1,0 +1,9 @@
+slug: nxtra
+name: "Nxtra"
+kinds: [gpu_cloud]
+description: "Nxtra is one of the leading data center companies in India offering secure, scalable and enterprise-grade data center services nationwide."
+website: "https://www.nxtra.in"
+logo_url: /logos/nxtra.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

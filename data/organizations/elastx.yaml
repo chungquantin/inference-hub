@@ -1,0 +1,9 @@
+slug: elastx
+name: "Elastx"
+kinds: [gpu_cloud]
+description: "Svensk molnplattform med en plattform för affärskritiska tjänster och känslig data - managerad OpenStack, Kubernetes och databaser i svenska datacenter."
+website: "https://elastx.se"
+logo_url: /logos/elastx.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

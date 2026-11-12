@@ -1,0 +1,8 @@
+slug: lux-capital
+name: "Lux Capital"
+kinds: [investor]
+description: "We’re a tight-knit team of big dreamers and deep thinkers obsessed with finding new ways to build a better tomorrow."
+website: "https://www.luxcapital.com"
+logo_url: /logos/lux-capital.png
+tagging:
+  match_case: true

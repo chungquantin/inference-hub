@@ -1,0 +1,8 @@
+slug: ocean-protocol
+name: "Ocean Protocol"
+kinds: [decentralized]
+description: "Monetize AI models & data while preserving privacy"
+website: "https://oceanprotocol.com"
+logo_url: /logos/ocean-protocol.png
+tagging:
+  match_case: true

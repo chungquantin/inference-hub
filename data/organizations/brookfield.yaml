@@ -1,0 +1,9 @@
+slug: brookfield
+name: "Brookfield"
+kinds: [investor]
+description: "Brookfield is a leading global investment firm, investing on behalf of institutions and individuals around the world. Start your investment journey today."
+website: "https://www.brookfield.com"
+logo_url: /logos/brookfield.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,8 @@
+slug: kie-ai
+name: "Kie.ai"
+kinds: [inference_provider]
+description: "Call video, image, music and chat AI models with one API key. Pay-as-you-go credits that never expire, no charge for failed tasks, free credits to test."
+website: "https://kie.ai"
+logo_url: /logos/kie-ai.png
+tagging:
+  match_case: true

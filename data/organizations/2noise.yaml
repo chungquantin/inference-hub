@@ -1,0 +1,20 @@
+slug: 2noise
+name: "2noise"
+kinds: [open_source]
+website: "https://2noise.com"
+logo_url: /logos/2noise.png
+links:
+  github: "https://github.com/2noise"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: chattts
+    name: "ChatTTS"
+    type: oss_project
+    github: 2noise/ChatTTS
+    tagline: "A generative speech model for daily dialogue."
+    url: "https://github.com/2noise/ChatTTS"
+    metadata:
+      license: "AGPL-3.0"

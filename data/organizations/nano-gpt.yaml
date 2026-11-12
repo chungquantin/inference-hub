@@ -1,0 +1,8 @@
+slug: nano-gpt
+name: "Nano-GPT"
+kinds: [llm_gateway]
+description: "1,271 AI models in one place, including ChatGPT, Claude and Gemini. Pay as you go, keep chats on your device, and build with an OpenAI-compatible API."
+website: "https://nano-gpt.com"
+logo_url: /logos/nano-gpt.png
+tagging:
+  match_case: true

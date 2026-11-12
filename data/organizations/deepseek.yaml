@@ -51,3 +51,43 @@ products:
         output: 2.19
         source_url: https://api-docs.deepseek.com/quick_start/pricing
         observed_on: 2025-02-10
+  - slug: 3fs
+    name: "3FS"
+    type: oss_project
+    github: deepseek-ai/3FS
+    tagline: "A high-performance distributed file system designed to address the challenges of AI training and inference workloads."
+    url: "https://github.com/deepseek-ai/3FS"
+    metadata:
+      license: "MIT"
+  - slug: deepep
+    name: "DeepEP"
+    type: oss_project
+    github: deepseek-ai/DeepEP
+    tagline: "DeepEP: an efficient expert-parallel communication library"
+    url: "https://github.com/deepseek-ai/DeepEP"
+    metadata:
+      license: "MIT"
+  - slug: deepgemm
+    name: "DeepGEMM"
+    type: oss_project
+    github: deepseek-ai/DeepGEMM
+    tagline: "DeepGEMM: clean and efficient BLAS kernel library on GPU"
+    url: "https://github.com/deepseek-ai/DeepGEMM"
+    metadata:
+      license: "MIT"
+  - slug: flashmla
+    name: "FlashMLA"
+    type: oss_project
+    github: deepseek-ai/FlashMLA
+    tagline: "FlashMLA: Efficient Multi-head Latent Attention Kernels"
+    url: "https://github.com/deepseek-ai/FlashMLA"
+    metadata:
+      license: "MIT"
+  - slug: open-infra-index
+    name: "open-infra-index"
+    type: oss_project
+    github: deepseek-ai/open-infra-index
+    tagline: "Production-tested AI infrastructure tools for efficient AGI development and community-driven innovation"
+    url: "https://github.com/deepseek-ai/open-infra-index"
+    metadata:
+      license: "CC0-1.0"

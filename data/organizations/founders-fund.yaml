@@ -1,0 +1,8 @@
+slug: founders-fund
+name: "Founders Fund"
+kinds: [investor]
+description: "Founders Fund is a San Francisco based venture capital firm investing in companies building revolutionary technologies."
+website: "https://foundersfund.com"
+logo_url: /logos/founders-fund.png
+tagging:
+  match_case: true

@@ -1,0 +1,61 @@
+slug: mit-han-lab
+name: "MIT HAN Lab"
+kinds: [open_source]
+description: "Efficient AI Computing. PI: Song Han"
+website: "https://hanlab.mit.edu"
+logo_url: /logos/mit-han-lab.png
+links:
+  github: "https://github.com/mit-han-lab"
+categories: [evals-benchmarks, model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tinychatengine
+    name: "TinyChatEngine"
+    type: oss_project
+    github: mit-han-lab/TinyChatEngine
+    tagline: "TinyChatEngine: On-Device LLM Inference Library"
+    url: "https://github.com/mit-han-lab/TinyChatEngine"
+    metadata:
+      license: "MIT"
+  - slug: duo-attention
+    name: "duo-attention"
+    type: oss_project
+    github: mit-han-lab/duo-attention
+    tagline: "[ICLR 2025] DuoAttention: Efficient Long-Context LLM Inference with Retrieval and Streaming Heads"
+    url: "https://github.com/mit-han-lab/duo-attention"
+    metadata:
+      license: "MIT"
+  - slug: llm-awq
+    name: "llm-awq"
+    type: oss_project
+    github: mit-han-lab/llm-awq
+    tagline: "[MLSys 2024 Best Paper Award] AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration"
+    url: "https://github.com/mit-han-lab/llm-awq"
+    metadata:
+      license: "MIT"
+  - slug: omniserve
+    name: "omniserve"
+    type: oss_project
+    github: mit-han-lab/omniserve
+    tagline: "[MLSys'25] QServe: W4A8KV4 Quantization and System Co-design for Efficient LLM Serving; [MLSys'25] LServe: Efficient Long-sequence LLM Serving with Unified Sparse Attention"
+    url: "https://github.com/mit-han-lab/omniserve"
+    metadata:
+      license: "Apache-2.0"
+  - slug: smoothquant
+    name: "smoothquant"
+    type: oss_project
+    github: mit-han-lab/smoothquant
+    tagline: "[ICML 2023] SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models"
+    url: "https://github.com/mit-han-lab/smoothquant"
+    metadata:
+      license: "MIT"
+  - slug: streaming-llm
+    name: "streaming-llm"
+    type: oss_project
+    github: mit-han-lab/streaming-llm
+    tagline: "[ICLR 2024] Efficient Streaming Language Models with Attention Sinks"
+    url: "https://github.com/mit-han-lab/streaming-llm"
+    metadata:
+      license: "MIT"

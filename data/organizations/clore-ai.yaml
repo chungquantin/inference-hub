@@ -1,0 +1,7 @@
+slug: clore-ai
+name: "Clore.ai"
+kinds: [decentralized]
+website: "https://clore.ai"
+logo_url: /logos/clore-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: hongshan
+name: "HongShan"
+kinds: [investor]
+website: "https://www.hongshan.com"
+logo_url: /logos/hongshan.svg
+tagging:
+  match_case: true

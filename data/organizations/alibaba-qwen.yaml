@@ -1,0 +1,8 @@
+slug: alibaba-qwen
+name: "Alibaba Qwen"
+kinds: [model_provider]
+description: "Qwickly forging AGI, enhancing intelligence."
+website: "https://qwenlm.github.io"
+logo_url: /logos/alibaba-qwen.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: terawulf
+name: "TeraWulf"
+kinds: [gpu_cloud]
+description: "Energy infrastructure for next-generation AI and high-performance computing. TeraWulf delivers scalable, power-secured infrastructure for AI and HPC growth."
+website: "https://www.terawulf.com"
+logo_url: /logos/terawulf.svg
+tagging:
+  match_case: true

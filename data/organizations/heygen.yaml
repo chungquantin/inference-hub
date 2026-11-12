@@ -1,0 +1,8 @@
+slug: heygen
+name: "HeyGen"
+kinds: [model_provider]
+description: "Be your best self, every time. Create clear, confident AI videos with your Personal Avatar—your face and voice, without filming every video. Try it free."
+website: "https://www.heygen.com"
+logo_url: /logos/heygen.png
+tagging:
+  match_case: true

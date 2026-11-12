@@ -1,0 +1,9 @@
+slug: metr
+name: "METR"
+kinds: [llmops]
+description: "METR is a nonprofit that studies the most advanced AI agents to understand whether their developers are on track to lose control of them."
+website: "https://metr.org"
+logo_url: /logos/metr.png
+categories: [observability]
+tagging:
+  match_case: true

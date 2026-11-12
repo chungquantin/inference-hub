@@ -1,0 +1,8 @@
+slug: mixedbread
+name: "Mixedbread"
+kinds: [model_provider]
+description: "Make your agents work on your data. Mixedbread turns PDFs, decks, videos, code, Slack, and Drive into evidence your agent can act on, with fewer tokens."
+website: "https://www.mixedbread.com"
+logo_url: /logos/mixedbread.png
+tagging:
+  match_case: true

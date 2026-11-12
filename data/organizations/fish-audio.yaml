@@ -1,0 +1,8 @@
+slug: fish-audio
+name: "Fish Audio"
+kinds: [model_provider]
+description: "Studio-grade AI text-to-speech and voice cloning. Start using free industry-leading voice generator today with emotion control and 2m+ voices in 8 languages."
+website: "https://fish.audio"
+logo_url: /logos/fish-audio.png
+tagging:
+  match_case: true

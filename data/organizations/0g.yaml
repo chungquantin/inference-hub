@@ -1,0 +1,8 @@
+slug: 0g
+name: "0G"
+kinds: [decentralized]
+description: "0G is the trust layer for AI. Private compute, encrypted storage, and an AI-native EVM L1 chain in one stack. Every AI action verified and audited."
+website: "https://0g.ai"
+logo_url: /logos/0g.png
+tagging:
+  match_case: true

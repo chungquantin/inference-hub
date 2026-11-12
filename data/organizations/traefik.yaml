@@ -1,0 +1,21 @@
+slug: traefik
+name: "Traefik Labs"
+kinds: [open_source]
+description: "Say Goodbye to Connectivity Chaos"
+website: "https://blog.traefik.io"
+logo_url: /logos/traefik.png
+links:
+  github: "https://github.com/traefik"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: traefik
+    name: "traefik"
+    type: oss_project
+    github: traefik/traefik
+    tagline: "The Cloud Native Application Proxy"
+    url: "https://github.com/traefik/traefik"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,8 @@
+slug: oblivus
+name: "Oblivus"
+kinds: [gpu_cloud]
+description: "Revolutionize your cloud bill with Oblivus Cloud - up to 80% cheaper! Utilize 18,000+ GPUs on a fast, cost-effective, and reliable infrastructure!"
+website: "https://oblivus.com"
+logo_url: /logos/oblivus.png
+tagging:
+  match_case: true

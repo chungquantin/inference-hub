@@ -1,0 +1,9 @@
+slug: gcore
+name: "Gcore"
+kinds: [gpu_cloud]
+description: "Launch faster, stay protected, and scale on your terms with Gcore. Run cloud, edge, security, and AI on EU-owned infrastructure built for real traffic."
+website: "https://gcore.com"
+logo_url: /logos/gcore.png
+tagging:
+  match_case: true
+  match_name: false

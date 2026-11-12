@@ -1,0 +1,9 @@
+slug: stripes
+name: "Stripes"
+kinds: [investor]
+description: "Stripes invests globally in category-defining businesses with amazing products and helps them scale."
+website: "https://www.stripes.co"
+logo_url: /logos/stripes.svg
+tagging:
+  match_case: true
+  match_name: false

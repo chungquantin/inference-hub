@@ -1,0 +1,8 @@
+slug: aleph-alpha
+name: "Aleph Alpha"
+kinds: [model_provider]
+description: "Aleph Alpha entwickelt spezialisierte Sprachmodelle und KI-Lösungen für Unternehmen und öffentliche Institutionen in Europa."
+website: "https://aleph-alpha.com"
+logo_url: /logos/aleph-alpha.svg
+tagging:
+  match_case: true

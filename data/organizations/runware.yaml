@@ -1,0 +1,8 @@
+slug: runware
+name: "Runware"
+kinds: [inference_provider]
+description: "One API for 400K+ AI models, plus serverless GPUs and reserved GPU capacity, all on modular data centers we design, build and run to cost less."
+website: "https://runware.ai"
+logo_url: /logos/runware.svg
+tagging:
+  match_case: true

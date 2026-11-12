@@ -1,0 +1,8 @@
+slug: lightricks
+name: "Lightricks"
+kinds: [model_provider]
+description: "Lightricks is a leading AI technology company transforming creative workflows with innovative tools; across web, mobile and open source innovation, for content creators, marketers, and professionals. Discover how our cutting-edge AI empowers creativity at every level."
+website: "https://www.lightricks.com"
+logo_url: /logos/lightricks.jpg
+tagging:
+  match_case: true

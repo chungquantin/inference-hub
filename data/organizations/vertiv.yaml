@@ -1,0 +1,8 @@
+slug: vertiv
+name: "Vertiv"
+kinds: [hardware]
+description: "Vertiv is a global leader in critical digital infrastructure for applications in data centers, communication networks, and commercial and industrial environments."
+website: "https://www.vertiv.com"
+logo_url: /logos/vertiv.png
+tagging:
+  match_case: true

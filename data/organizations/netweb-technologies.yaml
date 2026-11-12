@@ -1,0 +1,8 @@
+slug: netweb-technologies
+name: "Netweb Technologies"
+kinds: [hardware]
+description: "Netweb Meta Description: Netweb has expertise in Storage, Servers & Workstations, High-Performance Computing, AI/ML, Deep Learning, Cloud, Virtualization, and Surveillance solutions."
+website: "https://www.netwebindia.com"
+logo_url: /logos/netweb-technologies.png
+tagging:
+  match_case: true

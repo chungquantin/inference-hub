@@ -1,0 +1,8 @@
+slug: gimlet-labs
+name: "Gimlet Labs"
+kinds: [inference_provider]
+description: "Gimlet Labs is an applied research lab focused on building high performance AI systems."
+website: "https://gimletlabs.ai"
+logo_url: /logos/gimlet-labs.svg
+tagging:
+  match_case: true

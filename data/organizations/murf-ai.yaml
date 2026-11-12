@@ -1,0 +1,8 @@
+slug: murf-ai
+name: "Murf AI"
+kinds: [model_provider]
+description: "Generate human-like speech and deploy Conversational agents with Murf AI. The complete AI Voice platform trusted by 10 million+ developers, businesses, and creators."
+website: "https://murf.ai"
+logo_url: /logos/murf-ai.png
+tagging:
+  match_case: true

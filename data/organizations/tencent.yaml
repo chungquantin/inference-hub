@@ -1,0 +1,17 @@
+slug: tencent
+name: "Tencent"
+kinds: [open_source]
+website: "https://opensource.tencent.com"
+logo_url: /logos/tencent.png
+links:
+  github: "https://github.com/Tencent"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tnn
+    name: "TNN"
+    type: oss_project
+    github: Tencent/TNN
+    url: "https://github.com/Tencent/TNN"

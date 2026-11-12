@@ -1,0 +1,20 @@
+slug: open-mmlab
+name: "OpenMMLab"
+kinds: [open_source]
+website: "https://openmmlab.com"
+logo_url: /logos/open-mmlab.png
+links:
+  github: "https://github.com/open-mmlab"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mmrazor
+    name: "mmrazor"
+    type: oss_project
+    github: open-mmlab/mmrazor
+    tagline: "OpenMMLab Model Compression Toolbox and Benchmark."
+    url: "https://github.com/open-mmlab/mmrazor"
+    metadata:
+      license: "Apache-2.0"

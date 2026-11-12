@@ -1,0 +1,8 @@
+slug: hedra
+name: "Hedra"
+kinds: [model_provider]
+description: "Hedra is a research and infrastructure company bringing frontier inference to multimodal and physical AI. We serve your models and keep improving them."
+website: "https://www.hedra.com"
+logo_url: /logos/hedra.png
+tagging:
+  match_case: true

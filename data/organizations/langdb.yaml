@@ -1,0 +1,8 @@
+slug: langdb
+name: "LangDB"
+kinds: [llm_gateway]
+description: "Debug your AI agents in real time. Comprehensive observability for AI agents with tracing, monitoring, and optimization. Works with LangChain, Google ADK, OpenAI, and all major frameworks."
+website: "https://langdb.ai"
+logo_url: /logos/langdb.png
+tagging:
+  match_case: true

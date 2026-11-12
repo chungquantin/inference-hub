@@ -1,0 +1,7 @@
+slug: khosla-ventures
+name: "Khosla Ventures"
+kinds: [investor]
+website: "https://www.khoslaventures.com"
+logo_url: /logos/khosla-ventures.png
+tagging:
+  match_case: true

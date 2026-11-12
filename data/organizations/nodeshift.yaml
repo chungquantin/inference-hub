@@ -1,0 +1,8 @@
+slug: nodeshift
+name: "Nodeshift"
+kinds: [gpu_cloud]
+description: "Use Claude, ChatGPT, Gemini, and 100+ other AI models compliantly by anonymizing sensitive data before it ever leaves your org, on-premises or in your cloud."
+website: "https://nodeshift.com"
+logo_url: /logos/nodeshift.png
+tagging:
+  match_case: true

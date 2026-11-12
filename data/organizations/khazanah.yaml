@@ -1,0 +1,7 @@
+slug: khazanah
+name: "Khazanah"
+kinds: [investor]
+description: "Matlamat pelaburan kami adalah untuk membina industri yang berdaya tahan, memperkukuh keupayaan negara dan memacu pertumbuhan jangka panjang demi Malaysia"
+website: "https://www.khazanah.com.my"
+tagging:
+  match_case: true

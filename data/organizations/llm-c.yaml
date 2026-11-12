@@ -1,0 +1,19 @@
+slug: llm-c
+name: "llm.c"
+kinds: [open_source]
+website: "https://twitter.com/karpathy"
+links:
+  github: "https://github.com/karpathy/llm.c"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llm-c
+    name: "llm.c"
+    type: oss_project
+    github: karpathy/llm.c
+    tagline: "LLM training in simple, raw C/CUDA"
+    url: "https://github.com/karpathy/llm.c"
+    metadata:
+      license: "MIT"

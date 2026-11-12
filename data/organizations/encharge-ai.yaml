@@ -1,0 +1,8 @@
+slug: encharge-ai
+name: "EnCharge AI"
+kinds: [hardware]
+description: "AI Compute from the Edge-to-Cloud for Every Business. Transformative technology for AI computation, breaking records in efficiency and sustainability to enable state-of-the-art models uninhibited by power, space, and cost constraints."
+website: "https://enchargeai.com"
+logo_url: /logos/encharge-ai.png
+tagging:
+  match_case: true

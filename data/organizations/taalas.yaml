@@ -1,0 +1,7 @@
+slug: taalas
+name: "Taalas"
+kinds: [hardware]
+description: "We are creating a platform that makes it easy to turn any deep learning model into custom silicon quickly."
+website: "https://taalas.com"
+tagging:
+  match_case: true

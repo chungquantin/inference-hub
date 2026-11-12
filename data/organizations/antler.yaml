@@ -1,0 +1,9 @@
+slug: antler
+name: "Antler"
+kinds: [investor]
+description: "Antler is the world’s most active early-stage investor, backing exceptional founders from inception."
+website: "https://www.antler.co"
+logo_url: /logos/antler.jpg
+tagging:
+  match_case: true
+  match_name: false

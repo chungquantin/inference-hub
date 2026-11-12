@@ -1,0 +1,7 @@
+slug: kunlunxin
+name: "Kunlunxin"
+kinds: [hardware]
+website: "https://www.kunlunxin.com"
+logo_url: /logos/kunlunxin.png
+tagging:
+  match_case: true

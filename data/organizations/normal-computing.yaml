@@ -1,0 +1,8 @@
+slug: normal-computing
+name: "Normal Computing"
+kinds: [hardware]
+description: "Normal Computing is an applied AI company solving the hardest problems in AI and silicon. A new paradigm of AI hardware to power human progress."
+website: "https://www.normalcomputing.com"
+logo_url: /logos/normal-computing.png
+tagging:
+  match_case: true

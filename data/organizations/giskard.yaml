@@ -1,0 +1,10 @@
+slug: giskard
+name: "Giskard"
+kinds: [llmops]
+description: "Secure AI agents with Giskard’s continuous AI red teaming. Detect vulnerabilities, improve LLM security, and safeguard your AI systems."
+website: "https://www.giskard.ai"
+logo_url: /logos/giskard.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false

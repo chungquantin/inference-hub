@@ -1,0 +1,20 @@
+slug: comfy-org
+name: "Comfy Org"
+kinds: [open_source]
+website: "https://comfy.org"
+logo_url: /logos/comfy-org.png
+links:
+  github: "https://github.com/Comfy-Org"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: comfyui
+    name: "ComfyUI"
+    type: oss_project
+    github: Comfy-Org/ComfyUI
+    tagline: "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface. The fastest local inference engine in the world."
+    url: "https://github.com/Comfy-Org/ComfyUI"
+    metadata:
+      license: "GPL-3.0"

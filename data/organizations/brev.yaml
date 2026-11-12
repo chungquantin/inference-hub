@@ -1,0 +1,8 @@
+slug: brev
+name: "Brev"
+kinds: [gpu_cloud]
+website: "https://brev.nvidia.com"
+logo_url: /logos/brev.png
+tagging:
+  match_case: true
+  match_name: false

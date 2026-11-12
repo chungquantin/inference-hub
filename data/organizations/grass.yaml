@@ -1,0 +1,9 @@
+slug: grass
+name: "Grass"
+kinds: [decentralized]
+description: "Grass turns the unused part of your internet into rewards. Just download the app, let it run in the background, and start earning."
+website: "https://www.grass.io"
+logo_url: /logos/grass.png
+tagging:
+  match_case: true
+  match_name: false

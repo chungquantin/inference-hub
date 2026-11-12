@@ -1,0 +1,6 @@
+slug: quanta-computer
+name: "Quanta Computer"
+kinds: [hardware]
+website: "https://www.quantatw.com"
+tagging:
+  match_case: true

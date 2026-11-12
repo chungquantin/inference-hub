@@ -1,0 +1,8 @@
+slug: imagination-technologies
+name: "Imagination Technologies"
+kinds: [hardware]
+description: "Discover Imagination’s market-leading GPU IP for graphics, edge AI and compute. Efficient, programmable, and optimised to be your solution."
+website: "https://www.imaginationtech.com"
+logo_url: /logos/imagination-technologies.png
+tagging:
+  match_case: true

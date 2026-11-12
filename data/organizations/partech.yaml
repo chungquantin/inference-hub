@@ -1,0 +1,8 @@
+slug: partech
+name: "Partech"
+kinds: [investor]
+description: "Partech is a global investment platform for tech and digital companies, led by ex-entrepreneurs and operators of the industry spread across offices…."
+website: "https://partechpartners.com"
+tagging:
+  match_case: true
+  match_name: false

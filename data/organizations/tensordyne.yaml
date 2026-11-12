@@ -1,0 +1,8 @@
+slug: tensordyne
+name: "Tensordyne"
+kinds: [hardware]
+description: "Tensordyne is the official home of next-generation AI inference systems. Discover our technology, products, and research at Tensordyne.ai."
+website: "https://www.tensordyne.ai"
+logo_url: /logos/tensordyne.png
+tagging:
+  match_case: true

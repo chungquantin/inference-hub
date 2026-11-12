@@ -1,0 +1,8 @@
+slug: point-nine
+name: "Point Nine"
+kinds: [investor]
+description: "Point Nine is an early-stage venture capital firm investing in SaaS, AI, and B2B software at pre-seed and seed. Backers of Zendesk, Algolia, Contentful, Loom, and Revolut."
+website: "https://www.pointnine.com"
+logo_url: /logos/point-nine.png
+tagging:
+  match_case: true

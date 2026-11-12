@@ -1,0 +1,9 @@
+slug: confident-ai
+name: "Confident AI"
+kinds: [llmops]
+description: "Confident AI is the AI quality platform for enterprise teams to standardize AI evals and observability across the org — one consistent bar for how every team measures and monitors their AI."
+website: "https://www.confident-ai.com"
+logo_url: /logos/confident-ai.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

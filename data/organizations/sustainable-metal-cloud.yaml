@@ -1,0 +1,8 @@
+slug: sustainable-metal-cloud
+name: "Sustainable Metal Cloud"
+kinds: [gpu_cloud]
+website: "https://www.smc.ai"
+logo_url: /logos/sustainable-metal-cloud.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -24,3 +24,19 @@ products:
     url: "https://github.com/openvinotoolkit/openvino.genai"
     metadata:
       license: "Apache-2.0"
+  - slug: model-server
+    name: "model_server"
+    type: oss_project
+    github: openvinotoolkit/model_server
+    tagline: "A scalable inference server for models optimized with OpenVINO™"
+    url: "https://github.com/openvinotoolkit/model_server"
+    metadata:
+      license: "Apache-2.0"
+  - slug: nncf
+    name: "nncf"
+    type: oss_project
+    github: openvinotoolkit/nncf
+    tagline: "Neural Network Compression Framework for enhanced OpenVINO™ inference"
+    url: "https://github.com/openvinotoolkit/nncf"
+    metadata:
+      license: "Apache-2.0"

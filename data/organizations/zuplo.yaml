@@ -1,0 +1,8 @@
+slug: zuplo
+name: "Zuplo"
+kinds: [llm_gateway]
+description: "Secure, govern, and observe every API, LLM, and MCP call on one programmable policy engine. See practical implementation details and production tradeoffs."
+website: "https://zuplo.com"
+logo_url: /logos/zuplo.svg
+tagging:
+  match_case: true

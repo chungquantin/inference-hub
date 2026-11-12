@@ -1,0 +1,28 @@
+slug: qwenaudio
+name: "QwenAudio"
+kinds: [open_source]
+website: "https://www.funasr.com"
+logo_url: /logos/qwenaudio.png
+links:
+  github: "https://github.com/QwenAudio"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: fun-asr
+    name: "Fun-ASR"
+    type: oss_project
+    github: QwenAudio/Fun-ASR
+    tagline: "Fun-ASR speech recognition models, with native Hugging Face Transformers support for Fun-ASR-Nano and separate FunASR, vLLM and llama.cpp deployment paths."
+    url: "https://github.com/QwenAudio/Fun-ASR"
+    metadata:
+      license: "Apache-2.0"
+  - slug: cosyvoice
+    name: "CosyVoice"
+    type: oss_project
+    github: QwenAudio/CosyVoice
+    tagline: "Multi-lingual large voice generation model, providing inference, training and deployment full-stack ability."
+    url: "https://github.com/QwenAudio/CosyVoice"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,19 @@
+slug: kokoro
+name: "kokoro"
+kinds: [open_source]
+website: "https://github.com/hexgrad/kokoro"
+links:
+  github: "https://github.com/hexgrad/kokoro"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kokoro
+    name: "kokoro"
+    type: oss_project
+    github: hexgrad/kokoro
+    tagline: "https://hf.co/hexgrad/Kokoro-82M"
+    url: "https://github.com/hexgrad/kokoro"
+    metadata:
+      license: "Apache-2.0"

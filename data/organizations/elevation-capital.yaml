@@ -1,0 +1,8 @@
+slug: elevation-capital
+name: "Elevation Capital"
+kinds: [investor]
+description: "Elevation is India’s leading investor with a 25-year history of backing category-defining founders."
+website: "https://elevationcapital.com"
+logo_url: /logos/elevation-capital.png
+tagging:
+  match_case: true

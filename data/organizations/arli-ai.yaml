@@ -1,0 +1,8 @@
+slug: arli-ai
+name: "Arli AI"
+kinds: [inference_provider]
+description: "Unrestricted AI Inference Platform for power users."
+website: "https://www.arliai.com"
+logo_url: /logos/arli-ai.png
+tagging:
+  match_case: true

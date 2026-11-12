@@ -1,0 +1,21 @@
+slug: jax-ml
+name: "jax-ml"
+kinds: [open_source]
+description: "Pushing back the limits on numerical computing."
+website: "https://docs.jax.dev"
+logo_url: /logos/jax-ml.png
+links:
+  github: "https://github.com/jax-ml"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: jax
+    name: "jax"
+    type: oss_project
+    github: jax-ml/jax
+    tagline: "Composable transformations of Python+NumPy programs: differentiate, vectorize, JIT to GPU/TPU, and more"
+    url: "https://github.com/jax-ml/jax"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: lilypad
+name: "Lilypad"
+kinds: [decentralized]
+description: "Lilypad Network: Experience the Power of Decentralized Computing"
+website: "https://lilypad.tech"
+logo_url: /logos/lilypad.svg
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: metax
+name: "MetaX"
+kinds: [hardware]
+website: "https://www.metax-tech.com"
+logo_url: /logos/metax.png
+tagging:
+  match_case: true

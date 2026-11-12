@@ -1,0 +1,20 @@
+slug: axolotl-ai-cloud
+name: "Axolotl AI"
+kinds: [open_source]
+website: "https://axolotl.ai"
+logo_url: /logos/axolotl-ai-cloud.png
+links:
+  github: "https://github.com/axolotl-ai-cloud"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: axolotl
+    name: "axolotl"
+    type: oss_project
+    github: axolotl-ai-cloud/axolotl
+    tagline: "Go ahead and axolotl questions"
+    url: "https://github.com/axolotl-ai-cloud/axolotl"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: openchip
+name: "Openchip"
+kinds: [hardware]
+description: "Openchip - Full-stack system on chip and software innovator for AI & HPC"
+website: "https://openchip.com"
+logo_url: /logos/openchip.png
+tagging:
+  match_case: true

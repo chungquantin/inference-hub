@@ -1,0 +1,18 @@
+slug: stable-diffusion-webui-forge
+name: "stable-diffusion-webui-forge"
+kinds: [open_source]
+website: "https://github.com/lllyasviel/stable-diffusion-webui-forge"
+links:
+  github: "https://github.com/lllyasviel/stable-diffusion-webui-forge"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: stable-diffusion-webui-forge
+    name: "stable-diffusion-webui-forge"
+    type: oss_project
+    github: lllyasviel/stable-diffusion-webui-forge
+    url: "https://github.com/lllyasviel/stable-diffusion-webui-forge"
+    metadata:
+      license: "AGPL-3.0"

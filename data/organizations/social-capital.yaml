@@ -1,0 +1,8 @@
+slug: social-capital
+name: "Social Capital"
+kinds: [investor]
+description: "At Social Capital, we make big bets on transformational ideas, technology, and people."
+website: "https://www.socialcapital.com"
+logo_url: /logos/social-capital.png
+tagging:
+  match_case: true

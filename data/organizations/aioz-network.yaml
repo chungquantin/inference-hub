@@ -1,0 +1,6 @@
+slug: aioz-network
+name: "AIOZ Network"
+kinds: [decentralized]
+website: "https://aioz.network"
+tagging:
+  match_case: true

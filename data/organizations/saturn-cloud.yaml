@@ -1,0 +1,8 @@
+slug: saturn-cloud
+name: "Saturn Cloud"
+kinds: [gpu_cloud]
+description: "Run Kimi K3, GLM-5.3, DeepSeek and other open models on dedicated GPUs, or bring your own model and agents. Tuned for your workload and backed by a contractual performance SLA."
+website: "https://saturncloud.io"
+logo_url: /logos/saturn-cloud.png
+tagging:
+  match_case: true

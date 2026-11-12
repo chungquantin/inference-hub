@@ -1,0 +1,6 @@
+slug: nlp-cloud
+name: "NLP Cloud"
+kinds: [inference_provider]
+website: "https://nlpcloud.com"
+tagging:
+  match_case: true

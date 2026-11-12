@@ -1,0 +1,9 @@
+slug: glama
+name: "Glama"
+kinds: [llm_gateway]
+description: "119,842 MCP servers, all scanned and scored. A superset of the official MCP Registry, testable in your browser."
+website: "https://glama.ai"
+logo_url: /logos/glama.svg
+tagging:
+  match_case: true
+  match_name: false

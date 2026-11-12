@@ -1,0 +1,9 @@
+slug: magic
+name: "Magic"
+kinds: [model_provider]
+description: "Magic is an AI company that is working toward building safe AGI to accelerate humanity’s progress on the world’s most important problems."
+website: "https://magic.dev"
+logo_url: /logos/magic.png
+tagging:
+  match_case: true
+  match_name: false

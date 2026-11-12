@@ -1,0 +1,20 @@
+slug: librechat-ai
+name: "LibreChat-AI"
+kinds: [open_source]
+description: "Every AI for Everyone"
+website: "https://librechat.ai"
+logo_url: /logos/librechat-ai.png
+links:
+  github: "https://github.com/LibreChat-AI"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: librechat
+    name: "LibreChat"
+    type: oss_project
+    github: LibreChat-AI/LibreChat
+    url: "https://github.com/LibreChat-AI/LibreChat"
+    metadata:
+      license: "MIT"

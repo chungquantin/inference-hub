@@ -1,0 +1,8 @@
+slug: salesforce-ventures
+name: "Salesforce Ventures"
+kinds: [investor]
+description: "Salesforce Ventures helps enterprising founders build companies that reinvent the way the world works."
+website: "https://salesforceventures.com"
+logo_url: /logos/salesforce-ventures.png
+tagging:
+  match_case: true

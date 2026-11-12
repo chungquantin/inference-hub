@@ -1,0 +1,8 @@
+slug: simplismart
+name: "Simplismart"
+kinds: [inference_provider]
+description: "Fine-tune and deploy LLMs using Simplismart's fastest inference engine. Connect with AWS, Azure, GCP, and more cloud providers for simple, scalable, cost-effective deployment."
+website: "https://simplismart.ai"
+logo_url: /logos/simplismart.png
+tagging:
+  match_case: true

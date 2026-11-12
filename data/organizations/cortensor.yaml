@@ -1,0 +1,7 @@
+slug: cortensor
+name: "Cortensor"
+kinds: [decentralized]
+description: "Cortensor brings together contributors and AI practitioners to advance decentralized AI. Our platform transforms idle capacity into valuable AI assets and offers scalable tools for improved operations, promoting a smarter, interconnected world."
+website: "https://cortensor.network"
+tagging:
+  match_case: true

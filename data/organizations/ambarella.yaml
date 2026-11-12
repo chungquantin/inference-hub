@@ -1,0 +1,8 @@
+slug: ambarella
+name: "Ambarella"
+kinds: [hardware]
+description: "Ambarella's advanced imaging solutions make cameras smarter by extracting valuable data from high-resolution video streams."
+website: "https://www.ambarella.com"
+logo_url: /logos/ambarella.svg
+tagging:
+  match_case: true

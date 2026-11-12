@@ -1,0 +1,9 @@
+slug: reflection-ai
+name: "Reflection AI"
+kinds: [model_provider]
+description: "Make intelligence open and accessible to all"
+website: "https://reflection.ai"
+logo_url: /logos/reflection-ai.svg
+tagging:
+  match_case: true
+  match_name: false

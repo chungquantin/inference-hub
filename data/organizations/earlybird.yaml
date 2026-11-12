@@ -1,0 +1,9 @@
+slug: earlybird
+name: "Earlybird"
+kinds: [investor]
+description: "Founded in 1997, Earlybird is a pan-European VC investor backing tech-enabled companies and investing in their growth and development. Funds include Earlybird, Earlybird Health, Growth Opportunities."
+website: "https://www.earlybird.com"
+logo_url: /logos/earlybird.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,8 @@
+slug: aurelio-labs
+name: "Aurelio Labs"
+kinds: [llm_gateway]
+description: "NLP, LLM, Vector Search - Consultancy and Development"
+website: "https://www.aurelio.ai"
+logo_url: /logos/aurelio-labs.png
+tagging:
+  match_case: true

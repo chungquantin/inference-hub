@@ -1,0 +1,20 @@
+slug: systran
+name: "SYSTRAN"
+kinds: [open_source]
+website: "http://www.systransoft.com"
+logo_url: /logos/systran.png
+links:
+  github: "https://github.com/SYSTRAN"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: faster-whisper
+    name: "faster-whisper"
+    type: oss_project
+    github: SYSTRAN/faster-whisper
+    tagline: "Faster Whisper transcription with CTranslate2"
+    url: "https://github.com/SYSTRAN/faster-whisper"
+    metadata:
+      license: "MIT"

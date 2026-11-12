@@ -1,0 +1,17 @@
+slug: tinygrad
+name: "tinygrad"
+kinds: [open_source]
+description: "Meet the new tinybox. Configure memory, storage, and GPUs for your own deep learning computer. From $7,000."
+website: "https://tinygrad.org"
+categories: [inference-engines]
+tagging:
+  match_case: true
+products:
+  - slug: tinygrad
+    name: "tinygrad"
+    type: oss_project
+    github: tinygrad/tinygrad
+    tagline: "You like pytorch? You like micrograd? You love tinygrad! ❤️"
+    url: "https://github.com/tinygrad/tinygrad"
+    metadata:
+      license: "MIT"

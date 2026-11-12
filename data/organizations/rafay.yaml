@@ -1,0 +1,8 @@
+slug: rafay
+name: "Rafay"
+kinds: [gpu_cloud]
+description: "Rafay turns GPU and CPU infrastructure into governed, self-service AI and cloud-native platforms for enterprises, neoclouds, and sovereign AI clouds."
+website: "https://rafay.co"
+logo_url: /logos/rafay.png
+tagging:
+  match_case: true

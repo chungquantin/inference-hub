@@ -13,3 +13,12 @@ feeds:
     name: "Portkey blog"
     url: "https://portkey.ai/blog/rss/"
     interval_minutes: 180
+products:
+  - slug: gateway
+    name: "gateway"
+    type: oss_project
+    github: Portkey-AI/gateway
+    tagline: "A blazing fast AI Gateway with integrated guardrails. Route to 1,600+ LLMs, 50+ AI Guardrails with 1 fast & friendly API."
+    url: "https://github.com/Portkey-AI/gateway"
+    metadata:
+      license: "MIT"

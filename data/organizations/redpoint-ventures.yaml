@@ -1,0 +1,8 @@
+slug: redpoint-ventures
+name: "Redpoint Ventures"
+kinds: [investor]
+description: "Redpoint partners with visionary entrepreneurs to create new markets & redefine existing ones. We invest in startups across seed, early & growth phases."
+website: "https://www.redpoint.com"
+logo_url: /logos/redpoint-ventures.png
+tagging:
+  match_case: true

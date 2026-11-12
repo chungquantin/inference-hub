@@ -1,0 +1,8 @@
+slug: core-scientific
+name: "Core Scientific"
+kinds: [gpu_cloud]
+description: "Grow your business faster with high-density computing solutions built to scale at Core Scientific. Talk to a data center expert today."
+website: "https://www.corescientific.com"
+logo_url: /logos/core-scientific.webp
+tagging:
+  match_case: true

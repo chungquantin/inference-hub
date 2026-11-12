@@ -1,0 +1,7 @@
+slug: preferred-networks
+name: "Preferred Networks"
+kinds: [model_provider]
+website: "https://www.preferred.jp"
+logo_url: /logos/preferred-networks.png
+tagging:
+  match_case: true

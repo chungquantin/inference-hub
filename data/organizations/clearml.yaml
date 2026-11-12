@@ -1,0 +1,9 @@
+slug: clearml
+name: "ClearML"
+kinds: [open_source]
+description: "Unlock enterprise-scale AI with ClearML’s AI Infrastructure Platform. Manage GPU clusters, streamline AI/ML workflows, and deploy GenAI models effortlessly. Try ClearML today!"
+website: "https://clear.ml"
+logo_url: /logos/clearml.png
+categories: [inference-engines]
+tagging:
+  match_case: true

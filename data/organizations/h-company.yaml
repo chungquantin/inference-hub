@@ -1,0 +1,8 @@
+slug: h-company
+name: "H Company"
+kinds: [model_provider]
+description: "H Company is an AI research lab and agentic platform that works across any system without rebuilding your stack."
+website: "https://www.hcompany.ai"
+logo_url: /logos/h-company.png
+tagging:
+  match_case: true

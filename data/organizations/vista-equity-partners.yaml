@@ -1,0 +1,8 @@
+slug: vista-equity-partners
+name: "Vista Equity Partners"
+kinds: [investor]
+description: "Vista is a preeminent technology investor, specializing in enterprise AI and software, with over $100 billion in assets under management."
+website: "https://www.vistaequitypartners.com"
+logo_url: /logos/vista-equity-partners.png
+tagging:
+  match_case: true

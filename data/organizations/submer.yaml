@@ -1,0 +1,6 @@
+slug: submer
+name: "Submer"
+kinds: [hardware]
+website: "https://submer.com"
+tagging:
+  match_case: true

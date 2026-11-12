@@ -1,0 +1,6 @@
+slug: idg-capital
+name: "IDG Capital"
+kinds: [investor]
+website: "https://www.idgcapital.com"
+tagging:
+  match_case: true

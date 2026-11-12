@@ -1,0 +1,8 @@
+slug: inference-labs
+name: "Inference Labs"
+kinds: [decentralized]
+description: "The accountability layer for autonomy, ensuring every agent, decision, and transaction is provable, private, and compliant by design."
+website: "https://inferencelabs.com"
+logo_url: /logos/inference-labs.png
+tagging:
+  match_case: true

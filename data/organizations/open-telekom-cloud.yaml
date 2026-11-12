@@ -1,0 +1,9 @@
+slug: open-telekom-cloud
+name: "Open Telekom Cloud"
+kinds: [gpu_cloud]
+description: "Die T Cloud Public ist die Weiterentwicklung der Open Telekom Cloud. Europäische, DSGVO-konforme Public Cloud der Telekom – jetzt mit 250 € Guthaben testen."
+website: "https://www.t-cloud-public.com"
+logo_url: /logos/open-telekom-cloud.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

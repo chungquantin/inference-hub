@@ -1,0 +1,8 @@
+slug: inception-labs
+name: "Inception Labs"
+kinds: [model_provider]
+description: "We are leveraging diffusion technology to develop a new generation of LLMs. Our dLLMs are much faster and more efficient than traditional autoregressive LLMs."
+website: "https://www.inceptionlabs.ai"
+logo_url: /logos/inception-labs.png
+tagging:
+  match_case: true

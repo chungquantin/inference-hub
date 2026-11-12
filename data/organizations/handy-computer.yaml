@@ -1,0 +1,20 @@
+slug: handy-computer
+name: "handy-computer"
+kinds: [open_source]
+website: "https://github.com/handy-computer"
+logo_url: /logos/handy-computer.png
+links:
+  github: "https://github.com/handy-computer"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: transcribe-cpp
+    name: "transcribe.cpp"
+    type: oss_project
+    github: handy-computer/transcribe.cpp
+    tagline: "ggml speech-to-text inference for 16+ model families"
+    url: "https://github.com/handy-computer/transcribe.cpp"
+    metadata:
+      license: "MIT"

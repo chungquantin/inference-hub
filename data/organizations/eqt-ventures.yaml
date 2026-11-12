@@ -1,0 +1,8 @@
+slug: eqt-ventures
+name: "EQT Ventures"
+kinds: [investor]
+description: "EQT Ventures partner with founders building Generation-Defining Companies (GDCs) – the ones who dream big and aim to shape the next decade."
+website: "https://eqtventures.com"
+logo_url: /logos/eqt-ventures.png
+tagging:
+  match_case: true

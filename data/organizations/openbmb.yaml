@@ -1,0 +1,21 @@
+slug: openbmb
+name: "OpenBMB"
+kinds: [open_source]
+description: "OpenBMB (Open Lab for Big Model Base) aims to build foundation models and systems towards AGI."
+website: "https://www.openbmb.cn"
+logo_url: /logos/openbmb.png
+links:
+  github: "https://github.com/OpenBMB"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: bminf
+    name: "BMInf"
+    type: oss_project
+    github: OpenBMB/BMInf
+    tagline: "Efficient Inference for Big Models"
+    url: "https://github.com/OpenBMB/BMInf"
+    metadata:
+      license: "Apache-2.0"

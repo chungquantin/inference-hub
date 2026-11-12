@@ -1,0 +1,9 @@
+slug: zenml
+name: "ZenML"
+kinds: [open_source]
+description: "An always-on AI engineering team that watches your agents, finds what’s broken, and proves the fix works. Next, it will fine-tune a cheaper open model on your traces. It works on top of open-source Kitaru and ZenML."
+website: "https://www.zenml.io"
+logo_url: /logos/zenml.svg
+categories: [inference-engines]
+tagging:
+  match_case: true

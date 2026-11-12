@@ -1,0 +1,9 @@
+slug: mayfield
+name: "Mayfield"
+kinds: [investor]
+description: "Mayfield is an early-stage VC investing $3 billion in AI companies, with 70% of investments made at inception. 120 IPOs and 225+ M&As."
+website: "https://www.mayfield.com"
+logo_url: /logos/mayfield.png
+tagging:
+  match_case: true
+  match_name: false

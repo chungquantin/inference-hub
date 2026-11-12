@@ -1,0 +1,8 @@
+slug: gloo-ai-gateway
+name: "Gloo AI Gateway"
+kinds: [llm_gateway]
+description: "Solo.io builds agentgateway, the gateway for API and AI agent traffic, plus Istio Ambient service mesh, kagent, and agentregistry for production AI."
+website: "https://www.solo.io"
+logo_url: /logos/gloo-ai-gateway.png
+tagging:
+  match_case: true

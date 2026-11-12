@@ -1,0 +1,8 @@
+slug: lg-ai-research
+name: "LG AI Research"
+kinds: [model_provider]
+description: "Advancing AI for a better Life.The potential of AI goes beyond everyday life. It can affect industry, move the economy, and even save the planet.LG AI Research will help you harness the power of AI."
+website: "https://www.lgresearch.ai"
+logo_url: /logos/lg-ai-research.png
+tagging:
+  match_case: true

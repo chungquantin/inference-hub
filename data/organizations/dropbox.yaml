@@ -1,0 +1,20 @@
+slug: dropbox
+name: "Dropbox"
+kinds: [open_source]
+website: "https://dropbox.com/"
+logo_url: /logos/dropbox.png
+links:
+  github: "https://github.com/dropbox"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: hqq
+    name: "hqq"
+    type: oss_project
+    github: dropbox/hqq
+    tagline: "Official implementation of Half-Quadratic Quantization (HQQ)"
+    url: "https://github.com/dropbox/hqq"
+    metadata:
+      license: "Apache-2.0"

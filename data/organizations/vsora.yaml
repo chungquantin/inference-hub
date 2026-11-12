@@ -1,0 +1,8 @@
+slug: vsora
+name: "VSORA"
+kinds: [hardware]
+description: "VSORA designs inference-native AI chips. Jotunn8 delivers high-throughput, low-latency inference with better unit economics for cloud and data center AI."
+website: "https://vsora.com"
+logo_url: /logos/vsora.png
+tagging:
+  match_case: true

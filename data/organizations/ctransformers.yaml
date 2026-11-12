@@ -1,0 +1,19 @@
+slug: ctransformers
+name: "ctransformers"
+kinds: [open_source]
+website: "https://github.com/marella/ctransformers"
+links:
+  github: "https://github.com/marella/ctransformers"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ctransformers
+    name: "ctransformers"
+    type: oss_project
+    github: marella/ctransformers
+    tagline: "Python bindings for the Transformer models implemented in C/C++ using GGML library."
+    url: "https://github.com/marella/ctransformers"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,8 @@
+slug: coolit-systems
+name: "CoolIT Systems"
+kinds: [hardware]
+description: "Engineered for tomorrow’s workloads, CoolIT liquid cooling powers HPC, AI, and enterprise systems with efficient CDUs, cold plates and heat exchangers."
+website: "https://www.coolitsystems.com"
+logo_url: /logos/coolit-systems.svg
+tagging:
+  match_case: true

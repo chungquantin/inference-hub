@@ -1,0 +1,8 @@
+slug: resemble-ai
+name: "Resemble AI"
+kinds: [model_provider]
+description: "Resemble AI powers real-time deepfake detection for enterprise. Verify media and satisfy AI content compliance standards. On-prem or cloud, built to scale."
+website: "https://www.resemble.ai"
+logo_url: /logos/resemble-ai.png
+tagging:
+  match_case: true

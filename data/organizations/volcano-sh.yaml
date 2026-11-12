@@ -1,0 +1,21 @@
+slug: volcano-sh
+name: "Volcano"
+kinds: [open_source]
+description: "A Cloud Native Batch System"
+website: "http://volcano.sh"
+logo_url: /logos/volcano-sh.png
+links:
+  github: "https://github.com/volcano-sh"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: volcano
+    name: "volcano"
+    type: oss_project
+    github: volcano-sh/volcano
+    tagline: "A Cloud Native Batch System (Project under CNCF)"
+    url: "https://github.com/volcano-sh/volcano"
+    metadata:
+      license: "Apache-2.0"

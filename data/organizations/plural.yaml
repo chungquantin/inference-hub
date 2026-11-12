@@ -1,0 +1,9 @@
+slug: plural
+name: "Plural"
+kinds: [investor]
+description: "Plural is a venture community of regulatory experts, operators, and investors dedicated to providing early-stage companies with the investment and intellectual capital they need to build the future of finance."
+website: "https://plural.vc"
+logo_url: /logos/plural.png
+tagging:
+  match_case: true
+  match_name: false

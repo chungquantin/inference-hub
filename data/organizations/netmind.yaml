@@ -1,0 +1,8 @@
+slug: netmind
+name: "NetMind"
+kinds: [inference_provider]
+description: "Build and run AI with NetMind: access 100+ models through one API, use GPU compute, and build AI agents and tailored business solutions."
+website: "https://www.netmind.ai"
+logo_url: /logos/netmind.png
+tagging:
+  match_case: true

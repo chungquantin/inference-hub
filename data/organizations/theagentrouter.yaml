@@ -1,0 +1,21 @@
+slug: theagentrouter
+name: "Agent Router"
+kinds: [open_source]
+description: "The control plane for agent traffic."
+website: "https://github.com/theagentrouter"
+logo_url: /logos/theagentrouter.png
+links:
+  github: "https://github.com/theagentrouter"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: agent-router
+    name: "agent-router"
+    type: oss_project
+    github: theagentrouter/agent-router
+    tagline: "Manages Unified Access to Generative AI Services built on Envoy Gateway"
+    url: "https://github.com/theagentrouter/agent-router"
+    metadata:
+      license: "Apache-2.0"

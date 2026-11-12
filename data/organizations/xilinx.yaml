@@ -1,0 +1,27 @@
+slug: xilinx
+name: "Xilinx"
+kinds: [open_source]
+description: "GitHub.Com/Xilinx/"
+website: "https://www.amd.com"
+logo_url: /logos/xilinx.png
+links:
+  github: "https://github.com/Xilinx"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: brevitas
+    name: "brevitas"
+    type: oss_project
+    github: Xilinx/brevitas
+    tagline: "Brevitas: neural network quantization in PyTorch"
+    url: "https://github.com/Xilinx/brevitas"
+  - slug: finn
+    name: "finn"
+    type: oss_project
+    github: Xilinx/finn
+    tagline: "Dataflow compiler for QNN inference on FPGAs"
+    url: "https://github.com/Xilinx/finn"
+    metadata:
+      license: "BSD-3-Clause"

@@ -1,0 +1,9 @@
+slug: livebench
+name: "LiveBench"
+kinds: [llmops]
+description: "LiveBench 2.0 — a challenging, contamination-free long-horizon AI benchmark. Models do real work (decks, research reports, bug fixes, apps that run for hours) and we grade what they hand back."
+website: "https://livebench.ai"
+logo_url: /logos/livebench.png
+categories: [observability]
+tagging:
+  match_case: true

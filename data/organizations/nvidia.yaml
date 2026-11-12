@@ -112,3 +112,32 @@ products:
     url: "https://github.com/ai-dynamo/aiperf"
     metadata:
       license: "Apache-2.0"
+  - slug: fastertransformer
+    name: "FasterTransformer"
+    type: oss_project
+    github: NVIDIA/FasterTransformer
+    tagline: "Transformer related optimization, including BERT, GPT"
+    url: "https://github.com/NVIDIA/FasterTransformer"
+    metadata:
+      license: "Apache-2.0"
+  - slug: transformerengine
+    name: "TransformerEngine"
+    type: oss_project
+    github: NVIDIA/TransformerEngine
+    url: "https://github.com/NVIDIA/TransformerEngine"
+    metadata:
+      license: "Apache-2.0"
+  - slug: cutlass
+    name: "cutlass"
+    type: oss_project
+    github: NVIDIA/cutlass
+    tagline: "CUDA Templates and Python DSLs for High-Performance Linear Algebra"
+    url: "https://github.com/NVIDIA/cutlass"
+  - slug: model-analyzer
+    name: "model_analyzer"
+    type: oss_project
+    github: triton-inference-server/model_analyzer
+    tagline: "Triton Model Analyzer is a CLI tool to help with better understanding of the compute and memory requirements of the Triton Inference Server models."
+    url: "https://github.com/triton-inference-server/model_analyzer"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,19 @@
+slug: f5-tts
+name: "F5-TTS"
+kinds: [open_source]
+website: "https://arxiv.org/abs/2410.06885"
+links:
+  github: "https://github.com/SWivid/F5-TTS"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: f5-tts
+    name: "F5-TTS"
+    type: oss_project
+    github: SWivid/F5-TTS
+    tagline: "Official code for \"F5-TTS: A Fairytaler that Fakes Fluent and Faithful Speech with Flow Matching\""
+    url: "https://github.com/SWivid/F5-TTS"
+    metadata:
+      license: "MIT"

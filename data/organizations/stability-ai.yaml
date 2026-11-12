@@ -1,0 +1,8 @@
+slug: stability-ai
+name: "Stability AI"
+kinds: [model_provider]
+description: "Stability AI is the enterprise-ready creative partner for teams and creators, delivering professional-grade generative AI tools and solutions for content production at scale."
+website: "https://stability.ai"
+logo_url: /logos/stability-ai.webp
+tagging:
+  match_case: true

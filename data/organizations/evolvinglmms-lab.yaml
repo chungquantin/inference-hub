@@ -1,0 +1,19 @@
+slug: evolvinglmms-lab
+name: "LMMs-Lab"
+kinds: [open_source]
+description: "Multimodality is good."
+website: "https://github.com/EvolvingLMMs-Lab"
+logo_url: /logos/evolvinglmms-lab.png
+links:
+  github: "https://github.com/EvolvingLMMs-Lab"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lmms-eval
+    name: "lmms-eval"
+    type: oss_project
+    github: EvolvingLMMs-Lab/lmms-eval
+    tagline: "One-for-All Multimodal Evaluation Toolkit Across Text, Image, Video, and Audio Tasks"
+    url: "https://github.com/EvolvingLMMs-Lab/lmms-eval"

@@ -1,0 +1,7 @@
+slug: cleura
+name: "Cleura"
+kinds: [gpu_cloud]
+website: "https://cleura.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

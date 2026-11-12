@@ -1,0 +1,8 @@
+slug: nebula-block
+name: "Nebula Block"
+kinds: [inference_provider]
+description: "Sovereign Agentic Cloud — Autonomous AI agents on Canadian sovereign infrastructure. Built for regulated industries that can't use US cloud. SOC 2 certified. Loi 25 & PIPEDA compliant."
+website: "https://www.nebulablock.com"
+logo_url: /logos/nebula-block.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: m12
+name: "M12"
+kinds: [investor]
+description: "M12 is Microsoft’s venture capital fund. We invest in early-stage technology companies disrupting the enterprise."
+website: "https://m12.vc"
+logo_url: /logos/m12.svg
+tagging:
+  match_case: true

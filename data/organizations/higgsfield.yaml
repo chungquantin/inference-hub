@@ -1,0 +1,9 @@
+slug: higgsfield
+name: "Higgsfield"
+kinds: [model_provider]
+description: "Create images, videos, and voice content with Higgsfield AI from text prompts or references. Edit and upscale media, automate creative workflows with its AI agent, and generate content on web and mobile."
+website: "https://higgsfield.ai"
+logo_url: /logos/higgsfield.png
+tagging:
+  match_case: true
+  match_name: false

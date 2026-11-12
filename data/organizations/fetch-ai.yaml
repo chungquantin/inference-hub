@@ -1,0 +1,8 @@
+slug: fetch-ai
+name: "Fetch.ai"
+kinds: [decentralized]
+description: "The Complete Ecosystem for the Agentic Economy."
+website: "https://fetch.ai"
+logo_url: /logos/fetch-ai.png
+tagging:
+  match_case: true

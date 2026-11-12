@@ -1,0 +1,6 @@
+slug: mbzuai
+name: "MBZUAI"
+kinds: [model_provider]
+website: "https://mbzuai.ac.ae"
+tagging:
+  match_case: true

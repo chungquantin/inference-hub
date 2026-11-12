@@ -1,0 +1,21 @@
+slug: thu-pacman
+name: "PACMAN Group, Tsinghua University"
+kinds: [open_source]
+description: "Parallel Architecture & Compiler technology of Mobile, Accelerated, and Networked systems"
+website: "https://pacman.cs.tsinghua.edu.cn"
+logo_url: /logos/thu-pacman.png
+links:
+  github: "https://github.com/thu-pacman"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: chitu
+    name: "chitu"
+    type: oss_project
+    github: thu-pacman/chitu
+    tagline: "High-performance inference framework for large language models, focusing on efficiency, flexibility, and availability."
+    url: "https://github.com/thu-pacman/chitu"
+    metadata:
+      license: "Apache-2.0"

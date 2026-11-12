@@ -1,0 +1,9 @@
+slug: sesame
+name: "Sesame"
+kinds: [model_provider]
+description: "Intelligence with a point of view. Sesame voice agents are everyday collaborators who help you do more, talk things through, and follow your curiosity. Available on iOS and Android, coming soon to eyewear."
+website: "https://www.sesame.com"
+logo_url: /logos/sesame.svg
+tagging:
+  match_case: true
+  match_name: false

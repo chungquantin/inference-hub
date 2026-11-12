@@ -1,0 +1,8 @@
+slug: traefik-labs
+name: "Traefik Labs"
+kinds: [llm_gateway]
+description: "Eliminate fragmentation and unify governance for any workload, anywhere. Traefik is sovereign-by-design, infra-as-code, composable, and memory safe."
+website: "https://traefik.io"
+logo_url: /logos/traefik-labs.svg
+tagging:
+  match_case: true

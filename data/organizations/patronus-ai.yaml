@@ -1,0 +1,9 @@
+slug: patronus-ai
+name: "Patronus AI"
+kinds: [llmops]
+description: "Patronus AI is a behavioral research lab for AI that studies where models fail and builds training data and simulated environments to improve them."
+website: "https://www.patronus.ai"
+logo_url: /logos/patronus-ai.png
+categories: [evals-benchmarks]
+tagging:
+  match_case: true

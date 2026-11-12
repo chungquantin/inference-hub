@@ -1,0 +1,8 @@
+slug: pipeshift
+name: "Pipeshift"
+kinds: [inference_provider]
+description: "Pipeshift delivers the production infrastructure, tooling, and expertise needed to take the best AI products and agents to market—fast. Access bleeding-edge performance research and inference orchestration for real-time workloads across any cloud/region."
+website: "https://pipeshift.com"
+logo_url: /logos/pipeshift.png
+tagging:
+  match_case: true

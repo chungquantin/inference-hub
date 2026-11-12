@@ -1,0 +1,7 @@
+slug: t-head
+name: "T-Head"
+kinds: [hardware]
+website: "https://www.t-head.cn"
+logo_url: /logos/t-head.png
+tagging:
+  match_case: true

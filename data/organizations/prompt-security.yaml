@@ -1,0 +1,9 @@
+slug: prompt-security
+name: "Prompt Security"
+kinds: [llmops]
+description: "Comprehensive AI security resources for practitioners. Open-source tools, research, analysis, and guidance to understand and respond to AI threats."
+website: "https://www.prompt.security"
+logo_url: /logos/prompt-security.png
+categories: [guardrails]
+tagging:
+  match_case: true

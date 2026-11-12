@@ -1,0 +1,8 @@
+slug: daphni
+name: "Daphni"
+kinds: [investor]
+description: "daphni is a venture capital based in Paris, firm investing in tech startups with a European DNA and a strong international ambition."
+website: "https://www.daphni.com"
+logo_url: /logos/daphni.png
+tagging:
+  match_case: true

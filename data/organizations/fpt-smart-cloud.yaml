@@ -1,0 +1,8 @@
+slug: fpt-smart-cloud
+name: "FPT Smart Cloud"
+kinds: [gpu_cloud]
+website: "https://fptcloud.com"
+logo_url: /logos/fpt-smart-cloud.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: vana
+name: "Vana"
+kinds: [decentralized]
+description: "Vana is open data infrastructure for human-grounded AI. Human data moves under the permission of the person it belongs to, with a record."
+website: "https://www.vana.org"
+logo_url: /logos/vana.svg
+tagging:
+  match_case: true
+  match_name: false

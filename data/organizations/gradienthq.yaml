@@ -1,0 +1,20 @@
+slug: gradienthq
+name: "GradientHQ"
+kinds: [open_source]
+website: "https://github.com/GradientHQ"
+logo_url: /logos/gradienthq.png
+links:
+  github: "https://github.com/GradientHQ"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: parallax
+    name: "parallax"
+    type: oss_project
+    github: GradientHQ/parallax
+    tagline: "Parallax is a distributed model serving framework that lets you build your own AI cluster anywhere"
+    url: "https://github.com/GradientHQ/parallax"
+    metadata:
+      license: "Apache-2.0"

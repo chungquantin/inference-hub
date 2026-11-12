@@ -1,0 +1,8 @@
+slug: neurophos
+name: "Neurophos"
+kinds: [hardware]
+description: "Neurophos builds photonic AI processors — the T100 OPU delivers exaflop-scale inference at a fraction of GPU power."
+website: "https://www.neurophos.com"
+logo_url: /logos/neurophos.svg
+tagging:
+  match_case: true

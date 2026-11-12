@@ -1,0 +1,8 @@
+slug: exabits
+name: "Exabits"
+kinds: [decentralized]
+description: "Exabits’ network of GPUs, range from consumer grade to H100s and H200s, NVIDIA DGX B200, offers the most cost-effective compute because we are obsessed with innovating performance.builds a sustainable and high-quality web3.0 computing infrastructure"
+website: "https://www.exabits.ai"
+logo_url: /logos/exabits.png
+tagging:
+  match_case: true

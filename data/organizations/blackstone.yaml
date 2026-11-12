@@ -1,0 +1,7 @@
+slug: blackstone
+name: "Blackstone"
+kinds: [investor]
+website: "https://www.blackstone.com"
+tagging:
+  match_case: true
+  match_name: false

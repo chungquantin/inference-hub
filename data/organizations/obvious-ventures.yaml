@@ -1,0 +1,7 @@
+slug: obvious-ventures
+name: "Obvious Ventures"
+kinds: [investor]
+website: "https://obvious.com"
+logo_url: /logos/obvious-ventures.webp
+tagging:
+  match_case: true

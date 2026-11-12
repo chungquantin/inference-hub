@@ -1,0 +1,9 @@
+slug: suno
+name: "Suno"
+kinds: [model_provider]
+description: "Create stunning original music for free in seconds using our AI generator. Make your own masterpieces, share with friends, and discover music from artists worldwide."
+website: "https://suno.com"
+logo_url: /logos/suno.png
+tagging:
+  match_case: true
+  match_name: false

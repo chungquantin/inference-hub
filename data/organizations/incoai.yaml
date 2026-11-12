@@ -1,0 +1,20 @@
+slug: incoai
+name: "Inco AI"
+kinds: [open_source]
+website: "https://inco.ai/"
+logo_url: /logos/incoai.png
+links:
+  github: "https://github.com/incoai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: splash
+    name: "splash"
+    type: oss_project
+    github: incoai/splash
+    tagline: "A local inference engine for Apple silicon, built around the model."
+    url: "https://github.com/incoai/splash"
+    metadata:
+      license: "Apache-2.0"

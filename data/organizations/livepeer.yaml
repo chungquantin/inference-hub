@@ -1,0 +1,9 @@
+slug: livepeer
+name: "Livepeer"
+kinds: [decentralized]
+description: "Run AI video and image workloads on Livepeer — the open inference network."
+website: "https://livepeer.org"
+logo_url: /logos/livepeer.svg
+tagging:
+  match_case: true
+  match_name: false

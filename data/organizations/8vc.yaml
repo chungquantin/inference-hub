@@ -1,0 +1,8 @@
+slug: 8vc
+name: "8VC"
+kinds: [investor]
+description: "8VC is a technology and bio-sciences investment firm which invests in the world’s most ambitious and innovative companies."
+website: "https://www.8vc.com"
+logo_url: /logos/8vc.png
+tagging:
+  match_case: true

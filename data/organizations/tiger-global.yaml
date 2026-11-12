@@ -1,0 +1,8 @@
+slug: tiger-global
+name: "Tiger Global"
+kinds: [investor]
+description: "Tiger Global is a research-driven investment firm with 25+ years of experience investing in the defining companies of the future."
+website: "https://www.tigerglobal.com"
+logo_url: /logos/tiger-global.png
+tagging:
+  match_case: true

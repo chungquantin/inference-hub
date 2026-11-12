@@ -1,0 +1,8 @@
+slug: kueue
+name: "Kueue"
+kinds: [open_source]
+description: "Kueue is a cloud-native job queueing system for batch, HPC, AI/ML, and similar applications in a Kubernetes cluster"
+website: "https://kueue.sigs.k8s.io"
+categories: [inference-engines]
+tagging:
+  match_case: true

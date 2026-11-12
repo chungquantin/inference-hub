@@ -1,0 +1,9 @@
+slug: jax
+name: "JAX"
+kinds: [open_source]
+website: "https://jax.dev"
+logo_url: /logos/jax.png
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false

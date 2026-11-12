@@ -1,0 +1,20 @@
+slug: ogx-ai
+name: "ogx-ai"
+kinds: [open_source]
+website: "https://github.com/ogx-ai"
+logo_url: /logos/ogx-ai.png
+links:
+  github: "https://github.com/ogx-ai"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ogx
+    name: "ogx"
+    type: oss_project
+    github: ogx-ai/ogx
+    tagline: "Open GenAI Stack"
+    url: "https://github.com/ogx-ai/ogx"
+    metadata:
+      license: "MIT"

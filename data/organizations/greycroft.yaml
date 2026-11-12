@@ -1,0 +1,9 @@
+slug: greycroft
+name: "Greycroft"
+kinds: [investor]
+description: "Greycroft partners with bold founders in AI, software, sustainability, and consumer brands to create lasting impact."
+website: "https://www.greycroft.com"
+logo_url: /logos/greycroft.webp
+tagging:
+  match_case: true
+  match_name: false

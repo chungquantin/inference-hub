@@ -1,0 +1,20 @@
+slug: xllm-ai
+name: "xLLM-AI"
+kinds: [open_source]
+website: "https://xllm-ai.com"
+logo_url: /logos/xllm-ai.png
+links:
+  github: "https://github.com/xLLM-AI"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: xllm
+    name: "xllm"
+    type: oss_project
+    github: xLLM-AI/xllm
+    tagline: "A high-performance inference engine for LLM, VLM and DiT models, optimized for diverse AI accelerators. It is hosted in OpenAtom Foundation."
+    url: "https://github.com/xLLM-AI/xllm"
+    metadata:
+      license: "Apache-2.0"

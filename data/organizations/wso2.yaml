@@ -1,0 +1,6 @@
+slug: wso2
+name: "WSO2"
+kinds: [llm_gateway]
+website: "https://wso2.com"
+tagging:
+  match_case: true

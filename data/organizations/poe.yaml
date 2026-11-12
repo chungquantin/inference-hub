@@ -1,0 +1,8 @@
+slug: poe
+name: "Poe"
+kinds: [llm_gateway]
+website: "https://poe.com"
+logo_url: /logos/poe.png
+tagging:
+  match_case: true
+  match_name: false

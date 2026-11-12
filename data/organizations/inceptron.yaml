@@ -1,0 +1,8 @@
+slug: inceptron
+name: "Inceptron"
+kinds: [inference_provider]
+description: "Run and optimize LLMs on Inceptron’s compiler-accelerated platform. Launch serverless endpoints, use batched inference for throughput, and tap elastic GPUs across clouds. Bring your own model or our library. ISO 27001 certified and GDPR compliant."
+website: "https://inceptron.io"
+logo_url: /logos/inceptron.svg
+tagging:
+  match_case: true

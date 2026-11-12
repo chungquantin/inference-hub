@@ -1,0 +1,8 @@
+slug: scala-data-centers
+name: "Scala Data Centers"
+kinds: [gpu_cloud]
+website: "https://scaladatacenters.com"
+logo_url: /logos/scala-data-centers.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: q-ant
+name: "Q.ANT"
+kinds: [hardware]
+description: "Q.ANT builds photonic processors that compute with light: the Native Processing Unit, the Native Processing Server and an SDK for energy-efficient AI and HPC."
+website: "https://qant.com"
+logo_url: /logos/q-ant.svg
+tagging:
+  match_case: true

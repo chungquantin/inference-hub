@@ -1,0 +1,8 @@
+slug: massed-compute
+name: "Massed Compute"
+kinds: [gpu_cloud]
+description: "On-demand NVIDIA cloud GPUs from B300 to A30, pre-installed CUDA, billed by the hour. No contracts, no upsells. Deploy your AI workload in minutes."
+website: "https://massedcompute.com"
+logo_url: /logos/massed-compute.png
+tagging:
+  match_case: true

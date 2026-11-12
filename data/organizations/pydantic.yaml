@@ -1,0 +1,8 @@
+slug: pydantic
+name: "Pydantic"
+kinds: [llm_gateway]
+description: "Pydantic is the AI engineering stack for teams building with AI. Observe with Logfire, evaluate with Pydantic Evals, build type-safe agents with Pydantic AI, and track LLM costs with AI Gateway."
+website: "https://pydantic.dev"
+logo_url: /logos/pydantic.svg
+tagging:
+  match_case: true

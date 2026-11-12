@@ -1,0 +1,19 @@
+slug: enterpilot
+name: "enterpilot"
+kinds: [open_source]
+website: "https://enterpilot.io"
+logo_url: /logos/enterpilot.png
+links:
+  github: "https://github.com/ENTERPILOT"
+categories: [guardrails]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gomodel
+    name: "GoModel"
+    type: oss_project
+    github: ENTERPILOT/GoModel
+    url: "https://github.com/ENTERPILOT/GoModel"
+    metadata:
+      license: "MIT"

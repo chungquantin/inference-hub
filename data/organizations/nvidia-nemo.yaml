@@ -1,0 +1,20 @@
+slug: nvidia-nemo
+name: "NVIDIA-NeMo"
+kinds: [open_source]
+website: "https://nvidia.com/"
+logo_url: /logos/nvidia-nemo.png
+links:
+  github: "https://github.com/NVIDIA-NeMo"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: speech
+    name: "Speech"
+    type: oss_project
+    github: NVIDIA-NeMo/Speech
+    tagline: "A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)"
+    url: "https://github.com/NVIDIA-NeMo/Speech"
+    metadata:
+      license: "Apache-2.0"

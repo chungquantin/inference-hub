@@ -24,3 +24,19 @@ products:
     url: "https://github.com/Dao-AILab/flash-attention"
     metadata:
       license: "BSD-3-Clause"
+  - slug: causal-conv1d
+    name: "causal-conv1d"
+    type: oss_project
+    github: Dao-AILab/causal-conv1d
+    tagline: "Causal depthwise conv1d in CUDA, with a PyTorch interface"
+    url: "https://github.com/Dao-AILab/causal-conv1d"
+    metadata:
+      license: "BSD-3-Clause"
+  - slug: quack
+    name: "quack"
+    type: oss_project
+    github: Dao-AILab/quack
+    tagline: "A Quirky Assortment of CuTe Kernels"
+    url: "https://github.com/Dao-AILab/quack"
+    metadata:
+      license: "Apache-2.0"

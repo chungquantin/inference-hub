@@ -1,0 +1,9 @@
+slug: flexgen
+name: "FlexGen"
+kinds: [open_source]
+description: "Running large language models on a single GPU for throughput-oriented scenarios. - FMInference/FlexLLMGen"
+website: "https://github.com/FMInference/FlexLLMGen"
+logo_url: /logos/flexgen.png
+categories: [inference-engines]
+tagging:
+  match_case: true

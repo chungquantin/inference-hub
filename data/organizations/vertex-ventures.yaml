@@ -1,0 +1,7 @@
+slug: vertex-ventures
+name: "Vertex Ventures"
+kinds: [investor]
+website: "https://www.vertexventures.sg"
+logo_url: /logos/vertex-ventures.png
+tagging:
+  match_case: true

@@ -1,0 +1,21 @@
+slug: withcatai
+name: "Catai"
+kinds: [open_source]
+description: "Run AI models locally on your machine with Node.js"
+website: "https://withcat.ai"
+logo_url: /logos/withcatai.jpg
+links:
+  github: "https://github.com/withcatai"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: node-llama-cpp
+    name: "node-llama-cpp"
+    type: oss_project
+    github: withcatai/node-llama-cpp
+    tagline: "Run AI models locally on your machine with node.js bindings for llama.cpp. Enforce a JSON schema on the model output on the generation level"
+    url: "https://github.com/withcatai/node-llama-cpp"
+    metadata:
+      license: "MIT"

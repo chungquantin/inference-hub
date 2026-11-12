@@ -1,0 +1,7 @@
+slug: dst-global
+name: "DST Global"
+kinds: [investor]
+website: "https://www.dst-global.com"
+logo_url: /logos/dst-global.png
+tagging:
+  match_case: true

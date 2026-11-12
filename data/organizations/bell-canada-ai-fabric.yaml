@@ -1,0 +1,8 @@
+slug: bell-canada-ai-fabric
+name: "Bell Canada AI Fabric"
+kinds: [gpu_cloud]
+website: "https://www.bell.ca"
+logo_url: /logos/bell-canada-ai-fabric.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

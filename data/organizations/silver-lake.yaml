@@ -1,0 +1,8 @@
+slug: silver-lake
+name: "Silver Lake"
+kinds: [investor]
+description: "The global leader in technology investing"
+website: "https://www.silverlake.com"
+logo_url: /logos/silver-lake.svg
+tagging:
+  match_case: true

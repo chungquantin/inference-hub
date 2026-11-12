@@ -1,0 +1,8 @@
+slug: gravitee
+name: "Gravitee"
+kinds: [llm_gateway]
+description: "Gravitee is the AI Agent Management platform, securing, observing, and governing every AI agent, API, and event interaction at enterprise scale."
+website: "https://www.gravitee.io"
+logo_url: /logos/gravitee.svg
+tagging:
+  match_case: true

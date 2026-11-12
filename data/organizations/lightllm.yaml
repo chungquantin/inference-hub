@@ -1,0 +1,9 @@
+slug: lightllm
+name: "LightLLM"
+kinds: [open_source]
+description: "LightLLM is a Python-based LLM (Large Language Model) inference and serving framework, notable for its lightweight design, easy scalability, and high-speed performance. - ModelTC/LightLLM"
+website: "https://github.com/ModelTC/lightllm"
+logo_url: /logos/lightllm.png
+categories: [inference-engines]
+tagging:
+  match_case: true

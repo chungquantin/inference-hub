@@ -1,0 +1,8 @@
+slug: northflank
+name: "Northflank"
+kinds: [gpu_cloud]
+description: "The execution layer for a world where software builds and operates itself. Run AI agents and everything they generate."
+website: "https://northflank.com"
+logo_url: /logos/northflank.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: aimlapi
+name: "AIMLAPI"
+kinds: [llm_gateway]
+description: "Access AI models for text, images, video and audio, plus agent tools through one API. Connect with MCP and manage usage under one bill."
+website: "https://aimlapi.com"
+logo_url: /logos/aimlapi.svg
+tagging:
+  match_case: true

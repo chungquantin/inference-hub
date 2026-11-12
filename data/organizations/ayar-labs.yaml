@@ -1,0 +1,9 @@
+slug: ayar-labs
+name: "Ayar Labs"
+kinds: [hardware]
+description: "Ayar Labs delivers co-packaged optics for AI scale-up to enable next-generation hyperscale AI infrastructure."
+website: "https://ayarlabs.com"
+logo_url: /logos/ayar-labs.png
+tagging:
+  match_case: true
+  match_name: false

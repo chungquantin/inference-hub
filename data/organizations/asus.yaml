@@ -1,0 +1,8 @@
+slug: asus
+name: "ASUS"
+kinds: [hardware]
+description: "Driven by innovation & committed to quality, ASUS has a wide selection of best in class products. Find & buy a laptop, phone, router, monitor, motherboard & more"
+website: "https://www.asus.com"
+logo_url: /logos/asus.png
+tagging:
+  match_case: true

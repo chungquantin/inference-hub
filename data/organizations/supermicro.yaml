@@ -1,0 +1,6 @@
+slug: supermicro
+name: "Supermicro"
+kinds: [hardware]
+website: "https://www.supermicro.com"
+tagging:
+  match_case: true

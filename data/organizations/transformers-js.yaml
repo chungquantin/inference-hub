@@ -1,0 +1,9 @@
+slug: transformers-js
+name: "Transformers.js"
+kinds: [open_source]
+description: "State-of-the-art Machine Learning for the web. Run 🤗 Transformers directly in your browser, with no need for a server! - huggingface/transformers.js"
+website: "https://github.com/huggingface/transformers.js"
+logo_url: /logos/transformers-js.png
+categories: [inference-engines]
+tagging:
+  match_case: true

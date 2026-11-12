@@ -1,0 +1,19 @@
+slug: tensorfold
+name: "TensorFold"
+kinds: [open_source]
+website: "https://tensorfold.dev"
+links:
+  github: "https://github.com/ashhart/TensorFold"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tensorfold
+    name: "TensorFold"
+    type: oss_project
+    github: ashhart/TensorFold
+    tagline: "LLM Inference Engine for Metal, CUDA and Vulkan."
+    url: "https://github.com/ashhart/TensorFold"
+    metadata:
+      license: "Apache-2.0"

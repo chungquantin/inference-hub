@@ -1,0 +1,19 @@
+slug: distributed-llama
+name: "distributed-llama"
+kinds: [open_source]
+website: "https://n4no.com/"
+links:
+  github: "https://github.com/b4rtaz/distributed-llama"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: distributed-llama
+    name: "distributed-llama"
+    type: oss_project
+    github: b4rtaz/distributed-llama
+    tagline: "Distributed LLM inference. Connect home devices into a powerful cluster to accelerate LLM inference. More devices means faster inference."
+    url: "https://github.com/b4rtaz/distributed-llama"
+    metadata:
+      license: "MIT"

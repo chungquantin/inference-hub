@@ -1,0 +1,8 @@
+slug: liquidstack
+name: "LiquidStack"
+kinds: [hardware]
+description: "Transform your data center with LiquidStack's energy-efficient liquid cooling solutions. Contact us today to optimise your performance and sustainability!"
+website: "https://liquidstack.com"
+logo_url: /logos/liquidstack.png
+tagging:
+  match_case: true

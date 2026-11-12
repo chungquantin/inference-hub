@@ -1,0 +1,7 @@
+slug: gitee-ai
+name: "Gitee AI"
+kinds: [inference_provider]
+website: "https://moark.com"
+logo_url: /logos/gitee-ai.png
+tagging:
+  match_case: true

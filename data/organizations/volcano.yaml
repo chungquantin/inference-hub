@@ -1,0 +1,10 @@
+slug: volcano
+name: "Volcano"
+kinds: [open_source]
+description: "Cloud native batch scheduling system for compute-intensive workloads"
+website: "https://volcano.sh"
+logo_url: /logos/volcano.svg
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false

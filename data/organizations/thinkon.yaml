@@ -1,0 +1,9 @@
+slug: thinkon
+name: "ThinkOn"
+kinds: [gpu_cloud]
+description: "Think On, Inc. is a managed IT cloud service provider focused on empowering you to do whatever you need to do with your data."
+website: "https://thinkon.com"
+logo_url: /logos/thinkon.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

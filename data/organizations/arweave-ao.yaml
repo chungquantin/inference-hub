@@ -1,0 +1,8 @@
+slug: arweave-ao
+name: "Arweave AO"
+kinds: [decentralized]
+description: "AO is the hyper parallel computer: a decentralized supercomputer built on Arweave"
+website: "https://ao.arweave.net"
+logo_url: /logos/arweave-ao.svg
+tagging:
+  match_case: true

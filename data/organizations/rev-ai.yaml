@@ -1,0 +1,8 @@
+slug: rev-ai
+name: "Rev AI"
+kinds: [model_provider]
+description: "Rev AI, part of the Rev family, is a developer-first API that delivers industry-leading accuracy and fast performance at global scale. Click to learn more."
+website: "https://www.rev.ai"
+logo_url: /logos/rev-ai.png
+tagging:
+  match_case: true

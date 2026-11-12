@@ -1,0 +1,7 @@
+slug: samsung-electronics
+name: "Samsung Electronics"
+kinds: [hardware]
+website: "https://www.samsung.com"
+logo_url: /logos/samsung-electronics.png
+tagging:
+  match_case: true

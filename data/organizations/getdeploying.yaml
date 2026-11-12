@@ -1,0 +1,6 @@
+slug: getdeploying
+name: "GetDeploying"
+kinds: [other]
+website: "https://getdeploying.com"
+tagging:
+  match_case: true

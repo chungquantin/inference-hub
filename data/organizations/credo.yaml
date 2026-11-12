@@ -1,0 +1,9 @@
+slug: credo
+name: "Credo"
+kinds: [hardware]
+description: "Credo delivers high-speed, energy-efficient connectivity solutions powering AI, cloud computing, and hyperscale networks up to 1.6T."
+website: "https://www.credosemi.com"
+logo_url: /logos/credo.png
+tagging:
+  match_case: true
+  match_name: false

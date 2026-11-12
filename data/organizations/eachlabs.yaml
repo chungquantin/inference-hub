@@ -1,0 +1,8 @@
+slug: eachlabs
+name: "Eachlabs"
+kinds: [inference_provider]
+description: "Ship production AI with one API for 600+ models. Quality-aware routing and no training on your traffic."
+website: "https://www.eachlabs.ai"
+logo_url: /logos/eachlabs.png
+tagging:
+  match_case: true

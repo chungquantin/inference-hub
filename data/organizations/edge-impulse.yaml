@@ -1,0 +1,9 @@
+slug: edge-impulse
+name: "Edge Impulse"
+kinds: [open_source]
+description: "From end-to-end pipelines and security to versioning and model monitoring, Edge Impulse provides native MLOps workflows for edge AI and physical AI. Develop, deploy, and manage AI solutions at scale across the edge hardware ecosystem."
+website: "https://edgeimpulse.com"
+logo_url: /logos/edge-impulse.png
+categories: [inference-engines]
+tagging:
+  match_case: true

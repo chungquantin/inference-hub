@@ -1,0 +1,8 @@
+slug: capitalg
+name: "CapitalG"
+kinds: [investor]
+description: "We invest our capital and expertise to help remarkable entrepreneurs, leading transformational companies, accelerate the growth of their businesses."
+website: "https://capitalg.com"
+logo_url: /logos/capitalg.png
+tagging:
+  match_case: true

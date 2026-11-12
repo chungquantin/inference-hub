@@ -1,0 +1,8 @@
+slug: speechmatics
+name: "Speechmatics"
+kinds: [model_provider]
+description: "Speechmatics builds speech-to-text APIs for real conversations, not clean demos. Build Voice AI that understands accents, multiple speakers, and multilingual speech."
+website: "https://www.speechmatics.com"
+logo_url: /logos/speechmatics.png
+tagging:
+  match_case: true

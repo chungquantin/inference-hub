@@ -1,0 +1,7 @@
+slug: adia
+name: "ADIA"
+kinds: [investor]
+description: "Established in 1976, ADIA is a globally-diversified investor that prudently invests on behalf of the Government of Abu Dhabi to generate long-term value."
+website: "https://www.adia.ae"
+tagging:
+  match_case: true

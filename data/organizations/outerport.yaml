@@ -1,0 +1,8 @@
+slug: outerport
+name: "Outerport"
+kinds: [inference_provider]
+description: "AI agents build electrical and control systems as structured design models. CAD drawings, BOMs, calculations, and control logic all come from one model."
+website: "https://outerport.com"
+logo_url: /logos/outerport.png
+tagging:
+  match_case: true

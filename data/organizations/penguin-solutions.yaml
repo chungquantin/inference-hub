@@ -1,0 +1,8 @@
+slug: penguin-solutions
+name: "Penguin Solutions"
+kinds: [hardware]
+description: "Penguin Solutions designs, builds, deploys, and manages large, complex AI factory platforms globally, harnessing the power of accelerated computing at scale."
+website: "https://www.penguinsolutions.com"
+logo_url: /logos/penguin-solutions.png
+tagging:
+  match_case: true

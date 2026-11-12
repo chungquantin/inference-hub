@@ -1,0 +1,8 @@
+slug: sutro
+name: "Sutro"
+kinds: [inference_provider]
+description: "Sutro is a platform for optimizing and running consistent AI Functions."
+website: "https://sutro.sh"
+logo_url: /logos/sutro.svg
+tagging:
+  match_case: true

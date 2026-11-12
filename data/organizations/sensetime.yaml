@@ -1,0 +1,7 @@
+slug: sensetime
+name: "SenseTime"
+kinds: [model_provider]
+description: "SenseTime builds SenseNova native multimodal LLMs and SenseCore AI cloud infrastructure for enterprise AI digital transformation."
+website: "https://www.sensetime.com"
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: insight-partners
+name: "Insight Partners"
+kinds: [investor]
+description: "Insight Partners is a global software investor partnering with high-growth technology, software, and Internet startup and ScaleUp companies."
+website: "https://www.insightpartners.com"
+logo_url: /logos/insight-partners.png
+tagging:
+  match_case: true

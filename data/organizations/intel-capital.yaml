@@ -1,0 +1,6 @@
+slug: intel-capital
+name: "Intel Capital"
+kinds: [investor]
+website: "https://www.intelcapital.com"
+tagging:
+  match_case: true

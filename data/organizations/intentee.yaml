@@ -1,0 +1,20 @@
+slug: intentee
+name: "Intentee"
+kinds: [open_source]
+description: "Keep AI in your own infrastructure / Create code-free systems"
+website: "https://intentee.com"
+logo_url: /logos/intentee.png
+links:
+  github: "https://github.com/intentee"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: paddler
+    name: "paddler"
+    type: oss_project
+    github: intentee/paddler
+    url: "https://github.com/intentee/paddler"
+    metadata:
+      license: "Apache-2.0"

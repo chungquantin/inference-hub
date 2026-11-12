@@ -1,0 +1,8 @@
+slug: sipearl
+name: "SiPearl"
+kinds: [hardware]
+description: "SiPearl designs European hingh-performance energy-efficient CPUs for sovereign supercomputing, AI and data centre."
+website: "https://sipearl.com"
+logo_url: /logos/sipearl.jpg
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: apache-tvm
+name: "Apache TVM"
+kinds: [open_source]
+website: "https://tvm.apache.org"
+logo_url: /logos/apache-tvm.png
+categories: [model-optimization]
+tagging:
+  match_case: true

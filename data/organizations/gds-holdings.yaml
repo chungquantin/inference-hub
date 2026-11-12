@@ -1,0 +1,7 @@
+slug: gds-holdings
+name: "GDS Holdings"
+kinds: [gpu_cloud]
+website: "https://www.gdsintl.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

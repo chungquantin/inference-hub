@@ -1,0 +1,8 @@
+slug: northzone
+name: "Northzone"
+kinds: [investor]
+description: "Northzone is a multi-stage venture capital firm operating across Europe and the US. Since 1996, it has backed more than 250 companies, including Spotify, Klarna, Spring Health, and Black Forest Labs."
+website: "https://northzone.com"
+logo_url: /logos/northzone.png
+tagging:
+  match_case: true

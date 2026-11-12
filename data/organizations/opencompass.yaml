@@ -1,0 +1,8 @@
+slug: opencompass
+name: "OpenCompass"
+kinds: [llmops]
+website: "https://opencompass.org.cn"
+logo_url: /logos/opencompass.svg
+categories: [observability]
+tagging:
+  match_case: true

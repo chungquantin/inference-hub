@@ -1,0 +1,21 @@
+slug: ovg-project
+name: "openvgpu"
+kinds: [open_source]
+description: "Flexible, dynamic, and open-source GPU sharing"
+website: "https://github.com/ovg-project"
+logo_url: /logos/ovg-project.png
+links:
+  github: "https://github.com/ovg-project"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kvcached
+    name: "kvcached"
+    type: oss_project
+    github: ovg-project/kvcached
+    tagline: "Virtualized Elastic KV Cache for Dynamic GPU Sharing and Beyond"
+    url: "https://github.com/ovg-project/kvcached"
+    metadata:
+      license: "Apache-2.0"

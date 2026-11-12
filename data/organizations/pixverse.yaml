@@ -1,0 +1,7 @@
+slug: pixverse
+name: "PixVerse"
+kinds: [model_provider]
+website: "https://pixverse.ai"
+logo_url: /logos/pixverse.svg
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: axolotl
+name: "Axolotl"
+kinds: [open_source]
+description: "Axolotl is an Open Source tool to make fine-tuning AI models friendly, fast and fun - without sacrificing functionality or scale."
+website: "https://axolotl.ai"
+logo_url: /logos/axolotl.png
+categories: [model-optimization]
+tagging:
+  match_case: true

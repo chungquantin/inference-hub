@@ -1,0 +1,15 @@
+slug: stanford-crfm
+name: "Stanford CRFM"
+kinds: [llmops]
+website: "https://crfm.stanford.edu"
+categories: [observability]
+tagging:
+  match_case: true
+products:
+  - slug: helm
+    name: "helm"
+    type: oss_project
+    github: stanford-crfm/helm
+    url: "https://github.com/stanford-crfm/helm"
+    metadata:
+      license: "Apache-2.0"

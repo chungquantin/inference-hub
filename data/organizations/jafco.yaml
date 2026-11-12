@@ -1,0 +1,7 @@
+slug: jafco
+name: "JAFCO"
+kinds: [investor]
+website: "https://www.jafco.co.jp"
+logo_url: /logos/jafco.png
+tagging:
+  match_case: true

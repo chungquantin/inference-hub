@@ -1,0 +1,8 @@
+slug: iree
+name: "IREE"
+kinds: [open_source]
+website: "https://iree.dev"
+logo_url: /logos/iree.svg
+categories: [inference-engines]
+tagging:
+  match_case: true

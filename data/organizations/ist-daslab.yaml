@@ -1,0 +1,28 @@
+slug: ist-daslab
+name: "IST Austria Distributed Algorithms and Systems Lab"
+kinds: [open_source]
+website: "https://ista.ac.at/en/research/alistarh-group/"
+logo_url: /logos/ist-daslab.png
+links:
+  github: "https://github.com/IST-DASLab"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: marlin
+    name: "marlin"
+    type: oss_project
+    github: IST-DASLab/marlin
+    tagline: "FP16xINT4 LLM inference kernel that can achieve near-ideal ~4x speedups up to medium batchsizes of 16-32 tokens."
+    url: "https://github.com/IST-DASLab/marlin"
+    metadata:
+      license: "Apache-2.0"
+  - slug: gptq
+    name: "gptq"
+    type: oss_project
+    github: IST-DASLab/gptq
+    tagline: "Code for the ICLR 2023 paper \"GPTQ: Accurate Post-training Quantization of Generative Pretrained Transformers\"."
+    url: "https://github.com/IST-DASLab/gptq"
+    metadata:
+      license: "Apache-2.0"

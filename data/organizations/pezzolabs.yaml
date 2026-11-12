@@ -1,0 +1,21 @@
+slug: pezzolabs
+name: "Pezzo"
+kinds: [open_source]
+description: "Pezzo is an AI development toolkit designed to streamline prompt design, version management, publishing, collaboration, troubleshooting, observability and more."
+website: "https://pezzo.ai"
+logo_url: /logos/pezzolabs.png
+links:
+  github: "https://github.com/pezzolabs"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: pezzo
+    name: "pezzo"
+    type: oss_project
+    github: pezzolabs/pezzo
+    tagline: "🕹️ Open-source, developer-first LLMOps platform designed to streamline prompt design, version management, instant delivery, collaboration, troubleshooting, observability and more."
+    url: "https://github.com/pezzolabs/pezzo"
+    metadata:
+      license: "Apache-2.0"

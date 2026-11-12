@@ -1,0 +1,16 @@
+slug: bytedance-seed
+name: "ByteDance Seed"
+kinds: [model_provider]
+website: "https://seed.bytedance.com"
+logo_url: /logos/bytedance-seed.png
+tagging:
+  match_case: true
+products:
+  - slug: triton-distributed
+    name: "Triton-distributed"
+    type: oss_project
+    github: ByteDance-Seed/Triton-distributed
+    tagline: "Distributed Compiler and Optimized Parallel Kernels"
+    url: "https://github.com/ByteDance-Seed/Triton-distributed"
+    metadata:
+      license: "MIT"

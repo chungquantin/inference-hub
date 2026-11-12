@@ -1,0 +1,8 @@
+slug: lunar-dev
+name: "Lunar.dev"
+kinds: [llm_gateway]
+description: "The only Enterprise AI Control Plane for MCP, LLM, and API governance. Full observability and runtime governance across every AI interaction, in a single audit trail. Self-hosted in your VPC."
+website: "https://www.lunar.dev"
+logo_url: /logos/lunar-dev.svg
+tagging:
+  match_case: true

@@ -1,0 +1,10 @@
+slug: stc
+name: "stc"
+kinds: [gpu_cloud]
+description: "Discover stc KSA telecom services for home & personal use. stc Saudi Arabia internet packages offers high speed internet and reliable mobile plans. Visit stc KSA online now!"
+website: "https://www.stc.com.sa"
+logo_url: /logos/stc.jpg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true
+  match_name: false

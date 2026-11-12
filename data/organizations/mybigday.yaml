@@ -1,0 +1,21 @@
+slug: mybigday
+name: "BRICKS"
+kinds: [open_source]
+description: "BRICKS DISPLAY INC."
+website: "https://bricks.tools"
+logo_url: /logos/mybigday.png
+links:
+  github: "https://github.com/mybigday"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llama-rn
+    name: "llama.rn"
+    type: oss_project
+    github: mybigday/llama.rn
+    tagline: "React Native binding of llama.cpp"
+    url: "https://github.com/mybigday/llama.rn"
+    metadata:
+      license: "MIT"

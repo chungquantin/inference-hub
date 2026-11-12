@@ -8,3 +8,10 @@ logo_url: /logos/tyk.svg
 tagging:
   aliases: ["Tyk AI Studio"]
   match_case: true
+products:
+  - slug: tyk
+    name: "tyk"
+    type: oss_project
+    github: TykTechnologies/tyk
+    tagline: "Open Source API and AI Gateway supporting REST, GraphQL, TCP, gRPC and MCP (Model Context Protocol)"
+    url: "https://github.com/TykTechnologies/tyk"

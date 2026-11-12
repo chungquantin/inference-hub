@@ -1,0 +1,8 @@
+slug: sima-ai
+name: "SiMa.ai"
+kinds: [hardware]
+description: "SiMa.ai scaling physical ai across across robotics, automotive, industrial automation, aerospace & defense, smart vision, and healthcare."
+website: "https://sima.ai"
+logo_url: /logos/sima-ai.png
+tagging:
+  match_case: true

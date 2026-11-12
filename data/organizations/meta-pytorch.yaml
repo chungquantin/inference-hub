@@ -1,0 +1,28 @@
+slug: meta-pytorch
+name: "Meta PyTorch"
+kinds: [open_source]
+website: "https://pytorch.org"
+logo_url: /logos/meta-pytorch.jpg
+links:
+  github: "https://github.com/meta-pytorch"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: torchrec
+    name: "torchrec"
+    type: oss_project
+    github: meta-pytorch/torchrec
+    tagline: "Pytorch domain library for recommendation systems"
+    url: "https://github.com/meta-pytorch/torchrec"
+    metadata:
+      license: "BSD-3-Clause"
+  - slug: torchtune
+    name: "torchtune"
+    type: oss_project
+    github: meta-pytorch/torchtune
+    tagline: "PyTorch native post-training library"
+    url: "https://github.com/meta-pytorch/torchtune"
+    metadata:
+      license: "BSD-3-Clause"

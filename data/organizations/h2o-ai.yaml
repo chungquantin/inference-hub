@@ -1,0 +1,9 @@
+slug: h2o-ai
+name: "H2O.ai"
+kinds: [llmops]
+description: "The H2O Sovereign AI Platform. Run predictive, generative, and agentic AI on your own infrastructure, from the cloud to fully air-gapped."
+website: "https://h2o.ai"
+logo_url: /logos/h2o-ai.svg
+categories: [observability]
+tagging:
+  match_case: true

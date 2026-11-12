@@ -1,0 +1,8 @@
+slug: y-combinator
+name: "Y Combinator"
+kinds: [investor]
+description: "Y Combinator created a new model for funding early stage startups. Four times a year we invest in a large number of startups."
+website: "https://www.ycombinator.com"
+logo_url: /logos/y-combinator.png
+tagging:
+  match_case: true

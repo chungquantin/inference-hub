@@ -1,0 +1,8 @@
+slug: naver-cloud
+name: "Naver Cloud"
+kinds: [gpu_cloud]
+description: "cloud computing services for corporations, IaaS, PaaS, SaaS, with Global region and Security Technology Certification"
+website: "https://www.ncloud.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

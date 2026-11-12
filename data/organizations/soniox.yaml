@@ -1,0 +1,8 @@
+slug: soniox
+name: "Soniox"
+kinds: [model_provider]
+description: "One speech AI API for realtime speech-to-text, text-to-speech, and translation in 60+ languages. Low-latency streaming, native-speaker accuracy, and seamless language switching for live voice applications."
+website: "https://soniox.com"
+logo_url: /logos/soniox.png
+tagging:
+  match_case: true

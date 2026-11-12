@@ -1,0 +1,6 @@
+slug: rivos
+name: "Rivos"
+kinds: [hardware]
+website: "https://www.rivosinc.com"
+tagging:
+  match_case: true

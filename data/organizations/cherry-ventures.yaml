@@ -1,0 +1,8 @@
+slug: cherry-ventures
+name: "Cherry Ventures"
+kinds: [investor]
+description: "Cherry is a venture capital firm based in Berlin, London, and Stockholm, founded in 2012. We’re an investment team of former entrepreneurs and operators who’ve built fast-scaling companies such as Zalando and Spotify."
+website: "https://www.cherry.vc"
+logo_url: /logos/cherry-ventures.png
+tagging:
+  match_case: true

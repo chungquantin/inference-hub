@@ -1,0 +1,8 @@
+slug: targon-manifold
+name: "Targon Manifold"
+kinds: [inference_provider]
+description: "Think Bigger - A Decentralized Frontier AI Lab"
+website: "https://manifold.inc"
+logo_url: /logos/targon-manifold.svg
+tagging:
+  match_case: true

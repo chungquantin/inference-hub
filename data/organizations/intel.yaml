@@ -1,0 +1,29 @@
+slug: intel
+name: "Intel"
+kinds: [hardware]
+website: "https://www.intel.com"
+tagging:
+  match_case: true
+products:
+  - slug: auto-round
+    name: "auto-round"
+    type: oss_project
+    github: intel/auto-round
+    url: "https://github.com/intel/auto-round"
+    metadata:
+      license: "Apache-2.0"
+  - slug: llm-scaler
+    name: "llm-scaler"
+    type: oss_project
+    github: intel/llm-scaler
+    url: "https://github.com/intel/llm-scaler"
+    metadata:
+      license: "Apache-2.0"
+  - slug: neural-compressor
+    name: "neural-compressor"
+    type: oss_project
+    github: intel/neural-compressor
+    tagline: "SOTA low-bit LLM quantization (INT8/FP8/MXFP8/INT4/MXFP4/NVFP4) & sparsity; leading model compression techniques on PyTorch, TensorFlow, and ONNX Runtime"
+    url: "https://github.com/intel/neural-compressor"
+    metadata:
+      license: "Apache-2.0"

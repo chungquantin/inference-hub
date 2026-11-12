@@ -8,3 +8,12 @@ logo_url: /logos/helicone.png
 categories: [observability]
 tagging:
   match_case: true
+products:
+  - slug: helicone
+    name: "helicone"
+    type: oss_project
+    github: Helicone/helicone
+    tagline: "🧊 Open source LLM observability platform. One line of code to monitor, evaluate, and experiment. YC W23 🍓"
+    url: "https://github.com/Helicone/helicone"
+    metadata:
+      license: "Apache-2.0"

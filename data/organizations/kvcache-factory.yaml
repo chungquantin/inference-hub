@@ -1,0 +1,19 @@
+slug: kvcache-factory
+name: "KVCache-Factory"
+kinds: [open_source]
+website: "https://github.com/Zefan-Cai/KVCache-Factory"
+links:
+  github: "https://github.com/Zefan-Cai/KVCache-Factory"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kvcache-factory
+    name: "KVCache-Factory"
+    type: oss_project
+    github: Zefan-Cai/KVCache-Factory
+    tagline: "Unified KV Cache Compression Methods for Auto-Regressive Models"
+    url: "https://github.com/Zefan-Cai/KVCache-Factory"
+    metadata:
+      license: "MIT"

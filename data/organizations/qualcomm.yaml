@@ -1,0 +1,7 @@
+slug: qualcomm
+name: "Qualcomm"
+kinds: [hardware]
+description: "Learn how Qualcomm transforms industries with leading edge AI, high-performance, low-power computing and unrivaled connectivity."
+website: "https://www.qualcomm.com"
+tagging:
+  match_case: true

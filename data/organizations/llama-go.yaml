@@ -1,0 +1,17 @@
+slug: llama-go
+name: "llama.go"
+kinds: [open_source]
+website: "https://github.com/gotzmann/llama.go"
+links:
+  github: "https://github.com/gotzmann/llama.go"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llama-go
+    name: "llama.go"
+    type: oss_project
+    github: gotzmann/llama.go
+    tagline: "llama.go is like llama.cpp in pure Golang!"
+    url: "https://github.com/gotzmann/llama.go"

@@ -1,0 +1,7 @@
+slug: tencent-hunyuan
+name: "Tencent Hunyuan"
+kinds: [model_provider]
+website: "https://hunyuan.tencent.com"
+logo_url: /logos/tencent-hunyuan.svg
+tagging:
+  match_case: true

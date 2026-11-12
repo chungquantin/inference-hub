@@ -1,0 +1,9 @@
+slug: xformers
+name: "xFormers"
+kinds: [open_source]
+description: "Hackable and optimized Transformers building blocks, supporting a composable construction. - facebookresearch/xformers"
+website: "https://github.com/facebookresearch/xformers"
+logo_url: /logos/xformers.png
+categories: [inference-engines]
+tagging:
+  match_case: true

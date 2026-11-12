@@ -1,0 +1,21 @@
+slug: callstackincubator
+name: "Callstack Incubator"
+kinds: [open_source]
+description: "We don't follow best practices, we set them. This is where it happens."
+website: "https://callstack.com"
+logo_url: /logos/callstackincubator.png
+links:
+  github: "https://github.com/callstackincubator"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ai
+    name: "ai"
+    type: oss_project
+    github: callstackincubator/ai
+    tagline: "On-device LLM execution in React Native with Vercel AI SDK compatibility"
+    url: "https://github.com/callstackincubator/ai"
+    metadata:
+      license: "MIT"

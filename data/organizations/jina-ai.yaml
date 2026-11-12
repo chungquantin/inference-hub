@@ -1,0 +1,8 @@
+slug: jina-ai
+name: "Jina AI"
+kinds: [model_provider]
+description: "Embeddings, rerankers, web reader, deepsearch, small language models. Search AI for multilingual and multimodal data."
+website: "https://jina.ai"
+logo_url: /logos/jina-ai.png
+tagging:
+  match_case: true

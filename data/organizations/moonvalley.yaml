@@ -1,0 +1,8 @@
+slug: moonvalley
+name: "Moonvalley"
+kinds: [model_provider]
+description: "a research lab focused on pushing the frontiers of creativity through deep learning."
+website: "https://www.moonvalley.com"
+logo_url: /logos/moonvalley.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: fractile
+name: "Fractile"
+kinds: [hardware]
+description: "Fractile is a chip-first frontier AI company, building hardware to advance AI’s underlying capabilities and push the frontier forward."
+website: "https://www.fractile.ai"
+logo_url: /logos/fractile.png
+tagging:
+  match_case: true

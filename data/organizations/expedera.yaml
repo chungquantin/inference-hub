@@ -1,0 +1,8 @@
+slug: expedera
+name: "Expedera"
+kinds: [hardware]
+description: "Scalable Neural Engine Semiconductor IP with best performance, power and latency while reducing cost and complexity. Removes memory bottlenecks by reducing memory to the theoretical minimum"
+website: "https://www.expedera.com"
+logo_url: /logos/expedera.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: airtrunk
+name: "AirTrunk"
+kinds: [gpu_cloud]
+description: "A place where data builds tomorrow. Asia Pacific insight and best-in-class data centre design to help you transform the world. Connect with AirTrunk"
+website: "https://airtrunk.com"
+logo_url: /logos/airtrunk.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,20 @@
+slug: zhihu
+name: "Zhihu"
+kinds: [open_source]
+website: "https://zhuanlan.zhihu.com/hackers"
+logo_url: /logos/zhihu.png
+links:
+  github: "https://github.com/zhihu"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: zhilight
+    name: "ZhiLight"
+    type: oss_project
+    github: zhihu/ZhiLight
+    tagline: "A highly optimized LLM inference acceleration engine for Llama and its variants."
+    url: "https://github.com/zhihu/ZhiLight"
+    metadata:
+      license: "Apache-2.0"

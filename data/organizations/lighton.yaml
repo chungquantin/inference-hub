@@ -1,0 +1,8 @@
+slug: lighton
+name: "LightOn"
+kinds: [model_provider]
+description: "Make your enterprise knowledge agent-readable."
+website: "https://lighton.ai"
+logo_url: /logos/lighton.svg
+tagging:
+  match_case: true

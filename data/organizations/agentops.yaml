@@ -1,0 +1,9 @@
+slug: agentops
+name: "AgentOps"
+kinds: [llmops]
+description: "Trace, Debug, & Deploy Reliable AI Agents."
+website: "https://www.agentops.ai"
+logo_url: /logos/agentops.png
+categories: [observability]
+tagging:
+  match_case: true

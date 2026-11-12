@@ -1,0 +1,8 @@
+slug: gradient-ventures
+name: "Gradient Ventures"
+kinds: [investor]
+description: "Gradient has been investing at the forefront of artificial intelligence since 2017. We are led by former founders, technical experts, and domain specialists, who have supported hundreds of AI founders from the beginning."
+website: "https://www.gradient.com"
+logo_url: /logos/gradient-ventures.png
+tagging:
+  match_case: true

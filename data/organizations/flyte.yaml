@@ -1,0 +1,9 @@
+slug: flyte
+name: "Flyte"
+kinds: [open_source]
+description: "Recover from infra and code failures, orchestrate dynamic workflows, scale to production."
+website: "https://flyte.org"
+logo_url: /logos/flyte.png
+categories: [inference-engines]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: inferless
+name: "Inferless"
+kinds: [inference_provider]
+description: "Blazing fast serverless GPU inference to deploy ML models. Use Inferless for scalable and effortless custom machine learning model deployment!"
+website: "https://www.inferless.com"
+logo_url: /logos/inferless.png
+tagging:
+  match_case: true

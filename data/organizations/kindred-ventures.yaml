@@ -1,0 +1,6 @@
+slug: kindred-ventures
+name: "Kindred Ventures"
+kinds: [investor]
+website: "https://www.kindredventures.com"
+tagging:
+  match_case: true

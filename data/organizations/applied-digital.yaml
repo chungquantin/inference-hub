@@ -1,0 +1,8 @@
+slug: applied-digital
+name: "Applied Digital"
+kinds: [gpu_cloud]
+description: "Discover the epicenter of AI innovation at Applied Digital, where our purpose-built data centers are engineered for peak performance. Revolutionize accelerated computing with our state-of-the-art design and power-centric facilities."
+website: "https://applieddigital.com"
+logo_url: /logos/applied-digital.png
+tagging:
+  match_case: true

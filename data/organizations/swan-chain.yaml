@@ -1,0 +1,8 @@
+slug: swan-chain
+name: "Swan Chain"
+kinds: [decentralized]
+description: "Swan Chain is a decentralized AI inference cloud. One OpenAI-compatible API for frontier and open-source models, served by independent GPU providers and paid per token. Connect a GPU and earn."
+website: "https://swanchain.io"
+logo_url: /logos/swan-chain.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: vals-ai
+name: "Vals AI"
+kinds: [llmops]
+description: "Vals AI independently tests AI models on real-world work. Explore benchmark results, model comparisons and research across coding, finance, law and more."
+website: "https://www.vals.ai"
+logo_url: /logos/vals-ai.svg
+categories: [observability]
+tagging:
+  match_case: true

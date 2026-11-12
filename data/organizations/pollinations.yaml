@@ -1,0 +1,8 @@
+slug: pollinations
+name: "Pollinations"
+kinds: [inference_provider]
+description: "The AI-native builder community. Generate images, video, speech, music and text. Build agents and apps."
+website: "https://pollinations.ai"
+logo_url: /logos/pollinations.png
+tagging:
+  match_case: true

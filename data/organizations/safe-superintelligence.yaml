@@ -1,0 +1,6 @@
+slug: safe-superintelligence
+name: "Safe Superintelligence"
+kinds: [model_provider]
+website: "https://ssi.inc"
+tagging:
+  match_case: true

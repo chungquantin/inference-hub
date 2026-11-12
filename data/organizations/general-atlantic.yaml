@@ -1,0 +1,8 @@
+slug: general-atlantic
+name: "General Atlantic"
+kinds: [investor]
+description: "General Atlantic is a global investment leader — the dedicated partner for entrepreneurs and investors building long-term value."
+website: "https://www.generalatlantic.com"
+logo_url: /logos/general-atlantic.png
+tagging:
+  match_case: true

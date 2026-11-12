@@ -1,0 +1,8 @@
+slug: inflection-ai
+name: "Inflection AI"
+kinds: [model_provider]
+description: "Inflection AI is pioneering personal intelligence. We"
+website: "https://inflection.ai"
+logo_url: /logos/inflection-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: pika
+name: "Pika"
+kinds: [model_provider]
+description: "Create AI video, images and audio with Pika. Use Seedance 2.5, Kling 4.0, Veo 3.1, Wan 3.0 and more models in one creative platform."
+website: "https://pika.art"
+logo_url: /logos/pika.svg
+tagging:
+  match_case: true
+  match_name: false

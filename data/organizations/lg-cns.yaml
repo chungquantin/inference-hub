@@ -1,0 +1,9 @@
+slug: lg-cns
+name: "LG CNS"
+kinds: [gpu_cloud]
+description: "LG CNS drives business innovation with AI Transformation (AX), combining technology leadership and consulting expertise to uncover hidden value and deliver global customer impact."
+website: "https://www.lgcns.com"
+logo_url: /logos/lg-cns.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

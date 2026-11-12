@@ -1,0 +1,8 @@
+slug: notion-capital
+name: "Notion Capital"
+kinds: [investor]
+description: "We are former operators striving to be the investors we wish we'd had, backing European software and AI-native founders"
+website: "https://www.notioncapital.com"
+logo_url: /logos/notion-capital.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: nutanix
+name: "Nutanix"
+kinds: [gpu_cloud]
+description: "We offer a unified platform that seamlessly integrates infrastructure and management to enable smooth operations of data and apps across clouds."
+website: "https://www.nutanix.com"
+logo_url: /logos/nutanix.svg
+tagging:
+  match_case: true

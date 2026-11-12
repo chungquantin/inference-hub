@@ -1,0 +1,8 @@
+slug: composio
+name: "Composio"
+kinds: [llm_gateway]
+description: "Put the AI you already use to work across 1,700+ apps. Composio gives it the tools to find information, update your apps and finish the job, with you in control."
+website: "https://composio.dev"
+logo_url: /logos/composio.png
+tagging:
+  match_case: true

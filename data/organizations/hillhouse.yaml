@@ -1,0 +1,9 @@
+slug: hillhouse
+name: "Hillhouse"
+kinds: [investor]
+description: "Hillhouse builds businesses that stand the test of time"
+website: "https://www.hillhouseinvestment.com"
+logo_url: /logos/hillhouse.png
+tagging:
+  match_case: true
+  match_name: false

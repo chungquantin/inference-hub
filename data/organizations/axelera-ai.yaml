@@ -1,0 +1,8 @@
+slug: axelera-ai
+name: "Axelera AI"
+kinds: [hardware]
+description: "Bring insights right to the data, increasing the performance of your solutions with a cost-effective and efficient inference chip. Axelera’s AI processing units are designed to seamlessly integrate into your innovations so you can focus on your customer!"
+website: "https://www.axelera.ai"
+logo_url: /logos/axelera-ai.png
+tagging:
+  match_case: true

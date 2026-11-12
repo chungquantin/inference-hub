@@ -1,0 +1,21 @@
+slug: arena-oss
+name: "Arena"
+kinds: [open_source]
+description: "Where AI meets the real world. Formerly LMArena. We measure and advance the frontier of AI through community-driven evaluation."
+website: "https://arena.ai/blog/"
+logo_url: /logos/arena-oss.jpg
+links:
+  github: "https://github.com/Arena-OSS"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: arena-hard-auto
+    name: "arena-hard-auto"
+    type: oss_project
+    github: Arena-OSS/arena-hard-auto
+    tagline: "Arena-Hard-Auto: An automatic LLM benchmark."
+    url: "https://github.com/Arena-OSS/arena-hard-auto"
+    metadata:
+      license: "Apache-2.0"

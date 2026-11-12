@@ -1,0 +1,8 @@
+slug: character-ai
+name: "Character.AI"
+kinds: [model_provider]
+website: "https://character.ai"
+logo_url: /logos/character-ai.png
+tagging:
+  match_case: true
+  match_name: false

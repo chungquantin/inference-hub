@@ -1,0 +1,7 @@
+slug: abeja
+name: "ABEJA"
+kinds: [inference_provider]
+website: "https://www.abejainc.com"
+logo_url: /logos/abeja.png
+tagging:
+  match_case: true

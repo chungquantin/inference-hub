@@ -1,0 +1,8 @@
+slug: bessemer-venture-partners
+name: "Bessemer Venture Partners"
+kinds: [investor]
+description: "Global in reach and decentralized by design, Bessemer Venture Partners backs founders in any sector—from seed to growth and beyond—with any check size."
+website: "https://www.bvp.com"
+logo_url: /logos/bessemer-venture-partners.png
+tagging:
+  match_case: true

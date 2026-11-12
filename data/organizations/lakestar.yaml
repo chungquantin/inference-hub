@@ -1,0 +1,8 @@
+slug: lakestar
+name: "Lakestar"
+kinds: [investor]
+description: "Lakestar invests in founders and technologies shaping Europe's future, helping build resilience, sovereignty, and long-term growth in a changing world."
+website: "https://www.lakestar.com"
+logo_url: /logos/lakestar.png
+tagging:
+  match_case: true

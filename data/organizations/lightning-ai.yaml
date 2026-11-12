@@ -8,3 +8,28 @@ logo_url: /logos/lightning-ai.png
 tagging:
   aliases: ["PyTorch Lightning"]
   match_case: true
+products:
+  - slug: lightning-thunder
+    name: "lightning-thunder"
+    type: oss_project
+    github: Lightning-AI/lightning-thunder
+    tagline: "PyTorch compiler that accelerates training and inference. Get built-in optimizations for performance, memory, parallelism, and easily write your own."
+    url: "https://github.com/Lightning-AI/lightning-thunder"
+    metadata:
+      license: "Apache-2.0"
+  - slug: litgpt
+    name: "litgpt"
+    type: oss_project
+    github: Lightning-AI/litgpt
+    tagline: "20+ high-performance LLMs with recipes to pretrain, finetune and deploy at scale."
+    url: "https://github.com/Lightning-AI/litgpt"
+    metadata:
+      license: "Apache-2.0"
+  - slug: litserve
+    name: "LitServe"
+    type: oss_project
+    github: Lightning-AI/LitServe
+    tagline: "A minimal Python framework for building custom AI inference servers with full control over logic, batching, and scaling."
+    url: "https://github.com/Lightning-AI/LitServe"
+    metadata:
+      license: "Apache-2.0"

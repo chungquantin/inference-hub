@@ -1,0 +1,8 @@
+slug: ipex-llm
+name: "IPEX-LLM"
+kinds: [open_source]
+website: "https://github.com/intel/ipex-llm"
+logo_url: /logos/ipex-llm.png
+categories: [inference-engines]
+tagging:
+  match_case: true

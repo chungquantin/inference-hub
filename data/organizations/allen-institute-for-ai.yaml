@@ -1,0 +1,8 @@
+slug: allen-institute-for-ai
+name: "Allen Institute for AI"
+kinds: [model_provider]
+description: "Ai2, founded by Paul Allen, conducts high-impact research and engineering to tackle key problems in artificial intelligence."
+website: "https://allenai.org"
+logo_url: /logos/allen-institute-for-ai.png
+tagging:
+  match_case: true

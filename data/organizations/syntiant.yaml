@@ -1,0 +1,8 @@
+slug: syntiant
+name: "Syntiant"
+kinds: [hardware]
+description: "A pioneer in edge AI, Syntiant is advancing ultra-low-power, always-on intelligence that senses, decides and acts in the real world."
+website: "https://www.syntiant.com"
+logo_url: /logos/syntiant.png
+tagging:
+  match_case: true

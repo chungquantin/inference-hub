@@ -1,0 +1,20 @@
+slug: sierra-research
+name: "Sierra Research"
+kinds: [open_source]
+website: "https://sierra.ai"
+logo_url: /logos/sierra-research.png
+links:
+  github: "https://github.com/sierra-research"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tau-bench
+    name: "tau-bench"
+    type: oss_project
+    github: sierra-research/tau-bench
+    tagline: "Code and Data for Tau-Bench"
+    url: "https://github.com/sierra-research/tau-bench"
+    metadata:
+      license: "MIT"

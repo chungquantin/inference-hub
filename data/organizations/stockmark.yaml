@@ -1,0 +1,7 @@
+slug: stockmark
+name: "Stockmark"
+kinds: [model_provider]
+website: "https://stockmark.co.jp"
+logo_url: /logos/stockmark.png
+tagging:
+  match_case: true

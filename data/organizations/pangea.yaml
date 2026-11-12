@@ -1,0 +1,10 @@
+slug: pangea
+name: "Pangea"
+kinds: [llmops]
+description: "Pangea empowers organizations to ship secure AI applications quickly with the industry's broadest set of AI security guardrails that can be added with just a few lines of code."
+website: "https://pangea.cloud"
+logo_url: /logos/pangea.png
+categories: [guardrails]
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: broadcom
+name: "Broadcom"
+kinds: [hardware]
+description: "Broadcom delivers semiconductors and infrastructure software for global enterprises’ most complex, mission-critical needs."
+website: "https://www.broadcom.com"
+logo_url: /logos/broadcom.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,8 @@
+slug: technology-innovation-institute
+name: "Technology Innovation Institute"
+kinds: [model_provider]
+description: "Technology Innovation Institute (TII) is leading global advanced technology research center in Abu Dhabi, UAE, that provides top science & tech solutions."
+website: "https://www.tii.ae"
+logo_url: /logos/technology-innovation-institute.png
+tagging:
+  match_case: true

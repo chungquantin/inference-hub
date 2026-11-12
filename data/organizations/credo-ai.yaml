@@ -1,0 +1,9 @@
+slug: credo-ai
+name: "Credo AI"
+kinds: [llmops]
+description: "Operationalize Trusted AI governance with Credo AI: discover AI, enforce policies, prove compliance, and manage risk across every model, agent, and application."
+website: "https://www.credo.ai"
+logo_url: /logos/credo-ai.png
+categories: [guardrails]
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: internet-computer
+name: "Internet Computer"
+kinds: [decentralized]
+website: "https://internetcomputer.org"
+logo_url: /logos/internet-computer.png
+tagging:
+  match_case: true

@@ -1,0 +1,19 @@
+slug: omlx
+name: "omlx"
+kinds: [open_source]
+website: "https://omlx.ai"
+links:
+  github: "https://github.com/jundot/omlx"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: omlx
+    name: "omlx"
+    type: oss_project
+    github: jundot/omlx
+    tagline: "LLM inference server with continuous batching & SSD caching for Apple Silicon — managed from the macOS menu bar"
+    url: "https://github.com/jundot/omlx"
+    metadata:
+      license: "Apache-2.0"

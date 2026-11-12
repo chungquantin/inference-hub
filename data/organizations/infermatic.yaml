@@ -1,0 +1,8 @@
+slug: infermatic
+name: "Infermatic"
+kinds: [inference_provider]
+description: "Open-weight LLMs in a web chat and an OpenAI-compatible API. We do not log your prompts or outputs. Free plan available, paid plans from $9 a month."
+website: "https://infermatic.ai"
+logo_url: /logos/infermatic.png
+tagging:
+  match_case: true

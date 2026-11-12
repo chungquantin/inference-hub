@@ -1,0 +1,6 @@
+slug: infinigence-ai
+name: "Infinigence AI"
+kinds: [inference_provider]
+website: "https://www.infinigence-ai.com"
+tagging:
+  match_case: true

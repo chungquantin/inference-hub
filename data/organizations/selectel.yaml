@@ -1,0 +1,8 @@
+slug: selectel
+name: "Selectel"
+kinds: [gpu_cloud]
+website: "https://selectel.ru"
+logo_url: /logos/selectel.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

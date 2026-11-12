@@ -1,0 +1,18 @@
+slug: insanely-fast-whisper
+name: "insanely-fast-whisper"
+kinds: [open_source]
+website: "https://vaibhavs10.github.io"
+links:
+  github: "https://github.com/Vaibhavs10/insanely-fast-whisper"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: insanely-fast-whisper
+    name: "insanely-fast-whisper"
+    type: oss_project
+    github: Vaibhavs10/insanely-fast-whisper
+    url: "https://github.com/Vaibhavs10/insanely-fast-whisper"
+    metadata:
+      license: "Apache-2.0"

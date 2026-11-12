@@ -1,0 +1,9 @@
+slug: stackit
+name: "STACKIT"
+kinds: [gpu_cloud]
+description: "Digitale Souveränität für Ihr Unternehmen. Entdecken Sie die skalierbaren, sicheren Cloud-Services von STACKIT – DSGVO-konform, gehostet in Europa."
+website: "https://stackit.com/de"
+logo_url: /logos/stackit.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

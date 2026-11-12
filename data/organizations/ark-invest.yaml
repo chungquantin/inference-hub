@@ -1,0 +1,6 @@
+slug: ark-invest
+name: "ARK Invest"
+kinds: [investor]
+website: "https://www.ark-invest.com"
+tagging:
+  match_case: true

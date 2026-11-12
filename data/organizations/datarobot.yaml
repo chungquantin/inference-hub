@@ -1,0 +1,9 @@
+slug: datarobot
+name: "DataRobot"
+kinds: [llmops]
+description: "DataRobot delivers the industry-leading AI applications and platform that maximize impact and minimize risk for your business"
+website: "https://www.datarobot.com"
+logo_url: /logos/datarobot.png
+categories: [observability]
+tagging:
+  match_case: true

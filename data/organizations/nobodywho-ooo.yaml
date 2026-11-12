@@ -1,0 +1,21 @@
+slug: nobodywho-ooo
+name: "NobodyWho"
+kinds: [open_source]
+description: "Inference engine that lets you run LLMs locally and efficiently on any device."
+website: "https://nobodywho.ai"
+logo_url: /logos/nobodywho-ooo.png
+links:
+  github: "https://github.com/nobodywho-ooo"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: nobodywho
+    name: "nobodywho"
+    type: oss_project
+    github: nobodywho-ooo/nobodywho
+    tagline: "NobodyWho is an inference engine that lets you run LLMs locally and efficiently on any device."
+    url: "https://github.com/nobodywho-ooo/nobodywho"
+    metadata:
+      license: "EUPL-1.2"

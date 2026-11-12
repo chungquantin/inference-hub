@@ -1,0 +1,8 @@
+slug: exxact
+name: "Exxact"
+kinds: [hardware]
+description: "Custom Computing Solutions: Workstations, Servers, & Rack Scale Clusters for · AI · Scientific Computing · Design Visualization · Engineering Simulation · Storage · & More"
+website: "https://www.exxactcorp.com"
+logo_url: /logos/exxact.png
+tagging:
+  match_case: true

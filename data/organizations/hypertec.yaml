@@ -1,0 +1,8 @@
+slug: hypertec
+name: "Hypertec"
+kinds: [gpu_cloud]
+description: "Hypertec helps organizations scale faster, operate smarter, and build sustainably with high-performance end-to-end solutions across HPC, AI, and cloud."
+website: "https://hypertec.com"
+logo_url: /logos/hypertec.png
+tagging:
+  match_case: true

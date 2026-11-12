@@ -1,0 +1,9 @@
+slug: liger-kernel
+name: "Liger Kernel"
+kinds: [open_source]
+description: "Efficient Triton Kernels for LLM Training. Contribute to linkedin/Liger-Kernel development by creating an account on GitHub."
+website: "https://github.com/linkedin/Liger-Kernel"
+logo_url: /logos/liger-kernel.png
+categories: [inference-engines]
+tagging:
+  match_case: true

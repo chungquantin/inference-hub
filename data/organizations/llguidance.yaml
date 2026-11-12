@@ -23,3 +23,11 @@ products:
     url: "https://github.com/guidance-ai/llguidance"
     metadata:
       license: "MIT"
+  - slug: guidance
+    name: "guidance"
+    type: oss_project
+    github: guidance-ai/guidance
+    tagline: "A guidance language for controlling large language models."
+    url: "https://github.com/guidance-ai/guidance"
+    metadata:
+      license: "MIT"

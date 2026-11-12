@@ -1,0 +1,8 @@
+slug: fluence
+name: "Fluence"
+kinds: [decentralized]
+description: "Fluence provides enterprise-grade CPU and GPU cloud compute with predictable pricing, unlimited bandwidth, and zero egress fees."
+website: "https://www.fluence.network"
+logo_url: /logos/fluence.png
+tagging:
+  match_case: true

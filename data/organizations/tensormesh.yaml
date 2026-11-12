@@ -1,0 +1,9 @@
+slug: tensormesh
+name: "Tensormesh"
+kinds: [open_source]
+description: "Cut LLM inference cost and latency. Tensormesh caches repeated context across GPU memory, host memory and storage so your GPUs stop recomputing it."
+website: "https://www.tensormesh.ai"
+logo_url: /logos/tensormesh.png
+categories: [inference-engines]
+tagging:
+  match_case: true

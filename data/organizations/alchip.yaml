@@ -1,0 +1,7 @@
+slug: alchip
+name: "Alchip"
+kinds: [hardware]
+website: "https://www.alchip.com"
+logo_url: /logos/alchip.png
+tagging:
+  match_case: true

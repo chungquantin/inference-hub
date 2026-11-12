@@ -1,0 +1,6 @@
+slug: shanghai-ai-laboratory
+name: "Shanghai AI Laboratory"
+kinds: [model_provider]
+website: "https://www.shlab.org.cn"
+tagging:
+  match_case: true

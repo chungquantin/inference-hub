@@ -1,0 +1,19 @@
+slug: fishaudio
+name: "Fish Audio"
+kinds: [open_source]
+description: "A Spark Between Voice and Text"
+website: "https://fish.audio"
+logo_url: /logos/fishaudio.png
+links:
+  github: "https://github.com/fishaudio"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: fish-speech
+    name: "fish-speech"
+    type: oss_project
+    github: fishaudio/fish-speech
+    tagline: "SOTA Open Source TTS"
+    url: "https://github.com/fishaudio/fish-speech"

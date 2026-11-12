@@ -1,0 +1,9 @@
+slug: essential-ai
+name: "Essential AI"
+kinds: [model_provider]
+description: "Essential AI builds open-source models and tools to make frontier AI more accessible."
+website: "https://www.essential.ai"
+logo_url: /logos/essential-ai.png
+tagging:
+  match_case: true
+  match_name: false

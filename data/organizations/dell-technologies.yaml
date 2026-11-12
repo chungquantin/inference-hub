@@ -1,0 +1,8 @@
+slug: dell-technologies
+name: "Dell Technologies"
+kinds: [hardware]
+website: "https://www.dell.com"
+logo_url: /logos/dell-technologies.png
+tagging:
+  match_case: true
+  match_name: false

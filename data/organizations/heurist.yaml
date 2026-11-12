@@ -1,0 +1,8 @@
+slug: heurist
+name: "Heurist"
+kinds: [decentralized]
+description: "Heurist brings institutional-grade financial intelligence to retail investors with AI-driven research desk, trusted datasets and agent skills."
+website: "https://www.heurist.ai"
+logo_url: /logos/heurist.png
+tagging:
+  match_case: true

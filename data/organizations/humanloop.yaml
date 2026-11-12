@@ -1,0 +1,10 @@
+slug: humanloop
+name: "Humanloop"
+kinds: [llmops]
+description: "Humanloop is joining Anthropic to accelerate the adoption of AI, safely."
+website: "https://humanloop.com"
+logo_url: /logos/humanloop.svg
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,32 @@
+slug: pytorch
+name: "pytorch"
+kinds: [open_source]
+website: "https://pytorch.org"
+logo_url: /logos/pytorch.jpg
+links:
+  github: "https://github.com/pytorch"
+categories: [inference-engines, local-runtimes, model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: fbgemm
+    name: "FBGEMM"
+    type: oss_project
+    github: pytorch/FBGEMM
+    tagline: "FB (Facebook) + GEMM (General Matrix-Matrix Multiplication) - https://code.fb.com/ml-applications/fbgemm/"
+    url: "https://github.com/pytorch/FBGEMM"
+  - slug: executorch
+    name: "executorch"
+    type: oss_project
+    github: pytorch/executorch
+    tagline: "On-device AI across mobile, embedded and edge for PyTorch"
+    url: "https://github.com/pytorch/executorch"
+  - slug: helion
+    name: "helion"
+    type: oss_project
+    github: pytorch/helion
+    tagline: "A Python-embedded DSL that makes it easy to write fast, scalable ML kernels with minimal boilerplate."
+    url: "https://github.com/pytorch/helion"
+    metadata:
+      license: "BSD-3-Clause"

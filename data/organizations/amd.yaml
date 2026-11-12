@@ -9,3 +9,34 @@ links:
 tagging:
   aliases: ["Instinct", "ROCm"]
   match_case: true
+products:
+  - slug: aiter
+    name: "aiter"
+    type: oss_project
+    github: ROCm/aiter
+    tagline: "AI Tensor Engine for ROCm"
+    url: "https://github.com/ROCm/aiter"
+    metadata:
+      license: "MIT"
+  - slug: composable-kernel
+    name: "composable_kernel"
+    type: oss_project
+    github: ROCm/composable_kernel
+    tagline: "[DEPRECATED] Moved to ROCm/rocm-libraries repo.  NOTE:  develop branch is maintained as a read-only mirror"
+    url: "https://github.com/ROCm/composable_kernel"
+  - slug: ryzenai-sw
+    name: "RyzenAI-SW"
+    type: oss_project
+    github: amd/RyzenAI-SW
+    tagline: "AMD Ryzen™ AI Software includes the tools and runtime libraries for optimizing and deploying AI inference on AMD Ryzen™ AI powered PCs."
+    url: "https://github.com/amd/RyzenAI-SW"
+    metadata:
+      license: "MIT"
+  - slug: gaia
+    name: "gaia"
+    type: oss_project
+    github: amd/gaia
+    tagline: "Build AI agents for your PC"
+    url: "https://github.com/amd/gaia"
+    metadata:
+      license: "MIT"

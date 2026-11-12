@@ -1,0 +1,8 @@
+slug: quadric
+name: "Quadric"
+kinds: [hardware]
+description: "Your silicon. Your models. Your roadmap. Flexible AI accelerator IP that is powering the next generation of AI chips."
+website: "https://quadric.io"
+logo_url: /logos/quadric.png
+tagging:
+  match_case: true

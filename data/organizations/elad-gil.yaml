@@ -1,0 +1,9 @@
+slug: elad-gil
+name: "Elad Gil"
+kinds: [investor]
+description: "I am a serial entrepreneur obsessed with technology and startups. Click to read Elad Blog, a Substack publication with tens of thousands of subscribers."
+website: "https://blog.eladgil.com"
+logo_url: /logos/elad-gil.jpg
+tagging:
+  match_case: true
+  match_name: false

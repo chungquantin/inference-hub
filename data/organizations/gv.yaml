@@ -1,0 +1,9 @@
+slug: gv
+name: "GV"
+kinds: [investor]
+description: "We support innovative founders moving the world forward."
+website: "https://www.gv.com"
+logo_url: /logos/gv.png
+tagging:
+  match_case: true
+  match_name: false

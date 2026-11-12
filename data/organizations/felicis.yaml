@@ -1,0 +1,9 @@
+slug: felicis
+name: "Felicis"
+kinds: [investor]
+description: "Felicis is a venture capital firm that backs iconic founders starting at Seed. Early believers in Notion, Canva, Shopify, n8n, Supabase, Mercor, and more."
+website: "https://www.felicis.com"
+logo_url: /logos/felicis.png
+tagging:
+  match_case: true
+  match_name: false

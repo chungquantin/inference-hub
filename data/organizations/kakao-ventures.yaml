@@ -1,0 +1,7 @@
+slug: kakao-ventures
+name: "Kakao Ventures"
+kinds: [investor]
+website: "https://www.kakao.vc"
+logo_url: /logos/kakao-ventures.png
+tagging:
+  match_case: true

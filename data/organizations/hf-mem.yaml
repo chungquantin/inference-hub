@@ -1,0 +1,19 @@
+slug: hf-mem
+name: "hf-mem"
+kinds: [open_source]
+website: "https://pypi.org/project/hf-mem/"
+links:
+  github: "https://github.com/alvarobartt/hf-mem"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: hf-mem
+    name: "hf-mem"
+    type: oss_project
+    github: alvarobartt/hf-mem
+    tagline: "A CLI to estimate inference memory requirements for Hugging Face models, written in Python."
+    url: "https://github.com/alvarobartt/hf-mem"
+    metadata:
+      license: "MIT"

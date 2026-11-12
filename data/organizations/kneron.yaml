@@ -1,0 +1,7 @@
+slug: kneron
+name: "Kneron"
+kinds: [hardware]
+description: "Kneron, a leading provider of edge AI solutions, was founded in 2015 at San Diego, US. It is dedicated to design and development of integrated software and hardware edge AI solutions."
+website: "https://www.kneron.com"
+tagging:
+  match_case: true

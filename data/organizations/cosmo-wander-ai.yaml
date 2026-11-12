@@ -1,0 +1,20 @@
+slug: cosmo-wander-ai
+name: "cosmo-wander-ai"
+kinds: [open_source]
+website: "https://github.com/cosmo-wander-ai"
+logo_url: /logos/cosmo-wander-ai.png
+links:
+  github: "https://github.com/cosmo-wander-ai"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cosmo-edge
+    name: "cosmo-edge"
+    type: oss_project
+    github: cosmo-wander-ai/cosmo-edge
+    tagline: "Production-grade C++ edge AI engine for video analytics and on-device VLM across Sophon, Rockchip RKNN, and x86, with visual orchestration, real-time OSD, events, and reproducible benchmarks."
+    url: "https://github.com/cosmo-wander-ai/cosmo-edge"
+    metadata:
+      license: "Apache-2.0"

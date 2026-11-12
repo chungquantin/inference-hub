@@ -1,0 +1,8 @@
+slug: nextdc
+name: "NEXTDC"
+kinds: [gpu_cloud]
+description: "Future-proof your business with NEXTDC. AI-ready data centre solutions that enable critical colocation, connectivity and cloud readiness Australia-wide."
+website: "https://www.nextdc.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

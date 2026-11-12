@@ -1,0 +1,8 @@
+slug: nea
+name: "NEA"
+kinds: [investor]
+description: "Foundational partners to ambitious founders at every stage of company-building."
+website: "https://www.nea.com"
+logo_url: /logos/nea.svg
+tagging:
+  match_case: true

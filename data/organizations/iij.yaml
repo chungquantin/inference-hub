@@ -1,0 +1,8 @@
+slug: iij
+name: "IIJ"
+kinds: [gpu_cloud]
+website: "https://www.iij.ad.jp"
+logo_url: /logos/iij.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: cortecs
+name: "Cortecs"
+kinds: [inference_provider]
+description: "Cortecs is Europe's LLM router for cost, speed, and compliance. Dynamically route AI workloads to the best models, all hosted within the EU, ensuring full GDPR compliance."
+website: "https://cortecs.ai"
+logo_url: /logos/cortecs.png
+tagging:
+  match_case: true

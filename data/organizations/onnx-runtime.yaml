@@ -1,0 +1,8 @@
+slug: onnx-runtime
+name: "ONNX Runtime"
+kinds: [open_source]
+description: "Cross-platform accelerated machine learning. Built-in optimizations speed up training and inferencing with your existing technology stack."
+website: "https://onnxruntime.ai"
+categories: [inference-engines]
+tagging:
+  match_case: true

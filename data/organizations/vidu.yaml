@@ -1,0 +1,8 @@
+slug: vidu
+name: "Vidu"
+kinds: [model_provider]
+description: "Create videos with Vidu, an AI video generator for text prompts, images, and references with fast workflows for social content, ads, and storytelling."
+website: "https://www.vidu.com"
+logo_url: /logos/vidu.svg
+tagging:
+  match_case: true

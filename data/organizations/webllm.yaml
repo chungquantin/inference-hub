@@ -1,0 +1,9 @@
+slug: webllm
+name: "WebLLM"
+kinds: [open_source]
+description: "WebLLM: High-Performance In-Browser LLM Inference Engine"
+website: "https://webllm.mlc.ai"
+logo_url: /logos/webllm.png
+categories: [inference-engines]
+tagging:
+  match_case: true

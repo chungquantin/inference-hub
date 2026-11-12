@@ -1,0 +1,19 @@
+slug: software-mansion
+name: "Software Mansion"
+kinds: [open_source]
+description: "Software development for mobile apps, web and AI. Providing technological partnership from MVP to production. Select partner in the Claude Partner Network."
+website: "https://swmansion.com"
+logo_url: /logos/software-mansion.png
+links:
+  github: "https://github.com/software-mansion"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: react-native-executorch
+    name: "react-native-executorch"
+    type: oss_project
+    github: software-mansion/react-native-executorch
+    tagline: "High-performance, privacy-first on-device AI inference library for React Native, powered by PyTorch's ExecuTorch runtime"
+    url: "https://github.com/software-mansion/react-native-executorch"

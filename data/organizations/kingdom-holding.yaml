@@ -1,0 +1,7 @@
+slug: kingdom-holding
+name: "Kingdom Holding"
+kinds: [investor]
+website: "https://kingdom.com.sa"
+logo_url: /logos/kingdom-holding.svg
+tagging:
+  match_case: true

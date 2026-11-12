@@ -1,0 +1,7 @@
+slug: wiwynn
+name: "Wiwynn"
+kinds: [hardware]
+description: "Learn about Wiwynn, a global cloud-enabling service company, providing end-to-end integrated solutions that caters to your enterprises."
+website: "https://www.wiwynn.com"
+tagging:
+  match_case: true

@@ -1,0 +1,6 @@
+slug: warburg-pincus
+name: "Warburg Pincus"
+kinds: [investor]
+website: "https://warburgpincus.com"
+tagging:
+  match_case: true

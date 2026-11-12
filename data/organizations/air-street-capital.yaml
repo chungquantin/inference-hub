@@ -1,0 +1,8 @@
+slug: air-street-capital
+name: "Air Street Capital"
+kinds: [investor]
+description: "Air Street Capital is a venture capital firm investing exclusively in AI-first companies across frontier AI, infrastructure, autonomy, defense technology, and TechBio. Founded in 2019 by Nathan Benaich."
+website: "https://www.airstreet.com"
+logo_url: /logos/air-street-capital.png
+tagging:
+  match_case: true

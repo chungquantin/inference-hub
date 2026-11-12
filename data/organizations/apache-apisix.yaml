@@ -13,3 +13,12 @@ feeds:
     name: "Apache APISIX blog"
     url: "https://apisix.apache.org/blog/rss"
     interval_minutes: 180
+products:
+  - slug: apisix
+    name: "apisix"
+    type: oss_project
+    github: apache/apisix
+    tagline: "The Cloud-Native API Gateway and AI Gateway"
+    url: "https://github.com/apache/apisix"
+    metadata:
+      license: "Apache-2.0"

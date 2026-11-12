@@ -1,0 +1,8 @@
+slug: thunderkittens
+name: "ThunderKittens"
+kinds: [open_source]
+website: "https://hazyresearch.stanford.edu/blog/2024-05-12-tk"
+logo_url: /logos/thunderkittens.png
+categories: [inference-engines]
+tagging:
+  match_case: true

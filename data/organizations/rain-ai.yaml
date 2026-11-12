@@ -1,0 +1,9 @@
+slug: rain-ai
+name: "Rain AI"
+kinds: [hardware]
+description: "We are building the compute platform that will power the future of AI infrastructure and redefine the cost of compute."
+website: "https://rain.ai"
+logo_url: /logos/rain-ai.webp
+tagging:
+  match_case: true
+  match_name: false

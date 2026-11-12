@@ -1,0 +1,8 @@
+slug: allora
+name: "Allora"
+kinds: [decentralized]
+description: "Allora is a decentralized network that turns many machine learning models into one continuously improving inference."
+website: "https://www.allora.network"
+tagging:
+  match_case: true
+  match_name: false

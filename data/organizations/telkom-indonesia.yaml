@@ -1,0 +1,9 @@
+slug: telkom-indonesia
+name: "Telkom Indonesia"
+kinds: [gpu_cloud]
+description: "Tumbuhkan Bisnis dan Konten Anda melalui Layanan, Platform dan Konektivitas Digital Telkom."
+website: "https://www.telkom.co.id"
+logo_url: /logos/telkom-indonesia.svg
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

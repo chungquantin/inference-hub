@@ -1,0 +1,10 @@
+slug: orq-ai
+name: "Orq.ai"
+kinds: [llmops]
+description: "One EU-built control plane for enterprise AI. Govern every LLM and MCP call with the AI Gateway and ship your backlog with the Software Factory. Start free."
+website: "https://orq.ai"
+logo_url: /logos/orq-ai.svg
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false

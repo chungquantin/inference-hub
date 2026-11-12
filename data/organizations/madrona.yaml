@@ -1,0 +1,9 @@
+slug: madrona
+name: "Madrona"
+kinds: [investor]
+description: "A venture capital firm that teams with technology entrepreneurs to nurture ideas from startup to market success."
+website: "https://www.madrona.com"
+logo_url: /logos/madrona.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: flux
+name: "Flux"
+kinds: [decentralized]
+description: "Flux provides decentralized cloud computing powered by blockchain technology. Deploy apps, run nodes, and access distributed computing resources with enhanced security and scalability."
+website: "https://runonflux.com"
+logo_url: /logos/flux.svg
+tagging:
+  match_case: true
+  match_name: false

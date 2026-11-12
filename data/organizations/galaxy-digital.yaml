@@ -1,0 +1,8 @@
+slug: galaxy-digital
+name: "Galaxy Digital"
+kinds: [gpu_cloud]
+description: "Galaxy builds the economy that runs on code — investing across digital assets moving onchain and the AI data centers powering the future of finance."
+website: "https://www.galaxy.com"
+logo_url: /logos/galaxy-digital.png
+tagging:
+  match_case: true

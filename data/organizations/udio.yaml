@@ -1,0 +1,9 @@
+slug: udio
+name: "Udio"
+kinds: [model_provider]
+description: "Discover, create, and share music with the world. Use the latest technology to create AI music in seconds."
+website: "https://www.udio.com"
+logo_url: /logos/udio.png
+tagging:
+  match_case: true
+  match_name: false

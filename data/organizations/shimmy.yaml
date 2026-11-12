@@ -1,0 +1,19 @@
+slug: shimmy
+name: "shimmy"
+kinds: [open_source]
+website: "https://targetedwebresults.com/"
+links:
+  github: "https://github.com/Michael-A-Kuykendall/shimmy"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: shimmy
+    name: "shimmy"
+    type: oss_project
+    github: Michael-A-Kuykendall/shimmy
+    tagline: "⚡ Pure-Rust WebGPU inference engine — OpenAI-API compatible, GGUF native, runs on any GPU. No Python. No llama.cpp. Single binary."
+    url: "https://github.com/Michael-A-Kuykendall/shimmy"
+    metadata:
+      license: "Apache-2.0"

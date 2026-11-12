@@ -1,0 +1,7 @@
+slug: carlyle
+name: "Carlyle"
+kinds: [investor]
+website: "https://www.carlyle.com"
+tagging:
+  match_case: true
+  match_name: false

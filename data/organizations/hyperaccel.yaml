@@ -1,0 +1,7 @@
+slug: hyperaccel
+name: "HyperAccel"
+kinds: [hardware]
+website: "https://hyperaccel.ai"
+logo_url: /logos/hyperaccel.png
+tagging:
+  match_case: true

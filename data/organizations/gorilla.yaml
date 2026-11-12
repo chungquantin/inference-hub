@@ -1,0 +1,19 @@
+slug: gorilla
+name: "gorilla"
+kinds: [open_source]
+website: "https://gorilla.cs.berkeley.edu/"
+links:
+  github: "https://github.com/ShishirPatil/gorilla"
+categories: [evals-benchmarks]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gorilla
+    name: "gorilla"
+    type: oss_project
+    github: ShishirPatil/gorilla
+    tagline: "Gorilla: Training and Evaluating LLMs for Function Calls (Tool Calls)"
+    url: "https://github.com/ShishirPatil/gorilla"
+    metadata:
+      license: "Apache-2.0"

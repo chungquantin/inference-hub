@@ -1,0 +1,8 @@
+slug: tensorfuse
+name: "Tensorfuse"
+kinds: [inference_provider]
+description: "Tensorfuse simplifies deploying, fine-tuning, and auto-scaling generative AI models on AWS/Azure/GCP. Run serverless inference, batch jobs, and job queues."
+website: "https://tensorfuse.io"
+logo_url: /logos/tensorfuse.png
+tagging:
+  match_case: true

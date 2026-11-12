@@ -1,0 +1,7 @@
+slug: krea
+name: "Krea"
+kinds: [model_provider]
+website: "https://www.krea.ai"
+logo_url: /logos/krea.png
+tagging:
+  match_case: true

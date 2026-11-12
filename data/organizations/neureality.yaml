@@ -1,0 +1,8 @@
+slug: neureality
+name: "NeuReality"
+kinds: [hardware]
+description: "NeuReality helps AI infrastructure teams maximize GPU throughput, reduce latency, and lower cost per token. Discover NR-NEXUS Inference OS and NR2 AI-SuperNIC for production AI at scale."
+website: "https://www.neureality.ai"
+logo_url: /logos/neureality.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: honeyhive
+name: "HoneyHive"
+kinds: [llmops]
+description: "HoneyHive helps enterprises trace, evaluate, monitor, and improve production AI agents across teams, stacks, and sensitive data environments."
+website: "https://www.honeyhive.ai"
+logo_url: /logos/honeyhive.png
+categories: [observability]
+tagging:
+  match_case: true

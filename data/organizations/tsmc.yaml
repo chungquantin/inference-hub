@@ -1,0 +1,6 @@
+slug: tsmc
+name: "TSMC"
+kinds: [hardware]
+website: "https://www.tsmc.com"
+tagging:
+  match_case: true

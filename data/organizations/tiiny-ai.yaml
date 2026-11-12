@@ -1,0 +1,20 @@
+slug: tiiny-ai
+name: "Tiiny AI"
+kinds: [open_source]
+website: "http://tiiny.ai/"
+logo_url: /logos/tiiny-ai.png
+links:
+  github: "https://github.com/Tiiny-AI"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: powerinfer
+    name: "PowerInfer"
+    type: oss_project
+    github: Tiiny-AI/PowerInfer
+    tagline: "High-speed Large Language Model Serving for Local Deployment"
+    url: "https://github.com/Tiiny-AI/PowerInfer"
+    metadata:
+      license: "MIT"

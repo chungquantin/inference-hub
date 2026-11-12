@@ -1,0 +1,6 @@
+slug: atoma-network
+name: "Atoma Network"
+kinds: [decentralized]
+website: "https://atoma.network"
+tagging:
+  match_case: true

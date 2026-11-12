@@ -1,0 +1,8 @@
+slug: deepx
+name: "DEEPX"
+kinds: [hardware]
+description: "Discover DEEPX's edge AI chips for robotics and on-device LLMs, delivering 240% faster performance and lower costs."
+website: "https://deepx.ai"
+logo_url: /logos/deepx.jpg
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: altimeter-capital
+name: "Altimeter Capital"
+kinds: [investor]
+website: "https://www.altimeter.com"
+logo_url: /logos/altimeter-capital.svg
+tagging:
+  match_case: true

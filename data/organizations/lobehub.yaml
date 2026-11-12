@@ -1,0 +1,19 @@
+slug: lobehub
+name: "LobeHub"
+kinds: [open_source]
+description: "Agent teammates that grow with you"
+website: "https://lobehub.com"
+logo_url: /logos/lobehub.png
+links:
+  github: "https://github.com/lobehub"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lobehub
+    name: "lobehub"
+    type: oss_project
+    github: lobehub/lobehub
+    tagline: "🤯 LobeHub - Super-Agents on Your Team. Add super-agents to the chats your team already uses.They take on work by themselves and get better every week."
+    url: "https://github.com/lobehub/lobehub"

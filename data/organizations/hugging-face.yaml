@@ -37,3 +37,42 @@ products:
     url: "https://github.com/huggingface/candle"
     metadata:
       license: "Apache-2.0"
+  - slug: kernels
+    name: "kernels"
+    type: oss_project
+    github: huggingface/kernels
+    tagline: "Build compute kernels and load them from the Hub."
+    url: "https://github.com/huggingface/kernels"
+    metadata:
+      license: "Apache-2.0"
+  - slug: lighteval
+    name: "lighteval"
+    type: oss_project
+    github: huggingface/lighteval
+    tagline: "Lighteval is your all-in-one toolkit for evaluating LLMs across multiple backends"
+    url: "https://github.com/huggingface/lighteval"
+    metadata:
+      license: "MIT"
+  - slug: optimum-nvidia
+    name: "optimum-nvidia"
+    type: oss_project
+    github: huggingface/optimum-nvidia
+    url: "https://github.com/huggingface/optimum-nvidia"
+    metadata:
+      license: "Apache-2.0"
+  - slug: swift-transformers
+    name: "swift-transformers"
+    type: oss_project
+    github: huggingface/swift-transformers
+    tagline: "Swift Package to implement a transformers-like API in Swift"
+    url: "https://github.com/huggingface/swift-transformers"
+    metadata:
+      license: "Apache-2.0"
+  - slug: tokenizers
+    name: "tokenizers"
+    type: oss_project
+    github: huggingface/tokenizers
+    tagline: "💥 Fast State-of-the-Art Tokenizers optimized for Research and Production"
+    url: "https://github.com/huggingface/tokenizers"
+    metadata:
+      license: "Apache-2.0"

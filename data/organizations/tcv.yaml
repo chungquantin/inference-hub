@@ -1,0 +1,8 @@
+slug: tcv
+name: "TCV"
+kinds: [investor]
+description: "Partnering with exceptional teams to build category-defining technology companies"
+website: "https://www.tcv.com"
+logo_url: /logos/tcv.png
+tagging:
+  match_case: true

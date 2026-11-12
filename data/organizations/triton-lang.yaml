@@ -1,0 +1,20 @@
+slug: triton-lang
+name: "triton-lang"
+kinds: [open_source]
+website: "https://github.com/triton-lang"
+logo_url: /logos/triton-lang.png
+links:
+  github: "https://github.com/triton-lang"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: triton
+    name: "triton"
+    type: oss_project
+    github: triton-lang/triton
+    tagline: "Development repository for the Triton language and compiler"
+    url: "https://github.com/triton-lang/triton"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,7 @@
+slug: freepik
+name: "Freepik"
+kinds: [model_provider]
+website: "https://www.freepik.com"
+logo_url: /logos/freepik.svg
+tagging:
+  match_case: true

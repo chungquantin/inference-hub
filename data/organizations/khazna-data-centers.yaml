@@ -1,0 +1,8 @@
+slug: khazna-data-centers
+name: "Khazna Data Centers"
+kinds: [gpu_cloud]
+description: "Khazna is an advanced data centers provider in the UAE. Explore our secure, sustainable, and scalable solutions for your business needs."
+website: "https://khaznadatacenters.com"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

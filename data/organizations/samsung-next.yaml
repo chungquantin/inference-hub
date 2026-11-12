@@ -1,0 +1,7 @@
+slug: samsung-next
+name: "Samsung Next"
+kinds: [investor]
+website: "https://www.samsungnext.com"
+logo_url: /logos/samsung-next.png
+tagging:
+  match_case: true

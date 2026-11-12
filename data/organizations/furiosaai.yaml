@@ -1,0 +1,8 @@
+slug: furiosaai
+name: "FuriosaAI"
+kinds: [hardware]
+description: "FuriosaAI designs high-performance, power-efficient AI accelerators (NPUs) used in data centers for computer vision, GenAI, LLMs, and demanding workloads."
+website: "https://furiosa.ai"
+logo_url: /logos/furiosaai.png
+tagging:
+  match_case: true

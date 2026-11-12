@@ -1,0 +1,9 @@
+slug: arthur-ai
+name: "Arthur AI"
+kinds: [llmops]
+description: "Arthur unites security, finance, and the teams shipping AI on one control plane for AI you can trust. Measure, monitor, and govern enterprise AI at scale."
+website: "https://www.arthur.ai"
+logo_url: /logos/arthur-ai.svg
+categories: [observability]
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: matx
+name: "MatX"
+kinds: [hardware]
+description: "We make the best chips physically possible for the large model needs of frontier labs."
+website: "https://matx.com"
+logo_url: /logos/matx.svg
+tagging:
+  match_case: true

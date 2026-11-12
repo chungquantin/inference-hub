@@ -1,0 +1,6 @@
+slug: balderton-capital
+name: "Balderton Capital"
+kinds: [investor]
+website: "https://www.balderton.com"
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: latent-ai
+name: "Latent AI"
+kinds: [open_source]
+description: "Discover Latent AI's edge AI platform: optimize, deploy, and adapt AI models with ease for faster, scalable, and secure solutions."
+website: "https://latentai.com"
+logo_url: /logos/latent-ai.png
+categories: [inference-engines]
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: teraco
+name: "Teraco"
+kinds: [gpu_cloud]
+website: "https://www.teraco.co.za"
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

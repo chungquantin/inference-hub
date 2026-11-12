@@ -1,0 +1,8 @@
+slug: lightmatter
+name: "Lightmatter"
+kinds: [hardware]
+description: "Rethinking the limits of AI, Lightmatter merges photonics and computing to build a future where speed, efficiency, and intelligence converge."
+website: "https://lightmatter.co"
+logo_url: /logos/lightmatter.png
+tagging:
+  match_case: true

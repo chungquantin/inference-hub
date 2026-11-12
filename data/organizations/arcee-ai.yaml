@@ -1,0 +1,8 @@
+slug: arcee-ai
+name: "Arcee AI"
+kinds: [model_provider]
+description: "Arcee is an open intelligence lab based in the U.S. Our models are open-weight, transparent, customizable, and built to run wherever you need them."
+website: "https://www.arcee.ai"
+logo_url: /logos/arcee-ai.svg
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: astera-labs
+name: "Astera Labs"
+kinds: [hardware]
+description: "Astera Labs: Purpose-Built Connectivity for Rack-Scale AI"
+website: "https://www.asteralabs.com"
+logo_url: /logos/astera-labs.png
+tagging:
+  match_case: true

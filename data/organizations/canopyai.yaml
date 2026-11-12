@@ -1,0 +1,20 @@
+slug: canopyai
+name: "Canopy Labs"
+kinds: [open_source]
+website: "https://canopylabs.ai"
+logo_url: /logos/canopyai.png
+links:
+  github: "https://github.com/canopyai"
+categories: [inference-engines]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: orpheus-tts
+    name: "Orpheus-TTS"
+    type: oss_project
+    github: canopyai/Orpheus-TTS
+    tagline: "Towards Human-Sounding Speech"
+    url: "https://github.com/canopyai/Orpheus-TTS"
+    metadata:
+      license: "Apache-2.0"

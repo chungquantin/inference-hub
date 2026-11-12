@@ -1,0 +1,8 @@
+slug: cota-capital
+name: "Cota Capital"
+kinds: [investor]
+description: "Cota Capital invests in net new by combining knowledge capital with financial expertise to drive innovative enterprise solutions."
+website: "https://www.cotacapital.com"
+logo_url: /logos/cota-capital.png
+tagging:
+  match_case: true

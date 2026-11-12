@@ -1,0 +1,6 @@
+slug: gigabyte
+name: "Gigabyte"
+kinds: [hardware]
+website: "https://www.gigabyte.com"
+tagging:
+  match_case: true

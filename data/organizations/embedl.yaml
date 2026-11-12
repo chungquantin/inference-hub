@@ -1,0 +1,9 @@
+slug: embedl
+name: "Embedl"
+kinds: [open_source]
+description: "Benchmark and deploy PyTorch models on NVIDIA Jetson and data-center GPUs, quantized with Embedl Deploy."
+website: "https://www.embedl.com"
+logo_url: /logos/embedl.png
+categories: [inference-engines]
+tagging:
+  match_case: true

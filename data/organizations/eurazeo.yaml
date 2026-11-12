@@ -1,0 +1,9 @@
+slug: eurazeo
+name: "Eurazeo"
+kinds: [investor]
+description: "EURAZEO groupe d'investissement, gestion d'actifs sur les marchés privés, gestion d'actifs, prise de participation, fonds d'investissement privé, private equity. Eurazeo accompagne les entreprises dans leur développement."
+website: "https://www.eurazeo.com"
+logo_url: /logos/eurazeo.png
+tagging:
+  match_case: true
+  match_name: false

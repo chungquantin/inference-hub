@@ -1,0 +1,19 @@
+slug: peonist-ai
+name: "Peonist.ai"
+kinds: [open_source]
+description: "Work, work."
+website: "https://peonist.ai"
+logo_url: /logos/peonist-ai.jpg
+links:
+  github: "https://github.com/peonist-ai"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: halogen-flash-server
+    name: "halogen-flash-server"
+    type: oss_project
+    github: peonist-ai/halogen-flash-server
+    tagline: "Local inference that behaves like a frontier API: Qwen3.8-Flash-Next on AMD Strix Halo plus small NPU models, over the OpenAI and Anthropic APIs on one port."
+    url: "https://github.com/peonist-ai/halogen-flash-server"

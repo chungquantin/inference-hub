@@ -1,0 +1,8 @@
+slug: ai21-labs
+name: "AI21 Labs"
+kinds: [model_provider]
+description: "AI21's Forward-Deployed Researchers post-train specialized models for your task, creating an AI edge your competitors can’t buy."
+website: "https://www.ai21.com"
+logo_url: /logos/ai21-labs.png
+tagging:
+  match_case: true

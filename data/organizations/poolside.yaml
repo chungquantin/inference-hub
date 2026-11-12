@@ -1,0 +1,8 @@
+slug: poolside
+name: "Poolside"
+kinds: [model_provider]
+description: "Poolside is a foundation model company bringing intelligence to everywhere work gets done. Our mission is to drive abundance for humanity by creating artificial general intelligence."
+website: "https://poolside.ai"
+logo_url: /logos/poolside.svg
+tagging:
+  match_case: true

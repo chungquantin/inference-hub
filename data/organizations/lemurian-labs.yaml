@@ -1,0 +1,8 @@
+slug: lemurian-labs
+name: "Lemurian Labs"
+kinds: [hardware]
+description: "Liberate AI from hardware limits. Discover Tachyon, a single stack that delivers limitless performance and true portability. Join the movement today."
+website: "https://www.lemurianlabs.com"
+logo_url: /logos/lemurian-labs.png
+tagging:
+  match_case: true

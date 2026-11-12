@@ -1,0 +1,10 @@
+slug: vellum
+name: "Vellum"
+kinds: [llmops]
+description: "An assistant that knows you deeply, evolves alongside you, and belongs to no one else. Powered by memory that remembers the way you do."
+website: "https://www.vellum.ai"
+logo_url: /logos/vellum.svg
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false

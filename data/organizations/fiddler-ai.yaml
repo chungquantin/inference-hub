@@ -1,0 +1,9 @@
+slug: fiddler-ai
+name: "Fiddler AI"
+kinds: [llmops]
+description: "The AI Control Plane for enterprises. Gain visibility, context, and control through evaluation, monitoring, enforcement, governance, and cost efficiency."
+website: "https://www.fiddler.ai"
+logo_url: /logos/fiddler-ai.png
+categories: [observability]
+tagging:
+  match_case: true

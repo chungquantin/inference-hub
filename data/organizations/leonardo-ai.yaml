@@ -1,0 +1,6 @@
+slug: leonardo-ai
+name: "Leonardo.ai"
+kinds: [model_provider]
+website: "https://leonardo.ai"
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: ideogram
+name: "Ideogram"
+kinds: [model_provider]
+description: "Use purpose-built AI apps, access major image and video models through one API, and build on Ideogram 4.0, our open model."
+website: "https://ideogram.ai"
+logo_url: /logos/ideogram.svg
+tagging:
+  match_case: true
+  match_name: false

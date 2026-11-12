@@ -1,0 +1,8 @@
+slug: singularitynet
+name: "SingularityNET"
+kinds: [decentralized]
+description: "SingularityNET – Next Generation of Decentralized AI"
+website: "https://singularitynet.io"
+logo_url: /logos/singularitynet.png
+tagging:
+  match_case: true

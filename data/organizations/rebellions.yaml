@@ -1,0 +1,8 @@
+slug: rebellions
+name: "Rebellions"
+kinds: [hardware]
+description: "Rebellions provides AI hardware for data centers, with cards, servers and rack-scale solutions, and full-stack software that supports PyTorch and vLLM."
+website: "https://rebellions.ai"
+logo_url: /logos/rebellions.png
+tagging:
+  match_case: true

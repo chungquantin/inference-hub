@@ -1,0 +1,8 @@
+slug: lenovo
+name: "Lenovo"
+kinds: [hardware]
+description: "Save more on Lenovo official Vietnam website on laptops, desktop PCs, tablets, and accessories."
+website: "https://www.lenovo.com"
+tagging:
+  match_case: true
+  match_name: false

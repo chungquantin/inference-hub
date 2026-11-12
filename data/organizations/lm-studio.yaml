@@ -13,3 +13,12 @@ feeds:
     name: "LM Studio blog"
     url: "https://lmstudio.ai/rss.xml"
     interval_minutes: 180
+products:
+  - slug: lms
+    name: "lms"
+    type: oss_project
+    github: lmstudio-ai/lms
+    tagline: "LM Studio CLI"
+    url: "https://github.com/lmstudio-ai/lms"
+    metadata:
+      license: "MIT"

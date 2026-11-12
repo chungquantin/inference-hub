@@ -1,0 +1,7 @@
+slug: hv-capital
+name: "HV Capital"
+kinds: [investor]
+website: "https://hvcapital.com"
+logo_url: /logos/hv-capital.png
+tagging:
+  match_case: true

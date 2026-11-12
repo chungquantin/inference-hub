@@ -1,0 +1,9 @@
+slug: greylock
+name: "Greylock"
+kinds: [investor]
+description: "Greylock Partners is a leading venture capital firm based in Silicon Valley. We are early partners of remarkable teams building companies that matter."
+website: "https://greylock.com"
+logo_url: /logos/greylock.svg
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,8 @@
+slug: sapphire-ventures
+name: "Sapphire Ventures"
+kinds: [investor]
+description: "Sapphire Ventures partners with enterprise AI founders building companies of consequence."
+website: "https://sapphireventures.com"
+logo_url: /logos/sapphire-ventures.png
+tagging:
+  match_case: true

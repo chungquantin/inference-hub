@@ -1,0 +1,8 @@
+slug: synthesia
+name: "Synthesia"
+kinds: [model_provider]
+description: "Official Synthesia site. The AI video platform trusted by 90%+ of the Fortune 100 to communicate, train, and upskill teams in 140+ languages."
+website: "https://www.synthesia.io"
+logo_url: /logos/synthesia.png
+tagging:
+  match_case: true

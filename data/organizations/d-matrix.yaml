@@ -1,0 +1,8 @@
+slug: d-matrix
+name: "d-Matrix"
+kinds: [hardware]
+description: "d-Matrix is redefining AI inference with memory-centric compute built for ultra-low latency, greater efficiency, and scalable AI infrastructure."
+website: "https://www.d-matrix.ai"
+logo_url: /logos/d-matrix.png
+tagging:
+  match_case: true

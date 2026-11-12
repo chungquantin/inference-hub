@@ -1,0 +1,7 @@
+slug: samsung-catalyst-fund
+name: "Samsung Catalyst Fund"
+kinds: [investor]
+website: "https://www.samsungcatalyst.com"
+logo_url: /logos/samsung-catalyst-fund.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: genmo
+name: "Genmo"
+kinds: [model_provider]
+description: "Genmo is a research lab dedicated to building open, state-of-the-art models for video generation towards unlocking the right brain of AGI. Create high-quality videos with Mochi."
+website: "https://www.genmo.ai"
+logo_url: /logos/genmo.png
+tagging:
+  match_case: true
+  match_name: false

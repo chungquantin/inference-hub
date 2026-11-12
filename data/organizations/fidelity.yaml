@@ -1,0 +1,8 @@
+slug: fidelity
+name: "Fidelity"
+kinds: [investor]
+website: "https://www.fidelity.com"
+logo_url: /logos/fidelity.png
+tagging:
+  match_case: true
+  match_name: false

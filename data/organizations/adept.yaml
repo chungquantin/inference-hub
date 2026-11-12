@@ -1,0 +1,7 @@
+slug: adept
+name: "Adept"
+kinds: [model_provider]
+website: "https://www.adept.ai"
+tagging:
+  match_case: true
+  match_name: false

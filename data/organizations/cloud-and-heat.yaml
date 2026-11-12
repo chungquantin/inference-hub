@@ -1,0 +1,9 @@
+slug: cloud-and-heat
+name: "Cloud&Heat"
+kinds: [gpu_cloud]
+description: "Ihr Cloud-Provider aus Dresden | Managed Kubernetes, Cloud Computing, On-Premise-Cloud | Sachsen | KI-Anwendungen in der Cloud"
+website: "https://www.cloudandheat.com"
+logo_url: /logos/cloud-and-heat.webp
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

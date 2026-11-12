@@ -1,0 +1,8 @@
+slug: speedinvest
+name: "Speedinvest"
+kinds: [investor]
+description: "Speedinvest is a leading European Pre-Seed, Seed, and Growth VC fund backing Deep Tech, B2B AI & Infra, Fintech, and fundamental technologies solving real-world problems. Our expert investors and network help you build global companies from Europe and beyond."
+website: "https://www.speedinvest.com"
+logo_url: /logos/speedinvest.png
+tagging:
+  match_case: true

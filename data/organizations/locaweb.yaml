@@ -1,0 +1,9 @@
+slug: locaweb
+name: "Locaweb"
+kinds: [gpu_cloud]
+description: "Black Friday Locaweb 2026: hospedagem de site, VPS, e-mail profissional e Google Workspace em até 12x sem juros. Ofertas."
+website: "https://www.locaweb.com.br"
+logo_url: /logos/locaweb.png
+categories: [sovereign-clouds]
+tagging:
+  match_case: true

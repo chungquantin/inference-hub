@@ -1,0 +1,8 @@
+slug: east-ventures
+name: "East Ventures"
+kinds: [investor]
+description: "Pioneering and leading sector-agnostic Venture Capital firm in Southeast Asia, backing 300+ portfolio companies for sustainable development."
+website: "https://east.vc"
+logo_url: /logos/east-ventures.png
+tagging:
+  match_case: true

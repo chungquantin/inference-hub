@@ -1,0 +1,9 @@
+slug: coherent
+name: "Coherent"
+kinds: [hardware]
+description: "Learn how Coherent empowers innovations and breakthrough technologies for the industrial, communications, electronics, and instrumentation markets."
+website: "https://www.coherent.com"
+logo_url: /logos/coherent.png
+tagging:
+  match_case: true
+  match_name: false

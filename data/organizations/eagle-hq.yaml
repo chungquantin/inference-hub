@@ -1,0 +1,19 @@
+slug: eagle-hq
+name: "Eagle"
+kinds: [open_source]
+description: "Speed always wins - Fast inference for everyone"
+website: "https://eagle.ai"
+logo_url: /logos/eagle-hq.png
+links:
+  github: "https://github.com/eagle-hq"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: eagle-4
+    name: "EAGLE-4"
+    type: oss_project
+    github: eagle-hq/EAGLE-4
+    tagline: "Official Inference Code of EAGLE-4"
+    url: "https://github.com/eagle-hq/EAGLE-4"

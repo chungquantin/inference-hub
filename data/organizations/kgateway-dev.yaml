@@ -1,0 +1,20 @@
+slug: kgateway-dev
+name: "kgateway-dev"
+kinds: [open_source]
+website: "https://kgateway.dev"
+logo_url: /logos/kgateway-dev.png
+links:
+  github: "https://github.com/kgateway-dev"
+categories: [serverless-gpu]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kgateway
+    name: "kgateway"
+    type: oss_project
+    github: kgateway-dev/kgateway
+    tagline: "The Cloud-Native API Gateway and AI Gateway"
+    url: "https://github.com/kgateway-dev/kgateway"
+    metadata:
+      license: "Apache-2.0"

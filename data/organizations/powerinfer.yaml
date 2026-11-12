@@ -1,0 +1,9 @@
+slug: powerinfer
+name: "PowerInfer"
+kinds: [open_source]
+description: "High-speed Large Language Model Serving for Local Deployment - Tiiny-AI/PowerInfer"
+website: "https://github.com/SJTU-IPADS/PowerInfer"
+logo_url: /logos/powerinfer.png
+categories: [inference-engines]
+tagging:
+  match_case: true

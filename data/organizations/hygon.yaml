@@ -1,0 +1,7 @@
+slug: hygon
+name: "Hygon"
+kinds: [hardware]
+website: "https://www.hygon.cn"
+logo_url: /logos/hygon.png
+tagging:
+  match_case: true

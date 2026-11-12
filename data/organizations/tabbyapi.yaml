@@ -1,0 +1,9 @@
+slug: tabbyapi
+name: "TabbyAPI"
+kinds: [open_source]
+description: "The official API server for Exllama. OAI compatible, lightweight, and fast. - theroyallab/tabbyAPI"
+website: "https://github.com/theroyallab/tabbyAPI"
+logo_url: /logos/tabbyapi.png
+categories: [inference-engines]
+tagging:
+  match_case: true

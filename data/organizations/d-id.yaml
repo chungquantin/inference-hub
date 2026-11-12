@@ -1,0 +1,7 @@
+slug: d-id
+name: "D-ID"
+kinds: [model_provider]
+description: "Introducing NUI the Natural User Interface, aimed at revolutionizing how people interact with anything digital leveraging the power of AI"
+website: "https://www.d-id.com"
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: extropic
+name: "Extropic"
+kinds: [hardware]
+description: "Building thermodynamic computing hardware that is radically more energy efficient than GPUs."
+website: "https://extropic.ai"
+logo_url: /logos/extropic.png
+tagging:
+  match_case: true
+  match_name: false

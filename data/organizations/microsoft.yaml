@@ -23,3 +23,58 @@ products:
     url: "https://github.com/microsoft/onnxruntime-genai"
     metadata:
       license: "MIT"
+  - slug: bitnet
+    name: "BitNet"
+    type: oss_project
+    github: microsoft/BitNet
+    tagline: "Official inference framework for 1-bit LLMs"
+    url: "https://github.com/microsoft/BitNet"
+    metadata:
+      license: "MIT"
+  - slug: llmlingua
+    name: "LLMLingua"
+    type: oss_project
+    github: microsoft/LLMLingua
+    tagline: "[EMNLP'23, ACL'24] To speed up LLMs' inference and enhance LLM's perceive of key information, compress the prompt and KV-Cache, which achieves up to 20x compression with minimal performance loss."
+    url: "https://github.com/microsoft/LLMLingua"
+    metadata:
+      license: "MIT"
+  - slug: minference
+    name: "MInference"
+    type: oss_project
+    github: microsoft/MInference
+    url: "https://github.com/microsoft/MInference"
+    metadata:
+      license: "MIT"
+  - slug: olive
+    name: "Olive"
+    type: oss_project
+    github: microsoft/Olive
+    tagline: "Olive: Simplify ML Model Finetuning, Conversion, Quantization, and Optimization for CPUs, GPUs and NPUs."
+    url: "https://github.com/microsoft/Olive"
+    metadata:
+      license: "MIT"
+  - slug: t-mac
+    name: "T-MAC"
+    type: oss_project
+    github: microsoft/T-MAC
+    tagline: "Low-bit LLM inference on CPU/NPU with lookup table"
+    url: "https://github.com/microsoft/T-MAC"
+    metadata:
+      license: "MIT"
+  - slug: sarathi-serve
+    name: "sarathi-serve"
+    type: oss_project
+    github: microsoft/sarathi-serve
+    tagline: "A low-latency & high-throughput serving engine for LLMs"
+    url: "https://github.com/microsoft/sarathi-serve"
+    metadata:
+      license: "Apache-2.0"
+  - slug: vattention
+    name: "vattention"
+    type: oss_project
+    github: microsoft/vattention
+    tagline: "Dynamic Memory Management for Serving LLMs without PagedAttention"
+    url: "https://github.com/microsoft/vattention"
+    metadata:
+      license: "MIT"

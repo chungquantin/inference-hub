@@ -1,0 +1,8 @@
+slug: graphcore
+name: "Graphcore"
+kinds: [hardware]
+description: "Graphcore has built a new type of processor for machine intelligence to accelerate machine learning and AI applications for a world of intelligent machines"
+website: "https://www.graphcore.ai"
+logo_url: /logos/graphcore.svg
+tagging:
+  match_case: true

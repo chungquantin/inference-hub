@@ -24,3 +24,11 @@ products:
     url: "https://github.com/turboderp-org/exllamav3"
     metadata:
       license: "MIT"
+  - slug: exllamav2
+    name: "exllamav2"
+    type: oss_project
+    github: turboderp-org/exllamav2
+    tagline: "A fast inference library for running LLMs locally on modern consumer-class GPUs"
+    url: "https://github.com/turboderp-org/exllamav2"
+    metadata:
+      license: "MIT"

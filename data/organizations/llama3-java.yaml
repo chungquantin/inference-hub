@@ -1,0 +1,19 @@
+slug: llama3-java
+name: "llama3.java"
+kinds: [open_source]
+website: "https://qxotic.ai"
+links:
+  github: "https://github.com/mukel/llama3.java"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: llama3-java
+    name: "llama3.java"
+    type: oss_project
+    github: mukel/llama3.java
+    tagline: "Llama 3+ inference in pure Java"
+    url: "https://github.com/mukel/llama3.java"
+    metadata:
+      license: "MIT"

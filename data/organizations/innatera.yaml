@@ -1,0 +1,8 @@
+slug: innatera
+name: "Innatera"
+kinds: [hardware]
+description: "Our processors help sensors recognise patterns with more energy efficiency, lower latency and greater privacy."
+website: "https://innatera.com"
+logo_url: /logos/innatera.webp
+tagging:
+  match_case: true

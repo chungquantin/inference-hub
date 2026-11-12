@@ -1,0 +1,19 @@
+slug: efeslab
+name: "Efeslab"
+kinds: [open_source]
+description: "Efeslab at the University of Washington"
+website: "https://homes.cs.washington.edu/~baris/"
+logo_url: /logos/efeslab.png
+links:
+  github: "https://github.com/efeslab"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: nanoflow
+    name: "Nanoflow"
+    type: oss_project
+    github: efeslab/Nanoflow
+    tagline: "A throughput-oriented high-performance serving framework for LLMs"
+    url: "https://github.com/efeslab/Nanoflow"

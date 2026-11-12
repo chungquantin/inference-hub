@@ -1,0 +1,19 @@
+slug: torch-pruning
+name: "Torch-Pruning"
+kinds: [open_source]
+website: "https://arxiv.org/abs/2301.12900"
+links:
+  github: "https://github.com/VainF/Torch-Pruning"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: torch-pruning
+    name: "Torch-Pruning"
+    type: oss_project
+    github: VainF/Torch-Pruning
+    tagline: "[CVPR 2023] DepGraph: Towards Any Structural Pruning; LLMs, Vision Foundation Models, etc."
+    url: "https://github.com/VainF/Torch-Pruning"
+    metadata:
+      license: "MIT"

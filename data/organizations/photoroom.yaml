@@ -1,0 +1,8 @@
+slug: photoroom
+name: "Photoroom"
+kinds: [model_provider]
+description: "Photoroom turns your product photos into listing images and videos that help you sell, from product page videos to video ads."
+website: "https://www.photoroom.com"
+logo_url: /logos/photoroom.svg
+tagging:
+  match_case: true

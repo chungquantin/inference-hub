@@ -1,0 +1,21 @@
+slug: openppl
+name: "OpenPPL"
+kinds: [open_source]
+description: "A High-performance Deep Learning Inference Platform"
+website: "https://openppl.ai/"
+logo_url: /logos/openppl.png
+links:
+  github: "https://github.com/OpenPPL"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ppq
+    name: "ppq"
+    type: oss_project
+    github: OpenPPL/ppq
+    tagline: "PPL Quantization Tool (PPQ) is a powerful offline neural network quantization tool."
+    url: "https://github.com/OpenPPL/ppq"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,9 @@
+slug: dragoneer
+name: "Dragoneer"
+kinds: [investor]
+description: "Partnering with exceptional businesses globally. Focused on investing in leading growth businesses with sustainable differentiation and attractive economic models"
+website: "https://www.dragoneer.com"
+logo_url: /logos/dragoneer.png
+tagging:
+  match_case: true
+  match_name: false

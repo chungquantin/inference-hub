@@ -1,0 +1,8 @@
+slug: thoma-bravo
+name: "Thoma Bravo"
+kinds: [investor]
+description: "Thoma Bravo, the world’s largest software-focused investment firm, manages over $172 billion in assets for approximately 80 global software companies."
+website: "https://www.thomabravo.com"
+logo_url: /logos/thoma-bravo.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: mediatek
+name: "MediaTek"
+kinds: [hardware]
+description: "MediaTek powers smarter devices with cutting-edge chipsets for smartphones, smart homes, automotive, IoT, and more. Discover innovation that connects."
+website: "https://www.mediatek.com"
+logo_url: /logos/mediatek.png
+tagging:
+  match_case: true

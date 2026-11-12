@@ -1,0 +1,9 @@
+slug: scale-ai
+name: "Scale AI"
+kinds: [llmops]
+description: "Scale delivers proven data, evaluations, and outcomes to AI labs, governments, and the Fortune 500."
+website: "https://scale.com"
+logo_url: /logos/scale-ai.svg
+categories: [observability]
+tagging:
+  match_case: true

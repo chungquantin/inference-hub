@@ -1,0 +1,9 @@
+slug: matrix-partners
+name: "Matrix Partners"
+kinds: [investor]
+description: "Matrix is an early-stage venture capital firm, investing from idea through Series A. As a close-knit team of former founders and company builders, we've partnered with companies from Apple and FedEx to Oculus and Canva."
+website: "https://www.matrix.vc"
+logo_url: /logos/matrix-partners.png
+tagging:
+  match_case: true
+  match_name: false

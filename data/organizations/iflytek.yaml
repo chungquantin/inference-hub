@@ -1,0 +1,8 @@
+slug: iflytek
+name: "iFlytek"
+kinds: [model_provider]
+description: "World-leading AI Solution Provider of Language Exchange & Machine Learning"
+website: "https://www.iflytek.com"
+logo_url: /logos/iflytek.png
+tagging:
+  match_case: true

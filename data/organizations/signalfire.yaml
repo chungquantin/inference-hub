@@ -1,0 +1,8 @@
+slug: signalfire
+name: "SignalFire"
+kinds: [investor]
+description: "Engineered to ignite your growth, SignalFire is the first venture capital firm built as a technology company. Data, advice, and support from seed to scale."
+website: "https://www.signalfire.com"
+logo_url: /logos/signalfire.png
+tagging:
+  match_case: true

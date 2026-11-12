@@ -1,0 +1,9 @@
+slug: ornn
+name: "Ornn"
+kinds: [other]
+description: "Compute trades in the world’s most opaque market. Ornn makes it something you can price, finance, and hedge with confidence."
+website: "https://ornn.com"
+logo_url: /logos/ornn.svg
+tagging:
+  match_case: true
+  match_name: false

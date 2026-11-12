@@ -1,0 +1,21 @@
+slug: rwkv
+name: "RWKV"
+kinds: [open_source]
+description: "RWKV is an RNN with Transformer-level LLM performance. It is hosted as an incubation project in LF AI & Data Foundation."
+website: "https://github.com/BlinkDL/RWKV-LM"
+logo_url: /logos/rwkv.png
+links:
+  github: "https://github.com/RWKV"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: rwkv-cpp
+    name: "rwkv.cpp"
+    type: oss_project
+    github: RWKV/rwkv.cpp
+    tagline: "INT4/INT5/INT8 and FP16 inference on CPU for RWKV language model"
+    url: "https://github.com/RWKV/rwkv.cpp"
+    metadata:
+      license: "MIT"

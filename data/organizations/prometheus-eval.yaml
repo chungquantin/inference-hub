@@ -1,0 +1,21 @@
+slug: prometheus-eval
+name: "prometheus-eval"
+kinds: [open_source]
+description: "Codebase to inference and train foundation models specialized on evaluating other foundation models"
+website: "https://seungonekim.github.io/"
+logo_url: /logos/prometheus-eval.jpg
+links:
+  github: "https://github.com/prometheus-eval"
+categories: [observability]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: prometheus-eval
+    name: "prometheus-eval"
+    type: oss_project
+    github: prometheus-eval/prometheus-eval
+    tagline: "Evaluate your LLM's response with Prometheus and GPT4 💯"
+    url: "https://github.com/prometheus-eval/prometheus-eval"
+    metadata:
+      license: "Apache-2.0"

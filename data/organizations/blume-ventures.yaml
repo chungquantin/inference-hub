@@ -1,0 +1,7 @@
+slug: blume-ventures
+name: "Blume Ventures"
+kinds: [investor]
+website: "https://blume.vc"
+logo_url: /logos/blume-ventures.png
+tagging:
+  match_case: true

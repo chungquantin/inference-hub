@@ -1,0 +1,8 @@
+slug: nventures
+name: "NVentures"
+kinds: [investor]
+description: "NVIDIA Inception is a free program designed to nurture startups, providing co-marketing support, and opportunities to connect with the NVIDIA experts."
+website: "https://www.nvidia.com/en-us/startups"
+logo_url: /logos/nventures.png
+tagging:
+  match_case: true

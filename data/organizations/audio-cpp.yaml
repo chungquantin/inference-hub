@@ -1,0 +1,16 @@
+slug: audio-cpp
+name: "audio.cpp"
+kinds: [open_source]
+website: "https://github.com/0xShug0/audio.cpp"
+links:
+  github: "https://github.com/0xShug0/audio.cpp"
+categories: [local-runtimes]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: audio-cpp
+    name: "audio.cpp"
+    type: oss_project
+    github: 0xShug0/audio.cpp
+    url: "https://github.com/0xShug0/audio.cpp"

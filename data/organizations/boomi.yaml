@@ -1,0 +1,8 @@
+slug: boomi
+name: "Boomi"
+kinds: [llm_gateway]
+description: "Turn complexity into endless possibility with Boomi, a single platform that integrates applications, APIs, data, and AI agents."
+website: "https://boomi.com"
+logo_url: /logos/boomi.png
+tagging:
+  match_case: true

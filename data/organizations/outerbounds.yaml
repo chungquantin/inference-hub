@@ -1,0 +1,9 @@
+slug: outerbounds
+name: "Outerbounds"
+kinds: [open_source]
+description: "Human Centric Infrastructure For Machine Learning, AI, and Data Science"
+website: "https://outerbounds.com"
+logo_url: /logos/outerbounds.png
+categories: [inference-engines]
+tagging:
+  match_case: true

@@ -1,0 +1,7 @@
+slug: snowflake-ventures
+name: "Snowflake Ventures"
+kinds: [investor]
+website: "https://www.snowflake.com/en/why-snowflake/snowflake-ventures"
+logo_url: /logos/snowflake-ventures.svg
+tagging:
+  match_case: true

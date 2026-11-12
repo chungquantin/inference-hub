@@ -1,0 +1,8 @@
+slug: berget-ai
+name: "Berget AI"
+kinds: [inference_provider]
+description: "EU-compliant inference service and AI infrastructure built by developers for developers."
+website: "https://berget.ai"
+logo_url: /logos/berget-ai.svg
+tagging:
+  match_case: true

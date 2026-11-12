@@ -1,0 +1,8 @@
+slug: sifive
+name: "SiFive"
+kinds: [hardware]
+description: "As the pioneers who introduced RISC-V to the world, SiFive is transforming the future of compute by bringing the limitless potential of RISC-V to the highest performance and most data-intensive applications in the world."
+website: "https://www.sifive.com"
+logo_url: /logos/sifive.png
+tagging:
+  match_case: true

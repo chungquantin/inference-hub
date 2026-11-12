@@ -1,0 +1,8 @@
+slug: hydra-host
+name: "Hydra Host"
+kinds: [gpu_cloud]
+description: "Hydra Host offers Bare Metal GPU solutions for AI, HPC, and big data. Enjoy autonomy, privacy, and scalable performance options. Get in touch!"
+website: "https://hydrahost.com"
+logo_url: /logos/hydra-host.png
+tagging:
+  match_case: true

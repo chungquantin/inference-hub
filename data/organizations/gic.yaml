@@ -1,0 +1,9 @@
+slug: gic
+name: "GIC"
+kinds: [investor]
+description: "We are driven by a common purpose – securing Singapore’s financial future."
+website: "https://www.gic.com.sg"
+logo_url: /logos/gic.svg
+tagging:
+  match_case: true
+  match_name: false

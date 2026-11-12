@@ -1,0 +1,19 @@
+slug: vmlx
+name: "vmlx"
+kinds: [open_source]
+website: "https://vmlx.net"
+links:
+  github: "https://github.com/jjang-ai/vmlx"
+categories: [model-optimization]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: vmlx
+    name: "vmlx"
+    type: oss_project
+    github: jjang-ai/vmlx
+    tagline: "vMLX - Use MLX models easily - JANGQ (GGUF for MLX) - Not dependant on mlx_vlm"
+    url: "https://github.com/jjang-ai/vmlx"
+    metadata:
+      license: "Apache-2.0"

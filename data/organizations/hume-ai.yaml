@@ -1,0 +1,8 @@
+slug: hume-ai
+name: "Hume AI"
+kinds: [model_provider]
+description: "Hume helps frontier labs and enterprises build more emotionally intelligent voice AI through voice-native evaluation, human judgment, and evidence that guides improvement."
+website: "https://www.hume.ai"
+logo_url: /logos/hume-ai.png
+tagging:
+  match_case: true

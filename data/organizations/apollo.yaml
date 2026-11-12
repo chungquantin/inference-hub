@@ -1,0 +1,8 @@
+slug: apollo
+name: "Apollo"
+kinds: [investor]
+website: "https://www.apollo.com"
+logo_url: /logos/apollo.png
+tagging:
+  match_case: true
+  match_name: false

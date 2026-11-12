@@ -1,0 +1,8 @@
+slug: silicon-data
+name: "Silicon Data"
+kinds: [other]
+description: "Silicon Data delivers real-time GPU pricing, benchmarks, and market intelligence, helping companies optimize costs, performance, and sustainability."
+website: "https://www.silicondata.com"
+logo_url: /logos/silicon-data.png
+tagging:
+  match_case: true

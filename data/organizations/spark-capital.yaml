@@ -1,0 +1,9 @@
+slug: spark-capital
+name: "Spark Capital"
+kinds: [investor]
+description: "Spark Capital invests in products we love by creators we admire across all sectors and stages."
+website: "https://www.sparkcapital.com"
+logo_url: /logos/spark-capital.png
+tagging:
+  match_case: true
+  match_name: false

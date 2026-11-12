@@ -1,0 +1,37 @@
+slug: kubernetes-sigs
+name: "Kubernetes SIGs"
+kinds: [open_source]
+description: "Org for Kubernetes SIG-related work"
+website: "https://github.com/kubernetes-sigs"
+logo_url: /logos/kubernetes-sigs.png
+links:
+  github: "https://github.com/kubernetes-sigs"
+categories: [serving-orchestration]
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lws
+    name: "lws"
+    type: oss_project
+    github: kubernetes-sigs/lws
+    tagline: "LeaderWorkerSet & DisaggregatedSet: Kubernetes APIs for Distributed and Disaggregated AI Serving"
+    url: "https://github.com/kubernetes-sigs/lws"
+    metadata:
+      license: "Apache-2.0"
+  - slug: kueue
+    name: "kueue"
+    type: oss_project
+    github: kubernetes-sigs/kueue
+    tagline: ":vertical_traffic_light: Kubernetes-native Job Queueing and Scheduling"
+    url: "https://github.com/kubernetes-sigs/kueue"
+    metadata:
+      license: "Apache-2.0"
+  - slug: kwok
+    name: "kwok"
+    type: oss_project
+    github: kubernetes-sigs/kwok
+    tagline: "Kubernetes WithOut Kubelet -  Simulates thousands of Nodes and Clusters."
+    url: "https://github.com/kubernetes-sigs/kwok"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: coatue
+name: "Coatue"
+kinds: [investor]
+description: "Coatue is a lifecycle investment platform focused on turning big ideas into world-shaping technology companies."
+website: "https://www.coatue.com"
+logo_url: /logos/coatue.jpg
+tagging:
+  match_case: true

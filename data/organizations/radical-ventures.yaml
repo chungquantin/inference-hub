@@ -1,0 +1,8 @@
+slug: radical-ventures
+name: "Radical Ventures"
+kinds: [investor]
+website: "https://radical.vc"
+logo_url: /logos/radical-ventures.png
+tagging:
+  match_case: true
+  match_name: false

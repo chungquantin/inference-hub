@@ -1,0 +1,9 @@
+slug: mgx
+name: "MGX"
+kinds: [investor]
+description: "We are the UAE’s leading AI and advanced technology investor, accelerating the responsible growth of the global AI economy"
+website: "https://mgx.ae"
+logo_url: /logos/mgx.png
+tagging:
+  match_case: true
+  match_name: false
