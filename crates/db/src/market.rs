@@ -133,7 +133,8 @@ fn model_order(sort: Option<&str>, dir: Option<&str>) -> String {
         "median" => ("m.median_blended_per_mtok", false),
         "input" => ("m.min_input_per_mtok", false),
         "output" => ("m.min_output_per_mtok", false),
-        "context" => ("m.max_context_window", true),
+        "context" => ("coalesce(m.max_context_window, f.context_window)", true),
+        "released" => ("f.released_on", true),
         "name" => ("lower(m.name)", false),
         _ => ("m.providers", true),
     };
@@ -156,16 +157,19 @@ pub async fn model_index(pool: &PgPool, q: &MarketIndexQuery) -> sqlx::Result<Pa
         "SELECT count(*) OVER () AS total, m.model_key, m.name, m.maker,
                 m.providers::int8 AS providers,
                 m.min_input_per_mtok, m.min_output_per_mtok, m.min_blended_per_mtok,
-                m.median_blended_per_mtok, m.max_context_window, m.capabilities, {CHEAPEST}
+                m.median_blended_per_mtok,
+                coalesce(m.max_context_window, f.context_window) AS max_context_window,
+                f.released_on, f.open_weights, m.capabilities, {CHEAPEST}
          FROM market_models m
          JOIN organizations o ON o.id = m.cheapest_organization_id
+         LEFT JOIN model_facts f ON f.model_key = m.model_key
          WHERE m.kind = 'model' AND m.providers >= $2
            AND ($1::text IS NULL OR m.model_key ILIKE $1 OR m.name ILIKE $1)
            AND ($5::text IS NULL OR m.organization_ids @> ARRAY[(SELECT id FROM organizations WHERE slug = $5)])
            AND ($6::text IS NULL OR lower(m.maker) = lower($6))
            AND ($7::float8 IS NULL OR m.min_blended_per_mtok <= $7)
            AND ($8::float8 IS NULL OR m.min_blended_per_mtok >= $8)
-           AND ($9::int8 IS NULL OR m.max_context_window >= $9)
+           AND ($9::int8 IS NULL OR coalesce(m.max_context_window, f.context_window) >= $9)
            AND ($10::text[] IS NULL OR m.capabilities @> $10)
          ORDER BY {order}
          LIMIT $3 OFFSET $4"
@@ -560,4 +564,12 @@ pub async fn provider_offerings(
         limit,
         offset,
     }))
+}
+
+/// What models.dev knows of a model, by its normalized key. `None` when it has no entry.
+pub async fn model_facts(pool: &PgPool, key: &str) -> sqlx::Result<Option<ih_core::ModelFacts>> {
+    sqlx::query_as("SELECT * FROM model_facts WHERE model_key = $1")
+        .bind(key)
+        .fetch_optional(pool)
+        .await
 }

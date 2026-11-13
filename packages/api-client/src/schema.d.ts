@@ -510,6 +510,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/market/models/{key}/facts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** What is known of a model apart from its price: release date, limits, modalities, capabilities. */
+        get: operations["marketModelFacts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market/providers": {
         parameters: {
             query?: never;
@@ -1313,6 +1330,38 @@ export interface components {
             model_key: string;
             name: string;
         };
+        ModelFacts: {
+            attachment?: boolean | null;
+            /**
+             * Format: int32
+             * @description The largest context any provider states, in tokens.
+             */
+            context_window?: number | null;
+            deprecated: boolean;
+            description?: string | null;
+            /** @description The model family, such as `claude-opus` or `gpt-oss`. */
+            family?: string | null;
+            input_modalities: string[];
+            /** @description Month the training data ends, such as `2026-06`. */
+            knowledge_cutoff?: string | null;
+            /** Format: int32 */
+            max_output?: number | null;
+            model_key: string;
+            name: string;
+            open_weights?: boolean | null;
+            output_modalities: string[];
+            /**
+             * Format: int32
+             * @description Providers that list the model at the source.
+             */
+            providers_listing: number;
+            reasoning?: boolean | null;
+            /** Format: date */
+            released_on?: string | null;
+            source: string;
+            structured_output?: boolean | null;
+            tool_call?: boolean | null;
+        };
         /** @description One model across every provider: price per million tokens. */
         ModelIndexRow: {
             /**
@@ -1322,7 +1371,10 @@ export interface components {
             capabilities: string[];
             cheapest: components["schemas"]["OrganizationRef"];
             maker?: string | null;
-            /** Format: int32 */
+            /**
+             * Format: int32
+             * @description The largest any provider states, or what models.dev knows when none does.
+             */
             max_context_window?: number | null;
             /** Format: double */
             median_blended_per_mtok: number;
@@ -1339,8 +1391,14 @@ export interface components {
             model_key: string;
             /** @description A display name: the most common name providers give it. */
             name: string;
+            open_weights?: boolean | null;
             /** Format: int64 */
             providers: number;
+            /**
+             * Format: date
+             * @description When the model was released, from models.dev.
+             */
+            released_on?: string | null;
         };
         /** @description A row of the model price comparison: one model at one provider, latest price. */
         ModelPrice: {
@@ -1627,7 +1685,10 @@ export interface components {
                 capabilities: string[];
                 cheapest: components["schemas"]["OrganizationRef"];
                 maker?: string | null;
-                /** Format: int32 */
+                /**
+                 * Format: int32
+                 * @description The largest any provider states, or what models.dev knows when none does.
+                 */
                 max_context_window?: number | null;
                 /** Format: double */
                 median_blended_per_mtok: number;
@@ -1644,8 +1705,14 @@ export interface components {
                 model_key: string;
                 /** @description A display name: the most common name providers give it. */
                 name: string;
+                open_weights?: boolean | null;
                 /** Format: int64 */
                 providers: number;
+                /**
+                 * Format: date
+                 * @description When the model was released, from models.dev.
+                 */
+                released_on?: string | null;
             }[];
             /** Format: int64 */
             limit: number;
@@ -2803,7 +2870,7 @@ export interface operations {
                 min_context?: number;
                 /**
                  * @description `providers` (default), `price`, `median`, `input`, `output`,
-                 *     `context` or `name`.
+                 *     `context`, `released` or `name`.
                  */
                 sort?: string;
                 /** @description `asc` or `desc`; each sort has a natural default. */
@@ -3009,7 +3076,7 @@ export interface operations {
                 min_context?: number;
                 /**
                  * @description `providers` (default), `price`, `median`, `input`, `output`,
-                 *     `context` or `name`.
+                 *     `context`, `released` or `name`.
                  */
                 sort?: string;
                 /** @description `asc` or `desc`; each sort has a natural default. */
@@ -3062,6 +3129,36 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MarketDetail"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorBody"];
+                };
+            };
+        };
+    };
+    marketModelFacts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Normalized model key, such as `deepseek-v3.2` */
+                key: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ModelFacts"];
                 };
             };
             404: {

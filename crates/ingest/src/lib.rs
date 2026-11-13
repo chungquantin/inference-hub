@@ -9,6 +9,7 @@ pub mod ingest;
 pub mod llm;
 pub mod market;
 pub mod metrics;
+pub mod models_dev;
 pub mod tagger;
 pub mod terms;
 pub mod url;

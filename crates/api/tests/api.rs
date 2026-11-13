@@ -1714,3 +1714,49 @@ async fn landscape_lists_every_organization_with_its_funding_rounds(pool: PgPool
     let quiet = items.iter().find(|i| i["slug"] == "quiet").unwrap();
     assert_eq!(quiet["rounds"].as_array().unwrap().len(), 0);
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn model_facts_enrich_the_model_list_and_have_their_own_endpoint(pool: PgPool) {
+    seed_market_index(&pool).await;
+    sqlx::query(
+        "INSERT INTO model_facts (model_key, name, family, released_on, knowledge_cutoff, open_weights,
+             context_window, max_output, input_modalities, output_modalities, reasoning, tool_call,
+             providers_listing)
+         VALUES ('deepseek-v3.2', 'DeepSeek V3.2', 'deepseek', '2025-12-01', '2025-06', true,
+                 163840, 65536, '{text}', '{text}', true, true, 12)",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    let app = app(pool);
+
+    let (status, facts) = get(&app, "/v1/market/models/deepseek-v3.2/facts").await;
+    assert_eq!(status, StatusCode::OK, "{facts}");
+    assert_eq!(facts["released_on"], "2025-12-01");
+    assert_eq!(facts["open_weights"], true);
+    assert_eq!(facts["input_modalities"], serde_json::json!(["text"]));
+    assert_eq!(facts["providers_listing"], 12);
+    let (status, _) = get(&app, "/v1/market/models/nope/facts").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+
+    // The list carries the release date and weights, and fills a context window no provider states.
+    let (_, list) = get(&app, "/v1/market/models?min_providers=2&sort=released").await;
+    let row = list["items"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|i| i["model_key"] == "deepseek-v3.2")
+        .unwrap();
+    assert_eq!(row["released_on"], "2025-12-01");
+    assert_eq!(row["open_weights"], true);
+    assert_eq!(
+        row["max_context_window"], 163840,
+        "from the facts when providers state none"
+    );
+    let (_, wide) = get(&app, "/v1/market/models?min_providers=2&min_context=100000").await;
+    assert_eq!(
+        wide["items"].as_array().unwrap().len(),
+        1,
+        "the filter sees the filled context too"
+    );
+}

@@ -65,7 +65,11 @@ pub struct ModelIndexRow {
     /// Cheapest 3:1 blend of input and output.
     pub min_blended_per_mtok: f64,
     pub median_blended_per_mtok: f64,
+    /// The largest any provider states, or what models.dev knows when none does.
     pub max_context_window: Option<i32>,
+    /// When the model was released, from models.dev.
+    pub released_on: Option<chrono::NaiveDate>,
+    pub open_weights: Option<bool>,
     /// What providers say it can do: `in:<modality>`, `out:<modality>` and
     /// features (`tools`, `json`, `reasoning`, `web`, `caching`).
     pub capabilities: Vec<String>,
@@ -109,7 +113,7 @@ pub struct MarketIndexQuery {
     /// Models only: context window of at least this many tokens.
     pub min_context: Option<i64>,
     /// `providers` (default), `price`, `median`, `input`, `output`,
-    /// `context` or `name`.
+    /// `context`, `released` or `name`.
     pub sort: Option<String>,
     /// `asc` or `desc`; each sort has a natural default.
     pub dir: Option<String>,

@@ -10,6 +10,7 @@ pub mod curves;
 pub mod landscape;
 pub mod market;
 pub mod metrics;
+pub mod model_facts;
 pub mod news;
 pub mod organization;
 pub mod pagination;
@@ -31,6 +32,7 @@ pub use metrics::{
     METRICS, MetricBoard, MetricCatalog, MetricDef, MetricLine, MetricPoint, MetricRow,
     MetricSourceStatus, MetricSummary, metric_def,
 };
+pub use model_facts::ModelFacts;
 pub use news::{
     AdapterStatus, NewsEnrichment, NewsItem, NewsMatch, NewsMention, NewsStatus, SourceStatus,
     UnmappedListing,

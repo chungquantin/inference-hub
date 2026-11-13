@@ -38,6 +38,7 @@ export type GpuIndexRow = Schemas["GpuIndexRow"];
 export type MediaIndexRow = Schemas["MediaIndexRow"];
 export type MakerCount = Schemas["MakerCount"];
 export type MarketAnalytics = Schemas["MarketAnalytics"];
+export type ModelFacts = Schemas["ModelFacts"];
 export type Landscape = Schemas["Landscape"];
 export type LandscapeItem = Schemas["LandscapeItem"];
 export type LandscapeRound = Schemas["LandscapeRound"];

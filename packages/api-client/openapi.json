@@ -1021,7 +1021,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context` or `name`.",
+            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context`, `released` or `name`.",
             "required": false,
             "schema": {
               "type": "string"
@@ -1403,7 +1403,7 @@
           {
             "name": "sort",
             "in": "query",
-            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context` or `name`.",
+            "description": "`providers` (default), `price`, `median`, `input`, `output`,\n`context`, `released` or `name`.",
             "required": false,
             "schema": {
               "type": "string"
@@ -1474,6 +1474,46 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/MarketDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/models/{key}/facts": {
+      "get": {
+        "tags": [
+          "market"
+        ],
+        "summary": "What is known of a model apart from its price: release date, limits, modalities, capabilities.",
+        "operationId": "marketModelFacts",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "Normalized model key, such as `deepseek-v3.2`",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModelFacts"
                 }
               }
             }
@@ -3755,6 +3795,121 @@
           }
         }
       },
+      "ModelFacts": {
+        "type": "object",
+        "required": [
+          "model_key",
+          "name",
+          "input_modalities",
+          "output_modalities",
+          "deprecated",
+          "providers_listing",
+          "source"
+        ],
+        "properties": {
+          "attachment": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "context_window": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32",
+            "description": "The largest context any provider states, in tokens."
+          },
+          "deprecated": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "family": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The model family, such as `claude-opus` or `gpt-oss`."
+          },
+          "input_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "knowledge_cutoff": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Month the training data ends, such as `2026-06`."
+          },
+          "max_output": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "model_key": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "open_weights": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "output_modalities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "providers_listing": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Providers that list the model at the source."
+          },
+          "reasoning": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "released_on": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "source": {
+            "type": "string"
+          },
+          "structured_output": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "tool_call": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          }
+        }
+      },
       "ModelIndexRow": {
         "type": "object",
         "description": "One model across every provider: price per million tokens.",
@@ -3791,7 +3946,8 @@
               "integer",
               "null"
             ],
-            "format": "int32"
+            "format": "int32",
+            "description": "The largest any provider states, or what models.dev knows when none does."
           },
           "median_blended_per_mtok": {
             "type": "number",
@@ -3818,9 +3974,23 @@
             "type": "string",
             "description": "A display name: the most common name providers give it."
           },
+          "open_weights": {
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
           "providers": {
             "type": "integer",
             "format": "int64"
+          },
+          "released_on": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "description": "When the model was released, from models.dev."
           }
         }
       },
@@ -4646,7 +4816,8 @@
                     "integer",
                     "null"
                   ],
-                  "format": "int32"
+                  "format": "int32",
+                  "description": "The largest any provider states, or what models.dev knows when none does."
                 },
                 "median_blended_per_mtok": {
                   "type": "number",
@@ -4673,9 +4844,23 @@
                   "type": "string",
                   "description": "A display name: the most common name providers give it."
                 },
+                "open_weights": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
                 "providers": {
                   "type": "integer",
                   "format": "int64"
+                },
+                "released_on": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date",
+                  "description": "When the model was released, from models.dev."
                 }
               }
             }

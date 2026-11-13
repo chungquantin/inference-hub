@@ -182,6 +182,29 @@ export default async function MarketModelsPage({ searchParams }: Props) {
         ),
     },
     { id: "median", header: "Median", numeric: true, optional: true, minWidth: "lg", sort: "median", cell: (r) => <Price>{formatPrice(r.median_blended_per_mtok)}</Price>, csv: (r) => r.median_blended_per_mtok },
+    {
+      id: "released",
+      header: "Released",
+      numeric: true,
+      optional: true,
+      minWidth: "xl",
+      sort: "released",
+      sortDir: "desc",
+      cell: (r) => (
+        <span className="font-mono text-[13px] text-ink-2 tabular">
+          {r.released_on ? new Date(r.released_on).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" }) : "—"}
+        </span>
+      ),
+      csv: (r) => r.released_on,
+    },
+    {
+      id: "weights",
+      header: "Weights",
+      optional: true,
+      minWidth: "2xl",
+      cell: (r) => <span className="text-[14px] text-ink-2">{r.open_weights == null ? "—" : r.open_weights ? "Open" : "Closed"}</span>,
+      csv: (r) => (r.open_weights == null ? "" : r.open_weights ? "open" : "closed"),
+    },
     { id: "context", header: "Context", numeric: true, optional: true, minWidth: "md", sort: "context", sortDir: "desc", cell: (r) => <Price>{formatTokens(r.max_context_window)}</Price>, csv: (r) => r.max_context_window },
     {
       id: "cheapest",

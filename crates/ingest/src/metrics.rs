@@ -40,6 +40,7 @@ pub enum Source {
     HuggingFaceSpeed,
     GitHub,
     GpuTerms,
+    ModelsDev,
 }
 
 pub const SOURCES: &[Source] = &[
@@ -47,6 +48,7 @@ pub const SOURCES: &[Source] = &[
     Source::HuggingFaceSpeed,
     Source::GitHub,
     Source::GpuTerms,
+    Source::ModelsDev,
 ];
 
 impl Source {
@@ -56,6 +58,7 @@ impl Source {
             Source::HuggingFaceSpeed => "huggingface-speed",
             Source::GitHub => "github-metrics",
             Source::GpuTerms => "gpu-terms",
+            Source::ModelsDev => "models-dev",
         }
     }
 
@@ -74,6 +77,7 @@ pub struct Origins {
     pub huggingface: String,
     pub router: String,
     pub azure: String,
+    pub models_dev: String,
 }
 
 impl Default for Origins {
@@ -82,6 +86,7 @@ impl Default for Origins {
             huggingface: "https://huggingface.co".into(),
             router: "https://router.huggingface.co".into(),
             azure: "https://prices.azure.com".into(),
+            models_dev: "https://models.dev".into(),
         }
     }
 }
@@ -94,7 +99,7 @@ pub async fn collect(
     let samples = match source {
         Source::HuggingFaceHub => hub(client, &origins.huggingface).await?,
         Source::HuggingFaceSpeed => speed(client, &origins.router).await?,
-        Source::GitHub | Source::GpuTerms => {
+        Source::GitHub | Source::GpuTerms | Source::ModelsDev => {
             return Ok(Collected {
                 samples: Vec::new(),
             });
@@ -341,6 +346,7 @@ pub async fn run_source(
         let mut report = match source {
             Source::GitHub => github(pool).await?,
             Source::GpuTerms => gpu_terms(pool, client, origins).await?,
+            Source::ModelsDev => models_dev(pool, client, origins).await?,
             _ => {
                 store(
                     pool,
@@ -475,6 +481,20 @@ async fn gpu_terms(
     Ok(RunReport {
         series,
         points: series,
+    })
+}
+
+/// Model facts from models.dev: release dates, limits, modalities and capabilities per model.
+async fn models_dev(
+    pool: &PgPool,
+    client: &Client,
+    origins: &Origins,
+) -> Result<RunReport, MetricsError> {
+    let facts = crate::models_dev::fetch(client, &origins.models_dev).await?;
+    let stored = crate::models_dev::store(pool, &facts).await?;
+    Ok(RunReport {
+        series: stored,
+        points: stored,
     })
 }
 

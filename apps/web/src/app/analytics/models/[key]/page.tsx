@@ -7,11 +7,18 @@ import { PageHeader, Stat } from "@/components/ui/primitives";
 import { creatorName, modelLogoUrl } from "@/lib/catalog";
 import { api } from "@/lib/api";
 import { formatUnitPrice } from "@/components/market";
+import { FactsPanel } from "@/components/model-facts";
 import { formatPrice } from "@/lib/format";
 
 export const revalidate = 300; // seconds; must be a literal for Next.js
 
 type Props = { params: Promise<{ key: string }> };
+
+/** What models.dev knows of the model; absent for models it does not list. */
+async function loadFacts(key: string) {
+  const { data } = await api.GET("/v1/market/models/{key}/facts", { params: { path: { key: decodeURIComponent(key) } } });
+  return data ?? null;
+}
 
 async function load(key: string) {
   const { data, response } = await api.GET("/v1/market/models/{key}", {
@@ -70,6 +77,7 @@ export default async function MarketModelPage({ params }: Props) {
   const priced = chat.filter((l) => (l.blended_per_mtok ?? 0) > 0);
   const blends = priced.map((l) => l.blended_per_mtok ?? 0).sort((a, b) => a - b);
   const sellers = new Set(chat.map((l) => l.variant ?? l.provider.slug)).size;
+  const facts = await loadFacts((await params).key);
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
@@ -92,6 +100,7 @@ export default async function MarketModelPage({ params }: Props) {
         <Stat value={sellers} label="sellers" />
         <Stat value={chat.length} label="listings" />
       </section>
+      {facts && <FactsPanel facts={facts} />}
       <MarketListings listings={chat} kind="model" />
       {media.length > 0 && <MarketListings listings={media} kind="media" />}
     </div>

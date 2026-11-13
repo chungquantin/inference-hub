@@ -26,6 +26,7 @@ pub fn router() -> OpenApiRouter<AppState> {
         .routes(routes!(gpu_detail))
         .routes(routes!(model_index))
         .routes(routes!(model_detail))
+        .routes(routes!(model_facts))
         .routes(routes!(model_makers))
         .routes(routes!(media_index))
         .routes(routes!(providers))
@@ -163,6 +164,20 @@ async fn model_detail(
         .await?
         .map(Json)
         .ok_or(ApiError::NotFound("model"))
+}
+
+/// What is known of a model apart from its price: release date, limits, modalities, capabilities.
+#[utoipa::path(get, path = "/market/models/{key}/facts", tag = "market", operation_id = "marketModelFacts",
+    params(("key" = String, Path, description = "Normalized model key, such as `deepseek-v3.2`")),
+    responses((status = 200, body = ih_core::ModelFacts), (status = 404, body = ErrorBody)))]
+async fn model_facts(
+    State(state): State<AppState>,
+    Path(key): Path<String>,
+) -> ApiResult<Json<ih_core::ModelFacts>> {
+    ih_db::market::model_facts(&state.pool, &key)
+        .await?
+        .map(Json)
+        .ok_or(ApiError::NotFound("model facts"))
 }
 
 /// Providers by coverage, with how often they are the cheapest.
