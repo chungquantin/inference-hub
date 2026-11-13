@@ -18,8 +18,8 @@ FROM base AS deps
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY apps/web/package.json apps/web/
 COPY packages/api-client/package.json packages/api-client/
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm install --frozen-lockfile --filter web... --store-dir /pnpm/store
+# No BuildKit cache mount: Railway requires service-scoped cache ids.
+RUN pnpm install --frozen-lockfile --filter web...
 
 # --- Build -------------------------------------------------------------------
 FROM deps AS build
