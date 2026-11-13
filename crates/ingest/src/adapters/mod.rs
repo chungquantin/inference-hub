@@ -26,6 +26,7 @@ pub mod labs;
 pub mod lambda;
 pub mod linode;
 pub mod liquid;
+pub mod models_dev;
 pub mod openrouter;
 pub mod oracle;
 pub mod ovhcloud;
@@ -325,6 +326,11 @@ pub fn market_adapters(endpoints: &Endpoints) -> Vec<MarketAdapter> {
     for spec in catalog::CATALOGS {
         adapters.push(MarketAdapter::Gateway(Box::new(
             catalog::CatalogAdapter::new(spec, endpoints),
+        )));
+    }
+    for spec in models_dev::PROVIDERS {
+        adapters.push(MarketAdapter::Gateway(Box::new(
+            models_dev::ModelsDevAdapter::new(spec, endpoints),
         )));
     }
     for spec in labs::LABS.iter().filter(|s| s.enabled) {
