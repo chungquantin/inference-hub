@@ -17,7 +17,8 @@ RUN cargo install cargo-chef --locked --version ^0.1
 WORKDIR /src
 
 FROM chef AS planner
-COPY . .
+COPY Cargo.toml Cargo.lock rust-toolchain.toml ./
+COPY crates crates
 RUN cargo chef prepare --recipe-path recipe.json
 
 # --- Build -------------------------------------------------------------------
@@ -25,7 +26,9 @@ FROM chef AS builder
 COPY --from=planner /src/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json \
     -p api -p worker -p seed
-COPY . .
+COPY Cargo.toml Cargo.lock rust-toolchain.toml ./
+COPY crates crates
+COPY migrations migrations
 RUN cargo build --release --locked -p api -p worker -p seed --bins \
  && mkdir -p /out \
  && cp target/release/api target/release/worker target/release/seed /out/

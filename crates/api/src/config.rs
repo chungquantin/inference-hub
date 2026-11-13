@@ -21,8 +21,7 @@ impl Config {
         let host = env_or("API_HOST", "127.0.0.1");
         // Platforms such as Railway assign the port in `PORT`.
         let port = std::env::var("PORT").unwrap_or_else(|_| env_or("API_PORT", "4000"));
-        let addr = format!("{host}:{port}")
-            .parse()
+        let addr = bind_address(&host, &port)
             .with_context(|| format!("invalid API_HOST/API_PORT: {host}:{port}"))?;
 
         let cors_origins = env_or("CORS_ORIGINS", "http://localhost:3000")
@@ -69,6 +68,36 @@ impl Config {
     }
 }
 
+/// `host:port`, with an IPv6 host (such as `::`, which also takes IPv4 on Linux) in brackets.
+fn bind_address(host: &str, port: &str) -> Result<SocketAddr, std::net::AddrParseError> {
+    if host.contains(':') && !host.starts_with('[') {
+        format!("[{host}]:{port}").parse()
+    } else {
+        format!("{host}:{port}").parse()
+    }
+}
+
 fn env_or(key: &str, default: &str) -> String {
     std::env::var(key).unwrap_or_else(|_| default.to_owned())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::bind_address;
+
+    #[test]
+    fn binds_ipv4_and_ipv6_hosts() {
+        assert_eq!(
+            bind_address("0.0.0.0", "4000").unwrap().to_string(),
+            "0.0.0.0:4000"
+        );
+        assert_eq!(bind_address("127.0.0.1", "8080").unwrap().port(), 8080);
+        // Railway's private network is IPv6; `::` listens there, and on IPv4 too.
+        assert_eq!(bind_address("::", "4000").unwrap().to_string(), "[::]:4000");
+        assert_eq!(
+            bind_address("[::]", "4000").unwrap().to_string(),
+            "[::]:4000"
+        );
+        assert!(bind_address("not a host", "4000").is_err());
+    }
 }

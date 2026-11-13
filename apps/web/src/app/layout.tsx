@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Instrument_Sans } from "next/font/google";
 import Link from "next/link";
+import { connection } from "next/server";
 import { CommandPalette } from "@/components/shell/command-palette";
 import { MainNav } from "@/components/shell/main-nav";
 import { LiveDot } from "@/components/ui/pixel";
@@ -26,6 +27,8 @@ export const metadata: Metadata = {
 export const viewport = { themeColor: "#fcfbf8" };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // Render on request: pages read the API, which does not exist at build time.
+  await connection();
   return (
     <html
       lang="en"

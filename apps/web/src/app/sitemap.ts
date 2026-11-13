@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { api } from "@/lib/api";
 import { SITE_URL } from "@/lib/site";
 
-export const revalidate = 3600; // seconds; must be a literal for Next.js
+export const dynamic = "force-dynamic"; // needs the API, which is absent at build time
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data, error } = await api.GET("/v1/sitemap");

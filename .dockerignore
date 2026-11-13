@@ -1,4 +1,5 @@
-# Only the Rust workspace, the migrations and the curated data go in the image.
+# Allowlist. The backend image takes the Rust workspace, migrations and curated
+# data; the web image (docker/web.Dockerfile) takes the pnpm workspace.
 **
 !Cargo.toml
 !Cargo.lock
@@ -9,4 +10,11 @@
 data/archive/
 data/landscape/
 !docker/
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!apps/web/
+!packages/api-client/
 crates/**/target
+**/node_modules
+**/.next

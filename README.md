@@ -240,9 +240,9 @@ such as `X-Real-IP` on Railway.
 
 ## Deploy
 
-The backend runs on Railway from the repository's `Dockerfile` (one image for the API,
-the worker and the seed), with Postgres and pgvector on a volume; the web app runs on
-Vercel. The Railway project is described in `.railway/railway.ts`. See
+Everything runs on Railway: the backend from the repository's `Dockerfile` (one image for
+the API, the worker and the seed), Postgres and pgvector on a volume, and the web app from
+`docker/web.Dockerfile`. The Railway project is described in `.railway/railway.ts`. See
 [DEPLOY.md](DEPLOY.md) for the first deploy, secrets and operations, and
 `docker-compose.prod.yml` to run the same stack locally.
 
