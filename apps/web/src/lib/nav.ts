@@ -29,6 +29,7 @@ export const NAV_SECTIONS: NavSection[] = [
     href: "/organizations",
     label: "Explore",
     items: [
+      { href: "/landscape", label: "Landscape", description: "Every company on one map, with funding where sourced" },
       { href: "/organizations", label: "Organizations", description: "Labs, clouds, gateways, investors" },
       { href: "/products", label: "Products", description: "Models, APIs, GPUs, projects" },
       { href: "/categories", label: "Categories", description: "The market's taxonomy" },

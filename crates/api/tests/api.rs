@@ -1655,3 +1655,62 @@ async fn curves_show_the_term_structure_and_daily_history(pool: PgPool) {
     let (status, _) = get(&app, "/v1/market/curves/gpus/NOPE").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
 }
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn landscape_lists_every_organization_with_its_funding_rounds(pool: PgPool) {
+    sqlx::query(
+        "INSERT INTO organizations (slug, name, kinds, tagline, description) VALUES
+             ('lab', 'Lab', '{model_provider}', NULL, 'Builds models for everyone.'),
+             ('fund', 'Fund', '{investor}', 'Backs labs.', NULL),
+             ('quiet', 'Quiet', '{gpu_cloud}', 'A cloud.', NULL)",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO funding_rounds (organization_id, round, announced_on, amount, valuation, currency, source_url)
+         SELECT id, r.round, r.day::date, r.amount, r.valuation, 'EUR', 'https://example.com/' || r.round
+         FROM organizations o
+         JOIN (VALUES ('seed', '2024-01-10', 5000000::bigint, NULL::bigint),
+                      ('series_a', '2025-03-04', 40000000::bigint, 200000000::bigint)) r (round, day, amount, valuation)
+              ON true
+         WHERE o.slug = 'lab'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+    sqlx::query(
+        "INSERT INTO funding_round_investors (funding_round_id, investor_id, is_lead)
+         SELECT f.id, i.id, true FROM funding_rounds f, organizations i
+         WHERE f.round = 'series_a' AND i.slug = 'fund'",
+    )
+    .execute(&pool)
+    .await
+    .unwrap();
+
+    let app = app(pool);
+    let (status, body) = get(&app, "/v1/landscape").await;
+    assert_eq!(status, StatusCode::OK, "{body}");
+    let items = body["items"].as_array().unwrap();
+    for slug in ["lab", "fund", "quiet"] {
+        assert!(
+            items.iter().any(|i| i["slug"] == slug),
+            "every organization is listed, funded or not: {slug}"
+        );
+    }
+
+    let lab = items.iter().find(|i| i["slug"] == "lab").unwrap();
+    assert_eq!(
+        lab["summary"], "Builds models for everyone.",
+        "falls back to the description"
+    );
+    let rounds = lab["rounds"].as_array().unwrap();
+    assert_eq!(rounds.len(), 2);
+    assert_eq!(rounds[0]["round"], "series_a", "newest first");
+    assert_eq!(rounds[0]["valuation"], 200_000_000);
+    assert_eq!(rounds[0]["currency"], "EUR");
+    assert_eq!(rounds[0]["leads"], serde_json::json!(["Fund"]));
+    assert!(rounds[1]["valuation"].is_null());
+    let quiet = items.iter().find(|i| i["slug"] == "quiet").unwrap();
+    assert_eq!(quiet["rounds"].as_array().unwrap().len(), 0);
+}

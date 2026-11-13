@@ -764,6 +764,26 @@
         }
       }
     },
+    "/v1/landscape": {
+      "get": {
+        "tags": [
+          "organizations"
+        ],
+        "summary": "Every organization with its roles, logo, summary and funding rounds, for the landscape map.",
+        "operationId": "landscape",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Landscape"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v1/market": {
       "get": {
         "tags": [
@@ -2691,6 +2711,146 @@
           },
           "organization": {
             "$ref": "#/components/schemas/OrganizationRef"
+          }
+        }
+      },
+      "Landscape": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LandscapeItem"
+            }
+          }
+        }
+      },
+      "LandscapeItem": {
+        "type": "object",
+        "required": [
+          "slug",
+          "name",
+          "kinds",
+          "status",
+          "rounds"
+        ],
+        "properties": {
+          "founded_year": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int32"
+          },
+          "hq_country": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "kinds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrgKind"
+            }
+          },
+          "logo_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Path of the logo, such as `/logos/openai.svg`."
+          },
+          "name": {
+            "type": "string"
+          },
+          "rounds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LandscapeRound"
+            },
+            "description": "Rounds raised, newest first. Empty when none is on record."
+          },
+          "slug": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/OrgStatus"
+          },
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "The tagline, or the start of the description when there is no tagline."
+          },
+          "website": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "LandscapeRound": {
+        "type": "object",
+        "description": "One funding round, as the landscape shows it.",
+        "required": [
+          "round",
+          "announced_on",
+          "currency",
+          "leads",
+          "investors"
+        ],
+        "properties": {
+          "amount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "description": "Amount raised, in `currency`."
+          },
+          "announced_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "investors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Names of the other investors in the directory."
+          },
+          "leads": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Names of the investors that led the round."
+          },
+          "round": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valuation": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "description": "Post-money valuation, in `currency`."
           }
         }
       },

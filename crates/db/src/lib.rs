@@ -8,6 +8,7 @@ pub mod categories;
 pub mod compare;
 pub mod curves;
 pub mod jobs;
+pub mod landscape;
 pub mod market;
 pub mod market_refresh;
 pub mod metrics;

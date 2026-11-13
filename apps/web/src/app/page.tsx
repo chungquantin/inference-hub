@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { components } from "@inference-hub/api-client";
 import { CheapestTable, type CheapTab } from "@/components/home/cheapest-table";
 import { Hero } from "@/components/home/hero";
+import { LandscapeData } from "@/components/landscape/landscape-data";
 import { api } from "@/lib/api";
 import { formatCount, formatPrice } from "@/lib/format";
 
@@ -188,6 +189,22 @@ export default async function HomePage() {
           <PathRow href="/directory?tab=orgs" title="Research a company" text="What they sell, who backs them, and what they charge." cta="Companies" />
         </ul>
       </Section>
+
+      <section id="landscape" aria-labelledby="landscape-title" className="pt-28">
+        <Head
+          id="landscape-title"
+          title="The whole market on one page"
+          lead="Every lab, inference provider, gateway, GPU cloud, chip maker and agent we track, grouped by what they do. Open one for what it does and who funded it."
+        />
+        <div className="mt-12">
+          <LandscapeData limit={18} />
+        </div>
+        <p className="mt-6 text-[15px]">
+          <Link href="/landscape" className="font-medium text-s-7 hover:underline">
+            Open the full landscape
+          </Link>
+        </p>
+      </section>
 
       <section aria-labelledby="faq-title" className="grid gap-10 pt-28 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-16">
         <Head id="faq-title" title="Questions people ask first" lead="Where the numbers come from, and how far to trust them." />

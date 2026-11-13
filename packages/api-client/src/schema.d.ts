@@ -263,6 +263,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/landscape": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every organization with its roles, logo, summary and funding rounds, for the landscape map. */
+        get: operations["landscape"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/market": {
         parameters: {
             query?: never;
@@ -929,6 +946,47 @@ export interface components {
              */
             blended_per_mtok: number;
             organization: components["schemas"]["OrganizationRef"];
+        };
+        Landscape: {
+            items: components["schemas"]["LandscapeItem"][];
+        };
+        LandscapeItem: {
+            /** Format: int32 */
+            founded_year?: number | null;
+            hq_country?: string | null;
+            kinds: components["schemas"]["OrgKind"][];
+            /** @description Path of the logo, such as `/logos/openai.svg`. */
+            logo_url?: string | null;
+            name: string;
+            /** @description Rounds raised, newest first. Empty when none is on record. */
+            rounds: components["schemas"]["LandscapeRound"][];
+            slug: string;
+            status: components["schemas"]["OrgStatus"];
+            /** @description The tagline, or the start of the description when there is no tagline. */
+            summary?: string | null;
+            website?: string | null;
+        };
+        /** @description One funding round, as the landscape shows it. */
+        LandscapeRound: {
+            /**
+             * Format: int64
+             * @description Amount raised, in `currency`.
+             */
+            amount?: number | null;
+            /** Format: date */
+            announced_on: string;
+            currency: string;
+            /** @description Names of the other investors in the directory. */
+            investors: string[];
+            /** @description Names of the investors that led the round. */
+            leads: string[];
+            round: string;
+            source_url?: string | null;
+            /**
+             * Format: int64
+             * @description Post-money valuation, in `currency`.
+             */
+            valuation?: number | null;
         };
         /** @description A maker and how many models it has, for filters. */
         MakerCount: {
@@ -2577,6 +2635,25 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RepoLeader"][];
+                };
+            };
+        };
+    };
+    landscape: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Landscape"];
                 };
             };
         };
