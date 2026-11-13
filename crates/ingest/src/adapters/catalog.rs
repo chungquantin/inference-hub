@@ -484,6 +484,191 @@ fn requesty(v: &Value) -> Result<Option<Entry>, String> {
     }))
 }
 
+/// Router Base: `pricing.prompt` / `pricing.completion` already in USD per million tokens
+/// (`pricing.unit` says "1M tokens").
+fn routerbase(v: &Value) -> Result<Option<Entry>, String> {
+    if !str_at(v, &["pricing", "unit"]).is_some_and(|u| u.contains("1M")) {
+        return Ok(None);
+    }
+    let mut e = match openai_style(v, PER_MTOK)? {
+        Some(e) => e,
+        None => return Ok(None),
+    };
+    e.context = int_at(v, &["context_length"]);
+    Ok(Some(e))
+}
+
+/// BlockRun: `pricing.input` / `pricing.output` in USD per million tokens; context in `context_window`.
+fn blockrun(v: &Value) -> Result<Option<Entry>, String> {
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(v, &["pricing", "input"], &["pricing", "output"], PER_MTOK)?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["context_window"]),
+        input,
+        output,
+        extra: serde_json::json!({ "cache_read_per_mtok": at(v, &["pricing", "cache_read"]) }),
+        ..Entry::default()
+    }))
+}
+
+/// CometAPI: `pricing.input` / `pricing.output` in USD per million tokens, stated by
+/// `pricing.currency` ("USD / M Tokens"); only text models carry both.
+fn cometapi(v: &Value) -> Result<Option<Entry>, String> {
+    if !str_at(v, &["pricing", "currency"])
+        .is_some_and(|c| c.starts_with("USD") && c.contains("Tokens"))
+    {
+        return Ok(None);
+    }
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(v, &["pricing", "input"], &["pricing", "output"], PER_MTOK)?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["context_length"]),
+        input,
+        output,
+        ..Entry::default()
+    }))
+}
+
+/// BitRouter: `pricing.input_tokens.no_cache` and `pricing.output_tokens.text`, USD per million tokens.
+fn bitrouter(v: &Value) -> Result<Option<Entry>, String> {
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(
+        v,
+        &["pricing", "input_tokens", "no_cache"],
+        &["pricing", "output_tokens", "text"],
+        PER_MTOK,
+    )?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["max_input_tokens"]),
+        input,
+        output,
+        ..Entry::default()
+    }))
+}
+
+/// SayGM: prices in nano-dollars per million tokens (`pricing.unit` says so), so 5,150,000,000 is $5.15.
+fn saygm(v: &Value) -> Result<Option<Entry>, String> {
+    if str_at(v, &["pricing", "unit"]).as_deref() != Some("ndollars_per_mtok") {
+        return Ok(None);
+    }
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(
+        v,
+        &["pricing", "dimensions", "input_per_mtok_ndollars"],
+        &["pricing", "dimensions", "output_per_mtok_ndollars"],
+        1e-9,
+    )?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        input: round6(input),
+        output: round6(output),
+        ..Entry::default()
+    }))
+}
+
+/// AI Gateway: `pricing.input_per_million` / `output_per_million`, billed per token only; the
+/// catalog also lists per-second, per-image and per-megapixel models, which are left out.
+fn aigateway(v: &Value) -> Result<Option<Entry>, String> {
+    if str_at(v, &["pricing", "billing_unit"]).as_deref() != Some("token") {
+        return Ok(None);
+    }
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(
+        v,
+        &["pricing", "input_per_million"],
+        &["pricing", "output_per_million"],
+        PER_MTOK,
+    )?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["context_window"]),
+        input,
+        output,
+        ..Entry::default()
+    }))
+}
+
+/// Tinfoil: `pricing.inputTokenPricePer1M` / `outputTokenPricePer1M`, USD per million tokens.
+fn tinfoil(v: &Value) -> Result<Option<Entry>, String> {
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let Some((input, output)) = prices(
+        v,
+        &["pricing", "inputTokenPricePer1M"],
+        &["pricing", "outputTokenPricePer1M"],
+        PER_MTOK,
+    )?
+    else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["context_window"]),
+        input,
+        output,
+        ..Entry::default()
+    }))
+}
+
+/// Opper: `pricing.input` / `pricing.output` are lists (one number per tier) in USD per million tokens
+/// (`billing_unit` says `per_mtok`); the first is the price. Only `llm` models are read.
+fn opper(v: &Value) -> Result<Option<Entry>, String> {
+    if str_at(v, &["type"]).as_deref() != Some("llm")
+        || str_at(v, &["pricing", "billing_unit"]).as_deref() != Some("per_mtok")
+    {
+        return Ok(None);
+    }
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let first = |k: &str| at(v, &["pricing", k]).get(0).and_then(Value::as_f64);
+    let (Some(input), Some(output)) = (first("input"), first("output")) else {
+        return Ok(None);
+    };
+    Ok(Some(Entry {
+        id,
+        name: str_at(v, &["name"]),
+        context: int_at(v, &["context_window"]),
+        input,
+        output,
+        ..Entry::default()
+    }))
+}
+
 /// The OpenRouter schema as first-party and reseller APIs serve it: `pricing.prompt` and
 /// `pricing.completion` in USD per token, `output_modalities` at the top level or under
 /// `architecture`. Embedding models are priced per million input tokens; rerankers (priced
@@ -502,10 +687,44 @@ fn openrouter_like(v: &Value) -> Result<Option<Entry>, String> {
     .filter_map(|m| m.as_str().map(str::to_owned))
     .collect();
     let has = |m: &str| modalities.iter().any(|x| x == m);
-    if id.to_ascii_lowercase().contains("rerank") {
+    let lower = id.to_ascii_lowercase();
+    if lower.contains("rerank") {
         return Ok(None);
     }
-    if has("embeddings") {
+    // Prices in another currency are not converted here.
+    if let Some(c) = at(v, &["pricing", "currency"]).as_str()
+        && !c.eq_ignore_ascii_case("USD")
+    {
+        return Ok(None);
+    }
+    // A model with no token price but another one (per second of video, per image) is not a chat model.
+    let zero = |k: &str| {
+        matches!(at(v, &["pricing", k]), Value::String(x) if x.parse::<f64>().is_ok_and(|n| n == 0.0))
+            || at(v, &["pricing", k]).as_f64() == Some(0.0)
+    };
+    let other_price = at(v, &["pricing"]).as_object().is_some_and(|o| {
+        o.iter().any(|(k, val)| {
+            !matches!(
+                k.as_str(),
+                "prompt" | "completion" | "currency" | "discount" | "unit"
+            ) && match val {
+                Value::String(x) => x.parse::<f64>().is_ok_and(|n| n > 0.0),
+                Value::Number(n) => n.as_f64().is_some_and(|n| n > 0.0),
+                _ => false,
+            } && (k.contains("per_")
+                || k.starts_with("output_")
+                || k == "image"
+                || k == "audio"
+                || k == "request")
+        })
+    });
+    if zero("prompt") && zero("completion") && other_price {
+        return Ok(None);
+    }
+    // Some catalogs state no modalities; an embedding model then shows in its id.
+    let embedding = has("embeddings")
+        || (modalities.is_empty() && (lower.contains("embed") || lower.contains("e5-")));
+    if embedding {
         let Some(price) = price_at(v, &["pricing", "prompt"], PER_TOKEN)? else {
             return Ok(None);
         };
@@ -688,6 +907,227 @@ pub static CATALOGS: &[CatalogSpec] = &[
         interval: DAILY,
         source_url: "https://portal.nousresearch.com",
         entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "trustedrouter",
+        name: "TrustedRouter",
+        organization: "trustedrouter",
+        origin: "https://trustedrouter.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://trustedrouter.com/models",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "minirouter",
+        name: "minirouter",
+        organization: "minirouter",
+        origin: "https://minirouter.sh",
+        path: "/api/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://minirouter.sh",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "wiro",
+        name: "Wiro",
+        organization: "wiro",
+        origin: "https://llm.wiro.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://wiro.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "gatewayz",
+        name: "Gatewayz",
+        organization: "gatewayz",
+        origin: "https://api.gatewayz.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://gatewayz.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "plaingateway",
+        name: "plaingateway",
+        organization: "plaingateway",
+        origin: "https://api.plaingateway.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://plaingateway.com",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "loopxxi",
+        name: "Loop XXI Gateway",
+        organization: "loop-xxi-gateway",
+        origin: "https://api.loopxxi.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://loopxxi.com",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "inferall",
+        name: "InferAll",
+        organization: "inferall",
+        origin: "https://api.inferall.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://inferall.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "infercom",
+        name: "Infercom",
+        organization: "infercom",
+        origin: "https://api.infercom.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://infercom.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "ofox",
+        name: "OfoxAI",
+        organization: "ofoxai",
+        origin: "https://api.ofox.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://ofox.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "eurouter",
+        name: "EUrouter",
+        organization: "eurouter",
+        origin: "https://eurouter.ai",
+        path: "/api/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://eurouter.ai",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "routerbase",
+        name: "Router Base",
+        organization: "routerbase",
+        origin: "https://routerbase.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://routerbase.com",
+        entry: routerbase,
+    },
+    CatalogSpec {
+        id: "blockrun",
+        name: "BlockRun",
+        organization: "blockrun",
+        origin: "https://blockrun.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://blockrun.ai",
+        entry: blockrun,
+    },
+    CatalogSpec {
+        id: "cometapi",
+        name: "CometAPI",
+        organization: "cometapi",
+        origin: "https://cometapi.com",
+        path: "/api/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://cometapi.com/models",
+        entry: cometapi,
+    },
+    CatalogSpec {
+        id: "bitrouter",
+        name: "BitRouter",
+        organization: "bitrouter",
+        origin: "https://api.bitrouter.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://bitrouter.ai",
+        entry: bitrouter,
+    },
+    CatalogSpec {
+        id: "saygm",
+        name: "SayGM",
+        organization: "saygm",
+        origin: "https://api.saygm.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://saygm.com",
+        entry: saygm,
+    },
+    CatalogSpec {
+        id: "aigateway",
+        name: "AI Gateway",
+        organization: "aigateway",
+        origin: "https://api.aigateway.sh",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://aigateway.sh",
+        entry: aigateway,
+    },
+    CatalogSpec {
+        id: "tinfoil",
+        name: "Tinfoil",
+        organization: "tinfoil",
+        origin: "https://api.tinfoil.sh",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://tinfoil.sh/models",
+        entry: tinfoil,
+    },
+    CatalogSpec {
+        id: "opper",
+        name: "Opper",
+        organization: "opper",
+        origin: "https://opper.ai",
+        path: "/api/v1/models",
+        items: Items::At(&["models"]),
+        paging: Paging::Offset {
+            offset: "offset",
+            limit: "limit",
+            size: 100,
+            total_field: Some(&["total"]),
+        },
+        interval: DAILY,
+        source_url: "https://opper.ai/models",
+        entry: opper,
     },
 ];
 
@@ -956,5 +1396,127 @@ mod tests {
         .unwrap();
         assert_eq!(l.len(), 1);
         assert_eq!(l[0].input_per_mtok, 1.5);
+    }
+
+    fn spec_of(id: &str) -> &'static CatalogSpec {
+        CATALOGS.iter().find(|s| s.id == id).unwrap()
+    }
+
+    #[test]
+    fn openrouter_like_skips_other_currencies_and_media_only_models() {
+        let l = parse(
+            spec_of("eurouter"),
+            r#"{"data":[
+              {"id":"glm-5.2","context_length":1048576,"pricing":{"prompt":"0.0000012","completion":"0.0000042","currency":"USD"}},
+              {"id":"cheap-eur","pricing":{"prompt":"0.000001","completion":"0.000002","currency":"EUR"}},
+              {"id":"speech-model","pricing":{"prompt":"0","completion":"0","audio":"0.00005833","currency":"USD"}}]}"#,
+        )
+        .unwrap();
+        assert_eq!(l.len(), 1, "{l:?}");
+        assert_eq!((l[0].input_per_mtok, l[0].output_per_mtok), (1.2, 4.2));
+        let l = parse(
+            spec_of("ofox"),
+            r#"{"data":[{"id":"alibaba/happyhorse","pricing":{"prompt":"0","completion":"0","output_video_per_second":"0.13"}},
+                        {"id":"openai/gpt-x","pricing":{"prompt":"0.000001","completion":"0.000004"}}]}"#,
+        )
+        .unwrap();
+        assert_eq!(
+            l.len(),
+            1,
+            "a video model priced per second is not a chat model: {l:?}"
+        );
+    }
+
+    #[test]
+    fn embedding_ids_without_modalities_are_priced_per_input_token() {
+        let l = parse(
+            spec_of("infercom"),
+            r#"{"data":[{"id":"E5-Mistral-7B-Instruct","context_length":4096,"pricing":{"prompt":"0.00000013","completion":"0.00000000"}},
+                        {"id":"Meta-Llama-3.3-70B-Instruct","context_length":131072,"pricing":{"prompt":"0.0000006","completion":"0.0000012"}}]}"#,
+        )
+        .unwrap();
+        let e5 = l.iter().find(|m| m.external_id.starts_with("E5")).unwrap();
+        assert_eq!(e5.media.unwrap().price, 0.13, "per million input tokens");
+        assert_eq!(
+            l.iter()
+                .find(|m| m.media.is_none())
+                .unwrap()
+                .output_per_mtok,
+            1.2
+        );
+    }
+
+    #[test]
+    fn router_specific_price_shapes_convert_to_usd_per_million_tokens() {
+        let one = |id: &str, body: &str| {
+            let l = parse(spec_of(id), body).unwrap();
+            assert_eq!(l.len(), 1, "{id}: {l:?}");
+            (
+                l[0].input_per_mtok,
+                l[0].output_per_mtok,
+                l[0].context_window,
+            )
+        };
+        assert_eq!(
+            one(
+                "routerbase",
+                r#"{"data":[{"id":"qwen/q","context_length":131072,"pricing":{"prompt":"0.20","completion":"0.70","unit":"1M tokens"}}]}"#
+            ),
+            (0.2, 0.7, Some(131_072))
+        );
+        assert_eq!(
+            one(
+                "blockrun",
+                r#"{"data":[{"id":"openai/g","context_window":1050000,"pricing":{"input":10,"output":50,"cache_read":1}}]}"#
+            ),
+            (10.0, 50.0, Some(1_050_000))
+        );
+        assert_eq!(
+            one(
+                "cometapi",
+                r#"{"data":[{"id":"gem","pricing":{"currency":"USD / M Tokens","input":1.5,"output":7.5}},
+                                        {"id":"vid","pricing":{"currency":"","input":null,"output":null,"per_second":0.1}}]}"#
+            ),
+            (1.5, 7.5, None)
+        );
+        assert_eq!(
+            one(
+                "bitrouter",
+                r#"{"data":[{"id":"anthropic/c","max_input_tokens":1000000,
+                 "pricing":{"input_tokens":{"no_cache":10.0,"cache_read":1.0},"output_tokens":{"text":50.0}}}]}"#
+            ),
+            (10.0, 50.0, Some(1_000_000))
+        );
+        assert_eq!(
+            one(
+                "saygm",
+                r#"{"data":[{"id":"claude","pricing":{"unit":"ndollars_per_mtok","dimensions":{"input_per_mtok_ndollars":5150000000,"output_per_mtok_ndollars":25750000000}}}]}"#
+            ),
+            (5.15, 25.75, None)
+        );
+        assert_eq!(
+            one(
+                "aigateway",
+                r#"{"data":[{"id":"openai/o","context_window":128000,"pricing":{"input_per_million":0.35,"output_per_million":0.75,"billing_unit":"token"}},
+                                          {"id":"pipecat/t","pricing":{"input_per_million":338,"output_per_million":0,"billing_unit":"minute"}}]}"#
+            ),
+            (0.35, 0.75, Some(128_000))
+        );
+        assert_eq!(
+            one(
+                "tinfoil",
+                r#"{"data":[{"id":"glm","context_window":1048576,"pricing":{"inputTokenPricePer1M":1.8,"outputTokenPricePer1M":5.75}}]}"#
+            ),
+            (1.8, 5.75, Some(1_048_576))
+        );
+        assert_eq!(
+            one(
+                "opper",
+                r#"{"models":[{"id":"alibaba:eu/q","type":"llm","context_window":262144,
+                 "pricing":{"billing_unit":"per_mtok","input":[0.4,0.8],"output":[1.2]}},
+                 {"id":"img","type":"image","pricing":{"billing_unit":"per_image","input":[1],"output":[1]}}]}"#
+            ),
+            (0.4, 1.2, Some(262_144))
+        );
     }
 }
