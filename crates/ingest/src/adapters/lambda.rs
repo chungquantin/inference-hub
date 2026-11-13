@@ -45,10 +45,7 @@ pub(crate) fn parse_on(
     if let Some(starts) = note.as_deref().and_then(effective_date)
         && starts > today
     {
-        return Err(AdapterError::Format(
-            ID,
-            format!("the listed prices take effect on {starts}; not recording them before then"),
-        ));
+        return Err(AdapterError::NotYet(ID, starts));
     }
     // The size tabs (`8x`, `4x`, ...) in page order; the on-demand tables follow in the same order.
     let mut sizes = tab_sizes(html).into_iter();
@@ -168,8 +165,15 @@ mod tests {
             ]),
         );
         let before = chrono::NaiveDate::from_ymd_opt(2026, 11, 11).unwrap();
-        let err = parse_on(&html, before).unwrap_err().to_string();
-        assert!(err.contains("take effect on 2026-11-16"), "{err}");
+        let err = parse_on(&html, before).unwrap_err();
+        assert!(
+            matches!(err, AdapterError::NotYet(_, d) if d.to_string() == "2026-11-16"),
+            "{err}"
+        );
+        assert!(
+            err.to_string().contains("take effect on 2026-11-16"),
+            "{err}"
+        );
 
         let after = chrono::NaiveDate::from_ymd_opt(2026, 11, 16).unwrap();
         let l = parse_on(&html, after).unwrap();

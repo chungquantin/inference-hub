@@ -645,3 +645,124 @@ async fn adapter_runs_rebuild_the_market_summaries_once(pool: PgPool) {
     // Fresh summaries need no scheduled rebuild.
     assert_eq!(worker::schedule_market_refresh(&pool).await.unwrap(), 0);
 }
+
+/// Hyperbolic lists only what is in stock: 6 configurations one run, 1 the next.
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn inventory_sources_may_shrink_but_never_to_nothing(pool: PgPool) {
+    seed(&pool).await;
+    let market = FakeMarket::new();
+    let ctx = context(&market.start().await);
+    let config = |region: &str, cents: i64| {
+        format!(
+            r#"{{"enabled":true,"costPerHourCents":{cents},"region":"{region}","gpuCount":1,"gpuType":"h100","gpuFormFactor":"sxm5"}}"#
+        )
+    };
+    let live = |pool: &PgPool| {
+        let pool = pool.clone();
+        async move {
+            sqlx::query_scalar::<_, i64>(
+                "SELECT count(*) FROM market_listings WHERE adapter = 'hyperbolic' AND delisted_at IS NULL",
+            )
+            .fetch_one(&pool)
+            .await
+            .unwrap()
+        }
+    };
+    let list = |n: i64| {
+        format!(
+            "[{}]",
+            (1..=n)
+                .map(|i| config(&format!("r{i}"), 300 + i))
+                .collect::<Vec<_>>()
+                .join(",")
+        )
+    };
+
+    *market.hyperbolic.lock().unwrap() = list(6);
+    run_adapters(&pool, &ctx).await;
+    assert_eq!(live(&pool).await, 6);
+
+    // Down to one of six: accepted, the other five are delisted.
+    *market.hyperbolic.lock().unwrap() = list(1);
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    assert_eq!(live(&pool).await, 1);
+    let error: Option<String> =
+        sqlx::query_scalar("SELECT last_error FROM adapter_state WHERE adapter = 'hyperbolic'")
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    assert_eq!(error, None);
+
+    // An empty list is still a broken API.
+    *market.hyperbolic.lock().unwrap() = "[]".into();
+    make_due(&pool).await;
+    run_adapters(&pool, &ctx).await;
+    assert_eq!(live(&pool).await, 1, "nothing was delisted");
+    let error: Option<String> =
+        sqlx::query_scalar("SELECT last_error FROM adapter_state WHERE adapter = 'hyperbolic'")
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+    assert!(
+        error.is_some_and(|e| e.contains("saw 0 listings after 1")),
+        "an empty run is refused"
+    );
+}
+
+/// A provider that publishes only prices that apply from a later date.
+struct Later;
+
+impl ih_ingest::adapters::Adapter for Later {
+    fn id(&self) -> &'static str {
+        "later"
+    }
+    fn name(&self) -> &'static str {
+        "Later"
+    }
+    fn organization_slug(&self) -> &'static str {
+        "hyperbolic"
+    }
+}
+
+impl ih_ingest::adapters::NeoCloudAdapter for Later {
+    fn fetch_gpus<'a>(
+        &'a self,
+        _client: &'a worker::Client,
+    ) -> ih_ingest::adapters::BoxFuture<
+        'a,
+        Result<Vec<ih_ingest::adapters::GpuListing>, ih_ingest::adapters::AdapterError>,
+    > {
+        Box::pin(async {
+            Err(ih_ingest::adapters::AdapterError::NotYet(
+                "later",
+                chrono::NaiveDate::from_ymd_opt(2026, 11, 16).unwrap(),
+            ))
+        })
+    }
+}
+
+#[sqlx::test(migrator = "ih_db::MIGRATOR")]
+async fn prices_announced_for_later_are_a_note_not_a_failure(pool: PgPool) {
+    seed(&pool).await;
+    let adapter = ih_ingest::adapters::MarketAdapter::NeoCloud(Box::new(Later));
+    ih_ingest::market::register_adapters(&pool, std::slice::from_ref(&adapter))
+        .await
+        .unwrap();
+    let report =
+        ih_ingest::market::run_adapter(&pool, &ih_ingest::http_client().unwrap(), &adapter)
+            .await
+            .unwrap();
+    assert_eq!(report, ih_ingest::market::RunReport::default());
+
+    let (failures, error, ran, succeeded): (i32, Option<String>, bool, bool) = sqlx::query_as(
+        "SELECT consecutive_failures, last_error, last_run_at IS NOT NULL, last_success_at IS NOT NULL
+         FROM adapter_state WHERE adapter = 'later'",
+    )
+    .fetch_one(&pool)
+    .await
+    .unwrap();
+    assert_eq!(failures, 0, "it keeps its normal schedule");
+    assert!(error.is_some_and(|e| e.contains("take effect on 2026-11-16")));
+    assert!(ran && !succeeded, "run recorded, no success claimed");
+}

@@ -270,6 +270,21 @@ pub async fn run_adapter(
     let id = adapter.info().id();
     let result = fetch_and_store(pool, client, adapter).await;
 
+    // Prices announced for a later date are not a failure: note it, keep the schedule, store nothing.
+    if let Err(MarketError::Adapter(note @ AdapterError::NotYet(..))) = &result {
+        sqlx::query(
+            "INSERT INTO adapter_state (adapter, last_run_at, last_error, consecutive_failures)
+             VALUES ($1, now(), left($2, 2000), 0)
+             ON CONFLICT (adapter) DO UPDATE SET
+                 last_run_at = now(), last_error = EXCLUDED.last_error, consecutive_failures = 0",
+        )
+        .bind(id)
+        .bind(note.to_string())
+        .execute(pool)
+        .await?;
+        return Ok(RunReport::default());
+    }
+
     match &result {
         Ok(report) => {
             sqlx::query(
@@ -329,6 +344,7 @@ async fn fetch_and_store(
         info.id(),
         info.organization_slug(),
         info.volatile(),
+        info.inventory_varies(),
         rows,
         Utc::now(),
     )
@@ -340,6 +356,7 @@ async fn store(
     adapter: &'static str,
     organization_slug: &'static str,
     volatile: bool,
+    inventory_varies: bool,
     rows: Vec<Row>,
     now: DateTime<Utc>,
 ) -> Result<RunReport, MarketError> {
@@ -356,7 +373,11 @@ async fn store(
     .fetch_one(pool)
     .await?;
     let previous = previous as usize;
-    if previous > 0 && (rows.len() as f64) < previous as f64 * MIN_SHARE_OF_PREVIOUS {
+    // An empty run is always refused. A run under half of the last is too, except for sources
+    // that list only what is in stock, whose lists legitimately swing.
+    let too_small = rows.is_empty()
+        || (!inventory_varies && (rows.len() as f64) < previous as f64 * MIN_SHARE_OF_PREVIOUS);
+    if previous > 0 && too_small {
         return Err(MarketError::Shrunk {
             seen: rows.len(),
             previous,

@@ -75,6 +75,13 @@ pub trait Adapter: Send + Sync {
     fn volatile(&self) -> bool {
         false
     }
+    /// Whether the list is the inventory available right now (a marketplace, or a cloud that
+    /// lists only the configurations in stock), which can shrink a lot between runs with
+    /// nothing broken. The store then refuses only an empty run, not one that is under half
+    /// of the last. Volatile sources are inventory by nature.
+    fn inventory_varies(&self) -> bool {
+        self.volatile()
+    }
 }
 
 /// Run cadences, so adapters agree on what "hourly" means.
@@ -229,6 +236,11 @@ pub enum AdapterError {
     /// The endpoint is gone (HTTP 404 or 410): the provider moved its API.
     #[error("{0} endpoint not found: {1}")]
     NotFound(&'static str, String),
+    /// The provider publishes prices that apply from a later date and shows no current ones.
+    /// Not a failure: nothing is recorded, the adapter keeps its schedule, and the next run
+    /// after the date picks the prices up.
+    #[error("{0} publishes prices that take effect on {1}; nothing is recorded before then")]
+    NotYet(&'static str, chrono::NaiveDate),
 }
 
 /// A source of model API prices.

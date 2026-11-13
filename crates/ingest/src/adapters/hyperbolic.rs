@@ -30,6 +30,11 @@ impl Adapter for HyperbolicAdapter {
     fn organization_slug(&self) -> &'static str {
         "hyperbolic"
     }
+    /// The rental-options list holds only the configurations in stock, which came to 6 one run
+    /// and 2 the next without the API changing.
+    fn inventory_varies(&self) -> bool {
+        true
+    }
 }
 
 #[derive(Deserialize)]
