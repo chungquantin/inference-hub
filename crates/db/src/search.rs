@@ -27,7 +27,8 @@ pub async fn search(
     if want("organization") {
         parts.push(format!(
             "(SELECT 'organization' AS kind, '/organizations/' || slug AS href, name AS title,
-                     tagline AS subtitle, logo_url, NULL AS maker, {} AS score, NULL::timestamptz AS date
+                     coalesce(tagline, description) AS subtitle, logo_url, NULL AS maker, {} AS score,
+                     NULL::timestamptz AS date
               FROM organizations
               WHERE name ILIKE $2 OR slug ILIKE $2 OR $1 ILIKE ANY (aliases)
               ORDER BY score DESC, name LIMIT $3)",

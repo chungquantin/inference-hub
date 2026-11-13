@@ -63,6 +63,10 @@ const KIND: Record<string, string> = {
   open_source: "Open source",
   hyperscaler: "Hyperscaler",
   llm_gateway: "Gateway",
+  decentralized: "Decentralized compute",
+  llmops: "LLMOps",
+  agent_tool: "Agent tool",
+  other: "Other",
 };
 
 /* ---------- operators and parsing ---------- */

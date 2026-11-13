@@ -22,6 +22,15 @@ macro_rules! org_columns {
     };
 }
 
+// The same columns for lists: an organization with no tagline shows the start of its
+// description (taken from its website), so a table never has a blank "what they do".
+macro_rules! org_list_columns {
+    () => {
+        "o.id, o.slug, o.name, o.kinds, coalesce(o.tagline, o.description) AS tagline, \
+         o.website, o.logo_url, o.hq_country::text AS hq_country, o.founded_year, o.status"
+    };
+}
+
 // Every filter is optional: a NULL parameter disables its clause.
 macro_rules! filter_where {
     () => {
@@ -50,7 +59,7 @@ pub async fn list(
 
     let items: Vec<Organization> = sqlx::query_as(concat!(
         "SELECT ",
-        org_columns!(),
+        org_list_columns!(),
         " FROM organizations o",
         filter_where!(),
         "ORDER BY
