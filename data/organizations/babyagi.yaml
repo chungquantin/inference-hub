@@ -1,0 +1,16 @@
+slug: babyagi
+name: "BabyAGI"
+kinds: [agent_tool]
+description: "I don't know what I'm doing here, don't judge me."
+website: "https://babyagi.org"
+links:
+  github: "https://github.com/yoheinakajima"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: babyagi
+    name: "BabyAGI"
+    type: oss_project
+    github: yoheinakajima/babyagi
+    url: "https://github.com/yoheinakajima/babyagi"

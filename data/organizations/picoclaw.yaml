@@ -1,0 +1,19 @@
+slug: picoclaw
+name: "PicoClaw"
+kinds: [agent_tool]
+description: "PicoClaw is a self-hosted AI assistant written in Go. Single binary, <10MB RAM, 1s startup. Runs on Raspberry Pi, RISC-V, ARM64, x86_64, Android & more. Supports Telegram, Discord, Slack, DingTalk, WeChat."
+website: "https://picoclaw.io"
+logo_url: /logos/picoclaw.png
+links:
+  github: "https://github.com/sipeed"
+tagging:
+  match_case: true
+products:
+  - slug: picoclaw
+    name: "PicoClaw"
+    type: oss_project
+    github: sipeed/picoclaw
+    tagline: "Tiny, Fast, and Deployable anywhere — automate the mundane, unleash your creativity"
+    url: "https://github.com/sipeed/picoclaw"
+    metadata:
+      license: "MIT"

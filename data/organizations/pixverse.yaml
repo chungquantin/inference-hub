@@ -1,6 +1,7 @@
 slug: pixverse
 name: "PixVerse"
 kinds: [model_provider]
+description: "Proprietary AI research in video generation and production, extended into real-time worlds and interactive entertainment."
 website: "https://pixverse.ai"
 logo_url: /logos/pixverse.svg
 tagging:

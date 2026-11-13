@@ -1,6 +1,7 @@
 slug: deepspeedai
 name: "deepspeedai"
 kinds: [open_source]
+description: "Example models using DeepSpeed"
 website: "https://github.com/deepspeedai"
 logo_url: /logos/deepspeedai.png
 links:

@@ -1,6 +1,7 @@
 slug: internet-computer
 name: "Internet Computer"
 kinds: [decentralized]
+description: "Sovereign serverless cloud for AIware apps, empowering agentic nations, enterprises, and people — created by an open, mathematical network"
 website: "https://internetcomputer.org"
 logo_url: /logos/internet-computer.png
 tagging:

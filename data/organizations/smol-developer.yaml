@@ -1,0 +1,19 @@
+slug: smol-developer
+name: "Smol Developer"
+kinds: [agent_tool]
+description: "the first library to let you embed a developer agent in your own app!"
+website: "https://twitter.com"
+logo_url: /logos/smol-developer.png
+links:
+  github: "https://github.com/smol-ai"
+tagging:
+  match_case: true
+products:
+  - slug: smol-developer
+    name: "Smol Developer"
+    type: oss_project
+    github: smol-ai/developer
+    tagline: "the first library to let you embed a developer agent in your own app!"
+    url: "https://github.com/smol-ai/developer"
+    metadata:
+      license: "MIT"

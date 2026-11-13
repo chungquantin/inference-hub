@@ -1,0 +1,8 @@
+slug: tabnine
+name: "Tabnine"
+kinds: [agent_tool]
+description: "Ship AI-generated code with confidence. The Tricentis Agentic Quality Engineering Platform unifies specialized AI agents under one governed control plane."
+website: "https://tabnine.com"
+logo_url: /logos/tabnine.png
+tagging:
+  match_case: true

@@ -1,0 +1,20 @@
+slug: mem0
+name: "Mem0"
+kinds: [agent_tool]
+description: "Mem0 is the memory layer for AI agents and applications, enabling them to learn from past interactions and deliver personalized experiences."
+website: "https://mem0.ai"
+logo_url: /logos/mem0.svg
+links:
+  github: "https://github.com/mem0ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mem0
+    name: "Mem0"
+    type: oss_project
+    github: mem0ai/mem0
+    tagline: "The Memory Layer for AI Agents - Drop-in memory infrastructure for AI agents and apps. Context that persists. Built for production."
+    url: "https://github.com/mem0ai/mem0"
+    metadata:
+      license: "Apache-2.0"

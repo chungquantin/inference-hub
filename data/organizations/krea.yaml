@@ -1,6 +1,7 @@
 slug: krea
 name: "Krea"
 kinds: [model_provider]
+description: "Krea is the world's most powerful creative AI suite. Generate, edit, and enhance images and videos using powerful AI for free."
 website: "https://www.krea.ai"
 logo_url: /logos/krea.png
 tagging:

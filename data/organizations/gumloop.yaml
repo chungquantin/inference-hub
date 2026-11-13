@@ -1,0 +1,8 @@
+slug: gumloop
+name: "Gumloop"
+kinds: [agent_tool]
+description: "Gumloop is the multiplayer AI agent builder. Let anyone at your company build agents with any AI model, any integration while IT controls access."
+website: "https://gumloop.com"
+logo_url: /logos/gumloop.png
+tagging:
+  match_case: true

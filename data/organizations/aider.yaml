@@ -1,0 +1,20 @@
+slug: aider
+name: "Aider"
+kinds: [agent_tool]
+description: "aider is AI pair programming in your terminal"
+website: "https://aider.chat"
+logo_url: /logos/aider.png
+links:
+  github: "https://github.com/Aider-AI"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: aider
+    name: "Aider"
+    type: oss_project
+    github: Aider-AI/aider
+    tagline: "aider is AI pair programming in your terminal"
+    url: "https://github.com/Aider-AI/aider"
+    metadata:
+      license: "Apache-2.0"

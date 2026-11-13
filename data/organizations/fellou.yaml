@@ -1,0 +1,20 @@
+slug: fellou
+name: "Fellou"
+kinds: [agent_tool]
+description: "Browse, automate, and execute — Fellou is the world's first self-driving browser where AI doesn't just chat, it acts. Automate multi-step tasks across websites, analyze data, and get things done while you focus on what matters."
+website: "https://www.fellou.ai"
+logo_url: /logos/fellou.png
+links:
+  github: "https://github.com/FellouAI"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: fellou
+    name: "Fellou"
+    type: oss_project
+    github: FellouAI/eko
+    tagline: "Eko (Eko Keeps Operating) - Build Production-ready Agentic Workflow with Natural Language - eko.fellou.ai"
+    url: "https://github.com/FellouAI/eko"
+    metadata:
+      license: "MIT"

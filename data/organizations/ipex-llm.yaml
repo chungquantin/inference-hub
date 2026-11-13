@@ -1,6 +1,7 @@
 slug: ipex-llm
 name: "IPEX-LLM"
 kinds: [open_source]
+description: "Accelerate local LLM inference and finetuning (LLaMA, Mistral, ChatGLM, Qwen, DeepSeek, Mixtral, Gemma, Phi, MiniCPM, Qwen-VL, MiniCPM-V, etc.) on Intel XPU (e.g., local PC with iGPU and NPU, discrete GPU such as Arc, Flex and Max); seamlessly integrate with llama.cpp, Ollama, HuggingFace,…"
 website: "https://github.com/intel/ipex-llm"
 logo_url: /logos/ipex-llm.png
 categories: [inference-engines]

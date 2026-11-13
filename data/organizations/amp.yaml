@@ -1,0 +1,9 @@
+slug: amp
+name: "Amp"
+kinds: [agent_tool]
+description: "Amp is a coding agent and development environment built for the frontier. You can build anything in Amp, in orbs, cloud sandboxes where the agent runs without supervision, or on your own machine with our CLI and runner. Plan work with your team in Spaces, and follow your threads from the Mac,…"
+website: "https://ampcode.com"
+logo_url: /logos/amp.png
+tagging:
+  match_case: true
+  match_name: false

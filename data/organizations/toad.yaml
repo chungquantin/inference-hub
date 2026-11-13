@@ -1,0 +1,20 @@
+slug: toad
+name: "Toad"
+kinds: [agent_tool]
+description: "A unified experience for AI in your terminal. Code with OpenHands, Claude Code, Gemini CLI, and more."
+website: "https://www.batrachian.ai"
+logo_url: /logos/toad.png
+links:
+  github: "https://github.com/batrachianai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: toad
+    name: "Toad"
+    type: oss_project
+    github: batrachianai/toad
+    tagline: "A unified interface for AI in your terminal."
+    url: "https://github.com/batrachianai/toad"
+    metadata:
+      license: "AGPL-3.0"

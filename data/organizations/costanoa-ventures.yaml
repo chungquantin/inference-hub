@@ -3,5 +3,6 @@ name: "Costanoa Ventures"
 kinds: [investor]
 description: "Costanoa Ventures is a Seed and Series A venture firm founded in 2012, backing applied AI, cybersecurity, fintech, and national security companies with ~$2.8B AUM."
 website: "https://www.costanoa.vc"
+logo_url: /logos/costanoa-ventures.png
 tagging:
   match_case: true

@@ -1,0 +1,8 @@
+slug: zencoder
+name: "Zencoder"
+kinds: [agent_tool]
+description: "Zencoder is an AI-powered coding agent that helps developers write, debug, and optimize code faster with intelligent code generation and chat assistance. Integrates with VS Code, JetBrains, and major IDEs."
+website: "https://zencoder.ai"
+logo_url: /logos/zencoder.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: sourcery
+name: "Sourcery"
+kinds: [agent_tool]
+description: "AI code review that finds more issues than any other AI reviewer. Demand perfection from your coding agents. Try Sourcery free!"
+website: "https://sourcery.ai"
+logo_url: /logos/sourcery.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,6 +1,7 @@
 slug: xllm-ai
 name: "xLLM-AI"
 kinds: [open_source]
+description: "xLLM is a high-performance inference framework for LLM, VLM, DiT, and REC models, optimized for heterogeneous AI accelerators."
 website: "https://xllm-ai.com"
 logo_url: /logos/xllm-ai.png
 links:

@@ -3,5 +3,6 @@ name: "Eclipse Ventures"
 kinds: [investor]
 description: "We didn’t leave industry to stop building. We left to help entrepreneurs rebuild the industries that power our world."
 website: "https://eclipse.vc"
+logo_url: /logos/eclipse-ventures.png
 tagging:
   match_case: true

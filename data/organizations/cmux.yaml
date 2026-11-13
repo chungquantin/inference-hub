@@ -1,0 +1,18 @@
+slug: cmux
+name: "cmux"
+kinds: [agent_tool]
+description: "Free and open source macOS terminal for AI coding agents. Works with Claude Code, Codex, OpenCode, Gemini CLI, Kiro, Aider, and any CLI tool."
+website: "https://cmux.com"
+logo_url: /logos/cmux.png
+links:
+  github: "https://github.com/manaflow-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cmux
+    name: "cmux"
+    type: oss_project
+    github: manaflow-ai/cmux
+    tagline: "Open source Ghostty-based macOS terminal with vertical tabs and notifications for AI coding agents. Built for multitasking, organization, and programmability."
+    url: "https://github.com/manaflow-ai/cmux"

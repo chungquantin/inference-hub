@@ -1,6 +1,7 @@
 slug: bell-canada-ai-fabric
 name: "Bell Canada AI Fabric"
 kinds: [gpu_cloud]
+description: "Wireless, Internet and TV Service Provider in Canada"
 website: "https://www.bell.ca"
 logo_url: /logos/bell-canada-ai-fabric.png
 categories: [sovereign-clouds]

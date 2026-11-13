@@ -1,0 +1,19 @@
+slug: agents-md
+name: "AGENTS.md"
+kinds: [other]
+description: "AGENTS.md is a simple, open format for guiding coding agents, used by over 60k open-source projects. Think of it as a README for agents."
+website: "https://agents.md"
+logo_url: /logos/agents-md.png
+links:
+  github: "https://github.com/agentsmd"
+tagging:
+  match_case: true
+products:
+  - slug: agents-md
+    name: "AGENTS.md"
+    type: oss_project
+    github: agentsmd/agents.md
+    tagline: "AGENTS.md — a simple, open format for guiding coding agents"
+    url: "https://github.com/agentsmd/agents.md"
+    metadata:
+      license: "MIT"

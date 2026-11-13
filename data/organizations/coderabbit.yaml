@@ -1,0 +1,8 @@
+slug: coderabbit
+name: "CodeRabbit"
+kinds: [agent_tool]
+description: "Ship more software, faster, with code you trust. Independent AI code review, PR triage, change explanations, and continuous security monitoring."
+website: "https://coderabbit.ai"
+logo_url: /logos/coderabbit.png
+tagging:
+  match_case: true

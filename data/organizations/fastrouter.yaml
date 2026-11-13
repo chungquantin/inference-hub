@@ -1,0 +1,8 @@
+slug: fastrouter
+name: "FastRouter"
+kinds: [llm_gateway]
+description: "FastRouter helps enterprise AI teams route, compare, and operate across 200+ models with a single OpenAI compatible API."
+website: "https://fastrouter.ai"
+logo_url: /logos/fastrouter.png
+tagging:
+  match_case: true

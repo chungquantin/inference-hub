@@ -1,0 +1,19 @@
+slug: llamaindex
+name: "LlamaIndex"
+kinds: [agent_tool]
+description: "LlamaIndex is the document processing platform for AI"
+website: "https://llamaindex.ai"
+logo_url: /logos/llamaindex.png
+links:
+  github: "https://github.com/run-llama"
+tagging:
+  match_case: true
+products:
+  - slug: llamaindex
+    name: "LlamaIndex"
+    type: oss_project
+    github: run-llama/llama_index
+    tagline: "LlamaIndex is the document processing platform for AI"
+    url: "https://github.com/run-llama/llama_index"
+    metadata:
+      license: "MIT"

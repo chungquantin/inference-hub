@@ -1,6 +1,7 @@
 slug: preferred-networks
 name: "Preferred Networks"
 kinds: [model_provider]
+description: "Preferred Networks（PFN、プリファードネットワークス）の公式サイト。AI半導体、計算基盤、生成AI、プロダクト・ソリューションまでAI技術を垂直統合し、最先端の技術を最適な形で社会実装する企業です。"
 website: "https://www.preferred.jp"
 logo_url: /logos/preferred-networks.png
 tagging:

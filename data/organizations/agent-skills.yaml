@@ -1,0 +1,20 @@
+slug: agent-skills
+name: "Agent Skills"
+kinds: [other]
+description: "A standardized way to give AI agents new capabilities and expertise."
+website: "https://agentskills.io"
+logo_url: /logos/agent-skills.png
+links:
+  github: "https://github.com/agentskills"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: agent-skills
+    name: "Agent Skills"
+    type: oss_project
+    github: agentskills/agentskills
+    tagline: "Specification and documentation for Agent Skills"
+    url: "https://github.com/agentskills/agentskills"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,8 @@
+slug: 302-ai
+name: "302.AI"
+kinds: [llm_gateway]
+description: "Pay-as-you-go, Comprehensive AI model API Access, Instant Online App Usage"
+website: "https://302.ai"
+logo_url: /logos/302-ai.png
+tagging:
+  match_case: true

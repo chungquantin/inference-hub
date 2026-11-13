@@ -1,0 +1,8 @@
+slug: oneinfer
+name: "OneInfer"
+kinds: [inference_provider]
+description: "Production AI, on our cloud or yours. Work with our engineers to run sovereign AI inside your own cloud or data center, build on OneInfer Cloud with multimodal model APIs, intelligent routing, GPUs and dedicated deployments, and put OneInfer Voice, Studio and Aura to work."
+website: "https://oneinfer.ai"
+logo_url: /logos/oneinfer.png
+tagging:
+  match_case: true

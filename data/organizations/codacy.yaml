@@ -1,0 +1,9 @@
+slug: codacy
+name: "Codacy"
+kinds: [agent_tool]
+description: "Govern code quality, security and AI coding policies from a single place. Enabling dev teams to ship safely without slowing down."
+website: "https://codacy.com"
+logo_url: /logos/codacy.png
+tagging:
+  match_case: true
+  match_name: false

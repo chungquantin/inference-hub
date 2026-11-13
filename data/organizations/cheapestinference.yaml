@@ -1,0 +1,8 @@
+slug: cheapestinference
+name: "CheapestInference"
+kinds: [llm_gateway]
+description: "Cheapest AI inference pricing: unlimited Kimi K3.1 Pro, Qwen3.8 Max & more from $22/mo flat — no per-token billing. Works with Claude Code."
+website: "https://cheapestinference.com"
+logo_url: /logos/cheapestinference.png
+tagging:
+  match_case: true

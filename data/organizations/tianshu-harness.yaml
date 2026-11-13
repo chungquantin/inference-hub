@@ -1,0 +1,18 @@
+slug: tianshu-harness
+name: "Tianshu Harness"
+kinds: [agent_tool]
+description: "天枢 Tianshu Harness 是开源的 AI 编程智能体运行时：目标不漂移，完成有证据，验证有闭环。终端 CLI、桌面端和 VS Code 插件共用同一个内核，Apache-2.0 开源。"
+website: "https://tianshuharness.com"
+logo_url: /logos/tianshu-harness.png
+links:
+  github: "https://github.com/huiliyi37"
+tagging:
+  match_case: true
+products:
+  - slug: tianshu-harness
+    name: "Tianshu Harness"
+    type: oss_project
+    github: huiliyi37/Tianshu-harness
+    url: "https://github.com/huiliyi37/Tianshu-harness"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,19 @@
+slug: librefang
+name: "LibreFang"
+kinds: [agent_tool]
+description: "LibreFang - The Agent Operating System. Run autonomous AI agents 24/7. Built in Rust for production workloads."
+website: "https://librefang.ai"
+logo_url: /logos/librefang.png
+links:
+  github: "https://github.com/librefang"
+tagging:
+  match_case: true
+products:
+  - slug: librefang
+    name: "LibreFang"
+    type: oss_project
+    github: librefang/librefang
+    tagline: "LibreFang is an open-source agent operating system written in Rust. Live demo: https://flyio.librefang.ai"
+    url: "https://github.com/librefang/librefang"
+    metadata:
+      license: "MIT"

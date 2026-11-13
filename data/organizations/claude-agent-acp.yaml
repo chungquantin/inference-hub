@@ -1,0 +1,19 @@
+slug: claude-agent-acp
+name: "Claude Agent ACP"
+kinds: [other]
+description: "Use Claude Agent SDK from any ACP client"
+website: "https://github.com/agentclientprotocol/claude-agent-acp"
+logo_url: /logos/claude-agent-acp.png
+links:
+  github: "https://github.com/agentclientprotocol"
+tagging:
+  match_case: true
+products:
+  - slug: claude-agent-acp
+    name: "Claude Agent ACP"
+    type: oss_project
+    github: agentclientprotocol/claude-agent-acp
+    tagline: "Use Claude Agent SDK from any ACP client"
+    url: "https://github.com/agentclientprotocol/claude-agent-acp"
+    metadata:
+      license: "Apache-2.0"

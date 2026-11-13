@@ -1,0 +1,19 @@
+slug: sim-studio
+name: "Sim Studio"
+kinds: [agent_tool]
+description: "Sim is the open-source AI workspace where companies build, distribute, and govern AI agents. 270+ integrations, every major LLM, permission groups, spend limits, and self-hosting."
+website: "https://sim.ai"
+logo_url: /logos/sim-studio.png
+links:
+  github: "https://github.com/simstudioai"
+tagging:
+  match_case: true
+products:
+  - slug: sim-studio
+    name: "Sim Studio"
+    type: oss_project
+    github: simstudioai/sim
+    tagline: "Sim is the collaborative workspace to build, deploy, and monitor AI agents and workflows. Used by 100,000+ builders."
+    url: "https://github.com/simstudioai/sim"
+    metadata:
+      license: "Apache-2.0"

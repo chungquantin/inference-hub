@@ -1,6 +1,7 @@
 slug: asml
 name: ASML
 kinds: [investor, hardware]
+description: "ASML is the leading supplier to the semiconductor industry, driving lithography system innovation to make chips smaller, faster and greener."
 website: https://www.asml.com
 logo_url: /logos/asml.png
 hq_country: NL

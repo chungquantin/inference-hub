@@ -1,6 +1,7 @@
 slug: systran
 name: "SYSTRAN"
 kinds: [open_source]
+description: "Translate text, documents and much more in 55+ languages with SYSTRAN fully secured professional translation solutions. API & CAT Tool integration"
 website: "http://www.systransoft.com"
 logo_url: /logos/systran.png
 links:

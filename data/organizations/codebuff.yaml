@@ -1,0 +1,18 @@
+slug: codebuff
+name: "Codebuff"
+kinds: [agent_tool]
+description: "Code faster with AI using Codebuff. Edit your codebase and run terminal commands via natural language instruction."
+website: "https://codebuff.com"
+logo_url: /logos/codebuff.webp
+links:
+  github: "https://github.com/CodebuffAI"
+tagging:
+  match_case: true
+products:
+  - slug: codebuff
+    name: "Codebuff"
+    type: oss_project
+    github: CodebuffAI/freebuff
+    url: "https://github.com/CodebuffAI/freebuff"
+    metadata:
+      license: "Apache-2.0"

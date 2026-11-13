@@ -1,0 +1,9 @@
+slug: zapier
+name: "Zapier"
+kinds: [agent_tool]
+description: "Build and scale AI workflows and agents across 9,000+ apps with Zapier—the most connected AI orchestration platform. Trusted by 3 million+ businesses."
+website: "https://zapier.com"
+logo_url: /logos/zapier.png
+tagging:
+  match_case: true
+  match_name: false

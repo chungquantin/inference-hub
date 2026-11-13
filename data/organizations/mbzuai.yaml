@@ -2,5 +2,6 @@ slug: mbzuai
 name: "MBZUAI"
 kinds: [model_provider]
 website: "https://mbzuai.ac.ae"
+logo_url: /logos/mbzuai.png
 tagging:
   match_case: true

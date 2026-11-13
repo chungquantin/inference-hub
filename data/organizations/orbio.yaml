@@ -1,0 +1,9 @@
+slug: orbio
+name: "Orbio"
+kinds: [llm_gateway]
+description: "Every major model, below list price. Private by default. First 20 messages free."
+website: "https://www.orbio.so"
+logo_url: /logos/orbio.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: voiceflow
+name: "Voiceflow"
+kinds: [agent_tool]
+description: "Voiceflow is the AI agent platform for customer experience automation. Build, launch, and scale chat and voice AI agents for customer support and CX. Book a demo."
+website: "https://voiceflow.com"
+logo_url: /logos/voiceflow.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,6 +1,17 @@
 slug: xiaomi-mimo
 name: "Xiaomi MiMo"
 kinds: [model_provider]
+description: "MiMo Code: Where Models and Agents Co-Evolve"
 website: "https://mimo.xiaomi.com"
+logo_url: /logos/xiaomi-mimo.jpg
 tagging:
   match_case: true
+products:
+  - slug: mimo-code
+    name: "MiMo Code"
+    type: oss_project
+    github: XiaomiMiMo/MiMo-Code
+    tagline: "MiMo Code: Where Models and Agents Co-Evolve"
+    url: "https://github.com/XiaomiMiMo/MiMo-Code"
+    metadata:
+      license: "MIT"

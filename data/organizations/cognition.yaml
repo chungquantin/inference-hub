@@ -7,3 +7,19 @@ logo_url: /logos/cognition.svg
 tagging:
   match_case: true
   match_name: false
+products:
+  - slug: devin-cli
+    name: "Devin CLI"
+    type: platform
+    tagline: "Devin runs locally in your terminal. Every frontier model, Fusion for frontier results at over a third less cost, and a hand-off to Devin Cloud when you close your laptop."
+    url: "https://devin.ai/cli"
+  - slug: windsurf
+    name: "Windsurf"
+    type: platform
+    tagline: "Manage any agent, locally or in the cloud, from one command center. Plan, review, and ship with a team of agents."
+    url: "https://windsurf.com"
+  - slug: devin
+    name: "Devin"
+    type: platform
+    tagline: "Devin is an AI coding agent and software engineer that helps developers build better software faster. Parallel cloud agents for serious engineering teams."
+    url: "https://devin.ai"

@@ -1,0 +1,7 @@
+slug: api2d
+name: "API2D"
+kinds: [llm_gateway]
+website: "https://api2d.com"
+logo_url: /logos/api2d.png
+tagging:
+  match_case: true

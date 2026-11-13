@@ -1,6 +1,7 @@
 slug: opencompass
 name: "OpenCompass"
 kinds: [llmops]
+description: "OpenCompass面向大模型的开源方和使用者， 提供开源、高效、全面的大模型评测开放平台。网站包含大模型评测榜单，评测集社区，文档等专区。榜单专区包含大语言模型以及多模态大模型榜单，提供多能力维度的评分参考。评测集社区致力于打造创新性的基准测试资源专区，提供丰富的评测集信息。"
 website: "https://opencompass.org.cn"
 logo_url: /logos/opencompass.svg
 categories: [observability]

@@ -1,0 +1,19 @@
+slug: qodo
+name: "Qodo"
+kinds: [agent_tool]
+description: "Qodo is an AI code review tool giving teams deep codebase context to move faster and improve code quality, with 15+ agentic workflows for IDEs, PRs and security."
+website: "https://qodo.ai"
+logo_url: /logos/qodo.png
+links:
+  github: "https://github.com/The-PR-Agent"
+tagging:
+  match_case: true
+products:
+  - slug: qodo
+    name: "Qodo"
+    type: oss_project
+    github: The-PR-Agent/pr-agent
+    tagline: "🚀 PR Agent: The Original Open-Source PR Reviewer. This project is not the Qodo free tier."
+    url: "https://github.com/The-PR-Agent/pr-agent"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,9 @@
+slug: mithril
+name: "Mithril"
+kinds: [gpu_cloud]
+description: "Mithril orchestrates multi-cloud GPUs so you don"
+website: "https://mithril.ai"
+logo_url: /logos/mithril.png
+tagging:
+  match_case: true
+  match_name: false

@@ -2,5 +2,6 @@ slug: submer
 name: "Submer"
 kinds: [hardware]
 website: "https://submer.com"
+logo_url: /logos/submer.png
 tagging:
   match_case: true

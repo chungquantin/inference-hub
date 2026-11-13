@@ -73,3 +73,35 @@ products:
     github: openai/evals
     tagline: "Eval framework and registry."
     url: "https://github.com/openai/evals"
+  - slug: codex-cli
+    name: "Codex CLI"
+    type: oss_project
+    github: openai/codex
+    tagline: "Lightweight coding agent that runs in your terminal"
+    url: "https://github.com/openai/codex"
+    metadata:
+      license: "Apache-2.0"
+  - slug: openai-symphony
+    name: "OpenAI Symphony"
+    type: oss_project
+    github: openai/symphony
+    tagline: "Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage work instead of supervising coding agents."
+    url: "https://github.com/openai/symphony"
+    metadata:
+      license: "Apache-2.0"
+  - slug: openai-agents-sdk
+    name: "OpenAI Agents SDK"
+    type: oss_project
+    github: openai/openai-agents-python
+    tagline: "A lightweight, powerful framework for multi-agent workflows"
+    url: "https://github.com/openai/openai-agents-python"
+    metadata:
+      license: "MIT"
+  - slug: swarm-openai
+    name: "Swarm OpenAI"
+    type: oss_project
+    github: openai/swarm
+    tagline: "Educational framework exploring ergonomic, lightweight multi-agent orchestration. Managed by OpenAI Solution team."
+    url: "https://github.com/openai/swarm"
+    metadata:
+      license: "MIT"

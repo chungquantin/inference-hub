@@ -1,0 +1,19 @@
+slug: clawhub
+name: "ClawHub"
+kinds: [agent_tool]
+description: "Discover skills and plugins from top creators"
+website: "https://clawhub.ai"
+logo_url: /logos/clawhub.png
+links:
+  github: "https://github.com/openclaw"
+tagging:
+  match_case: true
+products:
+  - slug: clawhub
+    name: "ClawHub"
+    type: oss_project
+    github: openclaw/clawhub
+    tagline: "Skill + Plugin Registry for OpenClaw"
+    url: "https://github.com/openclaw/clawhub"
+    metadata:
+      license: "MIT"

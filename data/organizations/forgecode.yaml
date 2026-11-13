@@ -1,0 +1,19 @@
+slug: forgecode
+name: "ForgeCode"
+kinds: [agent_tool]
+description: "ForgeCode is a software factory you set up once. GitHub issues, Slack threads, alerts or a prompt start work; the factory builds, tests, ships and monitors that work for months."
+website: "https://forgecode.dev"
+logo_url: /logos/forgecode.png
+links:
+  github: "https://github.com/tailcallhq"
+tagging:
+  match_case: true
+products:
+  - slug: forgecode
+    name: "ForgeCode"
+    type: oss_project
+    github: tailcallhq/forgecode
+    tagline: "AI enabled pair programmer for Claude, GPT, O Series, Grok, Deepseek, Gemini and 300+ models"
+    url: "https://github.com/tailcallhq/forgecode"
+    metadata:
+      license: "Apache-2.0"

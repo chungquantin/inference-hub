@@ -1,6 +1,7 @@
 slug: meta-pytorch
 name: "Meta PyTorch"
 kinds: [open_source]
+description: "PyTorch Foundation is the deep learning community home for the open source PyTorch framework and ecosystem."
 website: "https://pytorch.org"
 logo_url: /logos/meta-pytorch.jpg
 links:

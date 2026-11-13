@@ -1,0 +1,20 @@
+slug: gptme
+name: "gptme"
+kinds: [agent_tool]
+description: "gptme is an open-source AI agent that lives in your terminal. Bring Claude, GPT, Gemini, Grok, DeepSeek, or a local model."
+website: "https://gptme.org"
+logo_url: /logos/gptme.svg
+links:
+  github: "https://github.com/gptme"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gptme
+    name: "gptme"
+    type: oss_project
+    github: gptme/gptme
+    tagline: "Your agent in your terminal, equipped with local tools: writes code, uses the terminal, browses the web. Make your own persistent autonomous agent on top!"
+    url: "https://github.com/gptme/gptme"
+    metadata:
+      license: "MIT"

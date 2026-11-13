@@ -1,6 +1,7 @@
 slug: moore-threads
 name: "Moore Threads"
 kinds: [hardware]
+description: "摩尔线程成立于 2020 年6月，以全功能国产GPU为核心，致力于向全球提供加速计算的基础设施和一站式解决方案，为各行各业的数智化转型提供强大的 AI 计算支持。"
 website: "https://www.mthreads.com"
 logo_url: /logos/moore-threads.png
 tagging:

@@ -1,0 +1,18 @@
+slug: browserless
+name: "Browserless"
+kinds: [other]
+description: "Give AI agents a cloud browser that won't crash or get blocked. Connect over MCP, Puppeteer, or Playwright with stealth and Authenticated Profiles built in."
+website: "https://browserless.io"
+logo_url: /logos/browserless.svg
+links:
+  github: "https://github.com/browserless"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: browserless
+    name: "Browserless"
+    type: oss_project
+    github: browserless/browserless
+    tagline: "Deploy headless browsers in Docker. Run on our cloud or bring your own. Free for non-commercial uses."
+    url: "https://github.com/browserless/browserless"

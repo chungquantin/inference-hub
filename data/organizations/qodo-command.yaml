@@ -1,0 +1,17 @@
+slug: qodo-command
+name: "Qodo Command"
+kinds: [agent_tool]
+description: "Deploy with confidence. Your rules, your standards."
+website: "https://docs.qodo.ai"
+logo_url: /logos/qodo-command.png
+links:
+  github: "https://github.com/qodo-ai"
+tagging:
+  match_case: true
+products:
+  - slug: qodo-command
+    name: "Qodo Command"
+    type: oss_project
+    github: qodo-ai/command
+    tagline: "The Qodo Gen CLI lets you interact with the Qodo platform from your terminal for automation, advanced AI workflows, or CI/CD integration."
+    url: "https://github.com/qodo-ai/command"

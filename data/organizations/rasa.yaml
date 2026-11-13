@@ -1,0 +1,20 @@
+slug: rasa
+name: "Rasa"
+kinds: [agent_tool]
+description: "The agent platform for product teams building customer-facing AI."
+website: "https://rasa.com"
+logo_url: /logos/rasa.png
+links:
+  github: "https://github.com/RasaHQ"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: rasa
+    name: "Rasa"
+    type: oss_project
+    github: RasaHQ/rasa
+    tagline: "💬 Open source machine learning framework to automate text- and voice-based conversations: NLU, dialogue management, connect to Slack, Facebook, and more - Create chatbots and voice assistants"
+    url: "https://github.com/RasaHQ/rasa"
+    metadata:
+      license: "Apache-2.0"

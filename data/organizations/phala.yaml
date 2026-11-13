@@ -1,0 +1,9 @@
+slug: phala
+name: "Phala"
+kinds: [inference_provider]
+description: "Phala Cloud delivers confidential AI on TEE-protected GPUs — private LLM inference, sealed agents, and verifiable compute on Intel TDX + NVIDIA H100/H200."
+website: "https://phala.com"
+logo_url: /logos/phala.png
+tagging:
+  match_case: true
+  match_name: false

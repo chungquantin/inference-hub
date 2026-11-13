@@ -1,6 +1,7 @@
 slug: shanghai-ai-laboratory
 name: "Shanghai AI Laboratory"
 kinds: [model_provider]
+description: "上海人工智能实验室,首页"
 website: "https://www.shlab.org.cn"
 tagging:
   match_case: true

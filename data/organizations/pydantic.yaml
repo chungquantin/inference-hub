@@ -6,3 +6,12 @@ website: "https://pydantic.dev"
 logo_url: /logos/pydantic.svg
 tagging:
   match_case: true
+products:
+  - slug: pydantic-ai
+    name: "Pydantic AI"
+    type: oss_project
+    github: pydantic/pydantic-ai
+    tagline: "How Python does AI. Agents, realtime voice, image generation, embeddings. Every model, every interface, typed end to end."
+    url: "https://github.com/pydantic/pydantic-ai"
+    metadata:
+      license: "MIT"

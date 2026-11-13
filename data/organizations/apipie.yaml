@@ -1,0 +1,8 @@
+slug: apipie
+name: "APIpie"
+kinds: [llm_gateway]
+description: "Your one-stop shop for AI API services."
+website: "https://apipie.ai"
+logo_url: /logos/apipie.svg
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: the-browser-company
+name: "The Browser Company"
+kinds: [other]
+description: "We’re building a better way to use the internet, starting with your browser."
+website: "https://thebrowser.company"
+logo_url: /logos/the-browser-company.png
+tagging:
+  match_case: true

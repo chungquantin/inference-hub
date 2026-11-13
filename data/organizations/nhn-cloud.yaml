@@ -1,6 +1,7 @@
 slug: nhn-cloud
 name: "NHN Cloud"
 kinds: [gpu_cloud]
+description: "국내 대표 클라우드 기업 NHN Cloud, AI 시대를 위한 고성능 인프라와 안정적인 클라우드 서비스를 하나의 플랫폼에서 제공합니다."
 website: "https://www.nhncloud.com"
 logo_url: /logos/nhn-cloud.png
 categories: [sovereign-clouds]

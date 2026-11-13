@@ -1,0 +1,8 @@
+slug: apimart
+name: "APIMart"
+kinds: [llm_gateway]
+description: "Unified AI API for 190+ LLM, image and video models: GPT-6.1, Claude Opus 5.5, Gemini 3.8, Veo 3.1, Kling V3. OpenAI-compatible, 20% off official prices."
+website: "https://apimart.ai"
+logo_url: /logos/apimart.png
+tagging:
+  match_case: true

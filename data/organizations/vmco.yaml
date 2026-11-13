@@ -1,0 +1,8 @@
+slug: vmco
+name: "VMCO"
+kinds: [llm_gateway]
+description: "LLM token exchange: contribute API keys for one model, earn credits, spend them on any other. 28+ models, OpenAI-compatible API. Your GPT-4o tokens become Claude, Gemini, DeepSeek."
+website: "https://vmco.ai"
+logo_url: /logos/vmco.svg
+tagging:
+  match_case: true

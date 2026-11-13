@@ -1,0 +1,18 @@
+slug: autogpt
+name: "AutoGPT"
+kinds: [agent_tool]
+description: "Build your team of AI Experts for content, sales, research, and recurring work. Share the context, connect your tools, and let Otto coordinate."
+website: "https://agpt.co"
+logo_url: /logos/autogpt.png
+links:
+  github: "https://github.com/Significant-Gravitas"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: autogpt
+    name: "AutoGPT"
+    type: oss_project
+    github: Significant-Gravitas/AutoGPT
+    tagline: "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters."
+    url: "https://github.com/Significant-Gravitas/AutoGPT"

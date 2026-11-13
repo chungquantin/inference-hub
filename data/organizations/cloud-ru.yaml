@@ -1,6 +1,7 @@
 slug: cloud-ru
 name: "Cloud.ru"
 kinds: [gpu_cloud]
+description: "Cloud.ru — облачные сервисы и ИИ-технологии для бизнеса. Мы делаем доступ к облакам и ИИ простым и удобным. Более 130 IaaS- и PaaS-сервисов, дата-центры уровня Tier III и доступность по SLA 99,982%. Соответствие требованиям 152-ФЗ и 187-ФЗ."
 website: "https://cloud.ru"
 logo_url: /logos/cloud-ru.svg
 categories: [sovereign-clouds]

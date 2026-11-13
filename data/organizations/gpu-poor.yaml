@@ -1,7 +1,9 @@
 slug: gpu-poor
 name: "gpu_poor"
 kinds: [open_source]
+description: "Web site created using create-react-app"
 website: "https://rahulschand.github.io/gpu_poor/"
+logo_url: /logos/gpu-poor.jpg
 links:
   github: "https://github.com/RahulSChand/gpu_poor"
 categories: [model-optimization]

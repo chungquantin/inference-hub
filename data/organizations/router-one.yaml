@@ -1,0 +1,8 @@
+slug: router-one
+name: "Router One"
+kinds: [llm_gateway]
+description: "Unified LLM API gateway: one OpenAI-compatible endpoint for GPT, Claude, Gemini and Grok — automatic fallback, cost traces, per-key spend caps."
+website: "https://router.one"
+logo_url: /logos/router-one.png
+tagging:
+  match_case: true

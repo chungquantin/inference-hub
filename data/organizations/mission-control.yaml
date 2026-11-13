@@ -1,0 +1,20 @@
+slug: mission-control
+name: "Mission Control"
+kinds: [agent_tool]
+description: "Run agent operations from one self-hosted control plane with tasks, activity, costs, approvals, and operator review."
+website: "https://mc.builderz.dev"
+logo_url: /logos/mission-control.png
+links:
+  github: "https://github.com/builderz-labs"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mission-control
+    name: "Mission Control"
+    type: oss_project
+    github: builderz-labs/mission-control
+    tagline: "Self-hosted control plane for AI agents: dispatch tasks, review runs, track spend, and operate OpenClaw, Claude Code, Codex, and other runtimes."
+    url: "https://github.com/builderz-labs/mission-control"
+    metadata:
+      license: "MIT"

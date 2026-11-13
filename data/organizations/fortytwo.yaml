@@ -1,0 +1,9 @@
+slug: fortytwo
+name: "Fortytwo"
+kinds: [decentralized]
+description: "Better answers from open models. Fortytwo Engine gives API access to open-weight models; Fortytwo Harbor runs them on-premises."
+website: "https://fortytwo.network"
+logo_url: /logos/fortytwo.png
+tagging:
+  match_case: true
+  match_name: false

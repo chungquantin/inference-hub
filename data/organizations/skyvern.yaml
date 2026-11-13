@@ -1,0 +1,20 @@
+slug: skyvern
+name: "Skyvern"
+kinds: [agent_tool]
+description: "Skyvern automates browser workflows with AI. No brittle selectors, no maintenance. Automate logins, form fills, data extraction, and more across any website."
+website: "https://www.skyvern.com"
+logo_url: /logos/skyvern.png
+links:
+  github: "https://github.com/Skyvern-AI"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: skyvern
+    name: "Skyvern"
+    type: oss_project
+    github: Skyvern-AI/skyvern
+    tagline: "Automate browser based workflows with AI"
+    url: "https://github.com/Skyvern-AI/skyvern"
+    metadata:
+      license: "AGPL-3.0"

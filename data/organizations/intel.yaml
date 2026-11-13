@@ -2,6 +2,7 @@ slug: intel
 name: "Intel"
 kinds: [hardware]
 website: "https://www.intel.com"
+logo_url: /logos/intel.png
 tagging:
   match_case: true
 products:

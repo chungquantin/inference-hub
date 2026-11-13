@@ -1,0 +1,8 @@
+slug: packet-ai
+name: "Packet.ai"
+kinds: [gpu_cloud]
+description: "Rent NVIDIA B200, RTX PRO 6000, A100, L40S and RTX 4090 by the hour from $0.36. Share a pooled GPU and pay up to 47% less. No contract."
+website: "https://packet.ai"
+logo_url: /logos/packet-ai.png
+tagging:
+  match_case: true

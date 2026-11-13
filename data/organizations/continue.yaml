@@ -1,0 +1,19 @@
+slug: continue
+name: "Continue"
+kinds: [agent_tool]
+description: "Continue has been acquired by Cursor."
+website: "https://continue.dev"
+logo_url: /logos/continue.png
+links:
+  github: "https://github.com/continuedev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: continue
+    name: "Continue"
+    type: oss_project
+    github: continuedev/continue
+    url: "https://github.com/continuedev/continue"
+    metadata:
+      license: "Apache-2.0"

@@ -1,6 +1,7 @@
 slug: audio-cpp
 name: "audio.cpp"
 kinds: [open_source]
+description: "An all-in-one, pure C++ inference engine for audio models, powered by ggml. Supports TTS, STT, VAD, voice conversion, music generation, and more, with highly optimized performance. No Python dependency."
 website: "https://github.com/0xShug0/audio.cpp"
 links:
   github: "https://github.com/0xShug0/audio.cpp"

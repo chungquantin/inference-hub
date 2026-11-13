@@ -1,0 +1,19 @@
+slug: microclaw
+name: "MicroClaw"
+kinds: [agent_tool]
+description: "🦀An agentic AI assistant that lives in your chats, inspired by nanoclaw and incorporating some of its design ideas. Built with Rust 🦀"
+website: "https://microclaw.org"
+logo_url: /logos/microclaw.png
+links:
+  github: "https://github.com/microclaw"
+tagging:
+  match_case: true
+products:
+  - slug: microclaw
+    name: "MicroClaw"
+    type: oss_project
+    github: microclaw/microclaw
+    tagline: "🦀An agentic AI assistant that lives in your chats, inspired by nanoclaw and incorporating some of its design ideas. Built with Rust 🦀"
+    url: "https://github.com/microclaw/microclaw"
+    metadata:
+      license: "MIT"

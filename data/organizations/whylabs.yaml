@@ -2,6 +2,7 @@ slug: whylabs
 name: "WhyLabs"
 kinds: [llmops]
 website: "https://whylabs.ai"
+logo_url: /logos/whylabs.png
 categories: [observability]
 tagging:
   match_case: true

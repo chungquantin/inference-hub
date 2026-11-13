@@ -1,6 +1,7 @@
 slug: stockmark
 name: "Stockmark"
 kinds: [model_provider]
+description: "ストックマークは、生成AI・LLMを活用し、企業の暗黙知や非構造データをAI資本へと変換するAIカンパニーです。業務プロセスと意思決定を再設計し、人的資本とAI資本が共創する経営変革を支援します。"
 website: "https://stockmark.co.jp"
 logo_url: /logos/stockmark.png
 tagging:

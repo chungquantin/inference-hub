@@ -1,7 +1,9 @@
 slug: f5-tts
 name: "F5-TTS"
 kinds: [open_source]
+description: "This paper introduces F5-TTS, a fully non-autoregressive text-to-speech system based on flow matching with Diffusion Transformer (DiT). Without requiring complex designs such as duration model,..."
 website: "https://arxiv.org/abs/2410.06885"
+logo_url: /logos/f5-tts.png
 links:
   github: "https://github.com/SWivid/F5-TTS"
 categories: [inference-engines]

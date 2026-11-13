@@ -1,0 +1,19 @@
+slug: haystack-hayhooks
+name: "Haystack Hayhooks"
+kinds: [agent_tool]
+description: "Easily deploy Haystack pipelines as REST APIs and MCP Tools."
+website: "https://deepset-ai.github.io"
+logo_url: /logos/haystack-hayhooks.png
+links:
+  github: "https://github.com/deepset-ai"
+tagging:
+  match_case: true
+products:
+  - slug: haystack-hayhooks
+    name: "Haystack Hayhooks"
+    type: oss_project
+    github: deepset-ai/hayhooks
+    tagline: "Easily deploy Haystack pipelines as REST APIs and MCP Tools."
+    url: "https://github.com/deepset-ai/hayhooks"
+    metadata:
+      license: "Apache-2.0"

@@ -1,6 +1,8 @@
 slug: nillion
 name: "Nillion"
 kinds: [decentralized]
+description: "Humanity's first blind computer."
 website: "https://nillion.com"
+logo_url: /logos/nillion.svg
 tagging:
   match_case: true

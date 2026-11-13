@@ -1,0 +1,9 @@
+slug: infron
+name: "Infron"
+kinds: [llm_gateway]
+description: "Partner pricing, service tiers, custom inference and 24/7 engineering support."
+website: "https://infron.ai"
+logo_url: /logos/infron.png
+tagging:
+  match_case: true
+  match_name: false

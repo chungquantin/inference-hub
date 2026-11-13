@@ -1,0 +1,19 @@
+slug: superpowers
+name: "Superpowers"
+kinds: [other]
+description: "An agentic skills framework & software development methodology that works."
+website: "https://github.com/obra/superpowers"
+links:
+  github: "https://github.com/obra"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: superpowers
+    name: "Superpowers"
+    type: oss_project
+    github: obra/superpowers
+    tagline: "An agentic skills framework & software development methodology that works."
+    url: "https://github.com/obra/superpowers"
+    metadata:
+      license: "MIT"

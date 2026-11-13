@@ -2,6 +2,7 @@ slug: true-idc
 name: "True IDC"
 kinds: [gpu_cloud]
 website: "https://www.trueidc.com"
+logo_url: /logos/true-idc.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

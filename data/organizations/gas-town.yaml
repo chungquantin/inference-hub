@@ -1,0 +1,20 @@
+slug: gas-town
+name: "Gas Town"
+kinds: [agent_tool]
+description: "Gas Town - multi-agent workspace manager"
+website: "https://github.com/gastownhall/gastown"
+logo_url: /logos/gas-town.png
+links:
+  github: "https://github.com/gastownhall"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: gas-town
+    name: "Gas Town"
+    type: oss_project
+    github: gastownhall/gastown
+    tagline: "Gas Town - multi-agent workspace manager"
+    url: "https://github.com/gastownhall/gastown"
+    metadata:
+      license: "MIT"

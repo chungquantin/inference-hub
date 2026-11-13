@@ -6,3 +6,10 @@ website: "https://poolside.ai"
 logo_url: /logos/poolside.svg
 tagging:
   match_case: true
+products:
+  - slug: poolside-pool
+    name: "Poolside pool"
+    type: oss_project
+    github: poolsideai/pool
+    tagline: "pool is Poolside’s coding agent that runs in your terminal or integrates with any ACP-compatible editor"
+    url: "https://github.com/poolsideai/pool"

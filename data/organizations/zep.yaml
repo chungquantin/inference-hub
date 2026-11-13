@@ -1,0 +1,20 @@
+slug: zep
+name: "Zep"
+kinds: [agent_tool]
+description: "Zep is the enterprise context layer for reliable agents, providing governed access to company knowledge and skills built from agent tasks."
+website: "https://getzep.com"
+logo_url: /logos/zep.png
+links:
+  github: "https://github.com/getzep"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: zep
+    name: "Zep"
+    type: oss_project
+    github: getzep/zep
+    tagline: "Zep | Examples, Integrations, & More"
+    url: "https://github.com/getzep/zep"
+    metadata:
+      license: "Apache-2.0"

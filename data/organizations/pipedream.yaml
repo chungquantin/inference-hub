@@ -1,0 +1,18 @@
+slug: pipedream
+name: "Pipedream"
+kinds: [agent_tool]
+description: "Managed auth and 10,000+ tools across 3,000+ APIs for the agents you"
+website: "https://pipedream.com"
+logo_url: /logos/pipedream.svg
+links:
+  github: "https://github.com/PipedreamHQ"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: pipedream
+    name: "Pipedream"
+    type: oss_project
+    github: PipedreamHQ/pipedream
+    tagline: "Connect APIs, remarkably fast. Free for developers."
+    url: "https://github.com/PipedreamHQ/pipedream"

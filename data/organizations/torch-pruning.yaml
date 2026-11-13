@@ -1,7 +1,9 @@
 slug: torch-pruning
 name: "Torch-Pruning"
 kinds: [open_source]
+description: "Structural pruning enables model acceleration by removing structurally-grouped parameters from neural networks. However, the parameter-grouping patterns vary widely across different models, making..."
 website: "https://arxiv.org/abs/2301.12900"
+logo_url: /logos/torch-pruning.png
 links:
   github: "https://github.com/VainF/Torch-Pruning"
 categories: [model-optimization]

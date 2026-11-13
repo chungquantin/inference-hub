@@ -1,6 +1,7 @@
 slug: axolotl-ai-cloud
 name: "Axolotl AI"
 kinds: [open_source]
+description: "Axolotl is an Open Source tool to make fine-tuning AI models friendly, fast and fun - without sacrificing functionality or scale."
 website: "https://axolotl.ai"
 logo_url: /logos/axolotl-ai-cloud.png
 links:

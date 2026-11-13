@@ -1,0 +1,17 @@
+slug: augment-auggie
+name: "Augment Auggie"
+kinds: [agent_tool]
+description: "The Augment agent in your terminal. Build interactively or automate your entire development stack with context-aware AI that understands your codebase."
+website: "https://www.augmentcode.com"
+logo_url: /logos/augment-auggie.svg
+links:
+  github: "https://github.com/augmentcode"
+tagging:
+  match_case: true
+products:
+  - slug: augment-auggie
+    name: "Augment Auggie"
+    type: oss_project
+    github: augmentcode/auggie
+    tagline: "An AI agent that brings Augment Code's power to the terminal."
+    url: "https://github.com/augmentcode/auggie"

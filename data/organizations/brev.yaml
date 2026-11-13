@@ -1,6 +1,7 @@
 slug: brev
 name: "Brev"
 kinds: [gpu_cloud]
+description: "Brev.Dev Instances Console"
 website: "https://brev.nvidia.com"
 logo_url: /logos/brev.png
 tagging:

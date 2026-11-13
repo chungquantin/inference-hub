@@ -1,0 +1,9 @@
+slug: ellipsis
+name: "Ellipsis"
+kinds: [agent_tool]
+description: "Managed Claude Code agents in the cloud. Define agents as config files in your repo – Ellipsis runs them to build features, fix bugs, and investigate production issues."
+website: "https://ellipsis.dev"
+logo_url: /logos/ellipsis.svg
+tagging:
+  match_case: true
+  match_name: false

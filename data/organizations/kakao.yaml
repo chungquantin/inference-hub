@@ -1,6 +1,7 @@
 slug: kakao
 name: "Kakao"
 kinds: [model_provider]
+description: "Make AI part of everyone’s life"
 website: "https://www.kakaocorp.com"
 logo_url: /logos/kakao.png
 tagging:

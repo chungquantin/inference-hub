@@ -1,0 +1,20 @@
+slug: marimo
+name: "Marimo"
+kinds: [agent_tool]
+description: "Explore data and build apps seamlessly with marimo, a next-generation Python notebook. Open source, reactive, and Git-friendly. Try it free in your browser."
+website: "https://marimo.io"
+logo_url: /logos/marimo.png
+links:
+  github: "https://github.com/marimo-team"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: marimo
+    name: "Marimo"
+    type: oss_project
+    github: marimo-team/marimo
+    tagline: "A reactive notebook for Python — run reproducible experiments, query with SQL, execute as a script, deploy as an app, and version with git. Stored as pure Python. All in a modern, AI-native editor."
+    url: "https://github.com/marimo-team/marimo"
+    metadata:
+      license: "Apache-2.0"

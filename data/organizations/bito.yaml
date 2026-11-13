@@ -1,0 +1,9 @@
+slug: bito
+name: "Bito"
+kinds: [agent_tool]
+description: "Governor understands your code and routes each request to the best model, two levers that cut coding agent costs in half without touching quality."
+website: "https://bito.ai"
+logo_url: /logos/bito.png
+tagging:
+  match_case: true
+  match_name: false

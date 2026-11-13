@@ -1,0 +1,9 @@
+slug: emergent
+name: "Emergent"
+kinds: [agent_tool]
+description: "Transform ideas into production-ready web and mobile apps with vibe coding. Emergent's AI agents build in minutes through conversation, no code."
+website: "https://emergent.sh"
+logo_url: /logos/emergent.png
+tagging:
+  match_case: true
+  match_name: false

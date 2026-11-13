@@ -1,0 +1,19 @@
+slug: claude-squad
+name: "Claude Squad"
+kinds: [agent_tool]
+description: "A terminal app that manages multiple AI code assistants (Claude Code, Codex, Aider, etc.) in separate workspaces, allowing you to work on multiple tasks simultaneously."
+website: "https://smtg-ai.github.io"
+logo_url: /logos/claude-squad.png
+links:
+  github: "https://github.com/smtg-ai"
+tagging:
+  match_case: true
+products:
+  - slug: claude-squad
+    name: "Claude Squad"
+    type: oss_project
+    github: smtg-ai/claude-squad
+    tagline: "Manage multiple AI terminal agents like Claude Code, Codex, OpenCode, and Amp."
+    url: "https://github.com/smtg-ai/claude-squad"
+    metadata:
+      license: "AGPL-3.0"

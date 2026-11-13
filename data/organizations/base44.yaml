@@ -1,0 +1,8 @@
+slug: base44
+name: "Base44"
+kinds: [agent_tool]
+description: "Base44 is a no-code AI development platform that turns builders’ ideas into fully functional apps and websites — no coding required."
+website: "https://base44.com"
+logo_url: /logos/base44.png
+tagging:
+  match_case: true

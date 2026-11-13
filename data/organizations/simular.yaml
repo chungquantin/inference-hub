@@ -1,0 +1,20 @@
+slug: simular
+name: "Simular"
+kinds: [agent_tool]
+description: "Research-driven AI agents that operate real computers. Try Sai, your first robosecretary"
+website: "https://www.simular.ai"
+logo_url: /logos/simular.png
+links:
+  github: "https://github.com/simular-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: simular
+    name: "Simular"
+    type: oss_project
+    github: simular-ai/Agent-S
+    tagline: "Agent S: the state-of-the-art open source computer use agents"
+    url: "https://github.com/simular-ai/Agent-S"
+    metadata:
+      license: "Apache-2.0"

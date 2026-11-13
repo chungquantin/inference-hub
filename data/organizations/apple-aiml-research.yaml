@@ -1,6 +1,7 @@
 slug: apple-aiml-research
 name: "Apple AI/ML Research"
 kinds: [open_source]
+description: "Reference implementation of the Transformer architecture optimized for Apple Neural Engine (ANE)"
 website: "https://github.com/apple-aiml-research"
 logo_url: /logos/apple-aiml-research.png
 links:

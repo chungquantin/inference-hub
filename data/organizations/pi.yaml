@@ -1,0 +1,20 @@
+slug: pi
+name: "Pi"
+kinds: [agent_tool]
+description: "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI"
+website: "https://pi.dev"
+logo_url: /logos/pi.svg
+links:
+  github: "https://github.com/earendil-works"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: pi
+    name: "Pi"
+    type: oss_project
+    github: earendil-works/pi
+    tagline: "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI"
+    url: "https://github.com/earendil-works/pi"
+    metadata:
+      license: "MIT"

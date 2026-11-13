@@ -2,5 +2,6 @@ slug: nexos-ai
 name: "Nexos.ai"
 kinds: [llm_gateway]
 website: "https://nexos.ai"
+logo_url: /logos/nexos-ai.png
 tagging:
   match_case: true

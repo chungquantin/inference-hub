@@ -1,7 +1,9 @@
 slug: tensorfold
 name: "TensorFold"
 kinds: [open_source]
+description: "Run LLMs fast on the GPUs you own with native Metal and CUDA inference."
 website: "https://tensorfold.dev"
+logo_url: /logos/tensorfold.png
 links:
   github: "https://github.com/ashhart/TensorFold"
 categories: [inference-engines]

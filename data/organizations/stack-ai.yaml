@@ -1,0 +1,8 @@
+slug: stack-ai
+name: "Stack AI"
+kinds: [agent_tool]
+description: "StackAI empowers enterprises to deploy AI Agents at scale. Build secure, compliant AI applications in minutes with our intuitive drag-and-drop no-code platform."
+website: "https://stack-ai.com"
+logo_url: /logos/stack-ai.png
+tagging:
+  match_case: true

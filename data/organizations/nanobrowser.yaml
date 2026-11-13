@@ -1,0 +1,19 @@
+slug: nanobrowser
+name: "Nanobrowser"
+kinds: [agent_tool]
+description: "Nanobrowser is a free, open-source AI agent for Chrome and Edge. Tell it what you need and it clicks, types and reads web pages in your own logged-in browser. Use OpenAI, Anthropic, Gemini, DeepSeek, OpenRouter or a local model."
+website: "https://nanobrowser.ai"
+logo_url: /logos/nanobrowser.png
+links:
+  github: "https://github.com/nanobrowser"
+tagging:
+  match_case: true
+products:
+  - slug: nanobrowser
+    name: "Nanobrowser"
+    type: oss_project
+    github: nanobrowser/nanobrowser
+    tagline: "Open-source AI agent for web automation. Use your real, logged-in browser to automate daily tasks."
+    url: "https://github.com/nanobrowser/nanobrowser"
+    metadata:
+      license: "Apache-2.0"

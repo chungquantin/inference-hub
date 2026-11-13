@@ -1,0 +1,17 @@
+slug: oh-my-openagent
+name: "Oh My OpenAgent"
+kinds: [agent_tool]
+description: "OmO: Just type \"mass ulw\" keyword with your prompt. Now you are the master of graph engineering."
+website: "https://omo.dev"
+logo_url: /logos/oh-my-openagent.png
+links:
+  github: "https://github.com/code-yeongyu"
+tagging:
+  match_case: true
+products:
+  - slug: oh-my-openagent
+    name: "Oh My OpenAgent"
+    type: oss_project
+    github: code-yeongyu/oh-my-openagent
+    tagline: "OmO: Just type \"mass ulw\" keyword with your prompt. Now you are the master of graph engineering."
+    url: "https://github.com/code-yeongyu/oh-my-openagent"

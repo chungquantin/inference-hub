@@ -1,0 +1,20 @@
+slug: orca
+name: "Orca"
+kinds: [agent_tool]
+description: "Orca lets you run a fleet of coding agents (e.g. Claude Code, Codex) with your own subscription. Available on desktop, mobile and remote runtime."
+website: "https://orca.dev"
+logo_url: /logos/orca.png
+links:
+  github: "https://github.com/stablyai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: orca
+    name: "Orca"
+    type: oss_project
+    github: stablyai/orca
+    tagline: "Orca lets you run a fleet of coding agents (e.g. Claude Code, Codex) with your own subscription. Available on desktop, mobile and remote runtime."
+    url: "https://github.com/stablyai/orca"
+    metadata:
+      license: "MIT"

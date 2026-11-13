@@ -1,6 +1,7 @@
 slug: zhihu
 name: "Zhihu"
 kinds: [open_source]
+description: "A highly optimized LLM inference acceleration engine for Llama and its variants."
 website: "https://zhuanlan.zhihu.com/hackers"
 logo_url: /logos/zhihu.png
 links:

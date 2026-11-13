@@ -7,3 +7,12 @@ logo_url: /logos/xai.png
 tagging:
   aliases: ["Grok", "x.ai"]
   match_case: true
+products:
+  - slug: grok-build
+    name: "Grok Build"
+    type: oss_project
+    github: xai-org/grok-build
+    tagline: "SpaceXAI's coding agent harness and TUI. Fullscreen, mouse interactive, extensible."
+    url: "https://github.com/xai-org/grok-build"
+    metadata:
+      license: "Apache-2.0"

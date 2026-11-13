@@ -1,6 +1,7 @@
 slug: candle-vllm
 name: "candle-vllm"
 kinds: [open_source]
+description: "Efficent platform for inference and serving local LLMs including an OpenAI compatible API server."
 website: "https://github.com/EricLBuehler/candle-vllm"
 links:
   github: "https://github.com/EricLBuehler/candle-vllm"

@@ -1,0 +1,20 @@
+slug: every-code
+name: "Every Code"
+kinds: [agent_tool]
+description: "Switch from Notion, Slack, Intercom, Calendly and more to free, open-source alternatives you own. MIT licensed, yours to change."
+website: "https://justevery.com"
+logo_url: /logos/every-code.png
+links:
+  github: "https://github.com/just-every"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: every-code
+    name: "Every Code"
+    type: oss_project
+    github: just-every/code
+    tagline: "Every Code - push frontier AI to it limits. A fork of the Codex CLI with validation, automation, browser integration, multi-agents, theming, and much more. Orchestrate agents from OpenAI, Claude, Gemini or any provider."
+    url: "https://github.com/just-every/code"
+    metadata:
+      license: "Apache-2.0"

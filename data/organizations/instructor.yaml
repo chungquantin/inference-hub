@@ -1,0 +1,19 @@
+slug: instructor
+name: "Instructor"
+kinds: [agent_tool]
+description: "Multi-Language Library for Structured LLM Outputs"
+website: "https://python.useinstructor.com"
+logo_url: /logos/instructor.png
+links:
+  github: "https://github.com/567-labs"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: instructor
+    name: "Instructor"
+    type: oss_project
+    github: 567-labs/instructor
+    url: "https://github.com/567-labs/instructor"
+    metadata:
+      license: "MIT"

@@ -1,7 +1,9 @@
 slug: omlx
 name: "omlx"
 kinds: [open_source]
+description: "Native macOS inference server built on MLX. Paged SSD KV caching, continuous batching, and drop-in API for Claude Code, OpenClaw, and Cursor."
 website: "https://omlx.ai"
+logo_url: /logos/omlx.png
 links:
   github: "https://github.com/jundot/omlx"
 categories: [local-runtimes]

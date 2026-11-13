@@ -1,6 +1,7 @@
 slug: naver-hyperclova-x
 name: "Naver HyperCLOVA X"
 kinds: [model_provider]
+description: "하이퍼스케일 AI로 플랫폼 경쟁력을 강화하고 비즈니스 시너지를 확장합니다."
 website: "https://clova.ai"
 logo_url: /logos/naver-hyperclova-x.png
 tagging:

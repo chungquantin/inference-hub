@@ -1,0 +1,18 @@
+slug: windmill
+name: "Windmill"
+kinds: [agent_tool]
+description: "Code-first platform for workflows, apps and AI agents, on the fastest self-hostable orchestrator (benchmarked against Airflow, Prefect and Temporal). Business teams build with AI, engineers control what ships. Open-source alternative to Lovable, Retool and n8n."
+website: "https://windmill.dev"
+logo_url: /logos/windmill.png
+links:
+  github: "https://github.com/windmill-labs"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: windmill
+    name: "Windmill"
+    type: oss_project
+    github: windmill-labs/windmill
+    tagline: "Code-first platform for workflows, apps and AI agents, on the fastest self-hostable orchestrator (benchmarked against Airflow, Prefect and Temporal). Business teams build with AI, engineers control what ships. Open-source alternative to Lovable, Retool and n8n."
+    url: "https://github.com/windmill-labs/windmill"

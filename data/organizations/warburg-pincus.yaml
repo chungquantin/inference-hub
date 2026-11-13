@@ -2,5 +2,6 @@ slug: warburg-pincus
 name: "Warburg Pincus"
 kinds: [investor]
 website: "https://warburgpincus.com"
+logo_url: /logos/warburg-pincus.jpg
 tagging:
   match_case: true

@@ -1,0 +1,7 @@
+slug: tabnine-cli
+name: "Tabnine CLI"
+kinds: [agent_tool]
+website: "https://docs.tabnine.com"
+logo_url: /logos/tabnine-cli.svg
+tagging:
+  match_case: true

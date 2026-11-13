@@ -1,0 +1,18 @@
+slug: opencode
+name: "OpenCode"
+kinds: [agent_tool]
+description: "OpenCode is the open source coding agent that works where you do. Connect AI models from 200+ providers, including Claude, GPT and Gemini, or start free."
+website: "https://opencode.ai"
+logo_url: /logos/opencode.png
+links:
+  github: "https://github.com/anomalyco"
+tagging:
+  match_case: true
+products:
+  - slug: opencode
+    name: "OpenCode"
+    type: oss_project
+    github: anomalyco/opencode
+    url: "https://github.com/anomalyco/opencode"
+    metadata:
+      license: "MIT"

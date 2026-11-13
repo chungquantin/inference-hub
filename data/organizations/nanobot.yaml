@@ -1,0 +1,20 @@
+slug: nanobot
+name: "nanobot"
+kinds: [agent_tool]
+description: "nanobot is an ultra-lightweight, open-source, self-hosted personal AI agent for chat apps, automation, long-running workflows, and developer integrations."
+website: "https://nanobot.wiki"
+logo_url: /logos/nanobot.png
+links:
+  github: "https://github.com/HKUDS"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: nanobot
+    name: "nanobot"
+    type: oss_project
+    github: HKUDS/nanobot
+    tagline: "Your lightweight open-source personal agent."
+    url: "https://github.com/HKUDS/nanobot"
+    metadata:
+      license: "MIT"

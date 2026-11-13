@@ -1,0 +1,18 @@
+slug: mastra
+name: "Mastra"
+kinds: [agent_tool]
+description: "Ship AI agents that reason, remember, and act in TypeScript. Mastra provides memory, tools, MCP, and observability to go from prototype to production."
+website: "https://mastra.ai"
+logo_url: /logos/mastra.png
+links:
+  github: "https://github.com/mastra-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mastra
+    name: "Mastra"
+    type: oss_project
+    github: mastra-ai/mastra
+    tagline: "Mastra is the modern TypeScript framework for AI-powered applications and agents."
+    url: "https://github.com/mastra-ai/mastra"

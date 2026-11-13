@@ -1,0 +1,8 @@
+slug: laozhang-api
+name: "LaoZhang API"
+kinds: [llm_gateway]
+description: "One API key for Google Nano Banana, OpenAI GPT Image, xAI Grok Imagine and other text, video and audio models, with request logs and pay-as-you-go billing. Operated in Singapore since 2025."
+website: "https://www.laozhang.ai"
+logo_url: /logos/laozhang-api.svg
+tagging:
+  match_case: true

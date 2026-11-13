@@ -1,0 +1,19 @@
+slug: elizaos
+name: "ElizaOS"
+kinds: [agent_tool]
+description: "Eliza Research builds products at the intersection of AI and people: Eliza, a personal agent and open source operating system, and slop.cash, a swarm contribution platform."
+website: "https://elizaresearch.ai"
+logo_url: /logos/elizaos.svg
+links:
+  github: "https://github.com/elizaOS"
+tagging:
+  match_case: true
+products:
+  - slug: elizaos
+    name: "ElizaOS"
+    type: oss_project
+    github: elizaOS/eliza
+    tagline: "Open source agentic operating system"
+    url: "https://github.com/elizaOS/eliza"
+    metadata:
+      license: "MIT"

@@ -1,6 +1,7 @@
 slug: tiny-vllm
 name: "tiny-vllm"
 kinds: [open_source]
+description: "Build your own high performance LLM inference engine in C++ and CUDA - a smaller version of vLLM"
 website: "https://jedrzej.maczan.pl"
 links:
   github: "https://github.com/jmaczan/tiny-vllm"

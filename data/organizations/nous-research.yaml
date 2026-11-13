@@ -8,3 +8,11 @@ logo_url: /logos/nous-research.png
 tagging:
   aliases: ["Nous Portal"]
   match_case: true
+products:
+  - slug: hermes-agent
+    name: "Hermes Agent"
+    type: oss_project
+    github: NousResearch/hermes-agent
+    url: "https://github.com/NousResearch/hermes-agent"
+    metadata:
+      license: "MIT"

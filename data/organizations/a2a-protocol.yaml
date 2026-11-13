@@ -1,0 +1,19 @@
+slug: a2a-protocol
+name: "A2A Protocol"
+kinds: [agent_tool]
+description: "A2A (Agent2Agent) is an open standard, originated by Google and now hosted by the Linux Foundation, that lets AI agents built on different frameworks discover each other, communicate, and collaborate securely."
+website: "https://a2a-protocol.org"
+logo_url: /logos/a2a-protocol.svg
+links:
+  github: "https://github.com/a2aproject"
+tagging:
+  match_case: true
+products:
+  - slug: a2a-protocol
+    name: "A2A Protocol"
+    type: oss_project
+    github: a2aproject/A2A
+    tagline: "Agent2Agent (A2A) is an open protocol enabling communication and interoperability between opaque agentic applications."
+    url: "https://github.com/a2aproject/A2A"
+    metadata:
+      license: "Apache-2.0"

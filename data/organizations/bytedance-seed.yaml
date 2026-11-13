@@ -1,6 +1,7 @@
 slug: bytedance-seed
 name: "ByteDance Seed"
 kinds: [model_provider]
+description: "The ByteDance Seed team was established in 2023, dedicated to discovering new approaches to general intelligence, pushing the boundaries of AI. The team's research areas include LLM, speech, vision, world models, infrastructure, AI Infra, and next-generation AI interactions. The team operates labs…"
 website: "https://seed.bytedance.com"
 logo_url: /logos/bytedance-seed.png
 tagging:

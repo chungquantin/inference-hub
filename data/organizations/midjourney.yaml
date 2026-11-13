@@ -2,6 +2,7 @@ slug: midjourney
 name: "Midjourney"
 kinds: [model_provider]
 website: "https://www.midjourney.com"
+logo_url: /logos/midjourney.png
 tagging:
   match_case: true
   match_name: false

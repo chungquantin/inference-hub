@@ -1,6 +1,7 @@
 slug: safetensors
 name: "safetensors"
 kinds: [open_source]
+description: "Simple, safe way to store and distribute tensors"
 website: "https://github.com/safetensors"
 logo_url: /logos/safetensors.png
 links:

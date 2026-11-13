@@ -1,6 +1,7 @@
 slug: warpfront
 name: "warpfront"
 kinds: [open_source]
+description: "RDNA-native LLM inference engine in Rust."
 website: "https://github.com/warpfront"
 logo_url: /logos/warpfront.png
 links:

@@ -1,6 +1,7 @@
 slug: vk-cloud
 name: "VK Cloud"
 kinds: [gpu_cloud]
+description: "The platform that supports a wide range of cloud services for efficient development and data management for companies of any size"
 website: "https://cloud.vk.ru"
 logo_url: /logos/vk-cloud.png
 categories: [sovereign-clouds]

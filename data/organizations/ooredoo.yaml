@@ -3,6 +3,7 @@ name: "Ooredoo"
 kinds: [gpu_cloud]
 tagline: "Qatar AI cloud."
 website: "https://ooredoo.com"
+logo_url: /logos/ooredoo.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

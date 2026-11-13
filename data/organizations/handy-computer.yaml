@@ -1,6 +1,7 @@
 slug: handy-computer
 name: "handy-computer"
 kinds: [open_source]
+description: "ggml speech-to-text inference for 16+ model families"
 website: "https://github.com/handy-computer"
 logo_url: /logos/handy-computer.png
 links:

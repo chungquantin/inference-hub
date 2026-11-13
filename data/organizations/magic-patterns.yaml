@@ -1,0 +1,8 @@
+slug: magic-patterns
+name: "Magic Patterns"
+kinds: [agent_tool]
+description: "AI-native workspace for designing your product. Turn prompts into production-ready UI, use your design system, generate prototypes fast, and collaborate."
+website: "https://magicpatterns.com"
+logo_url: /logos/magic-patterns.png
+tagging:
+  match_case: true

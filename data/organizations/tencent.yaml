@@ -1,6 +1,7 @@
 slug: tencent
 name: "Tencent"
 kinds: [open_source]
+description: "腾讯对外开源开始进入了快节奏时代，以发起者、贡献者两种不同方式积极参与开源，领域覆盖微信、腾讯云、腾讯游戏、腾讯AI、腾讯安全等相关领域。"
 website: "https://opensource.tencent.com"
 logo_url: /logos/tencent.png
 links:

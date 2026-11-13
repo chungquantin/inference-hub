@@ -58,3 +58,45 @@ products:
     url: "https://github.com/google/gemma.cpp"
     metadata:
       license: "Apache-2.0"
+  - slug: gemini-cli
+    name: "Gemini CLI"
+    type: oss_project
+    github: google-gemini/gemini-cli
+    tagline: "An open-source AI agent that brings the power of Gemini directly into your terminal."
+    url: "https://github.com/google-gemini/gemini-cli"
+    metadata:
+      license: "Apache-2.0"
+  - slug: google-antigravity
+    name: "Google Antigravity"
+    type: platform
+    tagline: "Experience liftoff with the next-gen agent platform"
+    url: "https://antigravity.google"
+  - slug: jules
+    name: "Jules"
+    type: platform
+    url: "https://jules.google"
+  - slug: google-jules
+    name: "Google Jules"
+    type: platform
+    url: "https://jules.google"
+  - slug: firebase-studio
+    name: "Firebase Studio"
+    type: platform
+    tagline: "Firebase Studio is an entirely web-based workspace for full-stack application development, complete with the latest generative AI from Gemini, and full-fidelity app previews, powered by cloud emulators."
+    url: "https://firebase.studio"
+  - slug: google-adk
+    name: "Google ADK"
+    type: oss_project
+    github: google/adk-python
+    tagline: "An open-source, code-first Python toolkit for building, evaluating, and deploying sophisticated AI agents with flexibility and control."
+    url: "https://github.com/google/adk-python"
+    metadata:
+      license: "Apache-2.0"
+  - slug: genkit
+    name: "Genkit"
+    type: oss_project
+    github: genkit-ai/genkit
+    tagline: "Open-source framework for building agentic apps in JavaScript, Go, Dart, and Python, built and used in production by Google"
+    url: "https://github.com/genkit-ai/genkit"
+    metadata:
+      license: "Apache-2.0"

@@ -12,3 +12,31 @@ feeds:
     name: "Vercel blog"
     url: "https://vercel.com/atom"
     interval_minutes: 180
+products:
+  - slug: vercel-skills
+    name: "Vercel Skills"
+    type: oss_project
+    github: vercel-labs/skills
+    tagline: "The open agent skills tool - npx skills"
+    url: "https://github.com/vercel-labs/skills"
+    metadata:
+      license: "MIT"
+  - slug: vercel-v0
+    name: "Vercel v0"
+    type: platform
+    tagline: "Your collaborative AI assistant to design, iterate, and scale full-stack applications for the web."
+    url: "https://v0.dev"
+  - slug: vercel-ai-sdk
+    name: "Vercel AI SDK"
+    type: oss_project
+    github: vercel/ai
+    tagline: "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source library for building AI-powered applications and agents"
+    url: "https://github.com/vercel/ai"
+  - slug: agent-browser
+    name: "Agent Browser"
+    type: oss_project
+    github: vercel-labs/agent-browser
+    tagline: "Browser automation CLI for AI agents"
+    url: "https://github.com/vercel-labs/agent-browser"
+    metadata:
+      license: "Apache-2.0"

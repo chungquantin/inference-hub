@@ -1,0 +1,8 @@
+slug: jiekou-ai
+name: "Jiekou AI"
+kinds: [llm_gateway]
+description: "A large model API aggregation platform with direct domestic access to OpenAI, Claude, and Gemini, and enterprise-grade 99.9% SLA. Pay-as-you-go credits remain valid forever, with global acceleration + intelligent cost reduction + 7×24 support for quick access to AI capabilities. Try it now!"
+website: "https://jiekou.ai"
+logo_url: /logos/jiekou-ai.png
+tagging:
+  match_case: true

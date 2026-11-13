@@ -1,6 +1,7 @@
 slug: dropbox
 name: "Dropbox"
 kinds: [open_source]
+description: "Discover Dropbox – secure, easy cloud storage for file sharing and collaboration. With Dash, save time and organize all your company content in one place."
 website: "https://dropbox.com/"
 logo_url: /logos/dropbox.png
 links:

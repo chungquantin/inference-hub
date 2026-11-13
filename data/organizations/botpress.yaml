@@ -1,0 +1,20 @@
+slug: botpress
+name: "Botpress"
+kinds: [agent_tool]
+description: "The open-source hub to build & deploy GPT/LLM Agents ⚡️"
+website: "https://botpress.com"
+logo_url: /logos/botpress.png
+links:
+  github: "https://github.com/botpress"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: botpress
+    name: "Botpress"
+    type: oss_project
+    github: botpress/botpress
+    tagline: "The open-source hub to build & deploy GPT/LLM Agents ⚡️"
+    url: "https://github.com/botpress/botpress"
+    metadata:
+      license: "MIT"

@@ -2,5 +2,6 @@ slug: semianalysis
 name: "SemiAnalysis"
 kinds: [other]
 website: "https://semianalysis.com"
+logo_url: /logos/semianalysis.png
 tagging:
   match_case: true

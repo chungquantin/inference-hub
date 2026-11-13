@@ -1,0 +1,19 @@
+slug: plandex
+name: "Plandex"
+kinds: [agent_tool]
+description: "Open source AI coding agent. Designed for large projects and real world tasks."
+website: "https://plandex.ai"
+logo_url: /logos/plandex.png
+links:
+  github: "https://github.com/plandex-ai"
+tagging:
+  match_case: true
+products:
+  - slug: plandex
+    name: "Plandex"
+    type: oss_project
+    github: plandex-ai/plandex
+    tagline: "Open source AI coding agent. Designed for large projects and real world tasks."
+    url: "https://github.com/plandex-ai/plandex"
+    metadata:
+      license: "MIT"

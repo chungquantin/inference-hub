@@ -1,0 +1,20 @@
+slug: rivet
+name: "Rivet"
+kinds: [agent_tool]
+description: "An open-source AI programming environment using a visual, node-based graph editor"
+website: "https://rivet.ironcladapp.com"
+logo_url: /logos/rivet.png
+links:
+  github: "https://github.com/Ironclad"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: rivet
+    name: "Rivet"
+    type: oss_project
+    github: Ironclad/rivet
+    tagline: "The open-source visual AI programming environment and TypeScript library"
+    url: "https://github.com/Ironclad/rivet"
+    metadata:
+      license: "MIT"

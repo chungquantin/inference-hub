@@ -1,0 +1,17 @@
+slug: dyad
+name: "Dyad"
+kinds: [agent_tool]
+description: "Build full-stack AI apps on your desktop with Dyad, the free, local, open-source AI app builder. Use any AI model, own your code. Zero lock-in."
+website: "https://dyad.sh"
+logo_url: /logos/dyad.png
+links:
+  github: "https://github.com/dyad-sh"
+tagging:
+  match_case: true
+products:
+  - slug: lovable-alternatives-dyad
+    name: "Lovable Alternatives Dyad"
+    type: oss_project
+    github: dyad-sh/dyad
+    tagline: "Local, open-source AI app builder for power users ✨ v0 / Lovable / Replit / Bolt alternative 🌟 Star if you like it!"
+    url: "https://github.com/dyad-sh/dyad"

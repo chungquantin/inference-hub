@@ -1,0 +1,20 @@
+slug: griptape
+name: "Griptape"
+kinds: [agent_tool]
+description: "Griptape enables creatives to orchestrate multiple AI models and agents within secure, professional workflows. It’s predictable, controllable, and built for the way you think."
+website: "https://griptape.ai"
+logo_url: /logos/griptape.png
+links:
+  github: "https://github.com/griptape-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: griptape
+    name: "Griptape"
+    type: oss_project
+    github: griptape-ai/griptape
+    tagline: "Modular Python framework for AI agents and workflows with chain-of-thought reasoning, tools, and memory."
+    url: "https://github.com/griptape-ai/griptape"
+    metadata:
+      license: "Apache-2.0"

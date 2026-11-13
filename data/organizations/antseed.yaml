@@ -1,0 +1,19 @@
+slug: antseed
+name: "Antseed"
+kinds: [decentralized]
+description: "Give your agents, apps, and team access to 700+ AI models at lower prices, with built-in privacy and full control."
+website: "https://antseed.com"
+logo_url: /logos/antseed.svg
+links:
+  github: "https://github.com/Antseed"
+tagging:
+  match_case: true
+products:
+  - slug: antseed
+    name: "Antseed"
+    type: oss_project
+    github: Antseed/antseed
+    tagline: "AntSeed P2P AI Network - An open market for AI inference. No gatekeepers."
+    url: "https://github.com/Antseed/antseed"
+    metadata:
+      license: "GPL-3.0"

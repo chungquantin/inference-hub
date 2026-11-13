@@ -1,6 +1,7 @@
 slug: ist-daslab
 name: "IST Austria Distributed Algorithms and Systems Lab"
 kinds: [open_source]
+description: "FP16xINT4 LLM inference kernel that can achieve near-ideal ~4x speedups up to medium batchsizes of 16-32 tokens."
 website: "https://ista.ac.at/en/research/alistarh-group/"
 logo_url: /logos/ist-daslab.png
 links:

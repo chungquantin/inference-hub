@@ -1,0 +1,20 @@
+slug: warp
+name: "Warp"
+kinds: [agent_tool]
+description: "Build your software factory on Warp: factories as code, any model or harness, with evals, benchmarks, and self-improvement built in."
+website: "https://www.warp.dev"
+logo_url: /logos/warp.png
+links:
+  github: "https://github.com/warpdotdev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: warp
+    name: "Warp"
+    type: oss_project
+    github: warpdotdev/warp
+    tagline: "Warp is an agentic development environment, born out of the terminal."
+    url: "https://github.com/warpdotdev/warp"
+    metadata:
+      license: "AGPL-3.0"

@@ -1,0 +1,8 @@
+slug: qoder
+name: "Qoder"
+kinds: [agent_tool]
+description: "Qoder is a next-generation AI programming platform that offers intelligent code completion, AI conversational programming, and automatic code generation. It supports mainstream IDEs like VS Code and JetBrains. Download for free."
+website: "https://qoder.com"
+logo_url: /logos/qoder.png
+tagging:
+  match_case: true

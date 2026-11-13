@@ -1,0 +1,8 @@
+slug: surplus-intelligence
+name: "Surplus Intelligence"
+kinds: [llm_gateway]
+description: "Buy the cheapest inference. Sell your credits. The open order book for AI models. Up to 90% off Claude Opus 5.5, Abliteration Abliterated Model Large Flash, and more."
+website: "https://www.surplusintelligence.ai"
+logo_url: /logos/surplus-intelligence.png
+tagging:
+  match_case: true

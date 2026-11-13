@@ -1,0 +1,9 @@
+slug: lyceum
+name: "Lyceum"
+kinds: [gpu_cloud]
+description: "Sovereign European AI inference for open-source models. Pay per token through one API, then move to dedicated GPUs as you grow."
+website: "https://lyceum.technology"
+logo_url: /logos/lyceum.png
+tagging:
+  match_case: true
+  match_name: false

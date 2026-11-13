@@ -1,0 +1,19 @@
+slug: gpt-researcher
+name: "GPT Researcher"
+kinds: [agent_tool]
+description: "GPT Researcher is an open source autonomous AI research agent that produces deep research reports from many sources, with inline citations. #1 on Carnegie Mellon's DeepResearchGym benchmark."
+website: "https://gptr.dev"
+logo_url: /logos/gpt-researcher.png
+links:
+  github: "https://github.com/assafelovic"
+tagging:
+  match_case: true
+products:
+  - slug: gpt-researcher
+    name: "GPT Researcher"
+    type: oss_project
+    github: assafelovic/gpt-researcher
+    tagline: "An autonomous agent that conducts deep research on any data using any LLM providers"
+    url: "https://github.com/assafelovic/gpt-researcher"
+    metadata:
+      license: "Apache-2.0"

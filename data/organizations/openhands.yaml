@@ -1,0 +1,19 @@
+slug: openhands
+name: "OpenHands"
+kinds: [agent_tool]
+description: "Build and run AI coding agents with OpenHands. Start locally, automate engineering workflows, use any model, and scale with enterprise controls."
+website: "https://openhands.dev"
+logo_url: /logos/openhands.svg
+links:
+  github: "https://github.com/OpenHands"
+tagging:
+  match_case: true
+products:
+  - slug: openhands
+    name: "OpenHands"
+    type: oss_project
+    github: OpenHands/OpenHands
+    tagline: "🙌 OpenHands: AI-Driven Development"
+    url: "https://github.com/OpenHands/OpenHands"
+    metadata:
+      license: "MIT"

@@ -1,0 +1,8 @@
+slug: opera-neon
+name: "Opera Neon"
+kinds: [agent_tool]
+description: "Opera Neon is an agentic browser that understands your intent, assists with tasks, and takes actions. It helps you move faster and get things done."
+website: "https://www.opera.com"
+logo_url: /logos/opera-neon.png
+tagging:
+  match_case: true

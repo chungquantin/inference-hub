@@ -2,6 +2,7 @@ slug: fujitsu
 name: "Fujitsu"
 kinds: [gpu_cloud]
 website: "https://global.fujitsu"
+logo_url: /logos/fujitsu.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

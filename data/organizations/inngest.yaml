@@ -1,0 +1,20 @@
+slug: inngest
+name: "Inngest"
+kinds: [agent_tool]
+description: "Build reliable background jobs, workflows, and AI agents without extra infrastructure. Automatic retries, flow control, and step-level observability."
+website: "https://inngest.com"
+logo_url: /logos/inngest.svg
+links:
+  github: "https://github.com/inngest"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: inngest
+    name: "Inngest"
+    type: oss_project
+    github: inngest/agent-kit
+    tagline: "AgentKit: Build multi-agent networks in TypeScript with deterministic routing and rich tooling via MCP."
+    url: "https://github.com/inngest/agent-kit"
+    metadata:
+      license: "Apache-2.0"

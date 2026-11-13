@@ -1,0 +1,8 @@
+slug: greptile
+name: "Greptile"
+kinds: [agent_tool]
+description: "AI Code Reviews that understand your entire codebase. Automate PR reviews, catch bugs faster, improve code quality with AI-driven analysis. Try Greptile free!"
+website: "https://greptile.com"
+logo_url: /logos/greptile.png
+tagging:
+  match_case: true

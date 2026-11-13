@@ -1,0 +1,8 @@
+slug: skyfire
+name: "Skyfire"
+kinds: [other]
+description: "Skyfire gives AI agents verified identity and payment credentials that work across the open internet. No 403 errors. No blocked checkouts. Just authenticated access and real transactions, everywhere."
+website: "https://www.skyfire.xyz"
+tagging:
+  match_case: true
+  match_name: false

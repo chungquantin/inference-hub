@@ -1,6 +1,7 @@
 slug: ctransformers
 name: "ctransformers"
 kinds: [open_source]
+description: "Python bindings for the Transformer models implemented in C/C++ using GGML library."
 website: "https://github.com/marella/ctransformers"
 links:
   github: "https://github.com/marella/ctransformers"

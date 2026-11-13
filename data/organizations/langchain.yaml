@@ -14,3 +14,19 @@ feeds:
     name: "LangChain blog"
     url: "https://www.langchain.com/blog/rss.xml"
     interval_minutes: 180
+products:
+  - slug: deep-agents
+    name: "Deep Agents"
+    type: oss_project
+    github: langchain-ai/deepagents
+    tagline: "The batteries-included agent harness."
+    url: "https://github.com/langchain-ai/deepagents"
+    metadata:
+      license: "MIT"
+  - slug: langgraph
+    name: "LangGraph"
+    type: oss_project
+    github: langchain-ai/langgraph
+    url: "https://github.com/langchain-ai/langgraph"
+    metadata:
+      license: "MIT"

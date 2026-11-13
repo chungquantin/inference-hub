@@ -1,0 +1,8 @@
+slug: aihubmix
+name: "AIHubMix"
+kinds: [llm_gateway]
+description: "Access leading AI models through one unified, OpenAI-compatible API. Connect to ChatGPT, Claude, Gemini, DeepSeek, Doubao, Qwen and more through a single endpoint."
+website: "https://aihubmix.com"
+logo_url: /logos/aihubmix.png
+tagging:
+  match_case: true

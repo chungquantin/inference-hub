@@ -1,0 +1,8 @@
+slug: junie
+name: "Junie"
+kinds: [agent_tool]
+description: "Junie by JetBrains. AI Coding Agent."
+website: "https://junie.jetbrains.com"
+logo_url: /logos/junie.png
+tagging:
+  match_case: true

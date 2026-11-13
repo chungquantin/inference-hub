@@ -1,0 +1,9 @@
+slug: lindy
+name: "Lindy"
+kinds: [agent_tool]
+description: "Lindy is the AI employee that connects to all your tools, knows everything about your company, and does real work for the whole team."
+website: "https://lindy.ai"
+logo_url: /logos/lindy.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,20 @@
+slug: e2b
+name: "E2B"
+kinds: [other]
+description: "The AI Agent Cloud. An isolated machine for every AI agent: run code, browse, use tools, pause, fork. In our cloud or your AWS, GCP, or Azure account. 100K+ teams, 2B+ sandboxes started."
+website: "https://e2b.dev"
+logo_url: /logos/e2b.png
+links:
+  github: "https://github.com/e2b-dev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: e2b
+    name: "E2B"
+    type: oss_project
+    github: e2b-dev/E2B
+    tagline: "Open-source, secure environment with real-world tools for enterprise-grade agents."
+    url: "https://github.com/e2b-dev/E2B"
+    metadata:
+      license: "Apache-2.0"

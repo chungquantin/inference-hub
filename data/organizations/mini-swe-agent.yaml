@@ -1,0 +1,19 @@
+slug: mini-swe-agent
+name: "mini-swe-agent"
+kinds: [agent_tool]
+description: "The 100 line AI agent that solves GitHub issues or helps you in your command line. Radically simple, no huge configs, no giant monorepo—but scores >74% on SWE-bench verified!"
+website: "https://mini-swe-agent.com"
+logo_url: /logos/mini-swe-agent.png
+links:
+  github: "https://github.com/SWE-agent"
+tagging:
+  match_case: true
+products:
+  - slug: mini-swe-agent
+    name: "mini-swe-agent"
+    type: oss_project
+    github: SWE-agent/mini-swe-agent
+    tagline: "The 100 line AI agent that solves GitHub issues or helps you in your command line. Radically simple, no huge configs, no giant monorepo—but scores >74% on SWE-bench verified!"
+    url: "https://github.com/SWE-agent/mini-swe-agent"
+    metadata:
+      license: "MIT"

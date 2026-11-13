@@ -1,6 +1,7 @@
 slug: 2noise
 name: "2noise"
 kinds: [open_source]
+description: "A generative speech model for daily dialogue."
 website: "https://2noise.com"
 logo_url: /logos/2noise.png
 links:

@@ -2,5 +2,6 @@ slug: cipher-mining
 name: "Cipher Mining"
 kinds: [gpu_cloud]
 website: "https://www.ciphermining.com"
+logo_url: /logos/cipher-mining.png
 tagging:
   match_case: true

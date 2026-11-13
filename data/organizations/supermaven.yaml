@@ -1,0 +1,9 @@
+slug: supermaven
+name: "Supermaven"
+kinds: [agent_tool]
+description: "The fastest copilot. Supermaven uses a 1 million token context window to provide the highest quality code completions."
+website: "https://supermaven.com"
+logo_url: /logos/supermaven.png
+tagging:
+  match_case: true
+  match_name: false

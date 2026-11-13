@@ -1,0 +1,19 @@
+slug: project-airi
+name: "Project AIRI"
+kinds: [agent_tool]
+description: "Open source attempt to create cyber companion."
+website: "https://airi.moeru.ai"
+logo_url: /logos/project-airi.png
+links:
+  github: "https://github.com/moeru-ai"
+tagging:
+  match_case: true
+products:
+  - slug: project-airi
+    name: "Project AIRI"
+    type: oss_project
+    github: moeru-ai/airi
+    tagline: "💖🧸 Self hosted, you-owned Grok Companion, a container of souls of waifu, cyber livings to bring them into our worlds, wishing to achieve Neuro-sama's altitude. Capable of realtime voice chat, Minecraft, Factorio playing. Web / macOS / Windows supported."
+    url: "https://github.com/moeru-ai/airi"
+    metadata:
+      license: "MIT"

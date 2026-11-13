@@ -1,0 +1,8 @@
+slug: electron-hub
+name: "Electron Hub"
+kinds: [llm_gateway]
+description: "One API Gateway for 600+ models across 40+ providers. Route to any LLM with a single key, unified billing, and automatic provider failover."
+website: "https://www.electronhub.ai"
+logo_url: /logos/electron-hub.png
+tagging:
+  match_case: true

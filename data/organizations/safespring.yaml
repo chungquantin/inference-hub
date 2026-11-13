@@ -3,6 +3,7 @@ name: "Safespring"
 kinds: [gpu_cloud]
 description: "Digital infrastruktur per timme, från svenska datacenter."
 website: "https://www.safespring.com"
+logo_url: /logos/safespring.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

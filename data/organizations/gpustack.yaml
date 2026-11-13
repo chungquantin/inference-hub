@@ -3,6 +3,7 @@ name: "GPUStack"
 kinds: [open_source]
 description: "Deploy, manage, and scale LLMs and GPU resources on any hardware. GPUStack: Enterprise MaaS + GPUaaS Platform."
 website: "https://gpustack.ai"
+logo_url: /logos/gpustack.jpg
 categories: [inference-engines]
 tagging:
   match_case: true

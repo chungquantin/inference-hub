@@ -1,0 +1,8 @@
+slug: routstr
+name: "Routstr"
+kinds: [llm_gateway]
+description: "The future of AI access is permissionless, private, and decentralized. Access top AI models with Bitcoin Lightning payments."
+website: "https://routstr.com"
+logo_url: /logos/routstr.svg
+tagging:
+  match_case: true

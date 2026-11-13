@@ -1,0 +1,9 @@
+slug: relaxai
+name: "relaxAI"
+kinds: [inference_provider]
+description: "Get the benefits of AI without compromising on data privacy. relaxAI offers a secure, transparent, and compliant solution. Find out more and start using relaxAI today"
+website: "https://relax.ai"
+logo_url: /logos/relaxai.svg
+tagging:
+  match_case: true
+  match_name: false

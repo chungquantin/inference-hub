@@ -7,3 +7,10 @@ website: "https://primeintellect.ai"
 logo_url: /logos/prime-intellect.jpg
 tagging:
   match_case: true
+products:
+  - slug: prime-agent
+    name: "Prime Agent"
+    type: oss_project
+    github: PrimeIntellect-ai/prime-agent
+    tagline: "A self-improving RLM agent for coding workflows and long-running autonomous tasks."
+    url: "https://github.com/PrimeIntellect-ai/prime-agent"

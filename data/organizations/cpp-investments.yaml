@@ -2,5 +2,6 @@ slug: cpp-investments
 name: "CPP Investments"
 kinds: [investor]
 website: "https://www.cppinvestments.com"
+logo_url: /logos/cpp-investments.png
 tagging:
   match_case: true

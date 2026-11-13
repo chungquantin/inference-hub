@@ -15,3 +15,9 @@ feeds:
     name: "Modal blog"
     url: "https://modal.com/blog/atom.xml"
     interval_minutes: 180
+products:
+  - slug: modal-sandboxes
+    name: "Modal Sandboxes"
+    type: platform
+    tagline: "Create secure, isolated Modal Sandboxes for untrusted code at scale. Start and configure lifecycle, Image, runtime, and resources with Python, Go, or JS."
+    url: "https://modal.com/docs/guide/sandbox"

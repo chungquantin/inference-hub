@@ -3,6 +3,7 @@ name: "tinygrad"
 kinds: [open_source]
 description: "Meet the new tinybox. Configure memory, storage, and GPUs for your own deep learning computer. From $7,000."
 website: "https://tinygrad.org"
+logo_url: /logos/tinygrad.png
 categories: [inference-engines]
 tagging:
   match_case: true

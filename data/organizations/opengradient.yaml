@@ -1,0 +1,8 @@
+slug: opengradient
+name: "OpenGradient"
+kinds: [decentralized]
+description: "OpenGradient is a research lab focused on advancing private, uncensored, and sovereign artificial intelligence."
+website: "https://www.opengradient.ai"
+logo_url: /logos/opengradient.png
+tagging:
+  match_case: true

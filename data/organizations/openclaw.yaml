@@ -1,0 +1,19 @@
+slug: openclaw
+name: "OpenClaw"
+kinds: [agent_tool]
+description: "OpenClaw is the open-source AI assistant that runs on your machine and works from WhatsApp, Telegram, or any chat app: inbox, email, calendar, flights."
+website: "https://openclaw.ai"
+logo_url: /logos/openclaw.png
+links:
+  github: "https://github.com/openclaw"
+tagging:
+  match_case: true
+products:
+  - slug: openclaw
+    name: "OpenClaw"
+    type: oss_project
+    github: openclaw/openclaw
+    tagline: "The AI that really does things. Any OS. Any Platform. The lobster way. 🦞"
+    url: "https://github.com/openclaw/openclaw"
+    metadata:
+      license: "MIT"

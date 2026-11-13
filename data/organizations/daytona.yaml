@@ -1,0 +1,9 @@
+slug: daytona
+name: "Daytona"
+kinds: [other]
+description: "Deploy Al code with confidence using Daytona"
+website: "https://www.daytona.io"
+logo_url: /logos/daytona.png
+tagging:
+  match_case: true
+  match_name: false

@@ -2,5 +2,6 @@ slug: getdeploying
 name: "GetDeploying"
 kinds: [other]
 website: "https://getdeploying.com"
+logo_url: /logos/getdeploying.png
 tagging:
   match_case: true

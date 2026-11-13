@@ -1,0 +1,9 @@
+slug: graphite
+name: "Graphite"
+kinds: [agent_tool]
+description: "Graphite helps teams on GitHub deliver higher quality software, faster."
+website: "https://graphite.dev"
+logo_url: /logos/graphite.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,6 +1,7 @@
 slug: nvidia-nemo
 name: "NVIDIA-NeMo"
 kinds: [open_source]
+description: "Enjoy NVIDIA content in your language."
 website: "https://nvidia.com/"
 logo_url: /logos/nvidia-nemo.png
 links:

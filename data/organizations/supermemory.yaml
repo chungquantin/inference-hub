@@ -1,0 +1,20 @@
+slug: supermemory
+name: "Supermemory"
+kinds: [other]
+description: "Agents need memory. supermemory is building the default engine for memory and continual learning for agents."
+website: "https://supermemory.ai"
+logo_url: /logos/supermemory.png
+links:
+  github: "https://github.com/supermemoryai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: supermemory
+    name: "Supermemory"
+    type: oss_project
+    github: supermemoryai/supermemory
+    tagline: "Memory and context engine + app that is extremely fast, scalable, and can be run fully locally. The Memory API for the AI era."
+    url: "https://github.com/supermemoryai/supermemory"
+    metadata:
+      license: "MIT"

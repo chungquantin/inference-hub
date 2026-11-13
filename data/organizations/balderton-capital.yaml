@@ -2,5 +2,6 @@ slug: balderton-capital
 name: "Balderton Capital"
 kinds: [investor]
 website: "https://www.balderton.com"
+logo_url: /logos/balderton-capital.png
 tagging:
   match_case: true

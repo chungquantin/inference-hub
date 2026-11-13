@@ -2,5 +2,6 @@ slug: atoma-network
 name: "Atoma Network"
 kinds: [decentralized]
 website: "https://atoma.network"
+logo_url: /logos/atoma-network.png
 tagging:
   match_case: true

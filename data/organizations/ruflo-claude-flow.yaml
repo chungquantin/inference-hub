@@ -1,0 +1,20 @@
+slug: ruflo-claude-flow
+name: "Ruflo (claude-flow)"
+kinds: [agent_tool]
+description: "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated"
+website: "https://cognitum.one"
+logo_url: /logos/ruflo-claude-flow.png
+links:
+  github: "https://github.com/ruvnet"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ruflo-claude-flow
+    name: "Ruflo (claude-flow)"
+    type: oss_project
+    github: ruvnet/ruflo
+    tagline: "🌊 The original agent harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning intelligence, federation, vector RAG integration, and native Claude Code / Codex / Hermes and many more Integrated"
+    url: "https://github.com/ruvnet/ruflo"
+    metadata:
+      license: "MIT"

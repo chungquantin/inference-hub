@@ -1,0 +1,16 @@
+slug: agent-zero
+name: "Agent Zero"
+kinds: [agent_tool]
+description: "Easily build your own AI agents that work on their own operating system, create tools intelligently, learn, self-correct, and execute workflows with complete transparency."
+website: "https://agent-zero.ai"
+logo_url: /logos/agent-zero.png
+links:
+  github: "https://github.com/agent0ai"
+tagging:
+  match_case: true
+products:
+  - slug: agent-zero
+    name: "Agent Zero"
+    type: oss_project
+    github: agent0ai/agent-zero
+    url: "https://github.com/agent0ai/agent-zero"

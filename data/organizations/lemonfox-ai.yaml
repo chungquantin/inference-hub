@@ -1,0 +1,8 @@
+slug: lemonfox-ai
+name: "Lemonfox.ai"
+kinds: [inference_provider]
+description: "Transcribe audio files within seconds using our Speech-To-Text API - with the lowest price on the market."
+website: "https://www.lemonfox.ai"
+logo_url: /logos/lemonfox-ai.png
+tagging:
+  match_case: true

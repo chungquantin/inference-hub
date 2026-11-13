@@ -1,0 +1,8 @@
+slug: morph-cloud
+name: "Morph Cloud"
+kinds: [other]
+description: "Morph Cloud - Infrastructure for AI agents with instant environment branching and burst scalability. Deploy, branch, and scale computational environments in milliseconds."
+website: "https://www.morph.so"
+logo_url: /logos/morph-cloud.png
+tagging:
+  match_case: true

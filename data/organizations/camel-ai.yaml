@@ -1,0 +1,20 @@
+slug: camel-ai
+name: "CAMEL-AI"
+kinds: [agent_tool]
+description: "CAMEL-AI is an open-source community for finding the scaling laws of agents for data generation, world simulation, task automation."
+website: "https://camel-ai.org"
+logo_url: /logos/camel-ai.png
+links:
+  github: "https://github.com/camel-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: camel-ai
+    name: "CAMEL-AI"
+    type: oss_project
+    github: camel-ai/camel
+    tagline: "🐫 CAMEL: The first and the best multi-agent framework. Finding the Scaling Law of Agents. https://www.camel-ai.org"
+    url: "https://github.com/camel-ai/camel"
+    metadata:
+      license: "Apache-2.0"

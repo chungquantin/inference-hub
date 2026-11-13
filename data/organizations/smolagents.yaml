@@ -1,0 +1,19 @@
+slug: smolagents
+name: "smolagents"
+kinds: [agent_tool]
+description: "🤗 smolagents: a barebones library for agents that think in code."
+website: "https://huggingface.co"
+logo_url: /logos/smolagents.png
+links:
+  github: "https://github.com/huggingface"
+tagging:
+  match_case: true
+products:
+  - slug: smolagents
+    name: "smolagents"
+    type: oss_project
+    github: huggingface/smolagents
+    tagline: "🤗 smolagents: a barebones library for agents that think in code."
+    url: "https://github.com/huggingface/smolagents"
+    metadata:
+      license: "Apache-2.0"

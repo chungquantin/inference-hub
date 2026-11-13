@@ -1,6 +1,7 @@
 slug: comfy-org
 name: "Comfy Org"
 kinds: [open_source]
+description: "Comfy is the AI creation engine for visual professionals who demand control over every model, every parameter, and every output."
 website: "https://comfy.org"
 logo_url: /logos/comfy-org.png
 links:

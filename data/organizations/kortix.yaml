@@ -1,0 +1,18 @@
+slug: kortix
+name: "Kortix"
+kinds: [agent_tool]
+description: "Open-source CompanyOS: your agents, skills, memory, and connectors in one repo you own. Any model. Self-host or cloud."
+website: "https://kortix.com"
+logo_url: /logos/kortix.png
+links:
+  github: "https://github.com/kortix-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: kortix
+    name: "Kortix"
+    type: oss_project
+    github: kortix-ai/CompanyOS
+    tagline: "Kortix CompanyOS – the open-source operating system for your company. Multiplayer AI agents, your company as code, sovereign on your infrastructure or ours."
+    url: "https://github.com/kortix-ai/CompanyOS"

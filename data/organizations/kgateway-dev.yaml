@@ -1,6 +1,7 @@
 slug: kgateway-dev
 name: "kgateway-dev"
 kinds: [open_source]
+description: "The Cloud-Native API Gateway and AI Gateway"
 website: "https://kgateway.dev"
 logo_url: /logos/kgateway-dev.png
 links:

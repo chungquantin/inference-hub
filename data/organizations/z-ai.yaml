@@ -8,3 +8,25 @@ logo_url: /logos/z-ai.svg
 tagging:
   aliases: ["Zhipu", "Zhipu AI", "GLM"]
   match_case: true
+products:
+  - slug: z-code
+    name: "Z Code"
+    type: oss_project
+    github: zai-org/ZCode
+    tagline: "Z.ai's coding agent harness. Powerful, intelligent, extensible."
+    url: "https://github.com/zai-org/ZCode"
+    metadata:
+      license: "Apache-2.0"
+  - slug: z-ai
+    name: "Z.ai"
+    type: platform
+    tagline: "Meet Z.ai, the AI assistant powered by GLM-5.3-Flash. Build websites, write code, handle long-horizon tasks, and get instant answers. Fast, smart, and reliable."
+    url: "https://chat.z.ai"
+  - slug: autoglm
+    name: "AutoGLM"
+    type: oss_project
+    github: zai-org/Open-AutoGLM
+    tagline: "An Open Phone Agent Model & Framework. Unlocking the AI Phone for Everyone"
+    url: "https://github.com/zai-org/Open-AutoGLM"
+    metadata:
+      license: "Apache-2.0"

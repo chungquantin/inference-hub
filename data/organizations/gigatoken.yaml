@@ -1,6 +1,7 @@
 slug: gigatoken
 name: "gigatoken"
 kinds: [open_source]
+description: "Language model tokenization at GB/s"
 website: "https://github.com/marcelroed/gigatoken"
 links:
   github: "https://github.com/marcelroed/gigatoken"

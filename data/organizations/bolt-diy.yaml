@@ -1,0 +1,19 @@
+slug: bolt-diy
+name: "Bolt.diy"
+kinds: [agent_tool]
+description: "Prompt, run, edit, and deploy full-stack web applications using any LLM you want!"
+website: "https://stackblitz-labs.github.io"
+logo_url: /logos/bolt-diy.jpg
+links:
+  github: "https://github.com/stackblitz-labs"
+tagging:
+  match_case: true
+products:
+  - slug: bolt-diy
+    name: "Bolt.diy"
+    type: oss_project
+    github: stackblitz-labs/bolt.diy
+    tagline: "Prompt, run, edit, and deploy full-stack web applications using any LLM you want!"
+    url: "https://github.com/stackblitz-labs/bolt.diy"
+    metadata:
+      license: "MIT"

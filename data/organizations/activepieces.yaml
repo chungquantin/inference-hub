@@ -1,0 +1,18 @@
+slug: activepieces
+name: "Activepieces"
+kinds: [agent_tool]
+description: "Chat, agents, flows, tables, and 770+ apps in one workspace, so your whole team works with AI in the tools they already use. Open source at the core."
+website: "https://activepieces.com"
+logo_url: /logos/activepieces.svg
+links:
+  github: "https://github.com/activepieces"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: activepieces
+    name: "Activepieces"
+    type: oss_project
+    github: activepieces/activepieces
+    tagline: "AI Agents & MCPs & AI Workflow Automation • (~400 MCP servers for AI agents) • AI Automation / AI Agent with MCPs • AI Workflows & AI Agents • MCPs for AI Agents"
+    url: "https://github.com/activepieces/activepieces"

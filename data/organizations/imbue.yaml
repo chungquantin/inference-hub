@@ -1,0 +1,9 @@
+slug: imbue
+name: "Imbue"
+kinds: [agent_tool]
+description: "We build AI to help people think, create, and build. Tools that are loyal to you, not the company that built them."
+website: "https://imbue.com"
+logo_url: /logos/imbue.png
+tagging:
+  match_case: true
+  match_name: false

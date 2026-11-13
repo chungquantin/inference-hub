@@ -46,6 +46,14 @@ products:
       modalities: [text]
       license: Apache-2.0
       open_weights: true
+  - slug: mistral-vibe
+    name: "Mistral Vibe"
+    type: oss_project
+    github: mistralai/mistral-vibe
+    tagline: "Minimal CLI coding agent by Mistral"
+    url: "https://github.com/mistralai/mistral-vibe"
+    metadata:
+      license: "Apache-2.0"
 funding:
   - round: series_c
     announced_on: 2025-09-09

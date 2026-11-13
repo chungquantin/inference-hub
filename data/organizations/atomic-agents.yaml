@@ -1,0 +1,19 @@
+slug: atomic-agents
+name: "Atomic Agents"
+kinds: [agent_tool]
+description: "Building AI agents, atomically"
+website: "https://eigenwise.github.io"
+links:
+  github: "https://github.com/Eigenwise"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: atomic-agents
+    name: "Atomic Agents"
+    type: oss_project
+    github: Eigenwise/atomic-agents
+    tagline: "Building AI agents, atomically"
+    url: "https://github.com/Eigenwise/atomic-agents"
+    metadata:
+      license: "MIT"

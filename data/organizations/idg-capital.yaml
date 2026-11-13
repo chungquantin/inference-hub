@@ -2,5 +2,6 @@ slug: idg-capital
 name: "IDG Capital"
 kinds: [investor]
 website: "https://www.idgcapital.com"
+logo_url: /logos/idg-capital.png
 tagging:
   match_case: true

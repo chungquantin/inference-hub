@@ -1,6 +1,7 @@
 slug: gitee-ai
 name: "Gitee AI"
 kinds: [inference_provider]
+description: "汇聚最新最热 AI 模型，提供模型体验、推理、训练、部署和应用的一站式服务，提供充沛算力，做中国最好的 AI 社区。"
 website: "https://moark.com"
 logo_url: /logos/gitee-ai.png
 tagging:

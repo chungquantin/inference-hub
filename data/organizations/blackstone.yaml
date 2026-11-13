@@ -2,6 +2,7 @@ slug: blackstone
 name: "Blackstone"
 kinds: [investor]
 website: "https://www.blackstone.com"
+logo_url: /logos/blackstone.png
 tagging:
   match_case: true
   match_name: false

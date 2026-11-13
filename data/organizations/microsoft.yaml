@@ -78,3 +78,45 @@ products:
     url: "https://github.com/microsoft/vattention"
     metadata:
       license: "MIT"
+  - slug: github-copilot-cli
+    name: "GitHub Copilot CLI"
+    type: oss_project
+    github: github/copilot-cli
+    tagline: "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal."
+    url: "https://github.com/github/copilot-cli"
+  - slug: microsoft-agent-framework
+    name: "Microsoft Agent Framework"
+    type: oss_project
+    github: microsoft/agent-framework
+    tagline: "A framework for building, orchestrating and deploying AI agents and multi-agent workflows with support for Python and .NET."
+    url: "https://github.com/microsoft/agent-framework"
+    metadata:
+      license: "MIT"
+  - slug: semantic-kernel
+    name: "Semantic Kernel"
+    type: oss_project
+    github: microsoft/semantic-kernel
+    tagline: "Integrate cutting-edge LLM technology quickly and easily into your apps"
+    url: "https://github.com/microsoft/semantic-kernel"
+    metadata:
+      license: "MIT"
+  - slug: github-copilot
+    name: "GitHub Copilot"
+    type: platform
+    url: "https://github.com/features/copilot"
+  - slug: magentic-ui
+    name: "Magentic-UI"
+    type: oss_project
+    github: microsoft/magentic-ui
+    tagline: "MagenticLite is an experimental agent that works across the browser and local file system"
+    url: "https://github.com/microsoft/magentic-ui"
+    metadata:
+      license: "MIT"
+  - slug: autogen
+    name: "AutoGen"
+    type: oss_project
+    github: microsoft/autogen
+    tagline: "A programming framework for agentic AI"
+    url: "https://github.com/microsoft/autogen"
+    metadata:
+      license: "CC-BY-4.0"

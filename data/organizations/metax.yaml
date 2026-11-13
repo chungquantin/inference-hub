@@ -1,6 +1,7 @@
 slug: metax
 name: "MetaX"
 kinds: [hardware]
+description: "沐曦致力于为异构计算提供安全可靠的GPU芯片及解决方案，可广泛应用于人工智能、智慧城市、数据中心、云计算、自动驾驶、数字孪生、元宇宙等前沿领域，为数字经济发展提供强大的算力支撑。"
 website: "https://www.metax-tech.com"
 logo_url: /logos/metax.png
 tagging:

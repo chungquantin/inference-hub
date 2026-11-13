@@ -1,0 +1,9 @@
+slug: nesa
+name: "Nesa"
+kinds: [decentralized]
+description: "The Layer-1 blockchain for AI."
+website: "https://nesa.ai"
+logo_url: /logos/nesa.png
+tagging:
+  match_case: true
+  match_name: false

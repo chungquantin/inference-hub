@@ -1,6 +1,7 @@
 slug: elyza
 name: "ELYZA"
 kinds: [model_provider]
+description: "ELYZAは大規模言語モデル活用のプロフェッショナル集団です。「未踏の領域で、あたりまえを創る」という理念のもと、自然言語処理技術の研究開発を行い、企業の大規模言語モデル活用の支援や、独自LLM開発の支援、AI SaaSの開発・提供をしています。"
 website: "https://elyza.ai"
 logo_url: /logos/elyza.svg
 tagging:

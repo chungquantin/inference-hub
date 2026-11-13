@@ -1,0 +1,8 @@
+slug: yescale
+name: "YEScale"
+kinds: [llm_gateway]
+description: "Control AI traffic, API keys, routing, usage, logs and cost from one place. A dashboard-first control plane for production AI apps."
+website: "https://yescale.io"
+logo_url: /logos/yescale.svg
+tagging:
+  match_case: true

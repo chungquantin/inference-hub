@@ -1,7 +1,9 @@
 slug: vmlx
 name: "vmlx"
 kinds: [open_source]
+description: "An MLX inference engine for Apple Silicon. SSD prefix caching, paged KV cache and continuous batching, behind OpenAI- and Anthropic-compatible APIs. Free and offline."
 website: "https://vmlx.net"
+logo_url: /logos/vmlx.png
 links:
   github: "https://github.com/jjang-ai/vmlx"
 categories: [model-optimization]

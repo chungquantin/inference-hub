@@ -3,6 +3,7 @@ name: "T-Systems"
 kinds: [gpu_cloud]
 tagline: "German sovereign AI cloud."
 website: "https://t-systems.com"
+logo_url: /logos/t-systems.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

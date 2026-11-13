@@ -1,0 +1,19 @@
+slug: nanoclaw
+name: "NanoClaw"
+kinds: [agent_tool]
+description: "NanoClaw is a secure, lightweight alternative to OpenClaw. Your personal AI agent that runs in containers, built to be understood and customized for your own needs."
+website: "https://nanoclaw.dev"
+logo_url: /logos/nanoclaw.png
+links:
+  github: "https://github.com/nanocoai"
+tagging:
+  match_case: true
+products:
+  - slug: nanoclaw
+    name: "NanoClaw"
+    type: oss_project
+    github: nanocoai/nanoclaw
+    tagline: "A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK"
+    url: "https://github.com/nanocoai/nanoclaw"
+    metadata:
+      license: "MIT"

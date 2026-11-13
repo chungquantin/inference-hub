@@ -1,0 +1,19 @@
+slug: langflow
+name: "Langflow"
+kinds: [agent_tool]
+description: "Welcome to Langflow - Build AI applications with ease"
+website: "https://langflow.org"
+logo_url: /logos/langflow.png
+links:
+  github: "https://github.com/langflow-ai"
+tagging:
+  match_case: true
+products:
+  - slug: langflow
+    name: "Langflow"
+    type: oss_project
+    github: langflow-ai/langflow
+    tagline: "Langflow is a powerful tool for building and deploying AI-powered agents and workflows."
+    url: "https://github.com/langflow-ai/langflow"
+    metadata:
+      license: "MIT"

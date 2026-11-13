@@ -1,7 +1,9 @@
 slug: llama-cpp-python
 name: "llama-cpp-python"
 kinds: [open_source]
+description: "Python bindings for llama.cpp"
 website: "https://llama-cpp-python.readthedocs.io"
+logo_url: /logos/llama-cpp-python.png
 links:
   github: "https://github.com/abetlen/llama-cpp-python"
 categories: [local-runtimes]

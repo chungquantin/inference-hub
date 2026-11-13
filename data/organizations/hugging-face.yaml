@@ -76,3 +76,11 @@ products:
     url: "https://github.com/huggingface/tokenizers"
     metadata:
       license: "Apache-2.0"
+  - slug: tau
+    name: "Tau"
+    type: oss_project
+    github: huggingface/tau
+    tagline: "A Python port of Pi’s minimalist coding agent."
+    url: "https://github.com/huggingface/tau"
+    metadata:
+      license: "MIT"

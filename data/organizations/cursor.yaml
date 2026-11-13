@@ -1,0 +1,9 @@
+slug: cursor
+name: "Cursor"
+kinds: [agent_tool]
+description: "Built to help you ship, right from your terminal. Same commands, any environment."
+website: "https://cursor.com"
+logo_url: /logos/cursor.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,20 @@
+slug: cognee
+name: "Cognee"
+kinds: [other]
+description: "Cognee is the open-source agent memory platform for LLM agents. Build persistent memory across sessions with graph, vector, and relational retrieval that runs self-hosted, in Docker, on-prem, or on Cognee Cloud."
+website: "https://www.cognee.ai"
+logo_url: /logos/cognee.png
+links:
+  github: "https://github.com/topoteretes"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cognee
+    name: "Cognee"
+    type: oss_project
+    github: topoteretes/cognee
+    tagline: "Cognee is the open-source AI memory platform for agents. Give your AI agents persistent long-term memory with small models for free"
+    url: "https://github.com/topoteretes/cognee"
+    metadata:
+      license: "Apache-2.0"

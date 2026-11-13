@@ -1,7 +1,9 @@
 slug: jio-platforms
 name: "Jio Platforms"
 kinds: [gpu_cloud]
+description: "Jio is India's largest telecom network for customers and businesses. Jio offers Postpaid and Prepaid Connections, WiFi plans, Jioapps, & more. Join us today!"
 website: "https://www.jio.com"
+logo_url: /logos/jio-platforms.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

@@ -49,6 +49,31 @@ products:
         output: 4
         source_url: https://www.anthropic.com/pricing
         observed_on: 2024-12-01
+  - slug: claude-code
+    name: "Claude Code"
+    type: oss_project
+    github: anthropics/claude-code
+    tagline: "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands."
+    url: "https://github.com/anthropics/claude-code"
+  - slug: claude-agent-sdk
+    name: "Claude Agent SDK"
+    type: oss_project
+    github: anthropics/claude-agent-sdk-python
+    url: "https://github.com/anthropics/claude-agent-sdk-python"
+    metadata:
+      license: "MIT"
+  - slug: anthropic-claude-code-action
+    name: "Anthropic Claude Code Action"
+    type: oss_project
+    github: anthropics/claude-code-action
+    url: "https://github.com/anthropics/claude-code-action"
+    metadata:
+      license: "MIT"
+  - slug: claude-computer-use
+    name: "Claude computer use"
+    type: platform
+    tagline: "A refreshed, more powerful Claude 3.5 Sonnet, Claude 3.5 Haiku, and a new experimental AI capability: computer use."
+    url: "https://www.anthropic.com/news/3-5-models-and-computer-use"
 funding:
   - round: series_e
     announced_on: 2025-03-03

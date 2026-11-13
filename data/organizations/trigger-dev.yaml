@@ -1,0 +1,20 @@
+slug: trigger-dev
+name: "Trigger.dev"
+kinds: [agent_tool]
+description: "Trigger.dev is the open source platform for durable AI agents and workflows in TypeScript. Long-running tasks with retries, queues, and LLM observability."
+website: "https://trigger.dev"
+logo_url: /logos/trigger-dev.png
+links:
+  github: "https://github.com/triggerdotdev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: trigger-dev
+    name: "Trigger.dev"
+    type: oss_project
+    github: triggerdotdev/trigger.dev
+    tagline: "Trigger.dev – build and deploy durable AI agents and workflows"
+    url: "https://github.com/triggerdotdev/trigger.dev"
+    metadata:
+      license: "Apache-2.0"

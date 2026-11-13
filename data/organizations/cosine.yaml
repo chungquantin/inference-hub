@@ -1,0 +1,9 @@
+slug: cosine
+name: "Cosine"
+kinds: [agent_tool]
+description: "Cosine trains AI models and specialised coding agents for regulated organisations that need frontier capability within secure environments."
+website: "https://cosine.sh"
+logo_url: /logos/cosine.png
+tagging:
+  match_case: true
+  match_name: false

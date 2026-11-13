@@ -1,6 +1,7 @@
 slug: open-mmlab
 name: "OpenMMLab"
 kinds: [open_source]
+description: "OpenMMLab Model Compression Toolbox and Benchmark."
 website: "https://openmmlab.com"
 logo_url: /logos/open-mmlab.png
 links:

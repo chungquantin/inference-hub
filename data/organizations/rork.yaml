@@ -1,0 +1,8 @@
+slug: rork
+name: "Rork"
+kinds: [agent_tool]
+description: "Rork is a cross-platform AI app builder for iOS, Android & web. Publish to the App Store & Google Play in hours. Business tools, social apps & games with no code."
+website: "https://rork.com"
+logo_url: /logos/rork.png
+tagging:
+  match_case: true

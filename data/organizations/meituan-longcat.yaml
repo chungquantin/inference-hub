@@ -1,6 +1,7 @@
 slug: meituan-longcat
 name: "Meituan LongCat"
 kinds: [model_provider]
+description: "我分享了【LongCat AI】，快来看吧！"
 website: "https://longcat.chat"
 logo_url: /logos/meituan-longcat.svg
 tagging:

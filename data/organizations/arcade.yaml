@@ -1,0 +1,20 @@
+slug: arcade
+name: "Arcade"
+kinds: [agent_tool]
+description: "Arcade is the actions runtime for enterprise AI agents — one control point to enforce, execute, and govern every action, every time. Try it free."
+website: "https://arcade.dev"
+logo_url: /logos/arcade.png
+links:
+  github: "https://github.com/ArcadeAI"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: arcade
+    name: "Arcade"
+    type: oss_project
+    github: ArcadeAI/arcade-mcp
+    tagline: "MCP Server Framework and Tool Development library for building custom capabilities into agents."
+    url: "https://github.com/ArcadeAI/arcade-mcp"
+    metadata:
+      license: "MIT"

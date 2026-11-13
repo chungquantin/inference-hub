@@ -6,3 +6,10 @@ website: "https://fly.io"
 logo_url: /logos/fly-io.svg
 tagging:
   match_case: true
+products:
+  - slug: sprites
+    name: "Sprites"
+    type: oss_project
+    github: superfly/sprites-docs
+    tagline: "👾 Documentation for Fly.io Sprites"
+    url: "https://github.com/superfly/sprites-docs"

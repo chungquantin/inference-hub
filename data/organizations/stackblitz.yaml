@@ -1,0 +1,19 @@
+slug: stackblitz
+name: "StackBlitz"
+kinds: [agent_tool]
+description: "StackBlitz is the collaborative browser-based IDE for web developers. StackBlitz eliminates time-consuming local configuration and lets developers spend more time building."
+website: "https://stackblitz.com"
+logo_url: /logos/stackblitz.svg
+links:
+  github: "https://github.com/stackblitz"
+tagging:
+  match_case: true
+products:
+  - slug: stackblitz
+    name: "StackBlitz"
+    type: oss_project
+    github: stackblitz/core
+    tagline: "Online IDE powered by Visual Studio Code ⚡️"
+    url: "https://github.com/stackblitz/core"
+    metadata:
+      license: "MIT"

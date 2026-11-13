@@ -1,0 +1,8 @@
+slug: jetbrains-ai
+name: "JetBrains AI"
+kinds: [agent_tool]
+description: "JetBrains Air is one system for building software with agents. Works with the agents you already use and any ACP-compatible agent."
+website: "https://jetbrains.com"
+logo_url: /logos/jetbrains-ai.png
+tagging:
+  match_case: true

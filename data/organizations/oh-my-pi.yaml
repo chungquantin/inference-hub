@@ -1,0 +1,19 @@
+slug: oh-my-pi
+name: "Oh My Pi"
+kinds: [agent_tool]
+description: "omp is a coding agent for the terminal: subagents, plan mode, LSP, DAP, hindsight memory, hashline edits, and time-traveling rules — with a native Rust engine doing the heavy lifting. Built by Stencil Labs."
+website: "https://omp.sh"
+logo_url: /logos/oh-my-pi.png
+links:
+  github: "https://github.com/can1357"
+tagging:
+  match_case: true
+products:
+  - slug: oh-my-pi
+    name: "Oh My Pi"
+    type: oss_project
+    github: can1357/oh-my-pi
+    tagline: "⌥ Coding agent with the IDE wired in. Built by Stencil Labs."
+    url: "https://github.com/can1357/oh-my-pi"
+    metadata:
+      license: "MIT"

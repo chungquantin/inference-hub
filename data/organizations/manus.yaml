@@ -1,0 +1,9 @@
+slug: manus
+name: "Manus"
+kinds: [agent_tool]
+description: "Manus is the action engine that goes beyond answers to execute tasks, automate workflows, and extend your human reach."
+website: "https://manus.im"
+logo_url: /logos/manus.png
+tagging:
+  match_case: true
+  match_name: false

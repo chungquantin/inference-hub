@@ -1,0 +1,8 @@
+slug: aicreditmart
+name: "AICreditMart"
+kinds: [llm_gateway]
+description: "Vi guidar er från AI-strategi och pilot till färdig implementation och skalning. Med fokus på automation, AI-agenter och praktiska lösningar skapar vi konkret"
+website: "https://aicreditmart.com"
+logo_url: /logos/aicreditmart.png
+tagging:
+  match_case: true

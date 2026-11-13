@@ -1,0 +1,18 @@
+slug: nanocoder
+name: "Nanocoder"
+kinds: [agent_tool]
+description: "Official documentation for Nano Collective projects"
+website: "https://docs.nanocollective.org"
+logo_url: /logos/nanocoder.png
+links:
+  github: "https://github.com/Nano-Collective"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: nanocoder
+    name: "Nanocoder"
+    type: oss_project
+    github: Nano-Collective/nanocoder
+    tagline: "An open coding agent for your terminal, built by a community collective rather than a company. Bring your own model, keep your code on your machine, and owe nothing to anyone."
+    url: "https://github.com/Nano-Collective/nanocoder"

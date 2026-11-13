@@ -1,6 +1,7 @@
 slug: kakao-cloud
 name: "Kakao Cloud"
 kinds: [gpu_cloud]
+description: "클라우드의 기술과 혁신. 더 빠르고 안전한 새로운 클라우드 세상을 만들어 가고자 합니다."
 website: "https://kakaoenterprise.com"
 logo_url: /logos/kakao-cloud.png
 categories: [sovereign-clouds]

@@ -2,5 +2,6 @@ slug: ark-invest
 name: "ARK Invest"
 kinds: [investor]
 website: "https://www.ark-invest.com"
+logo_url: /logos/ark-invest.png
 tagging:
   match_case: true

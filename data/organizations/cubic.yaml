@@ -1,0 +1,9 @@
+slug: cubic
+name: "Cubic"
+kinds: [agent_tool]
+description: "AI code review designed to catch bugs in the most complex codebases. #1 on every independent benchmark. Try cubic free."
+website: "https://cubic.dev"
+logo_url: /logos/cubic.png
+tagging:
+  match_case: true
+  match_name: false

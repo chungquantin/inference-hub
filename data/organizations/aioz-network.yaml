@@ -1,6 +1,7 @@
 slug: aioz-network
 name: "AIOZ Network"
 kinds: [decentralized]
+description: "AIOZ empowers a faster, secure and decentralized future. Powered by AIOZ DePIN, Super Intelligence computation and thousands of individual nodes run globally, AIOZ rewards you for sharing your computational resources for use in storing, transcoding, and streaming digital media content and powering…"
 website: "https://aioz.network"
 tagging:
   match_case: true

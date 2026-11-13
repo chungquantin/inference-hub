@@ -1,0 +1,19 @@
+slug: grok-cli-community
+name: "Grok CLI (community)"
+kinds: [agent_tool]
+description: "An open-source coding agent for the Grok API"
+website: "https://github.com/superagent-ai/grok-cli"
+logo_url: /logos/grok-cli-community.png
+links:
+  github: "https://github.com/superagent-ai"
+tagging:
+  match_case: true
+products:
+  - slug: grok-cli-community
+    name: "Grok CLI (community)"
+    type: oss_project
+    github: superagent-ai/grok-cli
+    tagline: "An open-source coding agent for the Grok API"
+    url: "https://github.com/superagent-ai/grok-cli"
+    metadata:
+      license: "MIT"

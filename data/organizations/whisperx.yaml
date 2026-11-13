@@ -1,6 +1,7 @@
 slug: whisperx
 name: "whisperX"
 kinds: [open_source]
+description: "Max Bain's Personal Website."
 website: "https://maxbain.com"
 links:
   github: "https://github.com/m-bain/whisperX"

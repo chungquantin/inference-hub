@@ -1,7 +1,9 @@
 slug: insanely-fast-whisper
 name: "insanely-fast-whisper"
 kinds: [open_source]
+description: "AI and ML field notes, talks, and learnings from Vaibhav/ VB"
 website: "https://vaibhavs10.github.io"
+logo_url: /logos/insanely-fast-whisper.png
 links:
   github: "https://github.com/Vaibhavs10/insanely-fast-whisper"
 categories: [inference-engines]

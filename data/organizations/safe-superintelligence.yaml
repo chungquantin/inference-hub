@@ -1,6 +1,7 @@
 slug: safe-superintelligence
 name: "Safe Superintelligence"
 kinds: [model_provider]
+description: "The world's first straight-shot SSI lab, with one goal and one product: a safe superintelligence."
 website: "https://ssi.inc"
 tagging:
   match_case: true

@@ -1,6 +1,7 @@
 slug: kvcache-factory
 name: "KVCache-Factory"
 kinds: [open_source]
+description: "Unified KV Cache Compression Methods for Auto-Regressive Models"
 website: "https://github.com/Zefan-Cai/KVCache-Factory"
 links:
   github: "https://github.com/Zefan-Cai/KVCache-Factory"

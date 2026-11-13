@@ -1,0 +1,18 @@
+slug: cecli
+name: "cecli"
+kinds: [agent_tool]
+website: "https://cecli.dev"
+logo_url: /logos/cecli.svg
+links:
+  github: "https://github.com/cecli-dev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cecli
+    name: "cecli"
+    type: oss_project
+    github: cecli-dev/cecli
+    url: "https://github.com/cecli-dev/cecli"
+    metadata:
+      license: "Apache-2.0"

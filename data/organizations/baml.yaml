@@ -1,0 +1,20 @@
+slug: baml
+name: "BAML"
+kinds: [agent_tool]
+description: "BAML is one toolchain from the compiler to production. Build, test, trace, query, and alert on your code with tools that all read the same types."
+website: "https://boundaryml.com"
+logo_url: /logos/baml.png
+links:
+  github: "https://github.com/BoundaryML"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: baml
+    name: "BAML"
+    type: oss_project
+    github: BoundaryML/baml
+    tagline: "The programming language for agents"
+    url: "https://github.com/BoundaryML/baml"
+    metadata:
+      license: "Apache-2.0"

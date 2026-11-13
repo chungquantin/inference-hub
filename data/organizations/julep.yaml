@@ -1,0 +1,20 @@
+slug: julep
+name: "Julep"
+kinds: [agent_tool]
+description: "Julep — durable, composable AI agents. Flows that crash and resume, retry safely, and explain every step."
+website: "https://julep.ai"
+logo_url: /logos/julep.png
+links:
+  github: "https://github.com/julep-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: julep
+    name: "Julep"
+    type: oss_project
+    github: julep-ai/julep
+    tagline: "Julep — durable, composable AI agents. Flows that crash and resume, retry safely, and explain every step."
+    url: "https://github.com/julep-ai/julep"
+    metadata:
+      license: "Apache-2.0"

@@ -1,6 +1,7 @@
 slug: fpt-smart-cloud
 name: "FPT Smart Cloud"
 kinds: [gpu_cloud]
+description: "FPT smart Cloud là nền tảng Điện toán Đám mây thế hệ mới, được xây dựng theo quy chuẩn Cloud Quốc tế."
 website: "https://fptcloud.com"
 logo_url: /logos/fpt-smart-cloud.png
 categories: [sovereign-clouds]

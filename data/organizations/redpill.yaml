@@ -1,0 +1,8 @@
+slug: redpill
+name: "RedPill"
+kinds: [inference_provider]
+description: "Run private AI through verified GPU TEE providers, an attested gateway, signed response receipts, and audit sessions you can independently check."
+website: "https://redpill.ai"
+logo_url: /logos/redpill.png
+tagging:
+  match_case: true

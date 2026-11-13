@@ -1,0 +1,20 @@
+slug: bolt-new
+name: "Bolt.new"
+kinds: [agent_tool]
+description: "Build and scale high-performing websites & apps using your words. Join millions and start building today."
+website: "https://bolt.new"
+logo_url: /logos/bolt-new.png
+links:
+  github: "https://github.com/stackblitz"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: bolt-new
+    name: "Bolt.new"
+    type: oss_project
+    github: stackblitz/bolt.new
+    tagline: "Prompt, run, edit, and deploy full-stack web applications. -- bolt.new -- Help Center: https://support.bolt.new/ -- Community Support: https://discord.com/invite/stackblitz"
+    url: "https://github.com/stackblitz/bolt.new"
+    metadata:
+      license: "MIT"

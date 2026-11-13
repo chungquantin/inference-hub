@@ -1,0 +1,18 @@
+slug: tabby
+name: "Tabby"
+kinds: [agent_tool]
+description: "Tabby is an open-source AI coding assistant that empowers developers to code faster and smarter. Discover a self-contained alternative to GitHub Copilot, tailored for your development needs."
+website: "https://tabbyml.com"
+logo_url: /logos/tabby.png
+links:
+  github: "https://github.com/TabbyML"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tabby
+    name: "Tabby"
+    type: oss_project
+    github: TabbyML/tabby
+    tagline: "Self-hosted AI coding assistant"
+    url: "https://github.com/TabbyML/tabby"

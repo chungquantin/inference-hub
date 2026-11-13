@@ -1,0 +1,8 @@
+slug: ohmygpt
+name: "OhMyGPT"
+kinds: [llm_gateway]
+description: "Compare API prices and capability scores for models from OpenAI, Anthropic, Google, DeepSeek and other labs. One API key calls them all, and TEE proof is available."
+website: "https://www.ohmygpt.com"
+logo_url: /logos/ohmygpt.png
+tagging:
+  match_case: true

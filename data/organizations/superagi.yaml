@@ -1,0 +1,20 @@
+slug: superagi
+name: "SuperAGI"
+kinds: [agent_tool]
+description: "SuperAGI is an AI sales agent that works 24×7 to find & engage with prospects without the hassle of hiring."
+website: "https://superagi.com"
+logo_url: /logos/superagi.svg
+links:
+  github: "https://github.com/TransformerOptimus"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: superagi
+    name: "SuperAGI"
+    type: oss_project
+    github: TransformerOptimus/SuperAGI
+    tagline: "<⚡️> SuperAGI - A dev-first open source autonomous AI agent framework. Enabling developers to build, manage & run useful autonomous agents quickly and reliably."
+    url: "https://github.com/TransformerOptimus/SuperAGI"
+    metadata:
+      license: "MIT"

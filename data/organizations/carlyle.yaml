@@ -2,6 +2,7 @@ slug: carlyle
 name: "Carlyle"
 kinds: [investor]
 website: "https://www.carlyle.com"
+logo_url: /logos/carlyle.png
 tagging:
   match_case: true
   match_name: false

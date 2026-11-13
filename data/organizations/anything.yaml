@@ -1,0 +1,8 @@
+slug: anything
+name: "Anything"
+kinds: [agent_tool]
+description: "Anything is your AI agent for turning ideas into apps. Build sites, apps, tools, products and more just by describing what you want"
+website: "https://anything.com"
+tagging:
+  match_case: true
+  match_name: false

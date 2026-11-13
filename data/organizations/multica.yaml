@@ -1,0 +1,18 @@
+slug: multica
+name: "Multica"
+kinds: [agent_tool]
+description: "Source-available platform that turns coding agents into real teammates. Assign tasks, track progress, compound skills."
+website: "https://multica.ai"
+logo_url: /logos/multica.png
+links:
+  github: "https://github.com/multica-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: multica
+    name: "Multica"
+    type: oss_project
+    github: multica-ai/multica
+    tagline: "Make humans and AI agents work as one team — open-source and self-hostable."
+    url: "https://github.com/multica-ai/multica"

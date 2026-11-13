@@ -1,0 +1,19 @@
+slug: stripe-agent-toolkit
+name: "Stripe agent toolkit"
+kinds: [other]
+description: "Give your agent access to Stripe with plugins, MCP, and agent skills, and build AI products with usage-based billing, agentic commerce, and machine payments."
+website: "https://docs.stripe.com"
+logo_url: /logos/stripe-agent-toolkit.png
+links:
+  github: "https://github.com/stripe"
+tagging:
+  match_case: true
+products:
+  - slug: stripe-agent-toolkit
+    name: "Stripe agent toolkit"
+    type: oss_project
+    github: stripe/ai
+    tagline: "One-stop shop for building AI-powered products and businesses with Stripe."
+    url: "https://github.com/stripe/ai"
+    metadata:
+      license: "MIT"

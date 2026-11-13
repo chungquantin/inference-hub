@@ -1,0 +1,9 @@
+slug: hyperbrowser
+name: "Hyperbrowser"
+kinds: [other]
+description: "Cloud browsers, isolated sandboxes, and web data APIs for AI agents. Spin up Chrome sessions and microVMs in one call, and connect Playwright, Puppeteer, or any agent."
+website: "https://www.hyperbrowser.ai"
+logo_url: /logos/hyperbrowser.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,6 +1,7 @@
 slug: tiiny-ai
 name: "Tiiny AI"
 kinds: [open_source]
+description: "High-speed Large Language Model Serving for Local Deployment"
 website: "http://tiiny.ai/"
 logo_url: /logos/tiiny-ai.png
 links:

@@ -102,3 +102,8 @@ products:
     github: meta-llama/PurpleLlama
     tagline: "Meta safety classifiers."
     url: "https://github.com/meta-llama/PurpleLlama"
+  - slug: muse-code
+    name: "Muse Code"
+    type: platform
+    tagline: "Muse Code is Meta's coding agent for the terminal and CI, built for Muse Spark, with approvals, sandboxing, sessions, and multi-agent orchestration."
+    url: "https://dev.meta.ai/docs/muse-code"

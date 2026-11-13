@@ -1,6 +1,7 @@
 slug: triton-lang
 name: "triton-lang"
 kinds: [open_source]
+description: "Development repository for the Triton language and compiler"
 website: "https://github.com/triton-lang"
 logo_url: /logos/triton-lang.png
 links:

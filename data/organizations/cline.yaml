@@ -1,0 +1,20 @@
+slug: cline
+name: "Cline"
+kinds: [agent_tool]
+description: "Open-source AI coding agent with Plan/Act modes, MCP integration, and terminal-first workflows. Trusted by 11M+ developers worldwide."
+website: "https://cline.bot"
+logo_url: /logos/cline.png
+links:
+  github: "https://github.com/cline"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cline
+    name: "Cline"
+    type: oss_project
+    github: cline/cline
+    tagline: "Autonomous coding agent as an SDK, IDE extension, or CLI assistant."
+    url: "https://github.com/cline/cline"
+    metadata:
+      license: "Apache-2.0"

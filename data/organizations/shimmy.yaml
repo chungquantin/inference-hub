@@ -1,6 +1,7 @@
 slug: shimmy
 name: "shimmy"
 kinds: [open_source]
+description: "Production-ready open source projects built with Rust, Go, and modern technologies. Featuring Shimmy (5.7k+ stars), Airframe, CrabCamera, and more."
 website: "https://targetedwebresults.com/"
 links:
   github: "https://github.com/Michael-A-Kuykendall/shimmy"

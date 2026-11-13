@@ -1,0 +1,19 @@
+slug: trae-agent
+name: "Trae"
+kinds: [agent_tool]
+description: "TRAE integrates seamlessly into your workflow, collaborating with you to maximize performance and efficiency."
+website: "https://www.trae.ai"
+logo_url: /logos/trae-agent.png
+links:
+  github: "https://github.com/bytedance"
+tagging:
+  match_case: true
+products:
+  - slug: trae-agent
+    name: "Trae Agent"
+    type: oss_project
+    github: bytedance/trae-agent
+    tagline: "Trae Agent is an LLM-based agent for general purpose software engineering tasks."
+    url: "https://github.com/bytedance/trae-agent"
+    metadata:
+      license: "MIT"

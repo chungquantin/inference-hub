@@ -1,0 +1,18 @@
+slug: n8n
+name: "n8n"
+kinds: [agent_tool]
+description: "n8n is a workflow automation platform that uniquely combines AI capabilities with business process automation, giving technical teams the flexibility of code with the speed of no-code."
+website: "https://n8n.io"
+logo_url: /logos/n8n.png
+links:
+  github: "https://github.com/n8n-io"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: n8n
+    name: "n8n"
+    type: oss_project
+    github: n8n-io/n8n
+    tagline: "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations."
+    url: "https://github.com/n8n-io/n8n"

@@ -1,0 +1,8 @@
+slug: decagon
+name: "Decagon"
+kinds: [agent_tool]
+description: "Build, optimize, and scale AI agents that treat every customer like the only one."
+website: "https://decagon.ai"
+logo_url: /logos/decagon.png
+tagging:
+  match_case: true

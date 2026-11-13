@@ -1,0 +1,9 @@
+slug: the-grid
+name: "The Grid"
+kinds: [llm_gateway]
+description: "Pick a Grid instrument once and stop thinking about model releases, deprecations, and pricing changes. The Grid tracks qualifying models continuously and routes each request to the cheapest qualifying option."
+website: "https://thegrid.ai"
+logo_url: /logos/the-grid.png
+tagging:
+  match_case: true
+  match_name: false

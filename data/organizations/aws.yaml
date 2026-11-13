@@ -18,3 +18,38 @@ products:
     type: inference_api
     tagline: Managed API for foundation models from several labs.
     url: https://aws.amazon.com/bedrock/
+  - slug: amazon-q-developer-cli
+    name: "Amazon Q Developer CLI"
+    type: oss_project
+    github: aws/amazon-q-developer-cli
+    tagline: "✨ Agentic chat experience in your terminal. Build applications using natural language."
+    url: "https://github.com/aws/amazon-q-developer-cli"
+    metadata:
+      license: "Apache-2.0"
+  - slug: kiro-crew
+    name: "Kiro Crew"
+    type: oss_project
+    github: kirodotdev/KiroCrew
+    tagline: "A persistent workspace for development work that self-improves and continues beyond one session."
+    url: "https://github.com/kirodotdev/KiroCrew"
+    metadata:
+      license: "Apache-2.0"
+  - slug: kiro
+    name: "Kiro"
+    type: platform
+    tagline: "Set your intent and provide context. Kiro agents plan, build, review, and verify real engineering work on your machine or in the cloud, from Crew, Web, Mobile, IDE, and CLI."
+    url: "https://kiro.dev"
+  - slug: aws-kiro
+    name: "Kiro"
+    type: oss_project
+    github: kirodotdev/Kiro
+    tagline: "Kiro is an agentic IDE that works alongside you from prototype to production."
+    url: "https://github.com/kirodotdev/Kiro"
+  - slug: strands-agents
+    name: "Strands Agents"
+    type: oss_project
+    github: strands-agents/harness-sdk
+    tagline: "Build an agent harness and control it end-to-end. Open-source SDK for production AI agents in Python & TypeScript - any model, any cloud."
+    url: "https://github.com/strands-agents/harness-sdk"
+    metadata:
+      license: "Apache-2.0"

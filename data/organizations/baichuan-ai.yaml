@@ -1,6 +1,7 @@
 slug: baichuan-ai
 name: "Baichuan AI"
 kinds: [model_provider]
+description: "百川智能以帮助大众轻松、普惠地获取世界知识和专业服务为使命，致力于通过语言AI的突破，构建中国最优秀的大模型底座。"
 website: "https://www.baichuan-ai.com"
 logo_url: /logos/baichuan-ai.png
 tagging:

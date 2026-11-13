@@ -1,6 +1,7 @@
 slug: inspur
 name: "Inspur"
 kinds: [hardware]
+description: "浪潮致力于成为世界一流的新一代信息技术龙头企业、经济社会数字化转型的优秀服务商、新型基础设施建设的骨干企业"
 website: "https://en.inspur.com"
 tagging:
   match_case: true

@@ -2,6 +2,7 @@ slug: stanford-crfm
 name: "Stanford CRFM"
 kinds: [llmops]
 website: "https://crfm.stanford.edu"
+logo_url: /logos/stanford-crfm.png
 categories: [observability]
 tagging:
   match_case: true

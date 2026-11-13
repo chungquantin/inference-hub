@@ -1,0 +1,8 @@
+slug: crazyrouter
+name: "Crazyrouter"
+kinds: [llm_gateway]
+description: "A step-by-step guide to setting up Crazyrouter as your unified AI API gateway, replacing multiple provider accounts with a single API key."
+website: "https://crazyrouter.com"
+logo_url: /logos/crazyrouter.png
+tagging:
+  match_case: true

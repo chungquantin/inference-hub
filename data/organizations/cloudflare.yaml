@@ -8,3 +8,11 @@ logo_url: /logos/cloudflare.png
 tagging:
   aliases: ["Workers AI"]
   match_case: true
+products:
+  - slug: cloudflare-agents
+    name: "Cloudflare Agents"
+    type: oss_project
+    github: cloudflare/agents
+    url: "https://github.com/cloudflare/agents"
+    metadata:
+      license: "MIT"

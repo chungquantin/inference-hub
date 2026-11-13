@@ -1,6 +1,7 @@
 slug: infinigence-ai
 name: "Infinigence AI"
 kinds: [inference_provider]
+description: "无问芯穹（Infinigence AI）是国际领先的AI原生基础设施服务商，致力于以自主式人工智能基础设施底座，助力AI时代各行各业的智能革命。 依托软硬协同、多元异构、自主式AI等核心技术优势，无问芯穹打造了连接“M种模型”和“N种芯片”的“M×N”技术范式，在云与端侧均实现多种模型算法与多种芯片硬件间的极致效率与成本优化。"
 website: "https://www.infinigence-ai.com"
 tagging:
   match_case: true

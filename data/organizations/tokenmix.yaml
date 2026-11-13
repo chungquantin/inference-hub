@@ -1,0 +1,8 @@
+slug: tokenmix
+name: "TokenMix"
+kinds: [llm_gateway]
+description: "OpenAI-compatible AI API relay for Claude, OpenAI, Gemini, DeepSeek, Qwen, image, and video models. Base URL https://api.tokenmix.ai/v1. Top up from $1 with Alipay, Stripe, Antom, or crypto."
+website: "https://tokenmix.ai"
+logo_url: /logos/tokenmix.png
+tagging:
+  match_case: true

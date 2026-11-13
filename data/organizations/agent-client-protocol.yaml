@@ -1,0 +1,19 @@
+slug: agent-client-protocol
+name: "Agent Client Protocol"
+kinds: [other]
+description: "Get started with the Agent Client Protocol."
+website: "https://agentclientprotocol.com"
+logo_url: /logos/agent-client-protocol.png
+links:
+  github: "https://github.com/agentclientprotocol"
+tagging:
+  match_case: true
+products:
+  - slug: agent-client-protocol
+    name: "Agent Client Protocol"
+    type: oss_project
+    github: agentclientprotocol/agent-client-protocol
+    tagline: "A protocol for connecting any editor to any agent"
+    url: "https://github.com/agentclientprotocol/agent-client-protocol"
+    metadata:
+      license: "Apache-2.0"

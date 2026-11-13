@@ -1,6 +1,7 @@
 slug: jax
 name: "JAX"
 kinds: [open_source]
+description: "JAX: High performance array computing"
 website: "https://jax.dev"
 logo_url: /logos/jax.png
 categories: [inference-engines]

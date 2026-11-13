@@ -1,0 +1,17 @@
+slug: model-context-protocol
+name: "Model Context Protocol"
+kinds: [agent_tool]
+description: "Specification and documentation for the Model Context Protocol"
+website: "https://modelcontextprotocol.io"
+logo_url: /logos/model-context-protocol.png
+links:
+  github: "https://github.com/modelcontextprotocol"
+tagging:
+  match_case: true
+products:
+  - slug: model-context-protocol
+    name: "Model Context Protocol"
+    type: oss_project
+    github: modelcontextprotocol/modelcontextprotocol
+    tagline: "Specification and documentation for the Model Context Protocol"
+    url: "https://github.com/modelcontextprotocol/modelcontextprotocol"

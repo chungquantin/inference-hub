@@ -1,6 +1,7 @@
 slug: sugon
 name: "Sugon"
 kinds: [hardware]
+description: "中科曙光(sugon)是中国信息产业领军企业，为中国及全球用户提供创新、高效、可靠的IT产品、解决方案及服务。"
 website: "https://www.sugon.com"
 tagging:
   match_case: true

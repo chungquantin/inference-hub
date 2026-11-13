@@ -1,0 +1,8 @@
+slug: relevance-ai
+name: "Relevance AI"
+kinds: [agent_tool]
+description: "Deliver maximum ROI through optimized specialist agents. Build agents for sales, customer success, marketing and HR, and run millions of daily tasks on one platform."
+website: "https://relevanceai.com"
+logo_url: /logos/relevance-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,19 @@
+slug: metagpt
+name: "MetaGPT"
+kinds: [agent_tool]
+description: "🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming"
+website: "https://atoms.dev"
+logo_url: /logos/metagpt.png
+links:
+  github: "https://github.com/FoundationAgents"
+tagging:
+  match_case: true
+products:
+  - slug: metagpt
+    name: "MetaGPT"
+    type: oss_project
+    github: FoundationAgents/MetaGPT
+    tagline: "🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming"
+    url: "https://github.com/FoundationAgents/MetaGPT"
+    metadata:
+      license: "MIT"

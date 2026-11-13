@@ -1,0 +1,8 @@
+slug: zenmux
+name: "ZenMux"
+kinds: [llm_gateway]
+description: "The Enterprise LLM Platform: Unified API for 100+ AI models (Claude, GPT, Gemini, DeepSeek), intelligent routing, and AI Model Insurance that compensates for subpar output."
+website: "https://zenmux.ai"
+logo_url: /logos/zenmux.svg
+tagging:
+  match_case: true

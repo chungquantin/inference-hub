@@ -1,0 +1,19 @@
+slug: zeroclaw
+name: "ZeroClaw"
+kinds: [agent_tool]
+description: "A lightweight, secure personal AI agent: one Rust binary on your machine, your keys or your local models. 30+ channels, supervised by default, open source."
+website: "https://www.zeroclaw.com"
+logo_url: /logos/zeroclaw.png
+links:
+  github: "https://github.com/zeroclaw-labs"
+tagging:
+  match_case: true
+products:
+  - slug: zeroclaw
+    name: "ZeroClaw"
+    type: oss_project
+    github: zeroclaw-labs/zeroclaw
+    tagline: "Fast, small, and fully autonomous AI personal assistant infrastructure, any OS, any platform — deploy anywhere, swap anything 🦀"
+    url: "https://github.com/zeroclaw-labs/zeroclaw"
+    metadata:
+      license: "Apache-2.0"

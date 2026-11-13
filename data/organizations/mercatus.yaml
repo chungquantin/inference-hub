@@ -1,0 +1,9 @@
+slug: mercatus
+name: "Mercatus"
+kinds: [llm_gateway]
+description: "Call AI models through one API. Pay as you go, or buy monthly OSTR for planned usage across a published model menu. Explore token and GPU price indices."
+website: "https://www.mercatus-ai.com"
+logo_url: /logos/mercatus.png
+tagging:
+  match_case: true
+  match_name: false

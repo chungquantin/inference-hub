@@ -91,3 +91,11 @@ products:
     url: "https://github.com/deepseek-ai/open-infra-index"
     metadata:
       license: "CC0-1.0"
+  - slug: deepseek-harness
+    name: "DeepSeek Harness"
+    type: oss_project
+    github: deepseek-ai/deepseek-harness
+    tagline: "DeepSeek Harness: Everything is a Plugin."
+    url: "https://github.com/deepseek-ai/deepseek-harness"
+    metadata:
+      license: "MIT"

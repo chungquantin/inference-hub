@@ -2,6 +2,7 @@ slug: marvell
 name: "Marvell"
 kinds: [hardware]
 website: "https://www.marvell.com"
+logo_url: /logos/marvell.png
 tagging:
   match_case: true
   match_name: false

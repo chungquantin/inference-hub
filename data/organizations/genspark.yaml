@@ -1,0 +1,8 @@
+slug: genspark
+name: "Genspark"
+kinds: [agent_tool]
+website: "https://genspark.ai"
+logo_url: /logos/genspark.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,19 @@
+slug: kilo-code
+name: "Kilo Code"
+kinds: [agent_tool]
+description: "Open source AI coding agent for VS Code, JetBrains, CLI, and Cloud. 500+ models at zero markup, your own keys, or local models for privacy."
+website: "https://kilo.ai"
+logo_url: /logos/kilo-code.png
+links:
+  github: "https://github.com/Kilo-Org"
+tagging:
+  match_case: true
+products:
+  - slug: kilo-code
+    name: "Kilo Code"
+    type: oss_project
+    github: Kilo-Org/kilocode
+    tagline: "Kilo is the all-in-one agentic engineering platform. Build, ship, and iterate faster with the most popular open source coding agent."
+    url: "https://github.com/Kilo-Org/kilocode"
+    metadata:
+      license: "MIT"

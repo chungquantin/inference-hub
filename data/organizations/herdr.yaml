@@ -1,0 +1,20 @@
+slug: herdr
+name: "herdr"
+kinds: [agent_tool]
+description: "Herdr is a native app for running coding agents. Your agent can change any part of it, from the sidebar to whole new panels. Close it and your agents keep working."
+website: "https://herdr.dev"
+logo_url: /logos/herdr.png
+links:
+  github: "https://github.com/herdrdev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: herdr
+    name: "herdr"
+    type: oss_project
+    github: herdrdev/herdr
+    tagline: "the runtime your coding agents live on"
+    url: "https://github.com/herdrdev/herdr"
+    metadata:
+      license: "Apache-2.0"

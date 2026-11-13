@@ -1,6 +1,7 @@
 slug: enterpilot
 name: "enterpilot"
 kinds: [open_source]
+description: "enterpilot, Inc. creates GoModel, its open-source AI gateway for provider routing, failover, caching, budgets, audit logs, and usage tracking."
 website: "https://enterpilot.io"
 logo_url: /logos/enterpilot.png
 links:

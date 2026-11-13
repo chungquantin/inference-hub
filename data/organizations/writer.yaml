@@ -3,6 +3,7 @@ name: "Writer"
 kinds: [model_provider]
 description: "This request was blocked by the WRITER web application firewall."
 website: "https://writer.com"
+logo_url: /logos/writer.png
 tagging:
   match_case: true
   match_name: false

@@ -1,0 +1,20 @@
+slug: cua
+name: "Cua"
+kinds: [agent_tool]
+description: "Combine all your computers into one supercomputer. Your computers, shared by your team and its agents: Cua Spaces runs on hardware you own, nothing rented. Open-source Cua Driver and Lume included."
+website: "https://cua.ai"
+logo_url: /logos/cua.png
+links:
+  github: "https://github.com/trycua"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: cua
+    name: "Cua"
+    type: oss_project
+    github: trycua/cua
+    tagline: "Scale computer-use 2.0 with open-source drivers, cross-OS sandboxes, and benchmarks for training, evaluation, and data generation."
+    url: "https://github.com/trycua/cua"
+    metadata:
+      license: "MIT"

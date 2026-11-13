@@ -1,6 +1,7 @@
 slug: gradienthq
 name: "GradientHQ"
 kinds: [open_source]
+description: "Parallax is a distributed model serving framework that lets you build your own AI cluster anywhere"
 website: "https://github.com/GradientHQ"
 logo_url: /logos/gradienthq.png
 links:

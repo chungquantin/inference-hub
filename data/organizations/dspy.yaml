@@ -1,0 +1,20 @@
+slug: dspy
+name: "DSPy"
+kinds: [agent_tool]
+description: "The framework for programming—rather than prompting—language models."
+website: "https://dspy.ai"
+logo_url: /logos/dspy.png
+links:
+  github: "https://github.com/stanfordnlp"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: dspy
+    name: "DSPy"
+    type: oss_project
+    github: stanfordnlp/dspy
+    tagline: "DSPy: The framework for programming—not prompting—language models"
+    url: "https://github.com/stanfordnlp/dspy"
+    metadata:
+      license: "MIT"

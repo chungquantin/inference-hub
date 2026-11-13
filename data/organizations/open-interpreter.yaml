@@ -1,0 +1,19 @@
+slug: open-interpreter
+name: "Open Interpreter"
+kinds: [agent_tool]
+description: "An open-source coding agent built for low-cost and open-weight models."
+website: "https://openinterpreter.com"
+logo_url: /logos/open-interpreter.png
+links:
+  github: "https://github.com/openinterpreter"
+tagging:
+  match_case: true
+products:
+  - slug: open-interpreter
+    name: "Open Interpreter"
+    type: oss_project
+    github: openinterpreter/openinterpreter
+    tagline: "A coding agent for open models like Kimi K3 and GLM 5.3"
+    url: "https://github.com/openinterpreter/openinterpreter"
+    metadata:
+      license: "Apache-2.0"

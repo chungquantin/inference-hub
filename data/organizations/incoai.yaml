@@ -1,6 +1,7 @@
 slug: incoai
 name: "Inco AI"
 kinds: [open_source]
+description: "Inco AI — inference, reimagined for the agentic era."
 website: "https://inco.ai/"
 logo_url: /logos/incoai.png
 links:

@@ -1,0 +1,7 @@
+slug: chatanywhere
+name: "ChatAnywhere"
+kinds: [llm_gateway]
+website: "https://chatanywhere.tech"
+logo_url: /logos/chatanywhere.svg
+tagging:
+  match_case: true

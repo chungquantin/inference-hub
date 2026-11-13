@@ -1,7 +1,9 @@
 slug: distributed-llama
 name: "distributed-llama"
 kinds: [open_source]
+description: "Independent software development company from Poland. We build custom software, SaaS products, web apps and AI-powered solutions."
 website: "https://n4no.com/"
+logo_url: /logos/distributed-llama.png
 links:
   github: "https://github.com/b4rtaz/distributed-llama"
 categories: [inference-engines]

@@ -1,0 +1,8 @@
+slug: openai-hk
+name: "OpenAI-HK"
+kinds: [llm_gateway]
+description: "Suno Banana Midjourney GPT5 Claude Flux Gemini Openai-HK"
+website: "https://openai-hk.com"
+logo_url: /logos/openai-hk.png
+tagging:
+  match_case: true

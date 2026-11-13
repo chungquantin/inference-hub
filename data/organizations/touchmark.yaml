@@ -1,0 +1,9 @@
+slug: touchmark
+name: "Touchmark"
+kinds: [llm_gateway]
+description: "The world runs on inference. Touchmark is the market for reserving it."
+website: "https://touchmark.ai"
+logo_url: /logos/touchmark.png
+tagging:
+  match_case: true
+  match_name: false

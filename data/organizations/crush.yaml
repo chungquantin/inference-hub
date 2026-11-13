@@ -1,0 +1,18 @@
+slug: crush
+name: "Crush"
+kinds: [agent_tool]
+description: "Glamourous agentic coding for all 💘"
+website: "https://charm.land"
+logo_url: /logos/crush.png
+links:
+  github: "https://github.com/charmbracelet"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: crush
+    name: "Crush"
+    type: oss_project
+    github: charmbracelet/crush
+    tagline: "Glamourous agentic coding for all 💘"
+    url: "https://github.com/charmbracelet/crush"

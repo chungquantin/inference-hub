@@ -1,0 +1,19 @@
+slug: cowagent
+name: "CowAgent"
+kinds: [agent_tool]
+description: "CowAgent is an open-source super AI assistant and Agent Harness that plans tasks, runs tools and skills, and autonomously grows with long-term memory and knowledge. Multi-model, multi-channel, multi-agent, one-line install."
+website: "https://cowagent.ai"
+logo_url: /logos/cowagent.png
+links:
+  github: "https://github.com/zhayujie"
+tagging:
+  match_case: true
+products:
+  - slug: cowagent
+    name: "CowAgent"
+    type: oss_project
+    github: zhayujie/CowAgent
+    tagline: "Open-source personal AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and knowledge. Multi-agent, multi-model, multi-channel. Lightweight, extensible, one-line install."
+    url: "https://github.com/zhayujie/CowAgent"
+    metadata:
+      license: "MIT"

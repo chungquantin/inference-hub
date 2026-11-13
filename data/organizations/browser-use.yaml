@@ -1,0 +1,19 @@
+slug: browser-use
+name: "Browser Use"
+kinds: [agent_tool]
+description: "Browser agents and cloud browsers: the most-starred open-source browser agent, stealth cloud browsers at $0.02/browser-hour and Browser Harness. SOC 2 Type II, on-prem, US and EU. $1 free."
+website: "https://browser-use.com"
+logo_url: /logos/browser-use.png
+links:
+  github: "https://github.com/browser-use"
+tagging:
+  match_case: true
+products:
+  - slug: browser-use
+    name: "Browser Use"
+    type: oss_project
+    github: browser-use/browser-use
+    tagline: "Open-source Python library for AI browser agents, plus Browser Use Cloud: stealth browsers and a hosted agent API."
+    url: "https://github.com/browser-use/browser-use"
+    metadata:
+      license: "MIT"

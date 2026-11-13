@@ -1,0 +1,20 @@
+slug: ante
+name: "Ante"
+kinds: [agent_tool]
+description: "Substrate for self-organizing intelligence."
+website: "https://antigma.ai"
+logo_url: /logos/ante.png
+links:
+  github: "https://github.com/AntigmaLabs"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: ante
+    name: "Ante"
+    type: oss_project
+    github: AntigmaLabs/ante
+    tagline: "Ghost in your shell. Ante is a self-contained agent harness with a highly optimized core. It works like Claude Code or Codex, with none of their dependencies or model constraints."
+    url: "https://github.com/AntigmaLabs/ante"
+    metadata:
+      license: "Apache-2.0"

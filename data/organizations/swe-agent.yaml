@@ -1,0 +1,19 @@
+slug: swe-agent
+name: "SWE-agent"
+kinds: [agent_tool]
+description: "SWE-agent takes a GitHub issue and tries to automatically fix it, using your LM of choice. It can also be employed for offensive cybersecurity or competitive coding challenges. [NeurIPS 2024]"
+website: "https://swe-agent.com"
+logo_url: /logos/swe-agent.png
+links:
+  github: "https://github.com/SWE-agent"
+tagging:
+  match_case: true
+products:
+  - slug: swe-agent
+    name: "SWE-agent"
+    type: oss_project
+    github: SWE-agent/SWE-agent
+    tagline: "SWE-agent takes a GitHub issue and tries to automatically fix it, using your LM of choice. It can also be employed for offensive cybersecurity or competitive coding challenges. [NeurIPS 2024]"
+    url: "https://github.com/SWE-agent/SWE-agent"
+    metadata:
+      license: "MIT"

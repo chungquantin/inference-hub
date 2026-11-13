@@ -1,6 +1,7 @@
 slug: selectel
 name: "Selectel"
 kinds: [gpu_cloud]
+description: "Selectel предлагает комплексные IaaS и PaaS-решения для разных категорий бизнеса: от индивидуальных предпринимателей до крупных корпораций. Аренда IT-инфраструктуры в дата-центрах Москвы и Петербурга"
 website: "https://selectel.ru"
 logo_url: /logos/selectel.svg
 categories: [sovereign-clouds]

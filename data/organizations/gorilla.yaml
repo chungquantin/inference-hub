@@ -1,7 +1,9 @@
 slug: gorilla
 name: "gorilla"
 kinds: [open_source]
+description: "Gorilla: Training and Evaluating LLMs for Function Calls (Tool Calls)"
 website: "https://gorilla.cs.berkeley.edu/"
+logo_url: /logos/gorilla.jpg
 links:
   github: "https://github.com/ShishirPatil/gorilla"
 categories: [evals-benchmarks]

@@ -1,0 +1,18 @@
+slug: runloop
+name: "Runloop"
+kinds: [other]
+description: "Launch AI agents on secure code sandboxes, refine with evaluations, and productionize on AI infrastructure built for enterprise scale."
+website: "https://runloop.ai"
+logo_url: /logos/runloop.png
+links:
+  github: "https://github.com/runloopai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: runloop
+    name: "Runloop"
+    type: oss_project
+    github: runloopai/runloop-examples
+    tagline: "Examples and cookbooks for building AI software engineering agents with Runloop"
+    url: "https://github.com/runloopai/runloop-examples"

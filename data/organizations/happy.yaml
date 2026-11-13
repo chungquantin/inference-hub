@@ -1,0 +1,20 @@
+slug: happy
+name: "Happy"
+kinds: [agent_tool]
+description: "Happy Engineering (previously Happy Coder): orchestrate Claude, Codex, Grok, Gemini and more in one app, on desktop and phone. Open source, reusing your subscriptions."
+website: "https://happy.engineering"
+logo_url: /logos/happy.png
+links:
+  github: "https://github.com/slopus"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: happy
+    name: "Happy"
+    type: oss_project
+    github: slopus/happy
+    tagline: "Orchestrate Claude, Codex and Grok in one app. Open-source (MIT), reuses the subscriptions you already pay for."
+    url: "https://github.com/slopus/happy"
+    metadata:
+      license: "MIT"

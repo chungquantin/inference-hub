@@ -10,3 +10,9 @@ links:
 tagging:
   aliases: ["MiniMax AI"]
   match_case: true
+products:
+  - slug: minimax-agent
+    name: "MiniMax Agent"
+    type: platform
+    tagline: "Discover MiniMax Code, your AI supercompanion, enhancing creativity and productivity with tools for meditation, podcast, coding, analysis, and more!"
+    url: "https://agent.minimax.io"

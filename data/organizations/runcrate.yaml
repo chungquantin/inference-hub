@@ -1,0 +1,8 @@
+slug: runcrate
+name: "Runcrate"
+kinds: [gpu_cloud]
+description: "On-demand GPUs and inference for AI teams and the agents they run. A GPU with a real shell in about four minutes, or open models through one OpenAI-compatible API."
+website: "https://www.runcrate.ai"
+logo_url: /logos/runcrate.png
+tagging:
+  match_case: true

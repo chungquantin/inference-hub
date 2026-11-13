@@ -1,0 +1,8 @@
+slug: haimaker-ai
+name: "haimaker.ai"
+kinds: [llm_gateway]
+description: "Access 300+ AI models through a single OpenAI-compatible endpoint. Find the best model for cost, intelligence, or speed."
+website: "https://haimaker.ai"
+logo_url: /logos/haimaker-ai.png
+tagging:
+  match_case: true

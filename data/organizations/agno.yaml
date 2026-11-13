@@ -1,0 +1,20 @@
+slug: agno
+name: "Agno"
+kinds: [agent_tool]
+description: "Agno is a self-driving agent platform that runs in your cloud. Build, deploy and improve customer-facing and internal agents with coding agents."
+website: "https://agno.com"
+logo_url: /logos/agno.png
+links:
+  github: "https://github.com/agno-agi"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: agno
+    name: "Agno"
+    type: oss_project
+    github: agno-agi/agno
+    tagline: "The self-managing agent platform"
+    url: "https://github.com/agno-agi/agno"
+    metadata:
+      license: "Apache-2.0"

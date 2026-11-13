@@ -7,3 +7,9 @@ website: "https://gonka.ai"
 logo_url: /logos/gonka.png
 tagging:
   match_case: true
+products:
+  - slug: gonka-broker
+    name: "Gonka Broker"
+    type: platform
+    tagline: "Gonka Broker is an API to the Gonka decentralized GPU network, compatible with OpenAI and Anthropic clients: cheap open-source LLM inference in USD, no crypto."
+    url: "https://gonkabroker.com"

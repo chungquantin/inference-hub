@@ -1,6 +1,7 @@
 slug: neywa-labs
 name: "Neywa Labs"
 kinds: [open_source]
+description: "Neywa Labs is a local AI company. We build open-source, on-device AI for Apple devices: Engine (mlx-vlm and mlx-audio) and Nativ, the Mac app."
 website: "https://neywalabs.ai"
 logo_url: /logos/neywa-labs.png
 links:

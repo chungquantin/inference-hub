@@ -1,6 +1,7 @@
 slug: sk-broadband
 name: "SK Broadband"
 kinds: [gpu_cloud]
+description: "SK브로드밴드는 인터넷, IPTV, 미디어와 Biz 솔루션으로 일상을 연결합니다. 회사소개와 최신 소식을 지금 바로 확인하세요."
 website: "https://www.skbroadband.com"
 logo_url: /logos/sk-broadband.png
 categories: [sovereign-clouds]

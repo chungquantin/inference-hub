@@ -2,6 +2,7 @@ slug: atomico
 name: "Atomico"
 kinds: [investor]
 website: "https://www.atomico.com"
+logo_url: /logos/atomico.png
 tagging:
   match_case: true
   match_name: false

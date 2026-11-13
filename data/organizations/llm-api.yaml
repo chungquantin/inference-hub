@@ -1,0 +1,8 @@
+slug: llm-api
+name: "LLM API"
+kinds: [llm_gateway]
+description: "LLM API is an OpenAI-compatible LLM gateway: one API key and one bill for 397 models from 34 labs, with every model"
+website: "https://llmapi.ai"
+logo_url: /logos/llm-api.png
+tagging:
+  match_case: true

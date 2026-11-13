@@ -1,6 +1,7 @@
 slug: qwenaudio
 name: "QwenAudio"
 kinds: [open_source]
+description: "Choose a verified FunASR path for GPU throughput, realtime streaming, OpenAI-compatible APIs, CPUs, and edge devices."
 website: "https://www.funasr.com"
 logo_url: /logos/qwenaudio.png
 links:

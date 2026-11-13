@@ -8,3 +8,9 @@ logo_url: /logos/perplexity.png
 tagging:
   aliases: ["Perplexity AI"]
   match_case: true
+products:
+  - slug: perplexity-comet
+    name: "Perplexity Comet"
+    type: platform
+    tagline: "Comet browser by Perplexity is the AI browser that acts as a personal assistant. Automate tasks, research the web, organize your email, and more with Comet."
+    url: "https://www.perplexity.ai/comet"

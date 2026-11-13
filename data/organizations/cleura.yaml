@@ -1,7 +1,9 @@
 slug: cleura
 name: "Cleura"
 kinds: [gpu_cloud]
+description: "Secure and scalable IaaS with full data control. Cleura provides European cloud infrastructure powered by OpenStack and built for compliance."
 website: "https://cleura.com"
+logo_url: /logos/cleura.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

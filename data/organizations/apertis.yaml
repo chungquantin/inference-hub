@@ -1,0 +1,8 @@
+slug: apertis
+name: "Apertis"
+kinds: [llm_gateway]
+description: "Model access and delivery for AI agents and AI apps — 30+ providers and 390+ models behind one OpenAI-compatible API, with spend caps, routing, and usage analytics."
+website: "https://apertis.ai"
+tagging:
+  match_case: true
+  match_name: false

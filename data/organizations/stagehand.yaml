@@ -1,0 +1,20 @@
+slug: stagehand
+name: "Stagehand"
+kinds: [agent_tool]
+description: "Give your agents access to the whole web."
+website: "https://browserbase.com"
+logo_url: /logos/stagehand.svg
+links:
+  github: "https://github.com/browserbase"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: stagehand
+    name: "Stagehand"
+    type: oss_project
+    github: browserbase/stagehand
+    tagline: "The SDK to extract data and interact with any site on the web. Get started with Claude Code, Codex, Eve, Mastra, and more."
+    url: "https://github.com/browserbase/stagehand"
+    metadata:
+      license: "MIT"

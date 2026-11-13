@@ -1,0 +1,8 @@
+slug: payperq
+name: "PayPerQ"
+kinds: [llm_gateway]
+description: "PayPerQ AI - pay per prompt. Get instant access to hundreds of brand name AI models privately. Chat, Image, Video, and more. No subscriptions. No registration required."
+website: "https://ppq.ai"
+logo_url: /logos/payperq.png
+tagging:
+  match_case: true

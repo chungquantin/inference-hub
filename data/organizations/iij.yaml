@@ -1,6 +1,7 @@
 slug: iij
 name: "IIJ"
 kinds: [gpu_cloud]
+description: "株式会社インターネットイニシアティブ（IIJ）のオフィシャルサイト。IIJはクラウドサービスからインターネット接続サービス、セキュリティサービス、アウトソーシングサービス、システムインテグレーションに至るまで、総合的なソリューションサービスを提供しています。"
 website: "https://www.iij.ad.jp"
 logo_url: /logos/iij.png
 categories: [sovereign-clouds]

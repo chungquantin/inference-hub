@@ -1,0 +1,19 @@
+slug: agentql
+name: "AgentQL"
+kinds: [other]
+description: "Start building AI agents with natural language queries, connecting web data and enabling precise automation."
+website: "https://www.agentql.com"
+logo_url: /logos/agentql.png
+links:
+  github: "https://github.com/tinyfish-io"
+tagging:
+  match_case: true
+products:
+  - slug: agentql
+    name: "AgentQL"
+    type: oss_project
+    github: tinyfish-io/agentql
+    tagline: "AgentQL is a suite of tools for connecting your AI to the web. Featuring a query language and Playwright integrations for interacting with elements and extracting data quickly, precisely, and at scale. Includes REST API, Python and JavaScript SDKs, browser debugger."
+    url: "https://github.com/tinyfish-io/agentql"
+    metadata:
+      license: "MIT"

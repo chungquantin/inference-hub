@@ -1,0 +1,9 @@
+slug: dia
+name: "Dia"
+kinds: [agent_tool]
+description: "Dia is the browser for better days at work. Get answers without having to ask, produce beautiful ready-to-share outputs, and stay focused in the best browser for your work day."
+website: "https://diabrowser.com"
+logo_url: /logos/dia.png
+tagging:
+  match_case: true
+  match_name: false

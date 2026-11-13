@@ -1,6 +1,7 @@
 slug: cosmo-wander-ai
 name: "cosmo-wander-ai"
 kinds: [open_source]
+description: "Production-grade C++ edge AI engine for video analytics and on-device VLM across Sophon, Rockchip RKNN, and x86, with visual orchestration, real-time OSD, events, and reproducible benchmarks."
 website: "https://github.com/cosmo-wander-ai"
 logo_url: /logos/cosmo-wander-ai.png
 links:

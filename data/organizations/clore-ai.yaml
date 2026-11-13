@@ -1,6 +1,7 @@
 slug: clore-ai
 name: "Clore.ai"
 kinds: [decentralized]
+description: "Rent GPUs for AI training, inference, and rendering. 11,000+ GPUs available. Pay per minute in Bitcoin or CLORE tokens."
 website: "https://clore.ai"
 logo_url: /logos/clore-ai.png
 tagging:

@@ -1,0 +1,19 @@
+slug: codewhale-ex-deepseek-tui
+name: "CodeWhale (ex DeepSeek-TUI)"
+kinds: [agent_tool]
+description: "Codewhale is the open-source agent between you and any model. Read its code, or ask it to explain itself. An international community improves it with every release."
+website: "https://codewhale.net"
+logo_url: /logos/codewhale-ex-deepseek-tui.png
+links:
+  github: "https://github.com/codewhale-hq"
+tagging:
+  match_case: true
+products:
+  - slug: codewhale-ex-deepseek-tui
+    name: "CodeWhale (ex DeepSeek-TUI)"
+    type: oss_project
+    github: codewhale-hq/Codewhale
+    tagline: "An open-source coding agent for your terminal, written in Rust. It works with any model, can split one task across several agents, and every line of it is yours to read."
+    url: "https://github.com/codewhale-hq/Codewhale"
+    metadata:
+      license: "MIT"

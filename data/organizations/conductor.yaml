@@ -1,0 +1,9 @@
+slug: conductor
+name: "Conductor"
+kinds: [agent_tool]
+description: "Run coding agents in isolated cloud sandboxes with Conductor Cloud."
+website: "https://conductor.build"
+logo_url: /logos/conductor.png
+tagging:
+  match_case: true
+  match_name: false

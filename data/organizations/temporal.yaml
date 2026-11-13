@@ -1,0 +1,19 @@
+slug: temporal
+name: "Temporal"
+kinds: [agent_tool]
+description: "Build invincible apps with Temporal"
+website: "https://temporal.io"
+logo_url: /logos/temporal.png
+links:
+  github: "https://github.com/temporalio"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: temporal
+    name: "Temporal"
+    type: oss_project
+    github: temporalio/temporal
+    url: "https://github.com/temporalio/temporal"
+    metadata:
+      license: "MIT"

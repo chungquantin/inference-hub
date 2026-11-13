@@ -1,0 +1,18 @@
+slug: cheaper-inference
+name: "Cheaper Inference"
+kinds: [llm_gateway]
+description: "Access leading AI models through one OpenAI-compatible API and save up to 85% on inference costs."
+website: "https://www.cheaperinference.com"
+logo_url: /logos/cheaper-inference.png
+links:
+  github: "https://github.com/cheaper-inference"
+tagging:
+  match_case: true
+products:
+  - slug: cheaper-inference
+    name: "Cheaper Inference"
+    type: oss_project
+    github: cheaper-inference/OmniRoute
+    url: "https://github.com/cheaper-inference/OmniRoute"
+    metadata:
+      license: "MIT"

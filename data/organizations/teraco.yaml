@@ -2,6 +2,7 @@ slug: teraco
 name: "Teraco"
 kinds: [gpu_cloud]
 website: "https://www.teraco.co.za"
+logo_url: /logos/teraco.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

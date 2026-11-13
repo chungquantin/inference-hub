@@ -1,0 +1,20 @@
+slug: jcode
+name: "jcode"
+kinds: [agent_tool]
+description: "jcode is an open-source AI coding agent for your terminal, written in Rust. Run agent swarms and background tasks with low memory use. Install with one command."
+website: "https://jcode.sh"
+logo_url: /logos/jcode.png
+links:
+  github: "https://github.com/1jehuang"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: jcode
+    name: "jcode"
+    type: oss_project
+    github: 1jehuang/jcode
+    tagline: "High performance coding agent harness written in Rust, built for heavy multi-agent dev workflows"
+    url: "https://github.com/1jehuang/jcode"
+    metadata:
+      license: "MIT"

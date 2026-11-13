@@ -1,7 +1,9 @@
 slug: softbank-corp
 name: "SoftBank Corp"
 kinds: [gpu_cloud]
+description: "ソフトバンクの公式ホームページです。スマートフォンやインターネットなどライフスタイルを豊かにする各種サービスやAI・クラウドを含む多彩なソリューションなどを紹介しています。"
 website: "https://www.softbank.jp"
+logo_url: /logos/softbank-corp.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

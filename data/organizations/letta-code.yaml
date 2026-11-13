@@ -1,0 +1,28 @@
+slug: letta-code
+name: "Letta Code"
+kinds: [agent_tool]
+description: "Making machines that learn. Create stateful agents that remember everything, learn continuously, and improve themselves over time."
+website: "https://www.letta.com"
+logo_url: /logos/letta-code.png
+links:
+  github: "https://github.com/letta-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: letta-code
+    name: "Letta Code"
+    type: oss_project
+    github: letta-ai/letta-code
+    tagline: "Agents that self-improve with experience"
+    url: "https://github.com/letta-ai/letta-code"
+    metadata:
+      license: "Apache-2.0"
+  - slug: letta
+    name: "Letta"
+    type: oss_project
+    github: letta-ai/letta
+    tagline: "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time."
+    url: "https://github.com/letta-ai/letta"
+    metadata:
+      license: "Apache-2.0"

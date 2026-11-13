@@ -1,0 +1,20 @@
+slug: goose
+name: "Goose"
+kinds: [agent_tool]
+description: "Your open source AI agent. Use goose on desktop or in the terminal, or build agents into your own applications with the goose Development Kit (GDK)."
+website: "https://goose-docs.ai"
+logo_url: /logos/goose.png
+links:
+  github: "https://github.com/aaif-goose"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: goose
+    name: "Goose"
+    type: oss_project
+    github: aaif-goose/goose
+    tagline: "an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM"
+    url: "https://github.com/aaif-goose/goose"
+    metadata:
+      license: "Apache-2.0"

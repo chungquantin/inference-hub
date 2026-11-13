@@ -1,6 +1,7 @@
 slug: llama-go
 name: "llama.go"
 kinds: [open_source]
+description: "llama.go is like llama.cpp in pure Golang!"
 website: "https://github.com/gotzmann/llama.go"
 links:
   github: "https://github.com/gotzmann/llama.go"

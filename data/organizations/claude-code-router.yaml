@@ -1,0 +1,19 @@
+slug: claude-code-router
+name: "Claude Code Router"
+kinds: [agent_tool]
+description: "One local control plane for every AI agent: route across models, fuse new capabilities, orchestrate tools, and stay fully in control."
+website: "https://ccrdesk.top"
+logo_url: /logos/claude-code-router.png
+links:
+  github: "https://github.com/musistudio"
+tagging:
+  match_case: true
+products:
+  - slug: claude-code-router
+    name: "Claude Code Router"
+    type: oss_project
+    github: musistudio/claude-code-router
+    tagline: "One local control plane for every AI agent: route across models, fuse new capabilities, orchestrate tools, and stay fully in control."
+    url: "https://github.com/musistudio/claude-code-router"
+    metadata:
+      license: "MIT"

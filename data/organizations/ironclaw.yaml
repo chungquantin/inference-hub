@@ -1,0 +1,19 @@
+slug: ironclaw
+name: "IronClaw"
+kinds: [agent_tool]
+description: "IronClaw: Unleash Your AI Agent, With Peace of Mind. The open-source secure runtime that runs AI agents in encrypted enclaves on NEAR AI Cloud."
+website: "https://www.ironclaw.com"
+logo_url: /logos/ironclaw.png
+links:
+  github: "https://github.com/nearai"
+tagging:
+  match_case: true
+products:
+  - slug: ironclaw
+    name: "IronClaw"
+    type: oss_project
+    github: nearai/ironclaw
+    tagline: "IronClaw is an Agent OS focused on privacy, security and extensibility"
+    url: "https://github.com/nearai/ironclaw"
+    metadata:
+      license: "Apache-2.0"

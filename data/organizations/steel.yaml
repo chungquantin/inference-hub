@@ -1,0 +1,20 @@
+slug: steel
+name: "Steel"
+kinds: [other]
+description: "Steel is an open source browser API that lets you control fleets of browsers in the cloud."
+website: "https://steel.dev"
+logo_url: /logos/steel.svg
+links:
+  github: "https://github.com/steel-dev"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: steel
+    name: "Steel"
+    type: oss_project
+    github: steel-dev/steel-browser
+    tagline: "🔥 Open Source Browser API for AI Agents & Apps. Steel Browser is a batteries-included browser sandbox that lets you automate the web without worrying about infrastructure."
+    url: "https://github.com/steel-dev/steel-browser"
+    metadata:
+      license: "Apache-2.0"

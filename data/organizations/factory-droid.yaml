@@ -1,0 +1,17 @@
+slug: factory-droid
+name: "Factory Droid"
+kinds: [agent_tool]
+description: "Build faster with AI coding agents. Factory Droids automate coding, testing, and deployment for startups and enterprises."
+website: "https://factory.ai"
+logo_url: /logos/factory-droid.svg
+links:
+  github: "https://github.com/Factory-AI"
+tagging:
+  match_case: true
+products:
+  - slug: factory-droid
+    name: "Factory Droid"
+    type: oss_project
+    github: Factory-AI/factory
+    tagline: "Factory - Agent-Native Software Development"
+    url: "https://github.com/Factory-AI/factory"

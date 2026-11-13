@@ -1,0 +1,19 @@
+slug: agency-swarm
+name: "Agency Swarm"
+kinds: [agent_tool]
+description: "Welcome to Agency Swarm, an open-source agent orchestration framework built on the latest OpenAI Agents SDK / Responses API."
+website: "https://agency-swarm.ai"
+logo_url: /logos/agency-swarm.png
+links:
+  github: "https://github.com/VRSEN"
+tagging:
+  match_case: true
+products:
+  - slug: agency-swarm
+    name: "Agency Swarm"
+    type: oss_project
+    github: VRSEN/agency-swarm
+    tagline: "Reliable Multi-Agent Orchestration Framework"
+    url: "https://github.com/VRSEN/agency-swarm"
+    metadata:
+      license: "MIT"

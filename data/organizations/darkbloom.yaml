@@ -3,5 +3,6 @@ name: "Darkbloom"
 kinds: [decentralized]
 tagline: "Decentralized private inference network powered by Apple Silicon Macs."
 website: "https://www.darkbloom.ai"
+logo_url: /logos/darkbloom.png
 tagging:
   match_case: true

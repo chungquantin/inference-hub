@@ -1,0 +1,9 @@
+slug: tessl
+name: "Tessl"
+kinds: [agent_tool]
+description: "Tessl helps teams build software factories through versioned context and repeatable agent workflows to deliver reliable code at scale"
+website: "https://tessl.io"
+logo_url: /logos/tessl.svg
+tagging:
+  match_case: true
+  match_name: false

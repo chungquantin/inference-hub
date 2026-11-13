@@ -1,0 +1,19 @@
+slug: orca-agent
+name: "Orca Agent"
+kinds: [agent_tool]
+description: "Orca Agent is a DeepSeek-native local terminal coding agent for long-context coding, multi-turn tool use, prefix-cache friendly prompts, persistent goals, resumable history, and approval-aware automation."
+website: "https://orcaagent.dev"
+logo_url: /logos/orca-agent.svg
+links:
+  github: "https://github.com/echoVic"
+tagging:
+  match_case: true
+products:
+  - slug: orca-agent
+    name: "Orca Agent"
+    type: oss_project
+    github: echoVic/orca-agent
+    tagline: "Orca Agent — a DeepSeek-native terminal coding agent"
+    url: "https://github.com/echoVic/orca-agent"
+    metadata:
+      license: "MIT"

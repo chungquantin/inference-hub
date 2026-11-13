@@ -1,0 +1,18 @@
+slug: tinyclaw
+name: "TinyClaw"
+kinds: [agent_tool]
+description: "Tiny Claw is a personal, self-improving, self-learning AI companion built from scratch. Small by design, mighty by nature."
+website: "https://tinyclaw.ai"
+links:
+  github: "https://github.com/warengonzaga"
+tagging:
+  match_case: true
+products:
+  - slug: tinyclaw
+    name: "TinyClaw"
+    type: oss_project
+    github: warengonzaga/tinyclaw
+    tagline: "The original Tiny Claw as your personal autonomous AI companion. 🐜"
+    url: "https://github.com/warengonzaga/tinyclaw"
+    metadata:
+      license: "GPL-3.0"

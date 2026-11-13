@@ -1,0 +1,9 @@
+slug: replit
+name: "Replit"
+kinds: [agent_tool]
+description: "Describe what you want. Replit builds it. Get a working app or website in minutes. No coding required."
+website: "https://replit.com"
+logo_url: /logos/replit.png
+tagging:
+  match_case: true
+  match_name: false

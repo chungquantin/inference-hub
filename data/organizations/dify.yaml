@@ -1,0 +1,18 @@
+slug: dify
+name: "Dify"
+kinds: [agent_tool]
+description: "Dify is the platform for production-ready agentic workflows. Build agents, knowledge pipelines, models, and tools on one canvas, deployable on Cloud, in your VPC, or self-hosted."
+website: "https://dify.ai"
+logo_url: /logos/dify.svg
+links:
+  github: "https://github.com/langgenius"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: dify
+    name: "Dify"
+    type: oss_project
+    github: langgenius/dify
+    tagline: "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack."
+    url: "https://github.com/langgenius/dify"

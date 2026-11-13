@@ -1,0 +1,18 @@
+slug: command-code
+name: "Command Code"
+kinds: [agent_tool]
+description: "Command Code AI — the best coding agent for open models."
+website: "https://commandcode.ai"
+logo_url: /logos/command-code.png
+links:
+  github: "https://github.com/CommandCodeAI"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: command-code
+    name: "Command Code"
+    type: oss_project
+    github: CommandCodeAI/command-code
+    tagline: "Command Code AI — the best coding agent for open models."
+    url: "https://github.com/CommandCodeAI/command-code"

@@ -1,0 +1,19 @@
+slug: openmanus
+name: "OpenManus"
+kinds: [agent_tool]
+description: "No fortress, purely open ground. OpenManus is Coming."
+website: "https://openmanus.github.io"
+logo_url: /logos/openmanus.png
+links:
+  github: "https://github.com/FoundationAgents"
+tagging:
+  match_case: true
+products:
+  - slug: openmanus
+    name: "OpenManus"
+    type: oss_project
+    github: FoundationAgents/OpenManus
+    tagline: "No fortress, purely open ground. OpenManus is Coming."
+    url: "https://github.com/FoundationAgents/OpenManus"
+    metadata:
+      license: "MIT"

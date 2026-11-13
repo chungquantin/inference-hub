@@ -10,3 +10,16 @@ links:
 tagging:
   aliases: ["Kimi"]
   match_case: true
+products:
+  - slug: kimi-code
+    name: "Kimi Code"
+    type: oss_project
+    github: MoonshotAI/kimi-code
+    tagline: "Kimi Code CLI — The Starting Point for Next-Gen Agents"
+    url: "https://github.com/MoonshotAI/kimi-code"
+    metadata:
+      license: "MIT"
+  - slug: kimi-ok-computer
+    name: "Kimi OK Computer"
+    type: platform
+    url: "https://kimi.com/ok-computer"

@@ -3,6 +3,7 @@ name: "Humain"
 kinds: [gpu_cloud]
 tagline: "Saudi AI company."
 website: "https://humain.ai"
+logo_url: /logos/humain.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

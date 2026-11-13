@@ -1,0 +1,19 @@
+slug: vibe-kanban
+name: "Vibe Kanban"
+kinds: [agent_tool]
+description: "The ultimate project management tool for teams building with AI coding agents."
+website: "https://www.vibekanban.com"
+logo_url: /logos/vibe-kanban.png
+links:
+  github: "https://github.com/BloopAI"
+tagging:
+  match_case: true
+products:
+  - slug: vibe-kanban
+    name: "Vibe Kanban"
+    type: oss_project
+    github: BloopAI/vibe-kanban
+    tagline: "Get 10X more out of Claude Code, Codex or any coding agent"
+    url: "https://github.com/BloopAI/vibe-kanban"
+    metadata:
+      license: "Apache-2.0"

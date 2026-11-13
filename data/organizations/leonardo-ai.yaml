@@ -2,5 +2,6 @@ slug: leonardo-ai
 name: "Leonardo.ai"
 kinds: [model_provider]
 website: "https://leonardo.ai"
+logo_url: /logos/leonardo-ai.png
 tagging:
   match_case: true

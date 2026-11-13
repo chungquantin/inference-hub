@@ -1,0 +1,19 @@
+slug: inferx
+name: "InferX"
+kinds: [open_source]
+description: "Production-ready Endpoints for open models and Sovereign Endpoints™ powered by the InferX runtime."
+website: "https://inferx.net"
+logo_url: /logos/inferx.png
+links:
+  github: "https://github.com/inferx-net"
+tagging:
+  match_case: true
+products:
+  - slug: inferx
+    name: "InferX"
+    type: oss_project
+    github: inferx-net/inferx
+    tagline: "InferX: Inference as a Service Platform"
+    url: "https://github.com/inferx-net/inferx"
+    metadata:
+      license: "Apache-2.0"

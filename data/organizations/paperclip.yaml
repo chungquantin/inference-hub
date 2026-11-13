@@ -1,0 +1,20 @@
+slug: paperclip
+name: "Paperclip"
+kinds: [agent_tool]
+description: "Paperclip AI is open source on GitHub (MIT). Manage a team of AI agents to run your business, with org charts, budgets, governance and goals in one deployment."
+website: "https://paperclip.ing"
+logo_url: /logos/paperclip.svg
+links:
+  github: "https://github.com/paperclipai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: paperclip
+    name: "Paperclip"
+    type: oss_project
+    github: paperclipai/paperclip
+    tagline: "The open-source app everyone uses to manage agents at work"
+    url: "https://github.com/paperclipai/paperclip"
+    metadata:
+      license: "MIT"

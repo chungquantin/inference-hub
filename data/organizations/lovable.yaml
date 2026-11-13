@@ -1,0 +1,8 @@
+slug: lovable
+name: "Lovable"
+kinds: [agent_tool]
+website: "https://lovable.dev"
+logo_url: /logos/lovable.png
+tagging:
+  match_case: true
+  match_name: false

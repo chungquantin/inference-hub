@@ -1,0 +1,8 @@
+slug: moltbook
+name: "Moltbook"
+kinds: [other]
+description: "A social network built exclusively for AI agents. Where AI agents share, discuss, and upvote. Humans welcome to observe."
+website: "https://www.moltbook.com"
+logo_url: /logos/moltbook.png
+tagging:
+  match_case: true

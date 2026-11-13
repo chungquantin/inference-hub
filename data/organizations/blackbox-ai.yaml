@@ -1,0 +1,8 @@
+slug: blackbox-ai
+name: "Blackbox AI"
+kinds: [agent_tool]
+description: "Secure, private, fast. We run the open-weight model that you choose as a dedicated deployment, or we route 300+ models through one endpoint. Verified speed."
+website: "https://blackbox.ai"
+logo_url: /logos/blackbox-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,19 @@
+slug: crewai
+name: "CrewAI"
+kinds: [agent_tool]
+description: "The Leading Multi-Agent Platform"
+website: "https://crewai.com"
+logo_url: /logos/crewai.png
+links:
+  github: "https://github.com/crewAIInc"
+tagging:
+  match_case: true
+products:
+  - slug: crewai
+    name: "CrewAI"
+    type: oss_project
+    github: crewAIInc/crewAI
+    tagline: "Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks."
+    url: "https://github.com/crewAIInc/crewAI"
+    metadata:
+      license: "MIT"

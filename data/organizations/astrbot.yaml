@@ -1,0 +1,19 @@
+slug: astrbot
+name: "AstrBot"
+kinds: [agent_tool]
+description: "AI Agent Assistant & development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨"
+website: "https://astrbot.app"
+logo_url: /logos/astrbot.png
+links:
+  github: "https://github.com/AstrBotDevs"
+tagging:
+  match_case: true
+products:
+  - slug: astrbot
+    name: "AstrBot"
+    type: oss_project
+    github: AstrBotDevs/AstrBot
+    tagline: "AI Agent Assistant & development framework that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨"
+    url: "https://github.com/AstrBotDevs/AstrBot"
+    metadata:
+      license: "AGPL-3.0"

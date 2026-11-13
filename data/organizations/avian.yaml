@@ -1,0 +1,9 @@
+slug: avian
+name: "Avian"
+kinds: [inference_provider]
+description: "Fast AI inference billed per token. DeepSeek V4.1, MiniMax M3, GLM-5.3, Kimi K3, MiMo-V2.6 and more via OpenAI-compatible API. From $0.1275/M tokens."
+website: "https://avian.io"
+logo_url: /logos/avian.png
+tagging:
+  match_case: true
+  match_name: false

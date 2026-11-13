@@ -1,0 +1,8 @@
+slug: neuralwatt
+name: "Neuralwatt"
+kinds: [inference_provider]
+description: "AI is growing fast. So is the amount of energy it demands. Follow one watt from the grid to your bill."
+website: "https://neuralwatt.com"
+logo_url: /logos/neuralwatt.png
+tagging:
+  match_case: true
