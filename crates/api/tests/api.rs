@@ -1713,6 +1713,8 @@ async fn landscape_lists_every_organization_with_its_funding_rounds(pool: PgPool
     assert!(rounds[1]["valuation"].is_null());
     let quiet = items.iter().find(|i| i["slug"] == "quiet").unwrap();
     assert_eq!(quiet["rounds"].as_array().unwrap().len(), 0);
+    assert_eq!(quiet["models_sold"], 0);
+    assert_eq!(quiet["gpu_configs"], 0);
 }
 
 #[sqlx::test(migrator = "ih_db::MIGRATOR")]

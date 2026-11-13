@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LandscapeItem } from "@inference-hub/api-client";
 import { ORG_KIND_LABELS } from "@/lib/labels";
-import { GROUPS, type SortMode, compactMoney, formatRoundName, groupOf, headline, sortItems } from "@/lib/landscape";
+import { GROUPS, type SortMode, compactMoney, formatRoundName, groupOf, headline, sellsOnMarket, sortItems } from "@/lib/landscape";
 
 const TILE_LOGO = 44;
 
@@ -53,14 +53,15 @@ export function Landscape({
   const [q, setQ] = useState("");
   const [only, setOnly] = useState<string | null>(null);
   const [funding, setFunding] = useState(false);
+  const [selling, setSelling] = useState(false);
   const [sort, setSort] = useState<SortMode>("valuation");
   const [open, setOpen] = useState<LandscapeItem | null>(null);
 
   const bands = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    const matches = needle
-      ? items.filter((i) => `${i.name} ${i.summary ?? ""}`.toLowerCase().includes(needle))
-      : items;
+    const matches = items.filter(
+      (i) => (!needle || `${i.name} ${i.summary ?? ""}`.toLowerCase().includes(needle)) && (!selling || sellsOnMarket(i)),
+    );
     const by = new Map<string, LandscapeItem[]>();
     for (const i of matches) {
       const g = groupOf(i);
@@ -70,7 +71,7 @@ export function Landscape({
       group: g,
       items: sortItems(by.get(g.id) ?? [], sort),
     }));
-  }, [items, q, only, sort]);
+  }, [items, q, only, sort, selling]);
 
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
@@ -78,6 +79,7 @@ export function Landscape({
     return c;
   }, [items]);
   const fundedCount = fundedTotal ?? items.filter((i) => i.rounds.length > 0).length;
+  const sellingCount = items.filter(sellsOnMarket).length;
 
   return (
     <div className="flex flex-col gap-5">
@@ -102,6 +104,7 @@ export function Landscape({
               onChange={(e) => setSort(e.target.value as SortMode)}
               className="h-10 border border-line-strong bg-wash px-3 text-[15px] text-ink"
             >
+              <option value="market">Market activity</option>
               <option value="valuation">Valuation</option>
               <option value="raised">Raised</option>
               <option value="name">Name</option>
@@ -121,6 +124,19 @@ export function Landscape({
           Show valuation and funding
           <span className="font-mono text-[12px] text-ink-3">{fundedCount} on record</span>
         </button>
+        {!preview && (
+          <button
+            type="button"
+            aria-pressed={selling}
+            onClick={() => setSelling((s) => !s)}
+            className={`flex h-10 items-center gap-2 border px-3 text-[14px] ${
+              selling ? "border-ink bg-ink text-wash" : "border-line-strong bg-wash text-ink hover:bg-paper"
+            }`}
+          >
+            Sells on the market
+            <span className="font-mono text-[12px] opacity-70">{sellingCount}</span>
+          </button>
+        )}
       </div>
 
       {!preview && (
@@ -193,6 +209,11 @@ function Chip({ on, onClick, color, children }: { on: boolean; onClick: () => vo
   );
 }
 
+function tileTitle(i: LandscapeItem): string {
+  const sold = [i.models_sold > 0 && `${i.models_sold} models`, i.gpu_configs > 0 && `${i.gpu_configs} GPU configurations`].filter(Boolean);
+  return sold.length ? `${i.name}: sells ${sold.join(" and ")} on the market` : i.name;
+}
+
 function Tile({ item, funding, onOpen }: { item: LandscapeItem; funding: boolean; onOpen: () => void }) {
   const h = headline(item);
   const caption = h.valuation ? compactMoney(h.valuation.amount ? h.valuation : h.valuation) : h.raised ? `${compactMoney(h.raised)} raised` : null;
@@ -200,7 +221,7 @@ function Tile({ item, funding, onOpen }: { item: LandscapeItem; funding: boolean
     <button
       type="button"
       onClick={onOpen}
-      title={item.name}
+      title={tileTitle(item)}
       className="group flex w-full flex-col items-center gap-1.5 px-1 py-1.5 text-center outline-none hover:bg-paper focus-visible:bg-s-1 focus-visible:outline-2 focus-visible:outline-s-7"
     >
       <Mark item={item} />
@@ -268,6 +289,16 @@ function Detail({ item, onClose }: { item: LandscapeItem | null; onClose: () => 
             )}
           </div>
 
+          {sellsOnMarket(item) && (
+            <p className="border-t border-line px-5 py-3 text-[14px] leading-6 text-ink-2">
+              Sells {item.models_sold > 0 && <b className="font-medium text-ink">{item.models_sold} chat models</b>}
+              {item.models_sold > 0 && item.gpu_configs > 0 && " and "}
+              {item.gpu_configs > 0 && <b className="font-medium text-ink">{item.gpu_configs} GPU configurations</b>} at a price in the market.{" "}
+              <Link href={`/analytics/${item.models_sold > 0 ? "models" : "gpus"}?provider=${item.slug}`} className="text-s-7 hover:underline">
+                See its prices
+              </Link>
+            </p>
+          )}
           <div className="border-t border-line px-5 py-4">
             {item.rounds.length === 0 ? (
               <p className="text-[14px] leading-6 text-ink-3">No funding on record. We list a round only with a source we can link.</p>

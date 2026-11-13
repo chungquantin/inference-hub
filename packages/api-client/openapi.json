@@ -2775,6 +2775,8 @@
           "name",
           "kinds",
           "status",
+          "models_sold",
+          "gpu_configs",
           "rounds"
         ],
         "properties": {
@@ -2784,6 +2786,11 @@
               "null"
             ],
             "format": "int32"
+          },
+          "gpu_configs": {
+            "type": "integer",
+            "format": "int64",
+            "description": "GPU configurations it rents at a price in the market."
           },
           "hq_country": {
             "type": [
@@ -2803,6 +2810,11 @@
               "null"
             ],
             "description": "Path of the logo, such as `/logos/openai.svg`."
+          },
+          "models_sold": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Distinct chat models the organization sells at a price in the market, 0 if it sells none."
           },
           "name": {
             "type": "string"

@@ -970,10 +970,20 @@ export interface components {
         LandscapeItem: {
             /** Format: int32 */
             founded_year?: number | null;
+            /**
+             * Format: int64
+             * @description GPU configurations it rents at a price in the market.
+             */
+            gpu_configs: number;
             hq_country?: string | null;
             kinds: components["schemas"]["OrgKind"][];
             /** @description Path of the logo, such as `/logos/openai.svg`. */
             logo_url?: string | null;
+            /**
+             * Format: int64
+             * @description Distinct chat models the organization sells at a price in the market, 0 if it sells none.
+             */
+            models_sold: number;
             name: string;
             /** @description Rounds raised, newest first. Empty when none is on record. */
             rounds: components["schemas"]["LandscapeRound"][];

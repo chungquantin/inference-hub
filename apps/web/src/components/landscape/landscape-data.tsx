@@ -16,7 +16,7 @@ export async function LandscapeData({ limit }: { limit?: number }) {
   const totals: Record<string, number> = {};
   const items = [...bands.entries()].flatMap(([id, list]) => {
     totals[id] = list.length;
-    return sortItems(list, "valuation").slice(0, limit);
+    return sortItems(list, "market").slice(0, limit);
   });
   const fundedTotal = data.items.filter((i) => i.rounds.length > 0).length;
   return <Landscape items={items} totals={totals} limit={limit} fundedTotal={fundedTotal} />;

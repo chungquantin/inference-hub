@@ -22,6 +22,8 @@ struct OrgRow {
     status: OrgStatus,
     hq_country: Option<String>,
     founded_year: Option<i16>,
+    models_sold: i64,
+    gpu_configs: i64,
 }
 
 #[derive(sqlx::FromRow)]
@@ -41,8 +43,12 @@ pub async fn landscape(pool: &PgPool) -> sqlx::Result<Landscape> {
     let orgs: Vec<OrgRow> = sqlx::query_as(
         "SELECT o.id, o.slug, o.name, o.kinds, o.logo_url,
                 left(coalesce(o.tagline, o.description), 220) AS summary,
-                o.website, o.status, o.hq_country::text AS hq_country, o.founded_year
-         FROM organizations o ORDER BY o.name",
+                o.website, o.status, o.hq_country::text AS hq_country, o.founded_year,
+                coalesce(mp.models, 0)::int8 AS models_sold,
+                coalesce(mp.gpu_configurations, 0)::int8 AS gpu_configs
+         FROM organizations o
+         LEFT JOIN market_providers mp ON mp.organization_id = o.id
+         ORDER BY o.name",
     )
     .fetch_all(pool)
     .await?;
@@ -91,6 +97,8 @@ pub async fn landscape(pool: &PgPool) -> sqlx::Result<Landscape> {
                 status: o.status,
                 hq_country: o.hq_country,
                 founded_year: o.founded_year,
+                models_sold: o.models_sold,
+                gpu_configs: o.gpu_configs,
             })
             .collect(),
     })

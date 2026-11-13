@@ -36,6 +36,10 @@ pub struct LandscapeItem {
     pub status: OrgStatus,
     pub hq_country: Option<String>,
     pub founded_year: Option<i16>,
+    /// Distinct chat models the organization sells at a price in the market, 0 if it sells none.
+    pub models_sold: i64,
+    /// GPU configurations it rents at a price in the market.
+    pub gpu_configs: i64,
     /// Rounds raised, newest first. Empty when none is on record.
     pub rounds: Vec<LandscapeRound>,
 }

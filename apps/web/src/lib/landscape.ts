@@ -51,21 +51,32 @@ export function compactMoney(m: Money): string {
   }).format(m.amount);
 }
 
-export type SortMode = "valuation" | "raised" | "name";
+export type SortMode = "market" | "valuation" | "raised" | "name";
 
-/** Funded companies first by the chosen measure, then those with a logo, then by name. */
+/**
+ * `market`: who sells the most at a price in the market first, then the funded. `valuation` and
+ * `raised`: funded companies first by that measure, then the busiest sellers. Always ending with
+ * those that have a logo, then by name.
+ */
 export function sortItems(items: LandscapeItem[], mode: SortMode): LandscapeItem[] {
-  const key = (i: LandscapeItem) => {
+  const funding = (i: LandscapeItem) => {
     const h = headline(i);
-    return mode === "valuation" ? (h.valuation?.amount ?? 0) || (h.raised?.amount ?? 0) / 1e3 : mode === "raised" ? (h.raised?.amount ?? 0) : 0;
+    return mode === "raised" ? (h.raised?.amount ?? 0) : (h.valuation?.amount ?? 0) || (h.raised?.amount ?? 0) / 1e3;
   };
+  const sells = (i: LandscapeItem) => i.models_sold + i.gpu_configs;
+  const primary = (i: LandscapeItem) => (mode === "market" ? sells(i) : mode === "name" ? 0 : funding(i));
+  const secondary = (i: LandscapeItem) => (mode === "market" ? funding(i) : sells(i));
   return [...items].sort(
     (a, b) =>
-      key(b) - key(a) ||
+      primary(b) - primary(a) ||
+      secondary(b) - secondary(a) ||
       Number(Boolean(b.logo_url)) - Number(Boolean(a.logo_url)) ||
       a.name.localeCompare(b.name),
   );
 }
+
+/** Whether the organization has a price in the market: chat models or GPU configurations. */
+export const sellsOnMarket = (i: LandscapeItem): boolean => i.models_sold > 0 || i.gpu_configs > 0;
 
 export function formatRoundName(r: string): string {
   const m = /^series_([a-z])$/.exec(r);
