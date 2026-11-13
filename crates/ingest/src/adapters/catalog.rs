@@ -484,6 +484,47 @@ fn requesty(v: &Value) -> Result<Option<Entry>, String> {
     }))
 }
 
+/// The OpenRouter schema as first-party and reseller APIs serve it: `pricing.prompt` and
+/// `pricing.completion` in USD per token, `output_modalities` at the top level or under
+/// `architecture`. Embedding models are priced per million input tokens; rerankers (priced
+/// per input token but not chat models) are left out.
+fn openrouter_like(v: &Value) -> Result<Option<Entry>, String> {
+    let Some(id) = str_at(v, &["id"]) else {
+        return Err("model without an id".into());
+    };
+    let modalities: Vec<String> = [
+        at(v, &["output_modalities"]),
+        at(v, &["architecture", "output_modalities"]),
+    ]
+    .iter()
+    .filter_map(|m| m.as_array())
+    .flatten()
+    .filter_map(|m| m.as_str().map(str::to_owned))
+    .collect();
+    let has = |m: &str| modalities.iter().any(|x| x == m);
+    if id.to_ascii_lowercase().contains("rerank") {
+        return Ok(None);
+    }
+    if has("embeddings") {
+        let Some(price) = price_at(v, &["pricing", "prompt"], PER_TOKEN)? else {
+            return Ok(None);
+        };
+        let mut e = media_entry(
+            id,
+            str_at(v, &["name"]),
+            MediaKind::Embedding,
+            round6(price),
+        );
+        e.context = int_at(v, &["context_length"]);
+        return Ok(Some(e));
+    }
+    // Chat models, including ones that also return images or audio.
+    if !modalities.is_empty() && !has("text") {
+        return Ok(None);
+    }
+    openai_style(v, PER_TOKEN)
+}
+
 /// Every catalog provider; the worker runs each on its own interval.
 ///
 /// `paging` records what the endpoint does. Each was checked against the
@@ -611,6 +652,42 @@ pub static CATALOGS: &[CatalogSpec] = &[
         interval: DAILY,
         source_url: "https://www.requesty.ai/solution/llm-routing/models",
         entry: requesty,
+    },
+    CatalogSpec {
+        id: "inception",
+        name: "Inception Labs",
+        organization: "inception-labs",
+        origin: "https://api.inceptionlabs.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://docs.inceptionlabs.ai/get-started/models",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "jina",
+        name: "Jina AI",
+        organization: "jina-ai",
+        origin: "https://api.jina.ai",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://jina.ai/api-dashboard",
+        entry: openrouter_like,
+    },
+    CatalogSpec {
+        id: "nous",
+        name: "Nous Research Inference API",
+        organization: "nous-research",
+        origin: "https://inference-api.nousresearch.com",
+        path: "/v1/models",
+        items: Items::At(&["data"]),
+        paging: Paging::None,
+        interval: DAILY,
+        source_url: "https://portal.nousresearch.com",
+        entry: openrouter_like,
     },
 ];
 
@@ -833,5 +910,51 @@ mod tests {
             )
             .is_err()
         );
+    }
+    #[test]
+    fn openrouter_like_reads_chat_and_embeddings_and_skips_rerankers() {
+        let l = parse(
+            spec("jina"),
+            r#"{"data":[
+              {"id":"jina-ai/jina-embeddings-v4","output_modalities":["embeddings"],"context_length":32768,
+               "pricing":{"prompt":"0.00000005","completion":"0"}},
+              {"id":"jina-ai/jina-reranker-v3","output_modalities":["text"],"context_length":131072,
+               "pricing":{"prompt":"0.00000005","completion":"0"}},
+              {"id":"jina-ai/jina-ocr-v1","output_modalities":["text"],"context_length":32768,
+               "pricing":{"prompt":"0.0000005","completion":"0.000002"}}]}"#,
+        );
+        let l = l.unwrap();
+        assert_eq!(l.len(), 2, "{l:?}");
+        let emb = l.iter().find(|m| m.media.is_some()).unwrap();
+        assert_eq!(emb.external_id, "jina-ai/jina-embeddings-v4");
+        assert_eq!(emb.media.unwrap().price, 0.05);
+        let chat = l.iter().find(|m| m.media.is_none()).unwrap();
+        assert_eq!((chat.input_per_mtok, chat.output_per_mtok), (0.5, 2.0));
+    }
+
+    #[test]
+    fn inception_prices_are_per_token() {
+        let l = one(
+            "inception",
+            r#"{"data":[{"id":"mercury-2","context_length":128000,"output_modalities":["text"],
+                "pricing":{"prompt":"0.00000025","completion":"0.00000075"}}]}"#,
+        );
+        assert_eq!((l.input_per_mtok, l.output_per_mtok), (0.25, 0.75));
+        assert_eq!(l.context_window, Some(128_000));
+    }
+
+    #[test]
+    fn nous_reads_architecture_modalities_and_skips_image_only_models() {
+        let l = parse(
+            spec("nous"),
+            r#"{"data":[
+              {"id":"google/gemini-4-hydrogen","context_length":1048576,
+               "architecture":{"output_modalities":["text"]},"pricing":{"prompt":"0.0000015","completion":"0.000009"}},
+              {"id":"vendor/image-model","architecture":{"output_modalities":["image"]},
+               "pricing":{"prompt":"0.000001","completion":"0.000001"}}]}"#,
+        )
+        .unwrap();
+        assert_eq!(l.len(), 1);
+        assert_eq!(l[0].input_per_mtok, 1.5);
     }
 }

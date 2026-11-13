@@ -15,20 +15,24 @@
 pub mod akash;
 pub mod azure;
 pub mod catalog;
+pub mod clouds;
 pub mod coreweave;
 pub mod cudo;
 pub mod gpu;
 pub mod huggingface;
 pub mod hyperbolic;
 pub mod ionet;
+pub mod labs;
 pub mod lambda;
 pub mod linode;
 pub mod liquid;
 pub mod openrouter;
 pub mod oracle;
+pub mod ovhcloud;
 pub mod paging;
 pub mod rss;
 pub mod runpod;
+pub mod scaleway;
 pub mod shadeform;
 pub(crate) mod simple;
 pub mod vastai;
@@ -311,6 +315,16 @@ pub fn market_adapters(endpoints: &Endpoints) -> Vec<MarketAdapter> {
             catalog::CatalogAdapter::new(spec, endpoints),
         )));
     }
+    for spec in labs::LABS.iter().filter(|s| s.enabled) {
+        adapters.push(MarketAdapter::Gateway(Box::new(labs::LabAdapter::new(
+            spec, endpoints,
+        ))));
+    }
+    adapters.extend(
+        clouds::CLOUDS.iter().filter(|s| s.enabled).map(|spec| {
+            MarketAdapter::NeoCloud(Box::new(clouds::CloudAdapter::new(spec, endpoints)))
+        }),
+    );
     adapters.extend([
         MarketAdapter::NeoCloud(Box::new(runpod::RunPodAdapter::new(
             &endpoints.origin("https://api.runpod.io"),
@@ -353,6 +367,14 @@ pub fn market_adapters(endpoints: &Endpoints) -> Vec<MarketAdapter> {
         ))),
         MarketAdapter::NeoCloud(Box::new(azure::AzureAdapter::new(
             &endpoints.origin("https://prices.azure.com"),
+        ))),
+        MarketAdapter::NeoCloud(Box::new(ovhcloud::OvhCloudAdapter::new(
+            &endpoints.origin("https://api.ovh.com"),
+            &endpoints.origin("https://api.frankfurter.dev"),
+        ))),
+        MarketAdapter::NeoCloud(Box::new(scaleway::ScalewayAdapter::new(
+            &endpoints.origin("https://api.scaleway.com"),
+            &endpoints.origin("https://api.frankfurter.dev"),
         ))),
     ]);
     adapters
