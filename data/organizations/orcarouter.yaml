@@ -1,0 +1,19 @@
+slug: orcarouter
+name: "OrcaRouter"
+kinds: [llm_gateway]
+description: "One OpenAI-compatible AI gateway for production AI — adaptive routing, load balancing, guardrails, agent firewall, observability and governance across 200+ models."
+website: "https://orcarouter.ai"
+logo_url: /logos/orcarouter.png
+links:
+  github: "https://github.com/Continuum-AI-Corp"
+tagging:
+  match_case: true
+products:
+  - slug: orcarouter
+    name: "OrcaRouter"
+    type: oss_project
+    github: Continuum-AI-Corp/OrcaRouter-Lite
+    tagline: "Self-hosted LLM router with a managed safety net. OpenAI-compatible. BYOK. Single-workspace. Streaming. For more advanced routing choose hosted OrcaRouter"
+    url: "https://github.com/Continuum-AI-Corp/OrcaRouter-Lite"
+    metadata:
+      license: "MIT"

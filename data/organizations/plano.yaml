@@ -1,0 +1,20 @@
+slug: plano
+name: "Plano"
+kinds: [llm_gateway]
+description: "Build agents faster and deliver them reliably to production. Plano is an AI-native proxy and data plane for agent orchestration, LLM routing, guardrails, and observability."
+website: "https://planoai.dev"
+logo_url: /logos/plano.png
+links:
+  github: "https://github.com/katanemo"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: plano
+    name: "Plano"
+    type: oss_project
+    github: katanemo/plano
+    tagline: "Plano is an AI-native proxy server and data plane for agentic apps. Smart LLM routing, observability, agent orchestration, and guardrails so you stay focused on your agents core logic."
+    url: "https://github.com/katanemo/plano"
+    metadata:
+      license: "Apache-2.0"

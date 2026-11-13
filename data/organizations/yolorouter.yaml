@@ -1,0 +1,19 @@
+slug: yolorouter
+name: "YoloRouter"
+kinds: [llm_gateway]
+description: "Free, open-source, self-hosted LLM gateway. Translate between OpenAI, Anthropic and Gemini protocols, fail over across providers, rotate upstream keys — with an admin console embedded in one binary. Install with one command."
+website: "https://yolorouter.com"
+logo_url: /logos/yolorouter.svg
+links:
+  github: "https://github.com/yolorouter"
+tagging:
+  match_case: true
+products:
+  - slug: yolorouter
+    name: "YoloRouter"
+    type: oss_project
+    github: yolorouter/yolorouter
+    tagline: "A self-hosted, OpenAI-compatible LLM gateway with multi-provider failover, key rotation, and a built-in admin console."
+    url: "https://github.com/yolorouter/yolorouter"
+    metadata:
+      license: "Apache-2.0"

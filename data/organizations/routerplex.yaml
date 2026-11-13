@@ -1,0 +1,8 @@
+slug: routerplex
+name: "RouterPlex"
+kinds: [llm_gateway]
+description: "Eligible verified accounts get $1 free credit once, no card needed. One API for leading AI models with up to 40% cost savings, no quality loss, and spend-controlled keys."
+website: "https://routerplex.com"
+logo_url: /logos/routerplex.png
+tagging:
+  match_case: true

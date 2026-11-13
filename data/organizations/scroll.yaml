@@ -1,0 +1,9 @@
+slug: scroll
+name: "Scroll"
+kinds: [llm_gateway]
+description: "Switch between 30+ providers through a single unified interface."
+website: "https://scroll.io"
+logo_url: /logos/scroll.png
+tagging:
+  match_case: true
+  match_name: false

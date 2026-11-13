@@ -1,0 +1,9 @@
+slug: shareai
+name: "ShareAI"
+kinds: [decentralized]
+description: "One API to 150+ AI models across many providers. Auto-routing and failover for speed and uptime. Pay per token; 70% goes to the GPUs serving requests."
+website: "https://shareai.now"
+logo_url: /logos/shareai.png
+tagging:
+  match_case: true
+  match_name: false

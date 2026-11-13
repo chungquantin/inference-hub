@@ -1,0 +1,9 @@
+slug: wizzx
+name: "Wizzx"
+kinds: [inference_provider]
+description: "Nano Banana, GPT Image, Seedream, Veo, Kling, Seedance, PixVerse, and Suno through one task-based API. Pay-as-you-go credits with transparent per-model pricing."
+website: "https://wizzx.ai"
+logo_url: /logos/wizzx.png
+tagging:
+  match_case: true
+  match_name: false

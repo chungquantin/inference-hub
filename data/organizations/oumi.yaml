@@ -3,5 +3,6 @@ name: "Oumi"
 kinds: [model_provider]
 description: "Train models and agents. Run inference. Improve continuously. Fully automated, transparent, and under your control."
 website: "https://oumi.ai"
+logo_url: /logos/oumi.svg
 tagging:
   match_case: true

@@ -1,0 +1,8 @@
+slug: bettertoken
+name: "BetterToken"
+kinds: [llm_gateway]
+description: "Compare text, image and video generation APIs and current prices. Connect with compatible endpoints and pay for your usage."
+website: "https://bettertoken.ai"
+logo_url: /logos/bettertoken.png
+tagging:
+  match_case: true

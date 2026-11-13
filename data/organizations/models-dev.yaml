@@ -1,0 +1,20 @@
+slug: models-dev
+name: "models.dev"
+kinds: [open_source]
+description: "An open-source database of AI models: names, families, release dates, context limits, modalities, capabilities and per-provider prices, as one JSON file."
+website: "https://models.dev"
+logo_url: /logos/models-dev.svg
+links:
+  github: "https://github.com/anomalyco"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: models-dev
+    name: "models.dev"
+    type: oss_project
+    github: anomalyco/models.dev
+    tagline: "An open-source database of AI models."
+    url: "https://github.com/anomalyco/models.dev"
+    metadata:
+      license: "MIT"

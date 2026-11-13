@@ -30,3 +30,7 @@ products:
     url: "https://github.com/zai-org/Open-AutoGLM"
     metadata:
       license: "Apache-2.0"
+  - slug: bigmodel
+    name: "BigModel"
+    type: platform
+    url: "https://bigmodel.cn"

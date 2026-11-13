@@ -1,0 +1,9 @@
+slug: deapi
+name: "deAPI"
+kinds: [decentralized]
+description: "Generate images, synthesize voice, and transcribe audio or video with one unified API. Access leading open-source AI models at a fraction of the cost. Claim free credits now."
+website: "https://deapi.ai"
+logo_url: /logos/deapi.png
+tagging:
+  match_case: true
+  match_name: false

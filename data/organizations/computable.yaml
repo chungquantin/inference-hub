@@ -1,0 +1,9 @@
+slug: computable
+name: "Computable"
+kinds: [other]
+description: "It tracks deals in your chats and across the market, then brings you to your best match."
+website: "https://www.getcomputable.com"
+logo_url: /logos/computable.png
+tagging:
+  match_case: true
+  match_name: false

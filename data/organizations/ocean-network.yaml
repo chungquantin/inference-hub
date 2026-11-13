@@ -1,0 +1,9 @@
+slug: ocean-network
+name: "Ocean Network"
+kinds: [gpu_cloud]
+description: "Ocean Network is a peer to peer GPU cloud for AI inference. Serve any open model behind an OpenAI-compatible endpoint on a dedicated H200 from $2.16 an hour."
+website: "https://oncompute.ai"
+logo_url: /logos/ocean-network.png
+tagging:
+  match_case: true
+  match_name: false

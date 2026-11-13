@@ -1,0 +1,8 @@
+slug: ai-power-grid
+name: "AI Power Grid"
+kinds: [decentralized]
+description: "Transform supported GPUs into a community-powered generation layer for text, images, video, audio, agents, and workflows. GPU owners earn rewards for recorded work."
+website: "https://aipowergrid.io"
+logo_url: /logos/ai-power-grid.png
+tagging:
+  match_case: true

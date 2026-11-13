@@ -1,0 +1,7 @@
+slug: dgrid
+name: "DGrid"
+kinds: [decentralized]
+description: "Discover DGrid.AI, a decentralized AI inference network. Built on blockchain, it offers accessible, scalable LLM inference with trustless on-chain permissions, solving high costs and single points of failure in Web3 AI."
+website: "https://dgrid.ai"
+tagging:
+  match_case: true

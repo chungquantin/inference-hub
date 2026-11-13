@@ -3,5 +3,6 @@ name: "Kingsoft Cloud"
 kinds: [hyperscaler, inference_provider]
 tagline: "China GPU cloud."
 website: "https://ksyun.com"
+logo_url: /logos/kingsoft-cloud.png
 tagging:
   match_case: true

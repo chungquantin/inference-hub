@@ -1,0 +1,19 @@
+slug: bitrouter
+name: "BitRouter"
+kinds: [llm_gateway]
+description: "Make every step of your agent’s work count. Open-source model routing, through an API or your terminal. Your agents. Your models. Your infrastructure."
+website: "https://bitrouter.ai"
+logo_url: /logos/bitrouter.svg
+links:
+  github: "https://github.com/bitrouter"
+tagging:
+  match_case: true
+products:
+  - slug: bitrouter
+    name: "BitRouter"
+    type: oss_project
+    github: bitrouter/bitrouter
+    tagline: "elastic inference for your agentic workloads"
+    url: "https://github.com/bitrouter/bitrouter"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,9 @@
+slug: cloudsway
+name: "Cloudsway"
+kinds: [other]
+description: "Build production-ready agents with real-time search, secure execution, model access, and managed APIs."
+website: "https://www.cloudsway.ai"
+logo_url: /logos/cloudsway.png
+tagging:
+  match_case: true
+  match_name: false

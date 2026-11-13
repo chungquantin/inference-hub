@@ -1,0 +1,20 @@
+slug: aisix
+name: "AISIX"
+kinds: [llm_gateway]
+description: "Explore the AISIX AI Gateway suite: AISIX OSS, AISIX Enterprise, and AISIX Cloud for routing, securing, and observing LLM and AI-agent traffic."
+website: "https://api7.ai"
+logo_url: /logos/aisix.png
+links:
+  github: "https://github.com/api7"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: aisix
+    name: "AISIX"
+    type: oss_project
+    github: api7/aisix
+    tagline: "Open-source AI gateway for LLMs & AI agents, built in Rust. One OpenAI-compatible API for OpenAI, Anthropic, Gemini, Bedrock & more — routing, guardrails, caching, rate limits, observability."
+    url: "https://github.com/api7/aisix"
+    metadata:
+      license: "Apache-2.0"

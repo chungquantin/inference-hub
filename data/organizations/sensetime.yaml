@@ -3,5 +3,6 @@ name: "SenseTime"
 kinds: [model_provider]
 description: "SenseTime builds SenseNova native multimodal LLMs and SenseCore AI cloud infrastructure for enterprise AI digital transformation."
 website: "https://www.sensetime.com"
+logo_url: /logos/sensetime.png
 tagging:
   match_case: true

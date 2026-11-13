@@ -1,0 +1,8 @@
+slug: modelscope
+name: "ModelScope"
+kinds: [model_provider]
+description: "ModelScope 魔搭社区——开源模型社区，提供模型、数据集与在线 Demo 的一站式服务。"
+website: "https://modelscope.cn"
+logo_url: /logos/modelscope.png
+tagging:
+  match_case: true

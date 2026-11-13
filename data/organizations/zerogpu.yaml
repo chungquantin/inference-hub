@@ -1,0 +1,9 @@
+slug: zerogpu
+name: "ZeroGPU"
+kinds: [gpu_cloud]
+description: "Run specialized and open-weight models faster and at lower cost across ZeroGPU edge and cloud infrastructure."
+website: "https://zerogpu.ai"
+logo_url: /logos/zerogpu.png
+tagging:
+  match_case: true
+  match_name: false

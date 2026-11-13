@@ -1,0 +1,8 @@
+slug: shuttleai
+name: "ShuttleAI"
+kinds: [llm_gateway]
+description: "ShuttleAI is an artificial intelligence company advancing the systems and ideas that shape what comes next."
+website: "https://shuttleai.com"
+logo_url: /logos/shuttleai.png
+tagging:
+  match_case: true

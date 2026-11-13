@@ -1,0 +1,8 @@
+slug: xiuai
+name: "XiuAI"
+kinds: [llm_gateway]
+description: "Model APIs for enterprise applications, teams and developers. Public discounted rates, usage-based billing, existing tool compatibility and conversation privacy."
+website: "https://router.xiu.ai"
+logo_url: /logos/xiuai.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: neutrino-ai
+name: "Neutrino AI"
+kinds: [llm_gateway]
+description: "Neutrino is a smart AI router that lets you match GPT4 performance at a fraction of the cost by dynamically routing prompts to the best-suited model, balancing speed, cost, and accuracy."
+website: "https://www.neutrinoapp.com"
+logo_url: /logos/neutrino-ai.png
+tagging:
+  match_case: true

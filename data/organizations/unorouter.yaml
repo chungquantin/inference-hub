@@ -1,0 +1,8 @@
+slug: unorouter
+name: "UnoRouter"
+kinds: [llm_gateway]
+description: "One OpenAI compatible key for GPT, Claude, Gemini, DeepSeek and GLM, plus a free proxy for Janitor AI and SillyTavern. Free models, no credit card."
+website: "https://unorouter.ai"
+logo_url: /logos/unorouter.png
+tagging:
+  match_case: true

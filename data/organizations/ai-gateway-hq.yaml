@@ -1,0 +1,8 @@
+slug: ai-gateway-hq
+name: "AI Gateway HQ"
+kinds: [llm_gateway]
+description: "AI Gateway HQ is an enterprise AI and LLM gateway for controlled model access, hard spend limits, provider failover, and company or portfolio reporting."
+website: "https://aigatewayhq.com"
+logo_url: /logos/ai-gateway-hq.png
+tagging:
+  match_case: true

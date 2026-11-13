@@ -1,0 +1,19 @@
+slug: agentgateway
+name: "agentgateway"
+kinds: [llm_gateway]
+description: "The open-source gateway for AI traffic — LLM, MCP, A2A, and HTTP in one data plane."
+website: "https://agentgateway.dev"
+logo_url: /logos/agentgateway.png
+links:
+  github: "https://github.com/agentgateway"
+tagging:
+  match_case: true
+products:
+  - slug: agentgateway
+    name: "agentgateway"
+    type: oss_project
+    github: agentgateway/agentgateway
+    tagline: "Next Generation Agentic Proxy for AI Agents and MCP servers"
+    url: "https://github.com/agentgateway/agentgateway"
+    metadata:
+      license: "Apache-2.0"

@@ -1,0 +1,17 @@
+slug: thinkwatch
+name: "ThinkWatch"
+kinds: [llm_gateway]
+description: "AI gateways that route, inspect and meter model requests and MCP tool calls: ThinkWatch Enterprise for organizations, ThinkWatch Lite for developers."
+website: "https://thinkwat.ch"
+logo_url: /logos/thinkwatch.png
+links:
+  github: "https://github.com/ThinkWatchProject"
+tagging:
+  match_case: true
+products:
+  - slug: thinkwatch
+    name: "ThinkWatch"
+    type: oss_project
+    github: ThinkWatchProject/ThinkWatch
+    tagline: "Self-hosted AI API and MCP gateway for organizations: SSO and RBAC, per-user identity for MCP tool calls, PII redaction and tool-call guards, rate limits, budgets, cost accounting and audit logs."
+    url: "https://github.com/ThinkWatchProject/ThinkWatch"

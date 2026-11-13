@@ -1,0 +1,9 @@
+slug: inferall
+name: "InferAll"
+kinds: [llm_gateway]
+description: "LLM aggregator: one API key for 100+ AI models across OpenAI, Anthropic Claude, Google Gemini, NVIDIA NIM, Replicate, and Runway. 10+ free open-source models, published per-token pricing on premium providers."
+website: "https://inferall.ai"
+logo_url: /logos/inferall.png
+tagging:
+  match_case: true
+  match_name: false

@@ -7,3 +7,10 @@ logo_url: /logos/glama.svg
 tagging:
   match_case: true
   match_name: false
+products:
+  - slug: lightport
+    name: "Lightport"
+    type: oss_project
+    github: glama-ai/lightport
+    tagline: "A lightweight AI gateway that makes LLM providers OpenAI-compatible."
+    url: "https://github.com/glama-ai/lightport"

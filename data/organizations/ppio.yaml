@@ -1,7 +1,9 @@
 slug: ppio
 name: "PPIO"
 kinds: [inference_provider]
+description: "PPIO 是中国领先的独立 Agentic Cloud 服务商，面向 Agent 时代打造 Token 工厂，提供模型 API、Agent 沙箱、GPU 算力与 Agent 托管等云基础设施，帮助企业和开发者更高效、更稳定、更低成本地构建和运行 AI Agent 应用。"
 website: "https://ppio.com"
+logo_url: /logos/ppio.svg
 tagging:
   match_case: true
 funding:

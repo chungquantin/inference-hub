@@ -1,0 +1,8 @@
+slug: tokendos
+name: "TokenDos"
+kinds: [llm_gateway]
+description: "连接闲置 API Key 供应方与开发者。按 Token 计费、无订阅费、免翻墙全球直连。兼容 Claude Code、Cursor、OpenAI 与 Anthropic SDK，低成本调用 Claude 3.7 Sonnet、GPT-4o 与 DeepSeek R1。"
+website: "https://www.tokendos.com"
+logo_url: /logos/tokendos.png
+tagging:
+  match_case: true

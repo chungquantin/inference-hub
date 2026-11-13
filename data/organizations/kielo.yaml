@@ -1,0 +1,9 @@
+slug: kielo
+name: "Kielo"
+kinds: [decentralized]
+description: "Join Kielo's decentralized AI inference network. Earn passive income from idle CPU/GPU compute, or access open-source LLMs via one unified API."
+website: "https://kielo.in"
+logo_url: /logos/kielo.svg
+tagging:
+  match_case: true
+  match_name: false

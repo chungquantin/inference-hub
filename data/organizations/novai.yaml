@@ -1,0 +1,9 @@
+slug: novai
+name: "NovAI"
+kinds: [llm_gateway]
+description: "One OpenAI-compatible API for 105+ Chinese AI models — DeepSeek, Qwen, GLM, Seedance. Provider list prices, 0% markup, $2 free credit, no card."
+website: "https://aiapi-pro.com"
+logo_url: /logos/novai.png
+tagging:
+  match_case: true
+  match_name: false

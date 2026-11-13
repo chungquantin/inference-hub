@@ -1,0 +1,9 @@
+slug: ibl-ai
+name: "ibl.ai"
+kinds: [agent_tool]
+description: "Deploy AI agents and applications on your infrastructure with ibl.ai's AI Operating System. Your code, your data, any LLM. Serving 1.6M+ users across 400+ organizations."
+website: "https://ibl.ai"
+logo_url: /logos/ibl-ai.png
+tagging:
+  match_case: true
+  match_name: false

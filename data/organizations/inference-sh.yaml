@@ -1,0 +1,8 @@
+slug: inference-sh
+name: "inference.sh"
+kinds: [inference_provider]
+description: "everything your agent needs. run any model, compose agents, stack knowledge. skills, tools, and memory in one platform that compounds with use."
+website: "https://inference.sh"
+logo_url: /logos/inference-sh.png
+tagging:
+  match_case: true

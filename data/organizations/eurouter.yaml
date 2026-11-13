@@ -1,0 +1,9 @@
+slug: eurouter
+name: "EUrouter"
+kinds: [llm_gateway]
+description: "EUrouter is the unified API for EU-compliant AI. Integrate 100+ models with one line of code, with guaranteed EU data residency and GDPR compliance."
+website: "https://www.eurouter.ai"
+logo_url: /logos/eurouter.png
+tagging:
+  match_case: true
+  match_name: false

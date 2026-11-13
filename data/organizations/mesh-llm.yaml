@@ -1,0 +1,20 @@
+slug: mesh-llm
+name: "Mesh LLM"
+kinds: [open_source]
+description: "Mesh serves large local models across multiple machines through one OpenAI-compatible endpoint."
+website: "https://meshllm.cloud"
+logo_url: /logos/mesh-llm.svg
+links:
+  github: "https://github.com/Mesh-LLM"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mesh-llm
+    name: "Mesh LLM"
+    type: oss_project
+    github: Mesh-LLM/mesh-llm
+    tagline: "Distributed AI/LLM for the people. Share compute privately or publicly to power your agents and chat."
+    url: "https://github.com/Mesh-LLM/mesh-llm"
+    metadata:
+      license: "Apache-2.0"

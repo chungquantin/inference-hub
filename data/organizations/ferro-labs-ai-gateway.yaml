@@ -1,0 +1,19 @@
+slug: ferro-labs-ai-gateway
+name: "Ferro Labs AI Gateway"
+kinds: [llm_gateway]
+description: "Open-source, self-hosted AI gateway in Go: 30 providers and 2,500+ models behind one OpenAI-compatible API — routing strategies, plugins, MCP, embedded dashboard."
+website: "https://docs.ferrolabs.ai"
+logo_url: /logos/ferro-labs-ai-gateway.png
+links:
+  github: "https://github.com/ferro-labs"
+tagging:
+  match_case: true
+products:
+  - slug: ferro-labs-ai-gateway
+    name: "Ferro Labs AI Gateway"
+    type: oss_project
+    github: ferro-labs/ai-gateway
+    tagline: "Unified AI Gateway for 30+ LLMs (OpenAI, Anthropic, Bedrock, Azure etc) with Caching, Guardrails, A/B test & cost controls. Go-native Fastest & Scalable AI Gateway LiteLLM & Kong AI Gateway alternative."
+    url: "https://github.com/ferro-labs/ai-gateway"
+    metadata:
+      license: "Apache-2.0"

@@ -2,5 +2,6 @@ slug: sk-hynix
 name: "SK hynix"
 kinds: [hardware]
 website: "https://www.skhynix.com"
+logo_url: /logos/sk-hynix.svg
 tagging:
   match_case: true

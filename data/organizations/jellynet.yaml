@@ -1,0 +1,9 @@
+slug: jellynet
+name: "JellyNet"
+kinds: [other]
+description: "The API marketplace where everyone wins. Buyers get LLM access up to 60% cheaper. Suppliers earn from idle keys. 40 protocols, $1 free credits."
+website: "https://www.jellynet.net"
+logo_url: /logos/jellynet.png
+tagging:
+  match_case: true
+  match_name: false

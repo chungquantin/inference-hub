@@ -1,0 +1,9 @@
+slug: lexora
+name: "Lexora"
+kinds: [decentralized]
+description: "Distributed AI infrastructure for developers. Run inference, build chatbots from your documents, and access frontier models — Qwen3, DeepSeek, Kimi, FLUX — through one API. Pay only when you use it."
+website: "https://lexora.network"
+logo_url: /logos/lexora.png
+tagging:
+  match_case: true
+  match_name: false

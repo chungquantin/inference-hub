@@ -3,6 +3,7 @@ name: "KDDI"
 kinds: [gpu_cloud]
 description: "KDDIの公式企業サイトです。KDDIの企業情報、ブランド、個人向け事業、法人向け事業、サステナビリティ、投資家情報、採用情報などをご紹介します。"
 website: "https://www.kddi.com"
+logo_url: /logos/kddi.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

@@ -3,6 +3,7 @@ name: "TPG"
 kinds: [investor]
 description: "A leader in the alternative asset space, TPG was built for a distinctive approach, managing assets through a principled focus on innovation."
 website: "https://www.tpg.com"
+logo_url: /logos/tpg.svg
 tagging:
   match_case: true
   match_name: false

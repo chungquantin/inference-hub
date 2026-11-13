@@ -1,0 +1,9 @@
+slug: mage-lab
+name: "Mage Lab"
+kinds: [other]
+description: "Deploy AI on your infrastructure or subscribe to a managed instance. Full control over your data, models, and security posture with multi-model routing across 36+ providers."
+website: "https://magelab.ai"
+logo_url: /logos/mage-lab.png
+tagging:
+  match_case: true
+  match_name: false

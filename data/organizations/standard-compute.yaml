@@ -1,0 +1,9 @@
+slug: standard-compute
+name: "Standard Compute"
+kinds: [llm_gateway]
+description: "Standard Compute: one OpenAI- and Anthropic-compatible API for AI coding agents that routes each request to the cheapest capable model. From $19/mo."
+website: "https://standardcompute.com"
+logo_url: /logos/standard-compute.png
+tagging:
+  match_case: true
+  match_name: false

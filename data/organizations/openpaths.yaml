@@ -1,0 +1,17 @@
+slug: openpaths
+name: "OpenPaths"
+kinds: [llm_gateway]
+description: "Search and we shall find. Neural learned paths for 1ms routing across 432+ large model providers and art generators. Try Open Pathways."
+website: "https://openpaths.io"
+logo_url: /logos/openpaths.webp
+links:
+  github: "https://github.com/lee101"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: openpaths
+    name: "OpenPaths"
+    type: oss_project
+    github: lee101/openpaths
+    url: "https://github.com/lee101/openpaths"

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">玄枢API</title>
+  <defs>
+    <mask id="x-cut">
+      <rect width="64" height="64" fill="white"/>
+      <path d="M22 20 32 30 42 20 44 22 34 32 44 42 42 44 32 34 22 44 20 42 30 32 20 22Z" fill="black"/>
+    </mask>
+  </defs>
+  <g mask="url(#x-cut)">
+    <rect x="2" y="2" width="60" height="60" rx="14" fill="#11162E"/>
+    <path d="M16 7h32v15l-9 9-6-6V15h-2v10l-6 6-9-9Z" fill="#293B73"/>
+    <path d="M57 16v32H42l-9-9 6-6h10v-2H39l-6-6 9-9Z" fill="#C99A4A"/>
+    <path d="M48 57H16V42l9-9 6 6v10h2V39l6-6 9 9Z" fill="#293B73"/>
+    <path d="M7 48V16h15l9 9-6 6H15v2h10l6 6-9 9Z" fill="#2A8C82"/>
+  </g>
+</svg>

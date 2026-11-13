@@ -1,0 +1,20 @@
+slug: monkey-troop
+name: "Monkey Troop"
+kinds: [open_source]
+description: "P2P Distributed Inference for LLM Models"
+website: "https://100monkeys.ai"
+logo_url: /logos/monkey-troop.png
+links:
+  github: "https://github.com/100monkeys-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: monkey-troop
+    name: "Monkey Troop"
+    type: oss_project
+    github: 100monkeys-ai/monkey-troop
+    tagline: "P2P Distributed Inference for LLM Models"
+    url: "https://github.com/100monkeys-ai/monkey-troop"
+    metadata:
+      license: "MIT"

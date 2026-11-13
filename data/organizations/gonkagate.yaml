@@ -1,0 +1,8 @@
+slug: gonkagate
+name: "GonkaGate"
+kinds: [llm_gateway]
+description: "OpenAI-compatible access to Gonka Network with USD billing, no wallet or token operations, and a clear pricing breakdown"
+website: "https://gonkagate.com"
+logo_url: /logos/gonkagate.png
+tagging:
+  match_case: true

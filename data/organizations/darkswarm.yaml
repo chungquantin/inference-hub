@@ -1,0 +1,17 @@
+slug: darkswarm
+name: "DarkSwarm"
+kinds: [open_source]
+description: "P2P decentralized swarm for collective open-source LLM inference. Uncensored, self-hosted, distributed AI. No central authority, no API fees. llama.cpp-based peer-to-peer compute mesh for local LLMs."
+website: "https://github.com/Insider77Circle/DarkSwarm"
+links:
+  github: "https://github.com/Insider77Circle"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: darkswarm
+    name: "DarkSwarm"
+    type: oss_project
+    github: Insider77Circle/DarkSwarm
+    tagline: "P2P decentralized swarm for collective open-source LLM inference. Uncensored, self-hosted, distributed AI. No central authority, no API fees. llama.cpp-based peer-to-peer compute mesh for local LLMs."
+    url: "https://github.com/Insider77Circle/DarkSwarm"

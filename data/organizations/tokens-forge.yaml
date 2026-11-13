@@ -1,0 +1,9 @@
+slug: tokens-forge
+name: "Tokens Forge"
+kinds: [llm_gateway]
+description: "Tokens Forge provides a low-cost OpenAI-compatible AI gateway with transparent model pricing, usage tracking, and a built-in AI Stock Researcher."
+website: "https://tokens-forge.com"
+logo_url: /logos/tokens-forge.svg
+tagging:
+  match_case: true
+  match_name: false

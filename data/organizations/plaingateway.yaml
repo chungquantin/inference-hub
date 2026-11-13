@@ -1,0 +1,8 @@
+slug: plaingateway
+name: "plaingateway"
+kinds: [llm_gateway]
+description: "The same API as OpenRouter at the provider's list price, with 0% platform fee and no subscription. Earn up to 20% bonus credit when you add money."
+website: "https://plaingateway.com"
+logo_url: /logos/plaingateway.png
+tagging:
+  match_case: true

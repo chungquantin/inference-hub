@@ -1,0 +1,8 @@
+slug: apifree
+name: "APIFree"
+kinds: [llm_gateway]
+description: "Access multiple AI models through one free API with APIFree — a one-stop platform for free AI APIs, multimodal models, and simplified integration without managing multiple vendor accounts."
+website: "https://apifree.ai"
+logo_url: /logos/apifree.png
+tagging:
+  match_case: true

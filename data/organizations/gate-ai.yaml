@@ -1,0 +1,8 @@
+slug: gate-ai
+name: "Gate.AI"
+kinds: [llm_gateway]
+description: "One API connects to 200+ mainstream models, supporting intelligent routing, automatic fallback, cost control, organizational access management, and data privacy protection, helping enterprises use AI stably, securely, and in a controllable manner."
+website: "https://gate.ai"
+logo_url: /logos/gate-ai.png
+tagging:
+  match_case: true

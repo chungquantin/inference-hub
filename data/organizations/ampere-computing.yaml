@@ -3,6 +3,7 @@ name: "Ampere Computing"
 kinds: [hardware]
 description: "Discover how Ampere's unique design delivers unmatched efficiency, meeting the growing demand for cloud computing while consuming minimal resources."
 website: "https://amperecomputing.com"
+logo_url: /logos/ampere-computing.png
 tagging:
   match_case: true
   match_name: false

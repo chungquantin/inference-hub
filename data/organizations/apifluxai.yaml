@@ -1,0 +1,8 @@
+slug: apifluxai
+name: "ApiFluxAI"
+kinds: [llm_gateway]
+description: "ApiFlux is an AI router with native Anthropic, OpenAI & Gemini APIs — one key for 100+ models, automatic failover, transparent per-token pricing."
+website: "https://apiflux.ai"
+logo_url: /logos/apifluxai.svg
+tagging:
+  match_case: true

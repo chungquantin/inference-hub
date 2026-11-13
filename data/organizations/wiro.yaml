@@ -1,0 +1,9 @@
+slug: wiro
+name: "Wiro"
+kinds: [inference_provider]
+description: "Run AI models for image, video, audio and text through one API, plus agents and workflows. Per-run pricing, a browser playground and code for every model."
+website: "https://wiro.ai"
+logo_url: /logos/wiro.png
+tagging:
+  match_case: true
+  match_name: false

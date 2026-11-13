@@ -1,0 +1,9 @@
+slug: llmule
+name: "LLMule"
+kinds: [decentralized]
+description: "People with GPUs share the models running on their machines with other local AI enthusiasts. Free OpenAI-compatible API, web chat, one-file provider. Experimental."
+website: "https://llmule.xyz"
+logo_url: /logos/llmule.png
+tagging:
+  match_case: true
+  match_name: false

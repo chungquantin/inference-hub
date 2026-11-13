@@ -1,0 +1,9 @@
+slug: abacus-ai
+name: "Abacus.AI"
+kinds: [agent_tool]
+description: "The AI super assistant for professionals and enterprises. GPT-6 Astra, Opus 5.5, Fable 5.2, Gemini 4 Carbon and more — 100+ AI models in one place. Or hand a task to the agent and get back a finished app, deck or report."
+website: "https://abacus.ai"
+logo_url: /logos/abacus-ai.png
+tagging:
+  match_case: true
+  match_name: false

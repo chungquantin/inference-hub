@@ -1,0 +1,20 @@
+slug: orchid-genai
+name: "Orchid GenAI"
+kinds: [decentralized]
+description: "A decentralized marketplace for AI, storage, and bandwidth"
+website: "https://www.orchid.com"
+logo_url: /logos/orchid-genai.png
+links:
+  github: "https://github.com/OrchidTechnologies"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: orchid-genai
+    name: "Orchid GenAI"
+    type: oss_project
+    github: OrchidTechnologies/orchid
+    tagline: "Orchid: VPN, Personal Firewall"
+    url: "https://github.com/OrchidTechnologies/orchid"
+    metadata:
+      license: "AGPL-3.0"

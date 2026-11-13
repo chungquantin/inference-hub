@@ -1,0 +1,8 @@
+slug: xuanshu-api
+name: "XuanShu API"
+kinds: [llm_gateway]
+description: "For individual developers, technical teams, and enterprises: connect Claude Code, Codex, and Gemini CLI to one API endpoint, see current model pricing, and start with subscription or pay-as-you-go access."
+website: "https://www.xuanshuapi.com"
+logo_url: /logos/xuanshu-api.svg
+tagging:
+  match_case: true

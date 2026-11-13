@@ -1,0 +1,8 @@
+slug: iexec
+name: "iExec"
+kinds: [decentralized]
+description: "The PoCo Protocol lets applications be ordered, executed and paid for on data they never see, with hardware-enforced confidentiality and an onchain proof of every run."
+website: "https://iex.ec"
+logo_url: /logos/iexec.png
+tagging:
+  match_case: true

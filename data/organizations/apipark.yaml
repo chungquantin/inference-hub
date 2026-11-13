@@ -1,0 +1,18 @@
+slug: apipark
+name: "APIPark"
+kinds: [llm_gateway]
+description: "一站式 AI 大模型与 API 统一网关"
+website: "https://www.apipark.com"
+logo_url: /logos/apipark.png
+links:
+  github: "https://github.com/APIParkLab"
+tagging:
+  match_case: true
+products:
+  - slug: apipark
+    name: "APIPark"
+    type: oss_project
+    github: APIParkLab/APIPark
+    url: "https://github.com/APIParkLab/APIPark"
+    metadata:
+      license: "Apache-2.0"

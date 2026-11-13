@@ -1,0 +1,8 @@
+slug: apiclaw
+name: "APIClaw"
+kinds: [llm_gateway]
+description: "Flat-rate, OpenAI-compatible AI API gateway. Claude, GPT, Gemini, DeepSeek, Qwen, Kimi, GLM and more on one key from $19/month (500 requests/day). No per-token billing. Free 50-request trial, pay with crypto."
+website: "https://apiclaw.biz"
+logo_url: /logos/apiclaw.png
+tagging:
+  match_case: true

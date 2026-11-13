@@ -1,0 +1,8 @@
+slug: ramp-router
+name: "Ramp Router"
+kinds: [llm_gateway]
+description: "An LLM gateway that cuts inference costs by 40% on average. One endpoint for OpenAI, Anthropic, and open models – routed automatically. Free through 2026."
+website: "https://router.com"
+logo_url: /logos/ramp-router.png
+tagging:
+  match_case: true

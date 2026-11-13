@@ -1,0 +1,8 @@
+slug: kosmoy
+name: "Kosmoy"
+kinds: [llm_gateway]
+description: "Kosmoy is the AI management platform for the regulated enterprise. AI Gateway, LLM Gateway, MCP Gateway, AI governance, AI monitoring, AI agents sandbox and EU AI Act compliance — one platform, in your own Kubernetes."
+website: "https://kosmoy.com"
+logo_url: /logos/kosmoy.png
+tagging:
+  match_case: true

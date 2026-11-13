@@ -14,3 +14,8 @@ feeds:
     url: "https://www.digitalocean.com/rss/blog.atom"
     interval_minutes: 180
     auto_approve: false
+products:
+  - slug: digitalocean-serverless-inference
+    name: "DigitalOcean Serverless Inference"
+    type: platform
+    url: "https://try.digitalocean.com/serverless-inference/"

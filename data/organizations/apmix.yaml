@@ -1,0 +1,8 @@
+slug: apmix
+name: "APMix"
+kinds: [llm_gateway]
+description: "Cheap plans from $4.99/month cover GPT, Claude, Gemini, Grok, DeepSeek and Qwen on a single API key. OpenAI- and Anthropic-compatible; works with Claude Code, Codex CLI and Cursor."
+website: "https://apmix.ai"
+logo_url: /logos/apmix.png
+tagging:
+  match_case: true

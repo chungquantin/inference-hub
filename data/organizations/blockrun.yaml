@@ -1,0 +1,19 @@
+slug: blockrun
+name: "BlockRun"
+kinds: [llm_gateway]
+description: "BlockRun independently tests AI agents that move money: did they pay the right party the right amount, avoid being scammed, stay within their mandate, and tell the truth afterwards. Scored from the ledger, not by a model judge."
+website: "https://blockrun.ai"
+logo_url: /logos/blockrun.png
+links:
+  github: "https://github.com/BlockRunAI"
+tagging:
+  match_case: true
+products:
+  - slug: blockrun
+    name: "BlockRun"
+    type: oss_project
+    github: BlockRunAI/ClawRouter
+    tagline: "The agent-native LLM router for autonomous agents. Every frontier model behind one wallet, <1ms local routing, USDC payments on Base & Solana via x402."
+    url: "https://github.com/BlockRunAI/ClawRouter"
+    metadata:
+      license: "MIT"

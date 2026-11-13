@@ -2,5 +2,6 @@ slug: tsmc
 name: "TSMC"
 kinds: [hardware]
 website: "https://www.tsmc.com"
+logo_url: /logos/tsmc.svg
 tagging:
   match_case: true

@@ -1,0 +1,9 @@
+slug: you-com
+name: "You.com"
+kinds: [inference_provider]
+description: "The core AI infrastructure you need to maximize accuracy while reducing latency and costs."
+website: "https://you.com"
+logo_url: /logos/you-com.png
+tagging:
+  match_case: true
+  match_name: false

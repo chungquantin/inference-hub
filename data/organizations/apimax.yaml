@@ -1,0 +1,8 @@
+slug: apimax
+name: "ApiMax"
+kinds: [llm_gateway]
+description: "Access mainstream AI models through one unified API — stable, affordable, high-concurrency text, image and video model endpoints."
+website: "https://apimax.ai"
+logo_url: /logos/apimax.png
+tagging:
+  match_case: true

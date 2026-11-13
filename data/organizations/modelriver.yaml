@@ -1,0 +1,9 @@
+slug: modelriver
+name: "ModelRiver"
+kinds: [llmops]
+description: "Build multi-step AI workflows that call your backend at each step, with live updates to your users. Bring your own keys. Start free."
+website: "https://modelriver.com"
+logo_url: /logos/modelriver.png
+tagging:
+  match_case: true
+  match_name: false

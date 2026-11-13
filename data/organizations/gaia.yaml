@@ -1,0 +1,9 @@
+slug: gaia
+name: "Gaia"
+kinds: [decentralized]
+description: "Gaia is building an active, intelligent ecosystem that supports applications that learn, improve and grow over time."
+website: "https://www.gaianet.ai"
+logo_url: /logos/gaia.png
+tagging:
+  match_case: true
+  match_name: false

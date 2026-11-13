@@ -1,0 +1,16 @@
+slug: tensorblock
+name: "TensorBlock"
+kinds: [llm_gateway]
+description: "TensorBlock builds open infrastructure for intelligent systems, including Forge and the free hosted MCP Index for searchable MCP server profiles and install metadata."
+website: "https://www.tensorblock.co"
+logo_url: /logos/tensorblock.png
+links:
+  github: "https://github.com/TensorBlock"
+tagging:
+  match_case: true
+products:
+  - slug: tensorblock
+    name: "TensorBlock"
+    type: oss_project
+    github: TensorBlock/forge
+    url: "https://github.com/TensorBlock/forge"

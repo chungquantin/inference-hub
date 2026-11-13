@@ -1,0 +1,9 @@
+slug: saygm
+name: "SayGM"
+kinds: [llm_gateway]
+description: "An LLM gateway for Claude, GPT, Gemini and open models at or below list price. Works with your OpenAI or Anthropic SDK. Get a key in a minute."
+website: "https://saygm.com"
+logo_url: /logos/saygm.png
+tagging:
+  match_case: true
+  match_name: false

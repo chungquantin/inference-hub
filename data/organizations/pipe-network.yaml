@@ -1,0 +1,9 @@
+slug: pipe-network
+name: "Pipe Network"
+kinds: [decentralized]
+description: "Build with object storage, virtual machines, web hosting, Durable Objects, KV Cache, and AI inference. Explore all Pipe services and find the right tools for your next app."
+website: "https://pipe.network"
+logo_url: /logos/pipe-network.png
+tagging:
+  match_case: true
+  match_name: false

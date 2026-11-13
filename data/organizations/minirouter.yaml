@@ -1,0 +1,8 @@
+slug: minirouter
+name: "minirouter"
+kinds: [llm_gateway]
+description: "Use one OpenAI-compatible API. Pay with crypto or card, or bring your own OpenAI, Anthropic or DeepSeek keys for supported requests. No ID check (KYC) required."
+website: "https://minirouter.sh"
+logo_url: /logos/minirouter.png
+tagging:
+  match_case: true

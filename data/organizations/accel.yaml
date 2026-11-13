@@ -3,6 +3,7 @@ name: "Accel"
 kinds: [investor]
 description: "Accel is a leading venture capital firm that has invested in over 300 companies, including Facebook, Slack, and Dropbox."
 website: "https://www.accel.com"
+logo_url: /logos/accel.png
 tagging:
   match_case: true
   match_name: false

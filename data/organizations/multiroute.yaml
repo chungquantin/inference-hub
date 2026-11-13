@@ -1,0 +1,8 @@
+slug: multiroute
+name: "MultiRoute"
+kinds: [llm_gateway]
+description: "BYOK routing: $5.00 per 10,000 platform requests. Evaluation runs billed separately. $5.00 sign-up credit."
+website: "https://multiroute.ai"
+logo_url: /logos/multiroute.svg
+tagging:
+  match_case: true

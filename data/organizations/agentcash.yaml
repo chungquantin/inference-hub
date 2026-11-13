@@ -1,0 +1,9 @@
+slug: agentcash
+name: "AgentCash"
+kinds: [llm_gateway]
+description: "AgentCash lets AI agents buy anything on your behalf. Pay per call, no keys, no subscriptions."
+website: "https://agentcash.dev"
+logo_url: /logos/agentcash.png
+tagging:
+  match_case: true
+  match_name: false

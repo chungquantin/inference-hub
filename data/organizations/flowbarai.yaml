@@ -1,0 +1,8 @@
+slug: flowbarai
+name: "FlowBarAI"
+kinds: [llm_gateway]
+description: "Access leading AI models through one compatible gateway and create images and videos with FlowBarAI GEN Studio."
+website: "https://flowbarai.com"
+logo_url: /logos/flowbarai.png
+tagging:
+  match_case: true

@@ -2,5 +2,6 @@ slug: gigabyte
 name: "Gigabyte"
 kinds: [hardware]
 website: "https://www.gigabyte.com"
+logo_url: /logos/gigabyte.png
 tagging:
   match_case: true

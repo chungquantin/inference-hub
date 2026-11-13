@@ -1,0 +1,9 @@
+slug: bourse
+name: "Bourse"
+kinds: [other]
+description: "Nasdaq for AI models. LLM derivatives — every model a tradeable asset, every trade a bet on AI demand. OpenAI-compatible inference on top, settled on Solana."
+website: "https://usebourse.xyz"
+logo_url: /logos/bourse.svg
+tagging:
+  match_case: true
+  match_name: false

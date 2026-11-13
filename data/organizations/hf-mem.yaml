@@ -3,6 +3,7 @@ name: "hf-mem"
 kinds: [open_source]
 description: "A CLI to estimate inference memory requirements for Hugging Face models, written in Python."
 website: "https://pypi.org/project/hf-mem/"
+logo_url: /logos/hf-mem.svg
 links:
   github: "https://github.com/alvarobartt/hf-mem"
 categories: [local-runtimes]

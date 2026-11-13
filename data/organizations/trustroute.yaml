@@ -1,0 +1,9 @@
+slug: trustroute
+name: "TrustRoute"
+kinds: [llm_gateway]
+description: "One API key for open and frontier models, Swiss by default. An OpenAI compatible gateway with built in rules, made for regulated industries."
+website: "https://trustroute.ch"
+logo_url: /logos/trustroute.png
+tagging:
+  match_case: true
+  match_name: false

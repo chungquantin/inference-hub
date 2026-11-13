@@ -1,0 +1,7 @@
+slug: apiyi
+name: "APIYI"
+kinds: [llm_gateway]
+website: "https://api.apiyi.com"
+logo_url: /logos/apiyi.png
+tagging:
+  match_case: true

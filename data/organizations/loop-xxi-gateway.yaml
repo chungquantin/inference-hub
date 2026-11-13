@@ -1,0 +1,9 @@
+slug: loop-xxi-gateway
+name: "Loop XXI Gateway"
+kinds: [llm_gateway]
+description: "Loop Gateway, metered AI infrastructure by Loop XXI. Account access and API key management. Card checkout is closed."
+website: "https://api.loopxxi.com"
+logo_url: /logos/loop-xxi-gateway.png
+tagging:
+  match_case: true
+  match_name: false

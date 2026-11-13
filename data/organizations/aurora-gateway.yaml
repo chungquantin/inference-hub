@@ -1,0 +1,19 @@
+slug: aurora-gateway
+name: "Aurora Gateway"
+kinds: [llm_gateway]
+description: "Enterprise AI gateway. Route, secure, and monitor OpenAI & Anthropic traffic at scale. Self-hosted, high-performance, built with Go. ( 55x faster than LiteLLM )"
+website: "http://aurorallm.online"
+logo_url: /logos/aurora-gateway.svg
+links:
+  github: "https://github.com/aurorallm"
+tagging:
+  match_case: true
+products:
+  - slug: aurora-gateway
+    name: "Aurora Gateway"
+    type: oss_project
+    github: aurorallm/aurora
+    tagline: "The Fastest enterprise AI gateway — route LLM traffic across OpenAI, Anthropic, Gemini, Groq & 30+ providers via a single API. Self-hosted, no vendor lock-in. ( 55x faster than litellm )"
+    url: "https://github.com/aurorallm/aurora"
+    metadata:
+      license: "Apache-2.0"

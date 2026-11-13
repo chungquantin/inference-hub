@@ -1,0 +1,20 @@
+slug: olla
+name: "Olla"
+kinds: [llm_gateway]
+description: "Open-source LLM proxy for 12 local backends plus any OpenAI-compatible server. Load balancing, failover, Claude Code support and a built-in dashboard."
+website: "https://tensorfoundry.io"
+logo_url: /logos/olla.png
+links:
+  github: "https://github.com/thushan"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: olla
+    name: "Olla"
+    type: oss_project
+    github: thushan/olla
+    tagline: "High-performance lightweight proxy and load balancer for LLM infrastructure. Intelligent routing, automatic failover and unified model discovery across local and remote inference backends."
+    url: "https://github.com/thushan/olla"
+    metadata:
+      license: "Apache-2.0"

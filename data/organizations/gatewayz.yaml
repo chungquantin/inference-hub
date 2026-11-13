@@ -1,0 +1,8 @@
+slug: gatewayz
+name: "Gatewayz"
+kinds: [llm_gateway]
+description: "One key and one model-agnostic endpoint for every agent you run. OpenAI-compatible, with native Anthropic Messages, per-key spend ceilings and errors built for software, not people."
+website: "https://gatewayz.ai"
+logo_url: /logos/gatewayz.png
+tagging:
+  match_case: true

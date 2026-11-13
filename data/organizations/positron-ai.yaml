@@ -3,5 +3,6 @@ name: "Positron AI"
 kinds: [hardware]
 description: "Positron makes purpose-built hardware to accelerate generative AI."
 website: "https://www.positron.ai"
+logo_url: /logos/positron-ai.svg
 tagging:
   match_case: true

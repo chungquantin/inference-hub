@@ -1,0 +1,8 @@
+slug: zerouter
+name: "Zerouter"
+kinds: [llm_gateway]
+description: "Connect Claude Code, Codex and Cursor to supported AI models with one Zerouter API key. Compare token prices and list-price references. Pay per token, no subscription."
+website: "https://zerouter.ai"
+logo_url: /logos/zerouter.svg
+tagging:
+  match_case: true

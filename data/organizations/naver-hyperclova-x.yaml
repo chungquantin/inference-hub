@@ -6,3 +6,8 @@ website: "https://clova.ai"
 logo_url: /logos/naver-hyperclova-x.png
 tagging:
   match_case: true
+products:
+  - slug: clova-studio
+    name: "CLOVA Studio"
+    type: platform
+    url: "https://clovastudio.ncloud.com"

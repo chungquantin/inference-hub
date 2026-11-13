@@ -1,0 +1,9 @@
+slug: hiapi
+name: "HiAPI"
+kinds: [inference_provider]
+description: "Call leading generative models, track each task or wait for callbacks, and receive persistent artifact links without extra storage work."
+website: "https://hiapi.ai"
+logo_url: /logos/hiapi.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,9 @@
+slug: tierup
+name: "TierUp"
+kinds: [llm_gateway]
+description: "An affordable, OpenAI-compatible AI API. Pick a performance tier; TierUp routes to the best LLM at flat prices ~50% below retail. $25 free credit, no card."
+website: "https://tierup.ai"
+logo_url: /logos/tierup.png
+tagging:
+  match_case: true
+  match_name: false

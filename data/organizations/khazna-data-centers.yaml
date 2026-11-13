@@ -3,6 +3,7 @@ name: "Khazna Data Centers"
 kinds: [gpu_cloud]
 description: "Khazna is an advanced data centers provider in the UAE. Explore our secure, sustainable, and scalable solutions for your business needs."
 website: "https://khaznadatacenters.com"
+logo_url: /logos/khazna-data-centers.svg
 categories: [sovereign-clouds]
 tagging:
   match_case: true

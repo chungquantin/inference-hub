@@ -1,0 +1,20 @@
+slug: antirion
+name: "Antirion"
+kinds: [llm_gateway]
+description: "One Rust binary, with the admin console built in, between your apps and every model provider. Routing, budgets, guardrails and observability for every LLM call, with half a millisecond of overhead."
+website: "https://antirion.ai"
+logo_url: /logos/antirion.png
+links:
+  github: "https://github.com/eliasbiondo"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: antirion
+    name: "Antirion"
+    type: oss_project
+    github: eliasbiondo/antirion
+    tagline: "🕷️ The fastest open-source AI Gateway and LLM Gateway — one binary with built-in console to route, secure, budget and observe every LLM call across OpenAI, Anthropic, Gemini, Bedrock and more."
+    url: "https://github.com/eliasbiondo/antirion"
+    metadata:
+      license: "Apache-2.0"

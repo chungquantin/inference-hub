@@ -1,0 +1,9 @@
+slug: myai
+name: "MyAi"
+kinds: [decentralized]
+description: "MyAi is the decentralized GPU compute marketplace on Base. Contribute idle compute, earn MYAI tokens, and power AI agents with open-weight models at pay-per-job prices."
+website: "https://myaitoken.io"
+logo_url: /logos/myai.png
+tagging:
+  match_case: true
+  match_name: false

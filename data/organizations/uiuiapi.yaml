@@ -1,0 +1,8 @@
+slug: uiuiapi
+name: "UIUIAPI"
+kinds: [llm_gateway]
+description: "一个 API Key 接入主流 AI 模型，支持兼容调用、额度管理、备用线路与企业级服务支持。"
+website: "https://uiuiapi.com"
+logo_url: /logos/uiuiapi.png
+tagging:
+  match_case: true

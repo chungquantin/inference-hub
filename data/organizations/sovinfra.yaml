@@ -1,0 +1,9 @@
+slug: sovinfra
+name: "Sovinfra"
+kinds: [inference_provider]
+description: "Inférence IA souveraine hébergée en Europe. Un endpoint compatible OpenAI, dimensionné pour la production."
+website: "https://sovinfra.ai"
+logo_url: /logos/sovinfra.png
+tagging:
+  match_case: true
+  match_name: false

@@ -1,0 +1,19 @@
+slug: opper
+name: "Opper"
+kinds: [llm_gateway]
+description: "Access 700+ AI models through one EU-hosted, ISO 27001 certified, GDPR-compliant API. Drop-in OpenAI SDK compatible, pay-as-you-go, with spend caps, model allowlists and zero data retention."
+website: "https://opper.ai"
+logo_url: /logos/opper.png
+links:
+  github: "https://github.com/opper-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: opper
+    name: "Opper"
+    type: oss_project
+    github: opper-ai/opper-cookbook
+    url: "https://github.com/opper-ai/opper-cookbook"
+    metadata:
+      license: "Apache-2.0"

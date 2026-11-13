@@ -1,0 +1,18 @@
+slug: gpt-load
+name: "GPT-Load"
+kinds: [open_source]
+description: "One endpoint for every channel and credential."
+website: "https://www.gpt-load.com"
+logo_url: /logos/gpt-load.svg
+links:
+  github: "https://github.com/tbphp"
+tagging:
+  match_case: true
+products:
+  - slug: gpt-load
+    name: "GPT-Load"
+    type: oss_project
+    github: tbphp/gpt-load
+    url: "https://github.com/tbphp/gpt-load"
+    metadata:
+      license: "MIT"

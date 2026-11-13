@@ -3,5 +3,6 @@ name: "Kima Ventures"
 kinds: [investor]
 description: "We back 2 startups per week with money & care. 150K one-off, any stage, deal size & sector."
 website: "https://www.kimaventures.com"
+logo_url: /logos/kima-ventures.png
 tagging:
   match_case: true

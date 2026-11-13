@@ -1,0 +1,9 @@
+slug: hopscotch
+name: "Hopscotch"
+kinds: [llm_gateway]
+description: "Call 500+ models at each provider"
+website: "https://hopscotchlabs.ai"
+logo_url: /logos/hopscotch.png
+tagging:
+  match_case: true
+  match_name: false

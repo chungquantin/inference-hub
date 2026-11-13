@@ -1,6 +1,7 @@
 slug: semianalysis
 name: "SemiAnalysis"
 kinds: [other]
+description: "Research, industry models, and advisory for the teams building, funding, and analyzing the AI buildout."
 website: "https://semianalysis.com"
 logo_url: /logos/semianalysis.png
 tagging:

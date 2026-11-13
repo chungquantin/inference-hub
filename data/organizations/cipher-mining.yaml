@@ -1,6 +1,7 @@
 slug: cipher-mining
 name: "Cipher Mining"
 kinds: [gpu_cloud]
+description: "Rapidly scaling the energy capabilities of today, to power the potential of tomorrow."
 website: "https://www.ciphermining.com"
 logo_url: /logos/cipher-mining.png
 tagging:

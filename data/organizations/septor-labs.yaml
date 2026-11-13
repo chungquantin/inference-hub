@@ -1,0 +1,9 @@
+slug: septor-labs
+name: "Septor Labs"
+kinds: [llm_gateway]
+description: "One OpenAI-compatible API for every model — open-weight, open-source, and frontier — with adaptive routing, hosted agents, pipelines, and built-in observability."
+website: "https://septorlabs.com"
+logo_url: /logos/septor-labs.png
+tagging:
+  match_case: true
+  match_name: false

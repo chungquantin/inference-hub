@@ -1,6 +1,7 @@
 slug: submer
 name: "Submer"
 kinds: [hardware]
+description: "Submer Group is the connected intelligence across every layer of AI infrastructure: power, cooling, data centers, and compute. Deployed and operating worldwide."
 website: "https://submer.com"
 logo_url: /logos/submer.png
 tagging:

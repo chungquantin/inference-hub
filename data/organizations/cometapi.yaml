@@ -1,0 +1,8 @@
+slug: cometapi
+name: "CometAPI"
+kinds: [llm_gateway]
+description: "Access GPT, Claude, Gemini, Flux, Suno and 500+ AI models with one API key. CometAPI unifies providers, billing and endpoints for faster builds."
+website: "https://www.cometapi.com"
+logo_url: /logos/cometapi.png
+tagging:
+  match_case: true

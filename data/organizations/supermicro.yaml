@@ -2,5 +2,6 @@ slug: supermicro
 name: "Supermicro"
 kinds: [hardware]
 website: "https://www.supermicro.com"
+logo_url: /logos/supermicro.png
 tagging:
   match_case: true

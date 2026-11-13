@@ -1,0 +1,7 @@
+slug: sllm
+name: "sllm"
+kinds: [inference_provider]
+website: "https://sllm.cloud"
+tagging:
+  match_case: true
+  match_name: false

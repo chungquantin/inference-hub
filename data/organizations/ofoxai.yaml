@@ -1,0 +1,8 @@
+slug: ofoxai
+name: "OfoxAI"
+kinds: [llm_gateway]
+description: "One API for GPT, Claude, Gemini, DeepSeek, Kimi, Qwen, GLM and 100+ models — plus Seedance video and Nano Banana images. 3-minute setup, 99.9% SLA."
+website: "https://ofox.ai"
+logo_url: /logos/ofoxai.png
+tagging:
+  match_case: true

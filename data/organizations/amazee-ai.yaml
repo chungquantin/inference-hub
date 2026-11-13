@@ -1,0 +1,8 @@
+slug: amazee-ai
+name: "amazee.ai"
+kinds: [llm_gateway]
+description: "Deploy secure, sovereign private AI. Access leading LLMs, autonomous agents, and Drupal workflows in your chosen region with zero data retention."
+website: "https://www.amazee.ai"
+logo_url: /logos/amazee-ai.png
+tagging:
+  match_case: true

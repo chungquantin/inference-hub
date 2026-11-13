@@ -1,6 +1,8 @@
 slug: blackrock
 name: "BlackRock"
 kinds: [investor]
+description: "BlackRock invests on behalf of our clients, from institutions to individuals in any stage of life, who entrust their savings to us. Learn more about us."
 website: "https://www.blackrock.com"
+logo_url: /logos/blackrock.svg
 tagging:
   match_case: true

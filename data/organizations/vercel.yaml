@@ -40,6 +40,11 @@ products:
     url: "https://github.com/vercel-labs/agent-browser"
     metadata:
       license: "Apache-2.0"
+  - slug: vercel-ai-gateway
+    name: "Vercel AI Gateway"
+    type: platform
+    tagline: "Use 400+ AI models without managing rate limits and API keys through Vercel AI Gateway."
+    url: "https://vercel.com/ai-gateway"
 funding:
   - round: series_f
     announced_on: 2025-09-30

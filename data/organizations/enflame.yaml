@@ -2,5 +2,6 @@ slug: enflame
 name: "Enflame"
 kinds: [hardware]
 website: "https://www.enflame-tech.com"
+logo_url: /logos/enflame.svg
 tagging:
   match_case: true

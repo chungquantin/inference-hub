@@ -1,0 +1,19 @@
+slug: manifest
+name: "Manifest"
+kinds: [llm_gateway]
+description: "The open source LLM gateway that connects your AI agents and agentic workflows to any provider in seconds. Subscriptions, pay-per-token, local models, and custom providers."
+website: "https://manifest.build"
+logo_url: /logos/manifest.png
+links:
+  github: "https://github.com/mnfst"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: manifest
+    name: "Manifest"
+    type: oss_project
+    github: mnfst/llm-gateway
+    url: "https://github.com/mnfst/llm-gateway"
+    metadata:
+      license: "MIT"

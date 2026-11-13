@@ -1,0 +1,8 @@
+slug: compute-exchange
+name: "Compute Exchange"
+kinds: [other]
+description: "An institutional exchange for GPU compute — aggregated reserved capacity from neocloud partners, secondary hardware, and forward delivery. Identity-verified counterparties only."
+website: "https://compute.exchange"
+logo_url: /logos/compute-exchange.svg
+tagging:
+  match_case: true

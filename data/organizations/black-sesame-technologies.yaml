@@ -3,5 +3,6 @@ name: "Black Sesame Technologies"
 kinds: [hardware]
 description: "黑芝麻智能科技有限公司，全球自动驾驶计算芯片引领者。黑芝麻公司致力于打造人工智能和计算机视觉的核心算法和计算平台。专注于视觉感知技术和自主IP黑芝麻芯片设计开发，构建开放的产业生态。黑芝麻公司集结了20年以上汽车领域和芯片领域从业经验的团队，黑芝麻ADAS、黑芝麻感知系统具有独特优势，为智能社会生活提供完整的解决方案。"
 website: "https://www.blacksesame.com"
+logo_url: /logos/black-sesame-technologies.png
 tagging:
   match_case: true

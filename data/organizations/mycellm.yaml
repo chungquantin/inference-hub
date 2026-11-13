@@ -1,0 +1,20 @@
+slug: mycellm
+name: "mycellm"
+kinds: [open_source]
+description: "Distributed LLM inference. Chat for free, powered by GPUs worldwide. No signup. Open source."
+website: "https://mycellm.ai"
+logo_url: /logos/mycellm.svg
+links:
+  github: "https://github.com/mycellm"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: mycellm
+    name: "mycellm"
+    type: oss_project
+    github: mycellm/mycellm
+    tagline: "Distributed LLM inference across heterogeneous hardware. Pool GPUs into a P2P network with QUIC transport, Ed25519 identity, and an OpenAI-compatible API."
+    url: "https://github.com/mycellm/mycellm"
+    metadata:
+      license: "Apache-2.0"

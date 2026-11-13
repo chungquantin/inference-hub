@@ -1,0 +1,20 @@
+slug: edgee
+name: "Edgee"
+kinds: [llm_gateway]
+description: "Budget-driven routing, token compression, and team observability for Claude Code, Codex, Cursor, and Copilot. Route to open weight models mid-task, no quality loss, no code changes."
+website: "https://edgee.ai"
+logo_url: /logos/edgee.png
+links:
+  github: "https://github.com/edgee-ai"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: edgee
+    name: "Edgee"
+    type: oss_project
+    github: edgee-ai/edgee
+    tagline: "Official Edgee CLI to interract with Edgee's Agent Gateway. Route Claude Code, Codex, Cursor, VS Code + Copilot, and more through Edgee's hosted gateway to cut token spend."
+    url: "https://github.com/edgee-ai/edgee"
+    metadata:
+      license: "Apache-2.0"

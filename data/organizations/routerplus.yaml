@@ -1,0 +1,8 @@
+slug: routerplus
+name: "RouterPlus"
+kinds: [llm_gateway]
+description: "AI inference and LLM routing on your own evals and production traffic. Every model worth running behind one key, plus the capacity you need next."
+website: "https://routerplus.com"
+logo_url: /logos/routerplus.webp
+tagging:
+  match_case: true

@@ -3,6 +3,7 @@ name: "Conviction"
 kinds: [investor]
 description: "AI Seed and Series A Venture Fund"
 website: "https://www.conviction.com"
+logo_url: /logos/conviction.png
 tagging:
   match_case: true
   match_name: false

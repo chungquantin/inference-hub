@@ -1,6 +1,7 @@
 slug: lancium
 name: "Lancium"
 kinds: [gpu_cloud]
+description: "Lancium Provides Green Energy Infrastructure Solutions for Today's Data Center Demands. Discover how today."
 website: "https://lancium.com"
 tagging:
   match_case: true

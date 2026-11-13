@@ -3,5 +3,6 @@ name: "Tachyum"
 kinds: [hardware]
 description: "Tachyum is enabling human brain-scale AI and advancing the entire world to a greener era, by delivering Tachyum Prodigy - The World’s First Universal Processor"
 website: "https://www.tachyum.com"
+logo_url: /logos/tachyum.png
 tagging:
   match_case: true

@@ -3,6 +3,7 @@ name: "CtrlS"
 kinds: [gpu_cloud]
 description: "CtrlS is Asia's largest Rated-4 data center network. We offer colocation, private cloud, and managed services with a 99.995% uptime SLA. Explore now."
 website: "https://www.ctrls.com"
+logo_url: /logos/ctrls.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true

@@ -1,0 +1,9 @@
+slug: glean
+name: "Glean"
+kinds: [agent_tool]
+description: "Glean is the Enterprise AI platform connected to your enterprise's data. Find, create, and automate anything. Explore what Glean can do for you!"
+website: "https://www.glean.com"
+logo_url: /logos/glean.png
+tagging:
+  match_case: true
+  match_name: false

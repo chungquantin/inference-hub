@@ -1,0 +1,20 @@
+slug: lynkr
+name: "Lynkr"
+kinds: [llm_gateway]
+description: "Self-hosted LLM gateway for Claude Code, Cursor, and Codex. Compresses tokens before they hit the model — 87.6% on JSON tool results, 53% on tool-heavy requests, 171ms semantic cache hits. 13+ providers, zero code changes."
+website: "http://lynkrhq.com"
+logo_url: /logos/lynkr.png
+links:
+  github: "https://github.com/Fast-Editor"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: lynkr
+    name: "Lynkr"
+    type: oss_project
+    github: Fast-Editor/Lynkr
+    tagline: "Streamline your workflow with Lynkr, a CLI tool that acts as an HTTP proxy for efficient code interactions using Claude Code CLI."
+    url: "https://github.com/Fast-Editor/Lynkr"
+    metadata:
+      license: "Apache-2.0"

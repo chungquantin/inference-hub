@@ -7,3 +7,9 @@ website: "https://llmgateway.io"
 logo_url: /logos/llm-gateway.png
 tagging:
   match_case: true
+products:
+  - slug: lounge-by-llm-gateway
+    name: "Lounge by LLM Gateway"
+    type: platform
+    tagline: "The members' lounge for AI. Compare model answers, generate images and video, and host multi-model council debates — your AI workspace with one membership."
+    url: "https://lounge.llmgateway.io"

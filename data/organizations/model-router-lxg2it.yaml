@@ -1,0 +1,17 @@
+slug: model-router-lxg2it
+name: "Model Router (lxg2it)"
+kinds: [llm_gateway]
+description: "Open-source AI model router — cheapest access to Claude Opus, GPT-5, Gemini with tiered fallback routing. Free tier, $1 paid tier, 0% Anthropic markup. OpenAI-compatible API."
+website: "https://api.lxg2it.com"
+logo_url: /logos/model-router-lxg2it.png
+links:
+  github: "https://github.com/lxg2it"
+tagging:
+  match_case: true
+products:
+  - slug: model-router-lxg2it
+    name: "Model Router (lxg2it)"
+    type: oss_project
+    github: lxg2it/modelrouter-core
+    tagline: "Open-source AI model router — cheapest access to Claude Opus, GPT-5, Gemini with tiered fallback routing. Free tier, $1 paid tier, 0% Anthropic markup. OpenAI-compatible API."
+    url: "https://github.com/lxg2it/modelrouter-core"

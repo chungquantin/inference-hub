@@ -1,0 +1,7 @@
+slug: no-1-api
+name: "No.1-API"
+kinds: [llm_gateway]
+description: "No.1‑API 专注于为开发者提供稳定高速的一站式大语言模型 API 中转服务，支持 、Anthropic Claude、Midjourney、Google Gemini、阿里云百炼、腾讯混元等主流 LLM，统一鉴权、灵活计费、智能负载均衡，助你低成本接入多模型 AI 能力。"
+website: "https://api.rcouyi.com"
+tagging:
+  match_case: true

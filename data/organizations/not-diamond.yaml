@@ -3,5 +3,6 @@ name: "Not Diamond"
 kinds: [llm_gateway]
 tagline: "Prompt-level model router."
 website: "https://www.notdiamond.ai"
+logo_url: /logos/not-diamond.svg
 tagging:
   match_case: true

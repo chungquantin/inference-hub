@@ -1,0 +1,19 @@
+slug: weave-router
+name: "Weave Router"
+kinds: [llm_gateway]
+description: "Weave Router is an open-source LLM router for Claude Code, Codex, and other coding agents. It routes each request to the cheapest model that clears your quality bar."
+website: "https://weaveos.com"
+logo_url: /logos/weave-router.png
+links:
+  github: "https://github.com/weave-os"
+tagging:
+  match_case: true
+products:
+  - slug: weave-router
+    name: "Weave Router"
+    type: oss_project
+    github: weave-os/router
+    tagline: "Model router for agentic systems. Routes every prompt to the right model in <50ms. Cut costs 40-70% with just an endpoint change."
+    url: "https://github.com/weave-os/router"
+    metadata:
+      license: "Apache-2.0"

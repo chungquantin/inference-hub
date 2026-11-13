@@ -2,5 +2,6 @@ slug: intel-capital
 name: "Intel Capital"
 kinds: [investor]
 website: "https://www.intelcapital.com"
+logo_url: /logos/intel-capital.svg
 tagging:
   match_case: true

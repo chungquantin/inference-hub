@@ -1,0 +1,9 @@
+slug: infercom
+name: "Infercom"
+kinds: [inference_provider]
+description: "EU inference provider for open-weight LLMs, on hardware we own in Munich. Inference API, dedicated capacity or on-premises. Up to 10x faster than GPUs."
+website: "https://infercom.ai"
+logo_url: /logos/infercom.png
+tagging:
+  match_case: true
+  match_name: false

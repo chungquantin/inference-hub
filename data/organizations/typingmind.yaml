@@ -1,0 +1,8 @@
+slug: typingmind
+name: "TypingMind"
+kinds: [other]
+description: "Chat with AI using your API keys. Pay only for what you use. ChatGPT, Gemini, Claude, and other LLMs supported. The best chat LLM frontend UI for all AI models."
+website: "https://www.typingmind.com"
+logo_url: /logos/typingmind.webp
+tagging:
+  match_case: true

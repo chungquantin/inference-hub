@@ -1,0 +1,9 @@
+slug: ai-box
+name: "AI Box"
+kinds: [other]
+description: "Every top text, image, audio, and video model in one subscription from $7.25/mo. Chat, compare, build no-code AI workflows, and use them in Claude or ChatGPT."
+website: "https://www.aibox.ai"
+logo_url: /logos/ai-box.svg
+tagging:
+  match_case: true
+  match_name: false

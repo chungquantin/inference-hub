@@ -1,0 +1,8 @@
+slug: go2llm
+name: "go2llm"
+kinds: [llm_gateway]
+description: "Claude, GPT, Gemini and open models with one API key. Cheaper than the official price on every token: input, output and cache."
+website: "https://go2llm.tech"
+logo_url: /logos/go2llm.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: ai
+name: "AI快站"
+kinds: [llm_gateway]
+description: "AI快站提供 Claude、OpenAI、Gemini、Grok、DeepSeek 及国产大模型 API 统一接入，兼容 OpenAI SDK，覆盖文本、图像、视频、向量与检索模型，支持 Cursor、Claude Code、Codex、Dify 等工具。"
+website: "https://www.aifast.club"
+logo_url: /logos/ai.png
+tagging:
+  match_case: true

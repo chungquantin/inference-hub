@@ -1,0 +1,8 @@
+slug: aigateway
+name: "AIgateway"
+kinds: [llm_gateway]
+description: "OpenAI-compatible endpoints to every frontier and open-weight model — text, image, video, voice, audio, embeddings. 1150+ models across 85+ labs, one schema."
+website: "https://aigateway.sh"
+logo_url: /logos/aigateway.png
+tagging:
+  match_case: true

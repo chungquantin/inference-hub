@@ -1,0 +1,8 @@
+slug: trustedrouter
+name: "TrustedRouter"
+kinds: [llm_gateway]
+description: "Access hundreds of models confidentially through a single OpenAI-compatible API."
+website: "https://trustedrouter.com"
+logo_url: /logos/trustedrouter.png
+tagging:
+  match_case: true

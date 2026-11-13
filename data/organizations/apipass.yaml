@@ -1,0 +1,7 @@
+slug: apipass
+name: "ApiPass"
+kinds: [llm_gateway]
+description: "ApiPass provides official-grade AI model APIs for 30%-70% less than official pricing."
+website: "https://apipass.dev"
+tagging:
+  match_case: true

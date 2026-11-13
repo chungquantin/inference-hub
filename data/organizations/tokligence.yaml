@@ -1,0 +1,19 @@
+slug: tokligence
+name: "Tokligence"
+kinds: [llm_gateway]
+description: "AI infrastructure tools that make using AI simple and secure. Privacy protection, smart routing, and token marketplace - for individuals and teams."
+website: "https://tokligence.ai"
+logo_url: /logos/tokligence.png
+links:
+  github: "https://github.com/tokligence"
+tagging:
+  match_case: true
+products:
+  - slug: tokligence
+    name: "Tokligence"
+    type: oss_project
+    github: tokligence/tokligence-gateway
+    tagline: "Go LLM gateway — one interface for Claude Code, Codex, Gemini CLI, Anthropic, OpenAI, Qwen, and vLLM."
+    url: "https://github.com/tokligence/tokligence-gateway"
+    metadata:
+      license: "Apache-2.0"

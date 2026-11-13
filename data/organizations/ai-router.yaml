@@ -1,0 +1,7 @@
+slug: ai-router
+name: "AI-ROUTER"
+kinds: [llm_gateway]
+website: "https://ai-router.dev"
+logo_url: /logos/ai-router.svg
+tagging:
+  match_case: true

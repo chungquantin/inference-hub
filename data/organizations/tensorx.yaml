@@ -1,0 +1,9 @@
+slug: tensorx
+name: "TensorX"
+kinds: [inference_provider]
+description: "Why our customers choose TensorX: AI Models, running at lightning speed on our private inference platform. Zero data retention. EU-sovereign infrastructure."
+website: "https://tensorx.ai"
+logo_url: /logos/tensorx.png
+tagging:
+  match_case: true
+  match_name: false

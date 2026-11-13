@@ -1,0 +1,20 @@
+slug: tinfoil
+name: "Tinfoil"
+kinds: [llm_gateway]
+description: "AI that keeps your data private at all times. Fast, powerful, and verifiable, thanks to secure hardware enclaves."
+website: "https://tinfoil.sh"
+logo_url: /logos/tinfoil.png
+links:
+  github: "https://github.com/tinfoilsh"
+tagging:
+  match_case: true
+  match_name: false
+products:
+  - slug: tinfoil
+    name: "Tinfoil"
+    type: oss_project
+    github: tinfoilsh/tinfoil-python
+    tagline: "Tinfoil Python Client supporting the OpenAI API standard"
+    url: "https://github.com/tinfoilsh/tinfoil-python"
+    metadata:
+      license: "Apache-2.0"

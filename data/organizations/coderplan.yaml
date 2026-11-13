@@ -1,0 +1,8 @@
+slug: coderplan
+name: "CoderPlan"
+kinds: [llm_gateway]
+description: "CoderPlan gives developers Claude Code/Codex routing, a Gemini CLI gateway, and third-party API access with pay-as-you-go billing plus auditable API usage credit, token, cache, and cost details."
+website: "https://coderplan.ai"
+logo_url: /logos/coderplan.png
+tagging:
+  match_case: true

@@ -1,0 +1,9 @@
+slug: concentrate
+name: "Concentrate"
+kinds: [llm_gateway]
+description: "Managed AI gateway and model router. Buy inference for every major model with one API key, plus failover, spend limits, ZDR, and a cost optimizer."
+website: "https://concentrate.ai"
+logo_url: /logos/concentrate.svg
+tagging:
+  match_case: true
+  match_name: false

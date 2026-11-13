@@ -2,5 +2,6 @@ slug: valor-equity-partners
 name: "Valor Equity Partners"
 kinds: [investor]
 website: "https://www.valorep.com"
+logo_url: /logos/valor-equity-partners.webp
 tagging:
   match_case: true

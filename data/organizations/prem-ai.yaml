@@ -1,0 +1,9 @@
+slug: prem-ai
+name: "Prem AI"
+kinds: [inference_provider]
+description: "Prem delivers sovereign AI that is verifiable, private, and compounding: frontier models on encrypted GPUs, and sovereign agents that turn AI from a tool you rent into owned, appreciating IP."
+website: "https://www.premai.io"
+logo_url: /logos/prem-ai.png
+tagging:
+  match_case: true
+  match_name: false

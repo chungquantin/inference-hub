@@ -1,0 +1,8 @@
+slug: chinallm
+name: "ChinaLLM"
+kinds: [llm_gateway]
+description: "统一的 AI 模型聚合与分发网关"
+website: "https://chinallm.ai"
+logo_url: /logos/chinallm.svg
+tagging:
+  match_case: true
