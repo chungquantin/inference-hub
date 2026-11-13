@@ -1,0 +1,8 @@
+slug: melious
+name: "Melious"
+kinds: [llm_gateway]
+description: "Making European AI accessible: 60+ open-weight models on sovereign European infrastructure — secure, sovereign, sustainable, OpenAI- and Anthropic-compatible."
+website: "https://melious.ai"
+logo_url: /logos/melious.png
+tagging:
+  match_case: true

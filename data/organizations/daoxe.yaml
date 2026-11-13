@@ -1,0 +1,8 @@
+slug: daoxe
+name: "DaoXE"
+kinds: [llm_gateway]
+description: "Unified AI API gateway and admin dashboard."
+website: "https://daoxe.com"
+logo_url: /logos/daoxe.png
+tagging:
+  match_case: true

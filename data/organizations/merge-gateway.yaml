@@ -1,0 +1,8 @@
+slug: merge-gateway
+name: "Merge Gateway"
+kinds: [llm_gateway]
+description: "Merge is the universal context engine for AI. One platform connects your agents to company data, tools, and models to reinvent what your business can do."
+website: "https://merge.dev"
+logo_url: /logos/merge-gateway.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: mixlayer
+name: "Mixlayer"
+kinds: [llm_gateway]
+description: "Mixlayer delivers frontier-grade APIs for open source AI models."
+website: "https://mixlayer.com"
+logo_url: /logos/mixlayer.svg
+tagging:
+  match_case: true

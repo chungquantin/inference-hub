@@ -1,0 +1,8 @@
+slug: privatemode-ai
+name: "Privatemode AI"
+kinds: [inference_provider]
+description: "Privatemode is the confidential AI service that protects your data end-to-end. Use AI without security and privacy worries."
+website: "https://privatemode.ai"
+logo_url: /logos/privatemode-ai.png
+tagging:
+  match_case: true

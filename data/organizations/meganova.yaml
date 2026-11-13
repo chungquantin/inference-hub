@@ -1,0 +1,7 @@
+slug: meganova
+name: "Meganova"
+kinds: [llm_gateway]
+description: "Build and run digital humans on one engine, Libra OS. Enterprise digital employees that run inside your own environment, and characters anyone can create."
+website: "https://meganova.ai"
+tagging:
+  match_case: true

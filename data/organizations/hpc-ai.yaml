@@ -1,0 +1,8 @@
+slug: hpc-ai
+name: "HPC-AI"
+kinds: [inference_provider]
+description: "Scale AI workloads with dedicated B200, H200, H100, 4090 & 5090 GPU servers. High-speed interconnect, NVLink, InfiniBand, and pay-as-you-go pricing. Start now on HPC-AI.COM."
+website: "https://hpc-ai.com"
+logo_url: /logos/hpc-ai.png
+tagging:
+  match_case: true

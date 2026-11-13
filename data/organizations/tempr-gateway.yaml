@@ -1,0 +1,8 @@
+slug: tempr-gateway
+name: "Tempr Gateway"
+kinds: [llm_gateway]
+description: "Run Claude Code on your Claude plan, Codex on ChatGPT, and any tool or app on your API keys, with one set of budgets, guardrails and logs over all of it."
+website: "https://temprhq.io"
+logo_url: /logos/tempr-gateway.png
+tagging:
+  match_case: true

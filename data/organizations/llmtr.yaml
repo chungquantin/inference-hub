@@ -1,0 +1,8 @@
+slug: llmtr
+name: "LLMTR"
+kinds: [llm_gateway]
+description: "LLMTR AI Gateway, OpenAI uyumlu API ile GPT, Claude, Gemini, Türkiye'de barındırılan LLMTR modelleri ve global sağlayıcılara tek API key üzerinden erişim sağlayan LLM gateway platformudur."
+website: "https://llmtr.com"
+logo_url: /logos/llmtr.png
+tagging:
+  match_case: true

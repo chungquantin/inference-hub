@@ -1,0 +1,7 @@
+slug: freemodel
+name: "FreeModel"
+kinds: [llm_gateway]
+description: "FreeModel routes each request to the best open model behind a single endpoint — compatible with both the OpenAI (v1/responses) and Anthropic (v1/messages) formats. One key, no vendor lock-in."
+website: "https://freemodel.dev"
+tagging:
+  match_case: true

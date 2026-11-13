@@ -1,0 +1,7 @@
+slug: above-dev
+name: "above.dev"
+kinds: [llm_gateway]
+description: "One OpenAI-compatible endpoint for the fastest agentic AI models. DeepSeek, GLM 5.3 Flash and MiMo at cost + 10%."
+website: "https://above.dev"
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: aki-io
+name: "AKI.IO"
+kinds: [llm_gateway]
+description: "Run curated open-weight AI models on German infrastructure via an OpenAI- and Anthropic-compatible API. GDPR-ready, Zero Retention, no hyperscalers."
+website: "https://aki.io"
+logo_url: /logos/aki-io.png
+tagging:
+  match_case: true

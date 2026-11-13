@@ -1,0 +1,8 @@
+slug: cloudferro-sherlock
+name: "CloudFerro Sherlock"
+kinds: [inference_provider]
+description: "Run AI, Earth observation and data-intensive workloads on sovereign European cloud infrastructure, built on open source and hosted in EU data centres."
+website: "https://cloudferro.com"
+logo_url: /logos/cloudferro-sherlock.webp
+tagging:
+  match_case: true

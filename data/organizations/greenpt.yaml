@@ -1,0 +1,8 @@
+slug: greenpt
+name: "GreenPT"
+kinds: [inference_provider]
+description: "Chat, search, documents and API on European infrastructure powered by renewable energy. Your conversations stay out of model training. Explore GreenPT."
+website: "https://greenpt.ai"
+logo_url: /logos/greenpt.png
+tagging:
+  match_case: true

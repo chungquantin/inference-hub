@@ -1,0 +1,8 @@
+slug: lowrouter
+name: "LowRouter"
+kinds: [llm_gateway]
+description: "LowRouter is one OpenAI-compatible gateway to many LLM providers and models. Choose your provider, model, and region, change it anytime, and see the carbon, grid, and cost of every call."
+website: "https://lowrouter.ai"
+logo_url: /logos/lowrouter.png
+tagging:
+  match_case: true

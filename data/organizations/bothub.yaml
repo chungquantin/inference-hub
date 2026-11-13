@@ -1,0 +1,7 @@
+slug: bothub
+name: "Bothub"
+kinds: [llm_gateway]
+website: "https://bothub.ru"
+logo_url: /logos/bothub.png
+tagging:
+  match_case: true

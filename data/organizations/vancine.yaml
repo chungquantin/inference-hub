@@ -1,0 +1,8 @@
+slug: vancine
+name: "Vancine"
+kinds: [llm_gateway]
+description: "Access flagship and fast-inference Chinese AI models for reasoning, coding, multimodal workflows, AI agents, and high-throughput applications through one OpenAI-compatible API."
+website: "https://vancine.com"
+logo_url: /logos/vancine.png
+tagging:
+  match_case: true

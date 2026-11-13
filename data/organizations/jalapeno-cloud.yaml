@@ -1,0 +1,8 @@
+slug: jalapeno-cloud
+name: "Jalapeno Cloud"
+kinds: [llm_gateway]
+description: "Fast, secure LLM inference API for GLM, DeepSeek, Kimi and more. OpenAI-compatible endpoints, zero-retention data policy, pay-as-you-go token pricing."
+website: "https://jalapeno-cloud.ai"
+logo_url: /logos/jalapeno-cloud.png
+tagging:
+  match_case: true

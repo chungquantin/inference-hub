@@ -1,0 +1,8 @@
+slug: munito-ai
+name: "Munito AI"
+kinds: [llm_gateway]
+description: "Munito AI is an open-model AI cloud for Europe, private by default. It runs the GPUs, the inference and the sandboxes, so your team keeps inference and storage in the EU."
+website: "https://munito.ai"
+logo_url: /logos/munito-ai.png
+tagging:
+  match_case: true

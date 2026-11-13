@@ -1,0 +1,8 @@
+slug: kenari
+name: "Kenari"
+kinds: [llm_gateway]
+description: "Satu API key untuk semua model AI, kompatibel dengan OpenAI dan Anthropic. Mulai gratis, lalu pilih paket bulanan atau PAYG dalam Rupiah."
+website: "https://kenari.id"
+logo_url: /logos/kenari.svg
+tagging:
+  match_case: true

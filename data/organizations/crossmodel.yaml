@@ -1,0 +1,8 @@
+slug: crossmodel
+name: "CrossModel"
+kinds: [llm_gateway]
+description: "A multi-provider, OpenAI- and Anthropic-compatible API gateway. One API key and one base_url to call DeepSeek, Claude, GPT, Gemini and other leading models, with usage-based billing."
+website: "https://crossmodel.ai"
+logo_url: /logos/crossmodel.png
+tagging:
+  match_case: true

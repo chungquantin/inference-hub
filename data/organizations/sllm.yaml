@@ -2,6 +2,7 @@ slug: sllm
 name: "sllm"
 kinds: [inference_provider]
 website: "https://sllm.cloud"
+logo_url: /logos/sllm.png
 tagging:
   match_case: true
   match_name: false

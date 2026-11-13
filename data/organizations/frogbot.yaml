@@ -1,0 +1,8 @@
+slug: frogbot
+name: "FrogBot"
+kinds: [llm_gateway]
+description: "Replace per-seat SaaS with apps you actually own. Build internal tools, CRMs, and AI workflows in Claude Code or Cursor and deploy to Dojo for $29/app/month with unlimited users."
+website: "https://frogbot.ai"
+logo_url: /logos/frogbot.png
+tagging:
+  match_case: true

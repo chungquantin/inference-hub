@@ -1,0 +1,8 @@
+slug: vivgrid
+name: "Vivgrid"
+kinds: [llm_gateway]
+description: "The Managed Skills platform for enterprise AI agents: serverless LLM function calling with observability, evaluation, and global inference built in."
+website: "https://vivgrid.com"
+logo_url: /logos/vivgrid.png
+tagging:
+  match_case: true

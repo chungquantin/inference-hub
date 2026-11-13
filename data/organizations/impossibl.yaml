@@ -1,0 +1,8 @@
+slug: impossibl
+name: "Impossibl"
+kinds: [llm_gateway]
+description: "one api. every model. 0% usage markup."
+website: "https://impossibl.com"
+logo_url: /logos/impossibl.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: empiriolabs-ai
+name: "EmpirioLabs AI"
+kinds: [llm_gateway]
+description: "Specialized AI model hosting for open, proprietary, and custom stacks. Hosted open models, optimized proprietary endpoints, and turnkey deployment to real users."
+website: "https://empiriolabs.ai"
+logo_url: /logos/empiriolabs-ai.png
+tagging:
+  match_case: true

@@ -1,0 +1,8 @@
+slug: regolo-ai
+name: "Regolo AI"
+kinds: [inference_provider]
+description: "Build secure AI apps with EU-hosted, LLM APIs. Leverage our Zero Data Retention policy for enterprise-grade GDPR compliance"
+website: "https://regolo.ai"
+logo_url: /logos/regolo-ai.png
+tagging:
+  match_case: true

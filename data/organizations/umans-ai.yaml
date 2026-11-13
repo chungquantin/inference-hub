@@ -1,0 +1,8 @@
+slug: umans-ai
+name: "Umans AI"
+kinds: [llm_gateway]
+description: "The best open coding models (Kimi K3.1 Pro, GLM 5.3, DeepSeek V4.1 Flash), served fast from our in-house inference stack, priced per token. Keep your tools. Keep your data: zero data retention, ISO 27001 and SOC 2 in progress, EU-only inference on request."
+website: "https://umans.ai"
+logo_url: /logos/umans-ai.png
+tagging:
+  match_case: true

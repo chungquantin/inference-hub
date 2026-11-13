@@ -1,0 +1,8 @@
+slug: synthetic
+name: "Synthetic"
+kinds: [llm_gateway]
+description: "Chat with open-source models privately"
+website: "https://synthetic.new"
+logo_url: /logos/synthetic.png
+tagging:
+  match_case: true

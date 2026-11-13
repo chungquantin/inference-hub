@@ -1,0 +1,8 @@
+slug: iteracompute
+name: "IteraCompute"
+kinds: [llm_gateway]
+description: "Start with Auto and 30M free tokens every month, no credit card. Use Qwen, DeepSeek and more through one OpenAI-compatible API."
+website: "https://iteracompute.com"
+logo_url: /logos/iteracompute.svg
+tagging:
+  match_case: true

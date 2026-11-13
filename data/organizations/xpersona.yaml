@@ -1,0 +1,8 @@
+slug: xpersona
+name: "Xpersona"
+kinds: [llm_gateway]
+description: "Xpersona is an options trading combine for SPY, QQQ, index, 0DTE, and US equity options traders, with clear rules and a path to a funded seat."
+website: "https://xpersona.co"
+logo_url: /logos/xpersona.png
+tagging:
+  match_case: true

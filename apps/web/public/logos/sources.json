@@ -167,6 +167,10 @@
   "file": "/logos/aisix.png",
   "source": "https://api7.ai/favicon.ico"
  },
+ "aixy": {
+  "file": "/logos/aixy.png",
+  "source": "https://aixy-gateway.com/favicon.ico"
+ },
  "aizip": {
   "file": "/logos/aizip.png",
   "source": "https://framerusercontent.com/images/8nj8LPbBszoCW1YdE4ZofyhdCM.png"
@@ -178,6 +182,10 @@
  "akash-network": {
   "file": "/logos/akash-network.png",
   "source": "https://github.com/akash-network.png?size=256"
+ },
+ "aki-io": {
+  "file": "/logos/aki-io.png",
+  "source": "https://aki.io/static/favicon/apple-touch-icon.png"
  },
  "alchip": {
   "file": "/logos/alchip.png",
@@ -427,6 +435,10 @@
   "file": "/logos/aurelio-labs.png",
   "source": "https://www.aurelio.ai/favicon.ico"
  },
+ "auriko": {
+  "file": "/logos/auriko.png",
+  "source": "https://www.auriko.ai/apple-icon.png?v=2"
+ },
  "aurora-gateway": {
   "file": "/logos/aurora-gateway.svg",
   "source": "https://aurorallm.online/navbar-logo.svg"
@@ -599,9 +611,17 @@
   "file": "/logos/boomi.png",
   "source": "https://boomi.com/wp-content/uploads/2024/08/cropped-Boomi_Logo_Icon_Navy.png"
  },
+ "bothub": {
+  "file": "/logos/bothub.png",
+  "source": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://bothub.ru&size=128"
+ },
  "botpress": {
   "file": "/logos/botpress.png",
   "source": "https://cdn.prod.website-files.com/635c4eeb78332f7971255095/6a887680628e755606a2406b_bp-logo.jpg"
+ },
+ "boundless": {
+  "file": "/logos/boundless.svg",
+  "source": "https://boundless.network/icon.svg?icon.0ey6ob1feclms.svg"
  },
  "bourse": {
   "file": "/logos/bourse.svg",
@@ -775,6 +795,10 @@
   "file": "/logos/cloud-ru.svg",
   "source": "https://cloud.ru/favicons/logo-48.svg"
  },
+ "cloudferro-sherlock": {
+  "file": "/logos/cloudferro-sherlock.webp",
+  "source": "https://cloudferro.s3.waw4-1.cloudferro.com/wp-content/uploads-webpc/uploads/2026/06/cropped-favicon-180x180.png.webp"
+ },
  "cloudflare": {
   "file": "/logos/cloudflare.png",
   "source": "https://developers.cloudflare.com/favicon.png"
@@ -947,6 +971,10 @@
   "file": "/logos/crewai.png",
   "source": "https://github.com/crewAIInc.png?size=256"
  },
+ "crossmodel": {
+  "file": "/logos/crossmodel.png",
+  "source": "https://www.crossmodel.ai/apple-icon.png?apple-icon.0ps~9bj.wvxg5.png"
+ },
  "crush": {
   "file": "/logos/crush.png",
   "source": "https://github.com/charmbracelet.png?size=256"
@@ -990,6 +1018,10 @@
  "d-matrix": {
   "file": "/logos/d-matrix.png",
   "source": "https://www.d-matrix.ai/wp-content/uploads/2024/10/cropped-favicon-red-180x180.png"
+ },
+ "daoxe": {
+  "file": "/logos/daoxe.png",
+  "source": "https://daoxe.com/favicon.ico"
  },
  "daphni": {
   "file": "/logos/daphni.png",
@@ -1227,6 +1259,10 @@
   "file": "/logos/emergent.png",
   "source": "https://cdn.prod.website-files.com/6a0edf12ef1a8562ed56d806/6a16a2349f51334d1700e015_emergent.png"
  },
+ "empiriolabs-ai": {
+  "file": "/logos/empiriolabs-ai.png",
+  "source": "https://empiriolabs.ai/images/webclip.png"
+ },
  "encharge-ai": {
   "file": "/logos/encharge-ai.png",
   "source": "https://cdn.prod.website-files.com/65402f08bc39306f5f20748d/65428a2dbd87828481295915_EnCharge-AI-Icon.png"
@@ -1234,6 +1270,10 @@
  "enflame": {
   "file": "/logos/enflame.svg",
   "source": "https://commons.wikimedia.org/wiki/Special:FilePath/Enflame_Technology.svg (Wikidata Q129571894)"
+ },
+ "engy": {
+  "file": "/logos/engy.svg",
+  "source": "https://engy.ai/icon.svg?icon.2a2mw4lb4vgyl.svg"
  },
  "enterpilot": {
   "file": "/logos/enterpilot.png",
@@ -1455,6 +1495,10 @@
   "file": "/logos/friendli.png",
   "source": "https://friendli.ai/favicon/apple-touch-icon.png"
  },
+ "frogbot": {
+  "file": "/logos/frogbot.png",
+  "source": "https://frogbot.ai/apple-icon.png?apple-icon.1u55yqi32b3i1.png"
+ },
  "fujitsu": {
   "file": "/logos/fujitsu.png",
   "source": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://global.fujitsu&size=128"
@@ -1659,6 +1703,10 @@
   "file": "/logos/gravitee.svg",
   "source": "https://www.gravitee.io/_astro/icon.CHSlWciW.svg"
  },
+ "greenpt": {
+  "file": "/logos/greenpt.png",
+  "source": "https://greenpt.com/assets/logo/apple-touch-icon.png"
+ },
  "greptile": {
   "file": "/logos/greptile.png",
   "source": "https://www.greptile.com/greptile-brand-mark.png"
@@ -1803,6 +1851,10 @@
   "file": "/logos/hopscotch.png",
   "source": "https://hopscotchlabs.ai/apple-touch-icon.png"
  },
+ "hpc-ai": {
+  "file": "/logos/hpc-ai.png",
+  "source": "https://hpc-ai.com/favicon_en.ico"
+ },
  "huawei-cloud": {
   "file": "/logos/huawei-cloud.png",
   "source": "https://www.huaweicloud.com/favicon.ico"
@@ -1898,6 +1950,10 @@
  "imbue": {
   "file": "/logos/imbue.png",
   "source": "https://imbue.com/favicon.ico"
+ },
+ "impossibl": {
+  "file": "/logos/impossibl.png",
+  "source": "https://impossibl.com/brand/impossibl-icon.png"
  },
  "inception-labs": {
   "file": "/logos/inception-labs.png",
@@ -2039,6 +2095,10 @@
   "file": "/logos/ist-daslab.png",
   "source": "https://github.com/IST-DASLab.png?size=256"
  },
+ "iteracompute": {
+  "file": "/logos/iteracompute.svg",
+  "source": "https://iteracompute.com/img/iteracompute-logo.svg?v=20261002-logo-blue-gradient"
+ },
  "ivp": {
   "file": "/logos/ivp.svg",
   "source": "https://www.ivp.com/favicons/safari-pinned-tab.svg"
@@ -2046,6 +2106,10 @@
  "jafco": {
   "file": "/logos/jafco.png",
   "source": "https://www.jafco.co.jp/apple-touch-icon.png"
+ },
+ "jalapeno-cloud": {
+  "file": "/logos/jalapeno-cloud.png",
+  "source": "https://www.jalapeno-cloud.ai/logo.png"
  },
  "jan": {
   "file": "/logos/jan.png",
@@ -2118,6 +2182,10 @@
  "kddi": {
   "file": "/logos/kddi.png",
   "source": "https://www.kddi.com/extlib/common/img_new/cmn_logo01.png"
+ },
+ "kenari": {
+  "file": "/logos/kenari.svg",
+  "source": "https://kenari.id/favicon.svg"
  },
  "kestra": {
   "file": "/logos/kestra.png",
@@ -2463,6 +2531,10 @@
   "file": "/logos/llm-guard.png",
   "source": "https://github.com/protectai.png?size=256"
  },
+ "llmtr": {
+  "file": "/logos/llmtr.png",
+  "source": "https://llmtr.com/apple-touch-icon.png"
+ },
  "llmule": {
   "file": "/logos/llmule.png",
   "source": "https://cm64-ss-public.s3.amazonaws.com/67608172a31516c083602958/llmule-head-64.png"
@@ -2510,6 +2582,10 @@
  "lovable": {
   "file": "/logos/lovable.png",
   "source": "https://lovable.dev/favicon.ico"
+ },
+ "lowrouter": {
+  "file": "/logos/lowrouter.png",
+  "source": "https://lowrouter.ai/apple-touch-icon.png"
  },
  "luce-org": {
   "file": "/logos/luce-org.png",
@@ -2623,6 +2699,10 @@
   "file": "/logos/meituan-longcat.svg",
   "source": "https://s3plus.meituan.net/aigc-media-resources/longcat/yeqian-logo.svg"
  },
+ "melious": {
+  "file": "/logos/melious.png",
+  "source": "https://cdn.melious.ai/favicon/apple-touch-icon.png"
+ },
  "mem0": {
   "file": "/logos/mem0.svg",
   "source": "https://framerusercontent.com/images/2ys67ADJdvcyGmQnhp8vKWSq8.svg"
@@ -2638,6 +2718,10 @@
  "mercatus": {
   "file": "/logos/mercatus.png",
   "source": "https://www.mercatus-ai.com/favicon/apple-touch-icon.png"
+ },
+ "merge-gateway": {
+  "file": "/logos/merge-gateway.png",
+  "source": "https://cdn.prod.website-files.com/624b192df0b0151225c10026/67cb6c3945b154c3c4a413d1_Webclip.png"
  },
  "mesh-llm": {
   "file": "/logos/mesh-llm.svg",
@@ -2714,6 +2798,10 @@
  "mixedbread": {
   "file": "/logos/mixedbread.png",
   "source": "https://www.mixedbread.com/apple-touch-icon.png"
+ },
+ "mixlayer": {
+  "file": "/logos/mixlayer.svg",
+  "source": "https://www.mixlayer.com/icon.svg?icon.085upx8jb_ix-.svg"
  },
  "mlc-ai": {
   "file": "/logos/mlc-ai.jpg",
@@ -2822,6 +2910,10 @@
  "multiroute": {
   "file": "/logos/multiroute.svg",
   "source": "https://multiroute.ai/logo.svg"
+ },
+ "munito-ai": {
+  "file": "/logos/munito-ai.png",
+  "source": "https://munito.ai/apple-touch-icon.png?v=20261008"
  },
  "murf-ai": {
   "file": "/logos/murf-ai.png",
@@ -3443,6 +3535,10 @@
   "file": "/logos/prime-intellect.jpg",
   "source": "https://cdn.prod.website-files.com/66239f0441b09824acb92c75/671b6f6054736f752438334f_Positive.jpg"
  },
+ "privatemode-ai": {
+  "file": "/logos/privatemode-ai.png",
+  "source": "https://www.privatemode.ai/images/privatemode-favicon-180.png"
+ },
  "proact-it": {
   "file": "/logos/proact-it.webp",
   "source": "https://www.proact.eu/wp-content/uploads/2022/04/favicon-red-150x150.webp"
@@ -3579,6 +3675,10 @@
   "file": "/logos/reflection-ai.svg",
   "source": "https://reflection.ai/icon.svg?icon.2l1p3ovm0zbbb.svg"
  },
+ "regolo-ai": {
+  "file": "/logos/regolo-ai.png",
+  "source": "https://regolo.ai/wp-content/uploads/2025/11/regolo-icon.png"
+ },
  "reka-ai": {
   "file": "/logos/reka-ai.jpg",
   "source": "https://reka.ai/_framer/framerusercontent.com/images/XekAjHcWv2prUE9pJiSj61CD54.jpg"
@@ -3670,6 +3770,10 @@
  "runcrate": {
   "file": "/logos/runcrate.png",
   "source": "https://www.runcrate.ai/apple-touch-icon.png"
+ },
+ "runinfra": {
+  "file": "/logos/runinfra.png",
+  "source": "https://runinfra.ai/apple-icon.png"
  },
  "runloop": {
   "file": "/logos/runloop.png",
@@ -3923,6 +4027,10 @@
   "file": "/logos/skyvern.png",
   "source": "https://www.skyvern.com/apple-touch-icon.png"
  },
+ "sllm": {
+  "file": "/logos/sllm.png",
+  "source": "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.sllm.cloud&size=128"
+ },
  "smithery": {
   "file": "/logos/smithery.svg",
   "source": "https://www.smithery.ai/favicon.svg"
@@ -4107,6 +4215,10 @@
   "file": "/logos/synthesia.png",
   "source": "https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d710/6618fd69d436784c0bba5e9e_webclip.png"
  },
+ "synthetic": {
+  "file": "/logos/synthetic.png",
+  "source": "https://synthetic.new/apple-touch-icon.png"
+ },
  "syntiant": {
   "file": "/logos/syntiant.png",
   "source": "https://www.syntiant.com/wp-content/uploads/2024/05/favicon.png"
@@ -4174,6 +4286,10 @@
  "temporal": {
   "file": "/logos/temporal.png",
   "source": "https://temporal.io/apple-touch-icon.png"
+ },
+ "tempr-gateway": {
+  "file": "/logos/tempr-gateway.png",
+  "source": "https://temprhq.io/assets/apple-touch-icon.png"
  },
  "tencent": {
   "file": "/logos/tencent.png",
@@ -4327,6 +4443,10 @@
   "file": "/logos/tokendos.png",
   "source": "https://www.tokendos.com/apple-touch-icon.png"
  },
+ "tokengo": {
+  "file": "/logos/tokengo.svg",
+  "source": "https://tokengo.com/images/tokengo.svg"
+ },
  "tokenmix": {
   "file": "/logos/tokenmix.png",
   "source": "https://tokenmix.ai/apple-touch-icon.png"
@@ -4423,6 +4543,10 @@
   "file": "/logos/uiuiapi.png",
   "source": "https://oss.uiuiapy.top/ai_uiuiap75.png"
  },
+ "umans-ai": {
+  "file": "/logos/umans-ai.png",
+  "source": "https://app.umans.ai/favicon.ico"
+ },
  "unify": {
   "file": "/logos/unify.png",
   "source": "https://unify.ai/apple-icon.png?apple-icon.2yns35tb0jhfp.png"
@@ -4463,6 +4587,10 @@
   "file": "/logos/vana.svg",
   "source": "https://vana.org/assets/logos/vana-asterisk-data-signal.svg"
  },
+ "vancine": {
+  "file": "/logos/vancine.png",
+  "source": "https://vancine.com/apple-touch-icon.png"
+ },
  "vast-ai": {
   "file": "/logos/vast-ai.png",
   "source": "https://vast.ai/icon.png"
@@ -4502,6 +4630,10 @@
  "vista-equity-partners": {
   "file": "/logos/vista-equity-partners.png",
   "source": "https://www.vistaequitypartners.com/wp-content/uploads/2020/03/Vista_favicon.png"
+ },
+ "vivgrid": {
+  "file": "/logos/vivgrid.png",
+  "source": "https://vivgrid.com/favicon.ico?favicon.4a16b311.ico"
  },
  "vk-cloud": {
   "file": "/logos/vk-cloud.png",
@@ -4650,6 +4782,10 @@
  "xllm-ai": {
   "file": "/logos/xllm-ai.png",
   "source": "https://github.com/xLLM-AI.png?size=256"
+ },
+ "xpersona": {
+  "file": "/logos/xpersona.png",
+  "source": "https://www.xpersona.co/apple-icon.png?v=sora-20260722"
  },
  "xuanshu-api": {
   "file": "/logos/xuanshu-api.svg",

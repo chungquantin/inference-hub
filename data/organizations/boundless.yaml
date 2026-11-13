@@ -1,0 +1,8 @@
+slug: boundless
+name: "Boundless"
+kinds: [llm_gateway]
+description: "Run open models fast and reliably in production, with an inference partner that tunes them to your traffic."
+website: "https://boundless.network"
+logo_url: /logos/boundless.svg
+tagging:
+  match_case: true

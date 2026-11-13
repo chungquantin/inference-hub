@@ -1,0 +1,7 @@
+slug: aixy
+name: "Aixy"
+kinds: [llm_gateway]
+website: "https://aixy-gateway.com"
+logo_url: /logos/aixy.png
+tagging:
+  match_case: true

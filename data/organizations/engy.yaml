@@ -1,0 +1,8 @@
+slug: engy
+name: "engy"
+kinds: [llm_gateway]
+description: "Verified inference for SOTA open models: reliable at scale, zero data retention, OpenAI-compatible."
+website: "https://engy.ai"
+logo_url: /logos/engy.svg
+tagging:
+  match_case: true

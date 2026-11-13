@@ -1,0 +1,8 @@
+slug: auriko
+name: "Auriko"
+kinds: [llm_gateway]
+description: "Auriko is the AI control plane for LLM inference: model gateway, intelligent routing, observability, and FinOps in one platform."
+website: "https://auriko.ai"
+logo_url: /logos/auriko.png
+tagging:
+  match_case: true
