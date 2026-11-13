@@ -1,0 +1,238 @@
+track	slug	name	tier	endpoint	format	auth	has_prices	evidence	notes
+gpu	airtrunk	AirTrunk	X		other	none		200 homepage, /pricing 404; no GPU terms	not_applicable: data-center operator
+gpu	applied-digital	Applied Digital	D		other	none		200 homepage, /pricing and /cloud 404; no GPU price text	Cloud pricing not public; contact sales
+gpu	aruba	Aruba	D		other	none		200 homepage; /gpu 404; no GPU price text; API docs at arubacloud.github.io/api	Public API needs account/key; no GPU pricing seen
+gpu	bell-canada-ai-fabric	Bell Canada AI Fabric	D		other	none		200 bell.ca homepage, /pricing 404; no GPU terms	Telco; no public GPU price list
+gpu	bitdeer	Bitdeer	D		next_data	none		200 homepage has __NEXT_DATA__ and mentions H100/H200/B200; no $/hr seen	Mining/AI cloud; price not seen; quote-led
+gpu	biznet-gio	Biznet Gio	D		other	none		200 homepage lists NEO GPU (H200) product; no price on page	GPU as a service; pricing not public in HTML
+gpu	brev	Brev	D		other	none		200 brev.nvidia.com is 2.7KB JS shell; api.brev.dev/api/instance/types 404	NVIDIA-hosted marketplace app; JS/login only
+gpu	cassava-technologies	Cassava Technologies	D		other	none		200 cassavaai.com is 114B JS redirect to /lander; main site only mentions A100	No public price list
+gpu	cipher-mining	Cipher Mining	X	https://cipherdigital.com/	other	none		403 on / and /pricing (5.8KB)	blocked (403); also bitcoin miner/data center
+gpu	cirrascale	Cirrascale	B	https://www.cirrascale.com/pricing	html	none		200; HTML text 'NVIDIA HGX B200 ... As low as $4.79/GPUhr'	Server-rendered cards 'as low as $/GPUhr'; no region; per-GPU
+gpu	civo	Civo	B	https://www.civo.com/pricing	html	none		200; 'Small 1 x NVIDIA H100 - 80GB ... $2.99 per hour', 8 x H100 $23.92 per hour	HTML tables H100/H200/A100/B200/L40S with counts; api.civo.com 403 w/o key
+gpu	claro-brasil	Claro Brasil	X		other	none		200 homepage, /pricing 404; no GPU terms	not_applicable: telecom consumer site
+gpu	cleura	Cleura	D	https://cleura.com/cloud-pricing	html	none		200 cloud-pricing 64KB; no H100/A100/GPU strings found	OpenStack cloud; no GPU prices seen
+gpu	cloud-and-heat	Cloud&Heat	D		other	none		200 homepage; /pricing 404; no GPU terms	Hosting/heat-reuse; no public GPU prices
+gpu	cloud-ru	Cloud.ru	D	https://cloud.ru/calculator	other	none		200; homepage text mentions B300/H100/V100/A40/A100; calculator is JS app	Russian cloud; price in JS calculator; not scraped
+gpu	core-scientific	Core Scientific	X		other	none		200 homepage, /pricing 404; no GPU price	not_applicable: colocation/hosting landlord
+gpu	core42	Core42	D	https://www.core42.ai/products/ai-cloud	html	none		200; text 'NVIDIA H100 Price: From $2.50/hr', 'H200 FROM $4.00/HR'	Only 'from' marketing prices, no table/counts/regions; weak
+gpu	crusoe	Crusoe	B	https://www.crusoe.ai/cloud/pricing	html	none		200; 'NVIDIA H200 141GB HGX $6.00 / GPU-hr $7.50 / GPU-hr', B200 $9.65 / GPU-hr	Server-rendered; 2 columns (likely on-demand/committed); API needs key
+gpu	ctrls	CtrlS	D		other	none		200 homepage mentions A100; /pricing and /gpu-cloud 404	No public price
+gpu	dayone	DayOne	X		other	none		200 1.8KB homepage shell, /pricing 404	not_applicable: data-center operator
+gpu	denvr-dataworks	Denvr Dataworks	B	https://www.denvr.com/pricing	html	none		200; 'NVIDIA H100 SXM 8 80 GB ... $2.45 / GPU', also CMS JSON startingFrom 'On-Demand for $2.45 / hour'	Per-GPU rate, 8-GPU nodes; H100/A100/H200/B200/GH200; embedded CMS JSON too
+gpu	digitalocean	DigitalOcean	B	https://www.digitalocean.com/pricing/gpu-droplets	html	none		200; 'NVIDIA HGX H100 $4.41 /GPU/hour On-Demand Price'; reserved $3.26	H100/H200/B300/MI350X cards in HTML; api.digitalocean.com/v2/sizes 401 (token)
+gpu	e2e-networks	E2E Networks	B	https://www.e2enetworks.com/pricing	html	none		200; 'NVIDIA B200 180 32 400 $7.99', H200 $5.29, H100 $3.99 hourly	Table by GPU count (1x/2x/4x/8x), USD; also INR; India region
+gpu	elastx	Elastx	D	https://elastx.se/en/gpu	html	none		200 gpu page, no $/hr or GPU price found; only A100 mentioned	Swedish OpenStack; quote-led
+gpu	evroc	Evroc	D		other	none		200 homepage and docs.evroc.com; no GPU price text; /pricing 404	Pricing not public in HTML
+gpu	exoscale	Exoscale	D	https://api-ch-gva-2.exoscale.com/v2/instance-type	json	none		200 unauth; gpu2/gpu3 families (gpus=1..8) but only cpus/memory/zones, no price or GPU model	Types public, no price; /gpu/ page has no price text seen; pricing page not parsed
+gpu	firmus	Firmus	D		other	none		200 homepage lists H200, L40S, GB300 with 'Enquire'	Enquire-only
+gpu	fluidstack	Fluidstack	D		other	none		200 fluidstack.io 91KB JS shell; /pricing 404; api.fluidstack.io unreachable	No public price/API seen
+gpu	fly-io	Fly.io	D		html	none		200 docs/about/pricing and fly.io/pricing have no GPU rows; blog says GPUs deprecated	GPU Machines being wound down; no GPU price in HTML
+gpu	fpt-smart-cloud	FPT Smart Cloud	D	https://fptcloud.com/en/pricing/	html	none		200; GPU plans (H200/H100/A100/A30) show '0 vnd/ month', one '$2.0/hour' elsewhere	Prices not reliably rendered; unusable as scraped
+gpu	fujitsu	Fujitsu	X		other	none		429 on / and /pricing	blocked (429); also conglomerate, not a GPU cloud
+gpu	galaxy-digital	Galaxy Digital	X		other	none		200 homepage mentions H100 only; /pricing 404	not_applicable: crypto financial firm/data center (Helios)
+gpu	gcore	Gcore	B	https://gcore.com/pricing/ai	html	none		200; text 'Price EUR 21.82 /hr EUR 2.73 per GPU ... EUR 10.18 /hr EUR 1.27 per GPU'; api.gcore.com 401	EUR, per-node and per-GPU; model labels nearby (H100/H200/A100/GB300); API needs key
+gpu	gds-holdings	GDS Holdings	X		other	none		200 3KB homepage, /pricing same; no GPU	not_applicable: data-center operator
+gpu	genesis-cloud	Genesis Cloud	X	https://genesiscloud.com/	other	none		522 on genesiscloud.com and /pricing; www and api host connect failed; docs site 200	dead/unreachable (522 origin down); API docs exist, key needed
+gpu	gmi-cloud	GMI Cloud	B	https://www.gmicloud.ai/en/pricing	html	none		"200; text ""NVIDIA H100 GPU from $2.60 /GPU-hour"", H200 from $3.20, B200 from $5.00"	"Only ""from"" per-GPU prices for 3-4 GPUs; no counts/regions. Thin but scrapeable."
+gpu	gmo-internet-group	GMO Internet Group	X	-	other	none		200 on group.gmo; no GPU pricing	not_applicable: holding company (GPU cloud is a subsidiary, see highreso).
+gpu	hetzner	Hetzner	D	https://www.hetzner.com/dedicated-rootserver/matrix-gpu	html	none		200; GEX45 listed (RTX PRO 4000 Blackwell 24GB), no GPU price seen; api.hetzner.cloud/v1/server_types 401	Only GEX dedicated line; Cloud API needs free token but has no GPUs.
+gpu	highreso	Highreso	D	https://highreso.jp/	html	none		200 highreso.jp 53KB, no price found; gpucloud.highreso.jp connection failed (000)	GPU cloud subdomain unreachable from here; retry later.
+gpu	hive-digital	HIVE Digital	D	https://www.hivedigital.cloud	html	none		200 hivedigital.cloud mentions H100, no $ prices seen	Miner with small AI cloud; no public price list found.
+gpu	humain	Humain	X	https://www.humain.com/	html	none		"403 ""Just a moment..."" Cloudflare challenge"	blocked (also sovereign AI, likely contact-sales).
+gpu	hut-8	Hut 8	X	-	other	none		200 hut8.com; no GPU pricing	not_applicable: bitcoin miner / data-center landlord.
+gpu	hydra-host	Hydra Host	B	https://hydrahost.com	html	none		"200; ""NVIDIA H200 Starting at $3.20 - $2.50/hr"", B200 $5.00-$3.50/hr, RTX 4090 $0.65-$0.40/hr; __NEXT_DATA__ present"	Marketplace price ranges per GPU on homepage; no counts/regions; brokkr app is login.
+gpu	hyperstack	Hyperstack	B	https://www.hyperstack.cloud/gpu-pricing	html	none		200; server-rendered table: NVIDIA H100 SXM vCPU 24, RAM 240, $3.20 (H100 PCIe $2.60, A100 etc.)	Tables have GPU/vCPU/RAM/$ per hour. Official pricebook API infrahub-api.nexgencloud.com 401 (key).
+gpu	hypertec	Hypertec	X	-	other	none		200; HPC manufacturer homepage, no pricing	not_applicable: hardware maker / datacenter integrator.
+gpu	iij	IIJ	D	-	html	none		200 iij.ad.jp homepage, no GPU pricing	Japanese telco/ISP; GPU service quote based.
+gpu	infomaniak	Infomaniak	D	https://www.infomaniak.com/en/hosting/public-cloud	html	none		"200 (2.8MB); text lists ""nVidia H200, H100, A100, L40S, L4""; no price seen; api.infomaniak.com/1/public/prices 404"	GPU flavours mentioned but pricing not in static HTML (JS calculator likely).
+gpu	ionos	IONOS	D	-	html	none		cloud.ionos.com/compute/gpu-vm 404; api.ionos.com/cloudapi/v6/ 401; cloud.ionos.com/prices 200 no GPU rows	API needs account; GPU VM pricing not found publicly.
+gpu	iren	IREN	D	https://iren.com/ai-cloud	html	none		200 (234KB) mentions H100, no $ price	Pricing by contact; neocloud pages show no rates.
+gpu	jarvislabs	Jarvislabs	B	https://jarvislabs.ai/pricing	html	none		"200; server-rendered rows: ""NVIDIA H100 SXM 80GB 16 vCPU 200GB $3.49 ... spot $1.54"", H200 $4.59"	Table of GPU / VRAM / vCPU / RAM / price (+discounted). Single-GPU list; counts via x1/x8 pricing rule.
+gpu	jio-platforms	Jio Platforms	X	-	other	none		200 jio.com consumer telco	not_applicable: telco (JioBrain/GPU cloud not publicly priced).
+gpu	kakao-cloud	Kakao Cloud	D	https://www.kakaocloud.com/	html	none		kakaoenterprise.com 200; kakaocloud.com 200 mentions A100,H100; no price found	Korean console pricing likely JS/login.
+gpu	kddi	KDDI	X	-	other	none		200 kddi.com telco homepage	not_applicable: telco; GPU offering via quote.
+gpu	khazna-data-centers	Khazna Data Centers	X	-	other	none		200 homepage, no GPU pricing	not_applicable: data-center landlord.
+gpu	krutrim	Krutrim	D	https://cloud.olakrutrim.com	html	none		200 olakrutrim.com homepage mentions A100; cloud.olakrutrim.com/pricing 404	No public GPU price list found.
+gpu	kt	KT	X	-	other	none		200 kt.com telco	not_applicable: telco.
+gpu	lancium	Lancium	X	https://lancium.com/	html	none		"403 ""Just a moment..."" Cloudflare challenge"	blocked; energy/datacenter developer anyway.
+gpu	latitude-sh	Latitude.sh	B	https://www.latitude.sh/pricing	html	none		"200; plan cards in SSR HTML: g3.h100.small ""1 x NVIDIA H100 80GB"" ... ""$1.68/hr""; g4.rtx6kpro.large 8x RTX PRO 6000; detail pages /pricing/<plan-slug>"	Per-plan pages give GPU count + $/hr + locations. api.latitude.sh/plans is 401 (key).
+gpu	leaseweb	Leaseweb	D	https://www.leaseweb.com/en/products-services/dedicated-servers/gpu-servers	html	none		200 but 2.5KB SPA shell (shop-api.leaseweb.com referenced, root 404)	Client-rendered shop; API endpoint not discoverable without JS.
+gpu	lg-cns	LG CNS	X	-	other	none		200 lgcns.com IT services	not_applicable: SI/consultancy.
+gpu	lightning-ai	Lightning AI	B	https://lightning.ai/pricing	html	none		"200; SSR table ""Large (CPU) $0.51/hr, X-Large $0.99/hr ..."" plus GPU rows H100/A100/L40S/H200/T4 availability list"	GPU price table partly SSR; verify GPU tab rows before building. Marketplace.
+gpu	lintasarta	Lintasarta	D	-	html	none		200 homepage; /gpu 404; no $ price seen	Indonesian telco; quote-based GPU service.
+gpu	liquid-web	Liquid Web	B	https://www.liquidweb.com/gpu-hosting/	html	none		"200; SSR: ""H100 94GB $3.97/hr  25% off 1 month $2.98/hr"", B200 mentioned 23x"	Dedicated bare-metal GPU boxes; some plans per month; parse card blocks.
+gpu	locaweb	Locaweb	X	-	other	none		200 locaweb.com.br; no GPU offering seen	not_applicable: Brazilian web hosting, no GPU product found.
+gpu	lyceum	Lyceum	B	https://lyceum.technology/resources/pricing/	html	none		"200; SSR: ""NVIDIA H100 80 GB On demand $5.39 Spot $2.69"", A100 80GB $2.59/$1.29, L40S, H200"	Clean table with on-demand and spot per GPU.
+gpu	massed-compute	Massed Compute	B	https://vm.massedcompute.com/pricing	html	none		"200 (581KB); SSR: ""H100 (80GB) x1 $2.73/hr, x2 $5.46, x4 $10.92"", H100 NVL x8 $23.36"	Best structure: GPU type + count + $/hr + vCPU/RAM. No region.
+gpu	mithril	Mithril	B	https://mithril.ai/pricing	html	none		"200; SSR table: ""H100 SXM5 1 GPU 20 vCPU $1.51 instance/hr; H100 SXM5 8 GPU $21.00 instance/hr"""	Prices updated weekly (market-based avg). Also embedded Framer JSON. api.mithril.ai 401.
+gpu	naver-cloud	Naver Cloud	D	https://www.ncloud.com/product/compute/gpuServer	html	none		200 (3MB) lists A100/H100/H200/L40S specs, no price in static text	Pricing in console/JS calculator (KRW).
+gpu	nebius	Nebius	B	https://nebius.com/prices	next_data	none		"200; __NEXT_DATA__ contains table rows e.g. [""NVIDIA RTX PRO 6000"",""24"",""218"",""from $0.79"",""$1.80""], [""NVIDIA L40S with Intel CPU"",""8-40"",""32-160"",""from $0.74**"",""from $1.55""]"	"H100/H200/B200/L40S rows in page JSON; ""from"" and on-demand columns; per-GPU hourly. Good candidate."
+gpu	nebul	Nebul	D	https://nebul.com	html	none		200 homepage mentions H100; /pricing 404	Private-AI/quote based.
+gpu	nextdc	NEXTDC	X		other	none		200; corporate data-centre site, no GPU pricing	not_applicable: data-centre operator
+gpu	neysa	Neysa	B	https://neysa.ai/pricing/	html	none		"200; ""H100 SXM (80GB) Starts at $4.39 / hour"""	"Server-rendered WordPress cards; ""starts at"" prices, USD; no region"
+gpu	nhn-cloud	NHN Cloud	D	https://www.nhncloud.com/kr/pricing	other	none		200; 870KB page, no GPU price strings found	Korean cloud; pricing in JS console/calculator, not probed further
+gpu	nodeshift	Nodeshift	D	https://nodeshift.com/pricing	html	none		200; no $ amounts or H100 strings in HTML; /api/gpus 404	Prices likely JS-rendered
+gpu	northern-data	Northern Data	B	https://northerndata.de/taiga-cloud-ai-pricing	html	none		"200; ""NVIDIA H100 SXM | 8 GPUs | 640 vRAM | from $2.70""; H200 ""from $3.20"""	"Taiga Cloud; ""from"" prices per GPU-hr, only 2 SKUs, contact for volume"
+gpu	northflank	Northflank	B	https://northflank.com/pricing	html	none		"200; ""$1.42 / hour NVIDIA A100 80GB"" and ""$2.74 / hour NVIDIA H100"""	Price table in HTML (also turbo-stream data); counts 1/2/4/8; API needs token; verify row order
+gpu	nscale	Nscale	D	https://www.nscale.com/	html	none		200 home; /pricing and /gpu-cloud 404; no $ found	Pricing via contact/quote
+gpu	nutanix	Nutanix	X		other	none		200; software vendor homepage	not_applicable: software vendor
+gpu	nxtra	Nxtra	X		other	none		200; Airtel data-centre homepage	not_applicable: data-centre operator
+gpu	oblivus	Oblivus	B	https://oblivus.com/pricing/	html	none		"200; ""H100 80GB SXM5 ... $4.31/hr Reservations: $2.92/hr"""	Server-rendered modals per GPU; on-demand + reserved prices; region codes in deploy links (MON1)
+gpu	ooredoo	Ooredoo	X		other	none		403 at https://www.ooredoo.com/	blocked (403); telco, likely not_applicable anyway
+gpu	open-telekom-cloud	Open Telekom Cloud	D	https://www.t-cloud-public.com/en/prices	other	none		200; price calculator page, no GPU price values in HTML	Calculator is JS-driven; OTC does have GPU flavors but no keyless price list seen
+gpu	orange-business	Orange Business	D	https://cloud.orange-business.com/en/flexible-engine/	html	none		200; marketing page, no prices	Flexible Engine; pricing via catalog/quote
+gpu	ori	Ori	D	https://radiant.co/ori	html	none		200; ori.co redirects to radiant.co/ori; no GPU prices found	Site rebranded/folded under Radiant; no pricing seen
+gpu	outscale	Outscale	D	https://en.outscale.com/pricing/	html	none		200; 157KB pricing page, no GPU price strings	Pricing in PDF/calculator; public catalog API not found with GET
+gpu	ovhcloud	OVHcloud	A	https://api.ovh.com/1.0/order/catalog/public/cloud?ovhSubsidiary=FR	json	none		"200 (8MB); plans[].planCode=""h100-380.consumption"" pricings[0].price=280000000 (hour, 1e8=1 EUR => 2.80 EUR)"	Keyless catalog; ovhSubsidiary=US returned 400 (use FR/GB/DE etc); region in availability; EUR
+gpu	packet-ai	Packet.ai	B	https://packet.ai/pricing	html	none		"200; JSON-LD Service offers ""RTX PRO 6000 Blackwell (Dynamic $0.76/hr), A100 80GB (Dynamic $0.89/hr)"""	schema.org JSON-LD in page; Dynamic vs Dedicated per-GPU prices
+gpu	paperspace	Paperspace	B	https://www.paperspace.com/pricing	html	none		"200; instance-names ""H100"" instance-price-2 ""3.09"" /hour; A100-80G 1.15"	Webflow HTML; hidden price spans; DigitalOcean-owned
+gpu	proact-it	Proact IT	X		other	none		200; IT reseller homepage	not_applicable: IT services/reseller
+gpu	qumulusai	QumulusAI	D	https://www.qumulusai.com/nvidia-h200-sxm	html	none		200; product pages without $ rates; /pricing 404	Contact sales / reserved
+gpu	rackspace	Rackspace	D	https://www.rackspace.com/ai/gpu-as-a-service/	html	none		200; marketing page, no prices	Quote only; /cloud/gpu returned 503
+gpu	rafay	Rafay	X		other	none		200; /platform/pricing has no GPU hourly prices	not_applicable: software/orchestration platform
+gpu	runcrate	Runcrate	B	https://www.runcrate.ai/pricing	html	none		"200; ""H100 Hopper 80GB $2.85 /hr"""	Server-rendered cards; Next-style page (553KB); no region
+gpu	safespring	Safespring	D	https://www.safespring.com/	html	none		200 home; /pricing 404	Swedish cloud; no GPU price seen
+gpu	sakura-internet	SAKURA Internet	B	https://ai.sakura.ad.jp/gpu/	html	none		"200; ""57.6円/時間"" and ""481円/時間"" listed for plans"	Japanese, JPY per hour, high-ish plans; needs JPY->USD conversion
+gpu	salad	Salad	B	https://salad.com/pricing/	html	none		"200; table: ""RTX 5090 32 GB High $0.600 Medium $0.483 Low $0.367 Lowest $0.250"""	Clean server-rendered table, 4 priority tiers, USD/GPU-hr
+gpu	samsung-sds	Samsung SDS	D	https://cloud.samsungsds.com/serviceportal/pricing/gpu.html	other	none		200 but redirected to failAll error page	No public pricing reachable
+gpu	sarvam-ai	Sarvam AI	X		other	none		/pricing 404; model/API company	not_applicable: AI model company
+gpu	saturn-cloud	Saturn Cloud	B	https://saturncloud.io/plans/saturn_cloud_plans/	html	none		"200; table ""NVIDIA H100 | 80 GB | Reference price $3.15""; H200 $3.80, B200 $5.95"	Reference (not billed) prices, one price per GPU, no count/region
+gpu	scala-data-centers	Scala Data Centers	X		other	none		200; data-centre homepage	not_applicable: data-centre developer
+gpu	scaleway	Scaleway	A	https://api.scaleway.com/product-catalog/v2alpha1/public-catalog/products?page_size=100&page=10	json	none		"200; products[].sku=""/instance/server/h100_sxm_8_80g/fr-par-2"" price.retail_price EUR units=0 nanos=422180000"	Keyless catalog (10 pages); H100 price looks per-GPU or odd, verify unit. instance/v1 servers API returns hourly_price 0.0
+gpu	seeweb	Seeweb	D	https://www.seeweb.it/en/products/cloud-server-gpu	html	none		200; lists H100/H200/A100/L40S/MI300X, no price values	Pricing via configurator/quote
+gpu	selectel	Selectel	D	https://selectel.ru/services/gpu/	html	none		200; Nuxt page lists H200/B300/A100, prices in rubles not in HTML	JS-rendered; RUB; /api/v1/prices 404
+gpu	sesterce	Sesterce	D	https://www.sesterce.com/	html	none		200 home; /pricing and /gpu-cloud 404	Prices behind app/login
+gpu	sf-compute	SF Compute	D	https://sfcompute.com/	html	none		200 home; /pricing redirects to authkit login; api.sfcompute.com/v0/* 404	Market prices behind login; docs API (docs.sfcompute.com) appears key-based, not verified
+gpu	sharon-ai	Sharon AI	D		other	none		200 homepage; /pricing 404, /gpu-cloud 404; no $ GPU prices in text	Sovereign AI cloud AU; no public pricing page found
+gpu	sify	Sify	D		other	none		200 homepage is a news/tech-stories page; no GPU prices	Telco/DC; no public GPU pricing seen
+gpu	singtel	Singtel	X		other	none		not probed	not_applicable: telco
+gpu	sk-broadband	SK Broadband	X		other	none		not probed	not_applicable: telco/ISP
+gpu	sk-telecom	SK Telecom	X		other	none		not probed	not_applicable: telco
+gpu	softbank-corp	SoftBank Corp	X		other	none		not probed	not_applicable: telco/holding
+gpu	soluna	Soluna	X		other	none		200 homepage; no pricing, power/data-center messaging	not_applicable: power/data-center operator
+gpu	stackit	STACKIT	D		other	none		200 /en; /en/pricing 404; no GPU $ in text	Sovereign cloud; pricing likely in a JS calculator
+gpu	stc	stc	X		other	none		not probed	not_applicable: telco
+gpu	sustainable-metal-cloud	Sustainable Metal Cloud	D		other	none		200 homepage ~1.7KB text; /pricing 404	No public pricing
+gpu	swisscom	Swisscom	X		other	none		not probed	not_applicable: telco
+gpu	t-systems	T-Systems	X		other	none		not probed	not_applicable: telco/IT services
+gpu	tata-communications	Tata Communications	X		other	none		200 homepage; no GPU prices	not_applicable: telco
+gpu	telkom-indonesia	Telkom Indonesia	X		other	none		not probed	not_applicable: telco
+gpu	telus	TELUS	X		other	none		403 on homepage	not_applicable: telco; also blocked (403)
+gpu	tensordock	TensorDock	C	https://dashboard.tensordock.com/api/v2/locations	json	key		"200 {""data"":{""locations"":[]}} empty unauthenticated; /v2/instances and /v2/hostnodes 401; v0 marketplace API 404"	API v2 exists; locations/GPU list empty without key; key needs account
+gpu	tensorwave	TensorWave	D		other	none		"200 on /pricing but body is Next 404 page (""Oops! Page not found""); /products 404"	No public pricing; Book a Call
+gpu	teraco	Teraco	X		other	none		not probed	not_applicable: colo/data-center
+gpu	terawulf	TeraWulf	X		other	none		200 homepage; no GPU prices	not_applicable: bitcoin miner/data-center landlord
+gpu	thinkon	ThinkOn	X		other	none		200 homepage; no GPU prices	not_applicable: MSP/cloud reseller, no public GPU pricing
+gpu	thunder-compute	Thunder Compute	B	https://www.thundercompute.com/pricing	html	none		"200; server-rendered table: ""H100 SXM | 80 GB | $3.20 /hr"", A100 80GB $1.09, L40 $0.79, RTX A6000 $0.35"	Only 4 GPU SKUs, 1 GPU each, no region; also JSON-LD says from $0.35/hr; sandbox rates H100 $2.95
+gpu	together-ai	Together AI	B	https://www.together.ai/pricing	html	none		"200 Webflow SSR; GPU Clusters table ""HGX H100 $5.49, HGX H200 $5.99, HGX B200 $9.29, HGX B300 $11.49"" per GPU/hr, plus Preemptible col (H100 $1.99)"	Per-GPU-hour on-demand/preemptible; no region; models API api.together.xyz/v1/models is 401 (tokens, not GPU)
+gpu	true-idc	True IDC	X		other	none		200 redirect to /th/index; 123B stub then data-center site	not_applicable: Thai data-center/colo
+gpu	ubicloud	Ubicloud	D	https://www.ubicloud.com/docs/about/pricing	html	none		200 docs pricing page (59KB text) has no GPU/H100/A100 prices	No GPU price seen on pricing docs; maybe not offered publicly
+gpu	upcloud	UpCloud	X	https://api.upcloud.com/1.3/price	json	key		"/pricing and /products/cloud-gpu 403 Cloudflare ""Just a moment""; api /1.3/price 401 AUTHENTICATION_REQUIRED"	blocked (Cloudflare) on website; API needs account
+gpu	viettel	Viettel	X		other	none		not probed	not_applicable: telco
+gpu	vk-cloud	VK Cloud	B	https://cloud.vk.ru/en/pricing/	next_data	none		200; __NEXT_DATA__ has gpu.hourTeslaA100.price=227733, hourTeslaL40S=173479, hourTeslaL4=71456, hourTeslaA30, V100, A10080GB	Calculator coefficients; unit/currency unclear (RUB, likely kopeck-scaled/monthly); verify; no H100; GPU count not given
+gpu	vng-cloud	VNG Cloud	D		other	none		200 /en/pricing and /en/gpu only ~10KB shell, ~56 chars text	JS-rendered; no prices in HTML
+gpu	voltage-park	Voltage Park	D	https://www.voltagepark.com/pricing	html	none		"200; only headline ""H100 ... starting at $1.99/hr"" and FAQ; no table in HTML"	Merged with Lightning AI per page banner; table appears JS-loaded
+gpu	whitefiber	WhiteFiber	D		other	none		200 homepage; /pricing 404; no GPU prices in text	AI infra/colo; no public pricing
+gpu	yandex-cloud	Yandex Cloud	X		other	none		200 but redirected to yandex.cloud/showcaptchafast (captcha) for /en/prices; docs redirect to SSO passport	blocked (captcha); not retried
+gpu	yotta	Yotta	D		other	none		200 homepage; /pricing 404; no GPU $ in text	Shakti Cloud India; no public pricing seen
+gpu	zenlayer	Zenlayer	D		other	none		200 homepage; /gpu-cloud 404; no GPU $ in text	Pricing via sales/console
+model	01-ai	01.AI	X	https://api.lingyiwanwu.com/v1/models	json	none	no	"410 {""code"":""model_service_closed"",""message"":""Model service has been discontinued""}"	API shut down; HF org 01-ai has weights only
+model	adaptive-ml	Adaptive ML	X	https://www.adaptive-ml.com	html	none	no	200 marketing site; HF author AdaptiveML returns []	Enterprise RL tuning platform, no public model API
+model	adept	Adept	X	https://www.adept.ai	html	none	no	403 on site; HF author adept lists weights only	Acqui-hired by Amazon; no public API
+model	ai21-labs	AI21 Labs	C	https://www.ai21.com/pricing	html	none	yes	"200 SSR text: Jamba Mini $0.2/1M in, $0.4/1M out; Jamba Large $2 in, $8 out; /studio/v1/models 200 but {""data"":[]}"	Only 2 models in page; HF ai21labs has open Jamba weights
+model	aleph-alpha	Aleph Alpha	X	https://pharia.com	html	none	no	api.aleph-alpha.com timed out (000); aleph-alpha.com/pricing 404; docs.aleph-alpha.com 200 402 bytes shell	Pivoted to Pharia/enterprise; no public price list found
+model	alibaba-qwen	Alibaba Qwen	C	https://www.alibabacloud.com/help/en/model-studio/model-pricing	html	none	yes	200 SSR text: qwen3.8-max 0<Token<=1M $2 in $6 out; qwen3.7-max $2.5/$7.5; /compatible-mode/v1/models 401	Tiered rows (context bands, thinking modes); also HF org Qwen
+model	allen-institute-for-ai	Allen Institute for AI	X	https://huggingface.co/api/models?author=allenai	json	none	no	HF author allenai 200 with models; api.allenai.org 000	Research org; HF only (weights, no hosted API prices)
+model	anthropic	Anthropic	C	https://platform.claude.com/docs/en/about-claude/pricing.md + https://platform.claude.com/docs/en/about-claude/models/overview.md	mdx	none	yes	200 text/markdown table: Claude Fable 5.2 $8 / MTok in, $40 / MTok out; overview.md has context window row; /v1/models 401	Best: clean markdown tables incl. context and max output. API list needs key
+model	arcee-ai	Arcee AI	D	https://api.arcee.ai/api/v1/models	json	key	no	401 on models; /pricing 404; HF arcee-ai 200 with models	Key required; weights on HF; prices likely via OpenRouter
+model	assemblyai	AssemblyAI	C	https://www.assemblyai.com/pricing	html	none	yes	200 SSR text: Universal-2 $0.15 /hr; Universal-3.5 Pro $0.21 /hr	Speech-to-text priced per hour, not tokens; also docs/llms.txt
+model	baichuan-ai	Baichuan AI	D	https://api.baichuan-ai.com/v1/models	json	key	no	401 on models; platform.baichuan-ai.com/price 404	Key needed; HF baichuan-inc has weights
+model	black-forest-labs	Black Forest Labs	C	https://bfl.ai/pricing + https://api.bfl.ai/openapi.json	html	none	yes	200 SSR text on bfl.ai/pricing: FLUX 3 Image $0.041 /img (768x768), Klein $0.008 /img; openapi.json 200 but no prices	Per-image media prices; docs.bfl.ai pricing.md has blank cells (JS filled)
+model	bytedance-seed	ByteDance Seed	D	https://ark.cn-beijing.volces.com/api/v3/models	json	key	no	401 on Ark models; seed.bytedance.com 200 marketing; HF ByteDance-Seed 200	Prices on Volcengine console (JS/login); HF weights only
+model	cartesia	Cartesia	E	https://cartesia.ai/pricing	html	none	partial	200 SSR plans: Pro $5 /mo 100K credits; api.cartesia.ai/voices 401	Credit-based plan tiers, no per-model USD rates seen
+model	character-ai	Character.AI	X	https://character.ai	html	none	no	403 on site; HF author character-ai returns []	Consumer chat product, no public model API
+model	cognition	Cognition	X	https://devin.ai/pricing	html	none	no	200 pricing is seat plans ($20 per month Pro); api.devin.ai/v1/models 404	Agent product, no per-token model API (SWE-2 only in own apps)
+model	cohere	Cohere	C	https://docs.cohere.com/docs/models + https://cohere.com/pricing	html	none	partial	200 SSR pricing FAQ: Command legacy $1.00/1M in, $2.00/1M out; /v1/models and /v2/models 401	Current-model prices not in SSR text; legacy only. HF CohereLabs has weights
+model	d-id	D-ID	E	https://www.d-id.com/pricing/api/	html	none	no	200 but 1430 chars of text, no prices (JS app)	Video avatar API; pricing rendered client-side
+model	decart	Decart	C	https://platform.decart.ai/pricing	html	none	yes	200 SSR text: lucy-2.6 $0.02/sec (720p), $0.04/sec fast; includes model IDs	Per-second video prices, not tokens
+model	deepgram	Deepgram	B	https://api.deepgram.com/v1/models + https://deepgram.com/pricing	json	none	partial	"200 JSON {""stt"":[{""name"":""conversationalai"",...}]} no prices; pricing SSR: Flux STT English $0.0077 / min"	Audio per-minute; models list public but price-less
+model	deepseek	DeepSeek	C	https://api-docs.deepseek.com/quick_start/pricing	html	none	yes	200 SSR: deepseek-v4-pro, CONTEXT LENGTH 1M, MAX OUTPUT 384K, cache-miss in $0.15 off-peak $0.3 peak; /models 401	Two models; peak/off-peak split and cache-hit prices need care
+model	elevenlabs	ElevenLabs	E	https://elevenlabs.io/pricing/api	html	none	partial	"200 but price cells garbled (""$1 $1 $1 ...""); api.elevenlabs.io/v1/models 404"	Credit/char plans; per-model rates not cleanly parseable
+model	elyza	ELYZA	D	https://elyza.ai	html	none	no	200 marketing site; HF elyza 200 with models	Mostly enterprise/contact; no public price list seen
+model	essential-ai	Essential AI	X	https://www.essential.ai	html	none	no	200 research site; HF EssentialAI 200 with models	Research lab; weights only, no API
+model	fish-audio	Fish Audio	D	https://api.fish.audio/model	json	none	no	"200 JSON {""items"":[{""type"":""tts"",""title"":...}]} lists community voices; /pricing and docs pricing 404"	Voice catalog only, no model prices found
+model	freepik	Freepik	D	https://api.freepik.com/v1/ai/models	json	key	no	401 on models; docs.freepik.com/pricing 200 but no prices in text; www.freepik.com/api/pricing 403	Key required; Magnific API docs llms.txt has no prices
+model	genmo	Genmo	X	https://huggingface.co/api/models?author=genmo	json	none	no	HF author genmo 200 (mochi weights); genmo.ai marketing 200	Open weights; consumer app, no public API prices
+model	gladia	Gladia	C	https://www.gladia.io/pricing	html	none	yes	200 SSR: Solaria-1 0.27 EUR/hr (0-100h), Solaria-3 0.16 EUR/hr; api.gladia.io/v2/models 404	EUR per hour STT with volume tiers; not tokens
+model	google	Google	C	https://ai.google.dev/gemini-api/docs/pricing.md.txt + https://ai.google.dev/gemini-api/docs/models	other	none	yes	"200 text/markdown: ""Paid Tier, per 1M tokens in USD"" blocks with Input/Output price; generativelanguage v1beta/models 403"	Markdown with free/paid/batch blocks; tiered by prompt size; list API needs key
+model	h-company	H Company	X	https://huggingface.co/api/models?author=Hcompany	json	none	no	HF author Hcompany 200 with models; hcompany.ai 200 marketing	Agent/VLM weights; no public priced API seen
+model	hedra	Hedra	D	https://api.hedra.com/web-app/public/models	json	key	no	"403 {""messages"":[""X-API-Key header is required""]}; pricing page shows GPU-hour rates only"	Key required; video credits, not scrapeable per model
+model	heygen	HeyGen	E	https://www.heygen.com/api-pricing	html	none	no	200 but 6350 chars no prices; api.heygen.com/v1/avatar.list 401	Avatar video, credits behind JS/login
+model	higgsfield	Higgsfield	E	https://higgsfield.ai/pricing	html	none	no	200 shell only (372 chars text, JS app); docs.higgsfield.ai 200	Pricing plans rendered client-side
+model	hume-ai	Hume AI	D	https://api.hume.ai/v0/	json	key	no	api.hume.ai/v0/evi/chat_groups 401; hume.ai/pricing 200 (plans, not token prices)	Voice/emotion API, per-minute/plan pricing, not token LLM; no public model list
+model	ideogram	Ideogram	D	https://developer.ideogram.ai/ideogram-api/api-setup	html	key	no	developer docs 200, prepaid credits $10-$300; per-image, no model list seen	Image gen, key needed; ideogram.ai/features/api-pricing 200 not parsed
+model	iflytek	iFlytek	D	https://spark-api-open.xf-yun.com/v1/chat/completions	html	key	no	xfyun docs 200 list Lite/Pro/Max/4.0Ultra; APIPassword key needed, free quota	Chinese docs only, no price table seen; HF org iflytek empty
+model	inception-labs	Inception Labs	A	https://api.inceptionlabs.ai/v1/models	json	none	yes	200; mercury-2 ctx 128000 prompt 0.00000025 completion 0.00000075	4 models, OpenRouter-shaped schema (pricing.prompt/completion, context_length): reuse parser
+model	inflection-ai	Inflection AI	X	https://inflection.ai/	html	none	no	developers.inflection.ai unreachable (000); homepage 200 no API/pricing	Pivoted to enterprise; public API effectively dead
+model	jina-ai	Jina AI	A	https://api.jina.ai/v1/models	json	none	yes	200; jina-ai/jina-embeddings-v4 prompt 0.00000005 ctx; 30 models	OpenRouter-shaped; embeddings, rerankers, OCR; first-party
+model	kakao	Kakao	X	https://huggingface.co/api/models?author=kakaocorp	json	none	no	HF 200 returns kakaocorp models; kakaocorp.com has no API pricing	Open weights only (HF kakaocorp); no public API seller
+model	krea	Krea	E	https://www.krea.ai/pricing	html	login	no	pricing 200 shows subscription $0/$9 per month; docs.krea.ai 200	Image gen, subscription/credits, API needs key
+model	kuaishou-kling	Kuaishou Kling	C	https://klingai.com/global/dev/pricing	next_data	none	partial	"200; embedded JSON: Kling Image 3.0 ""8 Units ($0.028) / image"""	Per image/video unit prices in page JSON, not token prices; media adapter only
+model	kyutai	Kyutai	X	https://huggingface.co/api/models?author=kyutai	json	none	no	HF 200 kyutai/pocket-tts; kyutai.org research site	Research lab, open weights on HF, no API
+model	leonardo-ai	Leonardo.ai	X	https://leonardo.ai/api	html	key	no	leonardo.ai/api 403 (challenge); docs.leonardo.ai/docs/pricing 404	Blocked; stopped. Image gen, per-credit pricing
+model	lg-ai-research	LG AI Research	X	https://huggingface.co/api/models?author=LGAI-EXAONE	json	none	no	HF 200 lists EXAONE models; lgresearch.ai no API pricing	Open weights; EXAONE served via third parties, no first-party price page
+model	lighton	LightOn	X	https://huggingface.co/api/models?author=lightonai	json	none	no	HF 200 lists lightonai models; lighton.ai/paradigm 404	Enterprise platform (Paradigm), contact sales; HF only
+model	lightricks	Lightricks	E	https://ltx.studio/pricing	html	login	no	ltx.studio/pricing 200 plans ($0, $15/mo credits); docs.ltx.video 403	Video gen; API docs blocked (403), HF Lightricks org has models
+model	liquid-ai	Liquid AI	X	https://huggingface.co/api/models?author=LiquidAI	json	none	no	api.liquid.ai/v1/models 404; docs.liquid.ai 200 no pricing; HF 200	Open-weight LFM models, no public hosted price list seen
+model	luma-ai	Luma AI	C	https://lumalabs.ai/api/pricing	html	none	partial	"200; ""Pay per image"", ""Prices are in credits"", Ray3.2 listed"	Server-rendered, credits not USD, media only; api host 403 unauthenticated
+model	magic	Magic	X	https://magic.dev	html	none	no	200; no API/pricing mention; /api 404	Not an API seller (coding product, no public API)
+model	mbzuai	MBZUAI	X	https://huggingface.co/api/models?author=MBZUAI	json	none	no	HF 200 MBZUAI/LaMini-Flan-T5-77M; mbzuai.ac.ae 403; k2think.ai Cloudflare challenge	University; open weights on HF; K2 site blocked
+model	meituan-longcat	Meituan LongCat	D	https://api.longcat.chat/openai/v1/models	json	key	no	/openai/v1/models 401; docs 200 are Vue SPA with Pricing nav only	Free key; HF meituan-longcat has weights; docs pricing not server-rendered
+model	meta	Meta	D	https://api.llama.com/v1/models	json	key	no	api.llama.com/v1/models 401; llama.developer.meta.com/pricing 404	Llama API docs list Muse models, no prices seen; HF meta-llama org exists
+model	midjourney	Midjourney	X	https://www.midjourney.com	html	none	no	www.midjourney.com 403 on first request	Blocked 403 and no public API
+model	mistral-ai	Mistral AI	C	https://docs.mistral.ai/inference/pricing.md	mdx	none	yes	/v1/models 401; pricing.md 200 table: mistral-large-4 Input $0.7 /M, Output $2.1 /M	Clean markdown table (name, API id, in/cached/out per M); no context window, also lists partner models
+model	mixedbread	Mixedbread	D	https://api.mixedbread.com/v1/models	json	key	no	/v1/models 404; pricing 200 is store/indexing ($0.25 per M content tokens)	No per-model price table; HF mixedbread-ai has models
+model	moonvalley	Moonvalley	E	https://www.moonvalley.com	html	login	no	"200; ""API (waitlist)"", Marey model"	Waitlist only
+model	murf-ai	Murf AI	E	https://murf.ai/api/pricing	html	key	no	murf.ai/api/pricing 200 only 3.4KB shell, no prices; docs 200	TTS, per-character, pricing JS-rendered
+model	naver-hyperclova-x	Naver HyperCLOVA X	E	https://www.ncloud.com/product/aiService/clovaStudio	html	login	no	"200; rows HCX-007/005 (input/output per 1,000 tokens) but price cell shows ""-"""	Prices JS-populated, Ncloud account needed
+model	nous-research	Nous Research	A	https://inference-api.nousresearch.com/v1/models	json	none	yes	200 400 models; google/gemini-4-hydrogen prompt 0.0000015 completion 0.0000075	Gateway reselling other labs (no nousresearch ids): not first-party; OpenRouter shape; HF NousResearch for weights
+model	openai	OpenAI	C	https://platform.openai.com/docs/pricing	html	none	yes	/v1/models 401; docs/pricing 200 embedded astro JSON: gpt-5.6-terra [2,0.2,2.5...]	Server-rendered props in HTML (id, input, cached, output per M); openai.com/api/pricing 403; no context window
+model	oumi	Oumi	X	https://huggingface.co/api/models?author=oumi-ai	json	none	no	HF 200 lists oumi-ai models; oumi.ai 200	Open-source training platform, no API sold
+model	perplexity	Perplexity	C	https://docs.perplexity.ai/docs/agent-api/models.md	mdx	none	yes	200 md table: anthropic/claude-sonnet-5-5 Input 2.00 Output 10.00 per 1M	Markdown tables per provider (incl. third-party); pricing.md has sonar/embeddings; api.perplexity.ai/models 404
+model	photoroom	Photoroom	C	https://www.photoroom.com/api/pricing	html	none	partial	"200; ""Plus price per image of $0.10"", Basic $0.02"	Per-image only, image editing API; not an LLM
+model	pika	Pika	C	https://pika.art/api	html	none	partial	"200; ""~$0.0903 / sec"" and Pika 2.5 model links in HTML"	Per-second video price, media only, JS-heavy page
+model	pixverse	PixVerse	E	https://docs.platform.pixverse.ai/	html	key	no	"docs 200 has ""PixVerse API Pricing"" nav entry, credits-based; page not fetched"	Credits, key; pricing page not probed
+model	playground-ai	Playground AI	E	https://playground.com/pricing	html	login	no	200 consumer plan pricing ($15/mo); no model list or API prices seen	Design app with subscription plans; no token API catalog
+model	pleias	Pleias	X	https://huggingface.co/api/models?author=PleIAs	json	none	no	HF API 200 lists PleIAs models; no hosted API seen	not_applicable: open-weights lab; HF org PleIAs only
+model	poolside	Poolside	E	https://poolside.ai/	html	login	no	200 marketing page only; no models or prices	Enterprise/contact-sales; no public API catalog
+model	preferred-networks	Preferred Networks	X	https://huggingface.co/api/models?author=pfnet	json	none	no	HF API 200 lists pfnet models (PLaMo); no API price page probed	not_applicable for adapter; HF org pfnet only
+model	recraft	Recraft	C	https://www.recraft.ai/docs	html	none	partial	200 SSR docs: V4.1 Flash about $0.007 per image, V4.1 from $0.035	Image models priced per image, not tokens; llms.txt at /docs/llms.txt
+model	reflection-ai	Reflection AI	X	https://reflection.ai/	html	none	no	200 marketing page; no API or prices	not_applicable: no public API seen
+model	reka-ai	Reka AI	C	https://developer.reka.ai/models	html	none	yes	200 SSR: deepseek4-flash $0.11/M input $0.66/M output; docs.reka.ai/chat/models.md has ctx 262k	api.reka.ai/v1/models has pricing but 401 key; HTML+md is keyless
+model	resemble-ai	Resemble AI	E	https://www.resemble.ai/pricing/	html	none	no	200 plans only ($350/mo team); no per-model price table	Voice/detection plans and credits; no model catalog
+model	rev-ai	Rev AI	C	https://www.rev.ai/pricing	html	none	partial	200 SSR: Reverb Transcription $0.20 per hour; Whisper Large $0.005 per min	ASR priced per hour, not tokens; no model JSON
+model	runway	Runway	C	https://docs.dev.runwayml.com/guides/pricing/	html	none	partial	200 SSR: credits $0.01 each; 720p $0.007 per frame; model credit table	Video models priced in credits/sec; no JSON list seen
+model	safe-superintelligence	Safe Superintelligence	X	https://ssi.inc/	html	none	no	200 3.9KB landing page	not_applicable: no product or API
+model	sakana	Sakana	X	https://huggingface.co/api/models?author=SakanaAI	json	none	no	HF API 200 lists SakanaAI models; no API pricing found	not_applicable: research lab; HF org SakanaAI
+model	sensetime	SenseTime	E	https://platform.sensenova.cn/	html	login	no	200 empty JS shell (title SenseNova only)	JS app; Chinese platform; no keyless catalog
+model	sesame	Sesame	X	https://www.sesame.com/	html	none	no	200 marketing page; HF API 200 for author sesame	not_applicable: voice product, no API; HF org sesame
+model	shanghai-ai-laboratory	Shanghai AI Laboratory	E	https://internlm.intern-ai.org.cn/api/document	html	login	no	200 8-char JS shell; HF author internlm 200	API docs JS only; HF org internlm has open weights
+model	soniox	Soniox	C	https://soniox.com/pricing	html	none	partial	200 SSR: stt-rt-v6 $0.12/hr; api.soniox.com/v1/models 401 key	STT per hour not tokens; one or two models only
+model	speechmatics	Speechmatics	C	https://www.speechmatics.com/pricing	html	none	partial	200 SSR: Speech to Text from $0.12/hr	ASR per hour; tiers not per-model; no JSON
+model	stability-ai	Stability AI	C	https://docs.stability.ai/pricing	html	none	partial	200 SSR: 1 credit = $0.01; Stable Image Ultra priced in credits; engines/list 401	Credit prices; HF author stabilityai 200 for open weights
+model	stockmark	Stockmark	X	https://huggingface.co/api/models?author=stockmark	json	none	no	HF API 200 lists stockmark models	not_applicable: Japanese lab, open weights only; HF org stockmark
+model	suno	Suno	X	https://suno.com/pricing	html	none	no	200 consumer plans ($10 Pro/mo); no API	not_applicable: consumer music app
+model	synthesia	Synthesia	E	https://www.synthesia.io/pricing	html	none	no	200 seat plans (Starter $19/mo); no API model prices	Video product subscriptions; not a model catalog
+model	technology-innovation-institute	Technology Innovation Institute	X	https://huggingface.co/api/models?author=tiiuae	json	none	no	HF API 200 lists tiiuae (Falcon) models	not_applicable: open weights only; HF org tiiuae
+model	tencent-hunyuan	Tencent Hunyuan	D	https://api.hunyuan.cloud.tencent.com/v1/models	json	key	no	401 invalid_api_key; cloud.tencent.com doc 200 but unreadable body	Key required; HF author tencent 200 has open weights
+model	thinking-machines	Thinking Machines	E	https://tinker-docs.thinkingmachines.ai/	html	login	no	200 docs for Tinker; no price table seen	Tinker fine-tuning service; no public model prices found
+model	udio	Udio	X	https://www.udio.com/	html	none	no	200 consumer music app page	not_applicable: consumer product
+model	upstage	Upstage	C	https://console.upstage.ai/docs/models/solar-pro-4.md	mdx	none	yes	200 md: Solar Pro 4 $0.30 input $1.20 output per 1M, 512K context; llms.txt index	Per-model md pages; list from /llms.txt; api /v1/models 401 key
+model	vidu	Vidu	E	https://www.vidu.com/pricing	html	login	no	200 shell says Loading pricing plans; platform.vidu.com JS	JS app; video generation
+model	voyage-ai	Voyage AI	C	https://docs.voyageai.com/docs/pricing	html	none	yes	200 SSR: voyage-4-large $0.12 per 1M tokens; api /v1/models 404	Embedding/rerank only (no output price); table scrapeable
+model	writer	Writer	C	https://dev.writer.com/home/models	html	none	yes	200 SSR: Palmyra X5 $2.00 input / X6 $8.00 output per 1M, context window stated; api.writer.com 403	API host Cloudflare 403 (blocked); docs page keyless
+model	xai	xAI	C	https://docs.x.ai/developers/models	html	none	yes	200 inline JSON __XAI_PUBLIC_MODELS__: grok-4.5 promptTextTokenPrice 20000, maxPromptLength 500000	Embedded JSON; price unit 20000=$2.00/1M (confirm scale); api.x.ai 401
+model	xiaomi-mimo	Xiaomi MiMo	D	https://api.xiaomimimo.com/v1/models	json	key	no	401 on /v1/models; platform.xiaomimimo.com empty JS shell	Key required; HF author XiaomiMiMo 200 has open weights
+model	z-ai	Z.ai	C	https://docs.z.ai/guides/overview/pricing	html	none	yes	200 SSR table: GLM-5.3 input $1.4 cached $0.26 output $4.4 per 1M	api.z.ai/api/paas/v4/models 401 key; HTML table keyless, also GLM-Image $0.015
+model	zyphra	Zyphra	E	https://cloud.zyphra.com/	html	login	no	200 1.3KB shell; zyphra.com/pricing timed out (000); HF author Zyphra 200	Pricing unreachable; HF org Zyphra has open weights
