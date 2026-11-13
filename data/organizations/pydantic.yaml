@@ -15,3 +15,11 @@ products:
     url: "https://github.com/pydantic/pydantic-ai"
     metadata:
       license: "MIT"
+funding:
+  - round: series_a
+    announced_on: 2024-10-01
+    amount: 12500000
+    currency: USD
+    lead: [sequoia-capital]
+    investors: [partech]
+    source_url: "https://techcrunch.com/2024/10/01/sequoia-backs-pydantic-to-expand-beyond-its-open-source-data-validation-framework"

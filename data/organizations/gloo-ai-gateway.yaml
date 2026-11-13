@@ -6,3 +6,12 @@ website: "https://www.solo.io"
 logo_url: /logos/gloo-ai-gateway.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2021-10-07
+    amount: 135000000
+    valuation: 1000000000
+    currency: USD
+    lead: [altimeter-capital]
+    investors: [redpoint-ventures]
+    source_url: "https://techcrunch.com/2021/10/07/solo-io-reaches-1b-valuation-with-135m-series-c-investment"

@@ -6,3 +6,10 @@ website: "https://taalas.com"
 logo_url: /logos/taalas.png
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2026-02-19
+    amount: 169000000
+    currency: USD
+    investors: [fidelity]
+    source_url: "https://siliconangle.com/?p=731558"

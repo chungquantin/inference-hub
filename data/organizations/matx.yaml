@@ -6,3 +6,16 @@ website: "https://matx.com"
 logo_url: /logos/matx.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2024-11-22
+    amount: 80000000
+    currency: USD
+    lead: [spark-capital]
+    source_url: "https://techcrunch.com/2024/11/22/ai-chip-startup-matx-founded-by-google-alums-raises-series-a-at-300m-valuation-sources-say"
+  - round: series_b
+    announced_on: 2026-02-24
+    amount: 500000000
+    currency: USD
+    investors: [marvell]
+    source_url: "https://siliconangle.com/2026/02/24/chip-startup-matx-raises-500m-speed-large-language-models/"

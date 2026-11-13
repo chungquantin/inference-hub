@@ -9,3 +9,11 @@ feeds:
     name: "Vultr blog"
     url: "https://blogs.vultr.com/rss.xml"
     interval_minutes: 180
+funding:
+  - round: growth
+    announced_on: 2024-12-18
+    amount: 333000000
+    valuation: 3500000000
+    currency: USD
+    lead: [amd]
+    source_url: "https://siliconangle.com/2024/12/18/amd-backs-333m-funding-round-cloud-provider-vultr/"

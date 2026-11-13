@@ -33,3 +33,11 @@ products:
     url: "https://github.com/Lightning-AI/LitServe"
     metadata:
       license: "Apache-2.0"
+funding:
+  - round: series_b
+    announced_on: 2022-06-16
+    amount: 40000000
+    currency: USD
+    lead: [coatue]
+    investors: [index-ventures]
+    source_url: "https://techcrunch.com/2022/06/16/grid-ai-rebrands-as-lightning-ai-raises-40m-to-build-ai-dev-tools"

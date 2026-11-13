@@ -6,3 +6,16 @@ website: "https://www.fractile.ai"
 logo_url: /logos/fractile.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2024-07-26
+    amount: 15000000
+    currency: USD
+    source_url: "https://tech.eu/2024/07/26/fractile-secures-15m-funding-for-better-hardware-for-ai-inference/"
+  - round: series_b
+    announced_on: 2026-05-13
+    amount: 220000000
+    currency: USD
+    lead: [accel, founders-fund]
+    investors: [conviction, felicis, 8vc]
+    source_url: "https://tech.eu/2026/05/13/uk-ai-chip-startup-fractile-raises-220m-to-tackle-the-growing-inference-bottleneck/"

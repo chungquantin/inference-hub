@@ -6,3 +6,19 @@ website: "https://www.zenlayer.com"
 logo_url: /logos/zenlayer.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2017-05-31
+    amount: 10000000
+    currency: USD
+    source_url: "https://zenlayer.com/?p=23177"
+  - round: series_b
+    announced_on: 2019-08-19
+    amount: 30000000
+    currency: USD
+    source_url: "https://builtin.com/articles/zenlayer-receives-30-million-series-b"
+  - round: series_c
+    announced_on: 2021-05-12
+    amount: 50000000
+    currency: USD
+    source_url: "https://www.zenlayer.com/?p=23134"

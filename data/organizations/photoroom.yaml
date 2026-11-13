@@ -6,3 +6,10 @@ website: "https://www.photoroom.com"
 logo_url: /logos/photoroom.svg
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2024-02-27
+    amount: 43000000
+    currency: USD
+    lead: [balderton-capital]
+    source_url: "https://tech.eu/2024/02/27/photoroom-raises-43m-in-series-b-round"

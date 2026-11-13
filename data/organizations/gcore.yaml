@@ -7,3 +7,9 @@ logo_url: /logos/gcore.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_a
+    announced_on: 2024-07-23
+    amount: 60000000
+    currency: USD
+    source_url: "https://gcore.com/news/gcore-announces-series-a-fund-raise"

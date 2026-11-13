@@ -7,3 +7,11 @@ website: "https://tensorwave.com"
 logo_url: /logos/tensorwave.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-05-14
+    amount: 100000000
+    currency: USD
+    lead: [amd]
+    investors: [nexus-venture-partners]
+    source_url: "https://www.silicon.co.uk/press-release/tensorwave-secures-100-million-series-a-funding-co-led-by-magnetar-and-amd-ventures"

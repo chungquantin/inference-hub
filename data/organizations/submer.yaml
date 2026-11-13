@@ -5,3 +5,9 @@ website: "https://submer.com"
 logo_url: /logos/submer.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2024-10-02
+    amount: 55500000
+    currency: USD
+    source_url: "https://techcrunch.com/2024/10/02/as-data-center-usage-heats-up-submer-raises-55-5m-to-cool-things-down"

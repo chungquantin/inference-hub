@@ -12,3 +12,12 @@ feeds:
     name: "Thinking Machines blog"
     url: "https://thinkingmachines.ai/index.xml"
     interval_minutes: 180
+funding:
+  - round: seed
+    announced_on: 2025-07-15
+    amount: 2000000000
+    valuation: 12000000000
+    currency: USD
+    lead: [a16z]
+    investors: [nvidia, accel, amd]
+    source_url: "https://techcrunch.com/2025/07/15/mira-muratis-thinking-machines-lab-is-worth-12b-in-seed-round/"

@@ -23,3 +23,12 @@ products:
     type: platform
     tagline: "Devin is an AI coding agent and software engineer that helps developers build better software faster. Parallel cloud agents for serious engineering teams."
     url: "https://devin.ai"
+funding:
+  - round: growth
+    announced_on: 2025-09-08
+    amount: 400000000
+    valuation: 10200000000
+    currency: USD
+    lead: [founders-fund]
+    investors: [lux-capital, 8vc, elad-gil]
+    source_url: "https://siliconangle.com/2025/09/08/ai-coding-startup-cognition-raises-400m-10-2b-valuation/"

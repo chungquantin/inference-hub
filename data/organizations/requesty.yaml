@@ -4,3 +4,9 @@ kinds: [llm_gateway]
 tagline: LLM router with one API across providers.
 website: https://www.requesty.ai
 logo_url: /logos/requesty.png
+funding:
+  - round: seed
+    announced_on: 2025-09-26
+    amount: 3000000
+    currency: USD
+    source_url: "https://www.requesty.ai/blog/requesty-raises-3m"

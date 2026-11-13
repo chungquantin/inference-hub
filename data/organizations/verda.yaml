@@ -7,3 +7,14 @@ logo_url: /logos/verda.png
 tagging:
   aliases: [DataCrunch]
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-09-08
+    amount: 64000000
+    currency: USD
+    source_url: "https://verda.com/blog/verda-formerly-datacrunch-usd64m-series-a-funding"
+  - round: growth
+    announced_on: 2026-04-24
+    amount: 117000000
+    currency: USD
+    source_url: "https://www.roschier.com/newsroom/verda-raises-usd-117-million-in-new-funding-to-build-ai-cloud-infrastructure"

@@ -13,3 +13,9 @@ feeds:
     name: "Civo blog"
     url: "https://www.civo.com/blog/rss.xml"
     interval_minutes: 180
+funding:
+  - round: strategic
+    announced_on: 2021-09-17
+    amount: 2000000
+    currency: USD
+    source_url: "https://civo.com/blog/thg-ingenuity-investment"

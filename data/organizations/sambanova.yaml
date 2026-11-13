@@ -11,3 +11,12 @@ feeds:
     name: "SambaNova blog"
     url: "https://sambanova.ai/blog/rss.xml"
     interval_minutes: 180
+funding:
+  - round: series_f
+    announced_on: 2026-07-08
+    amount: 1000000000
+    valuation: 11000000000
+    currency: USD
+    lead: [general-atlantic]
+    investors: [intel-capital, vista-equity-partners, battery-ventures, blackrock]
+    source_url: "https://pulse2.com/sambanova-raises-1-billion-series-f-first-close-at-11-billion-valuation/amp/"

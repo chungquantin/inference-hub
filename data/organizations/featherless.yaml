@@ -6,3 +6,15 @@ website: https://featherless.ai
 logo_url: /logos/featherless.png
 tagging:
   aliases: [Featherless AI]
+funding:
+  - round: seed
+    announced_on: 2025-03-17
+    amount: 5000000
+    currency: USD
+    source_url: "https://featherless.ai/blog/featherless-ai-raises-usd5m-in-seed-funding-to-democratize-access-to-open-source-ai-models"
+  - round: series_a
+    announced_on: 2026-05-05
+    amount: 20000000
+    currency: USD
+    lead: [amd]
+    source_url: "https://aiworld.eu/story/featherlessai-banks-20m-series-a-to-scale-open-source-ai-inference"

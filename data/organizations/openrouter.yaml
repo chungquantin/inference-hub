@@ -11,3 +11,11 @@ feeds:
     name: "OpenRouter blog"
     url: "https://openrouter.ai/blog/feed.xml"
     interval_minutes: 180
+funding:
+  - round: series_b
+    announced_on: 2026-05-30
+    amount: 113000000
+    currency: USD
+    lead: [capitalg]
+    investors: [nventures, databricks, snowflake-ventures]
+    source_url: "https://runtimewire.com/article/openrouter-raises-113m-series-b-capitalg"

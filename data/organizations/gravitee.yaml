@@ -6,3 +6,9 @@ website: "https://www.gravitee.io"
 logo_url: /logos/gravitee.svg
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2025-05-20
+    amount: 60000000
+    currency: USD
+    source_url: "https://techcrunch.com/2025/05/20/gravitee-a-platform-that-helps-companies-manage-apis-raises-60m"

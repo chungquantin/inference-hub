@@ -40,3 +40,11 @@ products:
     url: "https://github.com/vercel-labs/agent-browser"
     metadata:
       license: "Apache-2.0"
+funding:
+  - round: series_f
+    announced_on: 2025-09-30
+    amount: 300000000
+    valuation: 9300000000
+    currency: USD
+    lead: [accel, gic]
+    source_url: "https://vercel.com/blog/series-f"

@@ -7,3 +7,11 @@ logo_url: /logos/ayar-labs.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_e
+    announced_on: 2026-03-03
+    amount: 500000000
+    valuation: 3750000000
+    currency: USD
+    investors: [ark-invest, insight-partners, alchip, mediatek, amd, nvidia]
+    source_url: "https://pulse2.com/ayar-labs-500-million-series-e-raised-at-3-75-billion-valuation-for-optics-solutions-for-ai-scale-up"

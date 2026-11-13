@@ -6,3 +6,9 @@ website: "https://www.lemurianlabs.com"
 logo_url: /logos/lemurian-labs.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-12-03
+    amount: 28000000
+    currency: USD
+    source_url: "https://siliconangle.com/2025/12/03/lemurian-labs-raises-28m-efficiency-optimized-ai-model-compiler/"

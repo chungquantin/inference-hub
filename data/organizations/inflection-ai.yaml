@@ -6,3 +6,11 @@ website: "https://inflection.ai"
 logo_url: /logos/inflection-ai.png
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2023-06-29
+    amount: 1300000000
+    valuation: 4000000000
+    currency: USD
+    lead: [microsoft, nvidia]
+    source_url: "https://forklog.com/en/inflection-ai-raises-1-3-billion-from-microsoft-nvidia-and-other-investors/"

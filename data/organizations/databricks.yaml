@@ -14,3 +14,12 @@ feeds:
     url: "https://www.databricks.com/feed"
     interval_minutes: 180
     auto_approve: false
+funding:
+  - round: series_l
+    announced_on: 2025-12-16
+    amount: 4000000000
+    valuation: 134000000000
+    currency: USD
+    lead: [insight-partners, fidelity]
+    investors: [a16z, blackrock, blackstone, coatue, gic, mgx, nea, ontario-teachers, temasek]
+    source_url: "https://techcrunch.com/2025/12/16/databricks-raises-4b-at-134b-valuation-as-its-ai-business-heats-up"

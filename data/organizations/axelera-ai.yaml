@@ -6,3 +6,16 @@ website: "https://www.axelera.ai"
 logo_url: /logos/axelera-ai.png
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2024-06-27
+    amount: 68000000
+    currency: USD
+    investors: [samsung-catalyst-fund]
+    source_url: "https://siliconangle.com/2024/06/27/edge-ai-chip-startup-axelera-ai-raises-68m/"
+  - round: growth
+    announced_on: 2026-02-24
+    amount: 250000000
+    currency: USD
+    investors: [blackrock, samsung-catalyst-fund]
+    source_url: "https://finance.yahoo.com/news/european-ai-chip-startup-axelera-181608416.html"

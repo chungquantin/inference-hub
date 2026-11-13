@@ -6,3 +6,18 @@ website: https://www.cerebras.ai
 logo_url: /logos/cerebras.png
 hq_country: US
 founded_year: 2016
+funding:
+  - round: series_f
+    announced_on: 2021-11-10
+    amount: 250000000
+    currency: USD
+    investors: [altimeter-capital, benchmark, coatue, eclipse-ventures]
+    source_url: "https://www.cerebras.ai/press-release/cerebras-systems-raises-250m-in-funding-for-over-4b-valuation-to-advance-the-future-of-artificial-intelligence-compute"
+  - round: series_h
+    announced_on: 2026-02-03
+    amount: 1000000000
+    valuation: 23000000000
+    currency: USD
+    lead: [tiger-global]
+    investors: [benchmark, fidelity, altimeter-capital, amd, coatue]
+    source_url: "https://www.cerebras.ai/press-release/cerebras-systems-raises-usd1-billion-series-h"

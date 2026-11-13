@@ -6,3 +6,10 @@ website: "https://www.neurophos.com"
 logo_url: /logos/neurophos.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2026-01-22
+    amount: 110000000
+    currency: USD
+    investors: [m12]
+    source_url: "https://techcrunch.com/2026/01/22/from-invisibility-cloaks-to-ai-chips-neurophos-raises-110m-to-build-tiny-optical-processors-for-inferencing"

@@ -6,3 +6,10 @@ website: "https://pixverse.ai"
 logo_url: /logos/pixverse.svg
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2025-09-10
+    amount: 60000000
+    currency: USD
+    investors: [antler]
+    source_url: "https://pixverse.ai/en/blog/pixverse-announces-series-b-international-expansion-ai-video"

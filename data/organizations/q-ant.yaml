@@ -6,3 +6,10 @@ website: "https://qant.com"
 logo_url: /logos/q-ant.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-07-17
+    amount: 62000000
+    currency: EUR
+    lead: [cherry-ventures]
+    source_url: "https://tech.eu/2025/07/17/qant-raises-eur62m-to-transform-the-future-of-computing-with-photonic-processing/"

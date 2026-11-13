@@ -5,3 +5,11 @@ description: "The world's first straight-shot SSI lab, with one goal and one pro
 website: "https://ssi.inc"
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2025-04-12
+    amount: 2000000000
+    valuation: 32000000000
+    currency: USD
+    investors: [nvidia, google]
+    source_url: "https://techcrunch.com/2025/04/12/openai-co-founder-ilya-sutskevers-safe-superintelligence-reportedly-valued-at-32b"

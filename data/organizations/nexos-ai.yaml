@@ -5,3 +5,11 @@ website: "https://nexos.ai"
 logo_url: /logos/nexos-ai.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-10-21
+    amount: 30000000
+    currency: EUR
+    lead: [index-ventures]
+    investors: [creandum]
+    source_url: "https://tech.eu/2025/10/21/nexosai-secures-eur30m-to-tackle-the-enterprise-ai-adoption-challenge/"

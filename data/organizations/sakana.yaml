@@ -12,3 +12,10 @@ feeds:
     name: "Sakana blog"
     url: "https://sakana.ai/feed.xml"
     interval_minutes: 180
+funding:
+  - round: series_b
+    announced_on: 2025-11-17
+    amount: 32000000000
+    currency: JPY
+    investors: [khosla-ventures, salesforce-ventures, google, datadog, nea, lux-capital, jafco, macquarie]
+    source_url: "https://sakana.ai/series-b/"

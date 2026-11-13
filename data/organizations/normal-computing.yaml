@@ -6,3 +6,17 @@ website: "https://www.normalcomputing.com"
 logo_url: /logos/normal-computing.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2023-06-13
+    amount: 8500000
+    currency: USD
+    investors: [micron]
+    source_url: "https://www.eenewseurope.com/en/ex-google-engineers-probablistic-ai-startup-raises-seed-funding"
+  - round: strategic
+    announced_on: 2026-03-25
+    amount: 50000000
+    currency: USD
+    lead: [samsung-catalyst-fund]
+    investors: [micron]
+    source_url: "https://siliconangle.com/?p=736122"

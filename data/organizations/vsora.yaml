@@ -6,3 +6,9 @@ website: "https://vsora.com"
 logo_url: /logos/vsora.png
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2025-04-29
+    amount: 40000000
+    currency: EUR
+    source_url: "https://www.eenewseurope.com/en/european-ai-processor-developer-gets-e40m-for-manufacturing"

@@ -7,3 +7,11 @@ logo_url: /logos/extropic.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: seed
+    announced_on: 2023-12-05
+    amount: 14100000
+    currency: USD
+    lead: [kindred-ventures]
+    investors: [valor-equity-partners]
+    source_url: "https://thequantuminsider.com/2023/12/05/extropic-announces-14-1-million-seed-round-building-entropy-computer-for-generative-ai/"

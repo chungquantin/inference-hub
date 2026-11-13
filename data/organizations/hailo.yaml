@@ -6,3 +6,9 @@ logo_url: /logos/hailo.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_c
+    announced_on: 2024-04-02
+    amount: 120000000
+    currency: USD
+    source_url: "https://siliconangle.com/2024/04/02/hailo-raises-120m-debuts-first-chip-generative-ai-edge/"

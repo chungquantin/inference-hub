@@ -6,3 +6,9 @@ website: "https://berget.ai"
 logo_url: /logos/berget-ai.svg
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2026-02-02
+    amount: 2100000
+    currency: EUR
+    source_url: "https://tech.eu/2026/02/02/swedish-startup-berget-ai-lands-2-1m-as-demand-grows-for-sovereign-ai-in-europe/"

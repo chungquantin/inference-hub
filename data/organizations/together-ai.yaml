@@ -12,3 +12,9 @@ feeds:
   - slug: together-ai-blog
     name: Together AI Blog
     url: https://www.together.ai/blog/rss.xml
+funding:
+  - round: growth
+    announced_on: 2026-07-01
+    amount: 800000000
+    currency: USD
+    source_url: "https://siliconangle.com/2026/07/01/together-ai-raises-800m-grow-ai-optimized-public-cloud/"

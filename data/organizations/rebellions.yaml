@@ -6,3 +6,10 @@ website: "https://rebellions.ai"
 logo_url: /logos/rebellions.png
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2026-03-30
+    amount: 400000000
+    valuation: 2340000000
+    currency: USD
+    source_url: "https://techcrunch.com/2026/03/30/ai-chip-startup-rebellions-raises-400-million-at-2-3b-valuation-in-pre-ipo-round/"

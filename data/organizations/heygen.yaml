@@ -6,3 +6,10 @@ website: "https://www.heygen.com"
 logo_url: /logos/heygen.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2023-12-01
+    amount: 5600000
+    currency: USD
+    lead: [conviction]
+    source_url: "https://voicebot.ai/2023/12/01/generative-ai-video-startup-heygen-raises-5-6m/"

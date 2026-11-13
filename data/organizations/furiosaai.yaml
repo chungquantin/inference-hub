@@ -6,3 +6,14 @@ website: "https://furiosa.ai"
 logo_url: /logos/furiosaai.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2025-07-30
+    amount: 125000000
+    currency: USD
+    source_url: "https://furiosa.ai/blog/announcing-furiosaais-125m-series-c-bridge-funding-to-scale-sustainable-ai-compute"
+  - round: series_d
+    announced_on: 2026-10-29
+    amount: 620000000
+    currency: USD
+    source_url: "https://www.jonpeddie.com/news/furiosaai-raises-620-million-for-rngd/"

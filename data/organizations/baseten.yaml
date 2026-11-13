@@ -8,3 +8,12 @@ logo_url: /logos/baseten.png
 categories: [serverless-gpu]
 tagging:
   match_case: true
+funding:
+  - round: series_f
+    announced_on: 2026-06-22
+    amount: 1500000000
+    valuation: 13000000000
+    currency: USD
+    lead: [altimeter-capital, conviction, spark-capital]
+    investors: [battery-ventures, greylock, ivp]
+    source_url: "https://baseten.co/blog/announcing-our-series-f/"

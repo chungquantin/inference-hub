@@ -7,3 +7,12 @@ website: "https://runwayml.com"
 logo_url: /logos/runway.png
 tagging:
   match_case: true
+funding:
+  - round: series_e
+    announced_on: 2026-02-10
+    amount: 315000000
+    valuation: 5300000000
+    currency: USD
+    lead: [general-atlantic]
+    investors: [nvidia, amd]
+    source_url: "https://pulse2.com/runway-315-million-series-e/"

@@ -7,3 +7,18 @@ logo_url: /logos/etched.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_c
+    announced_on: 2026-07-23
+    amount: 300000000
+    valuation: 10300000000
+    currency: USD
+    lead: [sequoia-capital]
+    investors: [a16z]
+    source_url: "https://siliconangle.com/2026/07/23/ai-chip-startup-etched-doubles-valuation-10-3b-new-300m-round/"
+  - round: growth
+    announced_on: 2026-08-18
+    amount: 700000000
+    valuation: 21000000000
+    currency: USD
+    source_url: "https://runtimewire.com/article/etched-raises-700m-21b-jane-street-first-rack"

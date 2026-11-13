@@ -7,3 +7,18 @@ website: "https://reka.ai"
 logo_url: /logos/reka-ai.jpg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2023-06-28
+    amount: 50000000
+    currency: USD
+    lead: [dst-global]
+    investors: [snowflake-ventures]
+    source_url: "https://thestar.com.my/tech/tech-news/2023/06/28/ai-model-startup-reka-raises-50-million-led-by-dst-global"
+  - round: series_b
+    announced_on: 2025-07-22
+    amount: 110000000
+    valuation: 1000000000
+    currency: USD
+    investors: [nvidia, snowflake-ventures]
+    source_url: "https://siliconangle.com/2025/07/22/multimodal-ai-startup-reka-ai-raises-110m-1b-valuation"

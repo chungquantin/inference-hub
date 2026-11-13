@@ -5,3 +5,9 @@ description: "Kneron, a leading provider of edge AI solutions, was founded in 20
 website: "https://www.kneron.com"
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2022-10-06
+    amount: 48000000
+    currency: USD
+    source_url: "https://socaltech.com/kneron_gains_48m_in_series_b_for_ai_efforts/s-0082949.html"

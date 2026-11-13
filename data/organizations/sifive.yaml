@@ -6,3 +6,18 @@ website: "https://www.sifive.com"
 logo_url: /logos/sifive.png
 tagging:
   match_case: true
+funding:
+  - round: series_f
+    announced_on: 2022-03-16
+    amount: 175000000
+    currency: USD
+    lead: [coatue]
+    investors: [amd, intel-capital, qualcomm-ventures, spark-capital, sutter-hill-ventures]
+    source_url: "https://design-reuse.com/news/51605/sifive-company-valuation.html"
+  - round: series_g
+    announced_on: 2026-04-09
+    amount: 400000000
+    valuation: 3650000000
+    currency: USD
+    investors: [apollo, nvidia, sutter-hill-ventures]
+    source_url: "https://www.jonpeddie.com/news/sifive-raises-again-as-cpus-return-to-the-center-of-the-ai-data-center-story/"

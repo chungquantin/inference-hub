@@ -6,3 +6,9 @@ website: "https://fish.audio"
 logo_url: /logos/fish-audio.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2026-07-28
+    amount: 52000000
+    currency: USD
+    source_url: "https://pulse2.com/fish-audio-raises-52-million-seed-round-to-expand-expressive-voice-ai-platform/"

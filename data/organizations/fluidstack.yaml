@@ -7,3 +7,10 @@ website: "https://fluidstack.io"
 logo_url: /logos/fluidstack.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2026-07-21
+    amount: 830000000
+    valuation: 7500000000
+    currency: USD
+    source_url: "https://siliconangle.com/2026/07/21/ai-data-center-builder-fluidstack-raises-830m-7-5b-valuation/"

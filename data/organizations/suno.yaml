@@ -7,3 +7,12 @@ logo_url: /logos/suno.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_c
+    announced_on: 2025-11-19
+    amount: 250000000
+    valuation: 2450000000
+    currency: USD
+    lead: [menlo-ventures]
+    investors: [nventures, lightspeed, matrix-partners]
+    source_url: "https://techcrunch.com/2025/11/19/legally-embattled-ai-music-startup-suno-raises-at-2-45b-valuation-on-200m-revenue/"

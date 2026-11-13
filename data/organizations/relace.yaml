@@ -8,3 +8,11 @@ logo_url: /logos/relace.svg
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_a
+    announced_on: 2025-10-08
+    amount: 23000000
+    currency: USD
+    lead: [a16z]
+    investors: [matrix-partners]
+    source_url: "https://siliconangle.com/2025/10/08/relace-wants-build-infrastructure-foundation-ai-coding-agents-raising-23m-funding/"

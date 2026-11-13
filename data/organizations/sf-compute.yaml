@@ -13,3 +13,11 @@ feeds:
     name: "SF Compute blog"
     url: "https://sfcompute.com/news/rss.xml"
     interval_minutes: 180
+funding:
+  - round: series_a
+    announced_on: 2025-11-26
+    amount: 40000000
+    valuation: 300000000
+    currency: USD
+    lead: [wing-vc]
+    source_url: "https://sfcompute.com/news/sf-compute-series-a"

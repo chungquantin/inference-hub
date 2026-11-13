@@ -7,3 +7,11 @@ website: "https://decart.ai"
 logo_url: /logos/decart.png
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2025-08-07
+    amount: 100000000
+    valuation: 3100000000
+    currency: USD
+    investors: [sequoia-capital, benchmark]
+    source_url: "https://fortune.com/2025/08/07/exclusive-decart-raises-100-million-at-a-3-1-billion-valuation-chasing-the-future-of-real-time-creative-ai/"

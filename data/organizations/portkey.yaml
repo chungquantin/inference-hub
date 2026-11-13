@@ -22,3 +22,17 @@ products:
     url: "https://github.com/Portkey-AI/gateway"
     metadata:
       license: "MIT"
+funding:
+  - round: seed
+    announced_on: 2023-08-23
+    amount: 3000000
+    currency: USD
+    lead: [lightspeed]
+    source_url: "https://portkey.ai/blog/series-a-funding/"
+  - round: series_a
+    announced_on: 2026-02-19
+    amount: 15000000
+    currency: USD
+    lead: [elevation-capital]
+    investors: [lightspeed]
+    source_url: "https://portkey.ai/blog/series-a-funding/"

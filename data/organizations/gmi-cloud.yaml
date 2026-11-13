@@ -7,3 +7,9 @@ website: "https://gmicloud.ai"
 logo_url: /logos/gmi-cloud.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2024-10-31
+    amount: 82000000
+    currency: USD
+    source_url: "https://www.gmicloud.ai/blog/gmi-cloud-secures-82-million-series-a-funding"

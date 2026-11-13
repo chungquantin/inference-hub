@@ -7,3 +7,10 @@ website: "https://thundercompute.com"
 logo_url: /logos/thunder-compute.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2026-08-21
+    amount: 13000000
+    currency: USD
+    lead: [matrix-partners]
+    source_url: "https://pulse2.com/thunder-compute-raises-13-million-series-a-to-unlock-200-billion-of-idle-gpu-capacity/"

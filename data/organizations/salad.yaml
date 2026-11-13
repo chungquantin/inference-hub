@@ -11,3 +11,9 @@ categories: [gpu-marketplaces]
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_a
+    announced_on: 2022-04-21
+    amount: 17000000
+    currency: USD
+    source_url: "https://www.utahbusiness.com/salad-com-announces-17-million-series-a-funding-round-to-pioneer-affordable-decentralized-cloud-computing-services"

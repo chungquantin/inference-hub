@@ -4,3 +4,9 @@ kinds: [gpu_cloud, inference_provider]
 tagline: GPU cloud and inference API for open models.
 website: https://www.hyperbolic.ai
 logo_url: /logos/hyperbolic.png
+funding:
+  - round: series_a
+    announced_on: 2024-12-10
+    amount: 12000000
+    currency: USD
+    source_url: "https://www.hyperbolic.ai/blog/hyperbolic-secures-20m-total-funding-with-latest-series-a"

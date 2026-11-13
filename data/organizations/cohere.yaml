@@ -7,3 +7,29 @@ website: "https://cohere.com"
 logo_url: /logos/cohere.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2021-09-07
+    amount: 40000000
+    currency: USD
+    lead: [index-ventures]
+    source_url: "https://en.wikipedia.org/wiki/Cohere"
+  - round: series_b
+    announced_on: 2022-02-15
+    amount: 125000000
+    currency: USD
+    lead: [tiger-global]
+    source_url: "https://en.wikipedia.org/wiki/Cohere"
+  - round: series_d
+    announced_on: 2024-07-22
+    amount: 500000000
+    valuation: 5500000000
+    currency: USD
+    source_url: "https://the-decoder.com/cohere-raises-500-million-at-a-5-5-billion-valuation/"
+  - round: growth
+    announced_on: 2025-08-14
+    amount: 500000000
+    valuation: 6800000000
+    currency: USD
+    investors: [nvidia]
+    source_url: "https://www.ctvnews.ca/business/article/ai-firm-cohere-raises-us500-million-giving-business-us68-billion-valuation/"

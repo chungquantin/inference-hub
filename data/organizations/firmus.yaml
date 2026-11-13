@@ -8,3 +8,19 @@ logo_url: /logos/firmus.svg
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2025-11-14
+    amount: 327000000
+    valuation: 3900000000
+    currency: USD
+    investors: [nvidia]
+    source_url: "https://siliconangle.com/2025/11/14/ai-infrastructure-startup-firmus-raises-327m-build-data-centers-australia/"
+  - round: growth
+    announced_on: 2026-04-07
+    amount: 505000000
+    valuation: 5500000000
+    currency: USD
+    lead: [coatue]
+    investors: [nvidia]
+    source_url: "https://pulse2.com/firmus-technologies-505-million-raised-for-ai-infrastructure-expansion/"

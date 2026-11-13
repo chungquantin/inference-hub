@@ -7,3 +7,11 @@ logo_url: /logos/neysa.png
 categories: [sovereign-clouds]
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2026-02-17
+    amount: 600000000
+    currency: USD
+    lead: [blackstone]
+    investors: [nexus-venture-partners]
+    source_url: "https://w.media/blackstone-led-group-invests-us-600-million-in-neysa/"

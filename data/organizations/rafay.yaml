@@ -6,3 +6,16 @@ website: "https://rafay.co"
 logo_url: /logos/rafay.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2019-09-15
+    amount: 8000000
+    currency: USD
+    investors: [costanoa-ventures]
+    source_url: "https://pulse2.com/rafay-systems-raises-8-million-in-funding/"
+  - round: series_b
+    announced_on: 2021-08-31
+    amount: 25000000
+    currency: USD
+    investors: [costanoa-ventures]
+    source_url: "https://rafay.co/press-release/rafay-systems-raises-25-million-series-b-funding-led-by-forgepoint-capital-to-deliver-industrys-first-platform-for-kubernetes-operations"

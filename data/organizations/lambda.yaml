@@ -14,3 +14,15 @@ feeds:
   - slug: lambda-blog
     name: Lambda Blog
     url: https://lambda.ai/blog/rss.xml
+funding:
+  - round: series_d
+    announced_on: 2025-02-19
+    amount: 480000000
+    currency: USD
+    investors: [nvidia, ark-invest, supermicro, wiwynn]
+    source_url: "https://lambda.com/blog/lambda-raises-480m-to-expand-ai-cloud-platform"
+  - round: series_e
+    announced_on: 2025-11-18
+    amount: 1500000000
+    currency: USD
+    source_url: "https://lambda.com/blog/lambda-raises-over-1.5b-from-twg-global-usit-to-build-superintelligence-cloud-infrastructure"

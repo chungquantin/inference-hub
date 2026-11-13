@@ -12,3 +12,12 @@ feeds:
     name: "ElevenLabs blog"
     url: "https://elevenlabs.io/blog/rss.xml"
     interval_minutes: 180
+funding:
+  - round: series_d
+    announced_on: 2026-02-04
+    amount: 500000000
+    valuation: 11000000000
+    currency: USD
+    lead: [sequoia-capital]
+    investors: [a16z, lightspeed]
+    source_url: "https://elevenlabs.io/blog/series-d"

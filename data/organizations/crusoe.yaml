@@ -7,3 +7,20 @@ website: "https://crusoe.ai"
 logo_url: /logos/crusoe.png
 tagging:
   match_case: true
+funding:
+  - round: series_d
+    announced_on: 2024-12-12
+    amount: 600000000
+    valuation: 2800000000
+    currency: USD
+    lead: [founders-fund]
+    investors: [fidelity, mubadala, nvidia, valor-equity-partners]
+    source_url: "https://crusoe.ai/newsroom/crusoe-closes-series-d-funding/"
+  - round: series_f
+    announced_on: 2026-09-17
+    amount: 3900000000
+    valuation: 30900000000
+    currency: USD
+    lead: [mubadala, valor-equity-partners]
+    investors: [founders-fund, gic, nvidia, radical-ventures, tpg, altimeter-capital, ark-invest, salesforce-ventures, tiger-global, fidelity]
+    source_url: "https://www.crusoe.ai/resources/newsroom/crusoe-announces-series-f-funding"

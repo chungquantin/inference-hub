@@ -8,3 +8,9 @@ logo_url: /logos/hyperstack.webp
 tagging:
   aliases: ["NexGen Cloud"]
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-04-08
+    amount: 45000000
+    currency: USD
+    source_url: "https://siliconangle.com/2025/04/08/british-gpu-service-startup-nexgen-cloud-raises-45m/"

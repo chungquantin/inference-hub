@@ -6,3 +6,9 @@ website: "https://www.gladia.io"
 logo_url: /logos/gladia.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2024-10-15
+    amount: 16000000
+    currency: USD
+    source_url: "https://techcrunch.com/2024/10/15/gladia-believes-real-time-processing-is-the-next-frontier-of-audio-transcription-apis"

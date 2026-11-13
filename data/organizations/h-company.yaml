@@ -6,3 +6,10 @@ website: "https://www.hcompany.ai"
 logo_url: /logos/h-company.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2024-05-21
+    amount: 220000000
+    currency: USD
+    investors: [accel]
+    source_url: "https://siliconangle.com/?p=657126"

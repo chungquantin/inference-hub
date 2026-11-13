@@ -6,3 +6,20 @@ website: "https://www.preferred.jp"
 logo_url: /logos/preferred-networks.png
 tagging:
   match_case: true
+funding:
+  - round: strategic
+    announced_on: 2014-10-01
+    amount: 200000000
+    currency: JPY
+    source_url: "https://en.wikipedia.org/wiki/Preferred_Networks"
+  - round: strategic
+    announced_on: 2015-08-21
+    amount: 900000000
+    valuation: 15000000000
+    currency: JPY
+    source_url: "https://en.wikipedia.org/wiki/Preferred_Networks"
+  - round: strategic
+    announced_on: 2015-12-30
+    amount: 900000000
+    currency: JPY
+    source_url: "https://en.wikipedia.org/wiki/Preferred_Networks"

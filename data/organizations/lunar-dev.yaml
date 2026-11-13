@@ -6,3 +6,9 @@ website: "https://www.lunar.dev"
 logo_url: /logos/lunar-dev.svg
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2023-11-30
+    amount: 6000000
+    currency: USD
+    source_url: "https://www.pulse2.com/lunar-dev-6-million-funding/"

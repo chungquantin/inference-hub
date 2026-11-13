@@ -14,3 +14,15 @@ feeds:
     name: "Koyeb blog"
     url: "https://www.koyeb.com/feed.xml"
     interval_minutes: 180
+funding:
+  - round: pre_seed
+    announced_on: 2020-10-15
+    amount: 1600000
+    currency: USD
+    source_url: "https://techcrunch.com/2020/10/15/koyeb-raises-1-6-million-for-its-serverless-data-processing-engine/"
+  - round: seed
+    announced_on: 2023-11-02
+    amount: 7000000
+    currency: USD
+    investors: [samsung-next]
+    source_url: "https://www.koyeb.com/blog/we-raised-7m-to-simplify-app-deployment-with-our-global-serverless-platform"

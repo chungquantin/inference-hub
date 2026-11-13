@@ -7,3 +7,9 @@ website: "https://www.edenai.co"
 logo_url: /logos/eden-ai.png
 tagging:
   match_case: true
+funding:
+  - round: seed
+    announced_on: 2024-11-21
+    amount: 3000000
+    currency: EUR
+    source_url: "https://tech.eu/2024/11/21/eden-ai-raises-3m-seed-for-ai-interoperability/"

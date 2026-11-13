@@ -13,3 +13,12 @@ feeds:
     name: "fal blog"
     url: "https://fal.ai/changelog/rss.xml"
     interval_minutes: 180
+funding:
+  - round: series_f
+    announced_on: 2026-11-03
+    amount: 1300000000
+    valuation: 16000000000
+    currency: USD
+    lead: [bessemer-venture-partners]
+    investors: [nvidia, sound-ventures]
+    source_url: "https://siliconangle.com/2026/11/03/generative-media-inference-startup-fal-raises-1-3b-at-a-16b-valuation/"

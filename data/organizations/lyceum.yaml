@@ -7,3 +7,9 @@ logo_url: /logos/lyceum.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: pre_seed
+    announced_on: 2025-06-24
+    amount: 10300000
+    currency: EUR
+    source_url: "https://tech.eu/2025/06/24/sovereign-by-design-lyceum-emerges-with-eur103m-to-redefine-cloud-infrastructure-in-europe/"

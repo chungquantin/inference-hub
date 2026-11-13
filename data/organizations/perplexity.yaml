@@ -14,3 +14,10 @@ products:
     type: platform
     tagline: "Comet browser by Perplexity is the AI browser that acts as a personal assistant. Automate tasks, research the web, organize your email, and more with Comet."
     url: "https://www.perplexity.ai/comet"
+funding:
+  - round: growth
+    announced_on: 2024-04-23
+    amount: 62700000
+    valuation: 1000000000
+    currency: USD
+    source_url: "https://siliconangle.com/2024/04/23/perplexity-ai-lands-63m-funding-generative-ai-search-1-billion-valuation/"

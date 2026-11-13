@@ -6,3 +6,11 @@ website: "https://assemblyai.com"
 logo_url: /logos/assemblyai.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2023-12-04
+    amount: 50000000
+    currency: USD
+    lead: [accel]
+    investors: [insight-partners]
+    source_url: "https://siliconangle.com/2023/12/04/assemblyai-raises-50m-cloud-based-ai-speech-models/"

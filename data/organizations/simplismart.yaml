@@ -6,3 +6,10 @@ website: "https://simplismart.ai"
 logo_url: /logos/simplismart.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2024-10-17
+    amount: 7000000
+    currency: USD
+    lead: [accel]
+    source_url: "https://www.intelligentcio.com/north-america/2024/10/17/ex-oracle-and-google-engineers-get-7m-from-accel-for-public-launch-of-simplismart/"

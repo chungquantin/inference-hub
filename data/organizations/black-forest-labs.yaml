@@ -8,3 +8,11 @@ logo_url: /logos/black-forest-labs.png
 tagging:
   aliases: ["BFL"]
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2025-12-01
+    amount: 300000000
+    valuation: 3250000000
+    currency: USD
+    lead: [salesforce-ventures]
+    source_url: "https://www.unite.ai/black-forest-labs-raises-300-million-at-3-25-billion-valuation"

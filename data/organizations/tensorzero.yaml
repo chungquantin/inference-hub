@@ -23,3 +23,10 @@ products:
     url: "https://github.com/tensorzero/tensorzero"
     metadata:
       license: "Apache-2.0"
+funding:
+  - round: seed
+    announced_on: 2025-08-18
+    amount: 7300000
+    currency: USD
+    investors: [bessemer-venture-partners]
+    source_url: "https://www.tensorzero.com/blog/tensorzero-raises-7-3m-seed-round-to-build-an-open-source-stack-for-industrial-grade-llm-applications/"

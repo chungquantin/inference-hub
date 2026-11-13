@@ -6,3 +6,11 @@ website: "https://www.hedra.com"
 logo_url: /logos/hedra.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-05-15
+    amount: 32000000
+    currency: USD
+    lead: [a16z]
+    investors: [index-ventures]
+    source_url: "https://techcrunch.com/2025/05/15/hedra-the-app-used-to-make-talking-baby-podcasts-raises-32m-from-a16z"

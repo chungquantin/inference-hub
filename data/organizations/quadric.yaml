@@ -6,3 +6,9 @@ website: "https://quadric.io"
 logo_url: /logos/quadric.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2026-01-14
+    amount: 30000000
+    currency: USD
+    source_url: "https://www.edge-ai-vision.com/2026/01/quadric-inference-engine-for-on-device-ai-chips-raises-30m-series-c-as-design-wins-accelerate-across-edge/"

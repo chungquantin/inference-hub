@@ -7,3 +7,25 @@ logo_url: /logos/reflection-ai.svg
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: seed
+    announced_on: 2025-03-07
+    amount: 25000000
+    currency: USD
+    lead: [sequoia-capital]
+    source_url: "https://siliconangle.com/2025/03/07/superintelligence-startup-reflection-ai-launches-130m-funding/"
+  - round: series_a
+    announced_on: 2025-03-07
+    amount: 105000000
+    currency: USD
+    lead: [lightspeed]
+    investors: [nvidia]
+    source_url: "https://siliconangle.com/2025/03/07/superintelligence-startup-reflection-ai-launches-130m-funding/"
+  - round: series_b
+    announced_on: 2025-10-09
+    amount: 2000000000
+    valuation: 8000000000
+    currency: USD
+    lead: [nvidia, lightspeed]
+    investors: [sequoia-capital]
+    source_url: "https://siliconangle.com/2025/10/09/reflection-ai-lands-2b-8b-valuation-expand-frontier-ai-infrastructure-safety-research/"

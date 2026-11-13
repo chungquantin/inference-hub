@@ -6,3 +6,10 @@ website: "https://www.syntiant.com"
 logo_url: /logos/syntiant.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2020-08-07
+    amount: 35000000
+    currency: USD
+    lead: [m12]
+    source_url: "https://voicebot.ai/2020/08/07/syntiant-raises-35m-for-on-edge-ai-and-voice-processors"

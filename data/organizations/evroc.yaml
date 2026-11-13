@@ -8,3 +8,10 @@ categories: [sovereign-clouds]
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: series_a
+    announced_on: 2025-03-20
+    amount: 50600000
+    currency: EUR
+    investors: [eqt-ventures]
+    source_url: "https://techcrunch.com/2025/03/20/amid-calls-for-sovereign-eu-tech-stack-evroc-raises-55m-to-build-a-hyperscale-cloud-in-europe/"

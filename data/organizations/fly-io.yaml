@@ -13,3 +13,11 @@ products:
     github: superfly/sprites-docs
     tagline: "👾 Documentation for Fly.io Sprites"
     url: "https://github.com/superfly/sprites-docs"
+funding:
+  - round: series_c
+    announced_on: 2023-06-28
+    amount: 70000000
+    currency: USD
+    lead: [eqt-ventures]
+    investors: [a16z, dell-technologies, intel-capital]
+    source_url: "https://siliconangle.com/2023/06/28/fly-io-raises-70m-help-developers-launch-apps-closer-users/"

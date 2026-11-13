@@ -6,3 +6,9 @@ website: "https://www.tensordyne.ai"
 logo_url: /logos/tensordyne.png
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2024-02-20
+    amount: 102000000
+    currency: USD
+    source_url: "https://www.tensordyne.ai/stories/recogni-raises-102-million-to-advance-next-generation-ai-inference-system-for-generative-ai-and-intelligent-autonomy"

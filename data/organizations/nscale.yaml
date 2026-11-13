@@ -7,3 +7,10 @@ website: "https://nscale.com"
 logo_url: /logos/nscale.png
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2025-09-25
+    amount: 1100000000
+    currency: USD
+    investors: [nvidia, dell-technologies, fidelity]
+    source_url: "https://www.nscale.com/press-releases/nscale-series-b"

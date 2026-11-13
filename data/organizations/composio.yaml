@@ -6,3 +6,10 @@ website: "https://composio.dev"
 logo_url: /logos/composio.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2025-07-22
+    amount: 25000000
+    currency: USD
+    lead: [lightspeed]
+    source_url: "https://siliconangle.com/?p=704588"

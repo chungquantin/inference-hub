@@ -6,3 +6,10 @@ website: "https://stability.ai"
 logo_url: /logos/stability-ai.webp
 tagging:
   match_case: true
+funding:
+  - round: growth
+    announced_on: 2022-10-17
+    amount: 101000000
+    currency: USD
+    lead: [coatue, lightspeed]
+    source_url: "https://stability.ai/news/stability-ai-announces-101-million-in-funding-for-open-source-artificial-intelligence"

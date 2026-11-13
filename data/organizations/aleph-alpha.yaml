@@ -6,3 +6,9 @@ website: "https://aleph-alpha.com"
 logo_url: /logos/aleph-alpha.svg
 tagging:
   match_case: true
+funding:
+  - round: series_b
+    announced_on: 2023-11-06
+    amount: 500000000
+    currency: USD
+    source_url: "https://www.cnbc.com/2023/11/06/aleph-alpha-raises-500-million-to-build-a-european-rival-to-openai.html"

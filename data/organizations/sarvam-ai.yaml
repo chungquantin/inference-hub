@@ -12,3 +12,11 @@ feeds:
     name: "Sarvam AI blog"
     url: "https://www.sarvam.ai/rss.xml"
     interval_minutes: 180
+funding:
+  - round: series_a
+    announced_on: 2023-12-06
+    amount: 41000000
+    currency: USD
+    lead: [lightspeed]
+    investors: [peak-xv-partners, khosla-ventures]
+    source_url: "https://techcrunch.com/2023/12/06/indias-sarvam-ai-raises-41-million-from-lightspeed-khosla-peak-xv"

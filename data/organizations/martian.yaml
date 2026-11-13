@@ -8,3 +8,10 @@ logo_url: /logos/martian.png
 tagging:
   match_case: true
   match_name: false
+funding:
+  - round: seed
+    announced_on: 2023-11-15
+    amount: 9000000
+    currency: USD
+    investors: [nea, general-catalyst]
+    source_url: "https://techcrunch.com/2023/11/15/martians-tool-automatically-switches-between-llms-to-reduce-costs/"

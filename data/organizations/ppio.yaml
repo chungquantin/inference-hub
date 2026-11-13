@@ -4,3 +4,9 @@ kinds: [inference_provider]
 website: "https://ppio.com"
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2022-06-15
+    amount: 250000000
+    currency: CNY
+    source_url: "https://www.edgeir.com/chinese-edge-cloud-provider-ppio-raises-37-6m-20220615"

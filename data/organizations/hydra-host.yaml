@@ -6,3 +6,11 @@ website: "https://hydrahost.com"
 logo_url: /logos/hydra-host.png
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2026-06-15
+    amount: 100000000
+    currency: USD
+    lead: [kindred-ventures]
+    investors: [nvidia, ark-invest, founders-fund]
+    source_url: "https://hydrahost.com/blog/news/hydra-host-raises-100m-series-a/"

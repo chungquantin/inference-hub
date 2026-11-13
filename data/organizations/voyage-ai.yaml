@@ -6,3 +6,10 @@ website: "https://www.voyageai.com"
 logo_url: /logos/voyage-ai.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2024-10-03
+    amount: 20000000
+    currency: USD
+    investors: [snowflake-ventures]
+    source_url: "https://siliconangle.com/2024/10/03/snowflake-databricks-back-20m-round-ai-data-management-startup-voyage-ai"

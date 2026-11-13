@@ -28,3 +28,16 @@ products:
     url: "https://github.com/ray-project/llmperf"
     metadata:
       license: "Apache-2.0"
+funding:
+  - round: series_c
+    announced_on: 2021-12-07
+    amount: 100000000
+    valuation: 1000000000
+    currency: USD
+    investors: [intel-capital]
+    source_url: "https://www.intelcapital.com/anyscale-secures-100m-series-c-at-1b-valuation-to-radically-simplify-scaling-and-productionizing-ai-applications/"
+  - round: series_c
+    announced_on: 2022-08-23
+    amount: 99000000
+    currency: USD
+    source_url: "https://siliconangle.com/2022/08/23/anyscale-raises-99m-build-distributed-ai-computing-platform"

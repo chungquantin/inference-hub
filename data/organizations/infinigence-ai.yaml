@@ -5,3 +5,9 @@ description: "无问芯穹（Infinigence AI）是国际领先的AI原生基础�
 website: "https://www.infinigence-ai.com"
 tagging:
   match_case: true
+funding:
+  - round: series_c
+    announced_on: 2026-10-12
+    amount: 2300000000
+    currency: CNY
+    source_url: "https://technode.com/2026/10/12/ai-infrastructure-provider-infinigence-ai-raises-rmb-2-3-billion-in-series-c-funding/"

@@ -6,3 +6,11 @@ website: "https://gimletlabs.ai"
 logo_url: /logos/gimlet-labs.svg
 tagging:
   match_case: true
+funding:
+  - round: series_a
+    announced_on: 2026-03-23
+    amount: 80000000
+    currency: USD
+    lead: [menlo-ventures]
+    investors: [eclipse-ventures]
+    source_url: "https://www.vcaonline.com/news/2026032305/ai-inference-software-innovator-gimlet-labs-ushers-in-new-era-of-breakthrough-ai-performance-for-frontier-labs-and-leading-ai-companies-with-80-million-in-series-a-funding-led-by-menlo-ventures/"

@@ -16,3 +16,16 @@ products:
     url: "https://github.com/xai-org/grok-build"
     metadata:
       license: "Apache-2.0"
+funding:
+  - round: series_b
+    announced_on: 2024-05-26
+    amount: 6000000000
+    valuation: 24000000000
+    currency: USD
+    source_url: "https://www.nbcnews.com/business/business-news/elon-musks-ai-startup-now-valued-24-billion-fresh-funding-rcna154171"
+  - round: series_e
+    announced_on: 2026-01-06
+    amount: 20000000000
+    currency: USD
+    investors: [valor-equity-partners, fidelity, nvidia]
+    source_url: "https://www.thestar.com.my/tech/tech-news/2026/01/07/musk039s-xai-raises-20-billion-in-upsized-series-e-funding-round"
